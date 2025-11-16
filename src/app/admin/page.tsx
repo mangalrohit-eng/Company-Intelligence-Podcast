@@ -65,64 +65,46 @@ export default function AdminPage() {
   const [expandedRuns, setExpandedRuns] = useState<Set<string>>(new Set());
 
   useEffect(() => {
-    // Stub data - in production, fetch from API
-    setStats({
-      totalRuns: 1247,
-      activeRuns: 2,
-      completedToday: 42,
-      avgDuration: 8.5,
-    });
+    // Fetch real data from DynamoDB
+    const fetchRuns = async () => {
+      try {
+        const { api } = await import('@/lib/api');
+        const response = await api.get('/runs?status=running');
+        
+        if (response.ok) {
+          const data = await response.json();
+          setStats(data.stats || {
+            totalRuns: 0,
+            activeRuns: 0,
+            completedToday: 0,
+            avgDuration: 0,
+          });
+          setActiveRuns(data.runs || []);
+          
+          // Auto-expand first run if any
+          if (data.runs && data.runs.length > 0) {
+            setExpandedRuns(new Set([data.runs[0].id]));
+          }
+        } else {
+          console.error('Failed to fetch runs:', response.statusText);
+          // Show empty state instead of fake data
+          setStats({ totalRuns: 0, activeRuns: 0, completedToday: 0, avgDuration: 0 });
+          setActiveRuns([]);
+        }
+      } catch (error) {
+        console.error('Error fetching runs:', error);
+        // Show empty state instead of fake data
+        setStats({ totalRuns: 0, activeRuns: 0, completedToday: 0, avgDuration: 0 });
+        setActiveRuns([]);
+      }
+    };
 
-    // Sample active runs with all 13 stages
-    setActiveRuns([
-      {
-        id: 'run-001',
-        podcastName: 'Tech Weekly',
-        overallStatus: 'running',
-        overallProgress: 38,
-        startedAt: new Date(Date.now() - 1000 * 60 * 5).toISOString(),
-        stages: {
-          prepare: { status: 'completed', progress: 100, durationMs: 1200 },
-          discover: { status: 'completed', progress: 100, durationMs: 8500 },
-          disambiguate: { status: 'completed', progress: 100, durationMs: 3200 },
-          rank: { status: 'completed', progress: 100, durationMs: 2100 },
-          scrape: { status: 'in_progress', progress: 45, startTime: new Date().toISOString() },
-          extract: { status: 'pending', progress: 0 },
-          summarize: { status: 'pending', progress: 0 },
-          contrast: { status: 'pending', progress: 0 },
-          outline: { status: 'pending', progress: 0 },
-          script: { status: 'pending', progress: 0 },
-          qa: { status: 'pending', progress: 0 },
-          tts: { status: 'pending', progress: 0 },
-          package: { status: 'pending', progress: 0 },
-        },
-      },
-      {
-        id: 'run-002',
-        podcastName: 'Finance Insights',
-        overallStatus: 'running',
-        overallProgress: 85,
-        startedAt: new Date(Date.now() - 1000 * 60 * 12).toISOString(),
-        stages: {
-          prepare: { status: 'completed', progress: 100, durationMs: 1100 },
-          discover: { status: 'completed', progress: 100, durationMs: 9200 },
-          disambiguate: { status: 'completed', progress: 100, durationMs: 3500 },
-          rank: { status: 'completed', progress: 100, durationMs: 2300 },
-          scrape: { status: 'completed', progress: 100, durationMs: 45000 },
-          extract: { status: 'completed', progress: 100, durationMs: 12000 },
-          summarize: { status: 'completed', progress: 100, durationMs: 8500 },
-          contrast: { status: 'completed', progress: 100, durationMs: 6200 },
-          outline: { status: 'completed', progress: 100, durationMs: 7800 },
-          script: { status: 'completed', progress: 100, durationMs: 15000 },
-          qa: { status: 'completed', progress: 100, durationMs: 9500 },
-          tts: { status: 'in_progress', progress: 75, startTime: new Date().toISOString() },
-          package: { status: 'pending', progress: 0 },
-        },
-      },
-    ]);
-
-    // Auto-expand first run
-    setExpandedRuns(new Set(['run-001']));
+    fetchRuns();
+    
+    // Poll for updates every 3 seconds
+    const interval = setInterval(fetchRuns, 3000);
+    
+    return () => clearInterval(interval);
   }, []);
 
   const toggleExpanded = (runId: string) => {

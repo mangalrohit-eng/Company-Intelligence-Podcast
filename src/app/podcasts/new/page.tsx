@@ -400,8 +400,10 @@ function Step1({ formData, setFormData }: any) {
 function Step2({ formData, setFormData }: any) {
   const [companyName, setCompanyName] = useState('');
   const [suggestedCompetitors, setSuggestedCompetitors] = useState<string[]>([]);
+  const [isLoadingCompetitors, setIsLoadingCompetitors] = useState(false);
+  const [competitorError, setCompetitorError] = useState('');
   
-  // Competitor database - in production, this would be an API call
+  // Fallback competitor database for when API is unavailable
   const competitorMap: Record<string, string[]> = {
     'att': ['Verizon', 'T-Mobile', 'Dish Network', 'Comcast'],
     'at&t': ['Verizon', 'T-Mobile', 'Dish Network', 'Comcast'],
@@ -446,14 +448,53 @@ function Step2({ formData, setFormData }: any) {
     'adidas': ['Nike', 'Puma', 'Under Armour', 'New Balance'],
   };
 
-  const handleCompanyChange = (value: string) => {
+  const handleCompanyChange = async (value: string) => {
     setCompanyName(value);
     setFormData({ ...formData, companyId: value });
+    setCompetitorError('');
     
-    // Generate competitor suggestions
-    const normalized = value.toLowerCase().trim();
-    const competitors = competitorMap[normalized] || [];
-    setSuggestedCompetitors(competitors);
+    // Don't fetch if less than 3 characters
+    if (value.length < 3) {
+      setSuggestedCompetitors([]);
+      return;
+    }
+    
+    // Try AI-powered suggestions first
+    setIsLoadingCompetitors(true);
+    
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/competitors/suggest', { 
+        companyName: value 
+      }, { requireAuth: false }); // Allow without auth for quick testing
+      
+      if (response.ok) {
+        const data = await response.json();
+        setSuggestedCompetitors(data.competitors || []);
+      } else {
+        // Fallback to hardcoded map
+        const normalized = value.toLowerCase().trim();
+        const competitors = competitorMap[normalized] || [];
+        setSuggestedCompetitors(competitors);
+        
+        if (competitors.length === 0) {
+          setCompetitorError('Could not fetch AI suggestions. Try a well-known company name.');
+        }
+      }
+    } catch (error) {
+      console.error('Failed to fetch competitor suggestions:', error);
+      
+      // Fallback to hardcoded map
+      const normalized = value.toLowerCase().trim();
+      const competitors = competitorMap[normalized] || [];
+      setSuggestedCompetitors(competitors);
+      
+      if (competitors.length === 0) {
+        setCompetitorError('Could not fetch AI suggestions. Check your connection.');
+      }
+    } finally {
+      setIsLoadingCompetitors(false);
+    }
   };
 
   const toggleCompetitor = (competitor: string) => {
@@ -507,11 +548,26 @@ function Step2({ formData, setFormData }: any) {
         </Select>
       </div>
 
-      {suggestedCompetitors.length > 0 && (
+      {isLoadingCompetitors && (
+        <div className="p-4 bg-blue-950/30 border border-blue-800 rounded-lg">
+          <p className="text-sm flex items-center gap-2">
+            <span className="animate-spin">⏳</span>
+            Generating AI-powered competitor suggestions...
+          </p>
+        </div>
+      )}
+
+      {competitorError && (
+        <div className="p-4 bg-yellow-950/30 border border-yellow-800 rounded-lg">
+          <p className="text-sm text-yellow-400">{competitorError}</p>
+        </div>
+      )}
+
+      {!isLoadingCompetitors && suggestedCompetitors.length > 0 && (
         <div className="p-4 bg-green-950/30 border border-green-800 rounded-lg animate-in fade-in duration-300">
           <h3 className="font-semibold mb-2 flex items-center gap-2">
-            <span className="text-green-400">✨</span>
-            AI-Suggested Competitors for {companyName}
+            <span className="text-green-400">🤖</span>
+            AI-Generated Competitors for {companyName}
           </h3>
           <p className="text-sm text-muted mb-4">
             Based on your company, we recommend tracking these competitors
