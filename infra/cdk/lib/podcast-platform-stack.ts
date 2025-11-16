@@ -193,6 +193,15 @@ export class PodcastPlatformStack extends cdk.Stack {
       timeout: cdk.Duration.seconds(30),
     });
 
+    const voicePreviewLambda = new lambda.Function(this, 'VoicePreviewLambda', {
+      functionName: 'voice-preview',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'preview.handler',
+      code: lambda.Code.fromAsset('../../src/api/voice'),
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+    });
+
     // ========================================================================
     // API Gateway: HTTP API
     // ========================================================================
@@ -257,6 +266,17 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/competitors/suggest',
       methods: [apigatewayv2.HttpMethod.POST],
       integration: suggestCompetitorsIntegration,
+    });
+
+    const voicePreviewIntegration = new HttpLambdaIntegration(
+      'VoicePreviewIntegration',
+      voicePreviewLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/voice/preview',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: voicePreviewIntegration,
     });
 
     // ========================================================================
