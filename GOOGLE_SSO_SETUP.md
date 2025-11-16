@@ -34,9 +34,33 @@ https://console.cloud.google.com/
 - Name: "Podcast Platform Web Client"
 
 ### 1.5 Add Authorized Redirect URIs
-Add these URLs:
+
+**IMPORTANT**: You need to get your Cognito domain first!
+
+#### Get Your Cognito Domain:
+1. Open AWS Console → Cognito
+2. Go to User Pool: `podcast-platform-users` (us-east-1_lvLcARe2P)
+3. Click "App integration" tab
+4. Scroll to "Domain" section
+5. You'll see either:
+   - **Auto-generated**: `podcast-platform-XXXXX.auth.us-east-1.amazoncognito.com`
+   - **Custom domain**: `auth.yourcompany.com` (if configured)
+
+If you DON'T have a domain yet, create one:
+- Click "Actions" → "Create Cognito domain"
+- Enter a unique prefix (e.g., `podcast-platform-rohit`)
+- Save (it becomes: `podcast-platform-rohit.auth.us-east-1.amazoncognito.com`)
+
+#### Add These URLs to Google OAuth:
+Replace `YOUR-COGNITO-DOMAIN` with your actual domain:
 ```
-https://us-east-1_lvLcARe2P.auth.us-east-1.amazoncognito.com/oauth2/idpresponse
+https://YOUR-COGNITO-DOMAIN.auth.us-east-1.amazoncognito.com/oauth2/idpresponse
+http://localhost:3001/
+```
+
+**Example:**
+```
+https://podcast-platform-rohit.auth.us-east-1.amazoncognito.com/oauth2/idpresponse
 http://localhost:3001/
 ```
 
@@ -91,12 +115,11 @@ export const configureAmplify = () => {
         userPoolClientId: '3lm7s5lml6i0va070cm1c3uafn',
         loginWith: {
           oauth: {
-            domain: 'podcast-platform-XXXXX.auth.us-east-1.amazoncognito.com',  // Get from Cognito console
+            domain: 'YOUR-COGNITO-DOMAIN.auth.us-east-1.amazoncognito.com',  // Replace with your domain (without https://)
             scopes: ['profile', 'email', 'openid'],
             redirectSignIn: ['http://localhost:3001/'],
             redirectSignOut: ['http://localhost:3001/'],
             responseType: 'code',
-            providers: ['Google'],
           },
           email: true,
         },
@@ -105,6 +128,11 @@ export const configureAmplify = () => {
     },
   });
 };
+```
+
+**Example with actual domain:**
+```typescript
+domain: 'podcast-platform-rohit.auth.us-east-1.amazoncognito.com',  // No https://
 ```
 
 ---
