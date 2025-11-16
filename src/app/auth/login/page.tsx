@@ -50,8 +50,14 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    setError('Google SSO coming soon. Please use email/password for now.');
+  const handleGoogleLogin = async () => {
+    try {
+      const { signInWithRedirect } = await import('aws-amplify/auth');
+      await signInWithRedirect({ provider: 'Google' });
+    } catch (err: any) {
+      console.error('Google SSO error:', err);
+      setError('Google SSO is not yet configured. Please configure Google OAuth credentials in AWS Cognito first, or use email/password for now.');
+    }
   };
 
   const handleMicrosoftLogin = () => {

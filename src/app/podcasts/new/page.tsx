@@ -913,9 +913,40 @@ function Step5({ formData, setFormData }: any) {
 
   const tones = ['conversational', 'professional', 'energetic', 'formal'];
 
-  const playVoicePreview = (voiceId: string) => {
-    // TODO: Play actual preview from OpenAI TTS
-    alert(`🎧 Voice Preview: ${voiceId}\n\nIn production, this will play a sample audio clip using OpenAI TTS.\n\n"Welcome to your AI-powered podcast..."`);
+  const [isPlayingPreview, setIsPlayingPreview] = useState<string | null>(null);
+
+  const playVoicePreview = async (voiceId: string) => {
+    try {
+      setIsPlayingPreview(voiceId);
+      
+      // Call real OpenAI TTS API
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/voice/preview', { voiceId }, { requireAuth: false });
+      
+      if (response.ok) {
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+        const audio = new Audio(audioUrl);
+        
+        audio.onended = () => {
+          setIsPlayingPreview(null);
+          URL.revokeObjectURL(audioUrl);
+        };
+        
+        audio.onerror = () => {
+          setIsPlayingPreview(null);
+          alert('Failed to play audio preview');
+        };
+        
+        await audio.play();
+      } else {
+        throw new Error('Failed to generate preview');
+      }
+    } catch (error) {
+      console.error('Voice preview error:', error);
+      alert('Failed to generate voice preview. Make sure OpenAI API key is configured.');
+      setIsPlayingPreview(null);
+    }
   };
 
   return (
@@ -952,12 +983,22 @@ function Step5({ formData, setFormData }: any) {
                   e.stopPropagation();
                   playVoicePreview(voice.id);
                 }}
-                className="mt-3 w-full px-3 py-1.5 text-xs bg-background hover:bg-border border border-border rounded-lg transition-all flex items-center justify-center gap-2"
+                disabled={isPlayingPreview === voice.id}
+                className="mt-3 w-full px-3 py-1.5 text-xs bg-background hover:bg-border border border-border rounded-lg transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" />
-                </svg>
-                Preview
+                {isPlayingPreview === voice.id ? (
+                  <>
+                    <span className="animate-pulse">🔊</span>
+                    Playing...
+                  </>
+                ) : (
+                  <>
+                    <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z" />
+                    </svg>
+                    Preview
+                  </>
+                )}
               </button>
             </Card>
           ))}
