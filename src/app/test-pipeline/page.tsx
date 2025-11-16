@@ -265,7 +265,7 @@ export default function TestPipelinePage() {
                 ))}
               </div>
               <div className="mt-4 pt-4 border-t border-zinc-700 text-xs text-gray-500">
-                💡 Tip: Stages with "Ready" indicator have test fixtures available
+                💡 Tip: Stages with &quot;Ready&quot; indicator have test fixtures available
               </div>
             </div>
           </div>
@@ -662,7 +662,7 @@ export default function TestPipelinePage() {
               </ol>
               <div className="mt-4 pt-4 border-t border-blue-800">
                 <p className="text-xs text-gray-400">
-                  <strong>Note:</strong> The "Run Stage" button simulates execution. 
+                  <strong>Note:</strong> The &quot;Run Stage&quot; button simulates execution. 
                   For actual pipeline execution, copy the command and run it in your terminal, 
                   or deploy to AWS for full automation.
                 </p>
