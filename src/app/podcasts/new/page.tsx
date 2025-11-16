@@ -384,21 +384,38 @@ function Step2({ formData, setFormData }: any) {
     'verizon': ['AT&T', 'T-Mobile', 'Dish Network', 'Charter Communications'],
     't-mobile': ['AT&T', 'Verizon', 'Dish Network', 'US Cellular'],
     'tmobile': ['AT&T', 'Verizon', 'Dish Network', 'US Cellular'],
+    // Consulting & Professional Services
+    'accenture': ['Deloitte', 'PwC', 'EY', 'KPMG', 'IBM Consulting', 'Capgemini'],
+    'deloitte': ['Accenture', 'PwC', 'EY', 'KPMG', 'IBM Consulting'],
+    'pwc': ['Deloitte', 'Accenture', 'EY', 'KPMG', 'IBM Consulting'],
+    'ey': ['Deloitte', 'PwC', 'Accenture', 'KPMG', 'McKinsey'],
+    'kpmg': ['Deloitte', 'PwC', 'Accenture', 'EY', 'IBM Consulting'],
+    'mckinsey': ['BCG', 'Bain', 'Deloitte', 'Accenture'],
+    'bcg': ['McKinsey', 'Bain', 'Deloitte', 'Accenture'],
+    'bain': ['McKinsey', 'BCG', 'Deloitte', 'Accenture'],
+    // Technology
     'apple': ['Samsung', 'Google', 'Microsoft', 'Amazon'],
     'microsoft': ['Google', 'Amazon', 'Apple', 'Oracle', 'Salesforce'],
     'google': ['Microsoft', 'Amazon', 'Apple', 'Meta'],
     'amazon': ['Microsoft', 'Google', 'Walmart', 'Target'],
     'meta': ['Google', 'TikTok', 'Snap', 'Twitter/X'],
     'facebook': ['Google', 'TikTok', 'Snap', 'Twitter/X'],
+    'ibm': ['Accenture', 'Microsoft', 'Oracle', 'SAP'],
+    'oracle': ['Microsoft', 'SAP', 'IBM', 'Salesforce'],
+    'salesforce': ['Microsoft', 'Oracle', 'SAP', 'Adobe'],
+    // Automotive
     'tesla': ['Ford', 'GM', 'Rivian', 'Lucid Motors', 'BYD'],
     'ford': ['Tesla', 'GM', 'Stellantis', 'Toyota'],
     'gm': ['Ford', 'Tesla', 'Stellantis', 'Toyota'],
+    // Retail
     'walmart': ['Amazon', 'Target', 'Costco', 'Kroger'],
     'target': ['Walmart', 'Amazon', 'Costco', 'Best Buy'],
+    // Finance
     'jpmorgan': ['Bank of America', 'Wells Fargo', 'Citigroup', 'Goldman Sachs'],
     'chase': ['Bank of America', 'Wells Fargo', 'Citigroup', 'Goldman Sachs'],
     'bank of america': ['JPMorgan Chase', 'Wells Fargo', 'Citigroup', 'US Bank'],
     'wells fargo': ['JPMorgan Chase', 'Bank of America', 'Citigroup', 'US Bank'],
+    // Consumer Goods
     'coca-cola': ['PepsiCo', 'Dr Pepper', 'Monster Beverage', 'Keurig Dr Pepper'],
     'pepsi': ['Coca-Cola', 'Dr Pepper', 'Monster Beverage', 'Red Bull'],
     'nike': ['Adidas', 'Under Armour', 'Puma', 'Lululemon'],
