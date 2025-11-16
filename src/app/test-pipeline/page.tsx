@@ -192,19 +192,39 @@ export default function TestPipelinePage() {
     const startTime = Date.now();
 
     try {
-      // In a real implementation, this would call an API endpoint that runs the command
-      // For now, we'll simulate the behavior
-      
-      // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      
-      // Mock success result
-      setRunResult({
-        success: true,
-        output: `✅ Stage "${selectedStage}" completed successfully!\n\nMode: ${runMode === 'free' ? '🆓 Free (Replay/Stub)' : '💰 Real AI (OpenAI)'}\nLLM Provider: ${llmProvider}\nTTS Provider: ${ttsProvider}\nInput: ${inputFile}\nOutput: ${outputFile}\n\nGenerated output file with processed data.`,
-        duration: Date.now() - startTime,
-        outputFile: outputFile,
+      // Call real API endpoint to execute the pipeline stage
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${apiUrl}/api/pipeline/execute-stage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          stage: selectedStage,
+          llmProvider,
+          ttsProvider,
+          httpProvider,
+          inputFile,
+          outputFile,
+        }),
       });
+
+      if (response.ok) {
+        const data = await response.json();
+        setRunResult({
+          success: true,
+          output: data.output || `✅ Stage "${selectedStage}" completed successfully!`,
+          duration: Date.now() - startTime,
+          outputFile: outputFile,
+        });
+      } else {
+        const errorText = await response.text();
+        setRunResult({
+          success: false,
+          error: errorText || 'Failed to execute stage',
+          duration: Date.now() - startTime,
+        });
+      }
     } catch (error) {
       setRunResult({
         success: false,

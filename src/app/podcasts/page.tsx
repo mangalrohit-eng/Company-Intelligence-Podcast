@@ -26,41 +26,32 @@ export default function PodcastsPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // TODO: Fetch podcasts from API
-    // Stub data for now
-    setTimeout(() => {
-      setPodcasts([
-        {
-          id: '1',
-          title: 'Tech Industry Insights',
-          subtitle: 'Daily AI and tech news',
-          coverArtUrl: '',
-          cadence: 'daily',
-          status: 'active',
-          updatedAt: new Date().toISOString(),
-        },
-        {
-          id: '2',
-          title: 'Finance Weekly',
-          subtitle: 'Market analysis and trends',
-          coverArtUrl: '',
-          cadence: 'weekly',
-          status: 'active',
-          updatedAt: new Date().toISOString(),
-        },
-        {
-          id: '3',
-          title: 'Startup Stories',
-          subtitle: 'Founder interviews',
-          coverArtUrl: '',
-          cadence: 'monthly',
-          status: 'active',
-          updatedAt: new Date().toISOString(),
-        },
-      ]);
-      setLoading(false);
-    }, 500);
+    fetchPodcasts();
   }, []);
+
+  const fetchPodcasts = async () => {
+    try {
+      setLoading(true);
+      // Call real API endpoint
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${apiUrl}/api/podcasts`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setPodcasts(data.podcasts || []);
+      } else {
+        console.error('Failed to fetch podcasts:', response.statusText);
+        // Show empty state on error
+        setPodcasts([]);
+      }
+    } catch (error) {
+      console.error('Error fetching podcasts:', error);
+      // Show empty state on error
+      setPodcasts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   if (loading) {
     return (

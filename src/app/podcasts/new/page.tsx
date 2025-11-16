@@ -75,8 +75,38 @@ export default function NewPodcastPage() {
   };
 
   const handleSubmit = async () => {
-    // TODO: Submit to API
-    console.log('Creating podcast:', formData);
+    try {
+      // Create podcast via API
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+      const response = await fetch(`${apiUrl}/api/podcasts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: formData.title,
+          description: formData.description,
+          companyId: formData.companyId,
+          competitors: formData.competitorIds || [],
+          topics: formData.topics || [],
+          duration: formData.duration || 5,
+          voice: formData.voice || 'alloy',
+          schedule: formData.schedule || 'manual',
+        }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        // Redirect to the new podcast's page
+        window.location.href = `/podcasts/${data.id}`;
+      } else {
+        const error = await response.text();
+        alert(`Failed to create podcast: ${error}`);
+      }
+    } catch (error) {
+      console.error('Error creating podcast:', error);
+      alert('Failed to create podcast. Please try again.');
+    }
   };
 
   return (
