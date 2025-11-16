@@ -55,7 +55,7 @@ export default function GoodbyePage() {
           </div>
 
           <p className="text-muted mb-8">
-            We're sorry to see you go. If you change your mind, you can always create a new account and start fresh.
+            We&apos;re sorry to see you go. If you change your mind, you can always create a new account and start fresh.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

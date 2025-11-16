@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Podcast Platform - Deploying...</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            text-align: center;
+            max-width: 600px;
+        }
+        h1 { font-size: 3rem; margin-bottom: 1rem; }
+        p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        .status {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .btn:hover { transform: translateY(-2px); }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid white;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎙️ AI Podcast Platform</h1>
+        <p>Your AI-powered company intelligence podcast platform is being deployed...</p>
+        
+        <div class="status">
+            <div class="spinner"></div>
+            <h3>✅ AWS Infrastructure: Live</h3>
+            <p style="font-size: 0.9rem; margin-top: 10px;">
+                Backend services are operational!<br>
+                Frontend build is in progress...
+            </p>
+        </div>
+
+        <div style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 10px; margin: 20px 0;">
+            <h3 style="margin-bottom: 10px;">🚀 Quick Access</h3>
+            <p style="font-size: 0.9rem; line-height: 1.8;">
+                <strong>API Endpoint:</strong><br>
+                <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 3px; display: inline-block; margin: 5px 0;">
+                    https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com
+                </code><br><br>
+
+                <strong>Local Development:</strong><br>
+                <code style="background: rgba(0,0,0,0.3); padding: 5px; border-radius: 3px; display: inline-block; margin: 5px 0;">
+                    http://localhost:3000
+                </code><br>
+                <span style="font-size: 0.8rem; opacity: 0.8;">(Full UI available now!)</span><br><br>
+
+                <strong>Pipeline Console:</strong><br>
+                <a href="https://console.aws.amazon.com/states/home?region=us-east-1" 
+                   style="color: white; text-decoration: underline;">
+                   AWS Step Functions →
+                </a>
+            </p>
+        </div>
+
+        <a href="http://localhost:3000" class="btn">Access Local Development</a>
+
+        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.7;">
+            Full production frontend will be available soon!
+        </p>
+    </div>
+
+    <script>
+        // Auto-refresh every 30 seconds to check if deployment is complete
+        setTimeout(() => location.reload(), 30000);
+    </script>
+</body>
+</html>
+

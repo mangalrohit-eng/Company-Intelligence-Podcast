@@ -218,7 +218,7 @@ function Step1({ formData, setFormData }: any) {
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold mb-2">Branding & Metadata</h2>
-        <p className="text-muted">Define your podcast's identity and basic information</p>
+        <p className="text-muted">Define your podcast&apos;s identity and basic information</p>
       </div>
 
       {/* Cover Art Upload */}
@@ -430,7 +430,7 @@ function Step2({ formData, setFormData }: any) {
     <div className="space-y-6">
       <div>
         <h2 className="text-3xl font-bold mb-2">Company & Industry</h2>
-        <p className="text-muted">Define your focus and we'll suggest relevant competitors</p>
+        <p className="text-muted">Define your focus and we&apos;ll suggest relevant competitors</p>
       </div>
 
       <div>

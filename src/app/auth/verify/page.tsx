@@ -69,7 +69,7 @@ export default function VerifyPage() {
                 </div>
                 <p className="text-lg font-semibold mb-2">Check Your Email</p>
                 <p className="text-muted mb-6">
-                  We've sent a verification link to <span className="font-medium text-foreground">{email}</span>
+                  We&apos;ve sent a verification link to <span className="font-medium text-foreground">{email}</span>
                 </p>
                 <p className="text-sm text-muted mb-6">
                   Click the link in the email to verify your account and get started.

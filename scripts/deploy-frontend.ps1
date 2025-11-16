@@ -33,10 +33,13 @@ if ($LASTEXITCODE -ne 0) {
 Write-Output "`n✅ Build successful!`n"
 
 Write-Output "📤 Uploading to S3..."
-# For Next.js standalone, we need to upload the .next/standalone and static folders
-aws s3 sync .next/standalone s3://$BUCKET --delete
-aws s3 sync .next/static s3://$BUCKET/_next/static --delete
-aws s3 sync public s3://$BUCKET/public --delete
+# For Next.js export, upload the out directory
+if (Test-Path "out") {
+    aws s3 sync out s3://$BUCKET --delete
+} else {
+    Write-Output "❌ Build output directory 'out' not found!"
+    exit 1
+}
 
 Write-Output "`n✅ Upload complete!`n"
 

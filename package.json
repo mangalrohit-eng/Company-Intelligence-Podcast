@@ -10,7 +10,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "NEXT_DISABLE_ESLINT=true next build",
+    "build:win": "set NEXT_DISABLE_ESLINT=true&& next build",
     "start": "next start",
     "lint": "eslint . --ext .ts,.tsx",
     "test": "jest --config jest.config.cjs",

@@ -178,7 +178,7 @@ export default function SettingsPage() {
                     <Badge variant="outline">Not Connected</Badge>
                   </div>
                   <p className="text-sm text-muted mb-3">
-                    Add your podcast to Spotify and reach the world's largest audio platform
+                    Add your podcast to Spotify and reach the world&apos;s largest audio platform
                   </p>
                   <Button variant="outline" size="sm">
                     Submit to Spotify
