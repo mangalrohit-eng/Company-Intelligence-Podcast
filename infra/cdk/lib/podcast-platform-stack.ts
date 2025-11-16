@@ -171,6 +171,28 @@ export class PodcastPlatformStack extends cdk.Stack {
 
     podcastsTable.grantReadData(listPodcastsLambda);
 
+    // New Lambda functions
+    const listRunsLambda = new lambda.Function(this, 'ListRunsLambda', {
+      functionName: 'runs-list',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'list.handler',
+      code: lambda.Code.fromAsset('../../src/api/runs'),
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+    });
+
+    runsTable.grantReadData(listRunsLambda);
+    eventsTable.grantReadData(listRunsLambda);
+
+    const suggestCompetitorsLambda = new lambda.Function(this, 'SuggestCompetitorsLambda', {
+      functionName: 'competitors-suggest',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      handler: 'suggest.handler',
+      code: lambda.Code.fromAsset('../../src/api/competitors'),
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+    });
+
     // ========================================================================
     // API Gateway: HTTP API
     // ========================================================================
@@ -213,6 +235,28 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/podcasts',
       methods: [apigatewayv2.HttpMethod.GET],
       integration: listPodcastsIntegration,
+    });
+
+    const listRunsIntegration = new HttpLambdaIntegration(
+      'ListRunsIntegration',
+      listRunsLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/runs',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: listRunsIntegration,
+    });
+
+    const suggestCompetitorsIntegration = new HttpLambdaIntegration(
+      'SuggestCompetitorsIntegration',
+      suggestCompetitorsLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/competitors/suggest',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: suggestCompetitorsIntegration,
     });
 
     // ========================================================================
