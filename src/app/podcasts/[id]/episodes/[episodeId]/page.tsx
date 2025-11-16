@@ -7,6 +7,8 @@
 import { useParams } from 'next/navigation';
 import { useState, useRef } from 'react';
 import { Play, Pause, Download, Share2, ExternalLink } from 'lucide-react';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { Card } from '@/components/ui/card';
 
 export default function EpisodeDetailPage() {
   const params = useParams();
@@ -113,55 +115,62 @@ Industry analysts are calling it "transformative for the industry," with potenti
         </div>
 
         {/* Tabs */}
-        <div className="grid md:grid-cols-3 gap-4 mb-8">
-          <button className="px-4 py-2 bg-primary text-background font-medium rounded-lg">
-            Transcript
-          </button>
-          <button className="px-4 py-2 border border-border hover:border-primary font-medium rounded-lg transition-all">
-            Show Notes
-          </button>
-          <button className="px-4 py-2 border border-border hover:border-primary font-medium rounded-lg transition-all">
-            Sources
-          </button>
-        </div>
+        <Tabs defaultValue="transcript">
+          <TabsList className="mb-8">
+            <TabsTrigger value="transcript">Transcript</TabsTrigger>
+            <TabsTrigger value="shownotes">Show Notes</TabsTrigger>
+            <TabsTrigger value="sources">Sources</TabsTrigger>
+          </TabsList>
 
-        {/* Transcript */}
-        <div className="bg-secondary border border-border rounded-lg p-8">
-          <h2 className="text-2xl font-semibold mb-6">Transcript</h2>
-          <div className="prose prose-invert max-w-none">
-            {episode.transcript.split('\n\n').map((paragraph, idx) => (
-              <p key={idx} className="mb-4 text-muted leading-relaxed">
-                {paragraph}
-              </p>
-            ))}
-          </div>
-        </div>
+          <TabsContent value="transcript">
+            <Card className="p-8">
+              <h2 className="text-2xl font-semibold mb-6">Transcript</h2>
+              <div className="prose prose-invert max-w-none">
+                {episode.transcript.split('\n\n').map((paragraph, idx) => (
+                  <p key={idx} className="mb-4 text-muted leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
 
-        {/* Sources */}
-        <div className="mt-8 bg-secondary border border-border rounded-lg p-6">
-          <h2 className="text-2xl font-semibold mb-4">Sources</h2>
-          <div className="space-y-3">
-            {episode.sources.map((source, idx) => (
-              <a
-                key={idx}
-                href={source.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-between p-4 bg-background border border-border rounded-lg hover:border-primary transition-all group"
-              >
-                <div>
-                  <div className="font-medium group-hover:text-primary transition-colors">
-                    {source.title}
-                  </div>
-                  <div className="text-sm text-muted">
-                    {source.publisher} • {source.date}
-                  </div>
-                </div>
-                <ExternalLink className="w-5 h-5 text-muted group-hover:text-primary transition-colors" />
-              </a>
-            ))}
-          </div>
-        </div>
+          <TabsContent value="shownotes">
+            <Card className="p-8">
+              <h2 className="text-2xl font-semibold mb-6">Show Notes</h2>
+              <div className="prose prose-invert max-w-none">
+                <div dangerouslySetInnerHTML={{ __html: episode.showNotes.replace(/\n/g, '<br/>') }} />
+              </div>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="sources">
+            <Card className="p-6">
+              <h2 className="text-2xl font-semibold mb-4">Sources</h2>
+              <div className="space-y-3">
+                {episode.sources.map((source, idx) => (
+                  <a
+                    key={idx}
+                    href={source.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center justify-between p-4 bg-background border border-border rounded-lg hover:border-primary transition-all group"
+                  >
+                    <div>
+                      <div className="font-medium group-hover:text-primary transition-colors">
+                        {source.title}
+                      </div>
+                      <div className="text-sm text-muted">
+                        {source.publisher} • {source.date}
+                      </div>
+                    </div>
+                    <ExternalLink className="w-5 h-5 text-muted group-hover:text-primary transition-colors" />
+                  </a>
+                ))}
+              </div>
+            </Card>
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );

@@ -1,0 +1,342 @@
+AI Podcast Platform — User Experience Specification
+🔰 Overview
+
+A sleek, Spotify-inspired web app for creating and managing AI-generated company podcasts.
+Tone: professional, modern, intuitive.
+Target device: desktop + fully responsive mobile.
+
+🧭 User Journey Summary
+Phase	Goal	Primary Screens
+1. Landing & Onboarding	Discover the product, sign up	Landing page → Sign-in
+2. First Podcast Setup	Create a new podcast quickly	Podcast Wizard (5 steps)
+3. Dashboard & Runs	Manage, edit, trigger, monitor	Dashboard, Podcast Overview, Run Detail
+4. Episode Consumption	Listen, share, view sources	Episode Detail
+5. Administration	Admin oversight	Admin Console
+6. Account Management & Cancellation	Manage profile, delete account	Settings, Cancellation flow
+🖥️ SCREEN-BY-SCREEN SPEC
+1️⃣ Landing Page (/)
+
+Goal: Inform and convert visitors to sign up.
+
+Layout
+
+Hero banner: tagline “Turn your company news into a podcast — automatically.”
+
+CTA: Create your podcast (→ /auth/login)
+
+Feature tiles:
+
+AI summarization
+
+Competitor insights
+
+One-click publishing (Apple/Spotify)
+
+Demo section: embedded example player.
+
+Footer: Privacy, Terms, Contact.
+
+States
+
+Unauthenticated → “Sign in” top-right.
+
+Responsive: collapses into scroll stack on mobile.
+
+2️⃣ Authentication
+
+Pages
+
+/auth/login
+
+/auth/signup
+
+/auth/verify
+
+Flow
+
+Email + magic link (or Google/MS SSO via Cognito).
+
+Success → redirect /podcasts.
+
+3️⃣ Dashboard (/podcasts)
+
+Goal: Central control center.
+
+Elements
+
+Top bar: logo (→ /), search bar, “New Podcast” button, user avatar.
+
+Cards grid (Spotify album-style):
+
+Cover art, podcast name.
+
+Badges: cadence (Daily/Weekly/Monthly), status.
+
+Quick metrics: last run, next run.
+
+Hover actions: ▶ Run Now, ✎ Edit, ☰ Menu → RSS / Delete.
+
+Empty state:
+Illustration + “You don’t have any podcasts yet. Create your first!”
+
+4️⃣ New Podcast Wizard (/podcasts/new)
+
+Guided 5-step creation flow.
+Persistent progress bar at top, “Next / Back / Finish” buttons, autosave draft.
+
+Step 1: Branding & Metadata
+
+Fields: title, subtitle, description, author, email, category, explicit flag, language.
+
+Cover upload (3000×3000) with live preview.
+
+Validation hints (size, aspect).
+
+Step 2: Company & Industry
+
+Company autocomplete (OpenSearch).
+
+AI suggests competitors; checkboxes to include/exclude.
+
+Industry dropdown (e.g., Telecom, Finance, Retail).
+
+Step 3: Preset & Cadence
+
+Preset cards: Daily 2-min | Weekly 5-min | Monthly 10-min.
+
+Custom mode: sliders for duration/time window; cadence selector; publish time & timezone.
+
+Step 4: Topics & Regions
+
+Prechecked standard topics.
+
+AI-suggested special topics (with short description tags).
+
+Priority sliders (0-100).
+
+Region/language filter chips.
+
+Compliance toggles (robots-only, allow/block domain text areas).
+
+Step 5: Voice & Review
+
+Voice list (OpenAI TTS voices) with play preview.
+
+Tone options (conversational, formal, energetic).
+
+Review panel summarizing all choices.
+
+“Create Podcast” → API call → redirect /podcasts/:id.
+
+Mobile adaptation: linear stack, sticky footer actions, collapsible review summary.
+
+5️⃣ Podcast Overview (/podcasts/:id)
+
+Goal: Manage one podcast’s configuration, runs, and outputs.
+
+Header section
+
+Cover + title + author.
+
+Badges (Cadence, Duration).
+
+Buttons: ▶ Run Now | ✎ Edit | Copy RSS | Help → “Submit to Apple/Spotify”.
+
+Tabs
+
+Overview
+
+Summary cards: last run status, next scheduled, total episodes.
+
+Company, competitors, topics list.
+
+Chart: run durations over time.
+
+Button: “Edit Configuration”.
+
+Episodes
+
+Table: title, publish date, length, status, “View”.
+
+Runs
+
+Timeline of recent runs (status badges, timestamps).
+
+Click → “Run Detail”.
+
+Suggestions
+
+AI-refreshed competitor/topic suggestions with “Apply” buttons.
+
+Validation
+
+RSS feed health, artwork checks, domain compliance warnings.
+
+Team
+
+User list with roles, invite/remove.
+
+6️⃣ Run Detail / Live Progress (/podcasts/:id/run/:runId)
+
+Goal: Observe a single run in real time.
+
+Header: Podcast title, Run ID, status chip (Running, Success, Failed).
+Progress bar: segmented by stages (Prepare → Discover → Scrape → … → TTS → Publish).
+
+Timeline (vertical stream)
+
+Each event row: icon + label + message + timestamp.
+
+Example:
+
+🧭 Discover — 126 sources retrieved
+
+🕸️ Scrape — 18/24 pages processed (breadth=3)
+
+🧩 Outline generated
+
+🗣️ Voice selected: “Alloy”
+
+Stage panels (collapsible)
+
+Discovery: URL list, publishers.
+
+Scrape: domain heatmap (success, latency).
+
+Evidence Units: table (fact, quote, number).
+
+Outline/Script: text preview (read-only).
+
+TTS: waveform preview, voice, duration.
+
+Controls
+
+Cancel Run (confirmation modal).
+
+On completion → “View Episode”.
+
+Admin mode toggle: reveals raw prompts, tokens, API cost, domain metrics.
+
+7️⃣ Episode Detail (/podcasts/:id/episodes/:episodeId)
+
+Goal: Listen and read episode content.
+
+Hero player:
+
+Large play button + waveform progress bar.
+
+Duration + publish date.
+
+Tabs
+
+Transcript (scroll-sync with audio, searchable)
+
+Show Notes (markdown render: thesis, key points, sources list)
+
+Sources (table: domain, date, “Open” link)
+
+Telemetry (for admins: evidence counts, LLM timings)
+
+Buttons: Download MP3, Download Transcript, Copy RSS Item URL.
+
+8️⃣ Admin Console (/admin)
+
+Goal: Global observability.
+
+Sections
+
+Active Runs: live table (podcast, user, stage, progress%).
+
+Run Detail: same as user’s run view, with raw data tabs.
+
+Domain Telemetry: table (domain, success rate, latency, scrapability).
+
+Orgs & Users: list, quotas, usage.
+
+Controls: trigger any podcast’s run, replay past runs, purge cassettes.
+
+9️⃣ Settings & Profile (/settings)
+
+Tabs
+
+Profile: name, email, org, role.
+
+Notifications: email, Slack/Teams webhooks.
+
+Integrations: Apple/Spotify submission info.
+
+Danger Zone: delete podcast(s), delete account (confirmation).
+
+🔁 Recurring Use Flow
+
+User receives email: “Your weekly podcast is ready.”
+
+Opens dashboard → sees new episode.
+
+Click “View Episode” → listens or copies RSS link.
+
+(Optionally) edits topics/competitors for next run.
+
+Admin checks domain performance in console.
+
+🔚 Cancellation Flow
+
+User clicks “Delete Account” (Settings → Danger Zone).
+
+Confirmation modal:
+
+“All podcasts and episodes will be removed. Continue?”
+
+Buttons: Cancel / Confirm Delete.
+
+Backend deactivates account → queues cleanup (S3, DB, RSS purge).
+
+Redirect to Goodbye page:
+
+“Account deleted successfully. You can rejoin anytime.”
+
+🎨 Visual & Interaction Notes
+
+Color scheme: dark base (#121214) + accent (brand green #1DB954 or podcast custom).
+
+Typography: Inter or Circular, 16px base, 1.6 line height.
+
+Motion: 200ms ease transitions, no heavy animations.
+
+Empty states: friendly illustration + CTA button.
+
+Errors: inline messages, not blocking modals.
+
+📱 Mobile UX Adjustments
+
+Collapsible sections instead of tabs.
+
+Floating “Run Now” button on Podcast Overview.
+
+Sticky mini-player on Episode Detail.
+
+Drawer-style navigation menu.
+
+🧠 Optional Growth Features (later)
+
+Episode sharing link with embedded player.
+
+Weekly email digest with top trends.
+
+Analytics dashboard (listener stats, LLM costs).
+
+Collaboration (multi-editor podcasts).
+
+✅ Acceptance Criteria for Cursor / UI Dev
+
+All routes implemented; responsive layouts verified at 360px, 768px, 1280px.
+
+Wizard autosaves between steps.
+
+“Run Now” triggers backend, shows live updates via WebSocket/AppSync.
+
+Audio player streams CloudFront MP3.
+
+RSS feed passes iTunes validator.
+
+Account deletion revokes access and removes podcasts.

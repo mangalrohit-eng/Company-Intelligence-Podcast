@@ -6,7 +6,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Plus, Play, Settings, Share2, Calendar } from 'lucide-react';
+import { Plus, Play, Settings, Share2, Calendar, MoreVertical, Rss, Trash2 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 
 interface Podcast {
   id: string;
@@ -75,36 +78,65 @@ export default function PodcastsPage() {
   }
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <h1 className="text-4xl font-bold">My Podcasts</h1>
-          <Link
-            href="/podcasts/new"
-            className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-background font-semibold rounded-full transition-all"
-          >
-            <Plus className="w-5 h-5" />
-            New Podcast
-          </Link>
+        <div className="mb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+            <div>
+              <h1 className="text-4xl font-bold mb-2">My Podcasts</h1>
+              <p className="text-muted">Manage and monitor your AI-generated podcasts</p>
+            </div>
+            <Link href="/podcasts/new">
+              <Button size="lg" className="gap-2 w-full md:w-auto">
+                <Plus className="w-5 h-5" />
+                New Podcast
+              </Button>
+            </Link>
+          </div>
+          
+          {/* Search Bar */}
+          <div className="relative max-w-md">
+            <input
+              type="search"
+              placeholder="Search podcasts..."
+              className="w-full pl-10 pr-4 py-3 bg-secondary border border-border rounded-lg focus:outline-none focus:border-primary transition-colors"
+            />
+            <svg
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+              />
+            </svg>
+          </div>
         </div>
 
         {/* Podcasts Grid */}
         {podcasts.length === 0 ? (
-          <div className="text-center py-24">
-            <div className="text-6xl mb-4">🎙️</div>
-            <h2 className="text-2xl font-semibold mb-4">No podcasts yet</h2>
-            <p className="text-muted mb-8">Create your first AI-powered podcast</p>
-            <Link
-              href="/podcasts/new"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-background font-semibold rounded-full transition-all"
-            >
-              <Plus className="w-5 h-5" />
-              Create Podcast
+          <Card className="text-center py-24">
+            <div className="w-24 h-24 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-6">
+              <Play className="w-12 h-12 text-primary" />
+            </div>
+            <h2 className="text-2xl font-semibold mb-3">No podcasts yet</h2>
+            <p className="text-muted mb-8 max-w-md mx-auto">
+              Create your first AI-powered podcast and start generating episodes automatically
+            </p>
+            <Link href="/podcasts/new">
+              <Button size="lg" className="gap-2">
+                <Plus className="w-5 h-5" />
+                Create Your First Podcast
+              </Button>
             </Link>
-          </div>
+          </Card>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {podcasts.map((podcast) => (
               <PodcastCard key={podcast.id} podcast={podcast} />
             ))}
@@ -116,6 +148,8 @@ export default function PodcastsPage() {
 }
 
 function PodcastCard({ podcast }: { podcast: Podcast }) {
+  const [showMenu, setShowMenu] = useState(false);
+
   const handleRunNow = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -125,45 +159,107 @@ function PodcastCard({ podcast }: { podcast: Podcast }) {
     }
   };
 
+  const getCadenceColor = (cadence: string) => {
+    switch (cadence.toLowerCase()) {
+      case 'daily': return 'success';
+      case 'weekly': return 'default';
+      case 'monthly': return 'warning';
+      default: return 'outline';
+    }
+  };
+
   return (
-    <Link href={`/podcasts/${podcast.id}`}>
-      <div className="group relative bg-secondary hover:bg-secondary/80 p-4 rounded-lg border border-border hover:border-primary transition-all cursor-pointer">
+    <Card className="group hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all">
+      <Link href={`/podcasts/${podcast.id}`} className="block p-4">
         {/* Cover Art */}
-        <div className="aspect-square bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg mb-4 flex items-center justify-center text-6xl">
-          🎙️
+        <div className="relative aspect-square bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
+          <div className="text-6xl group-hover:scale-110 transition-transform">🎙️</div>
+          
+          {/* Hover Overlay */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+            <Button
+              size="icon"
+              className="w-12 h-12"
+              onClick={handleRunNow}
+            >
+              <Play className="w-6 h-6" />
+            </Button>
+          </div>
         </div>
 
         {/* Info */}
-        <h3 className="font-semibold text-lg mb-1 truncate">{podcast.title}</h3>
-        <p className="text-sm text-muted mb-3 truncate">{podcast.subtitle}</p>
+        <div className="mb-4">
+          <h3 className="font-semibold text-lg mb-1 truncate group-hover:text-primary transition-colors">
+            {podcast.title}
+          </h3>
+          <p className="text-sm text-muted truncate">{podcast.subtitle}</p>
+        </div>
 
         {/* Metadata */}
-        <div className="flex items-center gap-2 text-xs text-muted mb-4">
-          <Calendar className="w-4 h-4" />
-          <span className="capitalize">{podcast.cadence}</span>
-          <span className="ml-auto px-2 py-1 bg-primary/20 text-primary rounded">
+        <div className="flex items-center gap-2 mb-4">
+          <Badge variant={getCadenceColor(podcast.cadence)}>
+            <Calendar className="w-3 h-3 mr-1" />
+            {podcast.cadence}
+          </Badge>
+          <Badge variant="success">
             {podcast.status}
-          </span>
+          </Badge>
         </div>
+      </Link>
 
-        {/* Actions */}
-        <div className="flex gap-2">
-          <button 
-            onClick={handleRunNow}
-            className="flex-1 flex items-center justify-center gap-2 px-4 py-2 bg-primary hover:bg-accent text-background rounded-full text-sm font-medium transition-all"
+      {/* Actions */}
+      <div className="px-4 pb-4 flex gap-2 border-t border-border pt-4">
+        <Button
+          size="sm"
+          className="flex-1 gap-2"
+          onClick={handleRunNow}
+        >
+          <Play className="w-4 h-4" />
+          Run Now
+        </Button>
+        
+        <div className="relative">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={(e) => {
+              e.preventDefault();
+              setShowMenu(!showMenu);
+            }}
           >
-            <Play className="w-4 h-4" />
-            Run Now
-          </button>
-          <button className="p-2 hover:bg-border rounded-full transition-all">
-            <Settings className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-border rounded-full transition-all">
-            <Share2 className="w-5 h-5" />
-          </button>
+            <MoreVertical className="w-4 h-4" />
+          </Button>
+          
+          {showMenu && (
+            <>
+              <div 
+                className="fixed inset-0 z-10" 
+                onClick={() => setShowMenu(false)}
+              />
+              <div className="absolute right-0 top-full mt-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
+                <button className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2">
+                  <Settings className="w-4 h-4" />
+                  Edit Settings
+                </button>
+                <button className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2">
+                  <Rss className="w-4 h-4" />
+                  Copy RSS URL
+                </button>
+                <button className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2">
+                  <Share2 className="w-4 h-4" />
+                  Share
+                </button>
+                <div className="border-t border-border my-1" />
+                <button className="w-full px-4 py-2 text-left text-sm hover:bg-red-500/10 text-red-500 transition-colors flex items-center gap-2">
+                  <Trash2 className="w-4 h-4" />
+                  Delete
+                </button>
+              </div>
+            </>
+          )}
         </div>
       </div>
-    </Link>
+    </Card>
   );
 }
 

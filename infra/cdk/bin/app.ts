@@ -3,7 +3,6 @@
  * CDK App Entry Point
  */
 
-import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { PodcastPlatformStack } from '../lib/podcast-platform-stack';
 

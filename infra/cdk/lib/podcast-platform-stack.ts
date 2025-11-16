@@ -11,6 +11,7 @@ import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as iam from 'aws-cdk-lib/aws-iam';
 import { Construct } from 'constructs';
 
 export class PodcastPlatformStack extends cdk.Stack {
@@ -186,13 +187,60 @@ export class PodcastPlatformStack extends cdk.Stack {
     // Step Functions: Pipeline State Machine
     // ========================================================================
 
-    // This would be defined using the ASL JSON file
-    // For now, create a placeholder
+    // Create IAM role for Step Functions with necessary permissions
+    const stateMachineRole = new iam.Role(this, 'StateMachineRole', {
+      assumedBy: new iam.ServicePrincipal('states.amazonaws.com'),
+      description: 'Execution role for podcast pipeline state machine',
+    });
+
+    // Grant permissions to invoke Lambda functions
+    stateMachineRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['lambda:InvokeFunction'],
+      resources: ['*'], // Will be restricted to specific functions in production
+    }));
+
+    // Grant permissions to run ECS tasks
+    stateMachineRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        'ecs:RunTask',
+        'ecs:StopTask',
+        'ecs:DescribeTasks',
+      ],
+      resources: ['*'],
+    }));
+
+    // Grant permissions to pass IAM roles to ECS tasks
+    stateMachineRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['iam:PassRole'],
+      resources: ['*'],
+      conditions: {
+        StringEquals: {
+          'iam:PassedToService': 'ecs-tasks.amazonaws.com',
+        },
+      },
+    }));
+
+    // Grant permissions to create and manage EventBridge rules (for ECS sync integration)
+    stateMachineRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: [
+        'events:PutTargets',
+        'events:PutRule',
+        'events:DescribeRule',
+        'events:DeleteRule',
+        'events:RemoveTargets',
+      ],
+      resources: ['*'],
+    }));
 
     const stateMachine = new sfn.StateMachine(this, 'PipelineStateMachine', {
       stateMachineName: 'podcast-pipeline',
       definitionBody: sfn.DefinitionBody.fromFile('../../infra/stepfunctions/podcast_pipeline.asl.json'),
       timeout: cdk.Duration.hours(2),
+      role: stateMachineRole,
     });
 
     // ========================================================================

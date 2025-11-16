@@ -6,48 +6,216 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Home, Mic, Settings, User, Play } from 'lucide-react';
+import { Home, Mic, Settings, User, Play, Menu, X, Radio, LogOut, ChevronDown } from 'lucide-react';
+import { useState } from 'react';
+import { Button } from './ui/button';
 
 export function Navigation() {
   const pathname = usePathname();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  
+  // TODO: Get from authentication context
+  const isAuthenticated = true; // Set to true for demo
+  const user = {
+    name: 'John Doe',
+    email: 'john@company.com',
+    avatar: null,
+  };
 
   const links = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/podcasts', label: 'Podcasts', icon: Mic },
     { href: '/test-pipeline', label: 'Test Pipeline', icon: Play },
     { href: '/admin', label: 'Admin', icon: Settings },
-    { href: '/profile', label: 'Profile', icon: User },
+    { href: '/settings', label: 'Settings', icon: User },
   ];
 
+  const handleLogout = () => {
+    // TODO: Implement Cognito sign out
+    alert('Logout functionality will be connected to AWS Cognito');
+  };
+
   return (
-    <nav className="fixed left-0 top-0 h-screen w-64 bg-secondary border-r border-border p-6">
-      <Link href="/" className="block mb-8">
-        <h1 className="text-2xl font-bold text-primary">Podcast AI</h1>
-      </Link>
+    <>
+      {/* Desktop Navigation */}
+      <nav className="hidden lg:flex fixed left-0 top-0 h-screen w-64 bg-secondary border-r border-border p-6 flex-col z-40">
+        <Link href="/" className="block mb-8">
+          <div className="flex items-center gap-2">
+            <Radio className="w-8 h-8 text-primary" />
+            <h1 className="text-2xl font-bold text-primary">Podcast AI</h1>
+          </div>
+        </Link>
 
-      <ul className="space-y-2">
-        {links.map((link) => {
-          const Icon = link.icon;
-          const isActive = pathname === link.href;
+        <ul className="space-y-2 flex-1">
+          {links.map((link) => {
+            const Icon = link.icon;
+            const isActive = pathname === link.href;
 
-          return (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
-                  isActive
-                    ? 'bg-primary/20 text-primary'
-                    : 'text-muted hover:text-foreground hover:bg-border'
-                }`}
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    isActive
+                      ? 'bg-primary/20 text-primary'
+                      : 'text-muted hover:text-foreground hover:bg-border'
+                  }`}
+                >
+                  <Icon className="w-5 h-5" />
+                  <span className="font-medium">{link.label}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="pt-6 border-t border-border">
+          {isAuthenticated ? (
+            <div className="relative">
+              <button
+                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                className="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-border transition-all w-full"
               >
-                <Icon className="w-5 h-5" />
-                <span className="font-medium">{link.label}</span>
+                <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-semibold">
+                  {user.name.charAt(0)}
+                </div>
+                <div className="flex-1 text-left">
+                  <div className="text-sm font-medium truncate">{user.name}</div>
+                  <div className="text-xs text-muted truncate">{user.email}</div>
+                </div>
+                <ChevronDown className="w-4 h-4 text-muted" />
+              </button>
+              
+              {isUserMenuOpen && (
+                <>
+                  <div 
+                    className="fixed inset-0 z-10" 
+                    onClick={() => setIsUserMenuOpen(false)}
+                  />
+                  <div className="absolute bottom-full left-0 right-0 mb-2 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
+                    <Link
+                      href="/settings"
+                      className="flex items-center gap-2 px-4 py-3 text-sm hover:bg-border transition-colors"
+                      onClick={() => setIsUserMenuOpen(false)}
+                    >
+                      <Settings className="w-4 h-4" />
+                      Settings
+                    </Link>
+                    <div className="border-t border-border" />
+                    <button
+                      onClick={handleLogout}
+                      className="w-full flex items-center gap-2 px-4 py-3 text-sm hover:bg-red-500/10 text-red-500 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4" />
+                      Sign Out
+                    </button>
+                  </div>
+                </>
+              )}
+            </div>
+          ) : (
+            <div className="space-y-2">
+              <Link href="/auth/login">
+                <Button variant="outline" className="w-full">Sign In</Button>
               </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+              <Link href="/auth/signup">
+                <Button className="w-full">Get Started</Button>
+              </Link>
+            </div>
+          )}
+        </div>
+      </nav>
+
+      {/* Mobile Header */}
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-secondary border-b border-border px-4 flex items-center justify-between z-50">
+        <Link href="/" className="flex items-center gap-2">
+          <Radio className="w-6 h-6 text-primary" />
+          <h1 className="text-xl font-bold text-primary">Podcast AI</h1>
+        </Link>
+
+        <button
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          className="p-2 hover:bg-border rounded-lg transition-colors"
+          aria-label="Toggle menu"
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-6 h-6" />
+          ) : (
+            <Menu className="w-6 h-6" />
+          )}
+        </button>
+      </header>
+
+      {/* Mobile Menu Drawer */}
+      {isMobileMenuOpen && (
+        <>
+          <div
+            className="lg:hidden fixed inset-0 bg-black/50 z-40 mt-16"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+          <nav className="lg:hidden fixed top-16 right-0 w-64 h-[calc(100vh-4rem)] bg-secondary border-l border-border p-6 z-40 shadow-xl animate-in slide-in-from-right duration-200 flex flex-col">
+            <ul className="space-y-2 flex-1">
+              {links.map((link) => {
+                const Icon = link.icon;
+                const isActive = pathname === link.href;
+
+                return (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                        isActive
+                          ? 'bg-primary/20 text-primary'
+                          : 'text-muted hover:text-foreground hover:bg-border'
+                      }`}
+                    >
+                      <Icon className="w-5 h-5" />
+                      <span className="font-medium">{link.label}</span>
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+            
+            {/* Mobile User Menu */}
+            <div className="pt-6 border-t border-border">
+              {isAuthenticated ? (
+                <div>
+                  <div className="flex items-center gap-3 px-4 py-3 mb-2">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center text-primary font-semibold">
+                      {user.name.charAt(0)}
+                    </div>
+                    <div className="flex-1">
+                      <div className="text-sm font-medium truncate">{user.name}</div>
+                      <div className="text-xs text-muted truncate">{user.email}</div>
+                    </div>
+                  </div>
+                  <Button
+                    variant="outline"
+                    className="w-full gap-2 text-red-500 hover:text-red-500 hover:bg-red-500/10"
+                    onClick={handleLogout}
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Sign Out
+                  </Button>
+                </div>
+              ) : (
+                <div className="space-y-2">
+                  <Link href="/auth/login" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full">Sign In</Button>
+                  </Link>
+                  <Link href="/auth/signup" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full">Get Started</Button>
+                  </Link>
+                </div>
+              )}
+            </div>
+          </nav>
+        </>
+      )}
+    </>
   );
 }
 

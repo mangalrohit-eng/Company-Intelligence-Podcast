@@ -6,7 +6,11 @@
 
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { Play, Settings, Copy, Calendar, Clock } from 'lucide-react';
+import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 
 type Tab = 'overview' | 'episodes' | 'runs' | 'settings';
 
@@ -30,77 +34,99 @@ export default function PodcastDetailPage() {
   };
 
   return (
-    <div className="min-h-screen p-8">
+    <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex gap-8 mb-8">
+        <div className="flex flex-col md:flex-row gap-8 mb-8">
           {/* Cover Art */}
-          <div className="w-64 h-64 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg flex items-center justify-center text-8xl">
+          <div className="w-full md:w-72 h-72 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center text-8xl shadow-lg">
             🎙️
           </div>
 
           {/* Info */}
           <div className="flex-1">
-            <h1 className="text-5xl font-bold mb-2">{podcast.title}</h1>
-            <p className="text-xl text-muted mb-4">{podcast.subtitle}</p>
-            <p className="text-muted mb-6 max-w-2xl">{podcast.description}</p>
-
-            <div className="flex gap-4 mb-6">
-              <button className="flex items-center gap-2 px-6 py-3 bg-primary hover:bg-accent text-background font-semibold rounded-full transition-all">
-                <Play className="w-5 h-5" />
-                Run Now
-              </button>
-              <button className="flex items-center gap-2 px-6 py-3 border border-border hover:border-primary rounded-full transition-all">
-                <Settings className="w-5 h-5" />
-                Settings
-              </button>
-              <button className="flex items-center gap-2 px-6 py-3 border border-border hover:border-primary rounded-full transition-all">
-                <Copy className="w-5 h-5" />
-                Copy RSS
-              </button>
+            <div className="mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-2">{podcast.title}</h1>
+              <p className="text-lg md:text-xl text-muted mb-4">{podcast.subtitle}</p>
+              <p className="text-muted max-w-2xl leading-relaxed">{podcast.description}</p>
             </div>
 
-            <div className="flex gap-6 text-sm">
-              <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-muted" />
-                <span className="text-muted">Cadence:</span>
-                <span className="font-medium capitalize">{podcast.cadence}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Clock className="w-4 h-4 text-muted" />
-                <span className="text-muted">Last run:</span>
-                <span className="font-medium">{new Date(podcast.lastRun).toLocaleString()}</span>
+            <div className="flex flex-wrap gap-3 mb-6">
+              <Button size="lg" className="gap-2">
+                <Play className="w-5 h-5" />
+                Run Now
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2">
+                <Settings className="w-5 h-5" />
+                Settings
+              </Button>
+              <Button size="lg" variant="outline" className="gap-2">
+                <Copy className="w-5 h-5" />
+                Copy RSS
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="gap-2"
+                onClick={() => alert('Submit your RSS feed to:\n\n• Apple Podcasts: https://podcastsconnect.apple.com\n• Spotify: https://podcasters.spotify.com\n\nYour RSS URL has been copied to clipboard!')}
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                Help
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Badge variant="default">
+                <Calendar className="w-3 h-3 mr-1" />
+                {podcast.cadence}
+              </Badge>
+              <Badge variant="success">
+                {podcast.status}
+              </Badge>
+              <div className="flex items-center gap-2 text-sm text-muted">
+                <Clock className="w-4 h-4" />
+                <span>Last run: {new Date(podcast.lastRun).toLocaleDateString()}</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Tabs */}
-        <div className="border-b border-border mb-8">
-          <div className="flex gap-8">
-            {(['overview', 'episodes', 'runs', 'settings'] as Tab[]).map((tab) => (
-              <button
-                key={tab}
-                onClick={() => setActiveTab(tab)}
-                className={`px-4 py-3 font-medium capitalize transition-all ${
-                  activeTab === tab
-                    ? 'text-primary border-b-2 border-primary'
-                    : 'text-muted hover:text-foreground'
-                }`}
-              >
-                {tab}
-              </button>
-            ))}
-          </div>
-        </div>
+        <Tabs defaultValue="overview">
+          <TabsList className="mb-8">
+            <TabsTrigger value="overview">Overview</TabsTrigger>
+            <TabsTrigger value="episodes">Episodes</TabsTrigger>
+            <TabsTrigger value="runs">Runs</TabsTrigger>
+            <TabsTrigger value="suggestions">Suggestions</TabsTrigger>
+            <TabsTrigger value="validation">Validation</TabsTrigger>
+            <TabsTrigger value="team">Team</TabsTrigger>
+            <TabsTrigger value="settings">Settings</TabsTrigger>
+          </TabsList>
 
-        {/* Tab Content */}
-        <div>
-          {activeTab === 'overview' && <OverviewTab podcast={podcast} />}
-          {activeTab === 'episodes' && <EpisodesTab podcastId={podcastId} />}
-          {activeTab === 'runs' && <RunsTab podcastId={podcastId} />}
-          {activeTab === 'settings' && <SettingsTab podcast={podcast} />}
-        </div>
+          <TabsContent value="overview">
+            <OverviewTab podcast={podcast} />
+          </TabsContent>
+          <TabsContent value="episodes">
+            <EpisodesTab podcastId={podcastId} />
+          </TabsContent>
+          <TabsContent value="runs">
+            <RunsTab podcastId={podcastId} />
+          </TabsContent>
+          <TabsContent value="suggestions">
+            <SuggestionsTab podcastId={podcastId} />
+          </TabsContent>
+          <TabsContent value="validation">
+            <ValidationTab podcast={podcast} />
+          </TabsContent>
+          <TabsContent value="team">
+            <TeamTab podcastId={podcastId} />
+          </TabsContent>
+          <TabsContent value="settings">
+            <SettingsTab podcast={podcast} />
+          </TabsContent>
+        </Tabs>
       </div>
     </div>
   );
@@ -108,45 +134,82 @@ export default function PodcastDetailPage() {
 
 function OverviewTab({ podcast }: any) {
   return (
-    <div className="grid md:grid-cols-2 gap-6">
-      <div className="bg-secondary border border-border rounded-lg p-6">
-        <h3 className="text-xl font-semibold mb-4">Statistics</h3>
-        <div className="space-y-4">
-          <div className="flex justify-between">
-            <span className="text-muted">Total Episodes</span>
-            <span className="font-semibold">42</span>
+    <div className="space-y-6">
+      {/* Stats Grid */}
+      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-muted text-sm">Total Episodes</span>
+            <BarChart3 className="w-5 h-5 text-primary" />
           </div>
-          <div className="flex justify-between">
-            <span className="text-muted">Total Runs</span>
-            <span className="font-semibold">45</span>
+          <div className="text-3xl font-bold">42</div>
+        </Card>
+        
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-muted text-sm">Total Runs</span>
+            <Play className="w-5 h-5 text-blue-500" />
           </div>
-          <div className="flex justify-between">
-            <span className="text-muted">Success Rate</span>
-            <span className="font-semibold text-primary">93.3%</span>
+          <div className="text-3xl font-bold">45</div>
+        </Card>
+        
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-muted text-sm">Success Rate</span>
+            <TrendingUp className="w-5 h-5 text-green-500" />
           </div>
-          <div className="flex justify-between">
-            <span className="text-muted">Avg Duration</span>
-            <span className="font-semibold">4:32</span>
+          <div className="text-3xl font-bold text-primary">93.3%</div>
+        </Card>
+        
+        <Card className="p-6">
+          <div className="flex items-center justify-between mb-2">
+            <span className="text-muted text-sm">Avg Duration</span>
+            <Clock className="w-5 h-5 text-purple-500" />
           </div>
-        </div>
+          <div className="text-3xl font-bold">4:32</div>
+        </Card>
       </div>
 
-      <div className="bg-secondary border border-border rounded-lg p-6">
-        <h3 className="text-xl font-semibold mb-4">RSS Feed</h3>
-        <p className="text-sm text-muted mb-4">
-          Subscribe to this podcast in your favorite app
-        </p>
-        <div className="bg-background border border-border rounded p-3 mb-4 font-mono text-sm break-all">
-          {podcast.rssUrl}
-        </div>
-        <div className="flex gap-2">
-          <button className="flex-1 px-4 py-2 bg-primary hover:bg-accent text-background rounded-lg transition-all">
-            Copy URL
-          </button>
-          <button className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all">
-            Validate
-          </button>
-        </div>
+      {/* RSS Feed & Configuration */}
+      <div className="grid md:grid-cols-2 gap-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>RSS Feed</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted mb-4">
+              Subscribe to this podcast in your favorite app
+            </p>
+            <div className="bg-background border border-border rounded-lg p-3 mb-4 font-mono text-sm break-all">
+              {podcast.rssUrl}
+            </div>
+            <div className="flex gap-2">
+              <Button className="flex-1">Copy URL</Button>
+              <Button variant="outline">Validate</Button>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Users className="w-5 h-5" />
+              Team Access
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted mb-4">
+              Manage who can view and edit this podcast
+            </p>
+            <div className="space-y-3 mb-4">
+              <div className="flex items-center justify-between text-sm">
+                <span>john@company.com</span>
+                <Badge variant="default">Owner</Badge>
+              </div>
+            </div>
+            <Button variant="outline" className="w-full">Invite Team Member</Button>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
@@ -239,10 +302,133 @@ function RunsTab({ podcastId: _podcastId }: { podcastId: string }) {
   );
 }
 
+function SuggestionsTab({ podcastId: _podcastId }: { podcastId: string }) {
+  const suggestions = {
+    competitors: ['Tesla', 'Rivian', 'Lucid Motors'],
+    topics: ['Battery Technology', 'Autonomous Driving', 'Charging Infrastructure'],
+    lastRefreshed: new Date().toISOString(),
+  };
+
+  return (
+    <div className="space-y-6">
+      <Card className="p-6">
+        <div className="flex items-center justify-between mb-4">
+          <h3 className="text-xl font-semibold">AI-Refreshed Competitor Suggestions</h3>
+          <Button variant="outline" size="sm">
+            Refresh Now
+          </Button>
+        </div>
+        <p className="text-sm text-muted mb-4">
+          Last updated: {new Date(suggestions.lastRefreshed).toLocaleDateString()}
+        </p>
+        <div className="space-y-3">
+          {suggestions.competitors.map((competitor) => (
+            <div key={competitor} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
+              <span className="font-medium">{competitor}</span>
+              <Button size="sm">Add Competitor</Button>
+            </div>
+          ))}
+        </div>
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-xl font-semibold mb-4">Trending Topic Suggestions</h3>
+        <div className="space-y-3">
+          {suggestions.topics.map((topic) => (
+            <div key={topic} className="flex items-center justify-between p-3 bg-secondary rounded-lg">
+              <span className="font-medium">{topic}</span>
+              <Button size="sm">Add Topic</Button>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function ValidationTab({ podcast }: any) {
+  const validations = [
+    { check: 'RSS Feed Valid', status: 'pass', message: 'Feed validates against iTunes spec' },
+    { check: 'Cover Art Size', status: 'pass', message: '3000x3000px (correct)' },
+    { check: 'Episode Metadata', status: 'warn', message: '2 episodes missing descriptions' },
+    { check: 'Domain Compliance', status: 'pass', message: 'All sources respect robots.txt' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <Card className="p-6">
+        <h3 className="text-xl font-semibold mb-4">RSS Feed Health</h3>
+        <div className="space-y-3">
+          {validations.map((validation) => (
+            <div key={validation.check} className="flex items-start gap-3 p-3 bg-secondary rounded-lg">
+              <div className="flex-shrink-0 mt-0.5">
+                {validation.status === 'pass' ? (
+                  <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-yellow-500" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                  </svg>
+                )}
+              </div>
+              <div className="flex-1">
+                <div className="font-medium">{validation.check}</div>
+                <div className="text-sm text-muted">{validation.message}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-4 pt-4 border-t border-border">
+          <Button>Validate RSS Feed</Button>
+        </div>
+      </Card>
+    </div>
+  );
+}
+
+function TeamTab({ podcastId: _podcastId }: { podcastId: string }) {
+  const teamMembers = [
+    { name: 'John Doe', email: 'john@company.com', role: 'Owner', avatar: 'J' },
+    { name: 'Jane Smith', email: 'jane@company.com', role: 'Editor', avatar: 'J' },
+  ];
+
+  return (
+    <div className="space-y-6">
+      <Card className="p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h3 className="text-xl font-semibold">Team Members</h3>
+          <Button>Invite Member</Button>
+        </div>
+        
+        <div className="space-y-3">
+          {teamMembers.map((member) => (
+            <div key={member.email} className="flex items-center justify-between p-4 bg-secondary rounded-lg">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-primary/20 rounded-full flex items-center justify-center text-primary font-semibold">
+                  {member.avatar}
+                </div>
+                <div>
+                  <div className="font-medium">{member.name}</div>
+                  <div className="text-sm text-muted">{member.email}</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <Badge variant="default">{member.role}</Badge>
+                <Button variant="ghost" size="sm">Remove</Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      </Card>
+    </div>
+  );
+}
+
 function SettingsTab({ podcast: _podcast }: any) {
   return (
     <div className="space-y-6 max-w-2xl">
-      <div className="bg-secondary border border-border rounded-lg p-6">
+      <Card className="p-6">
         <h3 className="text-xl font-semibold mb-4">Podcast Settings</h3>
         <div className="space-y-4">
           <div>
@@ -262,17 +448,15 @@ function SettingsTab({ podcast: _podcast }: any) {
             </select>
           </div>
         </div>
-      </div>
+      </Card>
 
-      <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-6">
+      <Card className="p-6 border-red-500/30">
         <h3 className="text-xl font-semibold mb-2 text-red-500">Danger Zone</h3>
         <p className="text-sm text-muted mb-4">
           Irreversible actions. Please proceed with caution.
         </p>
-        <button className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-all">
-          Delete Podcast
-        </button>
-      </div>
+        <Button variant="danger">Delete Podcast</Button>
+      </Card>
     </div>
   );
 }
