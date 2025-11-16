@@ -1,0 +1,7 @@
+{
+  "finalScript": "Two hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network—a milestone that puts the carrier squarely ahead in the race for mid-band dominance. Welcome to this week's Verizon Intelligence Briefing.\n\nVerizon deployed 45,000 cell sites to reach 230 million people, hitting 90% of the initial target six months ahead of schedule. As CTO Kyle Malady put it, 'This is transformational for our customers.' The network delivers 300 to 500 megabits per second on average, with peaks exceeding one gigabit.\n\nWhile T-Mobile got a head start with mid-band through the Sprint merger and AT&T focused on FirstNet, Verizon has caught up remarkably quickly. Industry analysts note this 230 million milestone demonstrates serious execution capability. The company invested $20 billion specifically in C-band infrastructure, and that concentrated bet is now translating into measurable leadership.\n\nThe bottom line? Verizon is building end-to-end infrastructure dominance. On wireless, C-band 5G covers 230 million people. On wireline, the new 5 gigabit Fios tier is the fastest residential service in America. That's the story this week—not just incremental improvements, but fundamental infrastructure leadership that's hard for competitors to replicate. Thanks for listening to this week's Verizon Intelligence Briefing.",
+  "frozenConfig": {
+    "voice": "nova",
+    "targetDurationMinutes": 2.5
+  }
+}

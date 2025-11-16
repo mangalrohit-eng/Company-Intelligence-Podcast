@@ -1,0 +1,46 @@
+{
+  "topicSummaries": [
+    {
+      "topicId": "5g-network",
+      "topicName": "5G Network Expansion",
+      "oneStat": {
+        "span": "covers 230 million people",
+        "context": "Verizon's C-band 5G network now covers 230 million people"
+      },
+      "oneQuote": {
+        "span": "This is transformational for our customers",
+        "context": "Kyle Malady said this is transformational for customers",
+        "speaker": "Kyle Malady, Verizon CTO"
+      }
+    },
+    {
+      "topicId": "fiber-broadband",
+      "topicName": "Fiber & Broadband",
+      "oneStat": {
+        "span": "5 Gbps symmetrical speeds",
+        "context": "Verizon launched 5 Gbps Fios, the fastest residential service in US"
+      },
+      "oneQuote": {
+        "span": "fundamental shifts in household internet use",
+        "context": "CEO Sowmyanarayan Sampath noted fundamental shifts in internet use",
+        "speaker": "Sowmyanarayan Sampath"
+      }
+    }
+  ],
+  "contrasts": [
+    {
+      "topicId": "5g-network",
+      "competitorName": "AT&T",
+      "sentences": [
+        "While AT&T focused on FirstNet, Verizon's C-band deployment now covers 230 million people."
+      ]
+    },
+    {
+      "topicId": "5g-network",
+      "competitorName": "T-Mobile",
+      "sentences": [
+        "Despite T-Mobile's early mid-band lead, Verizon has caught up remarkably quickly."
+      ]
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://cursor.sh/schemas/v1.json",
+  "projectName": "AI Podcast Platform",
+  "description": "Flag-driven, record/replay pipeline for AI-generated podcasts (OpenAI LLM + TTS).",
+  "language": "typescript",
+  "entryPoint": "infra/stepfunctions/podcast_pipeline.asl.json",
+  "testDirectory": "tests",
+  "fixtureDirectory": "fixtures",
+  "cassetteDirectory": "cassettes",
+  "defaultEnvironment": {
+    "LLM_PROVIDER": "replay",
+    "TTS_PROVIDER": "stub",
+    "HTTP_PROVIDER": "replay",
+    "CASSETTE_KEY": "default",
+    "DRY_RUN": "false"
+  },
+  "commands": {
+    "run-summarize-replay": {
+      "description": "Run the summarize-topics stage using replayed LLM outputs.",
+      "command": "pnpm ts-node scripts/runStage.ts --stage summarize --in fixtures/summarize/in.json --out fixtures/summarize/out.json --llm=replay --cassette=default"
+    },
+    "run-script-stub": {
+      "description": "Run the script-polish stage using stub outputs (no OpenAI cost).",
+      "command": "pnpm ts-node scripts/runStage.ts --stage script --in fixtures/script/in.json --out fixtures/script/out.json --llm=stub"
+    },
+    "run-e2e-dry": {
+      "description": "Execute the full Step Functions pipeline in dryRun mode (no cost).",
+      "command": "aws stepfunctions start-execution --state-machine-arn arn:aws:states:REGION:ACCOUNT:stateMachine:podcastPipeline --input '{\"flags\":{\"dryRun\":true,\"provider\":{\"llm\":\"stub\",\"tts\":\"stub\",\"http\":\"replay\"}}}'"
+    }
+  },
+  "runFlagsSchema": "src/types/shared.ts",
+  "autoDocs": {
+    "readmeSection": "### Development Pattern\nThis project uses a **flag-driven, record/replay pipeline**.\n- Toggle stages via `RunFlags.enable.<stage>`.\n- Choose providers (`openai`, `replay`, `stub`) through `RunFlags.provider`.\n- Record real LLM/TTS outputs once into `/cassettes`, replay later to avoid cost.\n- Run partial stages using `scripts/runStage.ts` or Cursor presets."
+  },
+  "assistants": {
+    "default": {
+      "style": "concise",
+      "knowledge": [
+        "Use dependency injection for gateways (LlmGateway, TtsGateway, HttpGateway).",
+        "Use RunFlags to conditionally skip expensive stages.",
+        "Validate each Lambda’s input/output against schemas in /schemas.",
+        "Emit RunEvents for progress tracking."
+      ]
+    }
+  }
+}

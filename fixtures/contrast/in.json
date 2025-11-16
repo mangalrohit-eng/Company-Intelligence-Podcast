@@ -1,0 +1,55 @@
+{
+  "evidenceUnits": [
+    {
+      "id": "eu-001",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "covers 230 million people",
+      "context": "Verizon announced its C-band 5G network now covers 230 million people across the United States",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.92
+    },
+    {
+      "id": "eu-007",
+      "topicId": "5g-network",
+      "type": "quote",
+      "span": "caught up remarkably quickly",
+      "context": "'Verizon was late to the mid-band game but has caught up remarkably quickly,' said Roger Entner",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.88,
+      "speaker": "Roger Entner"
+    }
+  ],
+  "topicSummaries": [
+    {
+      "topicId": "5g-network",
+      "topicName": "5G Network Expansion",
+      "oneStat": {
+        "span": "covers 230 million people",
+        "context": "Verizon's C-band 5G network now covers 230 million people",
+        "evidenceId": "eu-001"
+      },
+      "oneQuote": {
+        "span": "caught up remarkably quickly",
+        "context": "Analyst Roger Entner noted Verizon has caught up remarkably quickly",
+        "speaker": "Roger Entner",
+        "evidenceId": "eu-007"
+      }
+    }
+  ],
+  "frozenConfig": {
+    "companyName": "Verizon",
+    "competitors": [
+      {
+        "name": "AT&T",
+        "domains": ["att.com"],
+        "keywords": ["at&t", "firstnet"]
+      },
+      {
+        "name": "T-Mobile",
+        "domains": ["t-mobile.com"],
+        "keywords": ["t-mobile", "un-carrier"]
+      }
+    ]
+  }
+}

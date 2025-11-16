@@ -1,0 +1,67 @@
+{
+  "items": [
+    {
+      "id": "item-001",
+      "topicId": "5g-network",
+      "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "title": "Verizon's C-band 5G now reaches 230 million people across US",
+      "snippet": "Verizon announced its C-band 5G network now covers 230 million people, achieving 90% of its initial deployment target ahead of schedule. The carrier has deployed 45,000 C-band sites nationwide.",
+      "publishedAt": "2024-11-12T09:15:00Z",
+      "source": "Fierce Wireless",
+      "confidence": 0.95,
+      "recencyScore": 0.92
+    },
+    {
+      "id": "item-002",
+      "topicId": "5g-network",
+      "url": "https://www.lightreading.com/2024/11/10/verizon-5g-ultra-wideband-stadium-deployment",
+      "title": "Verizon deploys 5G Ultra Wideband in 15 major stadiums",
+      "snippet": "The telecom giant expanded its mmWave 5G Ultra Wideband network to 15 additional NFL and MLB stadiums, bringing total venue coverage to 78 locations. Peak speeds reached 4.2 Gbps during testing.",
+      "publishedAt": "2024-11-10T14:30:00Z",
+      "source": "Light Reading",
+      "confidence": 0.91,
+      "recencyScore": 0.88
+    },
+    {
+      "id": "item-003",
+      "topicId": "fiber-broadband",
+      "url": "https://www.fiercetelecom.com/2024/11/08/verizon-fios-expansion-northeast",
+      "title": "Verizon Fios expands to 500K additional homes in Northeast corridor",
+      "snippet": "Verizon is investing $1.2 billion to bring Fios fiber broadband to 500,000 additional homes across New York, New Jersey, and Pennsylvania by end of 2025. The expansion targets underserved suburban and rural areas.",
+      "publishedAt": "2024-11-08T11:00:00Z",
+      "source": "Fierce Telecom",
+      "confidence": 0.89,
+      "recencyScore": 0.80
+    },
+    {
+      "id": "item-004",
+      "topicId": "fiber-broadband",
+      "url": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+      "title": "Verizon launches 5 Gbps Fios tier, fastest residential service in US",
+      "snippet": "Verizon introduced a new 5 Gbps symmetrical Fios tier for $124.99/month in select markets. The service targets power users and multi-generational homes with extreme bandwidth needs.",
+      "publishedAt": "2024-11-06T10:45:00Z",
+      "source": "BroadbandNow",
+      "confidence": 0.87,
+      "recencyScore": 0.75
+    },
+    {
+      "id": "item-005",
+      "topicId": "5g-network",
+      "url": "https://www.rcrwireless.com/2024/11/04/verizon-aws-5g-edge-computing",
+      "title": "Verizon partners with AWS for 5G mobile edge computing expansion",
+      "snippet": "Verizon Business and AWS announced expanded partnership to deploy AWS Wavelength Zones in 20 additional markets. The 5G edge computing platform reduces latency to under 10ms for enterprise applications.",
+      "publishedAt": "2024-11-04T13:20:00Z",
+      "source": "RCR Wireless",
+      "confidence": 0.93,
+      "recencyScore": 0.70
+    }
+  ],
+  "stats": {
+    "totalItemsFound": 5,
+    "itemsByTopic": {
+      "5g-network": 3,
+      "fiber-broadband": 2
+    },
+    "avgLatencyMs": 387
+  }
+}

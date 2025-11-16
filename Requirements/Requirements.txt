@@ -1,0 +1,264 @@
+# 1) Product Overview
+
+* **Goal:** Let users create AI-generated, company/industry news podcasts (with competitor context) and distribute them via a valid RSS feed (Apple/Spotify ready).
+* **Personas:**
+
+  * **User/Creator:** creates & runs podcasts, views progress, manages episodes, gets RSS.
+  * **Admin:** can view/run any podcast, see live step-by-step execution, manage limits.
+  * **Listener:** subscribes to RSS; no login.
+* **Key Tenets:** No user payment (for now); OpenAI for all LLM + TTS; AWS-native; no hardcoded topics—AI suggests.
+
+---
+
+# 2) Functional Requirements
+
+## 2.1 Frontend (Spotify-inspired, mobile-first)
+
+### 2.1.1 Navigation & IA
+
+* Routes: `/` (Landing), `/podcasts`, `/podcasts/new`, `/podcasts/:id`, `/podcasts/:id/run/:runId`, `/podcasts/:id/episodes/:episodeId`, `/admin`, `/settings`.
+* Role-aware menus (User vs Admin).
+
+### 2.1.2 Authentication
+
+* Sign up/in via **Cognito Hosted UI** (email OTP + Google/MS SSO).
+* Session handling; logout; passwordless flows.
+
+### 2.1.3 New Podcast Wizard (5 steps)
+
+1. **Branding & Metadata:** title, subtitle, description, author, email, category, explicit toggle, language; cover upload (3000×3000, validator).
+2. **Company & Industry:** autocomplete; **AI-suggested competitors** (checkbox list).
+3. **Preset & Cadence:** Daily 2-min / Weekly 5-min / Monthly 10-min or custom (duration, cadence, publish time, timezone, time window).
+4. **Topics & Regions:** standard topics pre-checked; **AI-suggested special topics** (e.g., AI, Sustainability) + priority sliders; region/language filters; compliance toggles (robots-only, allow/block domains).
+5. **Voice & Review:** OpenAI TTS voice picker (preview), speed, tone; final review → **Create Podcast**.
+
+### 2.1.4 Dashboards
+
+* **My Podcasts:** card grid (cover, cadence badge, last/next run, status). Actions: Run Now, Edit, Clone, RSS, Episodes.
+* **Podcast Overview:** tabs: Overview | Episodes | Runs | Suggestions | Validation | Team.
+* **Episodes List:** title, date, duration, status; open detail.
+
+### 2.1.5 Live Run View
+
+* **Segmented progress bar** across pipeline stages.
+* **Real-time timeline** (virtualized): discovery counts, scraped URLs, outline/script events, TTS voice selection.
+* Collapsible **stage panels**: Discovery (URLs), Scrape (domain stats), Evidence Units (facts/quotes/numbers), Outline/Script preview, TTS status.
+* Controls: Cancel run, view artifacts when complete.
+
+### 2.1.6 Episode Detail
+
+* Web audio player, transcript (searchable), show notes (markdown), sources table, download links, “Copy RSS”.
+
+### 2.1.7 Admin Console
+
+* Global runs table (filters by org/user/status).
+* Drill into any **Run** with live events and stage panels.
+* Domain telemetry (scrapability, latency, error rates).
+
+### 2.1.8 UX/Accessibility/Perf
+
+* Mobile-responsive grids & accordions; keyboard navigation; high contrast; screen-reader labels.
+* Skeleton loaders, toasts, tooltips; fast image/JS loading.
+
+**Acceptance (FE):**
+
+* Create podcast end-to-end on mobile and desktop.
+* “Run Now” shows live progress within 2s of start.
+* Episode page streams audio and renders transcript/notes.
+* Admin can observe any run’s detailed steps.
+
+---
+
+## 2.2 Backend (AWS)
+
+### 2.2.1 Auth & Tenancy
+
+* Cognito user pool; JWT validation in API Gateway/Lambda.
+* Multi-tenant isolation by `org_id`; RBAC: Owner, Editor, Viewer; Admin (cross-tenant).
+
+### 2.2.2 APIs
+
+* **Creator:**
+
+  * `POST /podcasts` (create), `PATCH /podcasts/{id}` (edit), `GET /podcasts*`
+  * `POST /podcasts/{id}/cover` → S3 signed URL
+  * `POST /podcasts/{id}/suggest/competitors`
+  * `POST /podcasts/{id}/suggest/topics`
+  * `POST /podcasts/{id}/runs` (Run Now)
+  * `GET /podcasts/{id}/runs`, `GET /runs/{runId}`, `GET /runs/{runId}/events`
+  * `GET /podcasts/{id}/episodes`, `GET /episodes/{episodeId}`
+  * `GET /rss/{podcastId}.xml`
+* **Admin:**
+
+  * `POST /admin/podcasts/{id}/runs`
+  * `GET /admin/runs?filters=...`
+  * WebSocket/AppSync subscription for run events.
+
+### 2.2.3 Orchestration & Scheduling
+
+* **Step Functions** state machine per run.
+* **EventBridge** rules per podcast for cadence (daily/weekly/monthly).
+* **SQS** queues for scrape tasks; **DLQ** for failures.
+
+### 2.2.4 Services & Storage
+
+* Scrapers: **ECS Fargate** (Node/TS + Playwright) in private subnets; robots respect; per-domain concurrency.
+* Intelligence: **ECS Fargate** or **Lambda** (Python) for embeddings, ranking, clustering, extraction, LLM calls.
+* TTS: Lambda calling **OpenAI TTS**; writes MP3 to S3.
+* Storage: **S3** (raw HTML, cleaned text, audio, transcripts, notes, RSS), **Aurora Serverless v2** or **DynamoDB** (configs, runs, episodes), **OpenSearch** (autocomplete, similarity), **ElastiCache (Redis)** optional.
+* CDN: **CloudFront** for media/RSS.
+* Secrets: **Secrets Manager** (OpenAI keys).
+
+### 2.2.5 RSS Management
+
+* Generate/patch RSS XML in S3 (iTunes + Podcasting 2.0 fields).
+* Validate; publish via CloudFront; cache headers.
+
+### 2.2.6 Notifications
+
+* Email via **SES** on success/failure (links to episode and run log).
+* Optional Slack/Teams webhook.
+
+**Acceptance (BE):**
+
+* Starting a run creates a Step Functions execution; events stream to client; artifacts land in S3; RSS updated; email sent.
+
+---
+
+## 2.3 Podcast Logic (Engine)
+
+> Single pipeline that converts config → audio + transcript + notes + RSS item.
+
+### 2.3.1 Inputs (snapshot per run)
+
+* Company/industry, competitors[], topics.standard[], topics.special[] (+ priority weights), cadence, duration, time window, regions/language, voice/tone, robots mode, allow/block lists, timezone/publish time.
+
+### 2.3.2 Derived Targets
+
+* Speech budget: ~150 wpm.
+* Evidence units target: `total_units = round(duration_min * 2)`; allocate across topics by priority.
+* Time budgets: global + per-topic.
+
+### 2.3.3 Stages
+
+1. **Prepare Inputs:** freeze config; compute targets/budgets.
+2. **Discover:** RSS/news APIs + IR + regulators + trades; store metadata; pre-classify to topics/entities (embeddings + zero-shot).
+3. **Disambiguate:** entity linking (canonical IDs), confidence threshold (≥0.85); apply allow/block & robots.
+4. **Rank:** per URL compute Expected Info Gain / Cost with `R,F,A,D,S,C`; build per-topic priority queues.
+5. **Scrape:** polite, timeboxed; per-domain concurrency & telemetry; **stop when** per-topic target met with breadth/confidence or time/fetch cap reached.
+6. **Extract Evidence Units:** detect numbers, ≤10-word quotes, verifiable claims with context; dedupe; update breadth/confidence.
+7. **Topic Summaries:** 1 paragraph/topic with **exactly one** on-air stat and **one** short quote; mark `[CHECK]` for inferences.
+8. **Competitor Contrasts:** per topic, 1–2 sentences contrasting company vs competitors with a bound stat/quote.
+9. **Theme & Outline:** small knowledge graph → 1 dominant theme + up to 2 sub-themes → outline (cold open, company deep dive, competitor moves, industry/special topic, takeaways).
+10. **Script & Polish:** generate narrative (length scaled by duration), bridges, tone unify; keep thematic, not article-by-article.
+11. **QA & Bind:** resolve `[CHECK]`, bind every stat/quote to evidence; date sanity within window.
+12. **TTS Render (OpenAI):** selected voice/speed/tone; MP3; duration within ±10% of target.
+13. **Package & RSS Item:** show_notes.md (thesis, bullets, ≤10 sources), transcripts (VTT+TXT), sources.json, RSS `<item>`.
+
+### 2.3.4 Progress & Telemetry
+
+* Emit `RunEvent {runId, stage, substage, pct, message, ts, severity}` at entry/exit + notable sub-steps (URL fetched, outline generated, etc.).
+* Persist `telemetry.json`: discovery counts, scrape success rate, units vs target, stop reasons, per-domain latency/error stats, LLM token/latency, TTS timings.
+
+**Acceptance (Engine):**
+
+* Meets per-topic targets or records graceful degradation; script contains one stat + one short quote per topic; MP3 renders; RSS item validated.
+
+---
+
+# 3) Non-Functional Requirements
+
+## 3.1 Performance
+
+* **On-demand run:**
+
+  * Daily 2-min preset: P50 < 8 min; P95 < 15 min.
+  * Weekly 5-min: P50 < 15 min.
+* **Live updates:** UI receives progress within 2s of event emission.
+* **Frontend:** Lighthouse (mobile) Performance ≥ 85, A11y ≥ 95.
+
+## 3.2 Scalability
+
+* Horizontal scale of scrapers and LLM workers via ECS Fargate.
+* Per-domain rate limiting; circuit breakers; backoff.
+* Queue backpressure control (SQS visibility/metrics).
+
+## 3.3 Reliability & Resilience
+
+* Step Functions retries with exponential backoff; DLQs.
+* Idempotent stages; resume from last success.
+* At-least-once artifact writes; GUID stability per run.
+
+## 3.4 Security & Privacy
+
+* TLS everywhere; Cognito JWT verification; role-based access.
+* Least-privilege IAM; S3/KMS encryption; secrets in Secrets Manager.
+* Audit logs for config changes, runs, publishing.
+* No scraping of disallowed pages; no paywall bypass.
+
+## 3.5 Compliance & Legal
+
+* Robots.txt honored.
+* On-air quotes ≤10 words; longer excerpts only in notes if permissible.
+* RSS conforms to iTunes + Podcasting 2.0; image 3000×3000; RFC-822 dates; unique GUIDs.
+
+## 3.6 Accessibility
+
+* WCAG 2.1 AA: keyboard nav, focus states, ARIA live regions for progress.
+* Color contrast and reduced-motion support.
+
+## 3.7 Observability
+
+* CloudWatch logs & metrics; X-Ray traces; custom metrics per stage.
+* Alarms: run failure rate spikes, RSS invalidation, domain scrapability drops.
+* Admin “Live” view mirrors RunEvents stream.
+
+## 3.8 Cost Controls
+
+* Use spot where viable; concurrency caps; caching of embeddings/entity lookups; token budgets per stage.
+
+## 3.9 Maintainability & Testability
+
+* Clear module boundaries (FE, API, Orchestration, Engine, Scraper, TTS).
+* Contract tests for APIs; state machine integration tests; feed validator tests; snapshot tests for script generation (redacted).
+* Linting, type checks, unit tests (min 70% coverage to start).
+
+## 3.10 CI/CD & Environments
+
+* IaC with CDK/Terraform; CodePipeline/CodeBuild.
+* Envs: dev/stage/prod (separate AWS accounts).
+* Blue/green for APIs; rolling for workers; feature flags.
+
+## 3.11 Data Retention & Governance
+
+* Config/run/episode data retained per org policy (e.g., 12 months default).
+* Log retention (e.g., 90 days); GDPR deletion on user request.
+* Backups & restore procedures tested quarterly.
+
+---
+
+# 4) Data Model (summary)
+
+* **User**(id, email, name, org_id, role, created_at)
+* **Org**(id, name, plan, quotas)
+* **Podcast**(id, org_id, owner_user_id, metadata…, cover_art_s3, rss_url, status, created_at)
+* **PodcastConfig**(id, podcast_id, version, cadence, duration, time_window, timezone, publish_time, company_id, industry_id, voice/tone, robots_mode, region_filters, topic_priorities_json, source_policies_json)
+* **PodcastCompetitor**(podcast_id, version, company_id, is_ai_suggested)
+* **PodcastTopic**(podcast_id, version, topic_id, type, priority_weight)
+* **Run**(id, podcast_id, config_version, status, started_at, finished_at, stop_reason, metrics_json, error)
+* **RunEvent**(id, run_id, ts, stage, substage, pct, level, message, payload_json)
+* **Episode**(id, podcast_id, run_id, title, description, pub_date, duration_sec, mp3_s3, transcript_s3, shownotes_s3, sources_json, guid, episode_number)
+* **DiscoveryItem**(run_id, url, title, snippet, publisher, date, entity_id, topic_id, scores_json)
+* **EvidenceUnit**(run_id, topic_id, entity_id, type, span, context, source_url, publisher, date, authority, stance, cluster_label)
+* **DomainTelemetry**(domain, success_rate, median_latency_ms, robots_status, scrapability_score, last_seen_at)
+
+---
+
+# 5) Acceptance Criteria (E2E)
+
+* User can create a podcast, receive an RSS URL, and **Run Now** successfully.
+* Live progress & logs appear within 2 seconds; Admin can view any run.
+* Engine discovers sources, scrapes enough content (or degrades gracefully), generates a thematic script with one stat + one short quote per selected topic, renders MP3 via OpenAI TTS, and updates a **valid RSS** feed.
+* Episode page shows audio, transcript, show notes, sources; links work via CloudFront.
+* Mobile UX passes Lighthouse and basic a11y checks.
+

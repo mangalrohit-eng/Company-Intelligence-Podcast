@@ -1,0 +1,52 @@
+{
+  "podcastId": "verizon-intel-podcast",
+  "runId": "run-2024-11-16-001",
+  "config": {
+    "companyName": "Verizon",
+    "targetDurationMinutes": 15,
+    "topics": [
+      {
+        "id": "5g-network",
+        "name": "5G Network Expansion",
+        "priority": 10,
+        "keywords": ["5g", "network expansion", "c-band", "millimeter wave", "coverage"],
+        "allowDomains": ["lightreading.com", "fiercewireless.com", "rcrwireless.com"],
+        "blockDomains": ["competitors.com"]
+      },
+      {
+        "id": "fiber-broadband",
+        "name": "Fiber & Broadband",
+        "priority": 8,
+        "keywords": ["fiber", "fios", "broadband", "home internet", "gigabit"],
+        "allowDomains": ["broadbandnow.com", "fiercetelecom.com"],
+        "blockDomains": []
+      },
+      {
+        "id": "iot-enterprise",
+        "name": "IoT & Enterprise Solutions",
+        "priority": 6,
+        "keywords": ["iot", "internet of things", "enterprise", "business solutions", "private 5g"],
+        "allowDomains": ["iotforall.com", "enterpriseiotinsights.com"],
+        "blockDomains": []
+      }
+    ],
+    "competitors": [
+      {
+        "name": "AT&T",
+        "domains": ["att.com", "about.att.com"],
+        "keywords": ["at&t", "att", "firstnet"]
+      },
+      {
+        "name": "T-Mobile",
+        "domains": ["t-mobile.com", "t-mobile.com/news"],
+        "keywords": ["t-mobile", "tmobile", "un-carrier"]
+      }
+    ],
+    "voice": "nova",
+    "tone": "professional and confident"
+  },
+  "timeWindow": {
+    "start": "2024-11-01T00:00:00Z",
+    "end": "2024-11-15T23:59:59Z"
+  }
+}

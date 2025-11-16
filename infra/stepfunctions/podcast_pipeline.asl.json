@@ -1,0 +1,359 @@
+{
+  "Comment": "AI Podcast Generation Pipeline - Orchestrates discovery, scraping, summarization, scripting, and TTS",
+  "StartAt": "Prepare",
+  "States": {
+    "Prepare": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${PrepareLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "podcastId.$": "$.podcastId",
+          "config.$": "$.config",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.prepareOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 2,
+          "MaxAttempts": 2,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "CheckDiscoverEnabled"
+    },
+    "CheckDiscoverEnabled": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.flags.enable.discover",
+          "BooleanEquals": true,
+          "Next": "Discover"
+        }
+      ],
+      "Default": "Success"
+    },
+    "Discover": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${DiscoverLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "config.$": "$.config",
+          "flags.$": "$.flags",
+          "prepareOutput.$": "$.prepareOutput.output"
+        }
+      },
+      "ResultPath": "$.discoverOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 3,
+          "MaxAttempts": 2,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "CheckScrapeEnabled"
+    },
+    "CheckScrapeEnabled": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.flags.enable.scrape",
+          "BooleanEquals": true,
+          "Next": "Scrape"
+        }
+      ],
+      "Default": "Success"
+    },
+    "Scrape": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::ecs:runTask.sync",
+      "Parameters": {
+        "Cluster": "${EcsClusterArn}",
+        "TaskDefinition": "${ScrapeTaskDefinitionArn}",
+        "LaunchType": "FARGATE",
+        "NetworkConfiguration": {
+          "AwsvpcConfiguration": {
+            "Subnets": ["${SubnetId}"],
+            "SecurityGroups": ["${SecurityGroupId}"],
+            "AssignPublicIp": "DISABLED"
+          }
+        },
+        "Overrides": {
+          "ContainerOverrides": [
+            {
+              "Name": "scraper",
+              "Environment": [
+                {
+                  "Name": "RUN_ID",
+                  "Value.$": "$.runId"
+                },
+                {
+                  "Name": "DISCOVERY_ITEMS",
+                  "Value.$": "States.JsonToString($.discoverOutput.output.items)"
+                },
+                {
+                  "Name": "ROBOTS_MODE",
+                  "Value.$": "$.config.robotsMode"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "ResultPath": "$.scrapeOutput",
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 1,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "CheckExtractEnabled"
+    },
+    "CheckExtractEnabled": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.flags.enable.extract",
+          "BooleanEquals": true,
+          "Next": "Extract"
+        }
+      ],
+      "Default": "Success"
+    },
+    "Extract": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${ExtractLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "scrapeOutput.$": "$.scrapeOutput",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.extractOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 3,
+          "MaxAttempts": 2,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Catch": [
+        {
+          "ErrorEquals": ["States.ALL"],
+          "ResultPath": "$.error",
+          "Next": "HandleFailure"
+        }
+      ],
+      "Next": "Parallel_Summarize_And_Contrast"
+    },
+    "Parallel_Summarize_And_Contrast": {
+      "Type": "Parallel",
+      "Branches": [
+        {
+          "StartAt": "Summarize",
+          "States": {
+            "Summarize": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": "${SummarizeLambdaArn}",
+                "Payload": {
+                  "runId.$": "$.runId",
+                  "extractOutput.$": "$.extractOutput.output",
+                  "config.$": "$.config",
+                  "flags.$": "$.flags"
+                }
+              },
+              "ResultSelector": {
+                "output.$": "$.Payload"
+              },
+              "End": true
+            }
+          }
+        },
+        {
+          "StartAt": "Contrast",
+          "States": {
+            "Contrast": {
+              "Type": "Task",
+              "Resource": "arn:aws:states:::lambda:invoke",
+              "Parameters": {
+                "FunctionName": "${ContrastLambdaArn}",
+                "Payload": {
+                  "runId.$": "$.runId",
+                  "extractOutput.$": "$.extractOutput.output",
+                  "config.$": "$.config",
+                  "flags.$": "$.flags"
+                }
+              },
+              "ResultSelector": {
+                "output.$": "$.Payload"
+              },
+              "End": true
+            }
+          }
+        }
+      ],
+      "ResultPath": "$.parallelOutput",
+      "Next": "Outline"
+    },
+    "Outline": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${OutlineLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "summaries.$": "$.parallelOutput[0].output.summaries",
+          "contrasts.$": "$.parallelOutput[1].output.contrasts",
+          "config.$": "$.config",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.outlineOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Next": "Script"
+    },
+    "Script": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${ScriptLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "outline.$": "$.outlineOutput.output.outline",
+          "summaries.$": "$.parallelOutput[0].output.summaries",
+          "contrasts.$": "$.parallelOutput[1].output.contrasts",
+          "config.$": "$.config",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.scriptOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Next": "CheckTtsEnabled"
+    },
+    "CheckTtsEnabled": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.flags.enable.tts",
+          "BooleanEquals": true,
+          "Next": "TTS"
+        }
+      ],
+      "Default": "Package"
+    },
+    "TTS": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${TtsLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "script.$": "$.scriptOutput.output.script",
+          "voice.$": "$.config.voice",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.ttsOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Retry": [
+        {
+          "ErrorEquals": ["States.TaskFailed"],
+          "IntervalSeconds": 5,
+          "MaxAttempts": 2,
+          "BackoffRate": 2.0
+        }
+      ],
+      "Next": "Package"
+    },
+    "Package": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${PackageLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "podcastId.$": "$.podcastId",
+          "config.$": "$.config",
+          "script.$": "$.scriptOutput.output.script",
+          "ttsOutput.$": "$.ttsOutput.output",
+          "flags.$": "$.flags"
+        }
+      },
+      "ResultPath": "$.packageOutput",
+      "ResultSelector": {
+        "output.$": "$.Payload"
+      },
+      "Next": "Success"
+    },
+    "Success": {
+      "Type": "Succeed"
+    },
+    "HandleFailure": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::lambda:invoke",
+      "Parameters": {
+        "FunctionName": "${HandleFailureLambdaArn}",
+        "Payload": {
+          "runId.$": "$.runId",
+          "error.$": "$.error"
+        }
+      },
+      "Next": "Fail"
+    },
+    "Fail": {
+      "Type": "Fail",
+      "Error": "PipelineExecutionFailed",
+      "Cause": "One or more pipeline stages failed"
+    }
+  }
+}
+

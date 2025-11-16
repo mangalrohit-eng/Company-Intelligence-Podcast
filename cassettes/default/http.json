@@ -1,0 +1,15 @@
+[
+  {
+    "url": "https://example.com/news/1",
+    "response": {
+      "url": "https://example.com/news/1",
+      "status": 200,
+      "headers": {
+        "content-type": "text/html"
+      },
+      "body": "<html><head><title>Tech News</title></head><body><article><h1>Company Announces New AI Chip</h1><p>The new AI chip demonstrates a 30% improvement in processing speed compared to previous generation.</p><p>CEO stated the launch is 'transformative for the industry' and will redefine standards.</p></article></body></html>",
+      "latencyMs": 450
+    }
+  }
+]
+

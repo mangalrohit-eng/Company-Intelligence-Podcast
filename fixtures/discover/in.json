@@ -1,0 +1,40 @@
+{
+  "frozenConfig": {
+    "companyName": "Verizon",
+    "topics": [
+      {
+        "id": "5g-network",
+        "name": "5G Network Expansion",
+        "priority": 10,
+        "keywords": ["5g", "network expansion", "c-band", "millimeter wave", "coverage"],
+        "allowDomains": ["lightreading.com", "fiercewireless.com", "rcrwireless.com"],
+        "blockDomains": []
+      },
+      {
+        "id": "fiber-broadband",
+        "name": "Fiber & Broadband",
+        "priority": 8,
+        "keywords": ["fiber", "fios", "broadband", "home internet"],
+        "allowDomains": ["broadbandnow.com", "fiercetelecom.com"],
+        "blockDomains": []
+      }
+    ],
+    "competitors": []
+  },
+  "budgets": {
+    "speechWordTarget": 2250,
+    "evidenceUnitTarget": 30,
+    "topicAllocations": {
+      "5g-network": {
+        "evidence": 13
+      },
+      "fiber-broadband": {
+        "evidence": 10
+      }
+    }
+  },
+  "timeWindow": {
+    "start": "2024-11-01T00:00:00Z",
+    "end": "2024-11-15T23:59:59Z"
+  }
+}

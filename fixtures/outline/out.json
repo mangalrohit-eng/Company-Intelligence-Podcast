@@ -1,0 +1,51 @@
+{
+  "outline": {
+    "dominantTheme": "Verizon's Network Infrastructure Leadership",
+    "subThemes": ["5G Mid-Band Dominance", "Gigabit Fiber Innovation"],
+    "sections": [
+      {
+        "id": "coldOpen",
+        "title": "Cold Open",
+        "purpose": "Hook with 230 million milestone",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "deepDive",
+        "title": "5G Deep Dive",
+        "purpose": "Explore C-band deployment achievement",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "competitors",
+        "title": "Competitive Landscape",
+        "purpose": "Position against AT&T and T-Mobile",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "innovation",
+        "title": "Fiber Innovation",
+        "purpose": "Highlight 5 Gbps Fios leadership",
+        "topicIds": ["fiber-broadband"]
+      },
+      {
+        "id": "takeaways",
+        "title": "Strategic Takeaways",
+        "purpose": "Synthesize network infrastructure leadership",
+        "topicIds": ["5g-network", "fiber-broadband"]
+      }
+    ],
+    "knowledgeGraph": {
+      "nodes": ["C-band 5G", "Fiber Broadband", "Network Coverage", "Enterprise Solutions", "Consumer Experience"],
+      "edges": [
+        { "from": "C-band 5G", "to": "Network Coverage", "relation": "enables" },
+        { "from": "C-band 5G", "to": "Enterprise Solutions", "relation": "powers" },
+        { "from": "Fiber Broadband", "to": "Consumer Experience", "relation": "enhances" },
+        { "from": "Network Coverage", "to": "Consumer Experience", "relation": "improves" }
+      ]
+    }
+  },
+  "stats": {
+    "sectionsCreated": 5,
+    "themesIdentified": 3
+  }
+}

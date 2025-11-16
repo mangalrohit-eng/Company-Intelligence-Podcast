@@ -1,0 +1,50 @@
+{
+  "scrapedItems": [
+    {
+      "id": "item-001",
+      "topicId": "5g-network",
+      "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "title": "Verizon's C-band 5G now reaches 230 million people across US",
+      "content": "Verizon announced Tuesday that its C-band 5G network now covers 230 million people across the United States, marking a major milestone in the carrier's aggressive mid-band deployment strategy. The company has deployed approximately 45,000 C-band cell sites nationwide, achieving 90% of its initial coverage target six months ahead of schedule.\n\n'This is transformational for our customers,' said Kyle Malady, Verizon's Chief Technology Officer. 'C-band provides the perfect balance of speed and coverage that makes 5G truly useful for everyday applications.'\n\nThe deployment represents a $20 billion investment by Verizon in C-band spectrum and infrastructure. Average download speeds on C-band range from 300-500 Mbps, with peak speeds exceeding 1 Gbps in optimal conditions. The network is now available in over 2,100 cities and towns.\n\nIndustry analysts note this puts Verizon ahead of competitors in mid-band 5G coverage. 'Verizon was late to the mid-band game but has caught up remarkably quickly,' said Roger Entner, founder of Recon Analytics. 'This 230 million POPs milestone demonstrates serious execution capability.'",
+      "scrapedAt": "2024-11-16T10:30:00Z"
+    },
+    {
+      "id": "item-002",
+      "topicId": "5g-network",
+      "url": "https://www.lightreading.com/2024/11/10/verizon-5g-ultra-wideband-stadium-deployment",
+      "title": "Verizon deploys 5G Ultra Wideband in 15 major stadiums",
+      "content": "Verizon has expanded its 5G Ultra Wideband mmWave network to 15 additional professional sports venues, bringing total stadium coverage to 78 locations across the NFL, NBA, MLB, and NHL.\n\nThe latest deployments include MetLife Stadium (New York), AT&T Stadium (Dallas), and SoFi Stadium (Los Angeles). Each venue features dense deployments of mmWave small cells capable of handling extreme capacity demands during sold-out events.\n\nDuring recent testing at SoFi Stadium, Verizon engineers recorded peak download speeds of 4.2 Gbps and upload speeds of 500 Mbps. The network successfully handled over 2.5 terabytes of data traffic during a single NFL game with 70,000 attendees.\n\n'Stadiums are the ultimate stress test for wireless networks,' explained Brian Mecum, VP of Device Technology at Verizon. 'Our mmWave deployments can handle thousands of simultaneous users in confined spaces without degradation.'\n\nThe company plans to add 25 more venues in 2025, focusing on major concert arenas and sports complexes.",
+      "scrapedAt": "2024-11-16T10:32:00Z"
+    },
+    {
+      "id": "item-004",
+      "topicId": "fiber-broadband",
+      "url": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+      "title": "Verizon launches 5 Gbps Fios tier, fastest residential service in US",
+      "content": "Verizon today launched a new 5 Gbps symmetrical Fios internet tier, making it the fastest residential broadband service available in the United States. The service is priced at $124.99 per month for new and existing customers in select markets.\n\nThe new tier targets power users, content creators, and multi-generational households with extreme bandwidth requirements. At 5 Gbps symmetrical speeds, customers can download a 4K movie in under 10 seconds or upload a 100 GB video file in less than 3 minutes.\n\n'We're seeing fundamental shifts in how households use internet,' said Sowmyanarayan Sampath, CEO of Verizon Consumer Group. 'With multiple people working from home, kids streaming content, and smart home devices everywhere, the demand for gigabit-plus speeds is real.'\n\nThe service is initially available in parts of New York City, Boston, Philadelphia, and Washington DC. Verizon plans to expand availability to all Fios markets by mid-2025. Customers will need a compatible Wi-Fi 7 router to achieve maximum wireless speeds.\n\nEarly adopters report sustained speeds of 4.8-4.9 Gbps in real-world testing, making this significantly faster than cable alternatives which typically cap out at 1-2 Gbps.",
+      "scrapedAt": "2024-11-16T10:35:00Z"
+    }
+  ],
+  "stats": {
+    "itemsScraped": 3,
+    "itemsFailed": 0,
+    "avgLatencyMs": 923,
+    "domainStats": {
+      "fiercewireless.com": {
+        "success": 1,
+        "failed": 0,
+        "avgLatencyMs": 887
+      },
+      "lightreading.com": {
+        "success": 1,
+        "failed": 0,
+        "avgLatencyMs": 945
+      },
+      "broadbandnow.com": {
+        "success": 1,
+        "failed": 0,
+        "avgLatencyMs": 938
+      }
+    }
+  }
+}

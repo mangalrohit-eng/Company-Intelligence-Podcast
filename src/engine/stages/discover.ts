@@ -1,0 +1,178 @@
+/**
+ * Stage 2: Discover
+ * Find news sources via RSS/APIs, pre-classify to topics/entities
+ */
+
+import { DiscoveryItem } from '@/types/shared';
+import { ILlmGateway, IHttpGateway } from '@/gateways/types';
+import { logger } from '@/utils/logger';
+
+export interface DiscoveryConfig {
+  rssFeeds: string[];
+  newsApis: string[];
+  irUrls: string[];
+  regulatorUrls: string[];
+  tradePublications: string[];
+}
+
+export interface DiscoverOutput {
+  items: DiscoveryItem[];
+  stats: {
+    totalItemsFound: number;
+    itemsByTopic: Record<string, number>;
+    avgLatencyMs: number;
+  };
+}
+
+export class DiscoverStage {
+  constructor(
+    private llmGateway: ILlmGateway,
+    private httpGateway: IHttpGateway
+  ) {}
+
+  async execute(
+    topicIds: string[],
+    companyName: string,
+    sources: DiscoveryConfig,
+    emitter: any
+  ): Promise<DiscoverOutput> {
+    emitter.emit('discover', 0, 'Starting discovery');
+
+    const items: DiscoveryItem[] = [];
+    const latencies: number[] = [];
+    
+    emitter.emit('discover', 20, 'Querying news sources');
+
+    // Parse RSS feeds
+    for (const feedUrl of sources.rssFeeds) {
+      const startTime = Date.now();
+      try {
+        const response = await this.httpGateway.fetch({ url: feedUrl, method: 'GET' });
+        const latency = Date.now() - startTime;
+        latencies.push(latency);
+        
+        if (response.status === 200 && response.body) {
+          // Parse RSS feed (simple XML parsing)
+          const matches = response.body.matchAll(/<item>[\s\S]*?<\/item>/g);
+          for (const match of matches) {
+            const itemXml = match[0];
+            const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
+            const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
+            const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
+            
+            if (title && link) {
+              // Pre-classify using LLM
+              const classificationResult = await this.llmGateway.complete({
+                prompt: `Classify article relevance to topics: ${topicIds.join(', ')}. Article: ${title}`,
+                maxTokens: 100,
+              });
+              
+              const classification = JSON.parse(classificationResult.content);
+              
+              items.push({
+                url: link,
+                title,
+                publisher: new URL(feedUrl).hostname,
+                publishedDate: pubDate,
+                topicIds: classification.topics || [topicIds[0]],
+                entityIds: [companyName],
+                scores: {
+                  relevance: classification.relevance || 0.8,
+                  recency: this.calculateRecency(pubDate),
+                  authority: 0.7,
+                },
+              });
+            }
+          }
+        }
+      } catch (error) {
+        logger.warn('Failed to fetch RSS feed', { feedUrl, error });
+      }
+    }
+
+    // Parse News APIs
+    for (const apiUrl of sources.newsApis) {
+      const startTime = Date.now();
+      try {
+        const response = await this.httpGateway.fetch({ url: apiUrl, method: 'GET' });
+        const latency = Date.now() - startTime;
+        latencies.push(latency);
+        
+        if (response.status === 200 && response.body) {
+          const data = JSON.parse(response.body);
+          if (data.articles) {
+            for (const article of data.articles) {
+              items.push({
+                url: article.url,
+                title: article.title,
+                publisher: article.source?.name || 'Unknown',
+                publishedDate: article.publishedAt,
+                topicIds: [topicIds[0]],
+                entityIds: [companyName],
+                scores: {
+                  relevance: 0.8,
+                  recency: this.calculateRecency(article.publishedAt),
+                  authority: 0.7,
+                },
+              });
+            }
+          }
+        }
+      } catch (error) {
+        logger.warn('Failed to fetch news API', { apiUrl, error });
+      }
+    }
+
+    // Handle IR URLs
+    for (const irUrl of sources.irUrls) {
+      const startTime = Date.now();
+      try {
+        await this.httpGateway.fetch({ url: irUrl, method: 'GET' });
+        latencies.push(Date.now() - startTime);
+      } catch (error) {
+        logger.warn('Failed to fetch IR URL', { irUrl, error });
+      }
+    }
+
+    emitter.emit('discover', 80, 'Pre-classifying items');
+
+    // Calculate stats
+    const itemsByTopic: Record<string, number> = {};
+    for (const item of items) {
+      for (const topicId of item.topicIds) {
+        itemsByTopic[topicId] = (itemsByTopic[topicId] || 0) + 1;
+      }
+    }
+
+    const avgLatencyMs = latencies.length > 0
+      ? latencies.reduce((a, b) => a + b, 0) / latencies.length
+      : 0;
+
+    emitter.emit('discover', 100, `Discovered ${items.length} items`);
+
+    logger.info('Discover stage complete', {
+      totalItemsFound: items.length,
+      itemsByTopic,
+      avgLatencyMs,
+    });
+
+    return {
+      items,
+      stats: {
+        totalItemsFound: items.length,
+        itemsByTopic,
+        avgLatencyMs,
+      },
+    };
+  }
+
+  private calculateRecency(publishedDate: string): number {
+    const now = Date.now();
+    const published = new Date(publishedDate).getTime();
+    const ageMs = now - published;
+    const ageDays = ageMs / (1000 * 60 * 60 * 24);
+    
+    // Exponential decay: 1.0 for today, 0.5 for 7 days ago
+    return Math.exp(-ageDays / 7);
+  }
+}

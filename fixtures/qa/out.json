@@ -1,0 +1,46 @@
+{
+  "finalScript": "Two hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network. Welcome to this week's Verizon Intelligence Briefing.\n\nVerizon deployed 45,000 cell sites to reach 230 million people—hitting 90% of the target ahead of schedule. As CTO Kyle Malady said, 'This is transformational for our customers.' We're delivering 300 to 500 megabits per second on average.",
+  "bindings": [
+    {
+      "scriptSnippet": "230 million people",
+      "evidenceId": "eu-001",
+      "verified": true
+    },
+    {
+      "scriptSnippet": "deployed 45,000 cell sites",
+      "evidenceId": "eu-002",
+      "verified": true
+    },
+    {
+      "scriptSnippet": "This is transformational for our customers",
+      "evidenceId": "eu-004",
+      "verified": true
+    },
+    {
+      "scriptSnippet": "300 to 500 megabits per second",
+      "evidenceId": "eu-006",
+      "verified": true
+    }
+  ],
+  "checkMarkers": [
+    {
+      "marker": "[CHECK]",
+      "location": "coldOpen",
+      "resolved": true,
+      "note": "Verified C-band 5G coverage claim against evidence unit eu-001"
+    }
+  ],
+  "dateChecks": {
+    "inWindow": 4,
+    "outsideWindow": 0
+  },
+  "stats": {
+    "checksVerified": 1,
+    "checksFailed": 0,
+    "statsBound": 3,
+    "quotesBound": 1,
+    "totalBindings": 4,
+    "datesInWindow": 4,
+    "datesOutside": 0
+  }
+}

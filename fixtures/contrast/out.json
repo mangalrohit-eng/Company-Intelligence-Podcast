@@ -1,0 +1,36 @@
+{
+  "contrasts": [
+    {
+      "topicId": "5g-network",
+      "competitorName": "AT&T",
+      "sentences": [
+        "While AT&T has focused on FirstNet and government contracts, Verizon's aggressive C-band deployment now covers 230 million people with mid-band 5G.",
+        "This milestone positions Verizon ahead in providing balanced speed and coverage that enterprise customers demand."
+      ],
+      "boundStatOrQuote": {
+        "type": "stat",
+        "span": "covers 230 million people",
+        "evidenceId": "eu-001"
+      }
+    },
+    {
+      "topicId": "5g-network",
+      "competitorName": "T-Mobile",
+      "sentences": [
+        "T-Mobile claimed early leadership in mid-band 5G through its Sprint merger, but Verizon has caught up remarkably quickly with 230 million people now covered.",
+        "Industry analysts note this demonstrates Verizon's execution capability despite entering the mid-band race later than rivals."
+      ],
+      "boundStatOrQuote": {
+        "type": "quote",
+        "span": "caught up remarkably quickly",
+        "evidenceId": "eu-007"
+      }
+    }
+  ],
+  "stats": {
+    "contrastsGenerated": 2,
+    "byTopic": {
+      "5g-network": 2
+    }
+  }
+}

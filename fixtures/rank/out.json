@@ -1,0 +1,45 @@
+{
+  "rankedQueues": {
+    "5g-network": [
+      {
+        "id": "item-001",
+        "topicId": "5g-network",
+        "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "title": "Verizon's C-band 5G now reaches 230 million people across US",
+        "publishedAt": "2024-11-12T09:15:00Z",
+        "confidence": 0.95,
+        "recencyScore": 0.92,
+        "rankScore": 0.94
+      },
+      {
+        "id": "item-002",
+        "topicId": "5g-network",
+        "url": "https://www.lightreading.com/2024/11/10/verizon-5g-ultra-wideband-stadium-deployment",
+        "title": "Verizon deploys 5G Ultra Wideband in 15 major stadiums",
+        "publishedAt": "2024-11-10T14:30:00Z",
+        "confidence": 0.91,
+        "recencyScore": 0.88,
+        "rankScore": 0.89
+      }
+    ],
+    "fiber-broadband": [
+      {
+        "id": "item-004",
+        "topicId": "fiber-broadband",
+        "url": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+        "title": "Verizon launches 5 Gbps Fios tier, fastest residential service in US",
+        "publishedAt": "2024-11-06T10:45:00Z",
+        "confidence": 0.87,
+        "recencyScore": 0.75,
+        "rankScore": 0.82
+      }
+    ]
+  },
+  "stats": {
+    "totalItemsRanked": 3,
+    "itemsByTopic": {
+      "5g-network": 2,
+      "fiber-broadband": 1
+    }
+  }
+}

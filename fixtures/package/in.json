@@ -1,0 +1,56 @@
+{
+  "finalScript": "Two hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network—a milestone that puts the carrier squarely ahead in the race for mid-band dominance. Welcome to this week's Verizon Intelligence Briefing.\n\nVerizon deployed 45,000 cell sites to reach 230 million people, hitting 90% of the initial target six months ahead of schedule. As CTO Kyle Malady put it, 'This is transformational for our customers.' The network delivers 300 to 500 megabits per second on average, with peaks exceeding one gigabit.\n\nWhile T-Mobile got a head start with mid-band through the Sprint merger and AT&T focused on FirstNet, Verizon has caught up remarkably quickly. Industry analysts note this 230 million milestone demonstrates serious execution capability.\n\nThe bottom line? Verizon is building end-to-end infrastructure dominance. On wireless, C-band 5G covers 230 million people. On wireline, the new 5 gigabit Fios tier is the fastest residential service in America. Thanks for listening.",
+  "audioUrl": "s3://verizon-podcast-prod/episodes/2024-11-16-001/audio.mp3",
+  "duration": 147.3,
+  "evidenceUnits": [
+    {
+      "id": "eu-001",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "covers 230 million people",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "sourceTitle": "Verizon's C-band 5G now reaches 230 million people across US",
+      "authority": 0.92
+    },
+    {
+      "id": "eu-002",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "deployed 45,000 C-band cell sites",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "sourceTitle": "Verizon's C-band 5G reaches 230M",
+      "authority": 0.92
+    },
+    {
+      "id": "eu-004",
+      "topicId": "5g-network",
+      "type": "quote",
+      "span": "This is transformational for our customers",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "sourceTitle": "Verizon C-band milestone",
+      "authority": 0.95,
+      "speaker": "Kyle Malady, CTO"
+    },
+    {
+      "id": "eu-008",
+      "topicId": "fiber-broadband",
+      "type": "stat",
+      "span": "5 Gbps symmetrical speeds",
+      "sourceUrl": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+      "sourceTitle": "Verizon launches 5 Gbps Fios",
+      "authority": 0.90
+    }
+  ],
+  "outline": {
+    "dominantTheme": "Verizon's Network Infrastructure Leadership",
+    "subThemes": ["5G Mid-Band Dominance", "Gigabit Fiber Innovation"],
+    "sections": []
+  },
+  "frozenConfig": {
+    "companyName": "Verizon",
+    "targetDurationMinutes": 2.5
+  },
+  "podcastId": "verizon-intel-podcast",
+  "episodeNumber": 23,
+  "publishedAt": "2024-11-16T08:00:00Z"
+}

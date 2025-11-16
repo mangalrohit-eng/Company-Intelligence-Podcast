@@ -1,0 +1,59 @@
+{
+  "script": {
+    "sections": [
+      {
+        "id": "coldOpen",
+        "narrative": "Two hundred thirty million people. That's how many Americans can now access Verizon's [CHECK] C-band 5G network. Welcome to this week's Verizon Intelligence Briefing.",
+        "wordCount": 28
+      },
+      {
+        "id": "deepDive",
+        "narrative": "Verizon deployed 45,000 cell sites to reach 230 million people—hitting 90% of the target ahead of schedule. As CTO Kyle Malady said, 'This is transformational for our customers.' We're delivering 300 to 500 megabits per second on average.",
+        "wordCount": 45
+      }
+    ]
+  },
+  "evidenceUnits": [
+    {
+      "id": "eu-001",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "covers 230 million people",
+      "context": "Verizon's C-band 5G network now covers 230 million people",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.92
+    },
+    {
+      "id": "eu-002",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "deployed 45,000 C-band cell sites",
+      "context": "The company has deployed approximately 45,000 C-band cell sites nationwide",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.92
+    },
+    {
+      "id": "eu-004",
+      "topicId": "5g-network",
+      "type": "quote",
+      "span": "This is transformational for our customers",
+      "context": "'This is transformational for our customers,' said Kyle Malady, Verizon's Chief Technology Officer",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.95,
+      "speaker": "Kyle Malady"
+    },
+    {
+      "id": "eu-006",
+      "topicId": "5g-network",
+      "type": "stat",
+      "span": "speeds from 300-500 Mbps",
+      "context": "Average download speeds on C-band range from 300-500 Mbps",
+      "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "authority": 0.92
+    }
+  ],
+  "timeWindow": {
+    "start": "2024-11-01T00:00:00Z",
+    "end": "2024-11-15T23:59:59Z"
+  }
+}

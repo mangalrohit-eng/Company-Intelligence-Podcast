@@ -1,0 +1,35 @@
+{
+  "items": [
+    {
+      "id": "item-001",
+      "topicId": "5g-network",
+      "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+      "title": "Verizon's C-band 5G now reaches 230 million people across US",
+      "snippet": "Verizon announced its C-band 5G network now covers 230 million people, achieving 90% of its initial deployment target ahead of schedule.",
+      "publishedAt": "2024-11-12T09:15:00Z",
+      "source": "Fierce Wireless",
+      "confidence": 0.95,
+      "recencyScore": 0.92,
+      "disambiguated": true,
+      "entities": ["Verizon Communications", "C-band spectrum", "5G deployment"]
+    },
+    {
+      "id": "item-004",
+      "topicId": "fiber-broadband",
+      "url": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+      "title": "Verizon launches 5 Gbps Fios tier, fastest residential service in US",
+      "snippet": "Verizon introduced a new 5 Gbps symmetrical Fios tier for $124.99/month in select markets.",
+      "publishedAt": "2024-11-06T10:45:00Z",
+      "source": "BroadbandNow",
+      "confidence": 0.87,
+      "recencyScore": 0.75,
+      "disambiguated": true,
+      "entities": ["Verizon Fios", "Fiber broadband", "Residential internet"]
+    }
+  ],
+  "stats": {
+    "itemsProcessed": 2,
+    "itemsDisambiguated": 2,
+    "itemsFiltered": 0
+  }
+}

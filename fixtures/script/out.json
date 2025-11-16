@@ -1,0 +1,46 @@
+{
+  "script": {
+    "sections": [
+      {
+        "id": "coldOpen",
+        "title": "Cold Open",
+        "narrative": "Two hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network—a milestone that puts the carrier squarely ahead in the race for mid-band dominance. Welcome to this week's Verizon Intelligence Briefing, where we break down what's driving our competitive edge in telecommunications.",
+        "wordCount": 48
+      },
+      {
+        "id": "deepDive",
+        "title": "5G Deep Dive",
+        "narrative": "Let's talk about what this C-band achievement really means. Verizon deployed 45,000 cell sites to reach 230 million people—hitting 90% of the initial target six months ahead of schedule. As CTO Kyle Malady put it, 'This is transformational for our customers.' And the numbers back that up. We're delivering 300 to 500 megabits per second on average, with peaks exceeding one gigabit. That's the sweet spot: fast enough for real-world applications, with coverage that actually matters. It's not just about speed on a billboard. It's about consistent performance where people live and work.",
+        "wordCount": 112
+      },
+      {
+        "id": "competitors",
+        "title": "Competitive Landscape",
+        "narrative": "Now, let's address the elephant in the room. T-Mobile got a head start with mid-band through the Sprint merger. AT&T focused on FirstNet and government contracts. But here's what industry analysts are saying: Verizon has caught up remarkably quickly. Roger Entner from Recon Analytics noted we were late to the mid-band game but demonstrated serious execution capability. That 230 million milestone? It's evidence of strategic focus paying off. While competitors were spreading resources across multiple priorities, Verizon invested $20 billion specifically in C-band infrastructure. That concentrated bet is now translating into measurable leadership.",
+        "wordCount": 105
+      },
+      {
+        "id": "takeaways",
+        "title": "Strategic Takeaways",
+        "narrative": "So what's the bottom line? Verizon is building end-to-end infrastructure dominance. On wireless, C-band 5G now covers 230 million people with speeds that make the technology genuinely useful. On wireline, the new 5 gigabit Fios tier is the fastest residential service in America. These aren't isolated product launches. They're coordinated moves in a broader strategy: owning the infrastructure that powers digital life. Whether it's a enterprise using 5G edge computing or a household streaming 4K content, Verizon's network architecture is built to handle it. That's the story to tell this week—not just incremental improvements, but fundamental infrastructure leadership that's hard for competitors to replicate.",
+        "wordCount": 121
+      }
+    ],
+    "bridges": [
+      "But that's only part of the story...",
+      "Now here's where it gets interesting...",
+      "Let's bring this home..."
+    ]
+  },
+  "stats": {
+    "wordCount": 386,
+    "estimatedDurationMinutes": 2.57,
+    "bridgeCount": 3,
+    "sectionWordCounts": {
+      "coldOpen": 48,
+      "deepDive": 112,
+      "competitors": 105,
+      "takeaways": 121
+    }
+  }
+}

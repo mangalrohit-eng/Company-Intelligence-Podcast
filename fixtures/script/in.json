@@ -1,0 +1,57 @@
+{
+  "outline": {
+    "dominantTheme": "Verizon's Network Infrastructure Leadership",
+    "subThemes": ["5G Mid-Band Dominance", "Gigabit Fiber Innovation"],
+    "sections": [
+      {
+        "id": "coldOpen",
+        "title": "Cold Open",
+        "purpose": "Hook with 230 million milestone",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "deepDive",
+        "title": "5G Deep Dive",
+        "purpose": "Explore C-band deployment",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "competitors",
+        "title": "Competitive Landscape",
+        "purpose": "Position vs competition",
+        "topicIds": ["5g-network"]
+      },
+      {
+        "id": "takeaways",
+        "title": "Takeaways",
+        "purpose": "Synthesize leadership",
+        "topicIds": ["5g-network", "fiber-broadband"]
+      }
+    ]
+  },
+  "topicSummaries": [
+    {
+      "topicId": "5g-network",
+      "topicName": "5G Network Expansion",
+      "oneStat": {
+        "span": "covers 230 million people",
+        "context": "Verizon's C-band 5G covers 230 million people"
+      },
+      "oneQuote": {
+        "span": "This is transformational for our customers",
+        "speaker": "Kyle Malady, Verizon CTO"
+      }
+    },
+    {
+      "topicId": "fiber-broadband",
+      "topicName": "Fiber & Broadband",
+      "oneStat": {
+        "span": "5 Gbps symmetrical speeds",
+        "context": "Verizon launched 5 Gbps Fios"
+      }
+    }
+  ],
+  "budgets": {
+    "speechWordTarget": 2250
+  }
+}

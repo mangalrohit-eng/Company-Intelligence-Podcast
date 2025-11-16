@@ -1,0 +1,50 @@
+{
+  "showNotes": "# Verizon's Network Infrastructure Leadership\n\n## This Week's Key Insight\nVerizon's C-band 5G network now covers 230 million Americans, achieving 90% of deployment targets six months ahead of schedule and positioning the carrier ahead of competitors in mid-band 5G dominance.\n\n## Key Developments\n- **230 Million POPs Covered**: Verizon's C-band 5G reaches 230M people across 2,100+ cities\n- **45,000 Cell Sites Deployed**: Massive infrastructure investment delivering 300-500 Mbps speeds\n- **Competitive Positioning**: Industry analysts note Verizon has \"caught up remarkably quickly\" despite later market entry\n- **Fiber Leadership**: New 5 Gbps Fios tier establishes fastest residential broadband service in US\n- **Infrastructure Dominance**: Combined wireless and wireline strategy creates comprehensive network advantage\n\n## Featured Quote\n*\"This is transformational for our customers. C-band provides the perfect balance of speed and coverage that makes 5G truly useful for everyday applications.\"*  \n— Kyle Malady, Chief Technology Officer, Verizon\n\n## Sources\n- [Fierce Wireless: Verizon's C-band 5G now reaches 230 million people](https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops)\n- [Light Reading: Verizon deploys 5G Ultra Wideband in 15 major stadiums](https://www.lightreading.com/2024/11/10/verizon-5g-ultra-wideband-stadium-deployment)\n- [BroadbandNow: Verizon launches 5 Gbps Fios tier](https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch)\n- [RCR Wireless: Verizon partners with AWS for 5G edge computing](https://www.rcrwireless.com/2024/11/04/verizon-aws-5g-edge-computing)\n\n---\n*Verizon Intelligence Briefing | Episode 23 | November 16, 2024*",
+  "transcript": {
+    "vtt": "WEBVTT\n\n00:00:00.000 --> 00:00:08.500\nTwo hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network—a milestone that puts the carrier squarely ahead in the race for mid-band dominance.\n\n00:00:08.500 --> 00:00:12.000\nWelcome to this week's Verizon Intelligence Briefing.\n\n00:00:13.000 --> 00:00:28.500\nVerizon deployed 45,000 cell sites to reach 230 million people, hitting 90% of the initial target six months ahead of schedule. As CTO Kyle Malady put it, 'This is transformational for our customers.'\n\n00:00:29.000 --> 00:00:38.500\nThe network delivers 300 to 500 megabits per second on average, with peaks exceeding one gigabit.\n\n00:00:39.500 --> 00:00:58.000\nWhile T-Mobile got a head start with mid-band through the Sprint merger and AT&T focused on FirstNet, Verizon has caught up remarkably quickly. Industry analysts note this 230 million milestone demonstrates serious execution capability.\n\n00:00:59.000 --> 00:01:18.500\nThe bottom line? Verizon is building end-to-end infrastructure dominance. On wireless, C-band 5G covers 230 million people. On wireline, the new 5 gigabit Fios tier is the fastest residential service in America.\n\n00:01:19.000 --> 00:01:27.300\nThanks for listening to this week's Verizon Intelligence Briefing.",
+    "txt": "Two hundred thirty million people. That's how many Americans can now access Verizon's C-band 5G network—a milestone that puts the carrier squarely ahead in the race for mid-band dominance. Welcome to this week's Verizon Intelligence Briefing.\n\nVerizon deployed 45,000 cell sites to reach 230 million people, hitting 90% of the initial target six months ahead of schedule. As CTO Kyle Malady put it, 'This is transformational for our customers.' The network delivers 300 to 500 megabits per second on average, with peaks exceeding one gigabit.\n\nWhile T-Mobile got a head start with mid-band through the Sprint merger and AT&T focused on FirstNet, Verizon has caught up remarkably quickly. Industry analysts note this 230 million milestone demonstrates serious execution capability.\n\nThe bottom line? Verizon is building end-to-end infrastructure dominance. On wireless, C-band 5G covers 230 million people. On wireline, the new 5 gigabit Fios tier is the fastest residential service in America. Thanks for listening to this week's Verizon Intelligence Briefing."
+  },
+  "sourcesJson": {
+    "sources": [
+      {
+        "id": "eu-001",
+        "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "title": "Verizon's C-band 5G now reaches 230 million people across US",
+        "authority": 0.92,
+        "type": "stat",
+        "span": "covers 230 million people"
+      },
+      {
+        "id": "eu-002",
+        "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "title": "Verizon's C-band 5G reaches 230M",
+        "authority": 0.92,
+        "type": "stat",
+        "span": "deployed 45,000 C-band cell sites"
+      },
+      {
+        "id": "eu-004",
+        "url": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "title": "Verizon C-band milestone",
+        "authority": 0.95,
+        "type": "quote",
+        "span": "This is transformational for our customers",
+        "speaker": "Kyle Malady, CTO"
+      },
+      {
+        "id": "eu-008",
+        "url": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+        "title": "Verizon launches 5 Gbps Fios",
+        "authority": 0.90,
+        "type": "stat",
+        "span": "5 Gbps symmetrical speeds"
+      }
+    ]
+  },
+  "rssItem": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<item>\n  <title>Verizon Intelligence Briefing - Episode 23: Network Infrastructure Leadership</title>\n  <description>Verizon's C-band 5G network now covers 230 million Americans, achieving deployment targets ahead of schedule and demonstrating infrastructure leadership over AT&amp;T and T-Mobile.</description>\n  <pubDate>Sat, 16 Nov 2024 08:00:00 GMT</pubDate>\n  <enclosure url=\"https://cdn.verizon-podcast.com/episodes/2024-11-16-001/audio.mp3\" length=\"3538944\" type=\"audio/mpeg\"/>\n  <guid isPermaLink=\"false\">verizon-intel-podcast-ep-23-2024-11-16</guid>\n  <itunes:duration>147</itunes:duration>\n  <itunes:episode>23</itunes:episode>\n  <itunes:episodeType>full</itunes:episodeType>\n  <itunes:explicit>false</itunes:explicit>\n  <itunes:author>Verizon Intelligence Team</itunes:author>\n  <itunes:summary>This week: Verizon's C-band 5G reaches 230M people, competitive positioning vs AT&amp;T and T-Mobile, and the launch of 5 Gbps Fios establishing fiber leadership.</itunes:summary>\n</item>",
+  "stats": {
+    "showNotesLength": 1248,
+    "transcriptLength": 987,
+    "sourcesCount": 4
+  }
+}

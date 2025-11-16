@@ -1,0 +1,41 @@
+{
+  "topicSummaries": [
+    {
+      "topicId": "5g-network",
+      "topicName": "5G Network Expansion",
+      "oneStat": {
+        "span": "covers 230 million people",
+        "context": "Verizon announced its C-band 5G network now covers 230 million people across the United States",
+        "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "evidenceId": "eu-001"
+      },
+      "oneQuote": {
+        "span": "This is transformational for our customers",
+        "context": "'This is transformational for our customers,' said Kyle Malady, Verizon's Chief Technology Officer",
+        "sourceUrl": "https://www.fiercewireless.com/2024/11/12/verizon-c-band-reaches-230m-pops",
+        "speaker": "Kyle Malady, Verizon CTO",
+        "evidenceId": "eu-004"
+      }
+    },
+    {
+      "topicId": "fiber-broadband",
+      "topicName": "Fiber & Broadband",
+      "oneStat": {
+        "span": "5 Gbps symmetrical speeds",
+        "context": "Verizon launched a new 5 Gbps symmetrical Fios internet tier, making it the fastest residential broadband service in the US",
+        "sourceUrl": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+        "evidenceId": "eu-008"
+      },
+      "oneQuote": {
+        "span": "fundamental shifts in household internet use",
+        "context": "'We're seeing fundamental shifts in how households use internet,' said Sowmyanarayan Sampath, CEO of Verizon Consumer Group",
+        "sourceUrl": "https://www.broadbandnow.com/2024/11/06/verizon-5-gbps-fios-service-launch",
+        "speaker": "Sowmyanarayan Sampath",
+        "evidenceId": "eu-010"
+      }
+    }
+  ],
+  "stats": {
+    "topicsSummarized": 2
+  }
+}

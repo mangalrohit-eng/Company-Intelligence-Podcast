@@ -1,0 +1,17 @@
+{
+  "audioUrl": "s3://verizon-podcast-prod/episodes/2024-11-16-001/audio.mp3",
+  "duration": 147.3,
+  "validation": {
+    "withinTarget": true,
+    "targetMinutes": 2.5,
+    "actualMinutes": 2.455,
+    "deviation": 0.045
+  },
+  "stats": {
+    "audioSizeBytes": 3538944,
+    "bitrate": 192000,
+    "format": "mp3",
+    "voice": "nova",
+    "sampleRate": 44100
+  }
+}

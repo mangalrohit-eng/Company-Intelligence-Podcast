@@ -1,0 +1,21 @@
+[
+  {
+    "content": "{\"theme\": \"AI Innovation and Market Leadership\", \"subThemes\": [\"Product Differentiation\", \"Competitive Landscape\"]}",
+    "usage": {
+      "promptTokens": 250,
+      "completionTokens": 80,
+      "totalTokens": 330
+    },
+    "latencyMs": 1200
+  },
+  {
+    "content": "In a major announcement, the company unveiled their latest AI chip which delivers a remarkable 30% improvement in processing speed over the previous generation. Industry analysts are calling it 'transformative for the industry,' with potential to redefine competitive benchmarks in the semiconductor space.",
+    "usage": {
+      "promptTokens": 180,
+      "completionTokens": 95,
+      "totalTokens": 275
+    },
+    "latencyMs": 980
+  }
+]
+
