@@ -76,14 +76,9 @@ export default function NewPodcastPage() {
 
   const handleSubmit = async () => {
     try {
-      // Create podcast via AWS Lambda API Gateway
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
-      const response = await fetch(`${apiUrl}/podcasts`, {  // No /api prefix for AWS Lambda
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+      // Create podcast via AWS Lambda API Gateway with auth token
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/podcasts', {
           title: formData.title,
           description: formData.description,
           companyId: formData.companyId,
@@ -92,8 +87,7 @@ export default function NewPodcastPage() {
           duration: formData.duration || 5,
           voice: formData.voice || 'alloy',
           schedule: formData.schedule || 'manual',
-        }),
-      });
+        });
 
       if (response.ok) {
         const data = await response.json();

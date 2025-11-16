@@ -32,9 +32,9 @@ export default function PodcastsPage() {
   const fetchPodcasts = async () => {
     try {
       setLoading(true);
-      // Call real AWS Lambda API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
-      const response = await fetch(`${apiUrl}/podcasts`);  // No /api prefix for AWS Lambda
+      // Call real AWS Lambda API endpoint with auth token
+      const { api } = await import('@/lib/api');
+      const response = await api.get('/podcasts');
       
       if (response.ok) {
         const data = await response.json();
@@ -147,13 +147,8 @@ function PodcastCard({ podcast }: { podcast: Podcast }) {
     
     if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
       try {
-        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
-        const response = await fetch(`${apiUrl}/podcasts/${podcast.id}/runs`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
+        const { api } = await import('@/lib/api');
+        const response = await api.post(`/podcasts/${podcast.id}/runs`);
 
         if (response.ok) {
           const data = await response.json();

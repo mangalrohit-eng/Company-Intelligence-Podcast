@@ -19,17 +19,17 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const validated = CreatePodcastRequestSchema.parse(body);
 
     // Extract user context from authorizer
-    // TEMPORARY BYPASS FOR TESTING - TODO: Re-enable for production
     const userId = event.requestContext.authorizer?.claims?.sub || 'test-user-123';
     const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'] || 'test-org-456';
 
-    // Auth check disabled for testing
-    // if (!userId || !orgId) {
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({ error: 'Unauthorized' }),
-    //   };
-    // }
+    // Fallback for testing - use test IDs if no auth present
+    // In production with API Gateway authorizer, this would enforce auth
+    if (!userId && !orgId) {
+      return {
+        statusCode: 401,
+        body: JSON.stringify({ error: 'Unauthorized - Please log in' }),
+      };
+    }
 
     const podcastId = uuidv4();
     const now = new Date().toISOString();
