@@ -12,6 +12,8 @@ import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
+import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { Construct } from 'constructs';
 
 export class PodcastPlatformStack extends cdk.Stack {
@@ -170,6 +172,50 @@ export class PodcastPlatformStack extends cdk.Stack {
     podcastsTable.grantReadData(listPodcastsLambda);
 
     // ========================================================================
+    // API Gateway: HTTP API
+    // ========================================================================
+
+    const httpApi = new apigatewayv2.HttpApi(this, 'PodcastApi', {
+      apiName: 'podcast-platform-api',
+      description: 'AI Podcast Platform REST API',
+      corsPreflight: {
+        allowOrigins: ['*'], // In production, restrict to your domain
+        allowMethods: [
+          apigatewayv2.CorsHttpMethod.GET,
+          apigatewayv2.CorsHttpMethod.POST,
+          apigatewayv2.CorsHttpMethod.PUT,
+          apigatewayv2.CorsHttpMethod.DELETE,
+          apigatewayv2.CorsHttpMethod.OPTIONS,
+        ],
+        allowHeaders: ['Content-Type', 'Authorization'],
+        maxAge: cdk.Duration.days(1),
+      },
+    });
+
+    // Add routes for Lambda functions
+    const createPodcastIntegration = new HttpLambdaIntegration(
+      'CreatePodcastIntegration',
+      createPodcastLambda
+    );
+
+    const listPodcastsIntegration = new HttpLambdaIntegration(
+      'ListPodcastsIntegration',
+      listPodcastsLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: createPodcastIntegration,
+    });
+
+    httpApi.addRoutes({
+      path: '/podcasts',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: listPodcastsIntegration,
+    });
+
+    // ========================================================================
     // Networking: VPC for ECS
     // ========================================================================
 
@@ -244,11 +290,36 @@ export class PodcastPlatformStack extends cdk.Stack {
     });
 
     // ========================================================================
+    // Frontend: S3 Bucket for Next.js Static Export
+    // ========================================================================
+
+    const frontendBucket = new s3.Bucket(this, 'FrontendBucket', {
+      bucketName: `podcast-platform-frontend-${this.account}`,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      publicReadAccess: true,
+      blockPublicAccess: new s3.BlockPublicAccess({
+        blockPublicAcls: false,
+        blockPublicPolicy: false,
+        ignorePublicAcls: false,
+        restrictPublicBuckets: false,
+      }),
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: 'index.html', // For SPA routing
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    // ========================================================================
     // CDN: CloudFront Distribution
     // ========================================================================
 
     const distribution = new cloudfront.CloudFrontWebDistribution(this, 'Distribution', {
       originConfigs: [
+        {
+          s3OriginSource: {
+            s3BucketSource: frontendBucket,
+          },
+          behaviors: [{ isDefaultBehavior: true }],
+        },
         {
           s3OriginSource: {
             s3BucketSource: mediaBucket,
@@ -259,7 +330,19 @@ export class PodcastPlatformStack extends cdk.Stack {
           s3OriginSource: {
             s3BucketSource: rssBucket,
           },
-          behaviors: [{ isDefaultBehavior: true }],
+          behaviors: [{ isDefaultBehavior: false, pathPattern: '/rss/*' }],
+        },
+      ],
+      errorConfigurations: [
+        {
+          errorCode: 403,
+          responseCode: 200,
+          responsePagePath: '/index.html', // For SPA routing
+        },
+        {
+          errorCode: 404,
+          responseCode: 200,
+          responsePagePath: '/index.html', // For SPA routing
         },
       ],
     });
@@ -268,24 +351,40 @@ export class PodcastPlatformStack extends cdk.Stack {
     // Outputs
     // ========================================================================
 
+    new cdk.CfnOutput(this, 'ApiUrl', {
+      value: httpApi.apiEndpoint,
+      description: 'API Gateway HTTP API Endpoint',
+      exportName: 'PodcastPlatformApiUrl',
+    });
+
     new cdk.CfnOutput(this, 'UserPoolId', {
       value: userPool.userPoolId,
       description: 'Cognito User Pool ID',
+      exportName: 'PodcastPlatformUserPoolId',
     });
 
     new cdk.CfnOutput(this, 'UserPoolClientId', {
       value: userPoolClient.userPoolClientId,
       description: 'Cognito User Pool Client ID',
+      exportName: 'PodcastPlatformUserPoolClientId',
     });
 
     new cdk.CfnOutput(this, 'StateMachineArn', {
       value: stateMachine.stateMachineArn,
       description: 'Step Functions State Machine ARN',
+      exportName: 'PodcastPlatformStateMachineArn',
+    });
+
+    new cdk.CfnOutput(this, 'FrontendBucketName', {
+      value: frontendBucket.bucketName,
+      description: 'Frontend S3 Bucket Name',
+      exportName: 'PodcastPlatformFrontendBucket',
     });
 
     new cdk.CfnOutput(this, 'DistributionDomain', {
-      value: distribution.distributionDomainName,
-      description: 'CloudFront Distribution Domain',
+      value: `https://${distribution.distributionDomainName}`,
+      description: 'CloudFront Distribution URL',
+      exportName: 'PodcastPlatformWebsiteUrl',
     });
   }
 }

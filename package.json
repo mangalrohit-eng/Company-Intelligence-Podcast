@@ -23,7 +23,10 @@
     "run-stage": "tsx scripts/runStage.ts",
     "generate-cassette": "ts-node scripts/generateCassette.ts",
     "deploy": "cd infra/cdk && cdk deploy",
-    "deploy:frontend": "next build && next export",
+    "deploy:update": "cd infra/cdk && cdk deploy --require-approval never --hotswap",
+    "deploy:frontend": "npm run build:frontend && npm run sync:frontend",
+    "build:frontend": "next build",
+    "sync:frontend": "aws s3 sync .next/standalone s3://podcast-platform-frontend-098478926952 --delete && aws cloudfront create-invalidation --distribution-id $(aws cloudformation describe-stacks --stack-name PodcastPlatformStack --query 'Stacks[0].Outputs[?OutputKey==`DistributionDomain`].OutputValue' --output text | cut -d'.' -f1) --paths '/*'",
     "synth": "cd infra/cdk && cdk synth",
     "destroy": "cd infra/cdk && cdk destroy"
   },
