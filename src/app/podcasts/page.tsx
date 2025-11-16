@@ -32,9 +32,9 @@ export default function PodcastsPage() {
   const fetchPodcasts = async () => {
     try {
       setLoading(true);
-      // Call real API endpoint
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-      const response = await fetch(`${apiUrl}/api/podcasts`);
+      // Call real AWS Lambda API endpoint
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+      const response = await fetch(`${apiUrl}/podcasts`);  // No /api prefix for AWS Lambda
       
       if (response.ok) {
         const data = await response.json();
@@ -145,8 +145,28 @@ function PodcastCard({ podcast }: { podcast: Podcast }) {
     e.preventDefault();
     e.stopPropagation();
     
-    if (confirm(`Start a new run for "${podcast.title}"?`)) {
-      alert('🚀 Starting pipeline...\n\nIn production, this would:\n1. Call API: POST /podcasts/' + podcast.id + '/runs\n2. Start Step Functions execution\n3. Navigate to live progress view\n\nFor now, try running a stage manually:\nnpm run run-stage -- --stage summarize --in fixtures/summarize/in.json --out output.json');
+    if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+        const response = await fetch(`${apiUrl}/podcasts/${podcast.id}/runs`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          alert(`✅ Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress view...`);
+          window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+        } else {
+          const error = await response.text();
+          alert(`❌ Failed to start pipeline:\n\n${error}`);
+        }
+      } catch (error) {
+        console.error('Error starting pipeline:', error);
+        alert(`❌ Error starting pipeline:\n\n${error instanceof Error ? error.message : 'Network error'}`);
+      }
     }
   };
 

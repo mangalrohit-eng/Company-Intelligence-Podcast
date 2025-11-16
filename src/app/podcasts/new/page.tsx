@@ -76,9 +76,9 @@ export default function NewPodcastPage() {
 
   const handleSubmit = async () => {
     try {
-      // Create podcast via API
-      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
-      const response = await fetch(`${apiUrl}/api/podcasts`, {
+      // Create podcast via AWS Lambda API Gateway
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+      const response = await fetch(`${apiUrl}/podcasts`, {  // No /api prefix for AWS Lambda
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
