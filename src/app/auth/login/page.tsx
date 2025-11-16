@@ -10,31 +10,52 @@ import { Mail, Lock, ArrowRight, Radio } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { signIn } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     setIsLoading(true);
-    
-    // TODO: Implement Cognito authentication
-    setTimeout(() => {
-      alert('Login functionality will be connected to AWS Cognito');
+
+    try {
+      const result = await signIn(email, password);
+      
+      if (result.isSignedIn) {
+        // Successfully logged in - redirect to podcasts
+        window.location.href = '/podcasts';
+      } else if (result.nextStep.signInStep === 'CONFIRM_SIGN_UP') {
+        // Need to verify email first
+        window.location.href = `/auth/verify?email=${encodeURIComponent(email)}`;
+      } else if (result.nextStep.signInStep === 'CONFIRM_SIGN_IN_WITH_NEW_PASSWORD_REQUIRED') {
+        setError('Please set a new password');
+      }
+    } catch (err: any) {
+      console.error('Login error:', err);
+      if (err.name === 'UserNotFoundException') {
+        setError('No account found with this email. Please sign up first.');
+      } else if (err.name === 'NotAuthorizedException') {
+        setError('Incorrect email or password.');
+      } else {
+        setError(err.message || 'Failed to sign in. Please try again.');
+      }
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleGoogleLogin = () => {
-    // TODO: Implement Google SSO via Cognito
-    alert('Google SSO will be connected via AWS Cognito');
+    setError('Google SSO coming soon. Please use email/password for now.');
   };
 
   const handleMicrosoftLogin = () => {
-    // TODO: Implement Microsoft SSO via Cognito
-    alert('Microsoft SSO will be connected via AWS Cognito');
+    setError('Microsoft SSO coming soon. Please use email/password for now.');
   };
 
   return (
@@ -53,6 +74,12 @@ export default function LoginPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleLogin} className="space-y-4">
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+                  {error}
+                </div>
+              )}
+              
               <div>
                 <label className="block text-sm font-medium mb-2">Email</label>
                 <div className="relative">

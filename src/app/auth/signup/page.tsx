@@ -10,6 +10,7 @@ import { Mail, Lock, User, Building2, ArrowRight, Radio } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SignUpPage() {
   const [formData, setFormData] = useState({
@@ -19,33 +20,50 @@ export default function SignUpPage() {
     password: '',
     confirmPassword: '',
   });
+  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const { signUp } = useAuth();
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      setError('Passwords do not match');
+      return;
+    }
+    
+    if (formData.password.length < 8) {
+      setError('Password must be at least 8 characters');
       return;
     }
     
     setIsLoading(true);
     
-    // TODO: Implement Cognito sign up
-    setTimeout(() => {
-      alert('Sign up functionality will be connected to AWS Cognito.\n\nYou would be redirected to verify your email.');
+    try {
+      await signUp(formData.email, formData.password, formData.name);
+      // Redirect to verification page
+      window.location.href = `/auth/verify?email=${encodeURIComponent(formData.email)}`;
+    } catch (err: any) {
+      console.error('Sign up error:', err);
+      if (err.name === 'UsernameExistsException') {
+        setError('An account with this email already exists. Please log in.');
+      } else if (err.name === 'InvalidPasswordException') {
+        setError('Password must contain uppercase, lowercase, numbers, and special characters');
+      } else {
+        setError(err.message || 'Failed to sign up. Please try again.');
+      }
+    } finally {
       setIsLoading(false);
-    }, 1000);
+    }
   };
 
   const handleGoogleSignUp = () => {
-    // TODO: Implement Google SSO via Cognito
-    alert('Google SSO will be connected via AWS Cognito');
+    setError('Google SSO coming soon. Please use email/password for now.');
   };
 
   const handleMicrosoftSignUp = () => {
-    // TODO: Implement Microsoft SSO via Cognito
-    alert('Microsoft SSO will be connected via AWS Cognito');
+    setError('Microsoft SSO coming soon. Please use email/password for now.');
   };
 
   return (
@@ -64,6 +82,12 @@ export default function SignUpPage() {
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSignUp} className="space-y-4">
+              {error && (
+                <div className="p-3 bg-red-500/10 border border-red-500 rounded-lg text-red-500 text-sm">
+                  {error}
+                </div>
+              )}
+              
               <div>
                 <label className="block text-sm font-medium mb-2">Full Name</label>
                 <div className="relative">
