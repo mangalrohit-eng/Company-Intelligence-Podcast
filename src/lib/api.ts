@@ -24,19 +24,46 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
   // Add authentication token if required
   if (requireAuth) {
     try {
-      const session = await fetchAuthSession();
+      console.log('🔐 Fetching auth session...');
+      const session = await fetchAuthSession({ forceRefresh: false });
+      console.log('📊 Session:', {
+        hasTokens: !!session.tokens,
+        hasIdToken: !!session.tokens?.idToken,
+        hasAccessToken: !!session.tokens?.accessToken,
+        credentials: !!session.credentials,
+        identityId: session.identityId,
+      });
+      
       const token = session.tokens?.idToken?.toString();
       
       if (token) {
+        console.log('✅ Token retrieved (length:', token.length, ')');
+        console.log('✅ Token preview:', token.substring(0, 50) + '...');
         (finalHeaders as Record<string, string>)['Authorization'] = `Bearer ${token}`;
       } else {
-        console.warn('No auth token available for API call');
+        console.error('❌ No auth token available for API call');
+        console.error('❌ Full session:', JSON.stringify(session, null, 2));
+        
+        // Try to get current user as additional debug
+        try {
+          const { getCurrentUser } = await import('aws-amplify/auth');
+          const currentUser = await getCurrentUser();
+          console.log('✅ Current user exists:', currentUser);
+        } catch (userError) {
+          console.error('❌ No current user:', userError);
+        }
       }
     } catch (error) {
-      console.error('Failed to get auth token:', error);
+      console.error('❌ Failed to get auth token:', error);
       // Continue without token - let backend handle auth error
     }
   }
+  
+  console.log('🌐 API Call:', {
+    url: endpoint,
+    method: fetchOptions.method || 'GET',
+    hasAuthHeader: !!(finalHeaders as Record<string, string>)['Authorization'],
+  });
 
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
   
