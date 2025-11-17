@@ -77,6 +77,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     const podcastId = uuidv4();
     const now = new Date().toISOString();
+    
+    // Generate UUIDs for string-based IDs (company, industry, topics, competitors)
+    // This allows the API to accept human-readable names instead of requiring UUIDs
+    const companyUuid = uuidv4(); // In future, look up or create company by name
+    const industryUuid = uuidv4(); // In future, look up or create industry by name
+    const competitorUuids = validated.competitorIds?.map(() => uuidv4()) || [];
+    const topicUuids = validated.topicIds.map(() => uuidv4());
 
     // Create podcast record
     const podcast = {
@@ -115,8 +122,10 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       timeWindowHours: validated.timeWindowHours,
       timezone: validated.timezone,
       publishTime: validated.publishTime,
-      companyId: validated.companyId,
-      industryId: validated.industryId,
+      companyId: companyUuid, // Use generated UUID
+      companyName: validated.companyId, // Store the actual name
+      industryId: industryUuid, // Use generated UUID
+      industryName: validated.industryId, // Store the actual name
       voiceConfig: {
         provider: 'openai-tts',
         voiceId: validated.voiceId,
@@ -124,11 +133,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         tone: validated.voiceTone,
       },
       robotsMode: validated.robotsMode,
-      regionFilters: validated.regions,
-      topicPriorities: validated.topicPriorities,
+      regionFilters: validated.regions || ['US'],
+      sourceLanguages: validated.sourceLanguages,
+      topicPriorities: validated.topicPriorities || {},
       sourcePolicies: {
-        allowDomains: validated.allowDomains,
-        blockDomains: validated.blockDomains,
+        allowDomains: validated.allowDomains || [],
+        blockDomains: validated.blockDomains || [],
       },
       createdAt: now,
     };
@@ -141,14 +151,18 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     );
 
     // Store competitors
-    for (const competitorId of validated.competitorIds) {
+    for (let i = 0; i < (validated.competitorIds?.length || 0); i++) {
+      const competitorName = validated.competitorIds![i];
+      const competitorUuid = competitorUuids[i];
+      
       await docClient.send(
         new PutCommand({
           TableName: process.env.PODCAST_COMPETITORS_TABLE!,
           Item: {
             podcastId,
             version: 1,
-            companyId: competitorId,
+            companyId: competitorUuid, // UUID for DB relations
+            companyName: competitorName, // Human-readable name
             isAiSuggested: false,
             createdAt: now,
           },
@@ -157,16 +171,20 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     }
 
     // Store topics
-    for (const topicId of validated.topicIds) {
+    for (let i = 0; i < validated.topicIds.length; i++) {
+      const topicName = validated.topicIds[i];
+      const topicUuid = topicUuids[i];
+      
       await docClient.send(
         new PutCommand({
           TableName: process.env.PODCAST_TOPICS_TABLE!,
           Item: {
             podcastId,
             version: 1,
-            topicId,
+            topicId: topicUuid, // UUID for DB relations
+            topicName: topicName, // Human-readable name
             type: 'standard',
-            priorityWeight: validated.topicPriorities[topicId] || 50,
+            priorityWeight: validated.topicPriorities?.[topicName] || 50,
             createdAt: now,
           },
         })
