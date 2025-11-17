@@ -6,21 +6,42 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { logger } from '@/utils/logger';
+import { badRequestResponse, successResponse, serverErrorResponse } from '@/utils/api-response';
+import { validateEnvironment } from '@/utils/auth-middleware';
 
-const dynamoClient = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(dynamoClient);
+// Lazy initialization for better testability
+let dynamoClient: DynamoDBClient | null = null;
+let docClient: DynamoDBDocumentClient | null = null;
+
+function getDocClient(): DynamoDBDocumentClient {
+  if (!docClient) {
+    dynamoClient = new DynamoDBClient({});
+    docClient = DynamoDBDocumentClient.from(dynamoClient);
+  }
+  return docClient;
+}
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    // Validate required environment variables
+    validateEnvironment(['RUN_EVENTS_TABLE']);
+    
+    const docClient = getDocClient();
     const runId = event.pathParameters?.id;
-    const limit = parseInt(event.queryStringParameters?.limit || '100');
     const nextToken = event.queryStringParameters?.nextToken;
 
     if (!runId) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Run ID required' }),
-      };
+      return badRequestResponse('Run ID required');
+    }
+
+    // Validate and parse limit parameter
+    const limitParam = event.queryStringParameters?.limit || '100';
+    const limit = parseInt(limitParam);
+    
+    if (isNaN(limit) || limit < 1 || limit > 1000) {
+      return badRequestResponse('Limit must be a number between 1 and 1000', {
+        providedLimit: limitParam,
+      });
     }
 
     const result = await docClient.send(
@@ -44,26 +65,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     logger.debug('Retrieved run events', { runId, count: events.length });
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        events,
-        nextToken: responseNextToken,
-      }),
-    };
+    return successResponse({
+      events,
+      nextToken: responseNextToken,
+    });
   } catch (error) {
     logger.error('Failed to get run events', { error });
-
-    return {
-      statusCode: 500,
-      body: JSON.stringify({
-        error: 'Internal server error',
-      }),
-    };
+    return serverErrorResponse('Failed to retrieve run events', error);
   }
 };
 

@@ -6,46 +6,37 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { logger } from '@/utils/logger';
+import { successResponse, serverErrorResponse, badRequestResponse } from '@/utils/api-response';
+import { extractAuthContext, validateEnvironment } from '@/utils/auth-middleware';
 
-const dynamoClient = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(dynamoClient);
+// Lazy initialization for better testability
+let dynamoClient: DynamoDBClient | null = null;
+let docClient: DynamoDBDocumentClient | null = null;
+
+function getDocClient(): DynamoDBDocumentClient {
+  if (!docClient) {
+    dynamoClient = new DynamoDBClient({});
+    docClient = DynamoDBDocumentClient.from(dynamoClient);
+  }
+  return docClient;
+}
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    // Extract auth from authorizer
-    const requestContext = event.requestContext as any;
-    const authorizer = requestContext?.authorizer;
+    // Validate required environment variables
+    validateEnvironment(['PODCASTS_TABLE']);
     
-    const userId = authorizer?.claims?.sub || 
-                   authorizer?.jwt?.claims?.sub || 
-                   null;
+    const docClient = getDocClient();
     
-    let orgId = authorizer?.claims?.['custom:org_id'] || 
-                authorizer?.jwt?.claims?.['custom:org_id'] ||
-                null;
-
-    // Auto-generate org_id if missing (for legacy users)
-    if (!orgId && userId) {
-      orgId = `org-${userId}`;
-      console.log('Auto-generated orgId for list query:', orgId);
+    // Extract and validate authentication
+    const auth = extractAuthContext(event);
+    if (!auth) {
+      return badRequestResponse('Authentication required - Please log in');
     }
 
-    // Require authentication
-    if (!userId || !orgId) {
-      return {
-        statusCode: 401,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({ 
-          error: 'Unauthorized - Please log in',
-          debug: { hasUserId: !!userId, hasOrgId: !!orgId }
-        }),
-      };
-    }
-
-    console.log('Listing podcasts for:', { userId, orgId });
+    const { userId, orgId } = auth;
+    
+    logger.info('Listing podcasts', { userId: userId.substring(0, 8) + '...', orgId: orgId.substring(0, 12) + '...' });
 
     const result = await docClient.send(
       new QueryCommand({
@@ -59,32 +50,15 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       })
     );
 
-    logger.info('Listed podcasts', { orgId, count: result.Items?.length || 0 });
+    logger.info('Listed podcasts', { orgId: orgId.substring(0, 12) + '...', count: result.Items?.length || 0 });
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        podcasts: result.Items || [],
-        nextToken: result.LastEvaluatedKey,
-      }),
-    };
+    return successResponse({
+      podcasts: result.Items || [],
+      nextToken: result.LastEvaluatedKey,
+    });
   } catch (error) {
     logger.error('Failed to list podcasts', { error });
-
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
-      }),
-    };
+    return serverErrorResponse('Failed to list podcasts', error);
   }
 };
 

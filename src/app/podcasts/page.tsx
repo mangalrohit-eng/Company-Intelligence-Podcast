@@ -373,6 +373,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
   };
 
   const getCadenceColor = (cadence: string) => {
+    if (!cadence) return 'outline';
     switch (cadence.toLowerCase()) {
       case 'daily': return 'success';
       case 'weekly': return 'default';
@@ -412,7 +413,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
         <div className="flex items-center gap-2 mb-4">
           <Badge variant={getCadenceColor(podcast.cadence)}>
             <Calendar className="w-3 h-3 mr-1" />
-            {podcast.cadence}
+            {podcast.cadence || 'Not Set'}
           </Badge>
           <Badge variant="success">
             {podcast.status}
@@ -562,6 +563,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
   };
 
   const getCadenceColor = (cadence: string) => {
+    if (!cadence) return 'outline';
     switch (cadence.toLowerCase()) {
       case 'daily': return 'success';
       case 'weekly': return 'default';
@@ -585,7 +587,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
             <p className="text-sm text-muted truncate mb-2">{podcast.subtitle}</p>
             <div className="flex gap-2 flex-wrap">
               <Badge variant={getCadenceColor(podcast.cadence)}>
-                {podcast.cadence}
+                {podcast.cadence || 'Not Set'}
               </Badge>
               <Badge variant="success">
                 {podcast.status}
@@ -702,4 +704,3 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
     </Card>
   );
 }
-

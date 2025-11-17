@@ -7,68 +7,41 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import { CreatePodcastRequestSchema } from '@/types/api';
+import { createdResponse, badRequestResponse, serverErrorResponse } from '@/utils/api-response';
+import { extractAuthContext, validateEnvironment } from '@/utils/auth-middleware';
+import { logger } from '@/utils/logger';
 
-const dynamoClient = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(dynamoClient);
+// Lazy initialization for better testability
+let dynamoClient: DynamoDBClient | null = null;
+let docClient: DynamoDBDocumentClient | null = null;
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin': '*',
-};
+function getDocClient(): DynamoDBDocumentClient {
+  if (!docClient) {
+    dynamoClient = new DynamoDBClient({});
+    docClient = DynamoDBDocumentClient.from(dynamoClient);
+  }
+  return docClient;
+}
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
-  console.log('='.repeat(80));
-  console.log('CREATE PODCAST HANDLER - START');
-  console.log('='.repeat(80));
-  
-  // Log full event for debugging
-  console.log('Event keys:', Object.keys(event));
-  console.log('Headers:', JSON.stringify(event.headers, null, 2));
-  console.log('RequestContext:', JSON.stringify(event.requestContext, null, 2));
-  
   try {
-    // Extract auth context
-    const requestContext = event.requestContext as any;
-    const authorizer = requestContext?.authorizer;
+    // Validate required environment variables
+    validateEnvironment(['PODCASTS_TABLE', 'PODCAST_CONFIGS_TABLE', 'PODCAST_COMPETITORS_TABLE', 'PODCAST_TOPICS_TABLE', 'CLOUDFRONT_DOMAIN']);
     
-    console.log('Authorizer object:', JSON.stringify(authorizer, null, 2));
+    const docClient = getDocClient();
     
-    // Try multiple auth context structures
-    const userId = authorizer?.claims?.sub || 
-                   authorizer?.jwt?.claims?.sub || 
-                   authorizer?.lambda?.sub ||
-                   null;
+    logger.info('Create podcast request received');
     
-    let orgId = authorizer?.claims?.['custom:org_id'] || 
-                authorizer?.jwt?.claims?.['custom:org_id'] ||
-                authorizer?.lambda?.['custom:org_id'] ||
-                null;
-
-    // Auto-generate org_id if missing (for legacy users)
-    if (!orgId && userId) {
-      orgId = `org-${userId}`;
-      console.log('Auto-generated org_id for legacy user:', orgId);
+    // Extract and validate authentication
+    const auth = extractAuthContext(event);
+    if (!auth) {
+      return badRequestResponse('Authentication required - You must be logged in to create a podcast');
     }
 
-    console.log('Extracted auth:', { 
-      hasAuthorizer: !!authorizer,
-      authorizerKeys: authorizer ? Object.keys(authorizer) : [],
-      userId, 
-      orgId,
-      orgIdSource: authorizer?.jwt?.claims?.['custom:org_id'] ? 'cognito' : 'auto-generated',
-      hasAuthHeader: !!event.headers?.Authorization || !!event.headers?.authorization
-    });
-
-    // Require authentication
-    if (!userId) {
-      return {
-        statusCode: 401,
-        headers,
-        body: JSON.stringify({
-          error: 'Unauthorized - Authentication required',
-          message: 'You must be logged in to create a podcast',
-        }),
-      };
+    const { userId, orgId, isLegacyUser } = auth;
+    
+    if (isLegacyUser) {
+      logger.warn('Legacy user creating podcast', { userId: userId.substring(0, 8) + '...', orgId });
     }
 
     // Parse and validate request body
@@ -191,36 +164,20 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       );
     }
 
-    console.log('Podcast created successfully:', podcastId);
+    logger.info('Podcast created successfully', { podcastId, userId: userId.substring(0, 8) + '...' });
 
-    return {
-      statusCode: 201,
-      headers,
-      body: JSON.stringify({
-        ...podcast,
-        config,
-      }),
-    };
+    return createdResponse({
+      ...podcast,
+      config,
+    });
   } catch (error: any) {
-    console.error('Failed to create podcast:', error);
+    logger.error('Failed to create podcast', { error });
 
-    // Determine status code
-    let statusCode = 500;
-    let errorMessage = 'Internal server error';
-    
+    // Handle validation errors specifically
     if (error.name === 'ZodError') {
-      statusCode = 400;
-      errorMessage = `Validation error: ${error.message}`;
-    } else if (error.message) {
-      errorMessage = error.message;
+      return badRequestResponse('Validation error', error.issues);
     }
 
-    return {
-      statusCode,
-      headers,
-      body: JSON.stringify({
-        error: errorMessage,
-      }),
-    };
+    return serverErrorResponse('Failed to create podcast', error);
   }
 };

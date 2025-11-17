@@ -5,31 +5,50 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import OpenAI from 'openai';
 import { logger } from '@/utils/logger';
+import { badRequestResponse, binaryResponse, serviceUnavailableResponse } from '@/utils/api-response';
+import { validateEnvironment } from '@/utils/auth-middleware';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy initialization for better testability
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+}
+
+// Valid OpenAI TTS voice IDs
+const VALID_VOICES = ['alloy', 'echo', 'fable', 'onyx', 'nova', 'shimmer'] as const;
+type ValidVoice = typeof VALID_VOICES[number];
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    // Validate required environment variables
+    validateEnvironment(['OPENAI_API_KEY']);
+    
     const body = JSON.parse(event.body || '{}');
     const { voiceId } = body;
 
     if (!voiceId) {
-      return {
-        statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({ error: 'Voice ID is required' }),
-      };
+      return badRequestResponse('Voice ID is required');
+    }
+
+    // Validate voice ID
+    if (!VALID_VOICES.includes(voiceId as any)) {
+      return badRequestResponse('Invalid voice ID', {
+        provided: voiceId,
+        validVoices: VALID_VOICES,
+      });
     }
 
     // Generate a short preview using OpenAI TTS
-    const mp3 = await openai.audio.speech.create({
+    const client = getOpenAIClient();
+    const mp3 = await client.audio.speech.create({
       model: 'tts-1',
-      voice: voiceId as 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer',
+      voice: voiceId as ValidVoice,
       input: 'Welcome to your AI-powered podcast. This is a preview of how your episodes will sound.',
     });
 
@@ -41,29 +60,16 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       audioSize: buffer.length,
     });
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'audio/mpeg',
-        'Access-Control-Allow-Origin': '*',
-        'Content-Length': buffer.length.toString(),
-      },
-      body: buffer.toString('base64'),
-      isBase64Encoded: true,
-    };
-  } catch (error) {
+    return binaryResponse(buffer, 'audio/mpeg');
+  } catch (error: any) {
     logger.error('Failed to generate voice preview', { error });
 
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
-      }),
-    };
+    // Check if it's an OpenAI API error
+    if (error.status === 401 || error.status === 403) {
+      return serviceUnavailableResponse('OpenAI TTS service');
+    }
+
+    return serviceUnavailableResponse('Voice preview generation');
   }
 };
 

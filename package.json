@@ -23,6 +23,7 @@
     "format:check": "prettier --check \"**/*.{ts,tsx,json,md}\"",
     "run-stage": "tsx scripts/runStage.ts",
     "generate-cassette": "ts-node scripts/generateCassette.ts",
+    "test:lambda": "tsx tests/lambda/run-all-tests.ts",
     "deploy": "cd infra/cdk && cdk deploy",
     "deploy:update": "cd infra/cdk && cdk deploy --require-approval never --hotswap",
     "deploy:frontend": "npm run build:frontend && npm run sync:frontend",

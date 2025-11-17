@@ -8,34 +8,39 @@ import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import { logger } from '@/utils/logger';
+import { badRequestResponse, notFoundResponse, acceptedResponse, serverErrorResponse, forbiddenResponse } from '@/utils/api-response';
+import { extractAuthContext, validateEnvironment, hasOrgAccess } from '@/utils/auth-middleware';
 
-const sfnClient = new SFNClient({});
-const dynamoClient = new DynamoDBClient({});
-const docClient = DynamoDBDocumentClient.from(dynamoClient);
+// Lazy initialization for better testability
+let sfnClient: SFNClient | null = null;
+let dynamoClient: DynamoDBClient | null = null;
+let docClient: DynamoDBDocumentClient | null = null;
+
+function getClients() {
+  if (!docClient) {
+    sfnClient = new SFNClient({});
+    dynamoClient = new DynamoDBClient({});
+    docClient = DynamoDBDocumentClient.from(dynamoClient);
+  }
+  return { sfnClient: sfnClient!, docClient: docClient! };
+}
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    // Validate required environment variables
+    validateEnvironment(['PODCASTS_TABLE', 'PODCAST_CONFIGS_TABLE', 'RUNS_TABLE', 'STATE_MACHINE_ARN']);
+    
+    const { sfnClient, docClient } = getClients();
     const podcastId = event.pathParameters?.id;
-    // Extract orgId from authorizer - REAL AUTH ONLY
-    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'];
 
     if (!podcastId) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: 'Invalid request - missing podcastId' }),
-      };
+      return badRequestResponse('Podcast ID required');
     }
     
-    // Require real authentication
-    if (!orgId) {
-      return {
-        statusCode: 401,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({ error: 'Unauthorized - Please log in' }),
-      };
+    // Extract and validate authentication
+    const auth = extractAuthContext(event);
+    if (!auth) {
+      return badRequestResponse('Authentication required');
     }
 
     // Get podcast and config
@@ -48,11 +53,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     const podcast = podcastResult.Item;
 
-    if (!podcast || podcast.orgId !== orgId) {
-      return {
-        statusCode: 404,
-        body: JSON.stringify({ error: 'Podcast not found' }),
-      };
+    if (!podcast) {
+      return notFoundResponse('Podcast');
+    }
+
+    // Verify user has access to this podcast
+    if (!hasOrgAccess(auth, podcast.orgId)) {
+      return forbiddenResponse('You do not have access to this podcast');
     }
 
     const configResult = await docClient.send(
@@ -68,10 +75,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const config = configResult.Item;
 
     if (!config) {
-      return {
-        statusCode: 500,
-        body: JSON.stringify({ error: 'Podcast configuration not found' }),
-      };
+      return serverErrorResponse('Podcast configuration not found');
     }
 
     // Parse flags from request
@@ -163,30 +167,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     logger.info('Run started', { runId, podcastId, executionArn: result.executionArn });
 
-    return {
-      statusCode: 202,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        ...run,
-        executionArn: result.executionArn,
-      }),
-    };
+    return acceptedResponse({
+      ...run,
+      executionArn: result.executionArn,
+    });
   } catch (error) {
     logger.error('Failed to start run', { error });
-
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
-      }),
-    };
+    return serverErrorResponse('Failed to start run', error);
   }
 };
 

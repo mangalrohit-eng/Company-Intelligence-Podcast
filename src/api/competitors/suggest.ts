@@ -5,29 +5,36 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import OpenAI from 'openai';
 import { logger } from '@/utils/logger';
+import { badRequestResponse, successResponse, serviceUnavailableResponse } from '@/utils/api-response';
+import { validateEnvironment } from '@/utils/auth-middleware';
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Lazy initialization for better testability
+let openai: OpenAI | null = null;
+
+function getOpenAIClient(): OpenAI {
+  if (!openai) {
+    openai = new OpenAI({
+      apiKey: process.env.OPENAI_API_KEY,
+    });
+  }
+  return openai;
+}
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
+    // Validate required environment variables
+    validateEnvironment(['OPENAI_API_KEY']);
+    
     const body = JSON.parse(event.body || '{}');
     const { companyName } = body;
 
     if (!companyName || companyName.length < 2) {
-      return {
-        statusCode: 400,
-        headers: {
-          'Content-Type': 'application/json',
-          'Access-Control-Allow-Origin': '*',
-        },
-        body: JSON.stringify({ error: 'Company name is required' }),
-      };
+      return badRequestResponse('Company name is required (minimum 2 characters)');
     }
 
     // Use OpenAI to generate competitor suggestions
-    const completion = await openai.chat.completions.create({
+    const client = getOpenAIClient();
+    const completion = await client.chat.completions.create({
       model: 'gpt-4',
       messages: [
         {
@@ -60,31 +67,20 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       tokensUsed: completion.usage?.total_tokens,
     });
 
-    return {
-      statusCode: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        companyName,
-        competitors,
-        tokensUsed: completion.usage?.total_tokens,
-      }),
-    };
-  } catch (error) {
+    return successResponse({
+      companyName,
+      competitors,
+      tokensUsed: completion.usage?.total_tokens,
+    });
+  } catch (error: any) {
     logger.error('Failed to suggest competitors', { error });
 
-    return {
-      statusCode: 500,
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*',
-      },
-      body: JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
-      }),
-    };
+    // Check if it's an OpenAI API error
+    if (error.status === 401 || error.status === 403) {
+      return serviceUnavailableResponse('OpenAI service');
+    }
+
+    return serviceUnavailableResponse('Competitor suggestion service');
   }
 };
 

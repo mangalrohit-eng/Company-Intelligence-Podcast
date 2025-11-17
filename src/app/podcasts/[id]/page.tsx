@@ -5,7 +5,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -262,50 +262,102 @@ function EpisodesTab({ podcastId: _podcastId }: { podcastId: string }) {
   );
 }
 
-function RunsTab({ podcastId: _podcastId }: { podcastId: string }) {
-  // TODO: Fetch runs
-  const runs = [
-    {
-      id: 'run-1',
-      status: 'success',
-      startedAt: '2025-01-15T09:00:00Z',
-      duration: 420,
-      episodeId: 'ep-1',
-    },
-  ];
+function RunsTab({ podcastId }: { podcastId: string }) {
+  const [runs, setRuns] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchRuns = async () => {
+    try {
+      setLoading(true);
+      const { api } = await import('@/lib/api');
+      const response = await api.get(`/podcasts/${podcastId}/runs/list`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        setRuns(data.runs || []);
+      }
+    } catch (error) {
+      console.error('Error fetching runs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch runs on mount and set up polling
+  useEffect(() => {
+    fetchRuns();
+    const interval = setInterval(fetchRuns, 3000); // Poll every 3 seconds
+    return () => clearInterval(interval);
+  }, [podcastId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (loading && runs.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <p className="mt-4 text-muted">Loading runs...</p>
+      </div>
+    );
+  }
+
+  if (runs.length === 0) {
+    return (
+      <Card className="text-center py-12">
+        <Play className="w-12 h-12 text-muted mx-auto mb-4" />
+        <h3 className="text-xl font-semibold mb-2">No runs yet</h3>
+        <p className="text-muted">Click "Run Now" to start your first pipeline run</p>
+      </Card>
+    );
+  }
 
   return (
     <div className="space-y-4">
-      {runs.map((run) => (
-        <div
-          key={run.id}
-          className="bg-secondary border border-border rounded-lg p-6 hover:border-primary transition-all cursor-pointer"
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="flex items-center gap-3 mb-2">
-                <span className="font-mono text-sm">{run.id.substring(0, 8)}</span>
-                <span
-                  className={`px-2 py-1 text-xs rounded ${
-                    run.status === 'success'
-                      ? 'bg-primary/20 text-primary'
-                      : 'bg-red-500/20 text-red-500'
-                  }`}
-                >
-                  {run.status}
-                </span>
+      {runs.map((run) => {
+        const statusColors = {
+          running: 'bg-blue-500/20 text-blue-500',
+          completed: 'bg-green-500/20 text-green-500',
+          failed: 'bg-red-500/20 text-red-500',
+          success: 'bg-green-500/20 text-green-500',
+        };
+
+        return (
+          <div
+            key={run.id}
+            className="bg-secondary border border-border rounded-lg p-6 hover:border-primary transition-all cursor-pointer"
+          >
+            <div className="flex items-center justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-2">
+                  <span className="font-mono text-sm">{run.id.substring(0, 20)}</span>
+                  <span
+                    className={`px-2 py-1 text-xs rounded ${
+                      statusColors[run.status as keyof typeof statusColors] || 'bg-gray-500/20 text-gray-500'
+                    }`}
+                  >
+                    {run.status}
+                  </span>
+                  {run.progress?.currentStage && (
+                    <span className="text-xs text-muted">
+                      Stage: {run.progress.currentStage}
+                    </span>
+                  )}
+                </div>
+                <div className="text-sm text-muted">
+                  {new Date(run.startedAt).toLocaleString()}
+                  {run.duration && (
+                    <> • {Math.floor(run.duration / 60)}m {run.duration % 60}s</>
+                  )}
+                </div>
               </div>
-              <div className="text-sm text-muted">
-                {new Date(run.startedAt).toLocaleString()} • {Math.floor(run.duration / 60)}m{' '}
-                {run.duration % 60}s
-              </div>
+              <button
+                onClick={() => window.location.href = `/podcasts/${podcastId}/runs/${run.id}`}
+                className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all"
+              >
+                View Details
+              </button>
             </div>
-            <button className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all">
-              View Details
-            </button>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }

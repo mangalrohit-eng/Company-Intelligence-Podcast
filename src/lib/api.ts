@@ -4,7 +4,13 @@
 
 import { fetchAuthSession } from 'aws-amplify/auth';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+// Use Next.js API routes in development, AWS Lambda in production
+const getApiBaseUrl = () => {
+  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+    return '/api';
+  }
+  return process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+};
 
 export interface ApiOptions extends RequestInit {
   requireAuth?: boolean;
@@ -65,6 +71,7 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
     hasAuthHeader: !!(finalHeaders as Record<string, string>)['Authorization'],
   });
 
+  const API_BASE_URL = getApiBaseUrl();
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
   
   return fetch(url, {
