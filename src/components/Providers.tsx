@@ -6,6 +6,7 @@
 
 import { useEffect, ReactNode } from 'react';
 import { AuthProvider } from '@/contexts/AuthContext';
+import { ToastProvider } from '@/contexts/ToastContext';
 import { configureAmplify } from '@/lib/amplify-config';
 
 export function Providers({ children }: { children: ReactNode }) {
@@ -14,6 +15,12 @@ export function Providers({ children }: { children: ReactNode }) {
     configureAmplify();
   }, []);
 
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <ToastProvider>
+        {children}
+      </ToastProvider>
+    </AuthProvider>
+  );
 }
 

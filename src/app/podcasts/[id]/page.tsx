@@ -6,14 +6,15 @@
 
 import { useParams } from 'next/navigation';
 import { useState } from 'react';
-import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users } from 'lucide-react';
+import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { RSSValidator } from '@/components/RSSValidator';
 
-type Tab = 'overview' | 'episodes' | 'runs' | 'settings';
+type Tab = 'overview' | 'episodes' | 'runs' | 'rss' | 'settings';
 
 export default function PodcastDetailPage() {
   const params = useParams();
@@ -101,6 +102,7 @@ export default function PodcastDetailPage() {
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="episodes">Episodes</TabsTrigger>
             <TabsTrigger value="runs">Runs</TabsTrigger>
+            <TabsTrigger value="rss">RSS Feed</TabsTrigger>
             <TabsTrigger value="suggestions">Suggestions</TabsTrigger>
             <TabsTrigger value="validation">Validation</TabsTrigger>
             <TabsTrigger value="team">Team</TabsTrigger>
@@ -115,6 +117,9 @@ export default function PodcastDetailPage() {
           </TabsContent>
           <TabsContent value="runs">
             <RunsTab podcastId={podcastId} />
+          </TabsContent>
+          <TabsContent value="rss">
+            <RSSValidator podcastId={podcastId} rssUrl={podcast.rssUrl} />
           </TabsContent>
           <TabsContent value="suggestions">
             <SuggestionsTab podcastId={podcastId} />
