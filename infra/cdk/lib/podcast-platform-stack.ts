@@ -14,6 +14,7 @@ import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { HttpJwtAuthorizer } from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 
@@ -103,6 +104,34 @@ export class PodcastPlatformStack extends cdk.Stack {
       partitionKey: { name: 'podcastId', type: dynamodb.AttributeType.STRING },
     });
 
+    // Additional tables for podcast configuration
+    const podcastConfigsTable = new dynamodb.Table(this, 'PodcastConfigsTable', {
+      tableName: 'podcast_configs',
+      partitionKey: { name: 'podcastId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'version', type: dynamodb.AttributeType.NUMBER },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      pointInTimeRecovery: true,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    const podcastCompetitorsTable = new dynamodb.Table(this, 'PodcastCompetitorsTable', {
+      tableName: 'podcast_competitors',
+      partitionKey: { name: 'podcastId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'companyId', type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      pointInTimeRecovery: true,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    const podcastTopicsTable = new dynamodb.Table(this, 'PodcastTopicsTable', {
+      tableName: 'podcast_topics',
+      partitionKey: { name: 'podcastId', type: dynamodb.AttributeType.STRING },
+      sortKey: { name: 'topicId', type: dynamodb.AttributeType.STRING },
+      billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
+      pointInTimeRecovery: true,
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
     // ========================================================================
     // Auth: Cognito User Pool
     // ========================================================================
@@ -123,6 +152,9 @@ export class PodcastPlatformStack extends cdk.Stack {
         requireDigits: true,
         requireSymbols: false,
       },
+      customAttributes: {
+        'org_id': new cognito.StringAttribute({ minLen: 1, maxLen: 256, mutable: false }),
+      },
       accountRecovery: cognito.AccountRecovery.EMAIL_ONLY,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });
@@ -142,45 +174,67 @@ export class PodcastPlatformStack extends cdk.Stack {
 
     const lambdaEnv = {
       PODCASTS_TABLE: podcastsTable.tableName,
+      PODCAST_CONFIGS_TABLE: podcastConfigsTable.tableName,
+      PODCAST_COMPETITORS_TABLE: podcastCompetitorsTable.tableName,
+      PODCAST_TOPICS_TABLE: podcastTopicsTable.tableName,
       RUNS_TABLE: runsTable.tableName,
       EVENTS_TABLE: eventsTable.tableName,
       EPISODES_TABLE: episodesTable.tableName,
       MEDIA_BUCKET: mediaBucket.bucketName,
       RSS_BUCKET: rssBucket.bucketName,
+      CLOUDFRONT_DOMAIN: `https://dhycfwg0k4xij.cloudfront.net`,  // TODO: Make this dynamic
       USER_POOL_ID: userPool.userPoolId,
       OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',  // Pass from local env
     };
 
-    const createPodcastLambda = new lambda.Function(this, 'CreatePodcastLambda', {
+    const createPodcastLambda = new NodejsFunction(this, 'CreatePodcastLambda', {
       functionName: 'podcast-create',
       runtime: lambda.Runtime.NODEJS_18_X,
-      handler: 'create.handler',
-      code: lambda.Code.fromAsset('../../src/api/podcasts'),
+      entry: '../../src/api/podcasts/create.ts',
+      handler: 'handler',
       environment: lambdaEnv,
       timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
     });
 
     podcastsTable.grantWriteData(createPodcastLambda);
+    podcastConfigsTable.grantWriteData(createPodcastLambda);
+    podcastCompetitorsTable.grantWriteData(createPodcastLambda);
+    podcastTopicsTable.grantWriteData(createPodcastLambda);
 
-    const listPodcastsLambda = new lambda.Function(this, 'ListPodcastsLambda', {
+    const listPodcastsLambda = new NodejsFunction(this, 'ListPodcastsLambda', {
       functionName: 'podcast-list',
       runtime: lambda.Runtime.NODEJS_18_X,
-      handler: 'list.handler',
-      code: lambda.Code.fromAsset('../../src/api/podcasts'),
+      entry: '../../src/api/podcasts/list.ts',
+      handler: 'handler',
       environment: lambdaEnv,
       timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
     });
 
     podcastsTable.grantReadData(listPodcastsLambda);
 
     // New Lambda functions
-    const listRunsLambda = new lambda.Function(this, 'ListRunsLambda', {
+    const listRunsLambda = new NodejsFunction(this, 'ListRunsLambda', {
       functionName: 'runs-list',
       runtime: lambda.Runtime.NODEJS_18_X,
-      handler: 'list.handler',
-      code: lambda.Code.fromAsset('../../src/api/runs'),
+      entry: '../../src/api/runs/list.ts',
+      handler: 'handler',
       environment: lambdaEnv,
       timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
     });
 
     runsTable.grantReadData(listRunsLambda);
@@ -235,6 +289,14 @@ export class PodcastPlatformStack extends cdk.Stack {
       },
     });
 
+    // Create JWT authorizer for Cognito
+    const authorizer = new HttpJwtAuthorizer('CognitoAuthorizer', 
+      `https://cognito-idp.${this.region}.amazonaws.com/${userPool.userPoolId}`,
+      {
+        jwtAudience: [userPoolClient.userPoolClientId],
+      }
+    );
+
     // Add routes for Lambda functions
     const createPodcastIntegration = new HttpLambdaIntegration(
       'CreatePodcastIntegration',
@@ -250,12 +312,14 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/podcasts',
       methods: [apigatewayv2.HttpMethod.POST],
       integration: createPodcastIntegration,
+      authorizer: authorizer,
     });
 
     httpApi.addRoutes({
       path: '/podcasts',
       methods: [apigatewayv2.HttpMethod.GET],
       integration: listPodcastsIntegration,
+      authorizer: authorizer,
     });
 
     const listRunsIntegration = new HttpLambdaIntegration(
@@ -267,6 +331,7 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/runs',
       methods: [apigatewayv2.HttpMethod.GET],
       integration: listRunsIntegration,
+      authorizer: authorizer,
     });
 
     const suggestCompetitorsIntegration = new HttpLambdaIntegration(
