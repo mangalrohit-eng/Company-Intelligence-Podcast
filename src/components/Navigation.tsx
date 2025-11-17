@@ -10,6 +10,7 @@ import { Home, Mic, Settings, User, Play, Menu, X, Radio, LogOut, ChevronDown } 
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { useAuth } from '@/contexts/AuthContext';
+import { NotificationCenter } from './NotificationCenter';
 
 export function Navigation() {
   const pathname = usePathname();
@@ -132,17 +133,20 @@ export function Navigation() {
           <h1 className="text-xl font-bold text-primary">Podcast AI</h1>
         </Link>
 
-        <button
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          className="p-2 hover:bg-border rounded-lg transition-colors"
-          aria-label="Toggle menu"
-        >
-          {isMobileMenuOpen ? (
-            <X className="w-6 h-6" />
-          ) : (
-            <Menu className="w-6 h-6" />
-          )}
-        </button>
+        <div className="flex items-center gap-2">
+          {isAuthenticated && <NotificationCenter />}
+          <button
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            className="p-2 hover:bg-border rounded-lg transition-colors"
+            aria-label="Toggle menu"
+          >
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
+          </button>
+        </div>
       </header>
 
       {/* Mobile Menu Drawer */}
