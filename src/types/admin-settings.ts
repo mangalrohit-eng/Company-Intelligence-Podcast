@@ -18,7 +18,7 @@ export interface ModelSettings {
   qa: OpenAIModel;                        // Verify [CHECK] markers
 }
 
-export interface RssFeed {
+export interface RSSFeed {
   id: string;
   name: string;
   url: string;                      // Use {company} as placeholder for company name
@@ -26,8 +26,11 @@ export interface RssFeed {
   description?: string;
 }
 
+// Alias for consistency
+export type RssFeed = RSSFeed;
+
 export interface DiscoverySettings {
-  rssFeeds: RssFeed[];
+  rssFeeds: RSSFeed[];
 }
 
 export interface PipelineSettings {
