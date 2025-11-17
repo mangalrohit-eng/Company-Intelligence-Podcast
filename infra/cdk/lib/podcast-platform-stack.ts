@@ -222,24 +222,7 @@ export class PodcastPlatformStack extends cdk.Stack {
 
     podcastsTable.grantReadData(listPodcastsLambda);
 
-    // New Lambda functions
-    const listRunsLambda = new NodejsFunction(this, 'ListRunsLambda', {
-      functionName: 'runs-list',
-      runtime: lambda.Runtime.NODEJS_18_X,
-      entry: '../../src/api/runs/list.ts',
-      handler: 'handler',
-      environment: lambdaEnv,
-      timeout: cdk.Duration.seconds(30),
-      bundling: {
-        minify: false,
-        sourceMap: true,
-        externalModules: ['@aws-sdk/*'],
-      },
-    });
-
-    runsTable.grantReadData(listRunsLambda);
-    eventsTable.grantReadData(listRunsLambda);
-
+    // Competitor suggestions Lambda
     const suggestCompetitorsLambda = new NodejsFunction(this, 'SuggestCompetitorsLambda', {
       functionName: 'competitors-suggest',
       runtime: lambda.Runtime.NODEJS_18_X,
@@ -319,18 +302,6 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/podcasts',
       methods: [apigatewayv2.HttpMethod.GET],
       integration: listPodcastsIntegration,
-      authorizer: authorizer,
-    });
-
-    const listRunsIntegration = new HttpLambdaIntegration(
-      'ListRunsIntegration',
-      listRunsLambda
-    );
-
-    httpApi.addRoutes({
-      path: '/runs',
-      methods: [apigatewayv2.HttpMethod.GET],
-      integration: listRunsIntegration,
       authorizer: authorizer,
     });
 
