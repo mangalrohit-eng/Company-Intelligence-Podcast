@@ -69,6 +69,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   const handleSignUp = async (email: string, password: string, name: string) => {
+    // Generate a unique org_id for this user
+    const orgId = `org-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+    
     await signUp({
       username: email,
       password,
@@ -76,6 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         userAttributes: {
           email,
           name,
+          'custom:org_id': orgId,  // Set org_id on signup
         },
       },
     });

@@ -39,21 +39,28 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
                    authorizer?.lambda?.sub ||
                    null;
     
-    const orgId = authorizer?.claims?.['custom:org_id'] || 
-                  authorizer?.jwt?.claims?.['custom:org_id'] ||
-                  authorizer?.lambda?.['custom:org_id'] ||
-                  null;
+    let orgId = authorizer?.claims?.['custom:org_id'] || 
+                authorizer?.jwt?.claims?.['custom:org_id'] ||
+                authorizer?.lambda?.['custom:org_id'] ||
+                null;
+
+    // Auto-generate org_id if missing (for legacy users)
+    if (!orgId && userId) {
+      orgId = `org-${userId}`;
+      console.log('Auto-generated org_id for legacy user:', orgId);
+    }
 
     console.log('Extracted auth:', { 
       hasAuthorizer: !!authorizer,
       authorizerKeys: authorizer ? Object.keys(authorizer) : [],
       userId, 
       orgId,
+      orgIdSource: authorizer?.jwt?.claims?.['custom:org_id'] ? 'cognito' : 'auto-generated',
       hasAuthHeader: !!event.headers?.Authorization || !!event.headers?.authorization
     });
 
     // Require authentication
-    if (!userId || !orgId) {
+    if (!userId) {
       return {
         statusCode: 401,
         headers,
