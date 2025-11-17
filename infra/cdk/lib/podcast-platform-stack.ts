@@ -14,6 +14,7 @@ import * as ecs from 'aws-cdk-lib/aws-ecs';
 import * as iam from 'aws-cdk-lib/aws-iam';
 import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
+import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 
 export class PodcastPlatformStack extends cdk.Stack {
@@ -185,22 +186,32 @@ export class PodcastPlatformStack extends cdk.Stack {
     runsTable.grantReadData(listRunsLambda);
     eventsTable.grantReadData(listRunsLambda);
 
-    const suggestCompetitorsLambda = new lambda.Function(this, 'SuggestCompetitorsLambda', {
+    const suggestCompetitorsLambda = new NodejsFunction(this, 'SuggestCompetitorsLambda', {
       functionName: 'competitors-suggest',
       runtime: lambda.Runtime.NODEJS_18_X,
-      handler: 'suggest.handler',
-      code: lambda.Code.fromAsset('../../src/api/competitors'),
+      entry: '../../src/api/competitors/suggest.ts',
+      handler: 'handler',
       environment: lambdaEnv,
       timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'], // AWS SDK is available in Lambda runtime
+      },
     });
 
-    const voicePreviewLambda = new lambda.Function(this, 'VoicePreviewLambda', {
+    const voicePreviewLambda = new NodejsFunction(this, 'VoicePreviewLambda', {
       functionName: 'voice-preview',
       runtime: lambda.Runtime.NODEJS_18_X,
-      handler: 'preview.handler',
-      code: lambda.Code.fromAsset('../../src/api/voice'),
+      entry: '../../src/api/voice/preview.ts',
+      handler: 'handler',
       environment: lambdaEnv,
       timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'], // AWS SDK is available in Lambda runtime
+      },
     });
 
     // ========================================================================
