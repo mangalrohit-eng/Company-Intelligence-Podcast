@@ -2,35 +2,54 @@
  * Landing Page
  */
 
+'use client';
+
 import Link from 'next/link';
-import { Play, Mic, TrendingUp, Globe, Sparkles, Zap, Radio } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+import { Play, Mic, TrendingUp, Globe, Sparkles, Zap, Radio, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function Home() {
+  const { user, signOut } = useAuth();
+  const router = useRouter();
+  const isAuthenticated = !!user;
+
+  const handleLogout = async () => {
+    try {
+      await signOut();
+      router.push('/');
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
+
   return (
     <main className="min-h-screen bg-background overflow-hidden">
-      {/* Header */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <Radio className="w-6 h-6 text-primary" />
-            <span className="text-xl font-bold text-primary">Podcast AI</span>
-          </Link>
-          
-          <div className="flex items-center gap-3">
-            <Link href="/auth/login">
-              <Button variant="ghost">Sign In</Button>
+      {/* Header - Only show for unauthenticated users */}
+      {!isAuthenticated && (
+        <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
+          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-2">
+              <Radio className="w-6 h-6 text-primary" />
+              <span className="text-xl font-bold text-primary">Podcast AI</span>
             </Link>
-            <Link href="/auth/signup">
-              <Button>Get Started</Button>
-            </Link>
+            
+            <div className="flex items-center gap-3">
+              <Link href="/auth/login">
+                <Button variant="ghost">Sign In</Button>
+              </Link>
+              <Link href="/auth/signup">
+                <Button>Get Started</Button>
+              </Link>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
+      )}
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 py-20 pt-32">
+      <section className={`relative min-h-screen flex items-center justify-center px-4 py-20 ${!isAuthenticated ? 'pt-32' : 'lg:pt-20'}`}>
         {/* Animated Background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-background to-background" />

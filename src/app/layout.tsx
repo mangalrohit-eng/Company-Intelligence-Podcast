@@ -4,8 +4,8 @@
 
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { Navigation } from '@/components/Navigation';
 import { Providers } from '@/components/Providers';
+import { LayoutContent } from '@/components/LayoutContent';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -19,10 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className={inter.className}>
         <Providers>
-          <div className="flex min-h-screen">
-            <Navigation />
-            <main className="flex-1 lg:ml-64 pt-16 lg:pt-0">{children}</main>
-          </div>
+          <LayoutContent>{children}</LayoutContent>
         </Providers>
       </body>
     </html>

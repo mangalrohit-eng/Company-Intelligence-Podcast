@@ -5,7 +5,7 @@
 'use client';
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { signIn, signOut, signUp, confirmSignUp, getCurrentUser, fetchAuthSession, SignInOutput } from 'aws-amplify/auth';
+import { signIn, signOut, signUp, confirmSignUp, getCurrentUser, fetchAuthSession, fetchUserAttributes, SignInOutput } from 'aws-amplify/auth';
 
 interface User {
   userId: string;
@@ -47,11 +47,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     try {
       const currentUser = await getCurrentUser();
       const session = await fetchAuthSession();
+      const attributes = await fetchUserAttributes();
       
       setUser({
         userId: currentUser.userId,
-        email: currentUser.signInDetails?.loginId || '',
-        emailVerified: true,
+        email: attributes.email || currentUser.signInDetails?.loginId || '',
+        name: attributes.name,
+        emailVerified: attributes.email_verified === 'true',
       });
     } catch (error) {
       setUser(null);
