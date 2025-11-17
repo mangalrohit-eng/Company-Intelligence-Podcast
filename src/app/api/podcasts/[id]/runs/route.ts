@@ -37,11 +37,40 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     // Import the orchestrator (server-side only)
     console.log(`⚙️ [${runId}] Importing modules...`);
     const { PipelineOrchestrator } = await import('@/engine/orchestrator');
-    const { NoOpEventEmitter } = await import('@/utils/event-emitter');
+    const { RealtimeEventEmitter } = await import('@/utils/realtime-event-emitter');
     console.log(`✅ [${runId}] Modules imported`);
     
-    console.log(`⚙️ [${runId}] Creating emitter...`);
-    const emitter = new NoOpEventEmitter();
+    // Create emitter with real-time callback that updates run status
+    console.log(`⚙️ [${runId}] Creating realtime emitter...`);
+    const emitter = new RealtimeEventEmitter((update) => {
+      // Update the run in runsStore in real-time
+      if (update.currentStage) {
+        run.progress.currentStage = update.currentStage;
+      }
+      
+      if (update.stageStatus && run.progress.stages[run.progress.currentStage]) {
+        run.progress.stages[run.progress.currentStage].status = update.stageStatus;
+      }
+      
+      if (update.stageStartedAt && run.progress.stages[run.progress.currentStage]) {
+        run.progress.stages[run.progress.currentStage].startedAt = update.stageStartedAt;
+      }
+      
+      if (update.stageCompletedAt && run.progress.stages[run.progress.currentStage]) {
+        run.progress.stages[run.progress.currentStage].completedAt = update.stageCompletedAt;
+      }
+      
+      if (update.error) {
+        run.error = update.error;
+        run.status = 'failed';
+      }
+      
+      console.log(`📊 [${runId}] Status update:`, {
+        currentStage: run.progress.currentStage,
+        stageStatus: update.stageStatus,
+        error: update.error,
+      });
+    });
     console.log(`✅ [${runId}] Emitter created`);
     
     // Use actual podcast config if available, otherwise fallback to defaults

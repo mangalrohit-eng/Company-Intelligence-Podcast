@@ -1,0 +1,37 @@
+{
+  "stats": {
+    "totalUrls": 12,
+    "successCount": 8,
+    "failureCount": 4,
+    "avgLatencyMs": 10888.5,
+    "domainStats": {
+      "news.google.com": {
+        "success": 8,
+        "failure": 0,
+        "avgLatencyMs": 10888.5,
+        "lastFetchMs": 1763417182522
+      }
+    }
+  },
+  "contentCount": 8,
+  "sampleContents": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9FZ21LRktUNEZiWmxWTklOUTBpZXg5LUJrUFE3MU1WX05Lam40TFJhNlRsaHdmY1JQcXdkZTRnN0pKOURtaU5lRnhhcEhDZzhtVDVaY2pLblR0UQ?oc=5",
+      "title": "How to get the biggest returns from Citibank CDs in 2025 - Fortune",
+      "contentLength": 10000,
+      "contentPreview": "Citibank CD rates 2025: Everything you need to know | Fortune Search Subscribe Now Sign In Home News Fortune 500 Fortune Global 500 Fortune 500 Europe Fortune China 500 Fortune SEA 500 Great Place To Work Tech AI Innovation Cybersecurity Finance Personal Finance Real Estate Economy Investing Banking Crypto Leadership Success Future Of Work Workplace Culture C-Suite CEO Initiative Lifestyle Arts &amp; Entertainment Travel &amp; Leisure Health Well Education Rankings Analytics Multimedia Live Medi"
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOeTU5Z1FQV0h0V3MwcUszaVdaNkNJYWJuZ1REeUxLcG45Q1NhZ3IyWjZ5aENEWDlVRWZJdHMtZy1WVlRtMTRWZGxJZWpCbDBnTkNURk9OR1o0Q3NNUGF0M20yOURLbGR6Q0h2aW1XdGs0TkxFWWl0ZXBCdjFBQXBMOXdGZ1AxMS1rMFc2Y2FlWC1pN2NSbjdBV3RBanhhcDNhaFVuc2ZQS0NEYTVwZWVn?oc=5",
+      "title": "Citibank partners with SDX to tokenise $75bn private equity market with Q3 2025 launch - Private Equity Insights",
+      "contentLength": 577,
+      "contentPreview": "Access Denied Caution Accenture blocked this page because it appears to contain dangerous or inappropriate material. If you have questions, please go here . --> Attempted URL: https://pe-insights.com:443 Classification: Matched categories: Compromised Websites Sites that are vulnerable and known to host an injected malicious code or unwanted content Blocking Tool: Forcepoint Cloud --> If you think this site should not be blocked, visit the Yammer page , support page or contact Technology Support"
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbEQyR1VJbnhvZlNOR29UdzlNcWZ6eVRnTFlfRzFyM0NWUHFkWDkwVm9SRDhJaGM5RFFEdHdlcUJFRWFOMFdkNExTNHlqcF9FTGxTYkNUN216Y1RHa2c1ZzJMOFZVYTVBeFlRV1F2MTdIM3BLaXRGZ1lySXVGODlSNTZoX2RIbGIxbXp1ZUY5RU5IcVVrc3N5b09FTC0xOEplVExCRUlHSHh0Zw?oc=5",
+      "title": "Trump Administration Cancels Citibank Settlement for Discrimination Against Armenians - Asbarez",
+      "contentLength": 27,
+      "contentPreview": "403 Forbidden 403 Forbidden"
+    }
+  ]
+}

@@ -105,6 +105,83 @@ export class PipelineOrchestrator {
         }
       };
 
+      // Helper to execute stage with comprehensive error handling
+      const executeStageWithErrorHandling = async <T>(
+        stageName: string,
+        stageExecutor: () => Promise<T>,
+        onError?: (error: any) => void
+      ): Promise<T | null> => {
+        const stageStart = Date.now();
+        try {
+          logger.info(`Starting stage: ${stageName}`, { runId: input.runId });
+          const result = await stageExecutor();
+          
+          telemetry.stages[stageName] = {
+            startTime: new Date(stageStart).toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: Date.now() - stageStart,
+            status: 'success',
+          };
+          
+          logger.info(`Completed stage: ${stageName}`, { 
+            runId: input.runId, 
+            durationMs: Date.now() - stageStart,
+          });
+          
+          // Mark stage as completed in emitter
+          if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+            (emitter as any).markStageCompleted(stageName);
+          }
+          
+          return result;
+        } catch (error: any) {
+          const errorMessage = error.message || String(error);
+          const errorStack = error.stack || '';
+          
+          logger.error(`Stage ${stageName} failed`, {
+            runId: input.runId,
+            error: errorMessage,
+            stack: errorStack,
+            durationMs: Date.now() - stageStart,
+          });
+          
+          telemetry.stages[stageName] = {
+            startTime: new Date(stageStart).toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: Date.now() - stageStart,
+            status: 'failed',
+            error: errorMessage,
+          };
+          
+          // Mark stage as failed in emitter
+          if ('markStageFailed' in emitter && typeof emitter.markStageFailed === 'function') {
+            (emitter as any).markStageFailed(stageName, errorMessage);
+          }
+          
+          // Save error details
+          try {
+            await fs.writeFile(
+              path.join(debugDir, `${stageName}_error.json`),
+              JSON.stringify({
+                error: errorMessage,
+                stack: errorStack,
+                timestamp: new Date().toISOString(),
+              }, null, 2)
+            );
+          } catch (saveError) {
+            logger.warn(`Failed to save ${stageName} error details`, { saveError });
+          }
+          
+          // Call custom error handler if provided
+          if (onError) {
+            onError(error);
+          }
+          
+          // Re-throw to stop pipeline
+          throw new Error(`Stage ${stageName} failed: ${errorMessage}`);
+        }
+      };
+
       // Stage 1: Prepare
       if (input.flags.enable.discover || input.flags.dryRun) {
         const stage = new PrepareStage();
@@ -356,38 +433,41 @@ export class PipelineOrchestrator {
       // Stage 7: Summarize
       let summarizeOutput;
       if (input.flags.enable.summarize && extractOutput) {
-        const stage = new SummarizeStage(llmGateway);
-        const stageStart = Date.now();
-        const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
-        summarizeOutput = await stage.execute(topicIds, evidenceByTopic, emitter);
-        telemetry.stages.summarize = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
+        summarizeOutput = await executeStageWithErrorHandling(
+          'summarize',
+          async () => {
+            const stage = new SummarizeStage(llmGateway);
+            const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+            return await stage.execute(topicIds, evidenceByTopic, emitter);
+          },
+          (error) => {
+            logger.error('Summarize stage failed - likely OpenAI API issue', {
+              error: error.message,
+              topicCount: input.config.topics.standard.length + input.config.topics.special.length,
+              evidenceCount: extractOutput?.units.length,
+            });
+          }
+        );
       }
 
       // Stage 8: Competitor Contrasts
       let contrastOutput;
       if (input.flags.enable.contrast && extractOutput && summarizeOutput) {
-        const stage = new ContrastStage(llmGateway);
-        const stageStart = Date.now();
-        const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
-        const competitors = input.config.competitors?.map(c => c.name) || [];
-        contrastOutput = await stage.execute(
-          topicIds,
-          evidenceByTopic,
-          input.config.company.name,
-          competitors,
-          emitter
+        contrastOutput = await executeStageWithErrorHandling(
+          'contrast',
+          async () => {
+            const stage = new ContrastStage(llmGateway);
+            const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+            const competitors = input.config.competitors?.map(c => c.name) || [];
+            return await stage.execute(topicIds, evidenceByTopic, input.config.company.name, competitors, emitter);
+          },
+          (error) => {
+            logger.error('Contrast stage failed', {
+              error: error.message,
+              competitorCount: input.config.competitors?.length || 0,
+            });
+          }
         );
-        telemetry.stages.contrast = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
       }
 
       // Stage 9: Outline
