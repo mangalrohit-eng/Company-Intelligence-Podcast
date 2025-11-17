@@ -10,6 +10,7 @@ import { Plus, Play, Settings, Share2, Calendar, MoreVertical, Rss, Trash2 } fro
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 interface Podcast {
   id: string;
@@ -55,20 +56,23 @@ export default function PodcastsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen p-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="h-12 w-64 skeleton rounded mb-8" />
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(4)].map((_, i) => (
-              <div key={i} className="skeleton h-80 rounded-lg" />
-            ))}
+      <ProtectedRoute>
+        <div className="min-h-screen p-8">
+          <div className="max-w-7xl mx-auto">
+            <div className="h-12 w-64 skeleton rounded mb-8" />
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="skeleton h-80 rounded-lg" />
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </ProtectedRoute>
     );
   }
 
   return (
+    <ProtectedRoute>
     <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
@@ -135,6 +139,7 @@ export default function PodcastsPage() {
         )}
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 
