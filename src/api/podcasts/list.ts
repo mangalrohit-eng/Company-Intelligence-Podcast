@@ -12,13 +12,26 @@ const docClient = DynamoDBDocumentClient.from(dynamoClient);
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    // Extract orgId from authorizer - REAL AUTH ONLY, NO BYPASSES
-    // API Gateway HTTP API uses different structure than REST API
-    const authorizer = event.requestContext?.authorizer;
-    const orgId = authorizer?.claims?.['custom:org_id'] ||  authorizer?.jwt?.claims?.['custom:org_id'];
+    // Extract auth from authorizer
+    const requestContext = event.requestContext as any;
+    const authorizer = requestContext?.authorizer;
+    
+    const userId = authorizer?.claims?.sub || 
+                   authorizer?.jwt?.claims?.sub || 
+                   null;
+    
+    let orgId = authorizer?.claims?.['custom:org_id'] || 
+                authorizer?.jwt?.claims?.['custom:org_id'] ||
+                null;
 
-    // Require real authentication
-    if (!orgId) {
+    // Auto-generate org_id if missing (for legacy users)
+    if (!orgId && userId) {
+      orgId = `org-${userId}`;
+      console.log('Auto-generated orgId for list query:', orgId);
+    }
+
+    // Require authentication
+    if (!userId || !orgId) {
       return {
         statusCode: 401,
         headers: {
@@ -27,10 +40,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         },
         body: JSON.stringify({ 
           error: 'Unauthorized - Please log in',
-          debug: 'No org_id found in authorizer context'
+          debug: { hasUserId: !!userId, hasOrgId: !!orgId }
         }),
       };
     }
+
+    console.log('Listing podcasts for:', { userId, orgId });
 
     const result = await docClient.send(
       new QueryCommand({
