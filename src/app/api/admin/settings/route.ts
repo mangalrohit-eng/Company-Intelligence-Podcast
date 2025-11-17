@@ -48,6 +48,7 @@ export async function GET(request: NextRequest) {
       pipeline: { ...DEFAULT_ADMIN_SETTINGS.pipeline, ...settings.pipeline },
       models: { ...DEFAULT_ADMIN_SETTINGS.models, ...settings.models },
       discovery: { ...DEFAULT_ADMIN_SETTINGS.discovery, ...settings.discovery },
+      ranking: { ...DEFAULT_ADMIN_SETTINGS.ranking, ...settings.ranking },
     };
     
     console.log('✅ Settings loaded successfully');
@@ -75,7 +76,7 @@ export async function PUT(request: NextRequest) {
     }
 
     // Validate numeric fields
-    const { pipeline, models, discovery } = body;
+    const { pipeline, models, discovery, ranking } = body;
     if (
       typeof pipeline.wordsPerMinute !== 'number' ||
       typeof pipeline.wordsPerArticle !== 'number' ||
@@ -103,11 +104,35 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    // Validate ranking weights if provided
+    if (ranking) {
+      const weights = ['recency', 'freshness', 'authority', 'diversity', 'specificity'];
+      for (const weight of weights) {
+        const value = ranking[weight];
+        if (typeof value !== 'number' || value < 0 || value > 1) {
+          return NextResponse.json(
+            { error: `Ranking weight '${weight}' must be a number between 0 and 1` },
+            { status: 400 }
+          );
+        }
+      }
+      
+      // Validate that weights sum to approximately 1.0 (allow small floating point errors)
+      const sum = ranking.recency + ranking.freshness + ranking.authority + ranking.diversity + ranking.specificity;
+      if (Math.abs(sum - 1.0) > 0.01) {
+        return NextResponse.json(
+          { error: `Ranking weights must sum to 1.0 (currently ${sum.toFixed(2)})` },
+          { status: 400 }
+        );
+      }
+    }
+
     const settings: AdminSettings = {
       id: 'global',
       pipeline,
       models: models || DEFAULT_ADMIN_SETTINGS.models,
       discovery: discovery || DEFAULT_ADMIN_SETTINGS.discovery,
+      ranking: ranking || DEFAULT_ADMIN_SETTINGS.ranking,
       updatedAt: new Date().toISOString(),
       updatedBy: body.updatedBy || 'admin',
     };

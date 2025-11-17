@@ -294,6 +294,24 @@ export class PipelineOrchestrator {
       if (input.flags.enable.discover && discoverOutput) {
         const stage = new DisambiguateStage(llmGateway);
         const stageStart = Date.now();
+        
+        // Save debug input
+        const disambiguateInput = {
+          itemCount: discoverOutput.items.length,
+          allowDomains: input.config.sourcePolicies?.allowDomains || [],
+          blockDomains: input.config.sourcePolicies?.blockDomains || [],
+          robotsMode: input.config.robotsMode,
+          sampleItems: discoverOutput.items.slice(0, 5).map(item => ({
+            url: item.url,
+            title: item.title,
+            publisher: item.publisher,
+          })),
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'disambiguate_input.json'),
+          JSON.stringify(disambiguateInput, null, 2)
+        );
+        
         disambiguateOutput = await stage.execute(
           discoverOutput.items,
           input.config.sourcePolicies?.allowDomains || [],
@@ -309,9 +327,27 @@ export class PipelineOrchestrator {
         };
         
         // Save debug output
+        const disambiguateDebugOutput = {
+          stats: disambiguateOutput.stats,
+          itemCount: disambiguateOutput.items.length,
+          passedCount: disambiguateOutput.items.filter(i => !i.blocked).length,
+          blockedCount: disambiguateOutput.items.filter(i => i.blocked).length,
+          samplePassedItems: disambiguateOutput.items.filter(i => !i.blocked).slice(0, 5).map(item => ({
+            url: item.url,
+            title: item.title,
+            blocked: item.blocked,
+            reason: item.reason,
+          })),
+          sampleBlockedItems: disambiguateOutput.items.filter(i => i.blocked).slice(0, 5).map(item => ({
+            url: item.url,
+            title: item.title,
+            blocked: item.blocked,
+            reason: item.reason,
+          })),
+        };
         await fs.writeFile(
-          path.join(debugDir, '02_disambiguate.json'),
-          JSON.stringify({ stats: disambiguateOutput.stats, itemCount: disambiguateOutput.items.length, items: disambiguateOutput.items.slice(0, 5) }, null, 2)
+          path.join(debugDir, 'disambiguate_output.json'),
+          JSON.stringify(disambiguateDebugOutput, null, 2)
         );
         logger.info('Saved disambiguate debug output', { passedCount: disambiguateOutput.items.filter(i => !i.blocked).length });
       }
@@ -321,9 +357,27 @@ export class PipelineOrchestrator {
       if (input.flags.enable.discover && disambiguateOutput) {
         const stage = new RankStage();
         const stageStart = Date.now();
+        
         // Filter to non-blocked items
         const validItems = disambiguateOutput.items.filter(item => !item.blocked);
-        rankOutput = await stage.execute(validItems, emitter);
+        
+        // Save debug input
+        const rankInput = {
+          itemCount: validItems.length,
+          rankingWeights: adminSettings.ranking,
+          sampleItems: validItems.slice(0, 5).map(item => ({
+            url: item.url,
+            title: item.title,
+            publisher: item.publisher,
+            scores: item.scores,
+          })),
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'rank_input.json'),
+          JSON.stringify(rankInput, null, 2)
+        );
+        
+        rankOutput = await stage.execute(validItems, adminSettings.ranking, emitter);
         telemetry.stages.rank = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -333,9 +387,25 @@ export class PipelineOrchestrator {
         
         // Save debug output
         const rankedItems = Array.from(rankOutput.topicQueues.values()).flat();
+        const rankDebugOutput = {
+          totalRanked: rankedItems.length,
+          topicCount: rankOutput.topicQueues.size,
+          topicDistribution: Array.from(rankOutput.topicQueues.entries()).map(([topicId, items]) => ({
+            topicId,
+            itemCount: items.length,
+          })),
+          topItems: rankedItems.slice(0, 10).map((item, index) => ({
+            rank: index + 1,
+            url: item.url,
+            title: item.title,
+            publisher: item.publisher,
+            scores: item.scores,
+            finalScore: item.scores?.finalScore,
+          })),
+        };
         await fs.writeFile(
-          path.join(debugDir, '03_rank.json'),
-          JSON.stringify({ totalRanked: rankedItems.length, topItems: rankedItems.slice(0, 5).map(item => ({ url: item.url, title: item.title, scores: item.scores })) }, null, 2)
+          path.join(debugDir, 'rank_output.json'),
+          JSON.stringify(rankDebugOutput, null, 2)
         );
         logger.info('Saved rank debug output', { totalRanked: rankedItems.length });
       }

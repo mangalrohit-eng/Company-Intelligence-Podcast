@@ -5,6 +5,7 @@
  */
 
 import { DiscoveryItem } from '@/types/shared';
+import { RankingWeights } from '@/types/admin-settings';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { logger } from '@/utils/logger';
 
@@ -35,9 +36,12 @@ export interface RankOutput {
 export class RankStage {
   async execute(
     items: DiscoveryItem[],
+    weights: RankingWeights,
     emitter: IEventEmitter
   ): Promise<RankOutput> {
     await emitter.emit('rank', 0, 'Starting URL ranking');
+
+    logger.info('Using ranking weights', weights);
 
     const rankedItems: RankedItem[] = [];
     const topicQueues = new Map<string, RankedItem[]>();
@@ -51,8 +55,8 @@ export class RankStage {
       // Compute ranking factors (R, F, A, D, S, C)
       const factors = this.computeRankingFactors(item, items);
 
-      // Compute Expected Info Gain from factors
-      const expectedInfoGain = this.computeExpectedInfoGain(factors);
+      // Compute Expected Info Gain from factors using admin-configured weights
+      const expectedInfoGain = this.computeExpectedInfoGain(factors, weights);
 
       // Compute Cost
       const cost = factors.C;
@@ -153,23 +157,26 @@ export class RankStage {
 
   /**
    * Compute Expected Info Gain from ranking factors
-   * Formula: weighted combination of R, F, A, D, S
+   * Formula: weighted combination of R, F, A, D, S using admin-configured weights
    */
-  private computeExpectedInfoGain(factors: {
-    R: number;
-    F: number;
-    A: number;
-    D: number;
-    S: number;
-    C: number;
-  }): number {
-    // Weighted combination (weights can be tuned)
+  private computeExpectedInfoGain(
+    factors: {
+      R: number;
+      F: number;
+      A: number;
+      D: number;
+      S: number;
+      C: number;
+    },
+    weights: RankingWeights
+  ): number {
+    // Weighted combination using admin-configured weights
     const expectedInfoGain =
-      0.15 * factors.R + // Recency weight
-      0.15 * factors.F + // Freshness weight
-      0.25 * factors.A + // Authority weight (higher)
-      0.20 * factors.D + // Diversity weight
-      0.25 * factors.S;  // Specificity weight (higher)
+      weights.recency * factors.R +      // Recency weight
+      weights.freshness * factors.F +    // Freshness weight
+      weights.authority * factors.A +    // Authority weight
+      weights.diversity * factors.D +    // Diversity weight
+      weights.specificity * factors.S;   // Specificity weight
 
     return expectedInfoGain;
   }

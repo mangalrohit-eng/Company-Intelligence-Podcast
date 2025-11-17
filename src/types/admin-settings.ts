@@ -33,6 +33,14 @@ export interface DiscoverySettings {
   rssFeeds: RSSFeed[];
 }
 
+export interface RankingWeights {
+  recency: number;        // R: How recent the article is (0-1)
+  freshness: number;      // F: From discovery scores (0-1)
+  authority: number;      // A: Publisher reputation (0-1)
+  diversity: number;      // D: Source diversity penalty (0-1)
+  specificity: number;    // S: Topic relevance (0-1)
+}
+
 export interface PipelineSettings {
   // Speech & Content Settings
   wordsPerMinute: number;           // Default: 150 (average speaking rate)
@@ -51,6 +59,7 @@ export interface AdminSettings {
   pipeline: PipelineSettings;
   models: ModelSettings;
   discovery: DiscoverySettings;
+  ranking: RankingWeights;
   updatedAt: string;
   updatedBy?: string;
 }
@@ -102,11 +111,21 @@ export const DEFAULT_DISCOVERY_SETTINGS: DiscoverySettings = {
   ],
 };
 
+export const DEFAULT_RANKING_WEIGHTS: RankingWeights = {
+  recency: 0.15,      // 15% - How recent is it?
+  freshness: 0.15,    // 15% - Discovery relevance score
+  authority: 0.25,    // 25% - Publisher reputation
+  diversity: 0.20,    // 20% - Penalty for duplicate sources
+  specificity: 0.25,  // 25% - Topic relevance
+  // Total: 100%
+};
+
 export const DEFAULT_ADMIN_SETTINGS: AdminSettings = {
   id: 'global',
   pipeline: DEFAULT_PIPELINE_SETTINGS,
   models: DEFAULT_MODEL_SETTINGS,
   discovery: DEFAULT_DISCOVERY_SETTINGS,
+  ranking: DEFAULT_RANKING_WEIGHTS,
   updatedAt: new Date().toISOString(),
 };
 
