@@ -87,7 +87,7 @@ export default function RunProgressPage() {
     );
   }
 
-  const audioPath = `/output/episodes/${runId}/audio.mp3`;
+  const audioPath = `/api/serve-file/episodes/${runId}/audio.mp3`;
 
   return (
     <ProtectedRoute>
@@ -166,7 +166,7 @@ export default function RunProgressPage() {
                             variant="ghost"
                             size="sm"
                             className="h-7 text-xs"
-                            onClick={() => window.open(`/output/episodes/${runId}/debug/${stage.id}_input.json`, '_blank')}
+                            onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_input.json`, '_blank')}
                           >
                             📥 Input JSON
                           </Button>
@@ -174,7 +174,7 @@ export default function RunProgressPage() {
                             variant="ghost"
                             size="sm"
                             className="h-7 text-xs"
-                            onClick={() => window.open(`/output/episodes/${runId}/debug/${stage.id}_output.json`, '_blank')}
+                            onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_output.json`, '_blank')}
                           >
                             📤 Output JSON
                           </Button>
@@ -210,14 +210,14 @@ export default function RunProgressPage() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => window.open(`/output/episodes/${runId}/${runId}_transcript.txt`, '_blank')}
+                      onClick={() => window.open(`/api/serve-file/episodes/${runId}/${runId}_transcript.txt`, '_blank')}
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Download Transcript
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => window.open(`/output/episodes/${runId}/${runId}_show_notes.md`, '_blank')}
+                      onClick={() => window.open(`/api/serve-file/episodes/${runId}/${runId}_show_notes.md`, '_blank')}
                     >
                       <Download className="w-4 h-4 mr-2" />
                       Download Show Notes
