@@ -46,23 +46,35 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
       // Update the run in runsStore in real-time
       if (update.currentStage) {
         run.progress.currentStage = update.currentStage;
+        
+        // Ensure the stage exists in the stages object (defensive)
+        if (!run.progress.stages[update.currentStage]) {
+          run.progress.stages[update.currentStage] = { status: 'pending' };
+          console.warn(`⚠️ [${runId}] Stage '${update.currentStage}' was not in initial stages object, adding it now`);
+        }
       }
       
-      if (update.stageStatus && run.progress.stages[run.progress.currentStage]) {
-        run.progress.stages[run.progress.currentStage].status = update.stageStatus;
+      const currentStage = run.progress.currentStage;
+      
+      if (update.stageStatus && currentStage && run.progress.stages[currentStage]) {
+        run.progress.stages[currentStage].status = update.stageStatus;
       }
       
-      if (update.stageStartedAt && run.progress.stages[run.progress.currentStage]) {
-        run.progress.stages[run.progress.currentStage].startedAt = update.stageStartedAt;
+      if (update.stageStartedAt && currentStage && run.progress.stages[currentStage]) {
+        run.progress.stages[currentStage].startedAt = update.stageStartedAt;
       }
       
-      if (update.stageCompletedAt && run.progress.stages[run.progress.currentStage]) {
-        run.progress.stages[run.progress.currentStage].completedAt = update.stageCompletedAt;
+      if (update.stageCompletedAt && currentStage && run.progress.stages[currentStage]) {
+        run.progress.stages[currentStage].completedAt = update.stageCompletedAt;
       }
       
       if (update.error) {
         run.error = update.error;
         run.status = 'failed';
+        if (currentStage && run.progress.stages[currentStage]) {
+          run.progress.stages[currentStage].status = 'failed';
+          run.progress.stages[currentStage].error = update.error;
+        }
       }
       
       console.log(`📊 [${runId}] Status update:`, {
@@ -402,13 +414,17 @@ export async function POST(
         stages: {
           prepare: { status: 'running', startedAt: now },
           discover: { status: 'pending' },
+          disambiguate: { status: 'pending' },
+          rank: { status: 'pending' },
           scrape: { status: 'pending' },
           extract: { status: 'pending' },
           summarize: { status: 'pending' },
+          contrast: { status: 'pending' },
           outline: { status: 'pending' },
           script: { status: 'pending' },
+          qa: { status: 'pending' },
           tts: { status: 'pending' },
-          publish: { status: 'pending' },
+          package: { status: 'pending' },
         }
       }
     };
