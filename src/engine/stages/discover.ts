@@ -75,22 +75,37 @@ export class DiscoverStage {
               // Simple keyword matching instead of LLM classification (faster)
               const titleLower = title.toLowerCase();
               const companyLower = companyName.toLowerCase();
-              const relevance = titleLower.includes(companyLower) ? 0.9 : 0.6;
               
-              // Assign to first topic by default (will be refined in later stages)
-              items.push({
-                url: link,
-                title,
-                publisher: new URL(feedUrl).hostname,
-                publishedDate: pubDate,
-                topicIds: [topicIds[0] || 'company-news'],
-                entityIds: [companyName],
-                scores: {
-                  relevance,
-                  recency: this.calculateRecency(pubDate),
-                  authority: 0.7,
-                },
-              });
+              // ✅ Only include articles that mention the company
+              if (titleLower.includes(companyLower)) {
+                const relevance = 0.9;
+                
+                // Assign to first topic by default (will be refined in later stages)
+                items.push({
+                  url: link,
+                  title,
+                  publisher: new URL(feedUrl).hostname,
+                  publishedDate: pubDate,
+                  topicIds: [topicIds[0] || 'company-news'],
+                  entityIds: [companyName],
+                  scores: {
+                    relevance,
+                    recency: this.calculateRecency(pubDate),
+                    authority: 0.7,
+                  },
+                });
+                
+                logger.debug('Relevant article found', { 
+                  title: title.substring(0, 100), 
+                  company: companyName,
+                  publisher: new URL(feedUrl).hostname 
+                });
+              } else {
+                logger.debug('Skipping irrelevant article', { 
+                  title: title.substring(0, 100), 
+                  company: companyName 
+                });
+              }
             }
           }
         }
