@@ -61,15 +61,8 @@ export async function PUT(request: NextRequest) {
       );
     }
 
-    if (!body.models) {
-      return NextResponse.json(
-        { error: 'Missing models settings' },
-        { status: 400 }
-      );
-    }
-
     // Validate numeric fields
-    const { pipeline, models } = body;
+    const { pipeline, models, discovery } = body;
     if (
       typeof pipeline.wordsPerMinute !== 'number' ||
       typeof pipeline.wordsPerArticle !== 'number' ||
@@ -100,7 +93,8 @@ export async function PUT(request: NextRequest) {
     const settings: AdminSettings = {
       id: 'global',
       pipeline,
-      models,
+      models: models || DEFAULT_ADMIN_SETTINGS.models,
+      discovery: discovery || DEFAULT_ADMIN_SETTINGS.discovery,
       updatedAt: new Date().toISOString(),
       updatedBy: body.updatedBy || 'admin',
     };

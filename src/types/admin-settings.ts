@@ -18,6 +18,18 @@ export interface ModelSettings {
   qa: OpenAIModel;                        // Verify [CHECK] markers
 }
 
+export interface RssFeed {
+  id: string;
+  name: string;
+  url: string;                      // Use {company} as placeholder for company name
+  enabled: boolean;
+  description?: string;
+}
+
+export interface DiscoverySettings {
+  rssFeeds: RssFeed[];
+}
+
 export interface PipelineSettings {
   // Speech & Content Settings
   wordsPerMinute: number;           // Default: 150 (average speaking rate)
@@ -35,6 +47,7 @@ export interface AdminSettings {
   id: string;
   pipeline: PipelineSettings;
   models: ModelSettings;
+  discovery: DiscoverySettings;
   updatedAt: string;
   updatedBy?: string;
 }
@@ -59,10 +72,38 @@ export const DEFAULT_MODEL_SETTINGS: ModelSettings = {
   qa: 'gpt-3.5-turbo',               // ✅ Yes/no verification
 };
 
+export const DEFAULT_DISCOVERY_SETTINGS: DiscoverySettings = {
+  rssFeeds: [
+    {
+      id: 'google-news',
+      name: 'Google News',
+      url: 'https://news.google.com/rss/search?q={company}',
+      enabled: true,
+      description: 'Google News aggregates articles from thousands of sources. Use {company} placeholder.',
+    },
+    // Disabled examples (Reuters discontinued, FT doesn't support filtering)
+    {
+      id: 'reuters',
+      name: 'Reuters Company News',
+      url: 'https://www.reuters.com/rssfeed/companyNews',
+      enabled: false,
+      description: 'Reuters company news feed (discontinued in 2020, not recommended)',
+    },
+    {
+      id: 'ft',
+      name: 'Financial Times',
+      url: 'https://www.ft.com/?format=rss',
+      enabled: false,
+      description: 'FT general news (no keyword filtering support)',
+    },
+  ],
+};
+
 export const DEFAULT_ADMIN_SETTINGS: AdminSettings = {
   id: 'global',
   pipeline: DEFAULT_PIPELINE_SETTINGS,
   models: DEFAULT_MODEL_SETTINGS,
+  discovery: DEFAULT_DISCOVERY_SETTINGS,
   updatedAt: new Date().toISOString(),
 };
 

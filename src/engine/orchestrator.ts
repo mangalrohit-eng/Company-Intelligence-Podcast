@@ -235,16 +235,29 @@ export class PipelineOrchestrator {
         const topicIds = input.config.topics.standard.map(t => t.id);
         const companyName = input.config.company.name;
         
-        // Build discovery sources
+        // Build discovery sources from admin settings
+        const rssFeedsFromSettings = adminSettings.discovery?.rssFeeds || [];
+        
+        // If no feeds configured, use default Google News
+        const rssFeeds = rssFeedsFromSettings.length > 0 
+          ? rssFeedsFromSettings
+              .filter(feed => feed.enabled)
+              .map(feed => {
+                // Replace {company} placeholder with actual company name
+                return feed.url.replace('{company}', encodeURIComponent(companyName));
+              })
+          : [
+              // Default: Google News with company search
+              'https://news.google.com/rss/search?q=' + encodeURIComponent(companyName),
+            ];
+
+        logger.info('Discovery RSS feeds configured', { 
+          feedCount: rssFeeds.length,
+          feeds: rssFeeds,
+        });
+
         const sources = {
-          rssFeeds: [
-            // Use Reuters RSS which has direct article links
-            `https://www.reuters.com/rssfeed/companyNews`,
-            // Financial Times
-            `https://www.ft.com/?format=rss`,
-            // As fallback, Google News (we'll filter out redirect URLs in scrape)
-            'https://news.google.com/rss/search?q=' + encodeURIComponent(companyName),
-          ],
+          rssFeeds,
           newsApis: [],
           irUrls: [],
           regulatorUrls: [],
