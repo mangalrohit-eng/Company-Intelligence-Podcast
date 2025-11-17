@@ -147,6 +147,7 @@ export class PodcastPlatformStack extends cdk.Stack {
       MEDIA_BUCKET: mediaBucket.bucketName,
       RSS_BUCKET: rssBucket.bucketName,
       USER_POOL_ID: userPool.userPoolId,
+      OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',  // Pass from local env
     };
 
     const createPodcastLambda = new lambda.Function(this, 'CreatePodcastLambda', {
