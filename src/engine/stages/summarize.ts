@@ -52,14 +52,30 @@ export class SummarizeStage {
       }
 
       // Pick best stat (highest authority)
-      const stat = stats.sort((a, b) => b.authority - a.authority)[0];
+      const stat = stats
+        .filter(s => s.span && s.authority !== undefined) // ✅ Filter out invalid evidence
+        .sort((a, b) => b.authority - a.authority)[0];
 
       // Pick best quote (highest authority, prefer shorter)
-      const quote = quotes.sort((a, b) => {
-        const authorityDiff = b.authority - a.authority;
-        if (Math.abs(authorityDiff) > 0.1) return authorityDiff;
-        return a.span.length - b.span.length;
-      })[0];
+      const quote = quotes
+        .filter(q => q.span && q.authority !== undefined) // ✅ Filter out invalid evidence
+        .sort((a, b) => {
+          const authorityDiff = b.authority - a.authority;
+          if (Math.abs(authorityDiff) > 0.1) return authorityDiff;
+          return (a.span?.length || 0) - (b.span?.length || 0); // ✅ Safe length access
+        })[0];
+      
+      // Check if we have valid stat and quote after filtering
+      if (!stat || !quote) {
+        logger.warn('Missing valid stat or quote for topic after filtering', { 
+          topicId,
+          statsAvailable: stats.length,
+          quotesAvailable: quotes.length,
+          validStatsAfterFilter: stats.filter(s => s.span && s.authority !== undefined).length,
+          validQuotesAfterFilter: quotes.filter(q => q.span && q.authority !== undefined).length,
+        });
+        continue;
+      }
 
       // Generate summary paragraph with [CHECK] markers for inferences
       const response = await this.llmGateway.complete({

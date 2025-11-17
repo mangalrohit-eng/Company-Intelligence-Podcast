@@ -85,6 +85,15 @@ Return JSON with extracted evidence.`,
         logger.info('Extracted evidence items', { count: items.length, from: content.url });
 
         for (const item of items) {
+          // ✅ Validate required fields
+          if (!item.span || !item.type) {
+            logger.warn('Skipping invalid evidence item (missing span or type)', { 
+              item,
+              url: content.url 
+            });
+            continue;
+          }
+
           // Enforce ≤10-word constraint for quotes
           if (item.type === 'quote') {
             const wordCount = item.span.split(/\s+/).length;
