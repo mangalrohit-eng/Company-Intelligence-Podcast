@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { api } from '@/lib/api';
 import { AdminSettings, PipelineSettings, DiscoverySettings, calculateArticlesNeeded } from '@/types/admin-settings';
 import { AlertCircle, CheckCircle2, Settings, Save, RotateCcw } from 'lucide-react';
 import { RssFeedManager } from './RssFeedManager';

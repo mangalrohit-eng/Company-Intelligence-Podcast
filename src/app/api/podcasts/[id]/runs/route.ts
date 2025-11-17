@@ -6,6 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { runsStore } from '@/lib/runs-store';
+import { saveRun, getRunsForPodcast } from '@/lib/runs-persistence';
 
 // Helper to map topic IDs to full topic objects
 function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<string, number> = {}) {
@@ -82,6 +83,9 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         stageStatus: update.stageStatus,
         error: update.error,
       });
+      
+      // Save run to disk after each update (async, fire-and-forget)
+      saveRun(run).catch(err => console.error(`❌ [${runId}] Failed to persist run:`, err));
     });
     console.log(`✅ [${runId}] Emitter created`);
     
@@ -232,6 +236,8 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         run.progress.stages[stage].status = 'completed';
       });
       
+      // Persist completed run to disk
+      await saveRun(run);
       console.log(`✅ Pipeline completed successfully for run ${runId}`);
     } else {
       // Pipeline failed
@@ -241,6 +247,8 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         errorMessage: typeof output.error === 'string' ? output.error : JSON.stringify(output.error),
       };
       
+      // Persist failed run to disk
+      await saveRun(run);
       console.error(`❌ Pipeline failed for run ${runId}:`, output.error);
     }
   } catch (error: any) {
@@ -253,6 +261,9 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     run.status = 'failed';
     run.error = error.message || 'Unknown error';
     run.completedAt = new Date().toISOString();
+    
+    // Persist exception-failed run to disk
+    await saveRun(run);
     throw error;
   }
 }
@@ -272,12 +283,28 @@ export async function GET(
     }
 
     console.log(`📋 Fetching runs for podcast: ${podcastId}`);
-    console.log(`📊 Runs store:`, runsStore);
 
-    // Get runs from in-memory store
-    let runs = runsStore[podcastId] || [];
+    // Load runs from persistent storage (includes all runs - completed, failed, running)
+    const runs = await getRunsForPodcast(podcastId);
+    console.log(`💾 Loaded ${runs.length} persisted runs from disk`);
     
-    // Also check file system for completed runs
+    // Also merge in-memory runs (in case of recent updates not yet persisted)
+    const memoryRuns = runsStore[podcastId] || [];
+    console.log(`🧠 Found ${memoryRuns.length} runs in memory`);
+    
+    // Merge memory runs with persisted runs (memory takes precedence for same ID)
+    for (const memRun of memoryRuns) {
+      const existingIndex = runs.findIndex(r => r.id === memRun.id);
+      if (existingIndex >= 0) {
+        // Update existing run with latest from memory
+        runs[existingIndex] = memRun;
+      } else {
+        // Add new run from memory
+        runs.push(memRun);
+      }
+    }
+    
+    // Also check file system for completed runs with audio
     const fs = await import('fs/promises');
     const path = await import('path');
     const outputDir = path.join(process.cwd(), 'output', 'episodes');
@@ -290,18 +317,26 @@ export async function GET(
         const stat = await fs.stat(dirPath);
         
         if (stat.isDirectory() && dir.startsWith('run_')) {
-          // Check if this run is already in memory
-          const existsInMemory = runs.some(r => r.id === dir);
+          // Check if this run already exists
+          const existingRun = runs.find(r => r.id === dir);
           
-          if (!existsInMemory) {
-            // Check if audio file exists
-            const audioPath = path.join(dirPath, 'audio.mp3');
-            const hasAudio = await fs.access(audioPath).then(() => true).catch(() => false);
+          // Check if audio file exists
+          const audioPath = path.join(dirPath, 'audio.mp3');
+          const hasAudio = await fs.access(audioPath).then(() => true).catch(() => false);
+          
+          if (hasAudio) {
+            const audioStats = await fs.stat(audioPath);
             
-            if (hasAudio) {
-              const audioStats = await fs.stat(audioPath);
-              
-              // Add completed run from file system
+            if (existingRun) {
+              // Update existing run with audio info
+              if (!existingRun.output) {
+                existingRun.output = {};
+              }
+              existingRun.output.audioPath = `/output/episodes/${dir}/audio.mp3`;
+              existingRun.output.audioSize = audioStats.size;
+              existingRun.status = 'completed';
+            } else {
+              // Add completed run from file system (not in DB yet)
               runs.push({
                 id: dir,
                 podcastId,
@@ -341,7 +376,7 @@ export async function GET(
       console.log('📂 No output directory or error reading:', err);
     }
     
-    console.log(`✅ Found ${runs.length} total runs (memory + filesystem) for podcast ${podcastId}`);
+    console.log(`✅ Found ${runs.length} total runs (persisted + memory + filesystem) for podcast ${podcastId}`);
     
     // Sort by createdAt descending (newest first)
     runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -431,11 +466,15 @@ export async function POST(
     
     console.log(`🚀 Starting REAL pipeline for podcast ${podcastId}: ${runId}`);
     
-    // Store the run
+    // Store the run in memory
     if (!runsStore[podcastId]) {
       runsStore[podcastId] = [];
     }
     runsStore[podcastId].push(run);
+    
+    // Also persist to disk immediately
+    await saveRun(run);
+    console.log(`💾 Run ${runId} persisted to disk`);
     
     // Execute the REAL pipeline in the background
     executePipeline(runId, podcastId, run, podcast).catch(error => {
@@ -445,6 +484,8 @@ export async function POST(
         storedRun.status = 'failed';
         storedRun.error = error.message;
         storedRun.completedAt = new Date().toISOString();
+        // Persist failed status to disk
+        saveRun(storedRun).catch(err => console.error(`❌ Failed to persist failed run:`, err));
       }
     });
 

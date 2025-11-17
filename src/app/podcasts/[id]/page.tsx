@@ -6,7 +6,7 @@
 
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss } from 'lucide-react';
+import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';

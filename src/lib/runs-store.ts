@@ -7,6 +7,7 @@
 
 // Persist runs across HMR by storing in global scope
 declare global {
+  // eslint-disable-next-line no-var
   var __runs_store: Record<string, any[]> | undefined;
 }
 
