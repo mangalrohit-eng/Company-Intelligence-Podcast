@@ -1,8 +1,19 @@
 /**
  * In-memory storage for runs (development only)
  * In production, this would be replaced with DynamoDB
+ * 
+ * Uses globalThis to persist across HMR (Hot Module Reloading) in development
  */
 
-export const runsStore: Record<string, any[]> = {};
+// Persist runs across HMR by storing in global scope
+declare global {
+  var __runs_store: Record<string, any[]> | undefined;
+}
+
+if (!global.__runs_store) {
+  global.__runs_store = {};
+}
+
+export const runsStore: Record<string, any[]> = global.__runs_store;
 
 
