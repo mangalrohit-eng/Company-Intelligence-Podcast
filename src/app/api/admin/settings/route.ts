@@ -38,14 +38,27 @@ async function saveSettings(settings: AdminSettings): Promise<void> {
 
 export async function GET(request: NextRequest) {
   try {
+    console.log('📥 GET /api/admin/settings - Loading settings...');
     const settings = await loadSettings();
-    return NextResponse.json(settings);
+    
+    // Ensure all required fields are present
+    const completeSettings = {
+      ...DEFAULT_ADMIN_SETTINGS,
+      ...settings,
+      pipeline: { ...DEFAULT_ADMIN_SETTINGS.pipeline, ...settings.pipeline },
+      models: { ...DEFAULT_ADMIN_SETTINGS.models, ...settings.models },
+      discovery: { ...DEFAULT_ADMIN_SETTINGS.discovery, ...settings.discovery },
+    };
+    
+    console.log('✅ Settings loaded successfully');
+    return NextResponse.json(completeSettings);
   } catch (error: any) {
-    console.error('Failed to load settings:', error);
-    return NextResponse.json(
-      { error: 'Failed to load settings', details: error.message },
-      { status: 500 }
-    );
+    console.error('❌ Failed to load settings:', error);
+    
+    // In case of any error, return defaults with 200 status
+    // This ensures the admin page can always load
+    console.log('⚠️ Returning default settings due to error');
+    return NextResponse.json(DEFAULT_ADMIN_SETTINGS);
   }
 }
 

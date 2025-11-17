@@ -27,13 +27,34 @@ export default function AdminSettingsPage() {
   const loadSettings = async () => {
     try {
       setLoading(true);
+      console.log('📥 Loading admin settings...');
       const response = await fetch('/api/admin/settings');
+      console.log('📊 Response status:', response.status);
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('❌ Failed to load settings:', errorData);
+        setMessage({ type: 'error', text: `Failed to load settings: ${errorData.error || response.statusText}` });
+        return;
+      }
+      
       const data = await response.json();
+      console.log('✅ Settings loaded:', data);
+      
+      // Validate data structure
+      if (!data.pipeline || !data.discovery || !data.models) {
+        console.error('❌ Invalid settings structure:', data);
+        setMessage({ type: 'error', text: 'Invalid settings structure received from server' });
+        return;
+      }
+      
       setSettings(data);
       setLocalSettings(data.pipeline);
       setLocalDiscovery(data.discovery);
+      setMessage({ type: 'success', text: 'Settings loaded successfully' });
     } catch (error: any) {
-      setMessage({ type: 'error', text: 'Failed to load settings' });
+      console.error('❌ Exception loading settings:', error);
+      setMessage({ type: 'error', text: `Failed to load settings: ${error.message}` });
     } finally {
       setLoading(false);
     }
@@ -45,20 +66,32 @@ export default function AdminSettingsPage() {
     try {
       setSaving(true);
       setMessage(null);
+      console.log('💾 Saving settings...');
       const response = await fetch('/api/admin/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pipeline: localSettings,
+          models: settings?.models, // Include models from current settings
           discovery: localDiscovery,
         }),
       });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('❌ Failed to save:', errorData);
+        setMessage({ type: 'error', text: errorData.error || 'Failed to save settings' });
+        return;
+      }
+      
       const updated = await response.json();
+      console.log('✅ Settings saved:', updated);
       setSettings(updated);
       setLocalSettings(updated.pipeline);
       setLocalDiscovery(updated.discovery);
       setMessage({ type: 'success', text: 'Settings saved successfully!' });
     } catch (error: any) {
+      console.error('❌ Exception saving settings:', error);
       setMessage({ type: 'error', text: error.message || 'Failed to save settings' });
     } finally {
       setSaving(false);
