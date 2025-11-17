@@ -14,25 +14,51 @@ const docClient = DynamoDBDocumentClient.from(dynamoClient);
 
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
-    // Parse and validate request body
-    const body = JSON.parse(event.body || '{}');
-    const validated = CreatePodcastRequestSchema.parse(body);
+    // Extract user context FIRST - before any other processing
+    // Handle both REST API and HTTP API authorizer structures
+    const requestContext = event.requestContext || {};
+    const authorizer = requestContext.authorizer;
+    
+    // Try multiple auth context structures (REST API vs HTTP API)
+    const userId = authorizer?.claims?.sub || 
+                   authorizer?.jwt?.claims?.sub || 
+                   requestContext.authorizer?.lambda?.sub;
+    
+    const orgId = authorizer?.claims?.['custom:org_id'] || 
+                  authorizer?.jwt?.claims?.['custom:org_id'] ||
+                  requestContext.authorizer?.lambda?.['custom:org_id'];
 
-    // Extract user context from authorizer - NO FALLBACKS, REAL AUTH ONLY
-    const userId = event.requestContext.authorizer?.claims?.sub;
-    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'];
+    // Log for debugging (will help diagnose the issue)
+    logger.info('Create podcast request', {
+      hasAuth: !!authorizer,
+      hasUserId: !!userId,
+      hasOrgId: !!orgId,
+      authStructure: authorizer ? Object.keys(authorizer) : 'none'
+    });
 
     // Require real authentication - no test bypasses
     if (!userId || !orgId) {
+      logger.warn('Unauthorized podcast creation attempt', { userId, orgId });
       return {
         statusCode: 401,
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify({ error: 'Unauthorized - Please log in with valid credentials' }),
+        body: JSON.stringify({ 
+          error: 'Unauthorized - Please log in with valid credentials',
+          debug: process.env.NODE_ENV === 'development' ? {
+            hasAuth: !!authorizer,
+            hasUserId: !!userId,
+            hasOrgId: !!orgId
+          } : undefined
+        }),
       };
     }
+
+    // Parse and validate request body
+    const body = JSON.parse(event.body || '{}');
+    const validated = CreatePodcastRequestSchema.parse(body);
 
     const podcastId = uuidv4();
     const now = new Date().toISOString();
@@ -146,16 +172,38 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       }),
     };
   } catch (error) {
-    logger.error('Failed to create podcast', { error });
+    logger.error('Failed to create podcast', { 
+      error: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined,
+      name: error instanceof Error ? error.name : undefined
+    });
+
+    // Determine status code based on error type
+    let statusCode = 500;
+    let errorMessage = 'Internal server error';
+    
+    if (error instanceof Error) {
+      if (error.name === 'ZodError' || error.message.includes('validation')) {
+        statusCode = 400;
+        errorMessage = `Validation error: ${error.message}`;
+      } else {
+        errorMessage = error.message;
+      }
+    }
 
     return {
-      statusCode: error instanceof Error && error.name === 'ZodError' ? 400 : 500,
+      statusCode,
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
       body: JSON.stringify({
-        error: error instanceof Error ? error.message : 'Internal server error',
+        error: errorMessage,
+        details: process.env.NODE_ENV === 'development' && error instanceof Error ? {
+          name: error.name,
+          message: error.message,
+          stack: error.stack?.split('\n').slice(0, 3)
+        } : undefined
       }),
     };
   }
