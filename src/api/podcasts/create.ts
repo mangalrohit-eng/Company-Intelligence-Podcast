@@ -16,17 +16,17 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
   try {
     // Extract user context FIRST - before any other processing
     // Handle both REST API and HTTP API authorizer structures
-    const requestContext = event.requestContext || {};
-    const authorizer = requestContext.authorizer;
+    const requestContext = event.requestContext as any || {};
+    const authorizer = requestContext.authorizer as any;
     
     // Try multiple auth context structures (REST API vs HTTP API)
     const userId = authorizer?.claims?.sub || 
                    authorizer?.jwt?.claims?.sub || 
-                   requestContext.authorizer?.lambda?.sub;
+                   authorizer?.lambda?.sub;
     
     const orgId = authorizer?.claims?.['custom:org_id'] || 
                   authorizer?.jwt?.claims?.['custom:org_id'] ||
-                  requestContext.authorizer?.lambda?.['custom:org_id'];
+                  authorizer?.lambda?.['custom:org_id'];
 
     // Log for debugging (will help diagnose the issue)
     logger.info('Create podcast request', {
