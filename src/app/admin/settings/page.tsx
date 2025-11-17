@@ -5,12 +5,13 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { AdminSettings, PipelineSettings, calculateArticlesNeeded } from '@/types/admin-settings';
-import { AlertCircle, CheckCircle2, Settings, Save, RotateCcw } from 'lucide-react';
+import { AdminSettings, PipelineSettings, ModelSettings, calculateArticlesNeeded, OpenAIModel } from '@/types/admin-settings';
+import { AlertCircle, CheckCircle2, Settings, Save, RotateCcw, Cpu } from 'lucide-react';
 
 export default function AdminSettingsPage() {
   const [settings, setSettings] = useState<AdminSettings | null>(null);
   const [localSettings, setLocalSettings] = useState<PipelineSettings | null>(null);
+  const [localModels, setLocalModels] = useState<ModelSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
@@ -32,6 +33,7 @@ export default function AdminSettingsPage() {
       const data = await response.json();
       setSettings(data);
       setLocalSettings(data.pipeline);
+      setLocalModels(data.models);
     } catch (error: any) {
       console.error('Error loading settings:', error);
       setMessage({ type: 'error', text: 'Failed to load settings' });
@@ -41,7 +43,7 @@ export default function AdminSettingsPage() {
   };
 
   const handleSave = async () => {
-    if (!localSettings) return;
+    if (!localSettings || !localModels) return;
 
     try {
       setSaving(true);
@@ -49,7 +51,10 @@ export default function AdminSettingsPage() {
       const response = await fetch('/api/admin/settings', {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ pipeline: localSettings }),
+        body: JSON.stringify({ 
+          pipeline: localSettings,
+          models: localModels,
+        }),
       });
       if (!response.ok) {
         throw new Error('Failed to save settings');
@@ -67,6 +72,7 @@ export default function AdminSettingsPage() {
   const handleReset = () => {
     if (settings) {
       setLocalSettings(settings.pipeline);
+      setLocalModels(settings.models);
       setMessage(null);
     }
   };
@@ -79,6 +85,34 @@ export default function AdminSettingsPage() {
     });
   };
 
+  const updateModel = (key: keyof ModelSettings, value: OpenAIModel) => {
+    if (!localModels) return;
+    setLocalModels({
+      ...localModels,
+      [key]: value,
+    });
+  };
+
+  const availableModels: OpenAIModel[] = [
+    'gpt-3.5-turbo',
+    'gpt-3.5-turbo-16k',
+    'gpt-4',
+    'gpt-4-turbo-preview',
+  ];
+
+  const getModelCost = (model: OpenAIModel): string => {
+    switch (model) {
+      case 'gpt-3.5-turbo':
+        return '💰 Cheapest (~$0.002/1K tokens)';
+      case 'gpt-3.5-turbo-16k':
+        return '💰 Cheap (~$0.003/1K tokens)';
+      case 'gpt-4':
+        return '💰💰 Expensive (~$0.06/1K tokens)';
+      case 'gpt-4-turbo-preview':
+        return '💰💰 Expensive (~$0.02/1K tokens)';
+    }
+  };
+
   if (loading) {
     return (
       <div className="container mx-auto py-8">
@@ -89,7 +123,7 @@ export default function AdminSettingsPage() {
     );
   }
 
-  if (!localSettings) {
+  if (!localSettings || !localModels) {
     return (
       <div className="container mx-auto py-8">
         <div className="text-center text-red-600">Failed to load settings</div>
@@ -97,7 +131,9 @@ export default function AdminSettingsPage() {
     );
   }
 
-  const hasChanges = JSON.stringify(localSettings) !== JSON.stringify(settings?.pipeline);
+  const hasChanges = 
+    JSON.stringify(localSettings) !== JSON.stringify(settings?.pipeline) ||
+    JSON.stringify(localModels) !== JSON.stringify(settings?.models);
 
   return (
     <div className="container mx-auto py-8 max-w-4xl">
@@ -274,6 +310,180 @@ export default function AdminSettingsPage() {
                 })}
               </tbody>
             </table>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Model Settings */}
+      <Card className="mb-6">
+        <CardHeader>
+          <div className="flex items-center gap-3">
+            <Cpu className="w-6 h-6 text-purple-600" />
+            <div>
+              <CardTitle>OpenAI Model Selection</CardTitle>
+              <CardDescription>
+                Choose which AI model to use for different stages (balance cost vs quality)
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Competitor Identification */}
+          <div className="space-y-2">
+            <Label htmlFor="model-competitor">Competitor Identification</Label>
+            <select
+              id="model-competitor"
+              value={localModels.competitorIdentification}
+              onChange={(e) => updateModel('competitorIdentification', e.target.value as OpenAIModel)}
+              className="w-full px-3 py-2 border rounded-md"
+            >
+              {availableModels.map((model) => (
+                <option key={model} value={model}>
+                  {model}
+                </option>
+              ))}
+            </select>
+            <p className="text-sm text-gray-600">
+              Used when suggesting competitors for a company • {getModelCost(localModels.competitorIdentification)}
+            </p>
+          </div>
+
+          <div className="border-t pt-4">
+            <h4 className="font-semibold mb-4 text-sm text-gray-700">Pipeline Stages</h4>
+            <div className="space-y-4">
+              {/* Extract */}
+              <div className="space-y-2">
+                <Label htmlFor="model-extract">Stage 6: Extract Evidence</Label>
+                <select
+                  id="model-extract"
+                  value={localModels.extract}
+                  onChange={(e) => updateModel('extract', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Extracts facts, stats, and quotes from articles • {getModelCost(localModels.extract)}
+                  {localModels.extract === 'gpt-3.5-turbo' && <span className="text-green-600"> ✅ Recommended for this task</span>}
+                </p>
+              </div>
+
+              {/* Summarize */}
+              <div className="space-y-2">
+                <Label htmlFor="model-summarize">Stage 7: Summarize Topics</Label>
+                <select
+                  id="model-summarize"
+                  value={localModels.summarize}
+                  onChange={(e) => updateModel('summarize', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Creates 1-paragraph summaries per topic • {getModelCost(localModels.summarize)}
+                  {localModels.summarize === 'gpt-3.5-turbo' && <span className="text-green-600"> ✅ Recommended for this task</span>}
+                </p>
+              </div>
+
+              {/* Contrast */}
+              <div className="space-y-2">
+                <Label htmlFor="model-contrast">Stage 8: Competitor Contrasts</Label>
+                <select
+                  id="model-contrast"
+                  value={localModels.contrast}
+                  onChange={(e) => updateModel('contrast', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Generates competitor comparisons • {getModelCost(localModels.contrast)}
+                  {localModels.contrast === 'gpt-3.5-turbo' && <span className="text-green-600"> ✅ Recommended for this task</span>}
+                </p>
+              </div>
+
+              {/* Outline */}
+              <div className="space-y-2">
+                <Label htmlFor="model-outline">Stage 9: Thematic Outline</Label>
+                <select
+                  id="model-outline"
+                  value={localModels.outline}
+                  onChange={(e) => updateModel('outline', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Identifies themes and creates outline • {getModelCost(localModels.outline)}
+                  {localModels.outline.includes('gpt-4') && <span className="text-blue-600"> 🎯 GPT-4 recommended for thematic thinking</span>}
+                </p>
+              </div>
+
+              {/* Script */}
+              <div className="space-y-2">
+                <Label htmlFor="model-script">Stage 10: Generate Script</Label>
+                <select
+                  id="model-script"
+                  value={localModels.script}
+                  onChange={(e) => updateModel('script', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Writes the podcast narrative • {getModelCost(localModels.script)}
+                  {localModels.script.includes('gpt-4') && <span className="text-blue-600"> 🎯 GPT-4 recommended for creative writing</span>}
+                </p>
+              </div>
+
+              {/* QA */}
+              <div className="space-y-2">
+                <Label htmlFor="model-qa">Stage 11: QA & Verification</Label>
+                <select
+                  id="model-qa"
+                  value={localModels.qa}
+                  onChange={(e) => updateModel('qa', e.target.value as OpenAIModel)}
+                  className="w-full px-3 py-2 border rounded-md"
+                >
+                  {availableModels.map((model) => (
+                    <option key={model} value={model}>
+                      {model}
+                    </option>
+                  ))}
+                </select>
+                <p className="text-sm text-gray-600">
+                  Verifies [CHECK] markers and binds evidence • {getModelCost(localModels.qa)}
+                  {localModels.qa === 'gpt-3.5-turbo' && <span className="text-green-600"> ✅ Recommended for this task</span>}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-blue-50 p-4 rounded-lg">
+            <p className="text-sm text-blue-800">
+              <strong>💡 Cost Optimization Tip:</strong> GPT-3.5 is 90% cheaper than GPT-4 and works great for structured tasks (extract, summarize, contrast, QA). 
+              Use GPT-4 only for creative/thematic tasks (outline, script) where quality matters most.
+            </p>
           </div>
         </CardContent>
       </Card>

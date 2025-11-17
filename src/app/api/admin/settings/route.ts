@@ -61,8 +61,15 @@ export async function PUT(request: NextRequest) {
       );
     }
 
+    if (!body.models) {
+      return NextResponse.json(
+        { error: 'Missing models settings' },
+        { status: 400 }
+      );
+    }
+
     // Validate numeric fields
-    const { pipeline } = body;
+    const { pipeline, models } = body;
     if (
       typeof pipeline.wordsPerMinute !== 'number' ||
       typeof pipeline.wordsPerArticle !== 'number' ||
@@ -93,6 +100,7 @@ export async function PUT(request: NextRequest) {
     const settings: AdminSettings = {
       id: 'global',
       pipeline,
+      models,
       updatedAt: new Date().toISOString(),
       updatedBy: body.updatedBy || 'admin',
     };

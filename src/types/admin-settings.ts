@@ -3,6 +3,21 @@
  * Global configuration for the podcast generation pipeline
  */
 
+export type OpenAIModel = 'gpt-4-turbo-preview' | 'gpt-4' | 'gpt-3.5-turbo' | 'gpt-3.5-turbo-16k';
+
+export interface ModelSettings {
+  // Feature Models
+  competitorIdentification: OpenAIModel;  // Used in competitor suggestion
+  
+  // Pipeline Stage Models
+  extract: OpenAIModel;                   // Extract evidence from articles
+  summarize: OpenAIModel;                 // Summarize topics
+  contrast: OpenAIModel;                  // Generate competitor contrasts
+  outline: OpenAIModel;                   // Generate thematic outline
+  script: OpenAIModel;                    // Generate podcast script
+  qa: OpenAIModel;                        // Verify [CHECK] markers
+}
+
 export interface PipelineSettings {
   // Speech & Content Settings
   wordsPerMinute: number;           // Default: 150 (average speaking rate)
@@ -19,6 +34,7 @@ export interface PipelineSettings {
 export interface AdminSettings {
   id: string;
   pipeline: PipelineSettings;
+  models: ModelSettings;
   updatedAt: string;
   updatedBy?: string;
 }
@@ -30,9 +46,23 @@ export const DEFAULT_PIPELINE_SETTINGS: PipelineSettings = {
   relevantTextRate: 0.25,
 };
 
+export const DEFAULT_MODEL_SETTINGS: ModelSettings = {
+  // Feature Models
+  competitorIdentification: 'gpt-3.5-turbo',
+  
+  // Pipeline Stage Models - Optimized for cost/quality balance
+  extract: 'gpt-3.5-turbo',          // ✅ Simple extraction, GPT-3.5 works great (90% cheaper)
+  summarize: 'gpt-3.5-turbo',        // ✅ Straightforward summarization
+  contrast: 'gpt-3.5-turbo',         // ✅ Simple comparisons
+  outline: 'gpt-4-turbo-preview',    // 🎯 Thematic thinking needs GPT-4
+  script: 'gpt-4-turbo-preview',     // 🎯 Creative writing needs GPT-4
+  qa: 'gpt-3.5-turbo',               // ✅ Yes/no verification
+};
+
 export const DEFAULT_ADMIN_SETTINGS: AdminSettings = {
   id: 'global',
   pipeline: DEFAULT_PIPELINE_SETTINGS,
+  models: DEFAULT_MODEL_SETTINGS,
   updatedAt: new Date().toISOString(),
 };
 

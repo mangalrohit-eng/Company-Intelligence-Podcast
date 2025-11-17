@@ -50,6 +50,25 @@ export class PipelineOrchestrator {
       wordsPerArticle: adminSettings.pipeline.wordsPerArticle,
       scrapeSuccessRate: adminSettings.pipeline.scrapeSuccessRate,
       relevantTextRate: adminSettings.pipeline.relevantTextRate,
+      models: adminSettings.models,
+    });
+
+    // Set environment variables for model selection (stages read from env)
+    process.env.EXTRACT_MODEL = adminSettings.models.extract;
+    process.env.SUMMARIZE_MODEL = adminSettings.models.summarize;
+    process.env.CONTRAST_MODEL = adminSettings.models.contrast;
+    process.env.OUTLINE_MODEL = adminSettings.models.outline;
+    process.env.SCRIPT_MODEL = adminSettings.models.script;
+    process.env.QA_MODEL = adminSettings.models.qa;
+    process.env.COMPETITOR_MODEL = adminSettings.models.competitorIdentification;
+
+    logger.info('Models configured for this run', {
+      extract: adminSettings.models.extract,
+      summarize: adminSettings.models.summarize,
+      contrast: adminSettings.models.contrast,
+      outline: adminSettings.models.outline,
+      script: adminSettings.models.script,
+      qa: adminSettings.models.qa,
     });
 
     // Calculate article limit based on duration

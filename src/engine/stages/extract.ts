@@ -46,6 +46,7 @@ export class ExtractStage {
 
       // Use LLM to extract structured evidence with ≤10-word quote constraint
       const response = await this.llmGateway.complete({
+        model: process.env.EXTRACT_MODEL || 'gpt-3.5-turbo', // ✅ Use model from env/admin settings
         messages: [
           {
             role: 'system',

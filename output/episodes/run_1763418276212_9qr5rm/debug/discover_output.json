@@ -1,0 +1,24 @@
+{
+  "stats": {
+    "totalItemsFound": 108,
+    "itemsByTopic": {
+      "company-news": 108
+    },
+    "avgLatencyMs": 17244.666666666668
+  },
+  "itemCount": 108,
+  "sampleItems": [
+    {
+      "url": "https://www.ft.com/content/e76df64b-b5ff-4e6d-9064-53233073908c",
+      "title": "<![CDATA[UK to ban resale of tickets above face value for live events]]>"
+    },
+    {
+      "url": "https://www.ft.com/content/540b2f9a-9c58-44f5-8ae9-36a58c95d26c",
+      "title": "<![CDATA[The hot new investment trend is the ‘Total Portfolio Approach’. Does it work? ]]>"
+    },
+    {
+      "url": "https://www.ft.com/content/307c73cc-3fb7-4165-8455-53c14f4390fc",
+      "title": "<![CDATA[The scramble for Europe is just beginning]]>"
+    }
+  ]
+}
