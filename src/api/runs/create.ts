@@ -16,8 +16,8 @@ const docClient = DynamoDBDocumentClient.from(dynamoClient);
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     const podcastId = event.pathParameters?.id;
-    // TEMPORARY BYPASS FOR TESTING - TODO: Re-enable for production
-    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'] || 'test-org-456';
+    // Extract orgId from authorizer - REAL AUTH ONLY
+    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'];
 
     if (!podcastId) {
       return {
@@ -26,13 +26,13 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       };
     }
     
-    // Auth check disabled for testing
-    // if (!orgId) {
-    //   return {
-    //     statusCode: 401,
-    //     body: JSON.stringify({ error: 'Unauthorized' }),
-    //   };
-    // }
+    // Require real authentication
+    if (!orgId) {
+      return {
+        statusCode: 401,
+        body: JSON.stringify({ error: 'Unauthorized - Please log in' }),
+      };
+    }
 
     // Get podcast and config
     const podcastResult = await docClient.send(

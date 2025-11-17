@@ -18,16 +18,15 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const body = JSON.parse(event.body || '{}');
     const validated = CreatePodcastRequestSchema.parse(body);
 
-    // Extract user context from authorizer
-    const userId = event.requestContext.authorizer?.claims?.sub || 'test-user-123';
-    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'] || 'test-org-456';
+    // Extract user context from authorizer - NO FALLBACKS, REAL AUTH ONLY
+    const userId = event.requestContext.authorizer?.claims?.sub;
+    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'];
 
-    // Fallback for testing - use test IDs if no auth present
-    // In production with API Gateway authorizer, this would enforce auth
-    if (!userId && !orgId) {
+    // Require real authentication - no test bypasses
+    if (!userId || !orgId) {
       return {
         statusCode: 401,
-        body: JSON.stringify({ error: 'Unauthorized - Please log in' }),
+        body: JSON.stringify({ error: 'Unauthorized - Please log in with valid credentials' }),
       };
     }
 
