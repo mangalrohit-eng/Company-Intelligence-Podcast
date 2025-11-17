@@ -1,0 +1,49 @@
+﻿
+   ROOT CAUSE CONFIRMED                                     
+
+
+SMOKING GUN FOUND IN DEBUG FILES:
+
+ Discover:      100 Citibank articles found
+ Disambiguate:  47 articles passed
+ Rank:          47 articles ranked
+ Scrape:        47 "successful" scrapes
+ PROBLEM:       Scraped content = "Google News" (11 chars)
+ Extract:       0 evidence units (nothing to extract)
+
+
+THE ISSUE:
+
+Google News RSS feeds link to redirect URLs like:
+  https://news.google.com/rss/articles/CBMi...?oc=5
+
+These are NOT the actual article pages. They're Google News proxy 
+pages that:
+1. Show "Google News" text
+2. Redirect browsers (with JavaScript) to the real article
+3. Basic HTTP fetch just gets the proxy page, not the article
+
+
+SCRAPE OUTPUT PROOF:
+
+{
+  "url": "https://news.google.com/rss/articles/CBMi...",
+  "title": "Putin gives green light for sale of Citibank's...",
+  "contentLength": 11,
+  "contentPreview": "Google News"  <-- ONLY 11 CHARACTERS!
+}
+
+
+Every scraped "article" is literally just "Google News" text.
+No wonder Extract found 0 evidence units!
+
+
+SOLUTION:
+
+Option 1: Follow HTTP redirects to get actual article URLs
+Option 2: Parse Google News URL to extract real article URL
+Option 3: Use better news sources (Yahoo Finance, company IR, etc.)
+
+
+I'm implementing Option 1 + 3 now...
+

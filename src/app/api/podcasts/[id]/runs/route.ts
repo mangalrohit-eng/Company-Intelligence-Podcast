@@ -7,49 +7,149 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { runsStore } from '@/lib/runs-store';
 
+// Helper to map topic IDs to full topic objects
+function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<string, number> = {}) {
+  const topicMap: Record<string, { name: string; priority: number }> = {
+    'company-news': { name: 'Company News & Announcements', priority: 3 },
+    'competitor-analysis': { name: 'Competitive Intelligence', priority: 2 },
+    'industry-trends': { name: 'Industry Trends & Market Analysis', priority: 2 },
+    'earnings': { name: 'Earnings & Financial Results', priority: 3 },
+    'product-launches': { name: 'Product Launches', priority: 3 },
+    'technology': { name: 'Technology & Innovation', priority: 2 },
+    'partnerships': { name: 'Strategic Partnerships', priority: 2 },
+    'leadership': { name: 'Leadership & Executive Changes', priority: 1 },
+    'mergers-acquisitions': { name: 'Mergers & Acquisitions', priority: 3 },
+    'regulatory': { name: 'Regulatory & Legal Developments', priority: 2 },
+  };
+  
+  return topicIds.map(id => ({
+    id,
+    name: topicMap[id]?.name || id,
+    priority: topicPriorities[id] || topicMap[id]?.priority || 2,
+  }));
+}
+
 // Execute pipeline orchestrator
-async function executePipeline(runId: string, podcastId: string, run: any) {
-  console.log(`⚙️ Executing pipeline orchestrator for run ${runId}...`);
+async function executePipeline(runId: string, podcastId: string, run: any, podcast: any = null) {
+  console.log(`⚙️ [${runId}] Starting pipeline execution...`);
   
   try {
     // Import the orchestrator (server-side only)
+    console.log(`⚙️ [${runId}] Importing modules...`);
     const { PipelineOrchestrator } = await import('@/engine/orchestrator');
     const { NoOpEventEmitter } = await import('@/utils/event-emitter');
+    console.log(`✅ [${runId}] Modules imported`);
     
+    console.log(`⚙️ [${runId}] Creating emitter...`);
     const emitter = new NoOpEventEmitter();
+    console.log(`✅ [${runId}] Emitter created`);
     
-    // TODO: Fetch podcast config from DynamoDB
-    // For now, use minimal test config
+    // Use actual podcast config if available, otherwise fallback to defaults
+    const companyId = podcast?.companyId || 'Microsoft';
+    const title = podcast?.title || 'Test Podcast';
+    const duration = podcast?.config?.duration || 5;
+    const voice = podcast?.config?.voice || 'alloy';
+    const schedule = podcast?.config?.schedule || 'daily';
+    const topicIds = podcast?.topics || ['company-news', 'competitor-analysis', 'industry-trends'];
+    const topicPriorities = podcast?.topicPriorities || {};
+    const competitors = podcast?.competitors || [];
+    
+    console.log(`📋 Pipeline Config:`, {
+      company: companyId,
+      topics: topicIds,
+      duration,
+      voice,
+    });
+    
     const pipelineInput = {
       runId,
       podcastId,
+      configVersion: 1,
       config: {
-        companyName: 'Test Company',
-        durationMinutes: 5,
+        // Metadata
+        title,
+        subtitle: podcast?.subtitle || `Company Intelligence Updates for ${companyId}`,
+        description: podcast?.description || `AI-powered intelligence briefing for ${companyId}`,
+        author: podcast?.author || companyId,
+        email: podcast?.email || 'podcast@example.com',
+        category: podcast?.category || 'Business',
+        explicit: podcast?.explicit || false,
+        language: podcast?.language || 'en',
+        coverArtS3Key: podcast?.coverArtS3Key || 'default-cover.png',
+        
+        // Core Config
+        company: {
+          id: companyId.toLowerCase().replace(/\s+/g, '-'),
+          name: companyId,
+        },
+        industry: {
+          id: podcast?.industryId || 'technology',
+          name: podcast?.industryId || 'Technology',
+        },
+        competitors: competitors.map((c: any) => 
+          typeof c === 'string' 
+            ? { id: c.toLowerCase(), name: c, isAiSuggested: false } 
+            : { id: c.id || c, name: c.name || c, isAiSuggested: c.isAiSuggested || false }
+        ),
+        
+        // Topics - Map from stored IDs to full topic objects
+        topics: {
+          standard: mapTopicsToStandard(topicIds, topicPriorities),
+          special: [],
+        },
+        
+        // Cadence & Timing
+        cadence: (schedule as any) || 'daily' as const,
+        durationMinutes: duration,
+        publishTime: podcast?.publishTime || '09:00',
+        timezone: podcast?.timezone || 'UTC',
+        timeWindowHours: schedule === 'daily' ? 24 : schedule === 'weekly' ? 168 : 720,
+        
+        // Time window for news discovery (computed from timeWindowHours)
         timeWindow: {
-          startIso: new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString(),
+          startIso: new Date(Date.now() - (schedule === 'daily' ? 24 : schedule === 'weekly' ? 168 : 720) * 60 * 60 * 1000).toISOString(),
           endIso: new Date().toISOString(),
         },
-        voice: 'alloy',
-        speed: 1.0,
+        
+        // Geographic & Language
+        regions: podcast?.regions || ['US'],
+        sourceLanguages: podcast?.sourceLanguages || ['en'],
+        
+        // Voice & Tone
+        voice: {
+          provider: 'openai-tts' as const,
+          voiceId: voice,
+          speed: podcast?.voiceSpeed || 1.0,
+          tone: podcast?.voiceTone || 'professional',
+        },
+        
+        // Compliance & Policies
+        robotsMode: 'permissive' as const,
+        sourcePolicies: {
+          allowDomains: [],
+          blockDomains: [],
+        },
       },
       flags: {
+        dryRun: false,
+        provider: {
+          llm: 'openai' as const,
+          tts: 'openai' as const,
+          http: 'stub' as const,  // Use Playwright for JavaScript-enabled scraping
+        },
+        cassetteKey: 'default',
         enable: {
           discover: true,
           scrape: true,
           extract: true,
           summarize: true,
+          contrast: true,
           outline: true,
           script: true,
+          qa: true,
           tts: true,
-          publish: false, // Skip publishing for now
+          package: true,
         },
-        provider: {
-          llm: 'openai',
-          tts: 'openai',
-          http: 'real',
-        },
-        dryRun: false,
       },
     };
     
@@ -57,28 +157,61 @@ async function executePipeline(runId: string, podcastId: string, run: any) {
     run.status = 'running';
     run.progress.currentStage = 'prepare';
     
+    console.log(`⚙️ [${runId}] Creating orchestrator instance...`);
     const orchestrator = new PipelineOrchestrator();
+    console.log(`✅ [${runId}] Orchestrator created, starting execution...`);
     const output = await orchestrator.execute(pipelineInput, emitter);
+    console.log(`✅ [${runId}] Pipeline execution returned`);
     
-    // Mark as completed
-    run.status = 'completed';
-    run.completedAt = new Date().toISOString();
-    run.duration = Math.floor((new Date().getTime() - new Date(run.startedAt).getTime()) / 1000);
-    run.progress.currentStage = 'completed';
-    run.output = {
-      episodeTitle: output.episode?.title || 'Generated Episode',
-      audioS3Key: output.audioS3Key,
-      transcript: output.script,
-    };
-    
-    // Mark all stages as completed
-    Object.keys(run.progress.stages).forEach(stage => {
-      run.progress.stages[stage].status = 'completed';
+    console.log(`📊 Pipeline output:`, {
+      status: output.status,
+      episodeId: output.episodeId,
+      hasArtifacts: !!output.artifacts,
+      error: output.error,
+      errorDetails: output.error ? JSON.stringify(output.error) : 'none',
     });
     
-    console.log(`✅ Pipeline completed successfully for run ${runId}`);
+    // Mark as completed or failed
+    run.status = output.status === 'success' ? 'completed' : 'failed';
+    run.completedAt = new Date().toISOString();
+    run.duration = Math.floor((new Date().getTime() - new Date(run.startedAt).getTime()) / 1000);
+    run.progress.currentStage = output.status === 'success' ? 'completed' : 'failed';
+    
+    if (output.status === 'success') {
+      run.output = {
+        episodeId: output.episodeId,
+        episodeTitle: output.episode?.title || 'Generated Episode',
+        audioS3Key: output.artifacts?.mp3S3Key,
+        transcriptS3Key: output.artifacts?.transcriptS3Key,
+        showNotesS3Key: output.artifacts?.showNotesS3Key,
+      };
+      
+      // Mark all stages as completed
+      Object.keys(run.progress.stages).forEach(stage => {
+        run.progress.stages[stage].status = 'completed';
+      });
+      
+      console.log(`✅ Pipeline completed successfully for run ${runId}`);
+    } else {
+      // Pipeline failed
+      run.error = output.error || 'Unknown error';
+      run.output = {
+        error: output.error,
+        errorMessage: typeof output.error === 'string' ? output.error : JSON.stringify(output.error),
+      };
+      
+      console.error(`❌ Pipeline failed for run ${runId}:`, output.error);
+    }
   } catch (error: any) {
-    console.error(`❌ Pipeline failed for run ${runId}:`, error);
+    console.error(`❌ [${runId}] Pipeline exception:`, {
+      message: error.message,
+      stack: error.stack,
+      name: error.name,
+      fullError: error,
+    });
+    run.status = 'failed';
+    run.error = error.message || 'Unknown error';
+    run.completedAt = new Date().toISOString();
     throw error;
   }
 }
@@ -100,10 +233,74 @@ export async function GET(
     console.log(`📋 Fetching runs for podcast: ${podcastId}`);
     console.log(`📊 Runs store:`, runsStore);
 
-    // Get runs for this podcast from in-memory store
-    const runs = runsStore[podcastId] || [];
+    // Get runs from in-memory store
+    let runs = runsStore[podcastId] || [];
     
-    console.log(`✅ Found ${runs.length} runs for podcast ${podcastId}`);
+    // Also check file system for completed runs
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const outputDir = path.join(process.cwd(), 'output', 'episodes');
+    
+    try {
+      const dirs = await fs.readdir(outputDir);
+      
+      for (const dir of dirs) {
+        const dirPath = path.join(outputDir, dir);
+        const stat = await fs.stat(dirPath);
+        
+        if (stat.isDirectory() && dir.startsWith('run_')) {
+          // Check if this run is already in memory
+          const existsInMemory = runs.some(r => r.id === dir);
+          
+          if (!existsInMemory) {
+            // Check if audio file exists
+            const audioPath = path.join(dirPath, 'audio.mp3');
+            const hasAudio = await fs.access(audioPath).then(() => true).catch(() => false);
+            
+            if (hasAudio) {
+              const audioStats = await fs.stat(audioPath);
+              
+              // Add completed run from file system
+              runs.push({
+                id: dir,
+                podcastId,
+                status: 'completed',
+                createdAt: stat.birthtime.toISOString(),
+                startedAt: stat.birthtime.toISOString(),
+                completedAt: stat.mtime.toISOString(),
+                duration: Math.floor((stat.mtime.getTime() - stat.birthtime.getTime()) / 1000),
+                progress: {
+                  currentStage: 'completed',
+                  stages: {
+                    prepare: { status: 'completed' },
+                    discover: { status: 'completed' },
+                    disambiguate: { status: 'completed' },
+                    rank: { status: 'completed' },
+                    scrape: { status: 'completed' },
+                    extract: { status: 'completed' },
+                    summarize: { status: 'completed' },
+                    contrast: { status: 'completed' },
+                    outline: { status: 'completed' },
+                    script: { status: 'completed' },
+                    qa: { status: 'completed' },
+                    tts: { status: 'completed' },
+                    publish: { status: 'completed' },
+                  },
+                },
+                output: {
+                  audioPath: `/output/episodes/${dir}/audio.mp3`,
+                  audioSize: audioStats.size,
+                },
+              });
+            }
+          }
+        }
+      }
+    } catch (err) {
+      console.log('📂 No output directory or error reading:', err);
+    }
+    
+    console.log(`✅ Found ${runs.length} total runs (memory + filesystem) for podcast ${podcastId}`);
     
     // Sort by createdAt descending (newest first)
     runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -136,6 +333,30 @@ export async function POST(
         { error: 'Missing podcast ID' },
         { status: 400 }
       );
+    }
+
+    // Fetch the actual podcast config from DynamoDB
+    console.log(`📡 Fetching podcast config for: ${podcastId}`);
+    let podcast: any = null;
+    try {
+      const { DynamoDBClient } = await import('@aws-sdk/client-dynamodb');
+      const { DynamoDBDocumentClient, GetCommand } = await import('@aws-sdk/lib-dynamodb');
+      
+      const client = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+      const docClient = DynamoDBDocumentClient.from(client);
+      
+      const response = await docClient.send(
+        new GetCommand({
+          TableName: 'podcasts',
+          Key: { id: podcastId },
+        })
+      );
+      
+      podcast = response.Item;
+      console.log(`✅ Fetched podcast config:`, podcast);
+    } catch (error: any) {
+      console.warn(`⚠️ Could not fetch from DynamoDB (local dev mode):`, error.message);
+      // For local dev, we'll use default config
     }
 
     const runId = `run_${Date.now()}_${Math.random().toString(36).substring(7)}`;
@@ -172,7 +393,7 @@ export async function POST(
     runsStore[podcastId].push(run);
     
     // Execute the REAL pipeline in the background
-    executePipeline(runId, podcastId, run).catch(error => {
+    executePipeline(runId, podcastId, run, podcast).catch(error => {
       console.error(`❌ Pipeline execution failed for ${runId}:`, error);
       const storedRun = runsStore[podcastId]?.find(r => r.id === runId);
       if (storedRun) {

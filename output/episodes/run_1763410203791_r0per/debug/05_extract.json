@@ -1,0 +1,52 @@
+{
+  "stats": {
+    "totalUnits": 193,
+    "byType": {
+      "claim": 133,
+      "stat": 33,
+      "quote": 27
+    },
+    "byTopic": {
+      "company-news": 193
+    },
+    "dedupeRemoved": 0
+  },
+  "evidenceCount": 193,
+  "evidence": [
+    {
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Climate United Fund sues EPA, Citibank over frozen $7B",
+      "context": "Title of the article.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX1VWUklkR3JwU0Vnb0F2eDZlMFFOWTRtV1pXSlZLTmdYcmotRHV6SWJlY1pfV25SdTVKTGEzZzZweGFVcS1ERXBmOXNvRlFUT1BlT0F6aENibEdXc1kxSnZINDFrVkRnNlc5MGlLUDI3OFBLNlR1aWtERElJVlJ4eW1qYTBZRmFJNGJ5elY5VWpUNFp1VGVsN2I2Y1k?oc=5"
+    },
+    {
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Climate United Fund sued the U.S. Environmental Protection Agency and Citibank over a $6.97 billion Greenhouse Gas Reduction Fund grant freeze.",
+      "context": "Climate United Fund's action against EPA and Citibank.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX1VWUklkR3JwU0Vnb0F2eDZlMFFOWTRtV1pXSlZLTmdYcmotRHV6SWJlY1pfV25SdTVKTGEzZzZweGFVcS1ERXBmOXNvRlFUT1BlT0F6aENibEdXc1kxSnZINDFrVkRnNlc5MGlLUDI3OFBLNlR1aWtERElJVlJ4eW1qYTBZRmFJNGJ5elY5VWpUNFp1VGVsN2I2Y1k?oc=5"
+    },
+    {
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "The total $20 billion in GGRF grant funding held by Citibank has been frozen since Feb. 18.",
+      "context": "Amount and duration of GGRF grant funding freeze.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX1VWUklkR3JwU0Vnb0F2eDZlMFFOWTRtV1pXSlZLTmdYcmotRHV6SWJlY1pfV25SdTVKTGEzZzZweGFVcS1ERXBmOXNvRlFUT1BlT0F6aENibEdXc1kxSnZINDFrVkRnNlc5MGlLUDI3OFBLNlR1aWtERElJVlJ4eW1qYTBZRmFJNGJ5elY5VWpUNFp1VGVsN2I2Y1k?oc=5"
+    },
+    {
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "It is my pledge to be accountable for every penny...",
+      "context": "EPA administrator Lee Zeldin's statement.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX1VWUklkR3JwU0Vnb0F2eDZlMFFOWTRtV1pXSlZLTmdYcmotRHV6SWJlY1pfV25SdTVKTGEzZzZweGFVcS1ERXBmOXNvRlFUT1BlT0F6aENibEdXc1kxSnZINDFrVkRnNlc5MGlLUDI3OFBLNlR1aWtERElJVlJ4eW1qYTBZRmFJNGJ5elY5VWpUNFp1VGVsN2I2Y1k?oc=5"
+    },
+    {
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "EPA alleged financial mismanagement, conflicts of interest, and oversight failures with the Greenhouse Gas Reduction Fund.",
+      "context": "EPA's allegations against the Greenhouse Gas Reduction Fund.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOX1VWUklkR3JwU0Vnb0F2eDZlMFFOWTRtV1pXSlZLTmdYcmotRHV6SWJlY1pfV25SdTVKTGEzZzZweGFVcS1ERXBmOXNvRlFUT1BlT0F6aENibEdXc1kxSnZINDFrVkRnNlc5MGlLUDI3OFBLNlR1aWtERElJVlJ4eW1qYTBZRmFJNGJ5elY5VWpUNFp1VGVsN2I2Y1k?oc=5"
+    }
+  ]
+}

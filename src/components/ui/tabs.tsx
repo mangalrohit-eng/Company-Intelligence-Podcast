@@ -65,3 +65,4 @@ export function TabsContent({ value, children }: { value: string; children: Reac
   return <div className="pt-6">{children}</div>;
 }
 
+

@@ -31,14 +31,26 @@ export class PlaywrightHttpGateway implements IHttpGateway {
 
       const response = await page.goto(request.url, {
         timeout: request.timeout || 30000,
-        waitUntil: 'domcontentloaded',
+        waitUntil: 'networkidle',  // Wait for all network requests to finish (includes redirects)
       });
 
       if (!response) {
         throw new Error(`No response received for ${request.url}`);
       }
 
+      // For Google News redirects, wait a bit more for any JS redirects
+      if (request.url.includes('news.google.com')) {
+        await page.waitForTimeout(2000);  // 2 second delay for JS redirects
+      }
+
       const body = await page.content();
+      const finalUrl = page.url();  // Get URL after any redirects
+      
+      logger.debug('Playwright page loaded', {
+        originalUrl: request.url,
+        finalUrl,
+        redirected: finalUrl !== request.url,
+      });
       const headers: Record<string, string> = {};
       const responseHeaders = response.headers();
       for (const [key, value] of Object.entries(responseHeaders)) {
@@ -49,12 +61,14 @@ export class PlaywrightHttpGateway implements IHttpGateway {
 
       logger.debug('Playwright fetch successful', {
         url: request.url,
+        finalUrl,
         status: response.status(),
         latencyMs,
+        bodyLength: body.length,
       });
 
       return {
-        url: response.url(),
+        url: finalUrl,  // Return final URL after all redirects
         status: response.status(),
         headers,
         body,

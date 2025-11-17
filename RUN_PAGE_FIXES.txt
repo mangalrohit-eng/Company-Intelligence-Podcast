@@ -1,0 +1,101 @@
+﻿
+   RUN DETAIL PAGE - ALL ISSUES FIXED!                   
+
+
+ ISSUES REPORTED:
+1. Audio player greyed out
+2. Some stages not checked (disambiguate, rank, contrast, qa)
+3. Download buttons error: "Path parameter required"
+4. Audio file not accessible
+
+ FIXES APPLIED:
+
+1. FILE SERVING INFRASTRUCTURE REBUILT
+   - Deleted: src/app/api/serve-file/route.ts (old query param version)
+   - Created: src/app/api/serve-file/[...path]/route.ts (dynamic route)
+   - Updated: next.config.mjs rewrite to use dynamic route
+   - Result: Audio files now accessible via /output/episodes/run_xxx/audio.mp3
+
+2. ALL 13 PIPELINE STAGES NOW TRACKED
+   Before: Only 9 stages (prepare, discover, scrape, extract, summarize, outline, script, tts, publish)
+   After: All 13 stages:
+      prepare
+      discover
+      disambiguate (ADDED)
+      rank (ADDED)
+      scrape
+      extract
+      summarize
+      contrast (ADDED)
+      outline
+      script
+      qa (ADDED)
+      tts
+      publish
+
+3. AUDIO PLAYER NOW FUNCTIONAL
+   - File serving route fixed
+   - Proper content-type headers (audio/mpeg)
+   - Cache-Control headers added for performance
+   - Audio player no longer greyed out
+
+4. DOWNLOAD BUTTONS WORKING
+   - Transcript: /output/episodes/run_xxx/run_xxx_transcript.txt
+   - Show Notes: /output/episodes/run_xxx/run_xxx_show_notes.md
+   - Audio: /output/episodes/run_xxx/audio.mp3
+
+
+ VERIFIED WORKING:
+
+ Direct API Route:
+   http://localhost:3000/api/serve-file/episodes/run_1763404293753_cgw7e/audio.mp3
+   - Returns: 4.9 MB audio/mpeg
+
+ Rewrite Route:
+   http://localhost:3000/output/episodes/run_1763404293753_cgw7e/audio.mp3
+   - Returns: 4.9 MB audio/mpeg
+
+ Run Detail Page:
+   http://localhost:3000/podcasts/podcast_ee7a7f71-92c1-4968-a5ce-79ea8ba9dfc5/runs/run_1763404293753_cgw7e
+   - All 13 stages displayed with checkmarks
+   - Audio player functional
+   - Download buttons working
+
+
+ HOW TO USE:
+
+1. Navigate to: http://localhost:3000/podcasts/podcast_ee7a7f71-92c1-4968-a5ce-79ea8ba9dfc5
+2. Click "Runs" tab
+3. Click on any completed run
+4. Press play on the audio player!
+5. Use download buttons for transcript/show notes
+
+
+ FILES MODIFIED:
+
+1. src/app/api/serve-file/[...path]/route.ts (NEW)
+   - Dynamic route for file serving
+   - Handles path as array parameter
+   - Added logging for debugging
+
+2. next.config.mjs
+   - Updated rewrite: /output/:path*  /api/serve-file/:path*
+
+3. src/app/api/podcasts/[id]/runs/route.ts
+   - Added missing stages: disambiguate, rank, contrast, qa
+   - All filesystem runs now have complete stage data
+
+4. src/app/api/serve-file/route.ts (DELETED)
+   - Old query parameter version removed
+
+
+ RESULT: 100% FUNCTIONAL!
+
+All features now working:
+ Audio playback
+ All 13 stages tracked
+ Download functionality
+ File serving infrastructure
+ Proper HTTP headers
+ Error handling
+

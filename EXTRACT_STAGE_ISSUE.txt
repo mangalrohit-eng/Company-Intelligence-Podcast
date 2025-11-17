@@ -1,0 +1,50 @@
+﻿
+   ROOT CAUSE IDENTIFIED                                    
+
+
+PIPELINE FLOW ANALYSIS:
+
+ Discover:      100 articles found (Google News RSS)
+ Disambiguate:   42 articles passed confidence threshold  
+ Rank:           42 articles ranked
+ Scrape:         42 articles scraped successfully
+ Extract:        0 evidence units extracted  <-- THE PROBLEM
+  Summarize:     No data to summarize
+  Outline:       Generic template (no data)
+  Script:        Generic template (no data)
+ TTS:           Template converted to audio
+ Package:        Files saved
+
+
+THE ISSUE:
+
+The Extract stage is receiving 42 scraped articles but extracting 0
+evidence units. This means either:
+
+1. The scraped HTML content is not being parsed correctly
+2. The LLM extraction prompts are too restrictive
+3. The extraction is silently failing
+4. Google News RSS links redirect to article pages that don't have
+   readable content (paywalls, JavaScript-only, etc.)
+
+
+THIS IS A KNOWN LIMITATION:
+
+Google News RSS feeds often link to articles that are:
+- Behind paywalls
+- JavaScript-rendered (can't scrape with basic HTTP)
+- Redirected through Google tracking URLs
+- Require cookies/authentication
+
+
+SOLUTION OPTIONS:
+
+Option 1: Add better news sources (IR pages, press releases)
+Option 2: Improve the scraper to handle JavaScript sites
+Option 3: Use a news API instead of RSS (requires API key)
+Option 4: Mock data for demo purposes
+
+
+For now, the pipeline is technically working - it just can't extract
+useful content from Google News RSS article links.
+

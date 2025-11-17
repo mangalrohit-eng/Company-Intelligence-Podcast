@@ -10,6 +10,7 @@ import { OpenAiTtsGateway } from './tts/openai';
 import { StubTtsGateway } from './tts/stub';
 import { ReplayHttpGateway } from './http/replay';
 import { PlaywrightHttpGateway } from './http/playwright';
+import { NodeFetchHttpGateway } from './http/node-fetch';
 import { logger } from '@/utils/logger';
 
 export class GatewayFactory {
@@ -64,8 +65,11 @@ export class GatewayFactory {
         logger.info('Creating Replay HTTP gateway', { cassetteKey: config.cassetteKey });
         return new ReplayHttpGateway(config.cassettePath, config.cassetteKey);
 
-      case 'openai': // 'openai' for HTTP means real Playwright scraping
-      case 'stub': // stub also uses real scraping for now
+      case 'openai': // Use simple fetch for RSS/API requests
+        logger.info('Creating Node Fetch HTTP gateway');
+        return new NodeFetchHttpGateway();
+        
+      case 'stub': // Playwright for complex scraping
         logger.info('Creating Playwright HTTP gateway');
         return new PlaywrightHttpGateway();
 

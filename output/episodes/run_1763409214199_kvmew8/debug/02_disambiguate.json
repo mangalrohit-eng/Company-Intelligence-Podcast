@@ -1,0 +1,122 @@
+{
+  "stats": {
+    "totalInput": 110,
+    "passedConfidenceThreshold": 46,
+    "blockedByPolicy": 0,
+    "blockedByRobots": 0,
+    "finalCount": 46
+  },
+  "itemCount": 46,
+  "items": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPNEFYdEZvZEl5QkRUWXEweHVjRzY5MjBkNy14MEFjM1NrOTI3QS1hUXREZWlkVUZJb0xlQlFRcGpFbS13R2JCT2prbi03bmR2d2JjZWVVTzFqbEVFX1FXeFBkSkFPTFBERVlla0MxTFN4NXdaOEpXTGdNSlZCWmJBbnBsWVFDX0F0V0JwcFkzaEt4ZTc2aW5pdXN3ckxjYlhRNEw2bkNrVUo2cHZPVEpv?oc=5",
+      "title": "Putin gives green light for sale of Citibank's Russian operations - Reuters",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 12 Nov 2025 17:42:12 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Citibank"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.48320183090024343,
+        "authority": 0.7
+      },
+      "canonicalEntityIds": [
+        "Citibank"
+      ],
+      "confidence": 0.8679954216618174,
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQUExTR1ZCMTFPSjBPT05sYmdvYTd6UVdkNmc3VU0tTFNjM095NW93bjFidV9PWFhYNmtSbkI2cmlTSnRkYW43VFcxVlVrT2Y0RURHVlZrdGNVcFE0WWVTUXJSaWg2bnJqek16dVREVXRVT2trbWkyaWp5OUdvczRjRHpsZzRVZmZwWlBiTVpJLVNGVnBkQl81QXZGN2FickU3aEswcjg2NEd3Y2lod25HOFRlVmU5M0h3?oc=5",
+      "title": "Putin Approves Sale of Citibank’s Russian Unit to Renaissance Capital - The Moscow Times",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 12 Nov 2025 16:38:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Citibank"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.48013407514111184,
+        "authority": 0.7
+      },
+      "canonicalEntityIds": [
+        "Citibank"
+      ],
+      "confidence": 0.9292621386556017,
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxQdGozYmwwS3hpNk40NGMzSkJBbW9oRnpRS2NheUwyaWwyNjAwMURCMkdjVm1uQVdaellmVmhmTk9MdURYUXhnX1huMHRPYnNnMFlZNV9yNm10UmdDb20wMThtRkpxay1ZXzE0cV9fTlRvSDZaZUZ6QXVuUEx5dEJ0RHdOZXN5TWpwT1pPR2Y1enp3X0tSQlVrYjA3RVZuM3Rv?oc=5",
+      "title": "Putin allows sale of Citibank's assets to Russian firm - Anadolu Ajansı",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 12 Nov 2025 14:39:10 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Citibank"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.47450699840234245,
+        "authority": 0.7
+      },
+      "canonicalEntityIds": [
+        "Citibank"
+      ],
+      "confidence": 0.869917477657829,
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOQjJPZFFQUmFPX1dTNFhjOUZIQVJTS2gwdUxjWS0tR04tcVZZQW84WnVGODNsU0lTUWFWdlVSZndTVXhZZnNQSjZvaDM2UXg2UGVVUFdGTmFiQ08zQmZqOVc3QllGZ0ZBVV9yNDRaZkRGdmpScXNPNWo2emVBczUyNDFYVkpXR3hLUTBTTThLNDRzM0ZLX2c0S0F2eTdpVnBINGRQMXJ0bTBvdHZPQkF6b3BidjFXYlliQXdpRVJuNmRzVVc1cXFR?oc=5",
+      "title": "A climate group gathers signatures for a petition against Costco's Citibank credit card - WMUK",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 13 Nov 2025 23:03:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Citibank"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5754296478421278,
+        "authority": 0.7
+      },
+      "canonicalEntityIds": [
+        "Citibank"
+      ],
+      "confidence": 0.9083403510961376,
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9FZ21LRktUNEZiWmxWTklOUTBpZXg5LUJrUFE3MU1WX05Lam40TFJhNlRsaHdmY1JQcXdkZTRnN0pKOURtaU5lRnhhcEhDZzhtVDVaY2pLblR0UQ?oc=5",
+      "title": "How to get the biggest returns from Citibank CDs in 2025 - Fortune",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 12 Nov 2025 18:32:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Citibank"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.48559498483327984,
+        "authority": 0.7
+      },
+      "canonicalEntityIds": [
+        "Citibank"
+      ],
+      "confidence": 0.9101927149273908,
+      "blocked": false
+    }
+  ]
+}

@@ -47,37 +47,46 @@ export class DiscoverStage {
     for (const feedUrl of sources.rssFeeds) {
       const startTime = Date.now();
       try {
+        logger.info('Fetching RSS feed', { feedUrl });
         const response = await this.httpGateway.fetch({ url: feedUrl, method: 'GET' });
         const latency = Date.now() - startTime;
         latencies.push(latency);
         
+        logger.info('RSS feed response', { 
+          feedUrl, 
+          status: response.status, 
+          bodyLength: response.body?.length || 0,
+          latency 
+        });
+        
         if (response.status === 200 && response.body) {
           // Parse RSS feed (simple XML parsing)
           const matches = response.body.matchAll(/<item>[\s\S]*?<\/item>/g);
-          for (const match of matches) {
+          const matchesArray = Array.from(matches);
+          logger.info('RSS items found', { feedUrl, itemCount: matchesArray.length });
+          
+          for (const match of matchesArray) {
             const itemXml = match[0];
             const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
             const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
             const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
             
             if (title && link) {
-              // Pre-classify using LLM
-              const classificationResult = await this.llmGateway.complete({
-                prompt: `Classify article relevance to topics: ${topicIds.join(', ')}. Article: ${title}`,
-                maxTokens: 100,
-              });
+              // Simple keyword matching instead of LLM classification (faster)
+              const titleLower = title.toLowerCase();
+              const companyLower = companyName.toLowerCase();
+              const relevance = titleLower.includes(companyLower) ? 0.9 : 0.6;
               
-              const classification = JSON.parse(classificationResult.content);
-              
+              // Assign to first topic by default (will be refined in later stages)
               items.push({
                 url: link,
                 title,
                 publisher: new URL(feedUrl).hostname,
                 publishedDate: pubDate,
-                topicIds: classification.topics || [topicIds[0]],
+                topicIds: [topicIds[0] || 'company-news'],
                 entityIds: [companyName],
                 scores: {
-                  relevance: classification.relevance || 0.8,
+                  relevance,
                   recency: this.calculateRecency(pubDate),
                   authority: 0.7,
                 },

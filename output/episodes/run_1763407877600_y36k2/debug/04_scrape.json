@@ -1,0 +1,11 @@
+{
+  "stats": {
+    "totalUrls": 51,
+    "successCount": 0,
+    "failureCount": 51,
+    "avgLatencyMs": 0,
+    "domainStats": {}
+  },
+  "contentCount": 0,
+  "contents": []
+}

@@ -6,7 +6,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { Home, Mic, Settings, User, Play, Menu, X, Radio, LogOut, ChevronDown } from 'lucide-react';
+import { Home, Mic, Settings, User, Play, Menu, X, Radio, LogOut, ChevronDown, ChevronRight, Shield } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from './ui/button';
 import { useAuth } from '@/contexts/AuthContext';
@@ -17,6 +17,7 @@ export function Navigation() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isAdminExpanded, setIsAdminExpanded] = useState(false);
   
   const { user, loading, signOut } = useAuth();
   const isAuthenticated = !!user;
@@ -24,9 +25,12 @@ export function Navigation() {
   const links = [
     { href: '/', label: 'Home', icon: Home },
     { href: '/podcasts', label: 'Podcasts', icon: Mic },
-    { href: '/test-pipeline', label: 'Test Pipeline', icon: Play },
-    { href: '/admin', label: 'Admin', icon: Settings },
     { href: '/settings', label: 'Settings', icon: User },
+  ];
+
+  const adminLinks = [
+    { href: '/admin/settings', label: 'Admin Settings', icon: Settings },
+    { href: '/test-pipeline', label: 'Test Pipeline', icon: Play },
   ];
 
   const handleLogout = async () => {
@@ -76,6 +80,51 @@ export function Navigation() {
               </li>
             );
           })}
+          
+          {/* Admin Section */}
+          <li>
+            <button
+              onClick={() => setIsAdminExpanded(!isAdminExpanded)}
+              className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                pathname.startsWith('/admin') || pathname === '/test-pipeline'
+                  ? 'bg-primary/20 text-primary'
+                  : 'text-muted hover:text-foreground hover:bg-border'
+              }`}
+            >
+              <Shield className="w-5 h-5" />
+              <span className="font-medium flex-1 text-left">Admin</span>
+              {isAdminExpanded ? (
+                <ChevronDown className="w-4 h-4" />
+              ) : (
+                <ChevronRight className="w-4 h-4" />
+              )}
+            </button>
+            
+            {isAdminExpanded && (
+              <ul className="mt-1 ml-4 space-y-1">
+                {adminLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = pathname === link.href;
+
+                  return (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-sm ${
+                          isActive
+                            ? 'bg-primary/20 text-primary'
+                            : 'text-muted hover:text-foreground hover:bg-border'
+                        }`}
+                      >
+                        <Icon className="w-4 h-4" />
+                        <span className="font-medium">{link.label}</span>
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+          </li>
         </ul>
 
         <div className="pt-6 border-t border-border">
@@ -179,6 +228,52 @@ export function Navigation() {
                   </li>
                 );
               })}
+              
+              {/* Admin Section */}
+              <li>
+                <button
+                  onClick={() => setIsAdminExpanded(!isAdminExpanded)}
+                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
+                    pathname.startsWith('/admin') || pathname === '/test-pipeline'
+                      ? 'bg-primary/20 text-primary'
+                      : 'text-muted hover:text-foreground hover:bg-border'
+                  }`}
+                >
+                  <Shield className="w-5 h-5" />
+                  <span className="font-medium flex-1 text-left">Admin</span>
+                  {isAdminExpanded ? (
+                    <ChevronDown className="w-4 h-4" />
+                  ) : (
+                    <ChevronRight className="w-4 h-4" />
+                  )}
+                </button>
+                
+                {isAdminExpanded && (
+                  <ul className="mt-1 ml-4 space-y-1">
+                    {adminLinks.map((link) => {
+                      const Icon = link.icon;
+                      const isActive = pathname === link.href;
+
+                      return (
+                        <li key={link.href}>
+                          <Link
+                            href={link.href}
+                            onClick={() => setIsMobileMenuOpen(false)}
+                            className={`flex items-center gap-3 px-4 py-2 rounded-lg transition-all text-sm ${
+                              isActive
+                                ? 'bg-primary/20 text-primary'
+                                : 'text-muted hover:text-foreground hover:bg-border'
+                            }`}
+                          >
+                            <Icon className="w-4 h-4" />
+                            <span className="font-medium">{link.label}</span>
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
+              </li>
             </ul>
             
             {/* Mobile User Menu */}

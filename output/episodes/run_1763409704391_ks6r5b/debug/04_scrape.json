@@ -1,0 +1,43 @@
+{
+  "stats": {
+    "totalUrls": 44,
+    "successCount": 44,
+    "failureCount": 0,
+    "avgLatencyMs": 4220.727272727271,
+    "domainStats": {
+      "news.google.com": {
+        "success": 44,
+        "failure": 0,
+        "avgLatencyMs": 4220.727272727271,
+        "lastFetchMs": 1763409956208
+      }
+    }
+  },
+  "contentCount": 44,
+  "contents": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxPbnlQNlFORFZJRDU1TlhmZmlWVnpqRVhMSmhXNURGZUR5dWNHbGRlVFQ0aWNEUVVOc2JDbm1lNXNkb2JQcW1hOE9uUTBwLUI2eGlIUEtlWWFnOFRBUm1XcjREeTlQaXNmaEZBVkJoeU95QnpLSWNWeHJOV3VtQzFaQXFPbDktY25aRWc?oc=5",
+      "title": "Russia approves Citibank Russia sale to Renaissance Capital - Yahoo Finance",
+      "contentLength": 11,
+      "contentPreview": "Google News",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 13 Nov 2025 13:48:02 GMT"
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNejd4MFpUMVA5OEZFcjF6MjAyb2xKN1VpOGx4N2Z0S01VYXpNbWJHdTkxM1RGZUtZNTdONFlKLU9QbEx4NVlXYVhvVWJxazVMajlLR1F5c3pmWGtXRFFwUEMxSXdkR2VJZWxRb3ExYlFWSTlCbGRfNnJicHpkajBEeGpEd0FOUXBXbkNaMXF2TE1ROTg?oc=5",
+      "title": "China’s BYD Targets Sale of 1.6m EVs Abroad in 2026: CitiBank - Asia Financial",
+      "contentLength": 11,
+      "contentPreview": "Google News",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 11 Nov 2025 13:45:34 GMT"
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTFBKV2hOVFVZWnlva3VjdVV1elRWcW00WjlORG1OX0tzS0o4UUFKa3h6cU81cmVidF80NkpvNTZuc1dNUjc3OGM1MGh5RmUwSHlVWlNCVVRYOXN6T0NoYlZPZk1EXzk1MHNPTjRQaWxNell6VEp2LWpabHBBbkFkMEU?oc=5",
+      "title": "Citibank Cuts Base Lending Rate To 7% Amid Competitive Market Shift - Yahoo Finance",
+      "contentLength": 11,
+      "contentPreview": "Google News",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 01 Nov 2025 07:00:00 GMT"
+    }
+  ]
+}

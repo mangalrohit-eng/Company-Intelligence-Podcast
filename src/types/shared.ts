@@ -212,6 +212,10 @@ export interface PodcastConfigSnapshot {
   publishTime: string; // HH:mm
   timezone: string;
   timeWindowHours: number; // how far back to look for news
+  timeWindow: {
+    startIso: string;
+    endIso: string;
+  };
 
   // Geographic & Language
   regions: string[]; // ISO country codes

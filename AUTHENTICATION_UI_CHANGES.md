@@ -114,3 +114,4 @@ RootLayout
 - Maintains consistent user experience across the application
 - Properly handles edge cases (missing name, loading states, etc.)
 
+

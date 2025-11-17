@@ -26,6 +26,7 @@ export function Toast({ id, type, title, message, duration = 5000, onClose }: To
       }, duration);
       return () => clearTimeout(timer);
     }
+    return undefined;
   }, [id, duration, onClose]);
 
   const getIcon = () => {
@@ -37,6 +38,8 @@ export function Toast({ id, type, title, message, duration = 5000, onClose }: To
       case 'warning':
         return <AlertCircle className="w-5 h-5 text-yellow-500" />;
       case 'info':
+        return <Info className="w-5 h-5 text-blue-500" />;
+      default:
         return <Info className="w-5 h-5 text-blue-500" />;
     }
   };
@@ -50,6 +53,8 @@ export function Toast({ id, type, title, message, duration = 5000, onClose }: To
       case 'warning':
         return 'bg-yellow-500/10 border-yellow-500/20';
       case 'info':
+        return 'bg-blue-500/10 border-blue-500/20';
+      default:
         return 'bg-blue-500/10 border-blue-500/20';
     }
   };
@@ -89,4 +94,5 @@ export function ToastContainer({ toasts, onClose }: {
     </div>
   );
 }
+
 

@@ -20,11 +20,52 @@ import { QAStage } from './stages/qa';
 import { TtsStage } from './stages/tts';
 import { PackageStage } from './stages/package';
 import { logger } from '@/utils/logger';
+import { AdminSettings, DEFAULT_ADMIN_SETTINGS, calculateArticlesNeeded } from '@/types/admin-settings';
 
 export class PipelineOrchestrator {
+  /**
+   * Load admin settings from file system
+   */
+  private async loadAdminSettings(): Promise<AdminSettings> {
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const settingsPath = path.join(process.cwd(), 'data', 'admin-settings.json');
+      const data = await fs.readFile(settingsPath, 'utf-8');
+      return JSON.parse(data);
+    } catch (error) {
+      logger.info('Using default admin settings (file not found or error loading)');
+      return DEFAULT_ADMIN_SETTINGS;
+    }
+  }
+
   async execute(input: PipelineInput, emitter: IEventEmitter): Promise<PipelineOutput> {
     const startTime = new Date();
     logger.info('Pipeline execution started', { runId: input.runId });
+
+    // Load admin settings
+    const adminSettings = await this.loadAdminSettings();
+    logger.info('Loaded admin settings', { 
+      wordsPerMinute: adminSettings.pipeline.wordsPerMinute,
+      wordsPerArticle: adminSettings.pipeline.wordsPerArticle,
+      scrapeSuccessRate: adminSettings.pipeline.scrapeSuccessRate,
+      relevantTextRate: adminSettings.pipeline.relevantTextRate,
+    });
+
+    // Calculate article limit based on duration
+    const articleLimit = calculateArticlesNeeded(input.config.durationMinutes, adminSettings.pipeline);
+    logger.info('Calculated article limit', { 
+      duration: input.config.durationMinutes,
+      articleLimit,
+      formula: `(${input.config.durationMinutes} × ${adminSettings.pipeline.wordsPerMinute}) / (${adminSettings.pipeline.scrapeSuccessRate} × ${adminSettings.pipeline.relevantTextRate} × ${adminSettings.pipeline.wordsPerArticle})`,
+    });
+
+    // Create debug output directory
+    const fs = await import('fs/promises');
+    const path = await import('path');
+    const debugDir = path.join(process.cwd(), 'output', 'episodes', input.runId, 'debug');
+    await fs.mkdir(debugDir, { recursive: true });
+    logger.info('Debug output directory created', { debugDir });
 
     const telemetry: RunTelemetry = {
       startTime: startTime.toISOString(),
@@ -48,11 +89,38 @@ export class PipelineOrchestrator {
       const ttsGateway = GatewayFactory.createTtsGateway(gatewayConfig);
       const httpGateway = GatewayFactory.createHttpGateway(gatewayConfig);
 
+      // Helper to save stage input/output
+      const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
+        try {
+          await fs.writeFile(
+            path.join(debugDir, `${stageName}_input.json`),
+            JSON.stringify(inputData, null, 2)
+          );
+          await fs.writeFile(
+            path.join(debugDir, `${stageName}_output.json`),
+            JSON.stringify(outputData, null, 2)
+          );
+        } catch (error) {
+          logger.warn(`Failed to save ${stageName} I/O`, { error });
+        }
+      };
+
       // Stage 1: Prepare
       if (input.flags.enable.discover || input.flags.dryRun) {
         const stage = new PrepareStage();
         const stageStart = Date.now();
+        
+        const prepareInput = { config: input.config };
+        await saveStageIO('prepare', prepareInput, {});
+        
         await stage.execute(input, emitter);
+        
+        const prepareOutput = {
+          speechBudgetWords: Math.round(input.config.durationMinutes * 150),
+          evidenceTargetUnits: Math.round(input.config.durationMinutes * 2),
+        };
+        await saveStageIO('prepare', prepareInput, prepareOutput);
+        
         telemetry.stages.prepare = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -66,7 +134,38 @@ export class PipelineOrchestrator {
       if (input.flags.enable.discover) {
         const stage = new DiscoverStage(llmGateway, httpGateway);
         const stageStart = Date.now();
-        discoverOutput = await stage.execute(input, emitter);
+        
+        // Extract topic IDs from config
+        const topicIds = input.config.topics.standard.map(t => t.id);
+        const companyName = input.config.company.name;
+        
+        // Build discovery sources
+        const sources = {
+          rssFeeds: [
+            // Use Reuters RSS which has direct article links
+            `https://www.reuters.com/rssfeed/companyNews`,
+            // Financial Times
+            `https://www.ft.com/?format=rss`,
+            // As fallback, Google News (we'll filter out redirect URLs in scrape)
+            'https://news.google.com/rss/search?q=' + encodeURIComponent(companyName),
+          ],
+          newsApis: [],
+          irUrls: [],
+          regulatorUrls: [],
+          tradePublications: [],
+        };
+        
+        const discoverInput = { topicIds, companyName, sources };
+        
+        discoverOutput = await stage.execute(topicIds, companyName, sources, emitter);
+        
+        const discoverOutputSummary = {
+          stats: discoverOutput.stats,
+          itemCount: discoverOutput.items.length,
+          sampleItems: discoverOutput.items.slice(0, 3).map(i => ({ url: i.url, title: i.title })),
+        };
+        await saveStageIO('discover', discoverInput, discoverOutputSummary);
+        
         telemetry.stages.discover = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -74,9 +173,11 @@ export class PipelineOrchestrator {
           status: 'success',
         };
         telemetry.discovery = {
-          totalItemsFound: discoverOutput.stats.totalFound,
-          itemsByTopic: discoverOutput.stats.byTopic,
+          totalItemsFound: discoverOutput.stats.totalItemsFound,
+          itemsByTopic: discoverOutput.stats.itemsByTopic,
         };
+        
+        logger.info('Saved discover debug output', { totalItems: discoverOutput.items.length });
       }
 
       // Stage 3: Disambiguate
@@ -86,8 +187,8 @@ export class PipelineOrchestrator {
         const stageStart = Date.now();
         disambiguateOutput = await stage.execute(
           discoverOutput.items,
-          input.config.allowDomains || [],
-          input.config.blockDomains || [],
+          input.config.sourcePolicies?.allowDomains || [],
+          input.config.sourcePolicies?.blockDomains || [],
           input.config.robotsMode,
           emitter
         );
@@ -97,6 +198,13 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Save debug output
+        await fs.writeFile(
+          path.join(debugDir, '02_disambiguate.json'),
+          JSON.stringify({ stats: disambiguateOutput.stats, itemCount: disambiguateOutput.items.length, items: disambiguateOutput.items.slice(0, 5) }, null, 2)
+        );
+        logger.info('Saved disambiguate debug output', { passedCount: disambiguateOutput.items.filter(i => !i.blocked).length });
       }
 
       // Stage 4: Rank
@@ -113,6 +221,14 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Save debug output
+        const rankedItems = Array.from(rankOutput.topicQueues.values()).flat();
+        await fs.writeFile(
+          path.join(debugDir, '03_rank.json'),
+          JSON.stringify({ totalRanked: rankedItems.length, topItems: rankedItems.slice(0, 5).map(item => ({ url: item.url, title: item.title, scores: item.scores })) }, null, 2)
+        );
+        logger.info('Saved rank debug output', { totalRanked: rankedItems.length });
       }
 
       // Stage 5: Scrape
@@ -121,7 +237,16 @@ export class PipelineOrchestrator {
         const stage = new ScrapeStage(httpGateway);
         const stageStart = Date.now();
         // Get top-ranked items from all topic queues
-        const rankedItems = Array.from(rankOutput.topicQueues.values()).flat();
+        const allRankedItems = Array.from(rankOutput.topicQueues.values()).flat();
+        
+        // Apply article limit based on admin settings
+        const limitedRankedItems = allRankedItems.slice(0, articleLimit);
+        logger.info('Applied article limit', {
+          totalRanked: allRankedItems.length,
+          articleLimit,
+          itemsToScrape: limitedRankedItems.length,
+        });
+        
         const topicTargets = Object.fromEntries(
           [...input.config.topics.standard, ...input.config.topics.special].map(t => [
             t.id,
@@ -130,7 +255,7 @@ export class PipelineOrchestrator {
         );
         
         scrapeOutput = await stage.execute(
-          rankedItems,
+          limitedRankedItems,
           topicTargets,
           input.config.robotsMode,
           emitter
@@ -155,6 +280,26 @@ export class PipelineOrchestrator {
             return acc;
           }, {} as Record<string, { success: number; failure: number; avgLatencyMs: number }>),
         };
+        
+        // Save I/O for scrape stage
+        const scrapeInput = {
+          itemCount: limitedRankedItems.length,
+          articleLimit,
+          topicTargets,
+          sampleUrls: limitedRankedItems.slice(0, 3).map(i => i.url),
+        };
+        const scrapeOutputSummary = {
+          stats: scrapeOutput.stats,
+          contentCount: scrapeOutput.contents.length,
+          sampleContents: scrapeOutput.contents.slice(0, 3).map(c => ({
+            url: c.url,
+            title: c.title,
+            contentLength: c.content.length,
+            contentPreview: c.content.substring(0, 500),
+          })),
+        };
+        await saveStageIO('scrape', scrapeInput, scrapeOutputSummary);
+        logger.info('Saved scrape debug output', { successCount: scrapeOutput.stats.successCount });
       }
 
       // Stage 6: Extract Evidence
@@ -174,6 +319,27 @@ export class PipelineOrchestrator {
           targetUnits: 0,
           unitsByTopic: extractOutput.stats.byTopic,
         };
+        
+        // Save I/O for extract stage
+        const extractInput = {
+          contentCount: scrapeOutput.contents.length,
+          sampleContent: scrapeOutput.contents[0] ? {
+            url: scrapeOutput.contents[0].url,
+            contentLength: scrapeOutput.contents[0].content.length,
+          } : null,
+        };
+        const extractOutputSummary = {
+          stats: extractOutput.stats,
+          evidenceCount: extractOutput.units.length,
+          sampleEvidence: extractOutput.units.slice(0, 5).map(u => ({
+            type: u.type,
+            topicId: u.topicId,
+            span: u.span?.substring(0, 200) || '',
+            sourceUrl: u.sourceUrl,
+          })),
+        };
+        await saveStageIO('extract', extractInput, extractOutputSummary);
+        logger.info('Saved extract debug output', { evidenceCount: extractOutput.units.length });
       }
 
       // Group evidence by topic
@@ -243,6 +409,13 @@ export class PipelineOrchestrator {
       if (input.flags.enable.script && outlineOutput && summarizeOutput && contrastOutput) {
         const stage = new ScriptStage(llmGateway);
         const stageStart = Date.now();
+        const scriptInput = {
+          outlineSegments: outlineOutput.outline.segments.length,
+          summaryCount: summarizeOutput.summaries.length,
+          contrastCount: contrastOutput.contrasts.length,
+          targetDuration: input.config.durationMinutes,
+        };
+        
         scriptOutput = await stage.execute(
           outlineOutput.outline,
           summarizeOutput.summaries,
@@ -250,6 +423,14 @@ export class PipelineOrchestrator {
           input.config.durationMinutes,
           emitter
         );
+        
+        const scriptOutputSummary = {
+          scriptLength: scriptOutput.script.narrative.length,
+          wordCount: scriptOutput.script.narrative.split(/\s+/).length,
+          preview: scriptOutput.script.narrative.substring(0, 500),
+        };
+        await saveStageIO('script', scriptInput, scriptOutputSummary);
+        
         telemetry.stages.script = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -287,13 +468,27 @@ export class PipelineOrchestrator {
       if (input.flags.enable.tts && finalScript) {
         const stage = new TtsStage(ttsGateway);
         const stageStart = Date.now();
+        
+        const ttsInput = {
+          scriptLength: finalScript.length,
+          wordCount: finalScript.split(/\s+/).length,
+          voiceId: input.config.voice.voiceId,
+          speed: input.config.voice.speed,
+        };
+        
         ttsOutput = await stage.execute(
-          finalScript,
-          input.config.durationMinutes,
+          { narrative: finalScript }, // Wrap in Script object
           input.config.voice.voiceId,
           input.config.voice.speed,
           emitter
         );
+        
+        const ttsOutputSummary = {
+          audioSize: ttsOutput.audioBuffer.length,
+          audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
+        };
+        await saveStageIO('tts', ttsInput, ttsOutputSummary);
+        
         telemetry.stages.tts = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -306,8 +501,13 @@ export class PipelineOrchestrator {
           finalSpeed: input.config.voice.speed,
         };
 
-        // TODO: Upload audio to S3
+        // Save audio to local disk (TODO: Upload to S3 in production)
         audioS3Key = `runs/${input.runId}/audio.mp3`;
+        const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
+        const fs = await import('fs/promises');
+        await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
+        await fs.writeFile(audioPath, ttsOutput.audioBuffer);
+        logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
       }
 
       // Stage 13: Package & RSS

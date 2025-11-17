@@ -45,9 +45,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const checkUser = async () => {
     try {
+      console.log('🔍 Checking user authentication...');
       const currentUser = await getCurrentUser();
+      console.log('✅ Current user found:', currentUser.userId);
+      
       const session = await fetchAuthSession();
+      console.log('✅ Session fetched');
+      
       const attributes = await fetchUserAttributes();
+      console.log('✅ User attributes fetched');
       
       setUser({
         userId: currentUser.userId,
@@ -55,10 +61,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         name: attributes.name,
         emailVerified: attributes.email_verified === 'true',
       });
+      console.log('✅ User state updated');
     } catch (error) {
+      console.error('❌ Auth check failed:', error);
       setUser(null);
     } finally {
       setLoading(false);
+      console.log('✅ Auth loading complete');
     }
   };
 
@@ -96,6 +105,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const getToken = async (): Promise<string | null> => {
     try {
+      // For local development, return a mock token
+      if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
+        const mockSession = localStorage.getItem('mock-auth-session');
+        if (mockSession) {
+          return 'mock-local-dev-token';
+        }
+        return null;
+      }
+
       // First try without force refresh
       let session = await fetchAuthSession({ forceRefresh: false });
       let token = session.tokens?.idToken?.toString();

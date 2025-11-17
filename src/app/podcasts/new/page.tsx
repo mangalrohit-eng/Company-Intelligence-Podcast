@@ -111,7 +111,7 @@ export default function NewPodcastPage() {
         timeWindowHours: 24,
         
         // Topics & regions defaults
-        topicIds: ['company-news', 'competitor-analysis', 'industry-trends'],
+        topics: ['company-news', 'competitor-analysis', 'industry-trends'],
         topicPriorities: {
           'company-news': 3,
           'competitor-analysis': 2,
@@ -151,10 +151,10 @@ export default function NewPodcastPage() {
           description: formData.description,
           companyId: formData.companyId,
           competitors: formData.competitorIds || [],
-          topics: formData.topics || [],
-          duration: formData.duration || 5,
-          voice: formData.voice || 'alloy',
-          schedule: formData.schedule || 'manual',
+          topics: formData.topicIds || [],
+          duration: formData.durationMinutes || 5,
+          voice: formData.voiceId || 'alloy',
+          schedule: formData.cadence || 'weekly',
         });
 
       if (response.ok) {

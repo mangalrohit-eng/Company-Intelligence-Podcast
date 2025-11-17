@@ -1,0 +1,398 @@
+[
+  {
+    "id": "000d37e2-1725-43fb-9a16-df22d223d422",
+    "type": "claim",
+    "span": "Citigroup Inc reported a better-than-expected quarterly profit",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "3e5b1796-45ba-4b2c-bb32-35c75f41f215",
+    "type": "stat",
+    "span": "investment banking fees rose 31% to $934 million",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "0d2066eb-6de1-4059-b0c9-3c8d04065b0d",
+    "type": "claim",
+    "span": "Wall Street banks have benefited from a recent revival in capital markets activity",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "e38b6625-9f93-4436-abeb-f76586c16a8d",
+    "type": "stat",
+    "span": "Citigroup's net income fell 9% to $3.2 billion",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "d9cce4b7-4526-4600-a4ec-1df58b66e90b",
+    "type": "stat",
+    "span": "Analysts on average had expected a profit of $1.35 per share",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "a70bee05-fad9-40d2-bf0f-520ba03936fe",
+    "type": "stat",
+    "span": "Total revenue rose 1% to $20.32 billion",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "371d13ce-ff6c-412e-bade-cb946b0362ae",
+    "type": "quote",
+    "span": "We delivered solid results with revenue growth across the firm",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "c394b58d-d35a-4250-8735-d6528de59308",
+    "type": "stat",
+    "span": "markets division reported revenue of $4.8 billion, down 6%",
+    "sourceUrl": "https://www.reuters.com/business/finance/citigroup-profit-beats-estimates-investment-banking-strength-2024-10-15",
+    "publisher": "Reuters",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "029ad52d-e11e-4f86-a1e5-562cf5ea175c",
+    "type": "stat",
+    "span": "profit of $3.2 billion, or $1.51 a share",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "f1acc8ab-dc22-4307-87cb-e0c788008cb5",
+    "type": "stat",
+    "span": "Revenue rose 1% to $20.3 billion.",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "1ceeaa70-5a92-41cb-8327-08cf477b8962",
+    "type": "quote",
+    "span": "Our transformation is gaining traction",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "8c653ead-c477-4309-b4d1-9272cd458d2c",
+    "type": "quote",
+    "span": "We're seeing the benefits of our strategy with improved efficiency...",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "b5a99cc1-779e-462d-aae0-0f33835c29aa",
+    "type": "stat",
+    "span": "efficiency ratio improved to 65.4% from 66.5%",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "4872e1f1-1c62-4089-8cfb-2b8bdcac022a",
+    "type": "stat",
+    "span": "wealth management business revenue of $1.9 billion, up 9% from a year earlier",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "a4cdd4ea-b144-4b36-b691-8768fc360a41",
+    "type": "stat",
+    "span": "net credit losses rising to 3.5% from 2.8%",
+    "sourceUrl": "https://www.wsj.com/finance/banking/citigroup-earnings-third-quarter-2024",
+    "publisher": "Wall Street Journal",
+    "publishedDate": "2024-10-16T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "95029773-c21c-45c0-8cf1-89e894b55963",
+    "type": "stat",
+    "span": "about 20,000 positions over the next two years",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "fa390a5b-ca66-40b7-ba64-fcd2b270d74c",
+    "type": "quote",
+    "span": "We're building a simpler, more focused bank",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "457881f4-5eb5-4aa4-941c-fc39fd7cfed1",
+    "type": "stat",
+    "span": "about $1 billion in severance and related expenses",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "08e0a3a2-d3f0-4512-8ee5-33ea443c26ad",
+    "type": "stat",
+    "span": "annual savings of approximately $2.5 billion",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "9a7edf81-21df-4e01-a5b1-e06a62895238",
+    "type": "stat",
+    "span": "return on tangible common equity was 7.2%",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "d53ca55d-01fd-4f14-a82c-4615fc098a45",
+    "type": "stat",
+    "span": "long-term target of at least 11%",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "b56523b4-7dfb-4825-adb6-600662f9c824",
+    "type": "claim",
+    "span": "Fraser became CEO in 2021",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "c2ad7102-cdcd-4f5d-bfc5-0abb23a0bad3",
+    "type": "claim",
+    "span": "exiting consumer banking businesses in multiple countries",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "ed8187fe-c455-41fd-b1a6-39c382a77a37",
+    "type": "claim",
+    "span": "creating five main business lines: services, markets, banking, U.S. personal banking, and wealth",
+    "sourceUrl": "https://www.bloomberg.com/news/articles/citigroup-ceo-fraser-restructuring",
+    "publisher": "Bloomberg",
+    "publishedDate": "2024-10-20T00:00:00.000Z",
+    "authority": 0.9
+  },
+  {
+    "id": "448df456-711d-4564-b710-b2581454a508",
+    "type": "stat",
+    "span": "net income of $3.2 billion, or $1.51 per share, for the third quarter 2024",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "ef977996-c469-4ac7-8214-959d76b0aac2",
+    "type": "stat",
+    "span": "net income of $3.5 billion, or $1.63 per share, in the prior-year period",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "0a83d703-490e-4a62-b14f-0766708978d0",
+    "type": "stat",
+    "span": "Revenues of $20.3 billion in the quarter increased 1%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "e9d2743f-ae92-4d93-91bd-eab0267f9b71",
+    "type": "quote",
+    "span": "We had a solid quarter with revenues up 1% and...",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "d1f69edd-88b8-4a2f-a326-2e89887baee2",
+    "type": "stat",
+    "span": "CET1 Capital ratio of 13.7%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "98ab0fa5-6077-4012-80e4-71a7b92a0b16",
+    "type": "stat",
+    "span": "Total assets stood at $2.4 trillion at quarter end",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "8d639ef2-cbb7-47b9-a6c7-453b1b1ac4e5",
+    "type": "stat",
+    "span": "Services, revenues of $4.9 billion increased 7%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "b9a9a5ef-4e3e-435e-98c4-fd0abbd3bab0",
+    "type": "stat",
+    "span": "Banking revenues were $1.4 billion, up 5% year-over-year",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "e04cbe97-06b6-4114-9d00-d4c29431e037",
+    "type": "stat",
+    "span": "Markets revenues of $4.8 billion declined 6%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "df33608c-980f-446b-be7e-7ec498b96af9",
+    "type": "stat",
+    "span": "U.S. Personal Banking revenues of $5.3 billion were up 3%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "01ed3667-2913-4f10-961c-09a85e72a4b2",
+    "type": "stat",
+    "span": "Wealth revenues of $1.9 billion grew 9%",
+    "sourceUrl": "https://www.citigroup.com/rcs/citigpa/storage/public/Q3-2024-Earnings-Release.pdf",
+    "publisher": "Citigroup",
+    "publishedDate": "2024-10-15T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "2c10cbfb-f2df-43f9-be16-ba3904d7c9c8",
+    "type": "stat",
+    "span": "Citigroup plans to invest $4 billion in digital transformation initiatives over the next three years.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "154d87ba-eb47-4f7d-888a-31b2369a1e7b",
+    "type": "claim",
+    "span": "The investment will focus on cloud migration, data analytics, cybersecurity, and artificial intelligence.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "00905dcb-b86d-4108-ab3a-74dffe76a144",
+    "type": "stat",
+    "span": "The bank plans to move 60% of its applications to the cloud by 2025, up from about 20% currently.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "49ad9718-e7cd-45d0-9797-f049efa8b4ea",
+    "type": "quote",
+    "span": "Technology is at the heart of our transformation,",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "db3fe371-002d-4054-ac53-446952bc4c77",
+    "type": "claim",
+    "span": "Citigroup has faced regulatory scrutiny over its technology systems in recent years.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "af5b464e-bf11-4528-b2c0-e1538ce38f60",
+    "type": "stat",
+    "span": "federal regulators imposed a $400 million fine",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "8a80eca3-e130-48a1-b233-0532b3ad7638",
+    "type": "claim",
+    "span": "The digital transformation includes upgrading Citi's mobile banking app, enhancing its payments infrastructure, and deploying AI-powered tools for risk management and customer service.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "6e057c96-717a-4b8d-a056-be23d1e34243",
+    "type": "quote",
+    "span": "We're moving from legacy systems to modern, cloud-based infrastructure,",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  },
+  {
+    "id": "d88769cf-ceda-497d-bb80-cf92806b52bf",
+    "type": "claim",
+    "span": "The bank has been losing market share to fintech companies and digital banks in some segments.",
+    "sourceUrl": "https://www.cnbc.com/citigroup-digital-transformation-technology-investment",
+    "publisher": "CNBC",
+    "publishedDate": "2024-10-25T00:00:00.000Z",
+    "authority": 0.5
+  }
+]

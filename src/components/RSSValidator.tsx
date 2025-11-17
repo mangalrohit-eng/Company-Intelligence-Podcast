@@ -203,7 +203,7 @@ export function RSSValidator({ podcastId, rssUrl }: RSSValidatorProps) {
               
               {result.info.iTunesCompliant !== undefined && (
                 <div className="p-3 bg-secondary rounded-lg">
-                  <Badge variant={result.info.iTunesCompliant ? 'success' : 'destructive'}>
+                  <Badge variant={result.info.iTunesCompliant ? 'success' : 'danger'}>
                     {result.info.iTunesCompliant ? '✓' : '✗'} iTunes
                   </Badge>
                   <div className="text-xs text-muted mt-1">Compliance</div>
@@ -212,7 +212,7 @@ export function RSSValidator({ podcastId, rssUrl }: RSSValidatorProps) {
               
               {result.info.spotifyCompliant !== undefined && (
                 <div className="p-3 bg-secondary rounded-lg">
-                  <Badge variant={result.info.spotifyCompliant ? 'success' : 'destructive'}>
+                  <Badge variant={result.info.spotifyCompliant ? 'success' : 'danger'}>
                     {result.info.spotifyCompliant ? '✓' : '✗'} Spotify
                   </Badge>
                   <div className="text-xs text-muted mt-1">Compliance</div>
@@ -339,4 +339,5 @@ export function RSSValidator({ podcastId, rssUrl }: RSSValidatorProps) {
     </Card>
   );
 }
+
 

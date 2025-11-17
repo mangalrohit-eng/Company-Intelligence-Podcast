@@ -49,18 +49,26 @@ export class ExtractStage {
         messages: [
           {
             role: 'system',
-            content: `You are an evidence extraction system. Extract:
-1. STATS: Numbers with context (revenue, growth, market share, etc.)
-2. QUOTES: Short quotes **MAXIMUM 10 WORDS** from named sources
-3. CLAIMS: Verifiable factual claims
+            content: `You are an evidence extraction system. Extract key facts, stats, and quotes from news articles.
 
-CRITICAL: Quotes MUST be ≤10 words. Truncate if longer.
+Extract and return a JSON object with an "items" array containing:
+- STATS: Numbers with context (revenue, growth, market share)
+- QUOTES: Short quotes (max 10 words) from named sources
+- CLAIMS: Verifiable factual claims
 
-Return JSON array with: {"type": "stat|quote|claim", "span": "text", "context": "surrounding text", "wordCount": number}`,
+Format: {"items": [{"type": "stat"|"quote"|"claim", "span": "the fact/quote/claim", "context": "surrounding context"}]}
+
+If no evidence found, return: {"items": []}`,
           },
           {
             role: 'user',
-            content: `Extract evidence from:\n\nTitle: ${content.title}\n\nContent: ${content.content.substring(0, 5000)}`,
+            content: `Extract evidence from this Citibank news article:
+
+Title: ${content.title}
+
+Content: ${content.content.substring(0, 5000)}
+
+Return JSON with extracted evidence.`,
           },
         ],
         temperature: 0.3,
@@ -69,8 +77,11 @@ Return JSON array with: {"type": "stat|quote|claim", "span": "text", "context": 
       });
 
       try {
+        logger.debug('LLM extraction response', { content: response.content.substring(0, 500) });
         const extracted = JSON.parse(response.content);
-        const items = Array.isArray(extracted) ? extracted : (extracted.items || []);
+        const items = Array.isArray(extracted) ? extracted : (extracted.items || extracted.evidence || []);
+
+        logger.info('Extracted evidence items', { count: items.length, from: content.url });
 
         for (const item of items) {
           // Enforce ≤10-word constraint for quotes
@@ -104,8 +115,12 @@ Return JSON array with: {"type": "stat|quote|claim", "span": "text", "context": 
             authority: this.calculateAuthority(content.publisher),
           });
         }
-      } catch (error) {
-        logger.warn('Failed to parse extracted evidence', { error });
+      } catch (error: any) {
+        logger.error('Failed to parse extracted evidence', { 
+          error: error.message,
+          response: response.content.substring(0, 1000),
+          url: content.url,
+        });
       }
     }
 
