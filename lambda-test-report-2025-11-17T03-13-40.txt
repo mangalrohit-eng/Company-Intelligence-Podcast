@@ -1,0 +1,282 @@
+
+================================================================================
+LAMBDA FUNCTION TEST REPORT
+================================================================================
+
+Total Tests: 38
+Passed: 0 ✓
+Failed: 38 ✗
+Total Issues: 21
+Total Warnings: 17
+Average Duration: 51.63ms
+
+================================================================================
+DETAILED RESULTS
+================================================================================
+
+1. competitors/suggest - Valid Request
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 346ms
+   Issues:
+     - Server error: 503
+
+2. competitors/suggest - Missing Company Name
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+3. competitors/suggest - Empty Company Name
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+4. competitors/suggest - Short Company Name
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 1ms
+   Warnings:
+     - Client error: 400
+
+5. competitors/suggest - Special Characters
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 130ms
+   Issues:
+     - Server error: 503
+
+6. episodes/get - Valid Episode ID
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 164ms
+   Issues:
+     - Server error: 500
+
+7. episodes/get - Missing Episode ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 1ms
+   Warnings:
+     - Client error: 400
+
+8. episodes/get - Invalid Episode ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+9. episodes/get - Non-existent Episode
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 29ms
+   Issues:
+     - Server error: 500
+
+10. podcasts/create - Valid Authenticated Request
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 98ms
+   Issues:
+     - Server error: 500
+
+11. podcasts/create - Missing Authentication
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+12. podcasts/create - Missing Required Fields
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 2ms
+   Warnings:
+     - Client error: 400
+
+13. podcasts/create - Invalid Email
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 11ms
+   Warnings:
+     - Client error: 400
+
+14. podcasts/create - Empty Body
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 13ms
+   Warnings:
+     - Client error: 400
+
+15. podcasts/create - Legacy User Auto-OrgId
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 28ms
+   Issues:
+     - Server error: 500
+
+16. podcasts/list - Valid Authenticated Request
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 86ms
+   Issues:
+     - Server error: 500
+
+17. podcasts/list - Missing Authentication
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 1ms
+   Warnings:
+     - Client error: 400
+
+18. podcasts/list - Legacy User Auto-OrgId
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 27ms
+   Issues:
+     - Server error: 500
+
+19. podcasts/list - Different User
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 27ms
+   Issues:
+     - Server error: 500
+
+20. runs/create - Valid Request
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 97ms
+   Issues:
+     - Server error: 500
+
+21. runs/create - Missing Podcast ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+22. runs/create - Missing Authentication
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 1ms
+   Warnings:
+     - Client error: 400
+
+23. runs/create - Non-existent Podcast
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 27ms
+   Issues:
+     - Server error: 500
+
+24. runs/create - Unauthorized Access
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 33ms
+   Issues:
+     - Server error: 500
+
+25. runs/events - Valid Request
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 85ms
+   Issues:
+     - Server error: 500
+
+26. runs/events - With Limit
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 27ms
+   Issues:
+     - Server error: 500
+
+27. runs/events - Missing Run ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+28. runs/events - Invalid Limit
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+29. runs/events - Non-existent Run
+   Status: ✗ FAIL
+   HTTP Status: 500
+   Duration: 152ms
+   Issues:
+     - Server error: 500
+
+30. voice/preview - Voice: alloy
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 83ms
+   Issues:
+     - Server error: 503
+
+31. voice/preview - Voice: echo
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 116ms
+   Issues:
+     - Server error: 503
+
+32. voice/preview - Voice: fable
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 126ms
+   Issues:
+     - Server error: 503
+
+33. voice/preview - Voice: onyx
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 98ms
+   Issues:
+     - Server error: 503
+
+34. voice/preview - Voice: nova
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 76ms
+   Issues:
+     - Server error: 503
+
+35. voice/preview - Voice: shimmer
+   Status: ✗ FAIL
+   HTTP Status: 503
+   Duration: 76ms
+   Issues:
+     - Server error: 503
+
+36. voice/preview - Missing Voice ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 1ms
+   Warnings:
+     - Client error: 400
+
+37. voice/preview - Invalid Voice ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+
+38. voice/preview - Empty Voice ID
+   Status: ✗ FAIL
+   HTTP Status: 400
+   Duration: 0ms
+   Warnings:
+     - Client error: 400
+

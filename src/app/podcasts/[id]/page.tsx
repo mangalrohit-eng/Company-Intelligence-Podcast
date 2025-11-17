@@ -143,6 +143,13 @@ export default function PodcastDetailPage() {
 function OverviewTab({ podcast }: any) {
   return (
     <div className="space-y-6">
+      {/* Dev Note */}
+      <Card className="p-4 bg-yellow-500/10 border-yellow-500/30">
+        <p className="text-sm text-yellow-600 dark:text-yellow-400">
+          <strong>⚠️ Development Mode:</strong> The statistics below are placeholder data for UI development purposes.
+        </p>
+      </Card>
+      
       {/* Stats Grid */}
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-6">
@@ -270,14 +277,21 @@ function RunsTab({ podcastId }: { podcastId: string }) {
     try {
       setLoading(true);
       const { api } = await import('@/lib/api');
-      const response = await api.get(`/podcasts/${podcastId}/runs/list`);
+      console.log(`🔍 Fetching runs for podcast: ${podcastId}`);
+      const response = await api.get(`/podcasts/${podcastId}/runs`);
+      
+      console.log(`📡 Response status: ${response.status}`);
       
       if (response.ok) {
         const data = await response.json();
+        console.log(`✅ Received ${data.runs?.length || 0} runs:`, data);
         setRuns(data.runs || []);
+      } else {
+        const errorText = await response.text();
+        console.error(`❌ Failed to fetch runs: ${errorText}`);
       }
     } catch (error) {
-      console.error('Error fetching runs:', error);
+      console.error('❌ Error fetching runs:', error);
     } finally {
       setLoading(false);
     }
@@ -455,6 +469,13 @@ function TeamTab({ podcastId: _podcastId }: { podcastId: string }) {
 
   return (
     <div className="space-y-6">
+      {/* Dev Note */}
+      <Card className="p-4 bg-yellow-500/10 border-yellow-500/30">
+        <p className="text-sm text-yellow-600 dark:text-yellow-400">
+          <strong>⚠️ Development Mode:</strong> Team collaboration features are coming soon. Data below is placeholder.
+        </p>
+      </Card>
+      
       <Card className="p-6">
         <div className="flex items-center justify-between mb-6">
           <h3 className="text-xl font-semibold">Team Members</h3>

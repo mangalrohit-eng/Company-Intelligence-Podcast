@@ -667,7 +667,7 @@ function Step2({ formData, setFormData }: any) {
       const { api } = await import('@/lib/api');
       const response = await api.post('/competitors/suggest', { 
         companyName: value 
-      }, { requireAuth: false }); // Allow without auth for quick testing
+      });
       
       if (response.ok) {
         const data = await response.json();
@@ -1118,7 +1118,7 @@ function Step5({ formData, setFormData }: any) {
       
       // Call real OpenAI TTS API
       const { api } = await import('@/lib/api');
-      const response = await api.post('/voice/preview', { voiceId }, { requireAuth: false });
+      const response = await api.post('/voice/preview', { voiceId });
       
       if (response.ok) {
         const audioBlob = await response.blob();

@@ -96,8 +96,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const getToken = async (): Promise<string | null> => {
     try {
-      const session = await fetchAuthSession();
-      return session.tokens?.idToken?.toString() || null;
+      // First try without force refresh
+      let session = await fetchAuthSession({ forceRefresh: false });
+      let token = session.tokens?.idToken?.toString();
+      
+      // If no token, try force refresh
+      if (!token) {
+        console.log('No token found, forcing refresh...');
+        session = await fetchAuthSession({ forceRefresh: true });
+        token = session.tokens?.idToken?.toString();
+      }
+      
+      return token || null;
     } catch (error) {
       console.error('Failed to get token:', error);
       return null;

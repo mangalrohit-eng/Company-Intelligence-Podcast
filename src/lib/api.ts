@@ -50,18 +50,21 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
         console.error('❌ No auth token available for API call');
         console.error('❌ Full session:', JSON.stringify(session, null, 2));
         
-        // Try to get current user as additional debug
-        try {
-          const { getCurrentUser } = await import('aws-amplify/auth');
-          const currentUser = await getCurrentUser();
-          console.log('✅ Current user exists:', currentUser);
-        } catch (userError) {
-          console.error('❌ No current user:', userError);
+        // No token available - redirect to login
+        if (typeof window !== 'undefined') {
+          console.log('🔄 Redirecting to login due to missing token');
+          window.location.href = '/auth/login';
         }
+        throw new Error('No authentication token available');
       }
     } catch (error) {
       console.error('❌ Failed to get auth token:', error);
-      // Continue without token - let backend handle auth error
+      // Redirect to login on auth error
+      if (typeof window !== 'undefined') {
+        console.log('🔄 Redirecting to login due to auth error');
+        window.location.href = '/auth/login';
+      }
+      throw error;
     }
   }
   
@@ -74,10 +77,57 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
   const API_BASE_URL = getApiBaseUrl();
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
   
-  return fetch(url, {
+  const response = await fetch(url, {
     ...fetchOptions,
     headers: finalHeaders,
   });
+
+  // Handle authentication errors
+  if (response.status === 401 || response.status === 403) {
+    console.error('❌ Authentication failed:', response.status, response.statusText);
+    
+    // Try to refresh the token once
+    if (requireAuth) {
+      try {
+        console.log('🔄 Attempting to refresh token...');
+        const refreshedSession = await fetchAuthSession({ forceRefresh: true });
+        const newToken = refreshedSession.tokens?.idToken?.toString();
+        
+        if (newToken) {
+          console.log('✅ Token refreshed successfully, retrying request');
+          (finalHeaders as Record<string, string>)['Authorization'] = `Bearer ${newToken}`;
+          
+          // Retry the request with the new token
+          const retryResponse = await fetch(url, {
+            ...fetchOptions,
+            headers: finalHeaders,
+          });
+          
+          // If retry still fails with auth error, redirect to login
+          if (retryResponse.status === 401 || retryResponse.status === 403) {
+            console.error('❌ Auth still failed after token refresh, redirecting to login');
+            if (typeof window !== 'undefined') {
+              window.location.href = '/auth/login';
+            }
+          }
+          
+          return retryResponse;
+        } else {
+          console.error('❌ Token refresh failed, redirecting to login');
+          if (typeof window !== 'undefined') {
+            window.location.href = '/auth/login';
+          }
+        }
+      } catch (refreshError) {
+        console.error('❌ Token refresh error:', refreshError);
+        if (typeof window !== 'undefined') {
+          window.location.href = '/auth/login';
+        }
+      }
+    }
+  }
+  
+  return response;
 }
 
 /**
@@ -98,6 +148,13 @@ export const api = {
     apiCall(endpoint, {
       ...options,
       method: 'PUT',
+      body: data ? JSON.stringify(data) : undefined,
+    }),
+
+  patch: (endpoint: string, data?: any, options?: ApiOptions) =>
+    apiCall(endpoint, {
+      ...options,
+      method: 'PATCH',
       body: data ? JSON.stringify(data) : undefined,
     }),
 

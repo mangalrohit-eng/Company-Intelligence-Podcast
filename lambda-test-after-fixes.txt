@@ -1,0 +1,3066 @@
+﻿
+> ai-podcast-platform@1.0.0 test:lambda
+> tsx tests/lambda/run-all-tests.ts
+
+Γ£ô Test environment configured
+  - OPENAI_API_KEY: sk-test-ke...
+  - AWS_REGION: us-east-1
+  - LOG_LEVEL: error
+
+
+====================================================================================================
+STARTING COMPREHENSIVE LAMBDA FUNCTION TESTING
+====================================================================================================
+
+
+****************************************************************************************************
+Running Test Suite: Competitors Suggest
+****************************************************************************************************
+
+================================================================================
+TESTING: competitors/suggest.ts
+================================================================================
+
+================================================================================
+Testing: competitors/suggest - Valid Request
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/competitors/suggest",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"companyName\":\"Microsoft\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:38 [[31MERROR[39M] Failed to suggest competitors | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0da91b60c336-EWR",
+      "connection": "keep-alive",
+      "content-length": "245",
+      "content-type": "text/plain",
+      "date": "Mon, 17 Nov 2025 03:13:38 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=gM1h6hQzCNnKNnfD9qY6T1aUYYX4lDmRgnnXEqGern0-1763349218-1.0.1.1-wucMHySRGBF_IxxlPCrOP4QQxzZZvAaIKDvi7RQLdzED1BUk_RHuJJo1xrwMvzJMPDCF95SzyG7Uv47QVOlLjQ.lQqS8.uyp2ju9uaYZzBA; path=/; expires=Mon, 17-Nov-25 03:43:38 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=VXbAsr190RoR7biMC3hZ.bV36c7pTtMK7_AwD.S09Ho-1763349218863-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-datadog-parent-id": "6590245208077935347",
+      "x-datadog-sampling-priority": "0",
+      "x-datadog-trace-id": "17331297388883026025",
+      "x-envoy-upstream-service-time": "24",
+      "x-error-json": "ewogICJlcnJvciI6IHsKICAgICJtZXNzYWdlIjogIkluY29ycmVjdCBBUEkga2V5IHByb3ZpZGVkOiBzay10ZXN0LSoqKipzdHViLiBZb3UgY2FuIGZpbmQgeW91ciBBUEkga2V5IGF0IGh0dHBzOi8vcGxhdGZvcm0ub3BlbmFpLmNvbS9hY2NvdW50L2FwaS1rZXlzLiIsCiAgICAidHlwZSI6ICJpbnZhbGlkX3JlcXVlc3RfZXJyb3IiLAogICAgImNvZGUiOiAiaW52YWxpZF9hcGlfa2V5IiwKICAgICJwYXJhbSI6IG51bGwKICB9Cn0=",
+      "x-ide-elapsed-time-sec": "0.023539591",
+      "x-ide-start": "1763349218.7932515",
+      "x-openai-authorization-error": "401",
+      "x-openai-ide-error-code": "invalid_api_key",
+      "x-openai-internal-caller": "unknown_through_ide",
+      "x-request-id": "req_9e8cb86afbb54de7816d1a05bd70ae24"
+    },
+    "request_id": "req_9e8cb86afbb54de7816d1a05bd70ae24",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "code": "invalid_api_key",
+      "param": null
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI service temporarily unavailable"
+}
+Duration: 346ms
+================================================================================
+
+================================================================================
+Testing: competitors/suggest - Missing Company Name
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/competitors/suggest",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Company name is required (minimum 2 characters)"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: competitors/suggest - Empty Company Name
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/competitors/suggest",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"companyName\":\"\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Company name is required (minimum 2 characters)"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: competitors/suggest - Short Company Name
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/competitors/suggest",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"companyName\":\"A\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Company name is required (minimum 2 characters)"
+}
+Duration: 1ms
+================================================================================
+
+================================================================================
+Testing: competitors/suggest - Special Characters
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/competitors/suggest",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"companyName\":\"AT&T\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to suggest competitors | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0daa1bffc336-EWR",
+      "connection": "keep-alive",
+      "content-length": "266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Mon, 17 Nov 2025 03:13:39 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=NEMdW6zq0EqKuG1v8vW3FycA6c4gwqWtlks8oLUoVVU-1763349219-1.0.1.1-uGDY4tXMa28FCRt8FjDBZrO3o4oYZslclKGZ68rUt_nODJd_orzN5mFQHJJUlU9Yg0Y4w.wbDpireHl9..y72pr3XxjWPo342GbMKzStx.s; path=/; expires=Mon, 17-Nov-25 03:43:39 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=DFer7kTgLlXTEur6uIB5xqgZgmHWei50YfuP.9NJyLc-1763349219004-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "Origin",
+      "x-content-type-options": "nosniff",
+      "x-envoy-upstream-service-time": "20",
+      "x-openai-proxy-wasm": "v0.1",
+      "x-request-id": "req_2982a75ac58d46c8a86fe7f3a27cfeb4"
+    },
+    "request_id": "req_2982a75ac58d46c8a86fe7f3a27cfeb4",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "param": null,
+      "code": "invalid_api_key"
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI service temporarily unavailable"
+}
+Duration: 130ms
+================================================================================
+
+Competitors Suggest: 0/5 tests passed
+
+****************************************************************************************************
+Running Test Suite: Episodes Get
+****************************************************************************************************
+
+================================================================================
+TESTING: episodes/get.ts
+================================================================================
+
+================================================================================
+Testing: episodes/get - Valid Episode ID
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/episodes/test-episode-123",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-episode-123"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to get episode | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "5P756IFQC83PFGC799G7CH4JVRVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to retrieve episode",
+  "details": "Requested resource not found"
+}
+Duration: 164ms
+================================================================================
+
+================================================================================
+Testing: episodes/get - Missing Episode ID
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/episodes",
+  "headers": {},
+  "pathParameters": {},
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Episode ID required"
+}
+Duration: 1ms
+================================================================================
+
+================================================================================
+Testing: episodes/get - Invalid Episode ID
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/episodes/invalid",
+  "headers": {},
+  "pathParameters": {
+    "id": ""
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Episode ID required"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: episodes/get - Non-existent Episode
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/episodes/non-existent-episode-xyz",
+  "headers": {},
+  "pathParameters": {
+    "id": "non-existent-episode-xyz"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to get episode | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "POPRRHSASU5992RTQLGSQ50UT3VV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to retrieve episode",
+  "details": "Requested resource not found"
+}
+Duration: 29ms
+================================================================================
+
+Episodes Get: 0/4 tests passed
+
+****************************************************************************************************
+Running Test Suite: Podcasts Create
+****************************************************************************************************
+
+================================================================================
+TESTING: podcasts/create.ts
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Valid Authenticated Request
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"title\":\"Test Podcast\",\"subtitle\":\"A test podcast\",\"description\":\"This is a test podcast description\",\"author\":\"Test Author\",\"email\":\"test@example.com\",\"category\":\"Technology\",\"explicit\":false,\"language\":\"en\",\"cadence\":\"weekly\",\"durationMinutes\":10,\"timeWindowHours\":168,\"timezone\":\"America/New_York\",\"publishTime\":\"09:00\",\"companyId\":\"Microsoft\",\"industryId\":\"Technology\",\"topicIds\":[\"AI\",\"Cloud Computing\"],\"competitorIds\":[\"Google\",\"Amazon\"],\"voiceId\":\"alloy\",\"voiceSpeed\":1,\"voiceTone\":\"professional\",\"robotsMode\":\"permissive\",\"regions\":[\"US\"],\"sourceLanguages\":[\"en\"],\"topicPriorities\":{\"AI\":80,\"Cloud Computing\":60},\"allowDomains\":[],\"blockDomains\":[]}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to create podcast | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "66JATGBHQ7TSR7A4U0VLC1KLANVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to create podcast",
+  "details": "Requested resource not found"
+}
+Duration: 98ms
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Missing Authentication
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"title\":\"Test Podcast\",\"subtitle\":\"A test podcast\",\"description\":\"This is a test podcast description\",\"author\":\"Test Author\",\"email\":\"test@example.com\",\"category\":\"Technology\",\"explicit\":false,\"language\":\"en\",\"cadence\":\"weekly\",\"durationMinutes\":10,\"timeWindowHours\":168,\"timezone\":\"America/New_York\",\"publishTime\":\"09:00\",\"companyId\":\"Microsoft\",\"industryId\":\"Technology\",\"topicIds\":[\"AI\",\"Cloud Computing\"],\"competitorIds\":[\"Google\",\"Amazon\"],\"voiceId\":\"alloy\",\"voiceSpeed\":1,\"voiceTone\":\"professional\",\"robotsMode\":\"permissive\",\"regions\":[\"US\"],\"sourceLanguages\":[\"en\"],\"topicPriorities\":{\"AI\":80,\"Cloud Computing\":60},\"allowDomains\":[],\"blockDomains\":[]}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[33MWARN[39M] No user ID found in auth context | {
+  "hasAuthorizer": false,
+  "path": "/podcasts",
+  "httpMethod": "POST"
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Authentication required - You must be logged in to create a podcast"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Missing Required Fields
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"title\":\"Test Podcast\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to create podcast | {
+  "error": {
+    "issues": [
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "author"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "category"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "boolean",
+        "received": "undefined",
+        "path": [
+          "explicit"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "language"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "companyId"
+        ],
+        "message": "Required"
+      },
+      {
+        "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+        "received": "undefined",
+        "code": "invalid_type",
+        "path": [
+          "cadence"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "durationMinutes"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "publishTime"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "timezone"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "timeWindowHours"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "array",
+        "received": "undefined",
+        "path": [
+          "topicIds"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "array",
+        "received": "undefined",
+        "path": [
+          "sourceLanguages"
+        ],
+        "message": "Required"
+      },
+      {
+        "expected": "'strict' | 'permissive'",
+        "received": "undefined",
+        "code": "invalid_type",
+        "path": [
+          "robotsMode"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "voiceId"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "voiceSpeed"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "voiceTone"
+        ],
+        "message": "Required"
+      }
+    ],
+    "name": "ZodError"
+  }
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Validation error",
+  "details": [
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "author"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "category"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "boolean",
+      "received": "undefined",
+      "path": [
+        "explicit"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "language"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "companyId"
+      ],
+      "message": "Required"
+    },
+    {
+      "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+      "received": "undefined",
+      "code": "invalid_type",
+      "path": [
+        "cadence"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "durationMinutes"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "publishTime"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "timezone"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "timeWindowHours"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "array",
+      "received": "undefined",
+      "path": [
+        "topicIds"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "array",
+      "received": "undefined",
+      "path": [
+        "sourceLanguages"
+      ],
+      "message": "Required"
+    },
+    {
+      "expected": "'strict' | 'permissive'",
+      "received": "undefined",
+      "code": "invalid_type",
+      "path": [
+        "robotsMode"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "voiceId"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "voiceSpeed"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "voiceTone"
+      ],
+      "message": "Required"
+    }
+  ]
+}
+Duration: 2ms
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Invalid Email
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"title\":\"Test Podcast\",\"subtitle\":\"A test podcast\",\"description\":\"This is a test podcast description\",\"author\":\"Test Author\",\"email\":\"invalid-email\",\"category\":\"Technology\",\"explicit\":false,\"language\":\"en\",\"cadence\":\"weekly\",\"durationMinutes\":10,\"timeWindowHours\":168,\"timezone\":\"America/New_York\",\"publishTime\":\"09:00\",\"companyId\":\"Microsoft\",\"industryId\":\"Technology\",\"topicIds\":[\"AI\",\"Cloud Computing\"],\"competitorIds\":[\"Google\",\"Amazon\"],\"voiceId\":\"alloy\",\"voiceSpeed\":1,\"voiceTone\":\"professional\",\"robotsMode\":\"permissive\",\"regions\":[\"US\"],\"sourceLanguages\":[\"en\"],\"topicPriorities\":{\"AI\":80,\"Cloud Computing\":60},\"allowDomains\":[],\"blockDomains\":[]}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to create podcast | {
+  "error": {
+    "issues": [
+      {
+        "validation": "email",
+        "code": "invalid_string",
+        "message": "Invalid email",
+        "path": [
+          "email"
+        ]
+      }
+    ],
+    "name": "ZodError"
+  }
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Validation error",
+  "details": [
+    {
+      "validation": "email",
+      "code": "invalid_string",
+      "message": "Invalid email",
+      "path": [
+        "email"
+      ]
+    }
+  ]
+}
+Duration: 11ms
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Empty Body
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to create podcast | {
+  "error": {
+    "issues": [
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "title"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "author"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "category"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "boolean",
+        "received": "undefined",
+        "path": [
+          "explicit"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "language"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "companyId"
+        ],
+        "message": "Required"
+      },
+      {
+        "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+        "received": "undefined",
+        "code": "invalid_type",
+        "path": [
+          "cadence"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "durationMinutes"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "publishTime"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "timezone"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "timeWindowHours"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "array",
+        "received": "undefined",
+        "path": [
+          "topicIds"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "array",
+        "received": "undefined",
+        "path": [
+          "sourceLanguages"
+        ],
+        "message": "Required"
+      },
+      {
+        "expected": "'strict' | 'permissive'",
+        "received": "undefined",
+        "code": "invalid_type",
+        "path": [
+          "robotsMode"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "voiceId"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "number",
+        "received": "undefined",
+        "path": [
+          "voiceSpeed"
+        ],
+        "message": "Required"
+      },
+      {
+        "code": "invalid_type",
+        "expected": "string",
+        "received": "undefined",
+        "path": [
+          "voiceTone"
+        ],
+        "message": "Required"
+      }
+    ],
+    "name": "ZodError"
+  }
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Validation error",
+  "details": [
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "title"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "author"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "category"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "boolean",
+      "received": "undefined",
+      "path": [
+        "explicit"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "language"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "companyId"
+      ],
+      "message": "Required"
+    },
+    {
+      "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+      "received": "undefined",
+      "code": "invalid_type",
+      "path": [
+        "cadence"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "durationMinutes"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "publishTime"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "timezone"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "timeWindowHours"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "array",
+      "received": "undefined",
+      "path": [
+        "topicIds"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "array",
+      "received": "undefined",
+      "path": [
+        "sourceLanguages"
+      ],
+      "message": "Required"
+    },
+    {
+      "expected": "'strict' | 'permissive'",
+      "received": "undefined",
+      "code": "invalid_type",
+      "path": [
+        "robotsMode"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "voiceId"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "number",
+      "received": "undefined",
+      "path": [
+        "voiceSpeed"
+      ],
+      "message": "Required"
+    },
+    {
+      "code": "invalid_type",
+      "expected": "string",
+      "received": "undefined",
+      "path": [
+        "voiceTone"
+      ],
+      "message": "Required"
+    }
+  ]
+}
+Duration: 13ms
+================================================================================
+
+================================================================================
+Testing: podcasts/create - Legacy User Auto-OrgId
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"title\":\"Test Podcast\",\"subtitle\":\"A test podcast\",\"description\":\"This is a test podcast description\",\"author\":\"Test Author\",\"email\":\"test@example.com\",\"category\":\"Technology\",\"explicit\":false,\"language\":\"en\",\"cadence\":\"weekly\",\"durationMinutes\":10,\"timeWindowHours\":168,\"timezone\":\"America/New_York\",\"publishTime\":\"09:00\",\"companyId\":\"Microsoft\",\"industryId\":\"Technology\",\"topicIds\":[\"AI\",\"Cloud Computing\"],\"competitorIds\":[\"Google\",\"Amazon\"],\"voiceId\":\"alloy\",\"voiceSpeed\":1,\"voiceTone\":\"professional\",\"robotsMode\":\"permissive\",\"regions\":[\"US\"],\"sourceLanguages\":[\"en\"],\"topicPriorities\":{\"AI\":80,\"Cloud Computing\":60},\"allowDomains\":[],\"blockDomains\":[]}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "legacy-user-789",
+        "custom:org_id": "org-legacy-user-789"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "legacy-user-789",
+          "custom:org_id": "org-legacy-user-789"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Create podcast request received
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "legacy-u...",
+  "orgId": "org-legacy-u...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to create podcast | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "VPFDJGSGGDAP8G7LA99IC8K5UBVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to create podcast",
+  "details": "Requested resource not found"
+}
+Duration: 28ms
+================================================================================
+
+Podcasts Create: 0/6 tests passed
+
+****************************************************************************************************
+Running Test Suite: Podcasts List
+****************************************************************************************************
+
+================================================================================
+TESTING: podcasts/list.ts
+================================================================================
+
+================================================================================
+Testing: podcasts/list - Valid Authenticated Request
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[32MINFO[39M] Listing podcasts | {
+  "userId": "test-use...",
+  "orgId": "test-org-456..."
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to list podcasts | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "IKTP9FVPA0C9KR0OMO5R0SAE6VVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to list podcasts",
+  "details": "Requested resource not found"
+}
+Duration: 86ms
+================================================================================
+
+================================================================================
+Testing: podcasts/list - Missing Authentication
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[33MWARN[39M] No user ID found in auth context | {
+  "hasAuthorizer": false,
+  "path": "/podcasts",
+  "httpMethod": "GET"
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Authentication required - Please log in"
+}
+Duration: 1ms
+================================================================================
+
+================================================================================
+Testing: podcasts/list - Legacy User Auto-OrgId
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "legacy-user-789",
+        "custom:org_id": "org-legacy-user-789"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "legacy-user-789",
+          "custom:org_id": "org-legacy-user-789"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "legacy-u...",
+  "orgId": "org-legacy-u...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[32MINFO[39M] Listing podcasts | {
+  "userId": "legacy-u...",
+  "orgId": "org-legacy-u..."
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to list podcasts | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "ESGF9M2HPR5DSS42M5HDQS8DEFVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to list podcasts",
+  "details": "Requested resource not found"
+}
+Duration: 27ms
+================================================================================
+
+================================================================================
+Testing: podcasts/list - Different User
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/podcasts",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "different-user-999",
+        "custom:org_id": "different-org-999"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "different-user-999",
+          "custom:org_id": "different-org-999"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "differen...",
+  "orgId": "different-or...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[32MINFO[39M] Listing podcasts | {
+  "userId": "differen...",
+  "orgId": "different-or..."
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to list podcasts | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "6IQKGOUA74G1BP550RQE2RC8A3VV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to list podcasts",
+  "details": "Requested resource not found"
+}
+Duration: 27ms
+================================================================================
+
+Podcasts List: 0/4 tests passed
+
+****************************************************************************************************
+Running Test Suite: Runs Create
+****************************************************************************************************
+
+================================================================================
+TESTING: runs/create.ts
+================================================================================
+
+================================================================================
+Testing: runs/create - Valid Request
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts/test-podcast-123/runs",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-podcast-123"
+  },
+  "queryStringParameters": null,
+  "body": "{\"flags\":{\"dryRun\":true,\"provider\":{\"llm\":\"replay\",\"tts\":\"stub\",\"http\":\"replay\"}}}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to start run | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "U08NKTQEIM2808O1PVSSM77V0BVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to start run",
+  "details": "Requested resource not found"
+}
+Duration: 97ms
+================================================================================
+
+================================================================================
+Testing: runs/create - Missing Podcast ID
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts//runs",
+  "headers": {},
+  "pathParameters": {},
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Podcast ID required"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: runs/create - Missing Authentication
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts/test-podcast-123/runs",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-podcast-123"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[33MWARN[39M] No user ID found in auth context | {
+  "hasAuthorizer": false,
+  "path": "/podcasts/test-podcast-123/runs",
+  "httpMethod": "POST"
+}
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Authentication required"
+}
+Duration: 1ms
+================================================================================
+
+================================================================================
+Testing: runs/create - Non-existent Podcast
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts/non-existent-podcast/runs",
+  "headers": {},
+  "pathParameters": {
+    "id": "non-existent-podcast"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "test-user-123",
+        "custom:org_id": "test-org-456"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "test-user-123",
+          "custom:org_id": "test-org-456"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "test-use...",
+  "orgId": "test-org-456...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to start run | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "4UC21EOBR85OGD98VOBO2T1N1JVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to start run",
+  "details": "Requested resource not found"
+}
+Duration: 27ms
+================================================================================
+
+================================================================================
+Testing: runs/create - Unauthorized Access
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/podcasts/test-podcast-123/runs",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-podcast-123"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": {
+      "claims": {
+        "sub": "different-user-999",
+        "custom:org_id": "different-org-999"
+      },
+      "jwt": {
+        "claims": {
+          "sub": "different-user-999",
+          "custom:org_id": "different-org-999"
+        }
+      }
+    }
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[32MINFO[39M] Auth context extracted | {
+  "userId": "differen...",
+  "orgId": "different-or...",
+  "isLegacyUser": false,
+  "hasEmail": false,
+  "hasUsername": false
+}
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to start run | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "ST62K76ME7MMPAOTD0MO8LR3VVVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to start run",
+  "details": "Requested resource not found"
+}
+Duration: 33ms
+================================================================================
+
+Runs Create: 0/5 tests passed
+
+****************************************************************************************************
+Running Test Suite: Runs Events
+****************************************************************************************************
+
+================================================================================
+TESTING: runs/events.ts
+================================================================================
+
+================================================================================
+Testing: runs/events - Valid Request
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/runs/test-run-123/events",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-run-123"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to get run events | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "8HRFSHS4DIPE0QUJC5U4FMJS8FVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to retrieve run events",
+  "details": "Requested resource not found"
+}
+Duration: 85ms
+================================================================================
+
+================================================================================
+Testing: runs/events - With Limit
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/runs/test-run-123/events",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-run-123"
+  },
+  "queryStringParameters": {
+    "limit": "10"
+  },
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to get run events | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "5BM9S6T9MN424SSHK1RHN052UBVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to retrieve run events",
+  "details": "Requested resource not found"
+}
+Duration: 27ms
+================================================================================
+
+================================================================================
+Testing: runs/events - Missing Run ID
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/runs//events",
+  "headers": {},
+  "pathParameters": {},
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Run ID required"
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: runs/events - Invalid Limit
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/runs/test-run-123/events",
+  "headers": {},
+  "pathParameters": {
+    "id": "test-run-123"
+  },
+  "queryStringParameters": {
+    "limit": "invalid"
+  },
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Limit must be a number between 1 and 1000",
+  "details": {
+    "providedLimit": "invalid"
+  }
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: runs/events - Non-existent Run
+================================================================================
+Event: {
+  "httpMethod": "GET",
+  "path": "/runs/non-existent-run/events",
+  "headers": {},
+  "pathParameters": {
+    "id": "non-existent-run"
+  },
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:39 [[31MERROR[39M] Failed to get run events | {
+  "error": {
+    "$fault": "client",
+    "$metadata": {
+      "httpStatusCode": 400,
+      "requestId": "OD7IMDUVIRG5U3GV7RIDO7I8KBVV4KQNSO5AEMVJF66Q9ASUAAJG",
+      "attempts": 1,
+      "totalRetryDelay": 0
+    },
+    "name": "ResourceNotFoundException",
+    "message": "Requested resource not found",
+    "__type": "com.amazonaws.dynamodb.v20120810#ResourceNotFoundException"
+  }
+}
+Response Status: 500
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Failed to retrieve run events",
+  "details": "Requested resource not found"
+}
+Duration: 152ms
+================================================================================
+
+Runs Events: 0/5 tests passed
+
+****************************************************************************************************
+Running Test Suite: Voice Preview
+****************************************************************************************************
+
+================================================================================
+TESTING: voice/preview.ts
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: alloy
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"alloy\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db0af85c336-EWR",
+      "connection": "keep-alive",
+      "content-length": "266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=t.F1.UJIYRTNT7zw0cjY2vvZH.YX50cYMM1dgivxwDI-1763349220-1.0.1.1-TTY0UzwuitV7XBK07dhhnROaXHqh.ViCils3RKVXR7g0mQ3..VKfzXp5FHg673UpSSUetLpQm5OG1c8REaUoHL2ZA5mZDgczBnHl8z4nr1w; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=bqOHmwkHfjAJx1Cqor_7Xk_1GBhWlubYldy5H_bMa40-1763349220012-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "Origin",
+      "x-content-type-options": "nosniff",
+      "x-envoy-upstream-service-time": "1",
+      "x-openai-proxy-wasm": "v0.1",
+      "x-request-id": "req_1b67912d155440a999658213f1b71191"
+    },
+    "request_id": "req_1b67912d155440a999658213f1b71191",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "param": null,
+      "code": "invalid_api_key"
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 83ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: echo
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"echo\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db12fdfc336-EWR",
+      "connection": "keep-alive",
+      "content-length": "266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=jCYXXL0WA2x0Vth3WfscTT2c6rc6EfmmOZFwpqhXaT8-1763349220-1.0.1.1-y4Olp3vpwxJ.9xSCEBeDwSxNCkOsffMpAIAW_NUOMJCRbrzzvXwbu28lSicVHFvDLSdZHnvCQwkr3Bm.46c1wo02fJUI0bDpvQ.aSCosRjY; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=jLuWVFMP4s_0MBzdmJbQ92VHcP_yjpD2skClAnCRc2k-1763349220124-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "Origin",
+      "x-content-type-options": "nosniff",
+      "x-envoy-upstream-service-time": "19",
+      "x-openai-proxy-wasm": "v0.1",
+      "x-request-id": "req_df2ef7d4080b459486ebd79ebb1a5a7a"
+    },
+    "request_id": "req_df2ef7d4080b459486ebd79ebb1a5a7a",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "param": null,
+      "code": "invalid_api_key"
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 116ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: fable
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"fable\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db1e85ac336-EWR",
+      "connection": "keep-alive",
+      "content-length": "245",
+      "content-type": "text/plain",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=0WCWQOIy4gJlZAwTtcqiICQntGD7YbYuoZoNYlh_5R4-1763349220-1.0.1.1-oWzXmdm31hXVqTzP42Q0tVUlIUuUJMuZnz7wovLo2KiWO7qsyFDAagbBYo7QZwbP48Q7_se074n2MfXC2A00apM7Wq4pzyVB2QIeu55m.G8; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=jkqVycpVYcR4YTTmHR0OpZr.moIw0kjDCG0.XYk1yzc-1763349220252-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-datadog-parent-id": "14002432709527182027",
+      "x-datadog-sampling-priority": "0",
+      "x-datadog-trace-id": "18374981845783813017",
+      "x-envoy-upstream-service-time": "53",
+      "x-error-json": "ewogICJlcnJvciI6IHsKICAgICJtZXNzYWdlIjogIkluY29ycmVjdCBBUEkga2V5IHByb3ZpZGVkOiBzay10ZXN0LSoqKipzdHViLiBZb3UgY2FuIGZpbmQgeW91ciBBUEkga2V5IGF0IGh0dHBzOi8vcGxhdGZvcm0ub3BlbmFpLmNvbS9hY2NvdW50L2FwaS1rZXlzLiIsCiAgICAidHlwZSI6ICJpbnZhbGlkX3JlcXVlc3RfZXJyb3IiLAogICAgImNvZGUiOiAiaW52YWxpZF9hcGlfa2V5IiwKICAgICJwYXJhbSI6IG51bGwKICB9Cn0=",
+      "x-ide-elapsed-time-sec": "0.046113148",
+      "x-ide-start": "1763349220.1906207",
+      "x-openai-authorization-error": "401",
+      "x-openai-ide-error-code": "invalid_api_key",
+      "x-openai-internal-caller": "unknown_through_ide",
+      "x-request-id": "req_ba5ce5bfb00b4c7c8d1b295679379c72"
+    },
+    "request_id": "req_ba5ce5bfb00b4c7c8d1b295679379c72",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "code": "invalid_api_key",
+      "param": null
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 126ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: onyx
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"onyx\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db2b8c1c336-EWR",
+      "connection": "keep-alive",
+      "content-length": "245",
+      "content-type": "text/plain",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=qMj1C6py53bJfUZyXwdRJZYUsXMRZbVwJC4kumN45Yk-1763349220-1.0.1.1-.I4aCuzO5BA6b9zS0i3Rnomv4kn8gDo5cvCmyTwmzXMIZm58JURP2L_uesEn6X502k17FyTXvv69C69iu5k6_0awTCW2CgCBEBSTNi08fek; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=054cdbcDE5QZoos8JxTi7qrJpCI4LhjJRcRMs4OKeEo-1763349220350-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "x-content-type-options": "nosniff",
+      "x-datadog-parent-id": "16983808407493859947",
+      "x-datadog-sampling-priority": "0",
+      "x-datadog-trace-id": "12573825884135895819",
+      "x-envoy-upstream-service-time": "3",
+      "x-error-json": "ewogICJlcnJvciI6IHsKICAgICJtZXNzYWdlIjogIkluY29ycmVjdCBBUEkga2V5IHByb3ZpZGVkOiBzay10ZXN0LSoqKipzdHViLiBZb3UgY2FuIGZpbmQgeW91ciBBUEkga2V5IGF0IGh0dHBzOi8vcGxhdGZvcm0ub3BlbmFpLmNvbS9hY2NvdW50L2FwaS1rZXlzLiIsCiAgICAidHlwZSI6ICJpbnZhbGlkX3JlcXVlc3RfZXJyb3IiLAogICAgImNvZGUiOiAiaW52YWxpZF9hcGlfa2V5IiwKICAgICJwYXJhbSI6IG51bGwKICB9Cn0=",
+      "x-ide-elapsed-time-sec": "0.001301809",
+      "x-ide-start": "1763349220.3271322",
+      "x-openai-authorization-error": "401",
+      "x-openai-ide-error-code": "invalid_api_key",
+      "x-openai-internal-caller": "unknown_through_ide",
+      "x-request-id": "req_0fba9446a16d40b68a7fd84122a94ab5"
+    },
+    "request_id": "req_0fba9446a16d40b68a7fd84122a94ab5",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "code": "invalid_api_key",
+      "param": null
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 98ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: nova
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"nova\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db3490fc336-EWR",
+      "connection": "keep-alive",
+      "content-length": "266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=rbiP5YhfOd30fTHhRL419l2vAI46M37VwuGN276cSjM-1763349220-1.0.1.1-0gJzlEy_23uwkt1VHEnDm6cxKJqrvJbSga1kCC8XYPuyZbtdB5igWS0ZXFnzAz8BVxw84uIutJi_QRXXq.doUu1P9u2UsMYKx3ZbjLWhxVM; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=k2pTTJMkRvx3PIAWhUx5UvDVpcs8Wb7s4kJICuFlNmc-1763349220427-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "Origin",
+      "x-content-type-options": "nosniff",
+      "x-envoy-upstream-service-time": "1",
+      "x-openai-proxy-wasm": "v0.1",
+      "x-request-id": "req_34e6685e335349b2b08753857741f583"
+    },
+    "request_id": "req_34e6685e335349b2b08753857741f583",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "param": null,
+      "code": "invalid_api_key"
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 76ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Voice: shimmer
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"shimmer\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+2025-11-16 22:13:40 [[31MERROR[39M] Failed to generate voice preview | {
+  "error": {
+    "status": 401,
+    "headers": {
+      "alt-svc": "h3=\":443\"; ma=86400",
+      "cf-cache-status": "DYNAMIC",
+      "cf-ray": "99fc0db3c968c336-EWR",
+      "connection": "keep-alive",
+      "content-length": "266",
+      "content-type": "application/json; charset=utf-8",
+      "date": "Mon, 17 Nov 2025 03:13:40 GMT",
+      "server": "cloudflare",
+      "set-cookie": "__cf_bm=E7xihqyVO9Yq0e4aIdtw2I0Y5LUjKP0fCmkoa3BwAJ8-1763349220-1.0.1.1-W_dv98EB5ClBOHv1NRZ6CMLuAkqPhJkI.iSUo11qUxsIBwIeuWxO2.F9HdMNhtgWXQZIshtD5LVVvUuNwT8ZySGxhiK3JH74WwhHeVW_fGw; path=/; expires=Mon, 17-Nov-25 03:43:40 GMT; domain=.api.openai.com; HttpOnly; Secure; SameSite=None, _cfuvid=vgaKfbIida5N.syKB_9IH5J6EEYVV1xAoqVwt1bUXbc-1763349220503-0.0.1.1-604800000; path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None",
+      "strict-transport-security": "max-age=31536000; includeSubDomains; preload",
+      "vary": "Origin",
+      "x-content-type-options": "nosniff",
+      "x-envoy-upstream-service-time": "1",
+      "x-openai-proxy-wasm": "v0.1",
+      "x-request-id": "req_12b71a8775624a549d5ebfb9616518c9"
+    },
+    "request_id": "req_12b71a8775624a549d5ebfb9616518c9",
+    "error": {
+      "message": "Incorrect API key provided: sk-test-****stub. You can find your API key at https://platform.openai.com/account/api-keys.",
+      "type": "invalid_request_error",
+      "param": null,
+      "code": "invalid_api_key"
+    },
+    "code": "invalid_api_key",
+    "param": null,
+    "type": "invalid_request_error"
+  }
+}
+Response Status: 503
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "OpenAI TTS service temporarily unavailable"
+}
+Duration: 76ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Missing Voice ID
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Voice ID is required"
+}
+Duration: 1ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Invalid Voice ID
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"invalid-voice\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Invalid voice ID",
+  "details": {
+    "provided": "invalid-voice",
+    "validVoices": [
+      "alloy",
+      "echo",
+      "fable",
+      "onyx",
+      "nova",
+      "shimmer"
+    ]
+  }
+}
+Duration: 0ms
+================================================================================
+
+================================================================================
+Testing: voice/preview - Empty Voice ID
+================================================================================
+Event: {
+  "httpMethod": "POST",
+  "path": "/voice/preview",
+  "headers": {},
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"voiceId\":\"\"}",
+  "requestContext": {
+    "requestId": "test-request-id",
+    "identity": {
+      "sourceIp": "127.0.0.1"
+    },
+    "authorizer": null
+  },
+  "isBase64Encoded": false
+}
+--------------------------------------------------------------------------------
+Response Status: 400
+Response Headers: {
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Headers": "Content-Type,Authorization,X-Amz-Date,X-Api-Key,X-Amz-Security-Token",
+  "Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS"
+}
+Response Body: {
+  "error": "Voice ID is required"
+}
+Duration: 0ms
+================================================================================
+
+Voice Preview: 0/9 tests passed
+
+====================================================================================================
+COMPREHENSIVE LAMBDA FUNCTION TEST REPORT
+====================================================================================================
+
+Generated: 2025-11-17T03:13:40.547Z
+Environment: test
+
+====================================================================================================
+EXECUTIVE SUMMARY
+====================================================================================================
+
+Total Tests Executed: 38
+Passed: 0 (0.0%)
+Failed: 38 (100.0%)
+Total Issues Found: 21
+Total Warnings: 17
+Average Execution Time: 51.63ms
+
+====================================================================================================
+HTTP STATUS CODE DISTRIBUTION
+====================================================================================================
+
+400: 17 (44.7%)
+500: 13 (34.2%)
+503: 8 (21.1%)
+
+====================================================================================================
+TEST CATEGORIES
+====================================================================================================
+
+Authentication Tests: 0/6 passed
+Validation Tests: 13/13 passed
+
+====================================================================================================
+COMMON ISSUES (Top 10)
+====================================================================================================
+
+[13x] Server error: 500
+[8x] Server error: 503
+
+====================================================================================================
+COMMON WARNINGS (Top 10)
+====================================================================================================
+
+[17x] Client error: 400
+
+====================================================================================================
+ISSUE TRACKING & PATTERNS
+====================================================================================================
+
+OTHER:
+  1. Server error: 503
+     Status: OPEN
+     Affected Functions: competitors/suggest - Valid Request, competitors/suggest - Special Characters, voice/preview - Voice: alloy, voice/preview - Voice: echo, voice/preview - Voice: fable, voice/preview - Voice: onyx, voice/preview - Voice: nova, voice/preview - Voice: shimmer
+
+  2. Server error: 500
+     Status: OPEN
+     Affected Functions: episodes/get - Valid Episode ID, episodes/get - Non-existent Episode, podcasts/create - Valid Authenticated Request, podcasts/create - Legacy User Auto-OrgId, podcasts/list - Valid Authenticated Request, podcasts/list - Legacy User Auto-OrgId, podcasts/list - Different User, runs/create - Valid Request, runs/create - Non-existent Podcast, runs/create - Unauthorized Access, runs/events - Valid Request, runs/events - With Limit, runs/events - Non-existent Run
+
+====================================================================================================
+DETAILED RESULTS BY FUNCTION
+====================================================================================================
+
+----------------------------------------------------------------------------------------------------
+competitors/suggest (0/5 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Request - Γ£ù FAIL
+     Status Code: 503
+     Duration: 346ms
+     Issues:
+       - Server error: 503
+
+  2. Missing Company Name - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  3. Empty Company Name - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  4. Short Company Name - Γ£ù FAIL
+     Status Code: 400
+     Duration: 1ms
+     Warnings:
+       - Client error: 400
+
+  5. Special Characters - Γ£ù FAIL
+     Status Code: 503
+     Duration: 130ms
+     Issues:
+       - Server error: 503
+
+----------------------------------------------------------------------------------------------------
+episodes/get (0/4 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Episode ID - Γ£ù FAIL
+     Status Code: 500
+     Duration: 164ms
+     Issues:
+       - Server error: 500
+
+  2. Missing Episode ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 1ms
+     Warnings:
+       - Client error: 400
+
+  3. Invalid Episode ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  4. Non-existent Episode - Γ£ù FAIL
+     Status Code: 500
+     Duration: 29ms
+     Issues:
+       - Server error: 500
+
+----------------------------------------------------------------------------------------------------
+podcasts/create (0/6 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Authenticated Request - Γ£ù FAIL
+     Status Code: 500
+     Duration: 98ms
+     Issues:
+       - Server error: 500
+
+  2. Missing Authentication - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  3. Missing Required Fields - Γ£ù FAIL
+     Status Code: 400
+     Duration: 2ms
+     Warnings:
+       - Client error: 400
+
+  4. Invalid Email - Γ£ù FAIL
+     Status Code: 400
+     Duration: 11ms
+     Warnings:
+       - Client error: 400
+
+  5. Empty Body - Γ£ù FAIL
+     Status Code: 400
+     Duration: 13ms
+     Warnings:
+       - Client error: 400
+
+  6. Legacy User Auto-OrgId - Γ£ù FAIL
+     Status Code: 500
+     Duration: 28ms
+     Issues:
+       - Server error: 500
+
+----------------------------------------------------------------------------------------------------
+podcasts/list (0/4 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Authenticated Request - Γ£ù FAIL
+     Status Code: 500
+     Duration: 86ms
+     Issues:
+       - Server error: 500
+
+  2. Missing Authentication - Γ£ù FAIL
+     Status Code: 400
+     Duration: 1ms
+     Warnings:
+       - Client error: 400
+
+  3. Legacy User Auto-OrgId - Γ£ù FAIL
+     Status Code: 500
+     Duration: 27ms
+     Issues:
+       - Server error: 500
+
+  4. Different User - Γ£ù FAIL
+     Status Code: 500
+     Duration: 27ms
+     Issues:
+       - Server error: 500
+
+----------------------------------------------------------------------------------------------------
+runs/create (0/5 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Request - Γ£ù FAIL
+     Status Code: 500
+     Duration: 97ms
+     Issues:
+       - Server error: 500
+
+  2. Missing Podcast ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  3. Missing Authentication - Γ£ù FAIL
+     Status Code: 400
+     Duration: 1ms
+     Warnings:
+       - Client error: 400
+
+  4. Non-existent Podcast - Γ£ù FAIL
+     Status Code: 500
+     Duration: 27ms
+     Issues:
+       - Server error: 500
+
+  5. Unauthorized Access - Γ£ù FAIL
+     Status Code: 500
+     Duration: 33ms
+     Issues:
+       - Server error: 500
+
+----------------------------------------------------------------------------------------------------
+runs/events (0/5 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Valid Request - Γ£ù FAIL
+     Status Code: 500
+     Duration: 85ms
+     Issues:
+       - Server error: 500
+
+  2. With Limit - Γ£ù FAIL
+     Status Code: 500
+     Duration: 27ms
+     Issues:
+       - Server error: 500
+
+  3. Missing Run ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  4. Invalid Limit - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  5. Non-existent Run - Γ£ù FAIL
+     Status Code: 500
+     Duration: 152ms
+     Issues:
+       - Server error: 500
+
+----------------------------------------------------------------------------------------------------
+voice/preview (0/9 passed)
+----------------------------------------------------------------------------------------------------
+
+  1. Voice: alloy - Γ£ù FAIL
+     Status Code: 503
+     Duration: 83ms
+     Issues:
+       - Server error: 503
+
+  2. Voice: echo - Γ£ù FAIL
+     Status Code: 503
+     Duration: 116ms
+     Issues:
+       - Server error: 503
+
+  3. Voice: fable - Γ£ù FAIL
+     Status Code: 503
+     Duration: 126ms
+     Issues:
+       - Server error: 503
+
+  4. Voice: onyx - Γ£ù FAIL
+     Status Code: 503
+     Duration: 98ms
+     Issues:
+       - Server error: 503
+
+  5. Voice: nova - Γ£ù FAIL
+     Status Code: 503
+     Duration: 76ms
+     Issues:
+       - Server error: 503
+
+  6. Voice: shimmer - Γ£ù FAIL
+     Status Code: 503
+     Duration: 76ms
+     Issues:
+       - Server error: 503
+
+  7. Missing Voice ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 1ms
+     Warnings:
+       - Client error: 400
+
+  8. Invalid Voice ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+  9. Empty Voice ID - Γ£ù FAIL
+     Status Code: 400
+     Duration: 0ms
+     Warnings:
+       - Client error: 400
+
+====================================================================================================
+RECOMMENDATIONS
+====================================================================================================
+
+1. Review authentication middleware and ensure consistent auth handling across all functions
+2. Resolve 2 open issues identified in testing
+
+====================================================================================================
+
+
+Test report saved to: lambda-test-report-2025-11-17T03-13-40.txt
+
+JSON results saved to: lambda-test-results-2025-11-17T03-13-40.json
+
+Total testing time: 1.98s
+
+Γ£ô All tests completed

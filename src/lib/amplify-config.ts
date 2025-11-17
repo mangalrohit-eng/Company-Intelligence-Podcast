@@ -3,6 +3,8 @@
  */
 
 import { Amplify } from 'aws-amplify';
+import { cognitoUserPoolsTokenProvider } from 'aws-amplify/auth/cognito';
+import { defaultStorage } from 'aws-amplify/utils';
 
 export const configureAmplify = () => {
   Amplify.configure({
@@ -32,5 +34,8 @@ export const configureAmplify = () => {
       },
     },
   });
+
+  // Configure token storage to use localStorage
+  cognitoUserPoolsTokenProvider.setKeyValueStorage(defaultStorage);
 };
 

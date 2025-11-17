@@ -1,0 +1,905 @@
+{
+  "timestamp": "2025-11-17T03:13:40.554Z",
+  "totalTime": 1978,
+  "analysis": {
+    "totalTests": 38,
+    "passed": 0,
+    "failed": 38,
+    "totalIssues": 21,
+    "totalWarnings": 17,
+    "avgDuration": 51.63157894736842,
+    "commonIssues": {
+      "Server error: 503": 8,
+      "Server error: 500": 13
+    },
+    "commonWarnings": {
+      "Client error: 400": 17
+    },
+    "byStatusCode": {
+      "400": 17,
+      "500": 13,
+      "503": 8
+    },
+    "authenticationTests": {
+      "total": 6,
+      "passed": 0,
+      "failed": 6
+    },
+    "validationTests": {
+      "total": 13,
+      "passed": 13,
+      "failed": 0
+    }
+  },
+  "issues": [
+    {
+      "category": "Other",
+      "description": "Server error: 503",
+      "affectedFunctions": [
+        "competitors/suggest - Valid Request",
+        "competitors/suggest - Special Characters",
+        "voice/preview - Voice: alloy",
+        "voice/preview - Voice: echo",
+        "voice/preview - Voice: fable",
+        "voice/preview - Voice: onyx",
+        "voice/preview - Voice: nova",
+        "voice/preview - Voice: shimmer"
+      ],
+      "status": "open"
+    },
+    {
+      "category": "Other",
+      "description": "Server error: 500",
+      "affectedFunctions": [
+        "episodes/get - Valid Episode ID",
+        "episodes/get - Non-existent Episode",
+        "podcasts/create - Valid Authenticated Request",
+        "podcasts/create - Legacy User Auto-OrgId",
+        "podcasts/list - Valid Authenticated Request",
+        "podcasts/list - Legacy User Auto-OrgId",
+        "podcasts/list - Different User",
+        "runs/create - Valid Request",
+        "runs/create - Non-existent Podcast",
+        "runs/create - Unauthorized Access",
+        "runs/events - Valid Request",
+        "runs/events - With Limit",
+        "runs/events - Non-existent Run"
+      ],
+      "status": "open"
+    }
+  ],
+  "results": [
+    {
+      "functionName": "competitors/suggest - Valid Request",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI service temporarily unavailable"
+      },
+      "duration": 346,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "competitors/suggest - Missing Company Name",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Company name is required (minimum 2 characters)"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "competitors/suggest - Empty Company Name",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Company name is required (minimum 2 characters)"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "competitors/suggest - Short Company Name",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Company name is required (minimum 2 characters)"
+      },
+      "duration": 1,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "competitors/suggest - Special Characters",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI service temporarily unavailable"
+      },
+      "duration": 130,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "episodes/get - Valid Episode ID",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to retrieve episode",
+        "details": "Requested resource not found"
+      },
+      "duration": 164,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "episodes/get - Missing Episode ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Episode ID required"
+      },
+      "duration": 1,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "episodes/get - Invalid Episode ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Episode ID required"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "episodes/get - Non-existent Episode",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to retrieve episode",
+        "details": "Requested resource not found"
+      },
+      "duration": 29,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "podcasts/create - Valid Authenticated Request",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to create podcast",
+        "details": "Requested resource not found"
+      },
+      "duration": 98,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "podcasts/create - Missing Authentication",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Authentication required - You must be logged in to create a podcast"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "podcasts/create - Missing Required Fields",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Validation error",
+        "details": [
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "author"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "category"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "boolean",
+            "received": "undefined",
+            "path": [
+              "explicit"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "language"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "companyId"
+            ],
+            "message": "Required"
+          },
+          {
+            "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+            "received": "undefined",
+            "code": "invalid_type",
+            "path": [
+              "cadence"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "durationMinutes"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "publishTime"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "timezone"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "timeWindowHours"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "array",
+            "received": "undefined",
+            "path": [
+              "topicIds"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "array",
+            "received": "undefined",
+            "path": [
+              "sourceLanguages"
+            ],
+            "message": "Required"
+          },
+          {
+            "expected": "'strict' | 'permissive'",
+            "received": "undefined",
+            "code": "invalid_type",
+            "path": [
+              "robotsMode"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "voiceId"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "voiceSpeed"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "voiceTone"
+            ],
+            "message": "Required"
+          }
+        ]
+      },
+      "duration": 2,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "podcasts/create - Invalid Email",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Validation error",
+        "details": [
+          {
+            "validation": "email",
+            "code": "invalid_string",
+            "message": "Invalid email",
+            "path": [
+              "email"
+            ]
+          }
+        ]
+      },
+      "duration": 11,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "podcasts/create - Empty Body",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Validation error",
+        "details": [
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "title"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "author"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "category"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "boolean",
+            "received": "undefined",
+            "path": [
+              "explicit"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "language"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "companyId"
+            ],
+            "message": "Required"
+          },
+          {
+            "expected": "'daily' | 'weekly' | 'monthly' | 'custom'",
+            "received": "undefined",
+            "code": "invalid_type",
+            "path": [
+              "cadence"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "durationMinutes"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "publishTime"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "timezone"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "timeWindowHours"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "array",
+            "received": "undefined",
+            "path": [
+              "topicIds"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "array",
+            "received": "undefined",
+            "path": [
+              "sourceLanguages"
+            ],
+            "message": "Required"
+          },
+          {
+            "expected": "'strict' | 'permissive'",
+            "received": "undefined",
+            "code": "invalid_type",
+            "path": [
+              "robotsMode"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "voiceId"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "number",
+            "received": "undefined",
+            "path": [
+              "voiceSpeed"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "invalid_type",
+            "expected": "string",
+            "received": "undefined",
+            "path": [
+              "voiceTone"
+            ],
+            "message": "Required"
+          }
+        ]
+      },
+      "duration": 13,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "podcasts/create - Legacy User Auto-OrgId",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to create podcast",
+        "details": "Requested resource not found"
+      },
+      "duration": 28,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "podcasts/list - Valid Authenticated Request",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to list podcasts",
+        "details": "Requested resource not found"
+      },
+      "duration": 86,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "podcasts/list - Missing Authentication",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Authentication required - Please log in"
+      },
+      "duration": 1,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "podcasts/list - Legacy User Auto-OrgId",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to list podcasts",
+        "details": "Requested resource not found"
+      },
+      "duration": 27,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "podcasts/list - Different User",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to list podcasts",
+        "details": "Requested resource not found"
+      },
+      "duration": 27,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/create - Valid Request",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to start run",
+        "details": "Requested resource not found"
+      },
+      "duration": 97,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/create - Missing Podcast ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Podcast ID required"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "runs/create - Missing Authentication",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Authentication required"
+      },
+      "duration": 1,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "runs/create - Non-existent Podcast",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to start run",
+        "details": "Requested resource not found"
+      },
+      "duration": 27,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/create - Unauthorized Access",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to start run",
+        "details": "Requested resource not found"
+      },
+      "duration": 33,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/events - Valid Request",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to retrieve run events",
+        "details": "Requested resource not found"
+      },
+      "duration": 85,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/events - With Limit",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to retrieve run events",
+        "details": "Requested resource not found"
+      },
+      "duration": 27,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "runs/events - Missing Run ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Run ID required"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "runs/events - Invalid Limit",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Limit must be a number between 1 and 1000",
+        "details": {
+          "providedLimit": "invalid"
+        }
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "runs/events - Non-existent Run",
+      "success": false,
+      "statusCode": 500,
+      "response": {
+        "error": "Failed to retrieve run events",
+        "details": "Requested resource not found"
+      },
+      "duration": 152,
+      "issues": [
+        "Server error: 500"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: alloy",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 83,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: echo",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 116,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: fable",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 126,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: onyx",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 98,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: nova",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 76,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Voice: shimmer",
+      "success": false,
+      "statusCode": 503,
+      "response": {
+        "error": "OpenAI TTS service temporarily unavailable"
+      },
+      "duration": 76,
+      "issues": [
+        "Server error: 503"
+      ],
+      "warnings": []
+    },
+    {
+      "functionName": "voice/preview - Missing Voice ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Voice ID is required"
+      },
+      "duration": 1,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "voice/preview - Invalid Voice ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Invalid voice ID",
+        "details": {
+          "provided": "invalid-voice",
+          "validVoices": [
+            "alloy",
+            "echo",
+            "fable",
+            "onyx",
+            "nova",
+            "shimmer"
+          ]
+        }
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    },
+    {
+      "functionName": "voice/preview - Empty Voice ID",
+      "success": false,
+      "statusCode": 400,
+      "response": {
+        "error": "Voice ID is required"
+      },
+      "duration": 0,
+      "issues": [],
+      "warnings": [
+        "Client error: 400"
+      ]
+    }
+  ]
+}
