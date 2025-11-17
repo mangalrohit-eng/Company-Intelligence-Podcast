@@ -1,0 +1,159 @@
+[
+  {
+    "test": "API Gateway Reachable",
+    "status": "PASS",
+    "duration": 241,
+    "details": {
+      "status": 404
+    }
+  },
+  {
+    "test": "Competitor Suggestions API (No Auth)",
+    "status": "PASS",
+    "duration": 2068,
+    "details": {
+      "competitors": [
+        "Ford Motor Company",
+        "General Motors",
+        "Nissan Motor Co.",
+        "BMW",
+        "Mercedes-Benz",
+        "Volkswagen AG"
+      ],
+      "tokensUsed": 78
+    }
+  },
+  {
+    "test": "Competitor AI: Microsoft",
+    "status": "PASS",
+    "duration": 963,
+    "details": {
+      "competitors": [
+        "Apple Inc.",
+        "Google",
+        "Amazon"
+      ],
+      "count": 6
+    }
+  },
+  {
+    "test": "Competitor AI: Starbucks",
+    "status": "PASS",
+    "duration": 2958,
+    "details": {
+      "competitors": [
+        "Dunkin' Donuts",
+        "Costa Coffee",
+        "McCafe (McDonald's)"
+      ],
+      "count": 6
+    }
+  },
+  {
+    "test": "Competitor AI: Nike",
+    "status": "PASS",
+    "duration": 1294,
+    "details": {
+      "competitors": [
+        "Adidas",
+        "Under Armour",
+        "Puma"
+      ],
+      "count": 6
+    }
+  },
+  {
+    "test": "Competitor AI: Toyota",
+    "status": "PASS",
+    "duration": 1400,
+    "details": {
+      "competitors": [
+        "Honda",
+        "Ford",
+        "Nissan"
+      ],
+      "count": 6
+    }
+  },
+  {
+    "test": "Voice Preview: alloy",
+    "status": "PASS",
+    "duration": 3566,
+    "details": {
+      "audioSize": "105.9 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "Voice Preview: echo",
+    "status": "PASS",
+    "duration": 1937,
+    "details": {
+      "audioSize": "98.9 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "Voice Preview: fable",
+    "status": "PASS",
+    "duration": 1855,
+    "details": {
+      "audioSize": "105.9 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "Voice Preview: nova",
+    "status": "PASS",
+    "duration": 2634,
+    "details": {
+      "audioSize": "105.0 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "Voice Preview: onyx",
+    "status": "PASS",
+    "duration": 2334,
+    "details": {
+      "audioSize": "106.4 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "Voice Preview: shimmer",
+    "status": "PASS",
+    "duration": 1778,
+    "details": {
+      "audioSize": "105.5 KB",
+      "contentType": "audio/mpeg"
+    }
+  },
+  {
+    "test": "List Podcasts (No Auth) → 401",
+    "status": "FAIL",
+    "duration": 484,
+    "error": "Unexpected status: 500",
+    "details": {
+      "message": "Internal Server Error"
+    }
+  },
+  {
+    "test": "Create Podcast (No Auth) → 401",
+    "status": "FAIL",
+    "duration": 232,
+    "error": "Unexpected status: 500",
+    "details": {
+      "message": "Internal Server Error"
+    }
+  },
+  {
+    "test": "List Runs (No Auth) → 401",
+    "status": "FAIL",
+    "duration": 520,
+    "error": "Expected 401, got 500",
+    "details": {
+      "message": "Internal Server Error"
+    }
+  }
+]

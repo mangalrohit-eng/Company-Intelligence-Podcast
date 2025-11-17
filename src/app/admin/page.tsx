@@ -346,6 +346,7 @@ export default function AdminPage() {
         {activeView === 'orgs' && <OrgsUsersView />}
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

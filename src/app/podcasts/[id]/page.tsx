@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 type Tab = 'overview' | 'episodes' | 'runs' | 'settings';
 
@@ -34,7 +35,8 @@ export default function PodcastDetailPage() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <ProtectedRoute>
+      <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex flex-col md:flex-row gap-8 mb-8">
@@ -129,6 +131,7 @@ export default function PodcastDetailPage() {
         </Tabs>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

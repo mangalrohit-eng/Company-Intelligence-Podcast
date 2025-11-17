@@ -9,6 +9,7 @@ import {
   Play, Loader2, CheckCircle, XCircle, Terminal, 
   FileText, Settings, Copy, ChevronRight 
 } from 'lucide-react';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 // All 13 stages
 const PIPELINE_STAGES = [
@@ -241,7 +242,8 @@ export default function TestPipelinePage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white p-8">
+    <ProtectedRoute>
+      <div className="min-h-screen bg-black text-white p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
@@ -692,5 +694,6 @@ export default function TestPipelinePage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

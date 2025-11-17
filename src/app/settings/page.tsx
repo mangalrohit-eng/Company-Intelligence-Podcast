@@ -13,6 +13,7 @@ import { Select } from '@/components/ui/select';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -27,7 +28,8 @@ export default function SettingsPage() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <ProtectedRoute>
+      <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2">Settings</h1>
@@ -343,6 +345,7 @@ export default function SettingsPage() {
         </Tabs>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

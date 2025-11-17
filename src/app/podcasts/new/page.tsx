@@ -11,6 +11,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -104,7 +105,8 @@ export default function NewPodcastPage() {
   };
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <ProtectedRoute>
+      <div className="min-h-screen p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
         <div className="mb-8 text-center">
@@ -208,6 +210,7 @@ export default function NewPodcastPage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 

@@ -5,10 +5,12 @@
 'use client';
 
 import { Calendar, Mail, Building } from 'lucide-react';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export default function ProfilePage() {
   return (
-    <div className="min-h-screen p-8">
+    <ProtectedRoute>
+      <div className="min-h-screen p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="bg-secondary border border-border rounded-lg p-8 mb-6">
@@ -74,6 +76,7 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }
 
