@@ -78,5 +78,16 @@ export class RealtimeEventEmitter implements IEventEmitter {
       error,
     });
   }
+
+  // Required by IEventEmitter interface
+  setSubstage(substage: string): void {
+    // Not implemented for realtime emitter, but required by interface
+    logger.debug(`Substage set: ${substage}`);
+  }
+
+  clearSubstage(): void {
+    // Not implemented for realtime emitter, but required by interface
+    logger.debug('Substage cleared');
+  }
 }
 
