@@ -13,7 +13,9 @@ const docClient = DynamoDBDocumentClient.from(dynamoClient);
 export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   try {
     // Extract orgId from authorizer - REAL AUTH ONLY, NO BYPASSES
-    const orgId = event.requestContext.authorizer?.claims?.['custom:org_id'];
+    // API Gateway HTTP API uses different structure than REST API
+    const authorizer = event.requestContext?.authorizer;
+    const orgId = authorizer?.claims?.['custom:org_id'] ||  authorizer?.jwt?.claims?.['custom:org_id'];
 
     // Require real authentication
     if (!orgId) {
@@ -23,7 +25,10 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        body: JSON.stringify({ error: 'Unauthorized - Please log in' }),
+        body: JSON.stringify({ 
+          error: 'Unauthorized - Please log in',
+          debug: 'No org_id found in authorizer context'
+        }),
       };
     }
 
@@ -57,8 +62,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({
-        error: 'Internal server error',
+        error: error instanceof Error ? error.message : 'Internal server error',
       }),
     };
   }

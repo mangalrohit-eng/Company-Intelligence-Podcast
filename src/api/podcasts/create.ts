@@ -150,6 +150,10 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     return {
       statusCode: error instanceof Error && error.name === 'ZodError' ? 400 : 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({
         error: error instanceof Error ? error.message : 'Internal server error',
       }),

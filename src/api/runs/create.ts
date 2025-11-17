@@ -179,8 +179,12 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     return {
       statusCode: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
       body: JSON.stringify({
-        error: 'Internal server error',
+        error: error instanceof Error ? error.message : 'Internal server error',
       }),
     };
   }

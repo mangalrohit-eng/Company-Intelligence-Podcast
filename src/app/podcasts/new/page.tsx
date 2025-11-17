@@ -5,7 +5,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Zap, Sparkles, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -16,6 +16,8 @@ import { ProtectedRoute } from '@/components/ProtectedRoute';
 type Step = 1 | 2 | 3 | 4 | 5;
 
 export default function NewPodcastPage() {
+  const [setupMode, setSetupMode] = useState<'choice' | 'easy' | 'advanced'>('choice');
+  const [easyModeCompany, setEasyModeCompany] = useState('');
   const [currentStep, setCurrentStep] = useState<Step>(1);
   const [formData, setFormData] = useState({
     // Step 1: Branding
@@ -75,6 +77,71 @@ export default function NewPodcastPage() {
     }
   };
 
+  const handleEasyModeSubmit = async () => {
+    if (!easyModeCompany.trim()) {
+      alert('Please enter your company name');
+      return;
+    }
+
+    try {
+      // Auto-generate all settings based on company name
+      const companyName = easyModeCompany.trim();
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/podcasts', {
+        // Auto-generated branding
+        title: `${companyName} Intelligence Briefing`,
+        subtitle: `Daily insights for ${companyName}`,
+        description: `Stay ahead of the curve with AI-powered intelligence briefings tailored for ${companyName}. Get daily updates on industry trends, competitor moves, and market insights.`,
+        author: companyName,
+        email: '', // Will use user's email from auth
+        category: 'Business',
+        explicit: false,
+        language: 'en',
+        
+        // Company settings
+        companyId: companyName,
+        industryId: 'technology', // Default
+        competitorIds: [],
+        
+        // Smart defaults for cadence
+        cadence: 'daily',
+        durationMinutes: 5,
+        publishTime: '09:00',
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        timeWindowHours: 24,
+        
+        // Topics & regions defaults
+        topicIds: ['company-news', 'competitor-analysis', 'industry-trends'],
+        topicPriorities: {
+          'company-news': 3,
+          'competitor-analysis': 2,
+          'industry-trends': 2
+        },
+        regions: ['US'],
+        sourceLanguages: ['en'],
+        robotsMode: 'strict',
+        allowDomains: [],
+        blockDomains: [],
+        
+        // Voice defaults
+        voiceId: 'alloy',
+        voiceSpeed: 1.0,
+        voiceTone: 'professional',
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        window.location.href = `/podcasts/${data.id}`;
+      } else {
+        const error = await response.text();
+        alert(`Failed to create podcast: ${error}`);
+      }
+    } catch (error) {
+      console.error('Error creating podcast:', error);
+      alert('Failed to create podcast. Please try again.');
+    }
+  };
+
   const handleSubmit = async () => {
     try {
       // Create podcast via AWS Lambda API Gateway with auth token
@@ -111,8 +178,172 @@ export default function NewPodcastPage() {
         {/* Header */}
         <div className="mb-8 text-center">
           <h1 className="text-4xl font-bold mb-2">Create New Podcast</h1>
-          <p className="text-muted">Follow these 5 steps to configure your AI-powered podcast</p>
+          <p className="text-muted">
+            {setupMode === 'choice' && 'Choose your setup experience'}
+            {setupMode === 'easy' && 'Quick setup - Just enter your company name'}
+            {setupMode === 'advanced' && 'Follow these 5 steps to configure your AI-powered podcast'}
+          </p>
         </div>
+
+        {/* Setup Mode Choice */}
+        {setupMode === 'choice' && (
+          <div className="max-w-4xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-6 mb-8">
+              {/* Easy Mode Card */}
+              <Card className="p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/10 transition-all cursor-pointer group">
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Zap className="w-10 h-10 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold mb-3">Easy Mode</h2>
+                  <p className="text-muted mb-6 leading-relaxed">
+                    Just enter your company name and we'll handle the rest with smart defaults.
+                    Perfect for getting started quickly.
+                  </p>
+                  <Button 
+                    size="lg" 
+                    className="w-full gap-2"
+                    onClick={() => setSetupMode('easy')}
+                  >
+                    <Sparkles className="w-5 h-5" />
+                    I'm Feeling Lucky
+                  </Button>
+                  <p className="text-xs text-muted mt-3">⚡ Setup in 30 seconds</p>
+                </div>
+              </Card>
+
+              {/* Advanced Mode Card */}
+              <Card className="p-8 hover:border-primary hover:shadow-lg hover:shadow-primary/10 transition-all cursor-pointer group">
+                <div className="text-center">
+                  <div className="w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                    <Settings className="w-10 h-10 text-white" />
+                  </div>
+                  <h2 className="text-2xl font-bold mb-3">Advanced Setup</h2>
+                  <p className="text-muted mb-6 leading-relaxed">
+                    Full control over all settings including competitors, topics, voice, and scheduling.
+                    Customize everything.
+                  </p>
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="w-full gap-2"
+                    onClick={() => setSetupMode('advanced')}
+                  >
+                    <Settings className="w-5 h-5" />
+                    Custom Setup
+                  </Button>
+                  <p className="text-xs text-muted mt-3">🎯 Full customization</p>
+                </div>
+              </Card>
+            </div>
+          </div>
+        )}
+
+        {/* Easy Mode Form */}
+        {setupMode === 'easy' && (
+          <div className="max-w-2xl mx-auto">
+            <Card className="p-8">
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 bg-gradient-to-br from-primary to-accent rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Sparkles className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold mb-3">Quick Setup</h2>
+                <p className="text-muted">
+                  We'll create an intelligent daily briefing podcast for your company with optimal settings
+                </p>
+              </div>
+
+              <div className="space-y-6">
+                <div>
+                  <label className="block text-sm font-semibold mb-2">
+                    Company Name <span className="text-red-500">*</span>
+                  </label>
+                  <Input
+                    value={easyModeCompany}
+                    onChange={(e) => setEasyModeCompany(e.target.value)}
+                    placeholder="e.g., Acme Corp"
+                    className="text-lg p-6"
+                    autoFocus
+                  />
+                  <p className="text-xs text-muted mt-2">
+                    This will be used to generate your podcast title and content focus
+                  </p>
+                </div>
+
+                {/* Preview of what will be created */}
+                {easyModeCompany.trim() && (
+                  <div className="bg-secondary border border-border rounded-lg p-6 space-y-3">
+                    <h3 className="font-semibold text-sm text-primary mb-3">📋 What we'll create:</h3>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium">Title:</span>{' '}
+                          <span className="text-muted">{easyModeCompany} Intelligence Briefing</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium">Schedule:</span>{' '}
+                          <span className="text-muted">Daily at 9:00 AM</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium">Duration:</span>{' '}
+                          <span className="text-muted">~5 minutes</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium">Topics:</span>{' '}
+                          <span className="text-muted">Company news, Competitor analysis, Industry trends</span>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-2">
+                        <Check className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                        <div>
+                          <span className="font-medium">Voice:</span>{' '}
+                          <span className="text-muted">Professional AI narrator</span>
+                        </div>
+                      </div>
+                    </div>
+                    <p className="text-xs text-muted pt-3 border-t border-border">
+                      💡 You can customize all settings later from the podcast settings page
+                    </p>
+                  </div>
+                )}
+              </div>
+
+              <div className="flex gap-3 mt-8">
+                <Button
+                  variant="outline"
+                  onClick={() => setSetupMode('choice')}
+                  className="flex-1"
+                >
+                  <ArrowLeft className="w-4 h-4 mr-2" />
+                  Back
+                </Button>
+                <Button
+                  onClick={handleEasyModeSubmit}
+                  disabled={!easyModeCompany.trim()}
+                  className="flex-1 gap-2"
+                  size="lg"
+                >
+                  <Sparkles className="w-5 h-5" />
+                  Create Podcast
+                </Button>
+              </div>
+            </Card>
+          </div>
+        )}
+
+        {/* Advanced Mode - Original 5-step flow */}
+        {setupMode === 'advanced' && (
+          <>
 
         {/* Progress Stepper */}
         <div className="mb-12">
@@ -208,6 +439,8 @@ export default function NewPodcastPage() {
             </Button>
           )}
         </div>
+        </>
+        )}
       </div>
     </div>
     </ProtectedRoute>
