@@ -52,8 +52,17 @@ export class RankStage {
 
       await emitter.emit('rank', pct, `Ranking ${i + 1}/${items.length}`);
 
+      // Get actual source (extracts from title for Google News articles)
+      const actualSource = this.getActualSource(item);
+      
+      // Update publisher field if we extracted a different source
+      const updatedItem = {
+        ...item,
+        publisher: actualSource.publisher, // Use extracted publisher for Google News
+      };
+
       // Compute ranking factors (R, F, A, D, S, C)
-      const factors = this.computeRankingFactors(item, items);
+      const factors = this.computeRankingFactors(updatedItem, items);
 
       // Compute Expected Info Gain from factors using admin-configured weights
       const expectedInfoGain = this.computeExpectedInfoGain(factors, weights);
@@ -65,7 +74,7 @@ export class RankStage {
       const rankScore = cost > 0 ? expectedInfoGain / cost : 0;
 
       const rankedItem: RankedItem = {
-        ...item,
+        ...updatedItem,
         expectedInfoGain,
         cost,
         rankScore,
@@ -129,21 +138,51 @@ export class RankStage {
 
   /**
    * Calculate domain authority for a given domain/publisher
+   * Handles both formats: "Reuters" or "reuters.com"
    */
   private calculateDomainAuthority(domainOrPublisher: string): number {
-    // Known high-authority domains
-    const highAuthority = ['reuters.com', 'bloomberg.com', 'wsj.com', 'ft.com', 'nytimes.com', 'theguardian.com', 'bbc.com', 'cnn.com', 'ap.org'];
-    // Known medium-authority domains
-    const mediumAuthority = ['cnbc.com', 'forbes.com', 'techcrunch.com', 'theverge.com', 'wired.com', 'time.com', 'usatoday.com', 'today.com'];
+    // Known high-authority publishers (both name and domain formats)
+    const highAuthority = [
+      'reuters', 'reuters.com',
+      'bloomberg', 'bloomberg.com',
+      'wsj', 'wsj.com', 'wall street journal',
+      'ft', 'ft.com', 'financial times',
+      'nytimes', 'nytimes.com', 'new york times',
+      'theguardian', 'theguardian.com', 'guardian',
+      'bbc', 'bbc.com',
+      'cnn', 'cnn.com',
+      'ap', 'ap.org', 'associated press',
+    ];
+    // Known medium-authority publishers
+    const mediumAuthority = [
+      'cnbc', 'cnbc.com',
+      'forbes', 'forbes.com',
+      'techcrunch', 'techcrunch.com',
+      'theverge', 'theverge.com',
+      'wired', 'wired.com',
+      'time', 'time.com',
+      'usatoday', 'usatoday.com', 'usa today',
+      'today', 'today.com',
+    ];
     
-    const normalized = domainOrPublisher.toLowerCase().replace(/^www\./, '');
+    const normalized = domainOrPublisher.toLowerCase().replace(/^www\./, '').replace(/\.com$/, '').replace(/\.org$/, '').trim();
     
-    if (highAuthority.some(d => normalized.includes(d))) {
+    // Check if normalized matches any high-authority publisher (name or domain)
+    if (highAuthority.some(pub => {
+      const pubNormalized = pub.toLowerCase().replace(/\.com$/, '').replace(/\.org$/, '');
+      return normalized === pubNormalized || normalized.includes(pubNormalized) || pubNormalized.includes(normalized);
+    })) {
       return 0.9;
     }
-    if (mediumAuthority.some(d => normalized.includes(d))) {
+    
+    // Check if normalized matches any medium-authority publisher
+    if (mediumAuthority.some(pub => {
+      const pubNormalized = pub.toLowerCase().replace(/\.com$/, '').replace(/\.org$/, '');
+      return normalized === pubNormalized || normalized.includes(pubNormalized) || pubNormalized.includes(normalized);
+    })) {
       return 0.7;
     }
+    
     // Default authority for unknown sources
     return 0.5;
   }
@@ -213,7 +252,7 @@ export class RankStage {
     const F = item.scores.recency;
 
     // A: Authority - publisher/domain authority
-    // For Google News articles, extract actual source from title
+    // Use the publisher field (which should already be updated for Google News)
     const actualSource = this.getActualSource(item);
     const A = actualSource.authority;
 
