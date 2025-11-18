@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Check, Zap, Sparkles, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -67,6 +67,20 @@ export default function NewPodcastPage() {
 
   const handleNext = () => {
     if (currentStep < 5) {
+      // If leaving Step 4, ensure topics are synced before moving to Step 5
+      if (currentStep === 4) {
+        console.log('🔄 Leaving Step 4 - ensuring topics are synced...', {
+          currentTopicIds: formData.topicIds,
+          topicIdsLength: formData.topicIds?.length || 0,
+        });
+        
+        // Force a final sync - this will be handled by Step4's useEffect when currentStep changes
+        // But we can also manually ensure topics are set if they're missing
+        if (!formData.topicIds || formData.topicIds.length === 0) {
+          console.warn('⚠️ Topics are empty when leaving Step 4! This should not happen.');
+        }
+      }
+      
       setCurrentStep((currentStep + 1) as Step);
     }
   };
@@ -144,6 +158,33 @@ export default function NewPodcastPage() {
 
   const handleSubmit = async () => {
     try {
+      // Debug: Log what we're sending
+      console.log('📤 Submitting podcast with formData:', {
+        title: formData.title,
+        companyId: formData.companyId,
+        topicIds: formData.topicIds,
+        topicIdsLength: formData.topicIds?.length || 0,
+        topicPriorities: formData.topicPriorities,
+        hasTopics: !!(formData.topicIds && formData.topicIds.length > 0),
+        allFormDataKeys: Object.keys(formData),
+      });
+
+      // Check if topics are missing and try to get them from Step4's default topics
+      let topicsToSubmit = formData.topicIds || [];
+      if (topicsToSubmit.length === 0) {
+        console.warn('⚠️ WARNING: formData.topicIds is empty!', {
+          formDataKeys: Object.keys(formData),
+          formDataTopicIds: formData.topicIds,
+        });
+        
+        // Try to get default topics as fallback
+        const defaultTopics = ['earnings', 'product-launches', 'm-and-a', 'leadership', 'technology', 'strategy'];
+        console.warn('⚠️ Using default topics as fallback:', defaultTopics);
+        topicsToSubmit = defaultTopics;
+        
+        alert('⚠️ Warning: No topics were synced from Step 4. Using default topics. Please go back to Step 4 and ensure topics are selected.');
+      }
+
       // Create podcast via AWS Lambda API Gateway with auth token
       const { api } = await import('@/lib/api');
       const response = await api.post('/podcasts', {
@@ -151,7 +192,8 @@ export default function NewPodcastPage() {
           description: formData.description,
           companyId: formData.companyId,
           competitors: formData.competitorIds || [],
-          topics: formData.topicIds || [],
+          topics: topicsToSubmit, // Use the topics we determined above
+          topicPriorities: formData.topicPriorities || {}, // Include priorities
           duration: formData.durationMinutes || 5,
           voice: formData.voiceId || 'alloy',
           schedule: formData.cadence || 'weekly',
@@ -402,7 +444,7 @@ export default function NewPodcastPage() {
           {currentStep === 1 && <Step1 formData={formData} setFormData={setFormData} />}
           {currentStep === 2 && <Step2 formData={formData} setFormData={setFormData} />}
           {currentStep === 3 && <Step3 formData={formData} setFormData={setFormData} />}
-          {currentStep === 4 && <Step4 formData={formData} setFormData={setFormData} />}
+          {currentStep === 4 && <Step4 formData={formData} setFormData={setFormData} currentStep={currentStep} />}
           {currentStep === 5 && <Step5 formData={formData} setFormData={setFormData} />}
         </Card>
 
@@ -944,18 +986,211 @@ function Step3({ formData, setFormData }: any) {
   );
 }
 
-function Step4({ formData, setFormData }: any) {
-  const [topicPriorities, setTopicPriorities] = useState<Record<string, number>>({
-    'Earnings': 80,
-    'Product Launches': 70,
-    'M&A': 60,
-    'Leadership': 50,
-    'Technology': 85,
-    'Strategy': 75,
-  });
+function Step4({ formData, setFormData, currentStep }: any) {
+  // Helper to convert topic name to ID (e.g., 'Strategy' -> 'strategy', 'Product Launches' -> 'product-launches')
+  const topicNameToId = (name: string): string => {
+    return name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '');
+  };
 
-  const [selectedRegions, setSelectedRegions] = useState<string[]>(['US', 'UK']);
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['en']);
+  // Initialize topic priorities from formData or defaults
+  const [topicPriorities, setTopicPriorities] = useState<Record<string, number>>(
+    formData.topicPriorities || {
+      'Earnings': 80,
+      'Product Launches': 70,
+      'M&A': 60,
+      'Leadership': 50,
+      'Technology': 85,
+      'Strategy': 75,
+    }
+  );
+
+  // Track which topics are selected (all are selected by default)
+  const [selectedTopics, setSelectedTopics] = useState<Set<string>>(
+    new Set(Object.keys(topicPriorities))
+  );
+
+  const [selectedRegions, setSelectedRegions] = useState<string[]>(
+    formData.regions || ['US', 'UK']
+  );
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(
+    formData.sourceLanguages || ['en']
+  );
+
+  // AI-suggested special topics
+  const [suggestedSpecialTopics, setSuggestedSpecialTopics] = useState<Array<{ name: string; desc: string }>>([]);
+  const [selectedSpecialTopics, setSelectedSpecialTopics] = useState<Set<string>>(new Set());
+  const [isLoadingTopics, setIsLoadingTopics] = useState(false);
+  const [topicsError, setTopicsError] = useState('');
+
+  // Track if we've already fetched topics for this company
+  const [fetchedCompany, setFetchedCompany] = useState<string>('');
+
+  // Fetch AI-suggested topics when company/competitors are available
+  useEffect(() => {
+    const companyName = formData.companyId;
+    const competitors = formData.competitorIds || [];
+    
+    // Only fetch if we have a company name, haven't loaded for this company yet, and not currently loading
+    if (
+      companyName && 
+      companyName.length >= 2 && 
+      companyName !== fetchedCompany && 
+      !isLoadingTopics
+    ) {
+      setIsLoadingTopics(true);
+      setTopicsError('');
+      setFetchedCompany(companyName); // Mark that we're fetching for this company
+      
+      const fetchTopics = async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post('/topics/suggest', {
+            companyName,
+            industry: formData.industryId || undefined,
+            competitors: competitors.length > 0 ? competitors : undefined,
+          }, {
+            requireAuth: false, // Skip auth for local development
+          });
+          
+          if (response.ok) {
+            const data = await response.json();
+            
+            // Check if API returned an error but with fallback flag
+            if (data.error && data.fallback) {
+              setTopicsError(
+                `ℹ️ ${data.error}. ${data.details || 'Using default topics.'}`
+              );
+              // Use default topics as fallback
+              setSuggestedSpecialTopics([
+                { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
+                { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
+                { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
+              ]);
+            } else if (data.topics && data.topics.length > 0) {
+              setSuggestedSpecialTopics(data.topics);
+              setTopicsError('');
+            } else {
+              // No topics returned, use defaults
+              setTopicsError('ℹ️ No AI topics generated. Using default topics.');
+              setSuggestedSpecialTopics([
+                { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
+                { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
+                { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
+              ]);
+            }
+          } else {
+            const errorData = await response.json().catch(() => ({}));
+            setTopicsError(
+              `⚠️ Could not generate AI topics: ${errorData.error || response.statusText}. Using default topics.`
+            );
+            // Fallback to default topics if API fails
+            setSuggestedSpecialTopics([
+              { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
+              { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
+              { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
+            ]);
+          }
+        } catch (error) {
+          console.error('Failed to fetch topic suggestions:', error);
+          setTopicsError(
+            `❌ Network error: ${error instanceof Error ? error.message : 'Unknown error'}. Using default topics.`
+          );
+          // Fallback to default topics
+          setSuggestedSpecialTopics([
+            { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
+            { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
+            { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
+          ]);
+        } finally {
+          setIsLoadingTopics(false);
+        }
+      };
+      
+      fetchTopics();
+    } else if (!companyName || companyName.length < 2) {
+      // Reset if company name is cleared
+      setFetchedCompany('');
+      setSuggestedSpecialTopics([]);
+      setSelectedSpecialTopics(new Set());
+    }
+  }, [formData.companyId, formData.competitorIds, formData.industryId, fetchedCompany, isLoadingTopics]);
+
+  // Sync topics and priorities to formData whenever they change
+  // Convert Sets to arrays for dependency tracking
+  const selectedTopicsArray = Array.from(selectedTopics).sort();
+  const selectedSpecialTopicsArray = Array.from(selectedSpecialTopics).sort();
+  
+  useEffect(() => {
+    const topicIds = selectedTopicsArray.map(topicNameToId);
+    const priorities: Record<string, number> = {};
+    selectedTopicsArray.forEach(topic => {
+      const topicId = topicNameToId(topic);
+      priorities[topicId] = topicPriorities[topic] || 50;
+    });
+
+    // Convert selected special topics to IDs and add to formData
+    const specialTopicIds = selectedSpecialTopicsArray.map(topicNameToId);
+
+    // Debug logging
+    console.log('🔄 Step4: Syncing topics to formData', {
+      selectedTopicsCount: selectedTopics.size,
+      selectedTopicsArray: selectedTopicsArray,
+      topicIds,
+      topicIdsLength: topicIds.length,
+      priorities,
+      specialTopicIds,
+    });
+
+    setFormData((prev: any) => {
+      const updated = {
+        ...prev,
+        topicIds,
+        topicPriorities: priorities,
+        specialTopicIds, // Store special topic IDs separately
+        specialTopics: selectedSpecialTopicsArray, // Store special topic names for reference
+        regions: selectedRegions,
+        sourceLanguages: selectedLanguages,
+      };
+      
+      // Log what we're setting
+      console.log('🔄 Step4: Updated formData with topics', {
+        topicIds: updated.topicIds,
+        topicIdsLength: updated.topicIds?.length || 0,
+      });
+      
+      return updated;
+    });
+  }, [selectedTopicsArray.join(','), topicPriorities, selectedRegions.join(','), selectedLanguages.join(','), selectedSpecialTopicsArray.join(',')]);
+
+  // Force sync when Step4 becomes active (currentStep === 4) and on mount
+  useEffect(() => {
+    // Sync immediately when Step4 is active and we have topics
+    if (currentStep === 4 && selectedTopics.size > 0) {
+      const topicIds = Array.from(selectedTopics).map(topicNameToId);
+      const priorities: Record<string, number> = {};
+      Array.from(selectedTopics).forEach(topic => {
+        const topicId = topicNameToId(topic);
+        priorities[topicId] = topicPriorities[topic] || 50;
+      });
+      
+      console.log('🔄 Step4: Force sync when Step4 is active', { 
+        topicIds,
+        selectedTopicsCount: selectedTopics.size,
+        selectedTopicsArray: Array.from(selectedTopics),
+        priorities,
+      });
+      
+      setFormData((prev: any) => {
+        const updated = {
+          ...prev,
+          topicIds,
+          topicPriorities: priorities,
+        };
+        console.log('🔄 Step4: Setting formData.topicIds to:', updated.topicIds);
+        return updated;
+      });
+    }
+  }, [currentStep, selectedTopics, topicPriorities]); // Re-sync when step changes or topics change
 
   const regions = ['US', 'UK', 'EU', 'APAC', 'LATAM', 'MEA', 'Global'];
   const languages = [
@@ -965,6 +1200,18 @@ function Step4({ formData, setFormData }: any) {
     { code: 'de', name: 'German' },
     { code: 'zh', name: 'Chinese' },
   ];
+
+  const toggleTopic = (topic: string) => {
+    setSelectedTopics(prev => {
+      const next = new Set(prev);
+      if (next.has(topic)) {
+        next.delete(topic);
+      } else {
+        next.add(topic);
+      }
+      return next;
+    });
+  };
 
   const toggleRegion = (region: string) => {
     setSelectedRegions(prev =>
@@ -991,20 +1238,27 @@ function Step4({ formData, setFormData }: any) {
           {Object.entries(topicPriorities).map(([topic, priority]) => (
             <div key={topic} className="space-y-2">
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4" defaultChecked />
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4" 
+                    checked={selectedTopics.has(topic)}
+                    onChange={() => toggleTopic(topic)}
+                  />
                   <span className="font-medium">{topic}</span>
                 </label>
                 <span className="text-sm text-muted">Priority: {priority}</span>
               </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={priority}
-                onChange={(e) => setTopicPriorities({ ...topicPriorities, [topic]: parseInt(e.target.value) })}
-                className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer"
-              />
+              {selectedTopics.has(topic) && (
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={priority}
+                  onChange={(e) => setTopicPriorities({ ...topicPriorities, [topic]: parseInt(e.target.value) })}
+                  className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer"
+                />
+              )}
             </div>
           ))}
         </div>
@@ -1015,22 +1269,82 @@ function Step4({ formData, setFormData }: any) {
           <span className="text-primary">✨</span>
           AI-Suggested Special Topics
         </h3>
-        <p className="text-sm text-muted mb-4">Based on your industry and competitors</p>
-        <div className="space-y-2">
-          {[
-            { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
-            { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
-            { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
-          ].map((topic) => (
-            <label key={topic.name} className="flex items-start gap-2 p-2 hover:bg-primary/5 rounded cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 mt-0.5" />
-              <div>
-                <div className="font-medium">{topic.name}</div>
-                <div className="text-xs text-muted">{topic.desc}</div>
+        <p className="text-sm text-muted mb-4">
+          {isLoadingTopics 
+            ? 'Generating topics based on your company and competitors...' 
+            : suggestedSpecialTopics.length > 0
+            ? 'Based on your industry and competitors'
+            : formData.companyId
+            ? 'Enter a company name in Step 2 to get AI-suggested topics'
+            : 'Based on your industry and competitors'}
+        </p>
+        
+        {isLoadingTopics && (
+          <div className="flex items-center gap-2 text-sm text-muted py-4">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary"></div>
+            <span>AI is analyzing your company and competitors...</span>
+          </div>
+        )}
+        
+        {topicsError && (
+          <div className={`text-sm mb-2 p-2 rounded ${
+            topicsError.includes('ℹ️') 
+              ? 'text-blue-700 bg-blue-50' 
+              : topicsError.includes('❌')
+              ? 'text-red-700 bg-red-50'
+              : 'text-yellow-600 bg-yellow-50'
+          }`}>
+            {topicsError}
+            {topicsError.includes('OPENAI_API_KEY') && (
+              <div className="mt-2 text-xs">
+                <p className="font-semibold">To enable AI-generated topics:</p>
+                <ol className="list-decimal list-inside mt-1 space-y-1">
+                  <li>Create a <code className="bg-white px-1 rounded">.env</code> file in the project root</li>
+                  <li>Add: <code className="bg-white px-1 rounded">OPENAI_API_KEY=your-api-key-here</code></li>
+                  <li>Restart the development server</li>
+                </ol>
               </div>
-            </label>
-          ))}
-        </div>
+            )}
+          </div>
+        )}
+        
+        {!isLoadingTopics && suggestedSpecialTopics.length > 0 && (
+          <div className="space-y-2">
+            {suggestedSpecialTopics.map((topic) => (
+              <label 
+                key={topic.name} 
+                className="flex items-start gap-2 p-2 hover:bg-primary/5 rounded cursor-pointer"
+              >
+                <input 
+                  type="checkbox" 
+                  className="w-4 h-4 mt-0.5" 
+                  checked={selectedSpecialTopics.has(topic.name)}
+                  onChange={() => {
+                    setSelectedSpecialTopics(prev => {
+                      const next = new Set(prev);
+                      if (next.has(topic.name)) {
+                        next.delete(topic.name);
+                      } else {
+                        next.add(topic.name);
+                      }
+                      return next;
+                    });
+                  }}
+                />
+                <div>
+                  <div className="font-medium">{topic.name}</div>
+                  <div className="text-xs text-muted">{topic.desc}</div>
+                </div>
+              </label>
+            ))}
+          </div>
+        )}
+        
+        {!isLoadingTopics && suggestedSpecialTopics.length === 0 && formData.companyId && (
+          <div className="text-sm text-muted py-4">
+            No special topics suggested. You can still proceed with standard topics.
+          </div>
+        )}
       </Card>
 
       <div>

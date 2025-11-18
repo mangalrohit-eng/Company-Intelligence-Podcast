@@ -4,14 +4,20 @@
  * POST /api/podcasts - Create new podcast
  */
 
+import 'dotenv/config'; // Load .env file explicitly
 import { NextRequest, NextResponse } from 'next/server';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, ScanCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
 import { randomUUID } from 'crypto';
 
 // Initialize DynamoDB client
+// AWS SDK will automatically use credentials from:
+// 1. Environment variables (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+// 2. AWS CLI config (~/.aws/credentials)
+// 3. IAM role (if running on EC2/Lambda)
 const client = new DynamoDBClient({
   region: process.env.AWS_REGION || 'us-east-1',
+  // Credentials will be picked up automatically from environment or AWS CLI config
 });
 const docClient = DynamoDBDocumentClient.from(client);
 
@@ -20,19 +26,35 @@ const TABLE_NAME = 'podcasts';
 // GET /api/podcasts - List all podcasts
 export async function GET(request: NextRequest) {
   try {
+    console.log(`📡 Fetching podcasts from DynamoDB table: ${TABLE_NAME}`);
+    console.log(`🔑 AWS Region: ${process.env.AWS_REGION || 'us-east-1'}`);
+    console.log(`🔑 AWS Credentials check:`, {
+      hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
+      hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
+      region: process.env.AWS_REGION || 'us-east-1',
+    });
+    
     const command = new ScanCommand({
       TableName: TABLE_NAME,
       Limit: 100, // Limit to 100 podcasts
     });
 
     const response = await docClient.send(command);
+    
+    console.log(`✅ Successfully fetched ${response.Count || 0} podcasts from DynamoDB`);
 
     return NextResponse.json({
       podcasts: response.Items || [],
       count: response.Count || 0,
     });
   } catch (error: any) {
-    console.error('Failed to fetch podcasts:', error);
+    console.error('❌ Failed to fetch podcasts:', error);
+    console.error('❌ Error details:', {
+      name: error.name,
+      code: error.code,
+      message: error.message,
+      statusCode: error.$metadata?.httpStatusCode,
+    });
     
     // If DynamoDB is not available, return empty list
     if (error.name === 'ResourceNotFoundException' || error.code === 'CredentialsError') {
@@ -55,7 +77,7 @@ export async function POST(request: NextRequest) {
   let body: any;
   try {
     body = await request.json();
-    const { title, description, companyId, competitors, topics, duration, voice, schedule } = body;
+    const { title, description, companyId, competitors, topics, topicPriorities, duration, voice, schedule } = body;
 
     if (!title || !companyId) {
       return NextResponse.json(
@@ -67,6 +89,16 @@ export async function POST(request: NextRequest) {
     const podcastId = `podcast_${randomUUID()}`;
     const now = new Date().toISOString();
 
+    // Log what we're receiving
+    console.log(`📝 Creating podcast with data:`, {
+      title,
+      companyId,
+      topics: topics,
+      topicsLength: topics?.length || 0,
+      topicPriorities: topicPriorities,
+      hasTopics: !!topics && topics.length > 0,
+    });
+
     const podcast = {
       id: podcastId,
       title,
@@ -74,6 +106,7 @@ export async function POST(request: NextRequest) {
       companyId,
       competitors: competitors || [],
       topics: topics || [],
+      topicPriorities: topicPriorities || {},
       config: {
         duration: duration || 5,
         voice: voice || 'alloy',
@@ -85,6 +118,18 @@ export async function POST(request: NextRequest) {
       episodeCount: 0,
       lastRunAt: null,
     };
+
+    // Warn if topics are empty
+    if (!topics || topics.length === 0) {
+      console.warn(`⚠️ Creating podcast WITHOUT topics!`, {
+        podcastId,
+        title,
+        topicsReceived: topics,
+        bodyKeys: Object.keys(body),
+      });
+    } else {
+      console.log(`✅ Creating podcast WITH ${topics.length} topics:`, topics);
+    }
 
     const command = new PutCommand({
       TableName: TABLE_NAME,

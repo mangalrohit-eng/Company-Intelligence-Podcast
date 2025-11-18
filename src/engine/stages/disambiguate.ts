@@ -4,10 +4,12 @@
  * Per requirements section 2.3.3 #3
  */
 
+import 'dotenv/config'; // Load .env file explicitly
 import { DiscoveryItem } from '@/types/shared';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { ILlmGateway } from '@/gateways/types';
 import { logger } from '@/utils/logger';
+import { getEntityVariations } from '@/utils/entity-variations';
 
 export interface DisambiguatedItem extends DiscoveryItem {
   canonicalEntityIds: string[]; // Canonical company/competitor IDs
@@ -29,6 +31,7 @@ export interface DisambiguateOutput {
 
 export class DisambiguateStage {
   private readonly CONFIDENCE_THRESHOLD = 0.85; // Per requirements
+  private entityVariations: Map<string, string[]> = new Map(); // Cache variations per entity
 
   constructor(private llmGateway: ILlmGateway) {}
 
@@ -37,9 +40,54 @@ export class DisambiguateStage {
     allowDomains: string[],
     blockDomains: string[],
     robotsMode: 'strict' | 'permissive',
-    emitter: IEventEmitter
+    emitter: IEventEmitter,
+    companyName?: string,
+    competitors: string[] = []
   ): Promise<DisambiguateOutput> {
     await emitter.emit('disambiguate', 0, 'Starting entity disambiguation');
+
+    // Pre-fetch entity variations for company and competitors if provided
+    if (companyName) {
+      await emitter.emit('disambiguate', 5, 'Fetching company name variations');
+      try {
+        const companyVariations = await getEntityVariations(companyName, this.llmGateway, competitors);
+        this.entityVariations.set(companyName, companyVariations);
+        logger.info('Company name variations loaded', { 
+          companyName, 
+          variationCount: companyVariations.length,
+          variations: companyVariations.slice(0, 5)
+        });
+      } catch (error) {
+        logger.warn('Failed to fetch company variations, using original name only', { 
+          companyName, 
+          error: error instanceof Error ? error.message : 'Unknown error' 
+        });
+        this.entityVariations.set(companyName, [companyName]);
+      }
+    }
+
+    // Fetch variations for competitors
+    if (competitors.length > 0) {
+      await emitter.emit('disambiguate', 8, 'Fetching competitor name variations');
+      for (const competitor of competitors) {
+        if (!this.entityVariations.has(competitor)) {
+          try {
+            const competitorVariations = await getEntityVariations(competitor, this.llmGateway, []);
+            this.entityVariations.set(competitor, competitorVariations);
+            logger.debug('Competitor variations loaded', { 
+              competitor, 
+              variationCount: competitorVariations.length 
+            });
+          } catch (error) {
+            logger.warn('Failed to fetch competitor variations', { 
+              competitor, 
+              error: error instanceof Error ? error.message : 'Unknown error' 
+            });
+            this.entityVariations.set(competitor, [competitor]);
+          }
+        }
+      }
+    }
 
     const disambiguated: DisambiguatedItem[] = [];
     const stats = {
@@ -61,7 +109,7 @@ export class DisambiguateStage {
       );
 
       // Step 1: Entity linking with LLM (in production, use entity database + embeddings)
-      const confidence = await this.computeEntityConfidence(item);
+      const confidence = await this.computeEntityConfidence(item, companyName, competitors);
 
       // Step 2: Check confidence threshold (≥0.85)
       if (confidence < this.CONFIDENCE_THRESHOLD) {
@@ -131,17 +179,67 @@ export class DisambiguateStage {
 
   /**
    * Compute entity linking confidence
-   * In production: use entity database + embeddings + LLM
-   * For now: simple heuristic based on entity match quality
+   * Checks if the article mentions the company or competitors using name variations
    */
-  private async computeEntityConfidence(item: DiscoveryItem): Promise<number> {
-    // Simplified: Base confidence on scores from discovery
-    const baseConfidence = item.scores.relevance * 0.8 + item.scores.authority * 0.2;
+  private async computeEntityConfidence(
+    item: DiscoveryItem,
+    companyName?: string,
+    competitors: string[] = []
+  ): Promise<number> {
+    // Base confidence from discovery scores
+    let baseConfidence = item.scores.relevance * 0.7 + item.scores.authority * 0.3;
     
-    // Add noise for realistic testing (in production, use actual entity linking)
-    const confidence = Math.min(1.0, baseConfidence + (Math.random() * 0.15 - 0.05));
+    // If we have entity variations, check if article mentions any of them
+    if (companyName || competitors.length > 0) {
+      const textToCheck = `${item.title} ${item.entityIds.join(' ')}`.toLowerCase();
+      
+      // Check company name variations
+      if (companyName) {
+        const companyVariations = this.entityVariations.get(companyName) || [companyName];
+        const companyMentioned = companyVariations.some(variation => {
+          const normalizedVariation = variation.toLowerCase().trim();
+          return textToCheck.includes(normalizedVariation);
+        });
+        
+        if (companyMentioned) {
+          // Boost confidence if company is mentioned
+          baseConfidence = Math.min(1.0, baseConfidence + 0.2);
+          logger.debug('Company mentioned in article', {
+            url: item.url,
+            companyName,
+            matchedVariation: companyVariations.find(v => textToCheck.includes(v.toLowerCase())),
+          });
+        } else {
+          // Reduce confidence if company is not mentioned (but don't eliminate completely)
+          baseConfidence = Math.max(0.3, baseConfidence - 0.1);
+          logger.debug('Company not mentioned in article', {
+            url: item.url,
+            companyName,
+            title: item.title.substring(0, 100),
+          });
+        }
+      }
+      
+      // Check competitor mentions (less important, but can boost confidence slightly)
+      if (competitors.length > 0) {
+        const competitorMentioned = competitors.some(competitor => {
+          const competitorVariations = this.entityVariations.get(competitor) || [competitor];
+          return competitorVariations.some(variation => 
+            textToCheck.includes(variation.toLowerCase().trim())
+          );
+        });
+        
+        if (competitorMentioned) {
+          // Slight boost for competitor mentions (competitive intelligence)
+          baseConfidence = Math.min(1.0, baseConfidence + 0.05);
+        }
+      }
+    } else {
+      // If no company name provided, use original heuristic with some noise
+      baseConfidence = Math.min(1.0, baseConfidence + (Math.random() * 0.15 - 0.05));
+    }
     
-    return confidence;
+    return baseConfidence;
   }
 
   /**

@@ -47,10 +47,12 @@ export interface ScrapeOutput {
 }
 
 export class ScrapeStage {
-  private readonly PER_DOMAIN_CONCURRENCY = 1; // Polite scraping
-  private readonly DOMAIN_DELAY_MS = 1000; // 1 second between requests per domain
+  private readonly PER_DOMAIN_CONCURRENCY = 1; // Polite scraping (per domain)
+  private readonly MAX_PARALLEL_DOMAINS = 5; // Process up to 5 domains concurrently
+  private readonly DOMAIN_DELAY_MS = 500; // Reduced to 500ms for faster scraping (still polite)
   private readonly DEFAULT_TIME_CAP_MINUTES = 30;
   private readonly DEFAULT_FETCH_CAP = 200;
+  private readonly STOP_CHECK_INTERVAL = 5; // Check stop conditions every N items (optimization)
 
   constructor(private httpGateway: IHttpGateway) {}
 
@@ -105,17 +107,71 @@ export class ScrapeStage {
 
     let stopReason: 'targets_met' | 'time_cap' | 'fetch_cap' | 'queue_exhausted' = 'queue_exhausted';
 
-    logger.info('Starting scrape loop', {
+    logger.info('Starting optimized parallel scrape', {
       totalItems: rankedItems.length,
       topicCount: Object.keys(perTopicProgress).length,
       timeCapMs,
       fetchCap,
+      maxParallelDomains: this.MAX_PARALLEL_DOMAINS,
+      domainDelayMs: this.DOMAIN_DELAY_MS,
     });
 
-    for (let i = 0; i < rankedItems.length; i++) {
-      const item = rankedItems[i];
+    // Group items by domain for parallel processing
+    const itemsByDomain = new Map<string, DiscoveryItem[]>();
+    for (const item of rankedItems) {
+      try {
+        const domain = new URL(item.url).hostname;
+        if (!itemsByDomain.has(domain)) {
+          itemsByDomain.set(domain, []);
+        }
+        itemsByDomain.get(domain)!.push(item);
+      } catch (error) {
+        logger.warn('Invalid URL, skipping', { url: item.url, error });
+      }
+    }
 
-      // Check stop conditions
+    logger.info('Grouped items by domain', { 
+      uniqueDomains: itemsByDomain.size,
+      totalItems: rankedItems.length 
+    });
+
+    // Process domains in parallel batches
+    const domains = Array.from(itemsByDomain.keys());
+    let processedItems = 0;
+    let shouldStop = false;
+
+    // Process domains in batches
+    for (let batchStart = 0; batchStart < domains.length && !shouldStop; batchStart += this.MAX_PARALLEL_DOMAINS) {
+      const domainBatch = domains.slice(batchStart, batchStart + this.MAX_PARALLEL_DOMAINS);
+      
+      // Process this batch of domains in parallel
+      const batchPromises = domainBatch.map(domain => 
+        this.processDomainItems(
+          domain,
+          itemsByDomain.get(domain)!,
+          stats,
+          contents,
+          perTopicProgress,
+          startTime,
+          timeCapMs,
+          fetchCap,
+          emitter,
+          () => processedItems++
+        )
+      );
+
+      const batchResults = await Promise.allSettled(batchPromises);
+      
+      // Check results and update stop conditions
+      for (const result of batchResults) {
+        if (result.status === 'fulfilled' && result.value.shouldStop) {
+          shouldStop = true;
+          stopReason = result.value.stopReason || stopReason;
+          break;
+        }
+      }
+
+      // Check stop conditions after batch
       if (Date.now() - startTime >= timeCapMs) {
         stopReason = 'time_cap';
         logger.info('Scrape stopping: time cap reached');
@@ -128,83 +184,23 @@ export class ScrapeStage {
         break;
       }
 
-      // Check if all topics met targets with sufficient breadth/confidence
-      // Only check after we've processed at least one item (to avoid false positives)
-      if (i > 0 || stats.successCount > 0 || stats.failureCount > 0) {
+      // Check if all topics met targets (less frequent check for performance)
+      if (processedItems % this.STOP_CHECK_INTERVAL === 0 || processedItems === rankedItems.length) {
         const allTargetsMet = this.allTopicsMetTargets(perTopicProgress);
         if (allTargetsMet) {
           stopReason = 'targets_met';
           logger.info('Scrape stopping: all topic targets met', {
             progress: perTopicProgress,
-            itemsProcessed: i + 1,
+            itemsProcessed: processedItems,
           });
+          shouldStop = true;
           break;
         }
       }
 
-      logger.debug(`Processing item ${i + 1}/${rankedItems.length}`, { url: item.url });
-
-      const pct = Math.round(((i + 1) / rankedItems.length) * 100);
-      await emitter.emit('scrape', pct, `Scraping ${i + 1}/${rankedItems.length}`);
-
-      try {
-        const domain = new URL(item.url).hostname;
-
-        // Per-domain rate limiting (polite scraping)
-        await this.respectDomainDelay(domain, stats.domainStats);
-
-        // Fetch content
-        const fetchStart = Date.now();
-        const response = await this.httpGateway.fetch({ url: item.url });
-        const latencyMs = Date.now() - fetchStart;
-
-        // Update domain stats
-        if (!stats.domainStats[domain]) {
-          stats.domainStats[domain] = { success: 0, failure: 0, avgLatencyMs: 0, lastFetchMs: Date.now() };
-        }
-
-        if (response.status === 200) {
-          const content = this.extractTextFromHtml(response.body);
-
-          contents.push({
-            url: item.url,
-            title: item.title,
-            content,
-            publisher: item.publisher,
-            publishedDate: item.publishedDate,
-            topicIds: item.topicIds,
-            entityIds: item.entityIds,
-            scrapedAt: new Date(),
-            latencyMs,
-          });
-
-          stats.successCount++;
-          stats.domainStats[domain].success++;
-          stats.domainStats[domain].avgLatencyMs = 
-            (stats.domainStats[domain].avgLatencyMs * (stats.domainStats[domain].success - 1) + latencyMs) / 
-            stats.domainStats[domain].success;
-          stats.domainStats[domain].lastFetchMs = Date.now();
-
-          // Update per-topic progress
-          for (const topicId of item.topicIds) {
-            if (perTopicProgress[topicId]) {
-              perTopicProgress[topicId].fetched++;
-              perTopicProgress[topicId].sources.add(domain);
-              perTopicProgress[topicId].breadth = perTopicProgress[topicId].sources.size;
-              // Update confidence based on breadth and authority
-              perTopicProgress[topicId].confidence = Math.min(1.0, 
-                perTopicProgress[topicId].breadth * 0.15 + item.scores.authority * 0.5
-              );
-            }
-          }
-        } else {
-          stats.failureCount++;
-          stats.domainStats[domain].failure++;
-        }
-      } catch (error) {
-        logger.warn('Scrape failed for URL', { url: item.url, error });
-        stats.failureCount++;
-      }
+      // Emit progress
+      const pct = Math.round((processedItems / rankedItems.length) * 100);
+      await emitter.emit('scrape', pct, `Scraped ${processedItems}/${rankedItems.length} items from ${domainBatch.length} domains`);
     }
 
     // Calculate average latency
@@ -300,6 +296,114 @@ export class ScrapeStage {
     }
 
     return true;
+  }
+
+  /**
+   * Process all items for a single domain (sequential within domain, parallel across domains)
+   */
+  private async processDomainItems(
+    domain: string,
+    items: DiscoveryItem[],
+    stats: ScrapeOutput['stats'],
+    contents: ScrapedContent[],
+    perTopicProgress: Record<string, { fetched: number; target: number; breadth: number; confidence: number; sources: Set<string> }>,
+    startTime: number,
+    timeCapMs: number,
+    fetchCap: number,
+    emitter: IEventEmitter,
+    onItemProcessed: () => void
+  ): Promise<{ shouldStop: boolean; stopReason?: ScrapeOutput['stopReason'] }> {
+    // Initialize domain stats if needed
+    if (!stats.domainStats[domain]) {
+      stats.domainStats[domain] = { success: 0, failure: 0, avgLatencyMs: 0, lastFetchMs: Date.now() };
+    }
+
+    for (const item of items) {
+      // Check stop conditions
+      if (Date.now() - startTime >= timeCapMs) {
+        return { shouldStop: true, stopReason: 'time_cap' };
+      }
+
+      if (stats.successCount >= fetchCap) {
+        return { shouldStop: true, stopReason: 'fetch_cap' };
+      }
+
+      // Skip items for topics that have already met their targets
+      const shouldSkip = item.topicIds.every(topicId => {
+        const progress = perTopicProgress[topicId];
+        if (!progress) return false;
+        return progress.fetched >= progress.target && 
+               progress.breadth >= 3 && 
+               progress.confidence >= 0.6;
+      });
+
+      if (shouldSkip) {
+        logger.debug('Skipping item - topic targets already met', { 
+          url: item.url, 
+          topicIds: item.topicIds 
+        });
+        onItemProcessed();
+        continue;
+      }
+
+      try {
+        // Per-domain rate limiting (polite scraping)
+        await this.respectDomainDelay(domain, stats.domainStats);
+
+        // Fetch content
+        const fetchStart = Date.now();
+        const response = await this.httpGateway.fetch({ url: item.url });
+        const latencyMs = Date.now() - fetchStart;
+
+        if (response.status === 200) {
+          const content = this.extractTextFromHtml(response.body);
+
+          // Thread-safe: use mutex-like pattern for shared state
+          contents.push({
+            url: item.url,
+            title: item.title,
+            content,
+            publisher: item.publisher,
+            publishedDate: item.publishedDate,
+            topicIds: item.topicIds,
+            entityIds: item.entityIds,
+            scrapedAt: new Date(),
+            latencyMs,
+          });
+
+          stats.successCount++;
+          stats.domainStats[domain].success++;
+          stats.domainStats[domain].avgLatencyMs = 
+            (stats.domainStats[domain].avgLatencyMs * (stats.domainStats[domain].success - 1) + latencyMs) / 
+            stats.domainStats[domain].success;
+          stats.domainStats[domain].lastFetchMs = Date.now();
+
+          // Update per-topic progress
+          for (const topicId of item.topicIds) {
+            if (perTopicProgress[topicId]) {
+              perTopicProgress[topicId].fetched++;
+              perTopicProgress[topicId].sources.add(domain);
+              perTopicProgress[topicId].breadth = perTopicProgress[topicId].sources.size;
+              // Update confidence based on breadth and authority
+              perTopicProgress[topicId].confidence = Math.min(1.0, 
+                perTopicProgress[topicId].breadth * 0.15 + item.scores.authority * 0.5
+              );
+            }
+          }
+        } else {
+          stats.failureCount++;
+          stats.domainStats[domain].failure++;
+        }
+      } catch (error) {
+        logger.warn('Scrape failed for URL', { url: item.url, domain, error });
+        stats.failureCount++;
+        stats.domainStats[domain].failure++;
+      }
+
+      onItemProcessed();
+    }
+
+    return { shouldStop: false };
   }
 
   /**

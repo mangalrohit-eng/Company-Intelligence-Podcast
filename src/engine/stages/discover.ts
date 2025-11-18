@@ -61,9 +61,29 @@ export class DiscoverStage {
         
         if (response.status === 200 && response.body) {
           // Parse RSS feed (simple XML parsing)
+          const bodyLength = response.body.length;
+          logger.info('RSS feed body received', { 
+            feedUrl, 
+            bodyLength,
+            bodyPreview: response.body.substring(0, 500) 
+          });
+          
           const matches = response.body.matchAll(/<item>[\s\S]*?<\/item>/g);
           const matchesArray = Array.from(matches);
           logger.info('RSS items found', { feedUrl, itemCount: matchesArray.length });
+          
+          if (matchesArray.length === 0) {
+            logger.warn('RSS feed returned 0 items', { 
+              feedUrl, 
+              bodyLength,
+              hasRssTag: response.body.includes('<rss'),
+              hasChannelTag: response.body.includes('<channel'),
+              bodySample: response.body.substring(0, 1000)
+            });
+          }
+          
+          let articlesFound = 0;
+          let articlesMatched = 0;
           
           for (const match of matchesArray) {
             const itemXml = match[0];
@@ -72,13 +92,33 @@ export class DiscoverStage {
             const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
             
             if (title && link) {
+              articlesFound++;
+              
               // Simple keyword matching instead of LLM classification (faster)
               const titleLower = title.toLowerCase();
               const companyLower = companyName.toLowerCase();
               
-              // ✅ Only include articles that mention the company
-              if (titleLower.includes(companyLower)) {
-                const relevance = 0.9;
+              // Normalize company name for matching (remove common words, handle typos)
+              const normalizeForMatching = (text: string) => {
+                return text.toLowerCase()
+                  .replace(/\s+/g, ' ')
+                  .replace(/[^\w\s]/g, '')
+                  .trim();
+              };
+              
+              const normalizedTitle = normalizeForMatching(title);
+              const normalizedCompany = normalizeForMatching(companyName);
+              
+              // More flexible matching: check if title contains company name OR key words from company name
+              const companyWords = normalizedCompany.split(/\s+/).filter(w => w.length > 3); // Words longer than 3 chars
+              const titleContainsCompany = normalizedTitle.includes(normalizedCompany);
+              const titleContainsKeyWords = companyWords.length > 0 && 
+                companyWords.some(word => normalizedTitle.includes(word));
+              
+              // ✅ Include articles that mention the company or key words (more lenient matching)
+              if (titleContainsCompany || titleContainsKeyWords) {
+                articlesMatched++;
+                const relevance = titleContainsCompany ? 0.9 : 0.7; // Lower relevance if only partial match
                 
                 // Assign to first topic by default (will be refined in later stages)
                 items.push({
@@ -98,16 +138,27 @@ export class DiscoverStage {
                 logger.debug('Relevant article found', { 
                   title: title.substring(0, 100), 
                   company: companyName,
-                  publisher: new URL(feedUrl).hostname 
+                  publisher: new URL(feedUrl).hostname,
+                  matchType: titleContainsCompany ? 'exact' : 'partial'
                 });
               } else {
                 logger.debug('Skipping irrelevant article', { 
                   title: title.substring(0, 100), 
-                  company: companyName 
+                  company: companyName,
+                  normalizedTitle: normalizedTitle.substring(0, 50),
+                  normalizedCompany
                 });
               }
             }
           }
+          
+          logger.info('RSS feed article filtering', {
+            feedUrl,
+            articlesFound,
+            articlesMatched,
+            companyName,
+            itemsAdded: items.length
+          });
         }
       } catch (error) {
         logger.warn('Failed to fetch RSS feed', { feedUrl, error });

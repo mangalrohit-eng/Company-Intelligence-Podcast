@@ -4,6 +4,7 @@
  * POST - Start a new podcast run
  */
 
+import 'dotenv/config'; // Load .env file explicitly
 import { NextRequest, NextResponse } from 'next/server';
 import { runsStore } from '@/lib/runs-store';
 import { saveRun, getRunsForPodcast } from '@/lib/runs-persistence';
@@ -20,14 +21,22 @@ function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<st
     'partnerships': { name: 'Strategic Partnerships', priority: 2 },
     'leadership': { name: 'Leadership & Executive Changes', priority: 1 },
     'mergers-acquisitions': { name: 'Mergers & Acquisitions', priority: 3 },
+    'm-and-a': { name: 'Mergers & Acquisitions', priority: 3 }, // Alias for M&A
+    'strategy': { name: 'Strategy & Business Development', priority: 2 },
     'regulatory': { name: 'Regulatory & Legal Developments', priority: 2 },
   };
   
-  return topicIds.map(id => ({
-    id,
-    name: topicMap[id]?.name || id,
-    priority: topicPriorities[id] || topicMap[id]?.priority || 2,
-  }));
+  return topicIds.map(id => {
+    // Normalize topic ID (handle variations)
+    const normalizedId = id.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '');
+    const topicKey = topicMap[normalizedId] ? normalizedId : (topicMap[id] ? id : normalizedId);
+    
+    return {
+      id: topicKey,
+      name: topicMap[topicKey]?.name || id,
+      priority: topicPriorities[id] || topicPriorities[topicKey] || topicMap[topicKey]?.priority || 2,
+    };
+  });
 }
 
 // Execute pipeline orchestrator
@@ -95,15 +104,64 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     const duration = podcast?.config?.duration || 5;
     const voice = podcast?.config?.voice || 'alloy';
     const schedule = podcast?.config?.schedule || 'daily';
-    const topicIds = podcast?.topics || ['company-news', 'competitor-analysis', 'industry-trends'];
-    const topicPriorities = podcast?.topicPriorities || {};
-    const competitors = podcast?.competitors || [];
+    
+    // Topics can be stored in multiple places - check all possibilities
+    let topicIds: string[] = [];
+    console.log(`🔍 [${runId}] Searching for topics in podcast object...`, {
+      hasPodcast: !!podcast,
+      podcastKeys: podcast ? Object.keys(podcast) : [],
+      podcastTopics: podcast?.topics,
+      podcastTopicIds: podcast?.topicIds,
+      podcastConfigTopics: podcast?.config?.topics,
+    });
+    
+    if (podcast?.topics && Array.isArray(podcast.topics) && podcast.topics.length > 0) {
+      topicIds = podcast.topics;
+      console.log(`✅ [${runId}] Found topics in podcast.topics:`, topicIds);
+    } else if (podcast?.topicIds && Array.isArray(podcast.topicIds) && podcast.topicIds.length > 0) {
+      topicIds = podcast.topicIds;
+      console.log(`✅ [${runId}] Found topics in podcast.topicIds:`, topicIds);
+    } else if (podcast?.config?.topics && Array.isArray(podcast.config.topics) && podcast.config.topics.length > 0) {
+      topicIds = podcast.config.topics;
+      console.log(`✅ [${runId}] Found topics in podcast.config.topics:`, topicIds);
+    } else {
+      // Fallback to defaults if no topics found
+      topicIds = ['company-news', 'competitor-analysis', 'industry-trends'];
+      console.warn(`⚠️ [${runId}] No topics found in podcast config, using defaults:`, topicIds);
+      console.warn(`⚠️ [${runId}] Full podcast object:`, JSON.stringify(podcast, null, 2));
+      console.warn(`⚠️ [${runId}] This means either:`);
+      console.warn(`   1. Podcast was not saved with topics`);
+      console.warn(`   2. DynamoDB is not available and podcast not in memory`);
+      console.warn(`   3. Topics array was empty when podcast was created`);
+    }
+    
+    const topicPriorities = podcast?.topicPriorities || podcast?.config?.topicPriorities || {};
+    const competitors = podcast?.competitors || podcast?.competitorIds || [];
+    
+    // Determine provider mode
+    const openaiKey = process.env.OPENAI_API_KEY;
+    const hasOpenAIKey = !!openaiKey;
+    const llmProvider = hasOpenAIKey ? 'openai' : 'replay';
+    const ttsProvider = hasOpenAIKey ? 'openai' : 'stub';
+    
+    // Debug: Log environment variable status
+    console.log(`🔑 OpenAI API Key Check:`, {
+      hasKey: hasOpenAIKey,
+      keyLength: openaiKey ? openaiKey.length : 0,
+      keyPrefix: openaiKey ? openaiKey.substring(0, 7) + '...' : 'none',
+      envVars: Object.keys(process.env).filter(k => k.includes('OPENAI')),
+    });
     
     console.log(`📋 Pipeline Config:`, {
       company: companyId,
       topics: topicIds,
+      topicCount: topicIds.length,
+      topicPriorities,
       duration,
       voice,
+      llmProvider: `${llmProvider}${hasOpenAIKey ? '' : ' (no API key, using replay mode)'}`,
+      ttsProvider: `${ttsProvider}${hasOpenAIKey ? '' : ' (no API key, using stub)'}`,
+      podcastKeys: podcast ? Object.keys(podcast) : 'null',
     });
     
     const pipelineInput = {
@@ -138,8 +196,11 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         ),
         
         // Topics - Map from stored IDs to full topic objects
+        // Ensure we have at least some topics (fallback to defaults if empty)
         topics: {
-          standard: mapTopicsToStandard(topicIds, topicPriorities),
+          standard: topicIds.length > 0 
+            ? mapTopicsToStandard(topicIds, topicPriorities)
+            : mapTopicsToStandard(['company-news', 'competitor-analysis', 'industry-trends'], {}),
           special: [],
         },
         
@@ -178,8 +239,9 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
       flags: {
         dryRun: false,
         provider: {
-          llm: 'openai' as const,
-          tts: 'openai' as const,
+          // Use OpenAI if API key is available, otherwise use replay mode (free, works offline)
+          llm: llmProvider as const,
+          tts: ttsProvider as const,
           http: 'stub' as const,  // Use Playwright for JavaScript-enabled scraping
         },
         cassetteKey: 'default',
@@ -418,8 +480,13 @@ export async function POST(
       const { DynamoDBClient } = await import('@aws-sdk/client-dynamodb');
       const { DynamoDBDocumentClient, GetCommand } = await import('@aws-sdk/lib-dynamodb');
       
-      const client = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+      // AWS SDK will automatically use credentials from environment or AWS CLI config
+      const client = new DynamoDBClient({ 
+        region: process.env.AWS_REGION || 'us-east-1',
+      });
       const docClient = DynamoDBDocumentClient.from(client);
+      
+      console.log(`🔗 DynamoDB client initialized for region: ${process.env.AWS_REGION || 'us-east-1'}`);
       
       const response = await docClient.send(
         new GetCommand({
@@ -429,10 +496,56 @@ export async function POST(
       );
       
       podcast = response.Item;
-      console.log(`✅ Fetched podcast config:`, podcast);
+      console.log(`✅ Fetched podcast config from DynamoDB:`, {
+        id: podcast?.id,
+        title: podcast?.title,
+        hasTopics: !!podcast?.topics,
+        topics: podcast?.topics,
+        topicsLength: podcast?.topics?.length || 0,
+        hasTopicIds: !!podcast?.topicIds,
+        topicIds: podcast?.topicIds,
+        topicPriorities: podcast?.topicPriorities,
+        allKeys: podcast ? Object.keys(podcast) : [],
+      });
     } catch (error: any) {
       console.warn(`⚠️ Could not fetch from DynamoDB (local dev mode):`, error.message);
-      // For local dev, we'll use default config
+      
+      // Fallback: Try to fetch from GET /api/podcasts endpoint (might have it in memory)
+      try {
+        console.log(`🔄 Trying fallback: fetching from GET /api/podcasts endpoint...`);
+        const { ScanCommand } = await import('@aws-sdk/lib-dynamodb');
+        const { DynamoDBClient } = await import('@aws-sdk/client-dynamodb');
+        const { DynamoDBDocumentClient } = await import('@aws-sdk/lib-dynamodb');
+        
+        const client = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+        const docClient = DynamoDBDocumentClient.from(client);
+        
+        const scanResponse = await docClient.send(
+          new ScanCommand({
+            TableName: 'podcasts',
+            FilterExpression: 'id = :id',
+            ExpressionAttributeValues: { ':id': podcastId },
+            Limit: 1,
+          })
+        );
+        
+        if (scanResponse.Items && scanResponse.Items.length > 0) {
+          podcast = scanResponse.Items[0];
+          console.log(`✅ Found podcast via scan fallback:`, {
+            id: podcast?.id,
+            topics: podcast?.topics,
+            topicsLength: podcast?.topics?.length || 0,
+          });
+        }
+      } catch (fallbackError: any) {
+        console.warn(`⚠️ Fallback fetch also failed:`, fallbackError.message);
+      }
+      
+      // If still no podcast, log a warning but continue (will use defaults)
+      if (!podcast) {
+        console.warn(`⚠️ No podcast found for ${podcastId}. Will use default topics.`);
+        console.warn(`⚠️ This usually means DynamoDB is not configured or the podcast was not saved.`);
+      }
     }
 
     const runId = `run_${Date.now()}_${Math.random().toString(36).substring(7)}`;

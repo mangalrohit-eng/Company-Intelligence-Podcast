@@ -3,6 +3,7 @@
  * Executes all stages in sequence based on RunFlags
  */
 
+import 'dotenv/config'; // Load .env file explicitly
 import { PipelineInput, PipelineOutput, RunTelemetry, EvidenceUnit } from '@/types/shared';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { GatewayFactory } from '@/gateways/factory';
@@ -231,8 +232,11 @@ export class PipelineOrchestrator {
         const stage = new DiscoverStage(llmGateway, httpGateway);
         const stageStart = Date.now();
         
-        // Extract topic IDs from config
-        const topicIds = input.config.topics.standard.map(t => t.id);
+        // Extract topic IDs from config (both standard and special topics)
+        const topicIds = [
+          ...(input.config.topics.standard || []).map(t => t.id),
+          ...(input.config.topics.special || []).map(t => t.id)
+        ];
         const companyName = input.config.company.name;
         
         // Build discovery sources from admin settings
@@ -321,12 +325,20 @@ export class PipelineOrchestrator {
           JSON.stringify(disambiguateInput, null, 2)
         );
         
+        // Extract company name and competitors for entity variation matching
+        const companyName = input.config.company.name;
+        const competitors = input.config.competitors?.map((c: any) => 
+          typeof c === 'string' ? c : c.name || c.id
+        ) || [];
+        
         disambiguateOutput = await stage.execute(
           discoverOutput.items,
           input.config.sourcePolicies?.allowDomains || [],
           input.config.sourcePolicies?.blockDomains || [],
           input.config.robotsMode,
-          emitter
+          emitter,
+          companyName,
+          competitors
         );
         telemetry.stages.disambiguate = {
           startTime: new Date(stageStart).toISOString(),
