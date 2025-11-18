@@ -1,0 +1,18 @@
+{
+  "summaryCount": 1,
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In today's episode, we're diving into the buzz around the Govino Unbreakable Stemless Wine Glass, a product that's been making waves online with a whopping 2,638 Amazon reviews. It's clear this isn't just another wine glass; it's a lifestyle choice for those who love their Merlot spill-proof and their Chardonnay unshatterable. And for savvy online shoppers looking to snag this must-have without the extra fees, there's a golden nugget of advice floating around: \"It is one of the easiest ways to avoid paying...\" shipping costs. With that kind of wisdom, it seems the only thing you'll be pouring is more wine, worry-free.",
+      "onAirStat": {
+        "span": "2,638 Amazon Reviews",
+        "evidenceId": "a8260ee4-343b-493c-8fe5-d42dc0ad3363"
+      },
+      "onAirQuote": {
+        "span": "It is one of the easiest ways to avoid paying...",
+        "evidenceId": "4b1ac6e1-b068-45ed-b0df-fb960dbbaea0"
+      }
+    }
+  ]
+}

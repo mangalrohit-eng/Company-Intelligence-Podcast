@@ -1,0 +1,58 @@
+[
+  {
+    "timestamp": "2025-11-18T03:43:49.177Z",
+    "stage": "scrape",
+    "progress": 0,
+    "message": "Starting polite scrape with stop conditions",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:43:49.179Z",
+    "stage": "scrape",
+    "progress": 20,
+    "message": "Scraping 1/5",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:43:55.294Z",
+    "stage": "scrape",
+    "progress": 40,
+    "message": "Scraping 2/5",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:44:03.299Z",
+    "stage": "scrape",
+    "progress": 60,
+    "message": "Scraping 3/5",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:44:06.591Z",
+    "stage": "scrape",
+    "progress": 80,
+    "message": "Scraping 4/5",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:44:08.861Z",
+    "stage": "scrape",
+    "progress": 100,
+    "message": "Scraping 5/5",
+    "level": "info",
+    "data": "{}"
+  },
+  {
+    "timestamp": "2025-11-18T03:44:13.581Z",
+    "stage": "scrape",
+    "progress": 100,
+    "message": "Scrape complete: targets_met",
+    "level": "info",
+    "data": "{\"stopReason\":\"targets_met\",\"stats\":{\"totalUrls\":5,\"successCount\":5,\"failureCount\":5,\"avgLatencyMs\":0,\"domainStats\":{\"www.reuters.com\":{\"success\":0,\"failure\":1,\"avgLatencyMs\":0,\"lastFetchMs\":1763437435293},\"www.bloomberg.com\":{\"success\":0,\"failure\":1,\"avgLatencyMs\":0,\"lastFetchMs\":1763437443298},\"www.ft.com\":{\"success\":0,\"failure\":1,\"avgLatencyMs\":0,\"lastFetchMs\":1763437446590},\"www.wsj.com\":{\"success\":0,\"failure\":1,\"avgLatencyMs\":0,\"lastFetchMs\":1763437453580}}}}"
+  }
+]

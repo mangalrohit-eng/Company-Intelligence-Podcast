@@ -1,0 +1,58 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 29,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 29,
+      "sampleUnits": [
+        {
+          "id": "581b9a3b-febf-4ab0-82fe-746b0c4d27e4",
+          "type": "claim",
+          "span": "Amazon fully leased the facility in 2022",
+          "authority": 0.5,
+          "publisher": "news.google.com",
+          "context": "The warehouse debuted in 2022, developed on a speculative basis.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "3fc47201-4e03-45d7-88e6-3ea5d07b2756",
+          "type": "claim",
+          "span": "The property has more than 160 aisles, holding up to 40 million products",
+          "authority": 0.5,
+          "publisher": "news.google.com",
+          "context": "The facility has more than 160 aisles, holding up to 40 million products.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "cc7441f0-beca-4552-b72c-9c9151bcc1c5",
+          "type": "claim",
+          "span": "The warehouse has 40-foot clear heights, 206 dock doors, and six grade-level doors",
+          "authority": 0.5,
+          "publisher": "news.google.com",
+          "context": "It has 40-foot clear heights, 206 dock doors and six grade-level doors.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 7,
+      "validQuotes": 2,
+      "validClaims": 20
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "itemCount": 65,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNUVdYTlpDUzBwTGNVWi12TWdmczBhTmp1a05MQURqLTRnTWNFazNDbWlLcm1HZnYyY1hEdjhpVDhKTXhVOXZ1RlVWX01xcmhOTlBMMFRnV1F0Snd5RmtMVElWWW1JY0VtZjZRR0xFSm5aVk5YQ192cjZmajAxUThFNElDZkttMDQ4eUlBU2E5elFaNG9waGRMM2VnbGljc3dnR0dxeU53Y0hEcElOV1Jpd3pxYUFBV09kcUx3YkNzSUhUMTNf?oc=5",
+      "title": "Amazon to raise $15 billion in first US bond sale in three years to fund AI push - Reuters",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.912496289421975,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWldETUNjYUpXWkUybmtSOUxzVXRaLVpvWmktOFUtV0h0ZzdGckVWVXVqZTJlckpWdTBNOXpINWRaNUpkMzVpUFM1a3ZxWnBfcmlUeU1IXzVxZTI0bVlzRGJNaV9aNkpaUW1fODlVTnJDV0EtekQydGl1QkpXaWUxRWg0UnlLVmNsb3pfa1ZWYTd3emRiSXdpcG51MTcwVzBLS0k4?oc=5",
+      "title": "Here are Tuesday's biggest analyst calls: Nvidia, Amazon, Meta, Microsoft, Deckers, Netflix &amp; more - CNBC",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9941026120348606,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE91NHJVcGY1enBqODhpZmx0VVVVelVTTXVudVhRbXdLR0hralB2WU5kRW4yM2twRGE2TGF0Wk9VV2Jqc2JzR25Jbjl4NVhyUVQyejBDVFFIbHdQcmdQajB5UGhqYl9nZGVjdTlFZWpYbnhlOUFhZGxZemlyWDJKdw?oc=5",
+      "title": "Amazon seeks $12B in bond sale, Netflix trades after stock split - Yahoo Finance",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8791584139221278,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbjlvSXlqc3F0ZDBKZ3ozWkRJYldFSGxrbllHVF9oRHhiUVpBUW03dXZURnIxOXJDUm85dlV1X01FajNOaUZCQ19FZGs1RlR5OUhhZ1dRTVhXUkxIS0toczlsUC1MdnFxSUJTNXR6MVZodXdJY0xMUkozekVCUGZpbVNnNkxwVWlRYWFTYWwzUS1rMXBXQzlINWpZanlLTDYyb05tczNZMGtTZw?oc=5",
+      "title": "Amazon’s Zoox offers free robotaxi rides in San Francisco - Los Angeles Times",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9975768509604962,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxQaHJId0tnY0JhMDZ4dWJoN0dxdURka0liOHk4M21PTlhBcUdCYlJHck1XWXRFblF5ekNCaFpnVW5YUzRfc1M4VmNPMkNBWFYzQ0FDeTVvV0g2UE16TlFlZUFSZEwzYTJQb0JXT2gyUmdzNkkwRG94S0FsTnhUWDF4dHNPOUU2eEVwcmxrdkMzQ0RYSTVoZUY0VDBIajFRYmRBbFoyLUZBcmtpUE1ndTFF0gG0AUFVX3lxTFBkVUFYeG1vQUF2UENGVGpPNjVOMWxNRDd2QVBDZksyb1pGWUN1WFJNNk8teHhZUXJxOWJNS1c5MFQzengzM0J4dUw0SFlxN1U2WU5zbEdFc3BJOXYzdTlSM3c4dlpjc0ZGLTJmb245QTRaOXZlWDgyQldpYmVIVG1jVzl1dTNvZkVuX3Z3VGJRNmU0RWExaEV4cElBNVBLa194NW91OGVuajlZbkZrbUpzUjFPbw?oc=5",
+      "title": "Amazon moves ahead with big “last-mile” package hub in central San Jose - The Mercury News",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9946468217290942,
+        "authority": 0.7
+      }
+    }
+  ]
+}

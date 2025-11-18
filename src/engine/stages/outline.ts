@@ -85,12 +85,30 @@ Return JSON with sections array: [{"section": "cold_open", "title": "...", "bull
       responseFormat: 'json_object',
     });
 
-    const outlineData = JSON.parse(outlineResponse.content);
+    let outlineData;
+    try {
+      outlineData = JSON.parse(outlineResponse.content);
+    } catch (error: any) {
+      logger.error('Failed to parse outline response', { 
+        error: error.message, 
+        responsePreview: outlineResponse.content.substring(0, 200) 
+      });
+      throw new Error(`Failed to parse outline LLM response: ${error.message}`);
+    }
+
+    // Validate sections exist
+    if (!outlineData.sections || !Array.isArray(outlineData.sections) || outlineData.sections.length === 0) {
+      logger.error('Outline LLM response missing sections', { 
+        outlineData,
+        responseContent: outlineResponse.content.substring(0, 500),
+      });
+      throw new Error('Outline stage failed: LLM response missing sections array');
+    }
 
     const outline: ThematicOutline = {
       theme: themeData.theme,
       subThemes: themeData.subThemes || [],
-      sections: outlineData.sections || [],
+      sections: outlineData.sections,
     };
 
     // Build simple knowledge graph (entity count tracking)

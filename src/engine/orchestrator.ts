@@ -264,16 +264,25 @@ export class PipelineOrchestrator {
           tradePublications: [],
         };
         
+        // Save input BEFORE execution
         const discoverInput = { topicIds, companyName, sources };
+        await fs.writeFile(
+          path.join(debugDir, 'discover_input.json'),
+          JSON.stringify(discoverInput, null, 2)
+        );
+        logger.info('Saved discover input', { topicCount: topicIds.length, feedCount: rssFeeds.length });
         
         discoverOutput = await stage.execute(topicIds, companyName, sources, emitter);
         
-        const discoverOutputSummary = {
-          stats: discoverOutput.stats,
-          itemCount: discoverOutput.items.length,
-          sampleItems: discoverOutput.items.slice(0, 3).map(i => ({ url: i.url, title: i.title })),
-        };
-        await saveStageIO('discover', discoverInput, discoverOutputSummary);
+        // Save output AFTER execution (exact format next stage expects)
+        // Disambiguate stage receives: discoverOutput.items
+        await fs.writeFile(
+          path.join(debugDir, 'discover_output.json'),
+          JSON.stringify({
+            items: discoverOutput.items, // Exact format disambiguate stage expects
+            stats: discoverOutput.stats, // Keep stats for debugging
+          }, null, 2)
+        );
         
         telemetry.stages.discover = {
           startTime: new Date(stageStart).toISOString(),
@@ -326,28 +335,24 @@ export class PipelineOrchestrator {
           status: 'success',
         };
         
-        // Save debug output
-        const disambiguateDebugOutput = {
-          stats: disambiguateOutput.stats,
-          itemCount: disambiguateOutput.items.length,
-          passedCount: disambiguateOutput.items.filter(i => !i.blocked).length,
-          blockedCount: disambiguateOutput.items.filter(i => i.blocked).length,
-          samplePassedItems: disambiguateOutput.items.filter(i => !i.blocked).slice(0, 5).map(item => ({
-            url: item.url,
-            title: item.title,
-            blocked: item.blocked,
-            blockReason: item.blockReason,
-          })),
-          sampleBlockedItems: disambiguateOutput.items.filter(i => i.blocked).slice(0, 5).map(item => ({
-            url: item.url,
-            title: item.title,
-            blocked: item.blocked,
-            blockReason: item.blockReason,
-          })),
-        };
+        // Save output AFTER execution (exact format next stage expects)
+        // Rank stage receives: disambiguateOutput.items.filter(item => !item.blocked)
         await fs.writeFile(
           path.join(debugDir, 'disambiguate_output.json'),
-          JSON.stringify(disambiguateDebugOutput, null, 2)
+          JSON.stringify({
+            items: disambiguateOutput.items.map(item => ({
+              url: item.url,
+              title: item.title,
+              publisher: item.publisher,
+              publishedDate: item.publishedDate,
+              topicIds: item.topicIds,
+              entityIds: item.entityIds,
+              scores: item.scores,
+              blocked: item.blocked,
+              blockReason: item.blockReason,
+            })), // Exact format rank stage expects
+            stats: disambiguateOutput.stats, // Keep stats for debugging
+          }, null, 2)
         );
         logger.info('Saved disambiguate debug output', { passedCount: disambiguateOutput.items.filter(i => !i.blocked).length });
       }
@@ -385,29 +390,43 @@ export class PipelineOrchestrator {
           status: 'success',
         };
         
-        // Save debug output
+        // Save output AFTER execution (exact format next stage expects)
+        // Scrape stage receives: Array.from(rankOutput.topicQueues.values()).flat()
         const rankedItems = Array.from(rankOutput.topicQueues.values()).flat();
-        const rankDebugOutput = {
-          totalRanked: rankedItems.length,
-          topicCount: rankOutput.topicQueues.size,
-          topicDistribution: Array.from(rankOutput.topicQueues.entries()).map(([topicId, items]) => ({
-            topicId,
-            itemCount: items.length,
-          })),
-          topItems: rankedItems.slice(0, 10).map((item, index) => ({
-            rank: index + 1,
-            url: item.url,
-            title: item.title,
-            publisher: item.publisher,
-            scores: item.scores,
-            rankScore: item.rankScore,
-            expectedInfoGain: item.expectedInfoGain,
-            rankingFactors: item.rankingFactors,
-          })),
-        };
         await fs.writeFile(
           path.join(debugDir, 'rank_output.json'),
-          JSON.stringify(rankDebugOutput, null, 2)
+          JSON.stringify({
+            topicQueues: Object.fromEntries(
+              Array.from(rankOutput.topicQueues.entries()).map(([topicId, items]) => [
+                topicId,
+                items.map(item => ({
+                  url: item.url,
+                  title: item.title,
+                  publisher: item.publisher,
+                  publishedDate: item.publishedDate,
+                  topicIds: item.topicIds,
+                  entityIds: item.entityIds,
+                  scores: item.scores,
+                  rankScore: item.rankScore,
+                  expectedInfoGain: item.expectedInfoGain,
+                  rankingFactors: item.rankingFactors,
+                })),
+              ])
+            ), // Exact format scrape stage expects (can extract flat array from this)
+            // Also save flat array for convenience
+            rankedItems: rankedItems.map(item => ({
+              url: item.url,
+              title: item.title,
+              publisher: item.publisher,
+              publishedDate: item.publishedDate,
+              topicIds: item.topicIds,
+              entityIds: item.entityIds,
+              scores: item.scores,
+              rankScore: item.rankScore,
+              expectedInfoGain: item.expectedInfoGain,
+              rankingFactors: item.rankingFactors,
+            })),
+          }, null, 2)
         );
         logger.info('Saved rank debug output', { totalRanked: rankedItems.length });
       }
@@ -434,6 +453,20 @@ export class PipelineOrchestrator {
             { targetUnits: Math.round(input.config.durationMinutes * 2 / (input.config.topics.standard.length + input.config.topics.special.length)) }
           ])
         );
+        
+        // Save input BEFORE execution
+        const scrapeInput = {
+          itemCount: limitedRankedItems.length,
+          articleLimit,
+          topicTargets,
+          sampleUrls: limitedRankedItems.slice(0, 3).map(i => i.url),
+          totalRankedItems: allRankedItems.length,
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'scrape_input.json'),
+          JSON.stringify(scrapeInput, null, 2)
+        );
+        logger.info('Saved scrape input', { itemCount: limitedRankedItems.length, articleLimit });
         
         scrapeOutput = await stage.execute(
           limitedRankedItems,
@@ -462,24 +495,25 @@ export class PipelineOrchestrator {
           }, {} as Record<string, { success: number; failure: number; avgLatencyMs: number }>),
         };
         
-        // Save I/O for scrape stage
-        const scrapeInput = {
-          itemCount: limitedRankedItems.length,
-          articleLimit,
-          topicTargets,
-          sampleUrls: limitedRankedItems.slice(0, 3).map(i => i.url),
-        };
-        const scrapeOutputSummary = {
-          stats: scrapeOutput.stats,
-          contentCount: scrapeOutput.contents.length,
-          sampleContents: scrapeOutput.contents.slice(0, 3).map(c => ({
-            url: c.url,
-            title: c.title,
-            contentLength: c.content.length,
-            contentPreview: c.content.substring(0, 500),
-          })),
-        };
-        await saveStageIO('scrape', scrapeInput, scrapeOutputSummary);
+        // Save output AFTER execution (exact format next stage expects)
+        // Extract stage receives: scrapeOutput.contents
+        await fs.writeFile(
+          path.join(debugDir, 'scrape_output.json'),
+          JSON.stringify({
+            contents: scrapeOutput.contents.map(c => ({
+              url: c.url,
+              title: c.title,
+              content: c.content, // Full content - exact format extract stage expects
+              publisher: c.publisher,
+              publishedDate: c.publishedDate,
+              topicIds: c.topicIds,
+              entityIds: c.entityIds,
+              scrapedAt: c.scrapedAt,
+              latencyMs: c.latencyMs,
+            })), // Exact format extract stage expects
+            stats: scrapeOutput.stats, // Keep stats for debugging
+          }, null, 2)
+        );
         logger.info('Saved scrape debug output', { successCount: scrapeOutput.stats.successCount });
       }
 
@@ -488,6 +522,22 @@ export class PipelineOrchestrator {
       if (input.flags.enable.extract && scrapeOutput) {
         const stage = new ExtractStage(llmGateway);
         const stageStart = Date.now();
+        
+        // Save input BEFORE execution
+        const extractInput = {
+          contentCount: scrapeOutput.contents.length,
+          sampleContent: scrapeOutput.contents[0] ? {
+            url: scrapeOutput.contents[0].url,
+            contentLength: scrapeOutput.contents[0].content.length,
+          } : null,
+          sampleUrls: scrapeOutput.contents.slice(0, 3).map(c => c.url),
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'extract_input.json'),
+          JSON.stringify(extractInput, null, 2)
+        );
+        logger.info('Saved extract input', { contentCount: scrapeOutput.contents.length });
+        
         extractOutput = await stage.execute(scrapeOutput.contents, emitter);
         telemetry.stages.extract = {
           startTime: new Date(stageStart).toISOString(),
@@ -501,25 +551,25 @@ export class PipelineOrchestrator {
           unitsByTopic: extractOutput.stats.byTopic,
         };
         
-        // Save I/O for extract stage
-        const extractInput = {
-          contentCount: scrapeOutput.contents.length,
-          sampleContent: scrapeOutput.contents[0] ? {
-            url: scrapeOutput.contents[0].url,
-            contentLength: scrapeOutput.contents[0].content.length,
-          } : null,
-        };
-        const extractOutputSummary = {
-          stats: extractOutput.stats,
-          evidenceCount: extractOutput.units.length,
-          sampleEvidence: extractOutput.units.slice(0, 5).map(u => ({
-            type: u.type,
-            topicId: u.topicId,
-            span: u.span?.substring(0, 200) || '',
-            sourceUrl: u.sourceUrl,
-          })),
-        };
-        await saveStageIO('extract', extractInput, extractOutputSummary);
+        // Save output AFTER execution (exact format next stage expects)
+        // Summarize stage receives: extractOutput.units (grouped by topic into Map)
+        await fs.writeFile(
+          path.join(debugDir, 'extract_output.json'),
+          JSON.stringify({
+            units: extractOutput.units.map(u => ({
+              id: u.id,
+              type: u.type,
+              topicId: u.topicId,
+              span: u.span, // Full span - exact format summarize stage expects
+              context: u.context, // Full context - exact format summarize stage expects
+              sourceUrl: u.sourceUrl,
+              publisher: u.publisher,
+              authority: u.authority,
+              publishedDate: u.publishedDate,
+            })), // Exact format summarize stage expects (can group by topicId)
+            stats: extractOutput.stats, // Keep stats for debugging
+          }, null, 2)
+        );
         logger.info('Saved extract debug output', { evidenceCount: extractOutput.units.length });
       }
 
@@ -537,12 +587,26 @@ export class PipelineOrchestrator {
       // Stage 7: Summarize
       let summarizeOutput;
       if (input.flags.enable.summarize && extractOutput) {
-        const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+        // Use topicIds from evidence (not config) - evidence may have different topicIds from scraped content
+        const topicIdsFromConfig = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+        const topicIdsFromEvidence = Array.from(evidenceByTopic.keys());
+        
+        // Use evidence topicIds if available, otherwise fall back to config
+        const topicIds = topicIdsFromEvidence.length > 0 ? topicIdsFromEvidence : topicIdsFromConfig;
+        
+        logger.info('Summarize stage topic selection', {
+          topicIdsFromConfig,
+          topicIdsFromEvidence,
+          selectedTopicIds: topicIds,
+          evidenceByTopicSize: evidenceByTopic.size,
+        });
         
         // Save debug input
         const summarizeInput = {
           topicCount: topicIds.length,
           topicIds: topicIds,
+          topicIdsFromConfig,
+          topicIdsFromEvidence,
           evidenceCount: extractOutput.units.length,
           evidenceByTopic: Array.from(evidenceByTopic.entries()).map(([topicId, units]) => ({
             topicId,
@@ -551,7 +615,18 @@ export class PipelineOrchestrator {
               id: u.id,
               type: u.type,
               span: u.span?.substring(0, 100),
+              authority: u.authority,
+              publisher: u.publisher,
+              context: u.context?.substring(0, 100),
+              hasSpan: !!u.span,
+              hasAuthority: u.authority !== undefined && u.authority !== null,
+              hasPublisher: !!u.publisher,
+              hasContext: !!u.context,
             })),
+            // Count valid evidence
+            validStats: units.filter(u => u.type === 'stat' && u.span && u.authority !== undefined).length,
+            validQuotes: units.filter(u => u.type === 'quote' && u.span && u.authority !== undefined).length,
+            validClaims: units.filter(u => u.type === 'claim' && u.span && u.authority !== undefined).length,
           })),
         };
         await fs.writeFile(
@@ -574,22 +649,39 @@ export class PipelineOrchestrator {
           }
         );
         
-        // Save debug output if successful
+        // Save debug output (success or failure)
         if (summarizeOutput) {
+          // Save output AFTER execution (exact format next stage expects)
+          // Outline stage receives: summarizeOutput.summaries
           const summarizeOutputSummary = {
-            summaryCount: summarizeOutput.summaries.length,
             summaries: summarizeOutput.summaries.map(s => ({
               topicId: s.topicId,
-              summary: s.summary.substring(0, 200),
-              stat: s.stat?.substring(0, 100),
-              quote: s.quote?.substring(0, 100),
-            })),
+              topicName: s.topicName,
+              paragraph: s.paragraph, // Full paragraph - exact format outline stage expects
+              onAirStat: s.onAirStat, // Full stat object - exact format outline stage expects
+              onAirQuote: s.onAirQuote, // Full quote object - exact format outline stage expects
+            })), // Exact format outline stage expects
           };
           await fs.writeFile(
             path.join(debugDir, 'summarize_output.json'),
             JSON.stringify(summarizeOutputSummary, null, 2)
           );
           logger.info('Saved summarize debug output', { summaryCount: summarizeOutput.summaries.length });
+        } else {
+          // Save error output so UI can display it
+          const errorOutput = {
+            error: 'Summarize stage failed',
+            summaryCount: 0,
+            summaries: [],
+            topicIds: topicIds,
+            evidenceCount: extractOutput?.units.length || 0,
+            message: 'Summarize stage encountered an error. Check summarize_error.json for details.',
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'summarize_output.json'),
+            JSON.stringify(errorOutput, null, 2)
+          );
+          logger.warn('Saved summarize error output', { topicIds, evidenceCount: extractOutput?.units.length });
         }
       }
 
@@ -627,70 +719,185 @@ export class PipelineOrchestrator {
           }
         );
         
-        // Save debug output if successful
+        // Save debug output if successful (always save, even if 0 contrasts)
         if (contrastOutput) {
+          // Save output AFTER execution (exact format next stage expects)
+          // Script stage receives: contrastOutput.contrasts
           const contrastOutputSummary = {
-            contrastCount: contrastOutput.contrasts.length,
             contrasts: contrastOutput.contrasts.map(c => ({
               topicId: c.topicId,
-              comparison: c.comparison.substring(0, 200),
-            })),
+              sentences: c.sentences, // Full sentences array - exact format script stage expects
+              boundStatOrQuote: c.boundStatOrQuote, // Exact format script stage expects
+            })), // Exact format script stage expects
+            stats: contrastOutput.stats, // Keep stats for debugging
           };
           await fs.writeFile(
             path.join(debugDir, 'contrast_output.json'),
             JSON.stringify(contrastOutputSummary, null, 2)
           );
           logger.info('Saved contrast debug output', { contrastCount: contrastOutput.contrasts.length });
+        } else {
+          // Save error output if stage failed
+          const errorOutput = {
+            error: 'Contrast stage failed',
+            contrastCount: 0,
+            stats: { totalContrasts: 0, byTopic: {} },
+            contrasts: [],
+            message: 'Contrast stage encountered an error. Check server logs for details.',
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'contrast_output.json'),
+            JSON.stringify(errorOutput, null, 2)
+          );
+          logger.warn('Saved contrast error output');
         }
       }
 
       // Stage 9: Outline
       let outlineOutput;
       if (input.flags.enable.outline && summarizeOutput) {
-        const stage = new OutlineStage(llmGateway);
-        const stageStart = Date.now();
-        outlineOutput = await stage.execute(summarizeOutput.summaries, input.config.company.name, emitter);
-        telemetry.stages.outline = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
+        // Save debug input
+        const outlineInput = {
+          summaryCount: summarizeOutput.summaries.length,
+          summaries: summarizeOutput.summaries.map(s => ({
+            topicId: s.topicId,
+            topicName: s.topicName,
+            paragraph: s.paragraph?.substring(0, 200),
+          })),
+          companyName: input.config.company.name,
         };
+        await fs.writeFile(
+          path.join(debugDir, 'outline_input.json'),
+          JSON.stringify(outlineInput, null, 2)
+        );
+
+        outlineOutput = await executeStageWithErrorHandling(
+          'outline',
+          async () => {
+            const stage = new OutlineStage(llmGateway);
+            return await stage.execute(summarizeOutput.summaries, input.config.company.name, emitter);
+          },
+          (error) => {
+            logger.error('Outline stage failed', {
+              error: error.message,
+              summaryCount: summarizeOutput.summaries.length,
+            });
+          }
+        );
+
+        // Save output AFTER execution (exact format next stage expects)
+        // Script stage receives: outlineOutput.outline
+        if (outlineOutput) {
+          const outlineOutputSummary = {
+            outline: {
+              theme: outlineOutput.outline.theme,
+              subThemes: outlineOutput.outline.subThemes,
+              sections: outlineOutput.outline.sections || [], // Full sections array - exact format script stage expects
+            }, // Exact format script stage expects
+            knowledgeGraph: outlineOutput.knowledgeGraph, // Keep for debugging
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'outline_output.json'),
+            JSON.stringify(outlineOutputSummary, null, 2)
+          );
+          logger.info('Saved outline debug output', { sectionCount: outlineOutput.outline.sections?.length || 0 });
+        } else {
+          // Save error output if stage failed
+          const errorOutput = {
+            error: 'Outline stage failed',
+            segmentCount: 0,
+            theme: null,
+            subThemes: [],
+            segments: [],
+            message: 'Outline stage encountered an error. Check server logs for details.',
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'outline_output.json'),
+            JSON.stringify(errorOutput, null, 2)
+          );
+          logger.warn('Saved outline error output');
+        }
       }
 
       // Stage 10: Script
       let scriptOutput;
       if (input.flags.enable.script && outlineOutput && summarizeOutput && contrastOutput) {
-        const stage = new ScriptStage(llmGateway);
-        const stageStart = Date.now();
+        // Save debug input BEFORE execution
+        // Note: outline has 'sections', not 'segments'
         const scriptInput = {
-          outlineSegments: outlineOutput.outline.segments.length,
+          outlineSectionCount: outlineOutput.outline.sections?.length || 0,
           summaryCount: summarizeOutput.summaries.length,
-          contrastCount: contrastOutput.contrasts.length,
-          targetDuration: input.config.durationMinutes,
+          contrastCount: contrastOutput.contrasts?.length || 0,
+          targetDurationMinutes: input.config.durationMinutes,
+          outlineTheme: outlineOutput.outline.theme,
+          outlineSubThemes: outlineOutput.outline.subThemes,
         };
-        
-        scriptOutput = await stage.execute(
-          outlineOutput.outline,
-          summarizeOutput.summaries,
-          contrastOutput.contrasts,
-          input.config.durationMinutes,
-          emitter
+        await fs.writeFile(
+          path.join(debugDir, 'script_input.json'),
+          JSON.stringify(scriptInput, null, 2)
         );
-        
-        const scriptOutputSummary = {
-          scriptLength: scriptOutput.script.narrative.length,
-          wordCount: scriptOutput.script.narrative.split(/\s+/).length,
-          preview: scriptOutput.script.narrative.substring(0, 500),
-        };
-        await saveStageIO('script', scriptInput, scriptOutputSummary);
-        
-        telemetry.stages.script = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
+        logger.info('Saved script input', { 
+          outlineSectionCount: scriptInput.outlineSectionCount,
+          summaryCount: scriptInput.summaryCount,
+          contrastCount: scriptInput.contrastCount,
+        });
+
+        scriptOutput = await executeStageWithErrorHandling(
+          'script',
+          async () => {
+            const stage = new ScriptStage(llmGateway);
+            return await stage.execute(
+              outlineOutput.outline,
+              summarizeOutput.summaries,
+              contrastOutput.contrasts,
+              input.config.durationMinutes,
+              emitter
+            );
+          },
+          (error) => {
+            logger.error('Script stage failed', {
+              error: error.message,
+              outlineSectionCount: outlineOutput.outline.sections?.length || 0,
+              summaryCount: summarizeOutput.summaries.length,
+              contrastCount: contrastOutput.contrasts?.length || 0,
+            });
+          }
+        );
+
+        // Save output AFTER execution (exact format next stage expects)
+        // QA stage receives: scriptOutput.script.narrative
+        if (scriptOutput) {
+          const scriptOutputSummary = {
+            script: {
+              narrative: scriptOutput.script.narrative, // Full narrative - exact format QA stage expects
+              boundEvidence: scriptOutput.script.boundEvidence || [], // Full boundEvidence array - exact format QA stage expects
+              durationEstimateSeconds: scriptOutput.script.durationEstimateSeconds,
+            }, // Exact format QA stage expects
+            stats: scriptOutput.stats, // Keep stats for debugging
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'script_output.json'),
+            JSON.stringify(scriptOutputSummary, null, 2)
+          );
+          logger.info('Saved script debug output', { 
+            narrativeLength: scriptOutput.script.narrative.length,
+            wordCount: scriptOutput.stats.wordCount,
+          });
+        } else {
+          // Save error output if stage failed
+          const errorOutput = {
+            error: 'Script stage failed',
+            script: null,
+            narrativeLength: 0,
+            wordCount: 0,
+            message: 'Script stage encountered an error. Check server logs for details.',
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'script_output.json'),
+            JSON.stringify(errorOutput, null, 2)
+          );
+          logger.warn('Saved script error output');
+        }
       }
 
       // Stage 11: QA & Bind
@@ -700,6 +907,21 @@ export class PipelineOrchestrator {
         const stageStart = Date.now();
         const timeWindowStart = new Date(input.config.timeWindow.startIso);
         const timeWindowEnd = new Date(input.config.timeWindow.endIso);
+        
+        // Save input BEFORE execution
+        const qaInput = {
+          scriptLength: scriptOutput.script.narrative.length,
+          wordCount: scriptOutput.script.narrative.split(/\s+/).length,
+          evidenceCount: extractOutput.units.length,
+          timeWindowStart: timeWindowStart.toISOString(),
+          timeWindowEnd: timeWindowEnd.toISOString(),
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'qa_input.json'),
+          JSON.stringify(qaInput, null, 2)
+        );
+        logger.info('Saved QA input', { scriptLength: qaInput.scriptLength, evidenceCount: qaInput.evidenceCount });
+        
         qaOutput = await stage.execute(
           scriptOutput.script.narrative,
           extractOutput.units,
@@ -707,6 +929,21 @@ export class PipelineOrchestrator {
           timeWindowEnd,
           emitter
         );
+        
+        // Save output AFTER execution (exact format next stage expects)
+        // TTS stage receives: qaOutput.script || scriptOutput.script.narrative
+        if (qaOutput) {
+          const qaOutputSummary = {
+            script: qaOutput.script || qaOutput.finalScript || '', // Full script - exact format TTS stage expects
+            finalScript: qaOutput.finalScript || qaOutput.script || '', // Alias for compatibility
+          }; // Exact format TTS stage expects
+          await fs.writeFile(
+            path.join(debugDir, 'qa_output.json'),
+            JSON.stringify(qaOutputSummary, null, 2)
+          );
+          logger.info('Saved QA output', { scriptLength: qaOutputSummary.script.length });
+        }
+        
         telemetry.stages.qa = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -723,12 +960,18 @@ export class PipelineOrchestrator {
         const stage = new TtsStage(ttsGateway);
         const stageStart = Date.now();
         
+        // Save input BEFORE execution
         const ttsInput = {
           scriptLength: finalScript.length,
           wordCount: finalScript.split(/\s+/).length,
           voiceId: input.config.voice.voiceId,
           speed: input.config.voice.speed,
         };
+        await fs.writeFile(
+          path.join(debugDir, 'tts_input.json'),
+          JSON.stringify(ttsInput, null, 2)
+        );
+        logger.info('Saved TTS input', { scriptLength: ttsInput.scriptLength, voiceId: ttsInput.voiceId });
         
         ttsOutput = await stage.execute(
           { narrative: finalScript }, // Wrap in Script object
@@ -737,11 +980,17 @@ export class PipelineOrchestrator {
           emitter
         );
         
+        // Save output AFTER execution
         const ttsOutputSummary = {
           audioSize: ttsOutput.audioBuffer.length,
           audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
+          durationSeconds: ttsOutput.durationSeconds,
         };
-        await saveStageIO('tts', ttsInput, ttsOutputSummary);
+        await fs.writeFile(
+          path.join(debugDir, 'tts_output.json'),
+          JSON.stringify(ttsOutputSummary, null, 2)
+        );
+        logger.info('Saved TTS output', { audioSizeKB: ttsOutputSummary.audioSizeKB });
         
         telemetry.stages.tts = {
           startTime: new Date(stageStart).toISOString(),
@@ -758,7 +1007,6 @@ export class PipelineOrchestrator {
         // Save audio to local disk (TODO: Upload to S3 in production)
         audioS3Key = `runs/${input.runId}/audio.mp3`;
         const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
-        const fs = await import('fs/promises');
         await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
         await fs.writeFile(audioPath, ttsOutput.audioBuffer);
         logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
@@ -772,6 +1020,22 @@ export class PipelineOrchestrator {
         const outputDir = `./output/episodes/${input.runId}`;
         const audioUrl = `https://cdn.example.com/${audioS3Key}`;
         
+        // Save input BEFORE execution
+        const packageInput = {
+          scriptLength: finalScript.length,
+          wordCount: finalScript.split(/\s+/).length,
+          audioUrl,
+          audioDurationSeconds: ttsOutput.durationSeconds,
+          outlineTheme: outlineOutput.outline.theme,
+          outlineSectionCount: outlineOutput.outline.sections?.length || 0,
+          evidenceCount: extractOutput.units.length,
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'package_input.json'),
+          JSON.stringify(packageInput, null, 2)
+        );
+        logger.info('Saved package input', { scriptLength: packageInput.scriptLength, evidenceCount: packageInput.evidenceCount });
+        
         packageOutput = await stage.execute(
           input.runId,
           finalScript,
@@ -783,6 +1047,22 @@ export class PipelineOrchestrator {
           outputDir,
           emitter
         );
+        
+        // Save output AFTER execution
+        if (packageOutput) {
+          const packageOutputSummary = {
+            showNotesPath: packageOutput.showNotesPath,
+            transcriptTxtPath: packageOutput.transcriptTxtPath,
+            transcriptVttPath: packageOutput.transcriptVttPath,
+            sourcesJsonPath: packageOutput.sourcesJsonPath,
+            rssItemGenerated: !!packageOutput.rssItem,
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'package_output.json'),
+            JSON.stringify(packageOutputSummary, null, 2)
+          );
+          logger.info('Saved package output', { showNotesPath: packageOutput.showNotesPath });
+        }
         telemetry.stages.package = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),

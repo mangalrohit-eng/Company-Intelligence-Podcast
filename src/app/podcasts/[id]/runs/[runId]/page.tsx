@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { ArrowLeft, CheckCircle2, Circle, Loader2, XCircle, Download, Play } from 'lucide-react';
+import { ArrowLeft, CheckCircle2, Circle, Loader2, XCircle, Download, Play, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
@@ -34,6 +34,9 @@ export default function RunProgressPage() {
 
   const [run, setRun] = useState<RunData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [resumingStage, setResumingStage] = useState<string | null>(null);
+  const [stopping, setStopping] = useState(false);
+  const [stageSummaries, setStageSummaries] = useState<Record<string, string>>({});
 
   const fetchRun = async () => {
     try {
@@ -54,6 +57,126 @@ export default function RunProgressPage() {
     }
   };
 
+  const fetchStageSummary = async (stageId: string) => {
+    try {
+      // Fetch the output JSON file directly
+      const response = await fetch(`/api/serve-file/episodes/${runId}/debug/${stageId}_output.json`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        return getStageSummary(stageId, data);
+      }
+    } catch (error) {
+      // Output JSON might not exist yet
+      return null;
+    }
+    return null;
+  };
+
+  const getStageSummary = (stageId: string, outputData: any): string | null => {
+    try {
+      switch (stageId) {
+        case 'discover':
+          return outputData.items ? `${outputData.items.length} articles discovered` : null;
+        
+        case 'disambiguate':
+          if (outputData.items) {
+            const passed = outputData.items.filter((i: any) => !i.blocked).length;
+            const blocked = outputData.items.filter((i: any) => i.blocked).length;
+            return `${passed} passed, ${blocked} blocked`;
+          }
+          return null;
+        
+        case 'rank':
+          if (outputData.rankedItems) {
+            return `${outputData.rankedItems.length} articles ranked`;
+          }
+          if (outputData.topicQueues) {
+            const total = Object.values(outputData.topicQueues).reduce((sum: number, items: any) => sum + (Array.isArray(items) ? items.length : 0), 0);
+            return `${total} articles ranked`;
+          }
+          return null;
+        
+        case 'scrape':
+          if (outputData.contents) {
+            return `${outputData.contents.length} articles scraped`;
+          }
+          if (outputData.stats) {
+            return `${outputData.stats.successCount || 0} articles scraped`;
+          }
+          return null;
+        
+        case 'extract':
+          if (outputData.units) {
+            const stats = outputData.units.reduce((acc: any, unit: any) => {
+              acc[unit.type] = (acc[unit.type] || 0) + 1;
+              return acc;
+            }, {});
+            const parts = [];
+            if (stats.stat) parts.push(`${stats.stat} facts`);
+            if (stats.quote) parts.push(`${stats.quote} quotes`);
+            if (stats.claim) parts.push(`${stats.claim} claims`);
+            return parts.length > 0 ? parts.join(', ') : `${outputData.units.length} evidence units`;
+          }
+          return null;
+        
+        case 'summarize':
+          if (outputData.summaries) {
+            return `${outputData.summaries.length} topic summaries`;
+          }
+          return null;
+        
+        case 'contrast':
+          if (outputData.contrasts) {
+            return `${outputData.contrasts.length} competitor contrasts`;
+          }
+          return null;
+        
+        case 'outline':
+          if (outputData.outline) {
+            const sections = outputData.outline.sections?.length || 0;
+            const themes = outputData.outline.subThemes?.length || 0;
+            return `${sections} sections, ${themes} themes`;
+          }
+          return null;
+        
+        case 'script':
+          if (outputData.script?.narrative) {
+            const wordCount = outputData.script.narrative.split(/\s+/).filter((w: string) => w.length > 0).length;
+            return `${wordCount.toLocaleString()} words`;
+          }
+          return null;
+        
+        case 'qa':
+          if (outputData.script) {
+            const wordCount = outputData.script.split(/\s+/).filter((w: string) => w.length > 0).length;
+            return `${wordCount.toLocaleString()} words (QA'd)`;
+          }
+          return null;
+        
+        case 'tts':
+          if (outputData.durationSeconds) {
+            const minutes = Math.floor(outputData.durationSeconds / 60);
+            const seconds = Math.floor(outputData.durationSeconds % 60);
+            return `${minutes}m ${seconds}s audio`;
+          }
+          return null;
+        
+        case 'package':
+          const files = [];
+          if (outputData.showNotesPath) files.push('show notes');
+          if (outputData.transcriptTxtPath) files.push('transcript');
+          if (outputData.transcriptVttPath) files.push('captions');
+          return files.length > 0 ? `${files.length} files generated` : null;
+        
+        default:
+          return null;
+      }
+    } catch (error) {
+      return null;
+    }
+  };
+
   useEffect(() => {
     fetchRun();
     
@@ -66,6 +189,89 @@ export default function RunProgressPage() {
 
     return () => clearInterval(interval);
   }, [runId, run?.status]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // Fetch stage summaries when run data changes
+  useEffect(() => {
+    if (!run) return;
+
+    const fetchSummaries = async () => {
+      const summaries: Record<string, string> = {};
+      
+      for (const stage of stages) {
+        const stageProgress = run.progress.stages[stage.id];
+        if (stageProgress?.status === 'completed') {
+          const summary = await fetchStageSummary(stage.id);
+          if (summary) {
+            summaries[stage.id] = summary;
+          }
+        }
+      }
+      
+      setStageSummaries(summaries);
+    };
+
+    fetchSummaries();
+  }, [run, runId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleResume = async (stageId: string) => {
+    if (!confirm(`Resume pipeline from ${stageId} stage? This will re-execute the stage using saved inputs.`)) {
+      return;
+    }
+
+    setResumingStage(stageId);
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/resume`, {
+        fromStage: stageId,
+      });
+
+      if (response.ok) {
+        // Refresh run data
+        await fetchRun();
+        // Start polling again
+        const interval = setInterval(() => {
+          fetchRun();
+        }, 3000);
+        setTimeout(() => clearInterval(interval), 60000); // Poll for 1 minute
+      } else {
+        const error = await response.json();
+        alert(`Failed to resume: ${error.error || error.details || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error resuming pipeline:', error);
+      alert(`Failed to resume pipeline: ${error.message}`);
+    } finally {
+      setResumingStage(null);
+    }
+  };
+
+  const handleStop = async () => {
+    if (!confirm('Are you sure you want to stop this pipeline execution? This action cannot be undone.')) {
+      return;
+    }
+
+    setStopping(true);
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/stop`);
+
+      if (response.ok) {
+        const data = await response.json();
+        alert('Pipeline execution stopped successfully.');
+        // Refresh run data
+        await fetchRun();
+        // Continue polling to see the updated status
+      } else {
+        const error = await response.json();
+        alert(`Failed to stop pipeline: ${error.error || error.details || 'Unknown error'}`);
+      }
+    } catch (error: any) {
+      console.error('Error stopping pipeline:', error);
+      alert(`Failed to stop pipeline: ${error.message}`);
+    } finally {
+      setStopping(false);
+    }
+  };
 
   if (loading) {
     return (
@@ -116,6 +322,36 @@ export default function RunProgressPage() {
                   </p>
                 )}
               </div>
+              <div className="flex items-center gap-3">
+                <span className={`px-3 py-1 rounded-full text-sm font-medium ${
+                  run.status === 'completed' ? 'bg-green-500/20 text-green-500' :
+                  run.status === 'failed' ? 'bg-red-500/20 text-red-500' :
+                  'bg-blue-500/20 text-blue-500'
+                }`}>
+                  {run.status}
+                </span>
+                {run.status === 'running' && (
+                  <Button
+                    variant="destructive"
+                    size="sm"
+                    onClick={handleStop}
+                    disabled={stopping}
+                    className="gap-2"
+                  >
+                    {stopping ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin" />
+                        Stopping...
+                      </>
+                    ) : (
+                      <>
+                        <XCircle className="w-4 h-4" />
+                        Stop Pipeline
+                      </>
+                    )}
+                  </Button>
+                )}
+              </div>
               <div className="flex items-center gap-2">
                 {run.status === 'running' && (
                   <>
@@ -146,6 +382,10 @@ export default function RunProgressPage() {
                 const stageProgress = run.progress.stages[stage.id];
                 const isCompleted = stageProgress?.status === 'completed';
                 const isRunning = run.progress.currentStage === stage.id;
+                const hasStarted = isRunning || isCompleted || stageProgress?.status === 'running' || stageProgress?.startedAt;
+                // Show resume button for all stages (except when currently running)
+                // This allows re-running any stage from the latest input JSON
+                const canResume = !isRunning && run.status !== 'running';
                 
                 return (
                   <div key={stage.name} className="flex items-center gap-4">
@@ -160,7 +400,15 @@ export default function RunProgressPage() {
                       <div className="font-medium">{stage.name}</div>
                       <div className="text-sm text-muted">{stage.description}</div>
                       
-                      {isCompleted && (
+                      {/* Show stage summary if available */}
+                      {stageSummaries[stage.id] && (
+                        <div className="text-xs text-blue-600 dark:text-blue-400 mt-1 font-medium">
+                          {stageSummaries[stage.id]}
+                        </div>
+                      )}
+                      
+                      {/* Show Input JSON as soon as stage starts */}
+                      {hasStarted && (
                         <div className="flex gap-2 mt-2">
                           <Button
                             variant="ghost"
@@ -170,13 +418,40 @@ export default function RunProgressPage() {
                           >
                             📥 Input JSON
                           </Button>
+                          {/* Show Output JSON only when completed */}
+                          {isCompleted && (
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              className="h-7 text-xs"
+                              onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_output.json`, '_blank')}
+                            >
+                              📤 Output JSON
+                            </Button>
+                          )}
+                        </div>
+                      )}
+                      
+                      {canResume && (
+                        <div className="flex gap-2 mt-2">
                           <Button
-                            variant="ghost"
+                            variant="outline"
                             size="sm"
                             className="h-7 text-xs"
-                            onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_output.json`, '_blank')}
+                            onClick={() => handleResume(stage.id)}
+                            disabled={resumingStage === stage.id}
                           >
-                            📤 Output JSON
+                            {resumingStage === stage.id ? (
+                              <>
+                                <Loader2 className="w-3 h-3 mr-1 animate-spin" />
+                                Resuming...
+                              </>
+                            ) : (
+                              <>
+                                <RotateCw className="w-3 h-3 mr-1" />
+                                Resume from here
+                              </>
+                            )}
                           </Button>
                         </div>
                       )}
@@ -258,5 +533,5 @@ const stages = [
   { id: 'script', name: 'Script', description: 'Writing podcast script' },
   { id: 'qa', name: 'QA', description: 'Quality assurance checks' },
   { id: 'tts', name: 'TTS', description: 'Converting to audio' },
-  { id: 'publish', name: 'Package', description: 'Creating output files' },
+  { id: 'package', name: 'Package', description: 'Creating output files' },
 ];

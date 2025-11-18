@@ -1,0 +1,4086 @@
+{
+  "totalRanked": 74,
+  "topicCount": 1,
+  "topicDistribution": [
+    {
+      "topicId": "company-news",
+      "itemCount": 74
+    }
+  ],
+  "rankedItems": [
+    {
+      "rank": 1,
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMmw3eE5LUHhDTlJHVDhrX2VyaWpla0N3MkprU1k5bHVDbEw2bjhvQ0pnX05RY2JCa1JCeVBqVVFQSUNNV1h5SFB6ckR5U0MyTjE1SmthYTNqUTJ5M0tYTXQ4bXgzd3lNQ1NoWVR2MkRSZlZCU2I4RENzYmZLUmYtVHV6aTgwYXRvcmtFcllXOFFxMWFIR1R4aUhhMlp0TmtRa0VRWHkyQjVPclJ6LTMxTzdPXzlsbk91?oc=5",
+      "title": "EU to probe market power of US cloud providers Amazon, Microsoft - RFI",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 15:15:20 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9970418113368686,
+        "authority": 0.7
+      },
+      "rankScore": 0.37897364645936094,
+      "expectedInfoGain": 0.759111776164816,
+      "rankingFactors": {
+        "R": 0.9970366964285714,
+        "F": 0.9970418113368686,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.0030727288215777
+      }
+    },
+    {
+      "rank": 2,
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOGFGQlZsM09lbllEcGZBb0pQNkFyeHNKSUc3SUc5c0cxOXREQmNMSDdqWnBKNkhpMkJkUDVGcTJqd2RTdVRlWFpfUXVraW5Db1ptMmlRZWtPSlVna3U3NnBuamlhQ2RpT0ZHZm5HWVFNRUV1U2tnXzJOMEViWGJJUG5WNTlGaHhKTzZKZXJDd1RuOWc1UnU5ZU5ZVm5Nc0lTXzdvVXo0Q1hiUQ?oc=5",
+      "title": "Ford Motor Company partners with Amazon to sell used cars - kyma.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:37:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.987387156617748,
+        "authority": 0.7
+      },
+      "rankScore": 0.375872146276923,
+      "expectedInfoGain": 0.7562040075204399,
+      "rankingFactors": {
+        "R": 0.9873062268518519,
+        "F": 0.987387156617748,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.011864978585852
+      }
+    },
+    {
+      "rank": 3,
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5keFBNd3dCYkhzdHluQjBjTmpRMkJ0VVN1UkZXaFkwbVJFaTkyVDlZbmcwdmloX0s2QkJadGJiTjlvR0t6TXJUNkd0dG5RX0JYbmVfNllWLUxWZDJWUWVxY0VqdTU4UjB2czFUcklxbDc3WG9qb1hZTXJaM0FRUdIBVEFVX3lxTE56a0ppaEZpNVpFT01VR3d2Q05lRWlzRUt6RVJQdThvWE0xaDRkQ3JhZVlrX0JtbHJIdU5qU29YQjU0cHFnemI1akVZcXljLUpGQ1ItTg?oc=5",
+      "title": "15 Best Amazon Holiday Home Essentials for 2025 - TODAY.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:35:04 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9871733160942422,
+        "authority": 0.7
+      },
+      "rankScore": 0.37580921988275756,
+      "expectedInfoGain": 0.7561394614518347,
+      "rankingFactors": {
+        "R": 0.9870897602513228,
+        "F": 0.9871733160942422,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.0120300978452046
+      }
+    },
+    {
+      "rank": 4,
+      "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQWEFJek9FZkVCb1BPSlFPcVR6STRFSXVBaGloc2RneHRtNjlscUY4cU16Qy02bFp6a2UyWlp1MWtJYjBOUUZ5RDQ5aTVmUDUwY3M5RWlUN29zSkkyZEZ0bnN5bUctMmEtQnIxWURGQTZ1V0Vfa2ZVa0I2MWxuVmZKclRvV19SM1Q1VjFVWVBqeVp2WHYwbV9wazBHZ3dDcGpSaU9GSWxkMmZlNWxubzZEalBoVlExamtINms1WDFfRHpBUGVIN1A4LUJLSm11N2VCa0FWZElHZm9ib3pkX3pHQmhYa0FMTlYwa1pCRW5zUUhUclJELUx5c2hLajh2RlJCcHVHcDUzOHV6ZFU?oc=5",
+      "title": "Black Friday 2025 deals from Amazon, Walmart and Target are live: Here's what to shop during the biggest sale of the year - Yahoo",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 16:20:27 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8699150458334025,
+        "authority": 0.7
+      },
+      "rankScore": 0.34252355865334627,
+      "expectedInfoGain": 0.7195832162004072,
+      "rankingFactors": {
+        "R": 0.8606397288359788,
+        "F": 0.8699150458334025,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.1008283898179023
+      }
+    },
+    {
+      "rank": 5,
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZHF4WGU0UEhiS3BIeFk0c0VaTHBWbllCRE1ZU1Zsd3BCM0ZTdEo4ZE9ZOGUyMjFBODhJb3JheWxOMkFtOEVWTDQ4MXo0ejRpdkVmY0dWQmZIbG5jVmdETEZNLWRYQVM2X2dZYnNRZmhsMzh2RUhHMmZ5ZElmX1BKa3BsOVg?oc=5",
+      "title": "Amazon Germany hires 12,000 seasonal workers ahead of holidays - Yahoo",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 08:05:39 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9554337171005584,
+        "authority": 0.7
+      },
+      "rankScore": 0.3404885513540198,
+      "expectedInfoGain": 0.7464764657992107,
+      "rankingFactors": {
+        "R": 0.9544093882275132,
+        "F": 0.9554337171005584,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.19236876785049
+      }
+    },
+    {
+      "rank": 6,
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWldETUNjYUpXWkUybmtSOUxzVXRaLVpvWmktOFUtV0h0ZzdGckVWVXVqZTJlckpWdTBNOXpINWRaNUpkMzVpUFM1a3ZxWnBfcmlUeU1IXzVxZTI0bVlzRGJNaV9aNkpaUW1fODlVTnJDV0EtekQydGl1QkpXaWUxRWg0UnlLVmNsb3pfa1ZWYTd3emRiSXdpcG51MTcwVzBLS0k4?oc=5",
+      "title": "Here are Tuesday's biggest analyst calls: Nvidia, Amazon, Meta, Microsoft, Deckers, Netflix &amp; more - CNBC",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:24:50 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9861716364286999,
+        "authority": 0.7
+      },
+      "rankScore": 0.33747701804099395,
+      "expectedInfoGain": 0.7558369302361303,
+      "rankingFactors": {
+        "R": 0.9860745651455026,
+        "F": 0.9861716364286999,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.2396693399261856
+      }
+    },
+    {
+      "rank": 7,
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWDViNkFSVEFmT3k2S0JKYTlFaGJHVzh4Tk96eWM5S0UxOFRJUkNGMU1oZmdmcTdhU1hkRFNYREFRUkI2MkxtNXJfYi03NlJFS01WVU1ESVZ6MWh0Vk1Yb3IwQUxNVHVWOVhtWHpKazFaQUpDcHJ5UXJXWTkxVlZvUDFnbmR0VnhxX01qVUU4NmQ?oc=5",
+      "title": "Ford turns to Amazon to give used cars sales a boost - TechCrunch",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 20:37:42 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8924017112805849,
+        "authority": 0.7
+      },
+      "rankScore": 0.3345069564754002,
+      "expectedInfoGain": 0.7267843005908973,
+      "rankingFactors": {
+        "R": 0.8861602926587302,
+        "F": 0.8924017112805849,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.172703097863214
+      }
+    },
+    {
+      "rank": 8,
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPcWNGa2pwdGVvNWx5bGFBQS1xRy00NFhfdy01RkxJOEdLM01ibVZmTkVOOHYxOEhqalVra21WZ0hIeWFxcGpaM0pjaHhxRmlyUzJIeGV5ekJyb1hJWnd2eHA4bm8zbjlWQzRzd2c1TkUwb3NpRVpPbFFPWk5aQmhla2toX0lVVGVVZU5SeFhsMWptRFJlWUxaQXZNeTNkendxTjl3SFppVUJlY2s1U0lSRXF5ZDRmVVNveWtXTDB3eHAyQkU4VjQ2bTFB?oc=5",
+      "title": "Amazon teams up with Ford to sell pre-owned cars - WBIR",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:53:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9830621430103383,
+        "authority": 0.7
+      },
+      "rankScore": 0.3302972748255488,
+      "expectedInfoGain": 0.7548967691202015,
+      "rankingFactors": {
+        "R": 0.9829163177910053,
+        "F": 0.9830621430103383,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.28550710725334
+      }
+    },
+    {
+      "rank": 9,
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOSTlzc0piaEplT1BfdHR6eTg0TVJHaTBOUmFjbW9iMlUzaWJ4LW9vZ3FScEs3b1lrT1lwcDF4aTJEazc2eVd1N1J2VGp2VlQzcVRSMkxpVUl4MTIzR1FQQzljamNNdXBJRFh2YW1fOXp6a0owdTNTU0I1dFliMnJUdzN1cXJjdm9sMkpoU2xtdzJObHNRWHRwcmozSENSd0w0LWRvQnFZbmJHSEJnU2xxLTVn?oc=5",
+      "title": "Amazon to Raise $15 Billion From First US Bond Sale Since 2022 - Bloomberg.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 22:19:30 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9014599341308096,
+        "authority": 0.7
+      },
+      "rankScore": 0.32304855867715254,
+      "expectedInfoGain": 0.7296579546533516,
+      "rankingFactors": {
+        "R": 0.896259763558201,
+        "F": 0.9014599341308096,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.258663396119824
+      }
+    },
+    {
+      "rank": 10,
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "title": "What the Tech: Amazon shipping - WBBJ TV",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9370817766964176,
+        "authority": 0.7
+      },
+      "rankScore": 0.3196763862765249,
+      "expectedInfoGain": 0.7408144599568435,
+      "rankingFactors": {
+        "R": 0.935014623015873,
+        "F": 0.9370817766964176,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.317388746117856
+      }
+    },
+    {
+      "rank": 11,
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE93czBvR2pLckVwTE9EZFc1eU9QcWJTM0hIbHBKVHRlenB6VlVTbmh2ODlzVmRkRTVYLUNmM1R4Xy1BNDBBVk50d2lZS1dXQVdESXpRMjhwbldJQjhCTUk0VUlDMmRPZk5sVGZ3eHNDRG1KVzBCU05icm9zckpXZnc?oc=5",
+      "title": "Amazon, Microsoft cloud services could face tougher EU rules - Tech Xplore",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:10:50 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9789583825811983,
+        "authority": 0.7
+      },
+      "rankScore": 0.3173801481427594,
+      "expectedInfoGain": 0.7536537164645606,
+      "rankingFactors": {
+        "R": 0.978733060515873,
+        "F": 0.9789583825811983,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.3746088747981897
+      }
+    },
+    {
+      "rank": 12,
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQM2hxa0ZNV3B2cEljMHRtVEEwMEY3SGNtX24xTUdNcWdtOUVUWGxDX3BRQmV5ZDFBOEpERUhKaWVfdEZPcUxwUlkwTXRKQVNOSnFfbURLZW5jSmhTdDFhUnpQWjREMnBMeThQVmxVbU9TWXA4TDdnNzdWVThuWFFHNTk1Ym1Sai1tZjItZGhJLWo1VGRZV1NvUlRJYkxidU01QmE3c1F1S24zRDRs?oc=5",
+      "title": "Colombia bans all new oil and mining projects in its Amazon - Mongabay",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 08:42:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9589678271661698,
+        "authority": 0.7
+      },
+      "rankScore": 0.31492716156228323,
+      "expectedInfoGain": 0.7475604166344493,
+      "rankingFactors": {
+        "R": 0.9581016170634921,
+        "F": 0.9589678271661698,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.3737565630286355
+      }
+    },
+    {
+      "rank": 13,
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPT1NETC02VVY3RXlmRlpqdjlYenRLdUxJNTlvcWxQR0dJaFMwR052MzY2a2dFODZwTjJZZk5FcDA0X3Fsa2hoQmotVjB5Vnhzb0tkVWNzakRvbk5FUFRMdmxYWXBvNjVVeTR5c0c1TXJYbzBWTWdZYlZhX2ZoZkd0V3hFUTVRdkdwSXNKeXBB?oc=5",
+      "title": "Amazon, X, Spotify Are Down in Massive Internet Outage - Men's Journal",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:25:37 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9921363034754208,
+        "authority": 0.7
+      },
+      "rankScore": 0.3075582344335989,
+      "expectedInfoGain": 0.7576361315332178,
+      "rankingFactors": {
+        "R": 0.9921045734126984,
+        "F": 0.9921363034754208,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.463390820696071
+      }
+    },
+    {
+      "rank": 14,
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9neXNESmRhZE8wM2hWYlV0RnJxLXA5SkRBdUVtYUsyWGt3X3Raem9yTUtkXy1HSVFSNXg0NEd6TXhWSW94d0RXdnBvdUlqMi1tbFZqTzRHb0xnNGZ4T0g3eUF3?oc=5",
+      "title": "Amazon’s Next Ad War - ADWEEK",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9721032486469583,
+        "authority": 0.7
+      },
+      "rankScore": 0.302754018646916,
+      "expectedInfoGain": 0.7515714004914882,
+      "rankingFactors": {
+        "R": 0.971706087962963,
+        "F": 0.9721032486469583,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.4824489658318996
+      }
+    },
+    {
+      "rank": 15,
+      "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1tcl9ud3kxbHlhSERRUGRJNG9NNU53VWdRa2tOQWJqUUl1aFM0WEIwTmVIQ0tWSFpVaklpa25XWEFvaXJ0VGk5NVNHSjRkR0FlNHJRYQ?oc=5",
+      "title": "Amazon | E-commerce, Amazon Web Services, History, &amp; Facts - britannica.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Sun, 16 Nov 2025 04:49:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7041153440685558,
+        "authority": 0.7
+      },
+      "rankScore": 0.3016795647961108,
+      "expectedInfoGain": 0.662995245558696,
+      "rankingFactors": {
+        "R": 0.649186292989418,
+        "F": 0.7041153440685558,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.1976803301436054
+      }
+    },
+    {
+      "rank": 16,
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRjVmU1BxR0JiSUVwVy1QcS1peWxqTUstS29tUWxRVkd4VXd0Znc1Y05NS1FKQXJlMjdsNXh6WjdpQUJtUTdEQTdiamQyWnZ4V1FsNlU5Q3RkY0NNQVd6bEoxd1A5MnBqeW1hVWRuTTQ2R1RtZXBqWU5QMktBZV92VkpXUmF2N2JiUWFJUDJR?oc=5",
+      "title": "You can now buy pre-owned Ford vehicles on Amazon - The Verge",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8578781016680157,
+        "authority": 0.7
+      },
+      "rankScore": 0.2988504261123406,
+      "expectedInfoGain": 0.7156876093474246,
+      "rankingFactors": {
+        "R": 0.8467059606481482,
+        "F": 0.8578781016680157,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.3948020374526457
+      }
+    },
+    {
+      "rank": 17,
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOandIcGpyS2dlZVRMbTJzemtKZmRZVUJKLXBiRUVaWVg0YWIxdVJhR0tlWUYxOW5kQm1YMzJBbHFodnJpcG1GSXZ4OWhVak5lWFVJX19fUlc5Q1IyTlo3MmFhQmJlNHBmYW45UHRQNzdjNENOSHA2ZndWd0RXeFJINVNoUmFZYkN0NjVobUxfZGQ2aVZHQ1pjN1B5d3I1cmdsMVY2N0dIM1NJakg2XzBVNW9FcGdWUkJDMEE?oc=5",
+      "title": "AMZN, MSFT: Analyst Downgrades Amazon and Microsoft, Citing Cautious Stance on Hyperscalers - TipRanks",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:58:20 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9835824242163274,
+        "authority": 0.7
+      },
+      "rankScore": 0.2887747189794693,
+      "expectedInfoGain": 0.7550541927495126,
+      "rankingFactors": {
+        "R": 0.9834455274470899,
+        "F": 0.9835824242163274,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.614682460493343
+      }
+    },
+    {
+      "rank": 18,
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNUVdYTlpDUzBwTGNVWi12TWdmczBhTmp1a05MQURqLTRnTWNFazNDbWlLcm1HZnYyY1hEdjhpVDhKTXhVOXZ1RlVWX01xcmhOTlBMMFRnV1F0Snd5RmtMVElWWW1JY0VtZjZRR0xFSm5aVk5YQ192cjZmajAxUThFNElDZkttMDQ4eUlBU2E5elFaNG9waGRMM2VnbGljc3dnR0dxeU53Y0hEcElOV1Jpd3pxYUFBV09kcUx3YkNzSUhUMTNf?oc=5",
+      "title": "Amazon to raise $15 billion in first US bond sale in three years to fund AI push - Reuters",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 23:01:25 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9052163696104802,
+        "authority": 0.7
+      },
+      "rankScore": 0.2885929087825503,
+      "expectedInfoGain": 0.7308451793999053,
+      "rankingFactors": {
+        "R": 0.9004181597222222,
+        "F": 0.9052163696104802,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.5324433039017755
+      }
+    },
+    {
+      "rank": 19,
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBEa2E5NjM4LV9mQS05NFp6M2I0Tjh1NHRSMkhMMVpRdnJERUNYcUloWFBkVDZ5ODU1cnlnR281blIzdWp6R1FuRTdBa0tQRlBPWUFKMTZFTVk2akJYS2Vmb1pxV0lGRVp2bTg0UWtfTjAwd9IBhgFBVV95cUxQLWFRMHY1d3F1MU01eGJrc2dHNXExMjZaVmxCNVVObFNOSGRTWENwQW85T19IRzhBVV9KWVJZeUdfN0pPT3ZUWHg3bjE5VlhfN3RXVS1sTzJWMXZ3VmIzSE9WN3dFdVg5NkZpYlpCVi1XUjkzVUFwOUNVTEZJcGl6UmEwOGVIdw?oc=5",
+      "title": "Amazon Pilots New Pedal-Assist Electric Delivery Vehicle - IEEE Spectrum",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:14:13 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9851335054510219,
+        "authority": 0.7
+      },
+      "rankScore": 0.2855679458940756,
+      "expectedInfoGain": 0.7555232185259866,
+      "rankingFactors": {
+        "R": 0.9850212847222222,
+        "F": 0.9851335054510219,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.645686357271447
+      }
+    },
+    {
+      "rank": 20,
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPTWZLbHZDbzJQSGx0U2poaEkxaDRRT2drRVptZmhGMTJQTEZ5ZklSMklRZEJSOWowTVo5Y2lvbWc3M3I5czAzcHl6OGRvcGo2UjJYNXlPUzNlb2YzZmxlNDVXdUxXaEgtOU5oekhSTU45RlNZOEhmMGxleUtUeEZzbGU3WDNJN1BxOGFReFVTU0NsOVU5NTNFY3VyRnhXTm8tYXNLTi1TRG04cXR5alg4eHBB0gG3AUFVX3lxTE5vbkp1Nl9nel9PYnJpbkR5Mk9iVXd3TGREWnVIOElxNHJmUW5jRVJLZEx2MF9WTkR0T3VRUThTRTQwUVQwUF95TzVaQzh3dUdUUXQ0Q3A5Ykw3c2hnRVpxQjJUenpXT1gzOHVSMGxMWFE5RTdPeVE4LWg3akRfeS0yd0Y1WVFVRkRhbHBvRmRXaFRPdWswZ1hmQmJGYnVHSW9CMXF6NXY0WU5KM2dHZGdMSEhUQ2JaZw?oc=5",
+      "title": "EU to assess whether Amazon and Microsoft cloud businesses need extra scrutiny - abcnews.go.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:10:34 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9847768500582121,
+        "authority": 0.7
+      },
+      "rankScore": 0.28258577399447493,
+      "expectedInfoGain": 0.7554154062289699,
+      "rankingFactors": {
+        "R": 0.984659191468254,
+        "F": 0.9847768500582121,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.673225178857516
+      }
+    },
+    {
+      "rank": 21,
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQRGRMQlB0c0JiWnV5YkNzQWR3bExScDRrMmpZN2xmbVBuMTc1U0RETWpEZktKVVdTbElpcjljU2lfV1AxRXVXMnRCR3lsZVdveHF6bHIzNDA0Y0pNZGY1bWxjYmYxQXduVWJmenM1Zi1BMjZvQVUzTjV5c01pX2VWS21XdG1DX1N2?oc=5",
+      "title": "The Best Black Friday Fishing Deals from Amazon - Wired2Fish",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:00:19 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9896492376540966,
+        "authority": 0.7
+      },
+      "rankScore": 0.27720997781889806,
+      "expectedInfoGain": 0.7568865632274795,
+      "rankingFactors": {
+        "R": 0.9895945171957672,
+        "F": 0.9896492376540966,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.730372727499568
+      }
+    },
+    {
+      "rank": 22,
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQX25rcmhvS1lGU000V3hQYnJZR3QtOEJOd2ZBUE1RU3RZYXJWNnlic0t4RzJ5Zk1HdmxJNjF3ekNuRlZYcEc3ay1udXMxel9sejMzQTdSQjFQVEh5T2JBck1GUUt5dVRFUUFnclNiRWNDSkxHRmxjODVDS09ISERlQWJRc1ZIaEVMSnIxTDBET291NnhjdU5lX3VxYjluNUs1RzN2SFRodzBBQ0hIcWFfTzNoTkVMSl9rYjQ5ZFVRNHBIZDVacTRYNlNHYUM?oc=5",
+      "title": "Needham reiterates Buy rating on Amazon stock, maintains $265 price target - Investing.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:20:22 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9740693666101321,
+        "authority": 0.7
+      },
+      "rankScore": 0.27506329507646193,
+      "expectedInfoGain": 0.7521693767177102,
+      "rankingFactors": {
+        "R": 0.9737264781746032,
+        "F": 0.9740693666101321,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.734531979298156
+      }
+    },
+    {
+      "rank": 23,
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFAxQmsyY1prbnVxOGR4ZmVtbVZwbnpxMGtha2xSQXNoTDJ4emJXVDhNYlY4QUZzSzRYSUk2d3hmd2x2ajRXSV83UV9SN2lQNlNfWXlyWUVXYUNWYXJkU1FtNzNjQXJ4RVV1MXh2SWJSODJYZ3dvTFE?oc=5",
+      "title": "Amazon Editors Just Released the Very Best Books of 2025—See the Ranked List - Biography",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 16:15:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8694448319889976,
+        "authority": 0.7
+      },
+      "rankScore": 0.2741737481478604,
+      "expectedInfoGain": 0.7194315809491433,
+      "rankingFactors": {
+        "R": 0.860099041005291,
+        "F": 0.8694448319889976,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.6239987810983196
+      }
+    },
+    {
+      "rank": 24,
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNVzFFU2RTQXBjaHJvXzJ0aVc3cXFpdGc4T01INTVPOVRXcG0zbG9NZFh4b0wzTkpDVXpKVzR1LU12a3pPM1BEQXozVHNzRmhHRG5Jdk5SalF0V2ZjdTBoX3RxdUp4S2s0Zk5PcVFEcHlSbjgxdExoaFBGS2FaVzFOUnlXcFJLdThyRG5LamtVaTBXTTZ1U2ZV?oc=5",
+      "title": "Amazon selling a tasteless Christmas baby outfit is Claus for concern - The Guardian",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:43:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9762589801055305,
+        "authority": 0.7
+      },
+      "rankScore": 0.27061790437702044,
+      "expectedInfoGain": 0.7528346535634486,
+      "rankingFactors": {
+        "R": 0.9759720436507936,
+        "F": 0.9762589801055305,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.781909997036307
+      }
+    },
+    {
+      "rank": 25,
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1IR2kzTFRZWThqSG1tU0FHMzNfNHU0dDJwNXFnR1o4NVhfcEJLb2txS01GUG0waW1obVd2XzRaRWRKTms3ZnB4Q2pMcEVSc1JGTEtuYnp5TG1jUHpKdS1QMnRRNkpRQmdaQXlNTzJBMWFxb3ViZU82Z3ZZOFVRZw?oc=5",
+      "title": "How Amazon is using generative and agentic AI to transform the shopping experience - About Amazon",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:05:06 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.990118980864352,
+        "authority": 0.7
+      },
+      "rankScore": 0.26547629518227944,
+      "expectedInfoGain": 0.7570282295701289,
+      "rankingFactors": {
+        "R": 0.9900692162698412,
+        "F": 0.990118980864352,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.8515850315386677
+      }
+    },
+    {
+      "rank": 26,
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPakhRRGp2d2syUlo0SFc5eURyNEY2ZU1oY3h0ZWVIa1R3UGlqNFAyeHRkLWItNExxRmdCZE5wbW9UcHd3XzJyRDBqaW5KU1BvdXdOVHY3WVA2SXZtUjRfeXVCU05fa1BobkZvN1BEWENhdHVwNTFkckg1a1hycDhsdVBjbWlrWnJ3SkZVNVB1eEhyZkExSVNnVl9rU2dYcmJWNi1fc3owbzBKTVRH?oc=5",
+      "title": "Amazon satellite network gets a rebrand — and drops its affordability pitch - TechCrunch",
+      "publisher": "news.google.com",
+      "publishedDate": "Sun, 16 Nov 2025 18:46:03 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7650818718146452,
+        "authority": 0.7
+      },
+      "rankScore": 0.26122839176975926,
+      "expectedInfoGain": 0.6845963003654507,
+      "rankingFactors": {
+        "R": 0.7322267972883598,
+        "F": 0.7650818718146452,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.620681066584976
+      }
+    },
+    {
+      "rank": 27,
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBKVHc1c3ZIajhjeGF5U25yVDNTOWhicW0tTmhfdmxQQ2U4WHFrN180YjcxOUp4UEptU01KV1lQWW02NEI1MlhCSGxGSm9KMDdDZVRMRXAzNmV3SzVCdEVJQU5wLVFLX3Z1Z01nMVRnalBWUFJhWnpzVUNoWU7SAVhBVV95cUxPQlpINTBmU1hQQnhETGtzMTY0RFdFVjVuT1hQN3hnbFVSRFljZU9hNmpUUS1rR21LZnRrUzdqTm41dXhCYTRwTU5TOTFielNfX2YwMkRoQWR3?oc=5",
+      "title": "The 23 Best Holiday Gifts on Amazon | NBC Select 2025 - NBC News",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 21:33:35 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8973629169490885,
+        "authority": 0.7
+      },
+      "rankScore": 0.25849022954921014,
+      "expectedInfoGain": 0.7283601084252997,
+      "rankingFactors": {
+        "R": 0.8917044725529101,
+        "F": 0.8973629169490885,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.817747153134227
+      }
+    },
+    {
+      "rank": 28,
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5HYW5fcDJhWGhLNzByWVJyTEtJSHh1TzByelZOSkxhUzBvSHJad1dUbGRXQjlwYUlrOVoyejQ4QkV3ZGpkZEE1V2E1WHM0VzBoWm9xM2UxQmpUNDVzTzJhVzdOMmRUUE1fVTFVenVMQkHSAXZBVV95cUxOZDkxSHpXTjdtdHRqdVRKRnBNVzNObkhPeWkwZG1SNFBIWEJhLWFzRGN3OW0yUmViSk5jMWxmTGh3TFhQMzNvMjFwUHIxYVk5LW0yRDlESnV5b1BfSHQ1blRDS0VMakttNV9waXpBUkd4NElsVGR3?oc=5",
+      "title": "Used Ford vehicles now available on Amazon in select cities - The Hill",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:35:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9813082462151144,
+        "authority": 0.7
+      },
+      "rankScore": 0.2584374961026828,
+      "expectedInfoGain": 0.7543658450671877,
+      "rankingFactors": {
+        "R": 0.9811307208994708,
+        "F": 0.9813082462151144,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.9189489003850353
+      }
+    },
+    {
+      "rank": 29,
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1PRWZ4dnZzX0d3d3prNW9wVmxhNnprdTB4aXlDMlVwTHZzNHR5YW5KSVY0U1dybGFKQWRFTXFJejY0enBibDcyV0ZrN3R3ajVCS3FtOXdUT0hlNlMxUDdYUTYybUtPRGpTMVQ5cEVUZnNBeDRTeVZWZS1Lbw?oc=5",
+      "title": "Amazon early Black Friday flash sale – hundreds of items at $1 or less: Wallets, stocking stuffers, winter gloves/hats, more - 9to5Toys",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:01:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9897163325177517,
+        "authority": 0.7
+      },
+      "rankScore": 0.2574649446120885,
+      "expectedInfoGain": 0.7569068085086151,
+      "rankingFactors": {
+        "R": 0.9896623908730159,
+        "F": 0.9897163325177517,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.939844139360465
+      }
+    },
+    {
+      "rank": 30,
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPX2pMdUJHSGNpT3NWZ3RzM2h2YzE3eVNRT1Z0REVab0ladnYxVVhXc045NzlCZ05vekVlcC1NbWR0NzZlTi1lUHdYNXpsekdKdHFXWXZ1ejVFUkxWUENFTGRib1NqU3NucEJBWHdDQUliYVExTjlQUTB4Um0xWnRjdjVkLVFRU050M1o2bFBqUm96WDdNYUIxRzhkZ2I5M0k?oc=5",
+      "title": "Amazon begins Prime Air deliveries in San Antonio - Unmanned airspace",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:34:56 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9930537300334076,
+        "authority": 0.7
+      },
+      "rankScore": 0.24102453380650574,
+      "expectedInfoGain": 0.7579123791974715,
+      "rankingFactors": {
+        "R": 0.9930287979497354,
+        "F": 0.9930537300334076,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.1445445292549463
+      }
+    },
+    {
+      "rank": 31,
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNT1Fqakt2dDh5Z3dldUE0VEt4VVJZaWJEWjA5VWQyVlV5Vl82c1lWd3VYWTNrWWdsLWJmNkNHRC1NMjc4WG5uQzR1b2hpS3NmM0xfMDFOa0VoOW9ORVpmalJhcGRwSkFTX0RnaXFfbzdYRGdQTFMySlE1N09xWGFyWUNod1pkZlM0eXkyZ3NUM1hNQUx6UFdfdG85YnpfZG1ldUppLXQyOFc4Tkl6Q2pfV1Viaw?oc=5",
+      "title": "Microsoft and Amazon Are Downgraded as Redburn Breaks Ranks With Peers - Bloomberg.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:52:10 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9947529674573288,
+        "authority": 0.7
+      },
+      "rankScore": 0.23917584445048296,
+      "expectedInfoGain": 0.758423726864631,
+      "rankingFactors": {
+        "R": 0.994738544973545,
+        "F": 0.9947529674573288,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.170987975843225
+      }
+    },
+    {
+      "rank": 32,
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNUlYzYWQ0V0FRaGlxRy10ZTlmQkVvT25aWUg2eEFFRE1MTHY1OUdXT1hjOFU2bm83MG5MdVJMX0JvRmdjN0Q4dTE1X29VaG8tTGU5cl9hMk5MZkd2Q2JBTnhIZW5hNkFOc3p6aU84TnhZOERJU3phbEwzM0JEWlZDTkhNZ2kxWUdmclpLZmFR0gFYQVVfeXFMUDJoZzB0dVBBSmlvNGUxVXh6ckR2ZEJoUTRoVEc0eElRTGlnMUdGUUFEVm5RNDRBellSb0VBVEVIRlRGWGI4em9OUW1GOXpjMTdfT3Y0Y25vYw?oc=5",
+      "title": "I Found 41+ Best Early Black Friday Deals From Amazon, Target, REI and More - NBC News",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 22:16:40 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9012065787131797,
+        "authority": 0.7
+      },
+      "rankScore": 0.2381022468672978,
+      "expectedInfoGain": 0.7295777702891197,
+      "rankingFactors": {
+        "R": 0.895978556547619,
+        "F": 0.9012065787131797,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.064136436712155
+      }
+    },
+    {
+      "rank": 33,
+      "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nd2JIVEJjdWxwWFd4SlN5eERvWEptODZ3STFjeU9uR2xwbldCQXZlOHVQTERNcnFBNmMwUDJDLU5zSm1TUTZycjIzZHVsZFdTZ29CRzVabjhWbjZvenFacEU1TjA2b25lMDlTVVlVMnBZcHRY0gF6QVVfeXFMT1oxcmh0UGRJWGgwZkJqNzQ3UnlvTDJpYXBuMzlwX3RzMHBpaUZiX2otY1VCR3ExZDVkM25ZYmVScG4wbnludGVsaXVwWEV2eVpUdWZ4NEpESjVUUGlCa0ZFMHNOcmYtOU1fbkZOX213NWVIUkhLUFpzVFE?oc=5",
+      "title": "Ford to start selling certified used cars on Amazon - CBS News",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 17:44:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8771554648435079,
+        "authority": 0.7
+      },
+      "rankScore": 0.2350695367837284,
+      "expectedInfoGain": 0.7219125717106532,
+      "rankingFactors": {
+        "R": 0.8689283465608466,
+        "F": 0.8771554648435079,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.0710596599968465
+      }
+    },
+    {
+      "rank": 34,
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdHdzeTA2Y1RWYmlwbU9NLWRVbVJjbVd1dHFTOHl0dHBzQnFlX244R292Yk5tLXAtMlBVYU42ZXdQaWYxZzJjODNlZVJnM295OW52QXE4OVlxNUZDV2xSRFpBSi1LQzFyTFo4ZEJlMnNjbG9ucmdhb2FoOGo4VWduR2dBLV8tNTFNTm5jZXo3R3VfUzc3bXc?oc=5",
+      "title": "Exclusive: Amazon Facility Lands $54M North of Chicago - CommercialSearch",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:56:51 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9776012783382602,
+        "authority": 0.7
+      },
+      "rankScore": 0.2212178671602407,
+      "expectedInfoGain": 0.7532420635265327,
+      "rankingFactors": {
+        "R": 0.9773458118386243,
+        "F": 0.9776012783382602,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.4049784187681214
+      }
+    },
+    {
+      "rank": 35,
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNNU1nc0E0V1VXc2lGMkppRFRBSXpjNEludjhLMEhSUVZUUXNfdEluZWpIVUhkcl90Y0o5bndsb3FJRDZraXNKbUpvU2U1NzJOSkl4bWxLa1lMUzhyMzZKRlVlZF9iQlJDRi1lVG5GR0VRZEg1LTZKN3Bnam1RRHBrSmRxczd6ZTlTSldpcVQtenA2QUF5aTVnSUh6QzBtZ1N6UnM4WU9sSG1mQkU4R2VZ?oc=5",
+      "title": "What The Tech: Tips to save money on shipping without an Amazon Prime subscription - WAKA 8",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:15:06 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9852198387241489,
+        "authority": 0.7
+      },
+      "rankScore": 0.21665623730942304,
+      "expectedInfoGain": 0.7555493121181461,
+      "rankingFactors": {
+        "R": 0.9851089087301588,
+        "F": 0.9852198387241489,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.4873185351183285
+      }
+    },
+    {
+      "rank": 36,
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRFhCRGtrSk1IaWlTeW5qU084QlNRa29sbWpVRnFNVmd3b0Q0VlBSeEUtQW9KSmlFTzZoOFk0UkphNng0bTlnS2tiWVhLd3JPdjdHSm9IRUFkSll4YWNtVHVfR2ZMZUhoanZielNyeHpZS2g4NWtxTkFkeDNyVG9NWGZuZFdhUDNhejhIVENBLUcwTzREM2lLczdHMUNFckZBNk1UZk1lVnQ?oc=5",
+      "title": "Microsoft’s Azure, Amazon’s AWS Come Under EU’s Digital Markets Act Scanner For Potential Curbs - Stocktwits",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:15:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9735509061126432,
+        "authority": 0.7
+      },
+      "rankScore": 0.21178705847679535,
+      "expectedInfoGain": 0.752011753972452,
+      "rankingFactors": {
+        "R": 0.9731941203703703,
+        "F": 0.9735509061126432,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.550791815992132
+      }
+    },
+    {
+      "rank": 37,
+      "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxOSmdXaDFoY0NHVDhjRGZPREFOUkJZUWZKbjVRcE9UQjlYN2dKX2xMV2EtZ3BQYktSRHVkSzFBV1QyQWlkNWI0bHhEbWJiN0xfM2d1OXFERVlLSVhuZXltbUxieGpWWldjT1pFVWF0dU52bk53dzB1QlE3TnNTdWZfYjVqbW15aFQwcVJlNlFSMHlvaE1PeG9KWlBNM2hvQnNIbnlHby1tWUhHRjJxRFI2aVozbWwxaFZ1d0xHV0g2Qm9LU0hCMklodDB4WXh3RlZmLTlQcVpSeU4weFlnd2pBMG5MdmFZV2MzXzZ1dUpCOFhEQUhEMkdrNkxzbk80R29jcjVweHEweGoxTkNmRjJlNGNwemgyWWM?oc=5",
+      "title": "Amazon's early Black Friday kitchen deals include this 'very dependable' KitchenAid mixer — plus 11 more markdowns on air fryers, coffee machines &amp; more - Yahoo Lifestyle Canada",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:44:02 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9880518454358461,
+        "authority": 0.7
+      },
+      "rankScore": 0.21124458546517716,
+      "expectedInfoGain": 0.7564046649602182,
+      "rankingFactors": {
+        "R": 0.9879792542989418,
+        "F": 0.9880518454358461,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.58070557545679
+      }
+    },
+    {
+      "rank": 38,
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNOWRfSVRHdllVa3k1OXdnQUM3aUFLVzBPZDJrc2FFYXZCMU5fcVh3bFV4VTBNZGJZc3BvczRmZms1MEhKVmRxZVBWNzk0OWdhMVk4TFRjRWhHOF96MnNBT19NNkJ2VG1qM3g0aWY2Q241dzVJWWcwbGN0SlZDS3I1S2ZGNENZWVh6aDFZ?oc=5",
+      "title": "My Worn-out Sweats Don’t Stand a Chance Against These 13 Effortlessly Chic Lounge Sets From Amazon—From $20 - Travel + Leisure",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.972103253468899,
+        "authority": 0.7
+      },
+      "rankScore": 0.2095821051969962,
+      "expectedInfoGain": 0.7515714143596205,
+      "rankingFactors": {
+        "R": 0.9717061755952381,
+        "F": 0.972103253468899,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.586047643014096
+      }
+    },
+    {
+      "rank": 39,
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNTThQQUdLUUttb2tKSU00N3lVVFltbk9sc1dBU2FZc2pwWlAxX3hWa1hmbnVfaWJrYjl3cUlxRmh5SWxBRWNpUXhqN1VhdDY5WGYySDdyWkl5WW5jY0JPemx1QU9LYWJNbV9TYnh2SzRSWVRhV1pRTDI1UEQ3dng1eFRmODJIbWVHQ01SM3piMA?oc=5",
+      "title": "Amazon downgraded, Alphabet upgraded: Wall Street's top analyst calls - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:41:44 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9937238765333187,
+        "authority": 0.7
+      },
+      "rankScore": 0.20913309030580257,
+      "expectedInfoGain": 0.7581141003292041,
+      "rankingFactors": {
+        "R": 0.993703458994709,
+        "F": 0.9937238765333187,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.625031788229496
+      }
+    },
+    {
+      "rank": 40,
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNeUl6V1JFYWJVd1FNNmlVemRHcW04RkViMElFYU1sTm1wQXBpM3pfNHBMMlhjQkFfUDBiYVp6bnA2TVVwbUF6Umg5eVd2cVNjMjU4dzVxTjZLT0gtX05NSF9Ia1l0NW9JRTR6SlltS2s1RkZpRTlWT2kwVkQzbHAtOWRISThXV3RnSUJPcndVVy1YRm1MYTVNYUh5d01OX0d1WXNFZDl3VmtmQUxUVXUwcmdRaHpoc0NUQkYzMlZiSXQxUjVhdDduVWcxRWFZMWFaZTZvYk0wZzVvem1I?oc=5",
+      "title": "Amazon ash art performance by Brazilian artivist Mundano demands action for forests at COP30 - greenpeace.org",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 15:04:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9960070638211245,
+        "authority": 0.7
+      },
+      "rankScore": 0.20839071909651793,
+      "expectedInfoGain": 0.7588008209818987,
+      "rankingFactors": {
+        "R": 0.9959984093915344,
+        "F": 0.9960070638211245,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.641240954835679
+      }
+    },
+    {
+      "rank": 41,
+      "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9xUTdQQUhuRC1WZnBKREwxQnB5TGRsd2VwWnFrZ3N5NmpNWkpESkJJT2E1MXA1ZmhwSml5Z1o3SkFlMlJ3d1ZqQWRVQ3FJeUdlODlxZ1loZENoV3lQOFRBN2xHS1dOM1VpREdyUWhTdmRVMmNKVUJF?oc=5",
+      "title": "Why Amazon Should Buy - Wait For It - DirecTV - Next in Media | Mike Shields",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:54:49 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9774041066070082,
+        "authority": 0.7
+      },
+      "rankScore": 0.20787289922679011,
+      "expectedInfoGain": 0.7531822633124797,
+      "rankingFactors": {
+        "R": 0.9771443154761905,
+        "F": 0.9774041066070082,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.6232826218041776
+      }
+    },
+    {
+      "rank": 42,
+      "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbi1FSFJKTHRFc1dOMmptbVdJOGxmSkRhNzlXZ3Q0VjZBVUEteVhISDNxczc4dFR5TXBaekMxVGM0QWNoaGZUM1JhU1Y1ZjNaVS12ZlJoRndreU8xbXVVTFNCMzVuT0JCZVNpaklWX3MwQ2F4RTRPd05aTGFIbVpvYXBuMzZDS3Z4VmRCams2Sy0xNmtkdXBRVW9kdkFWSlZmRFVPVUxFOEZnYURrS1h5RHdR?oc=5",
+      "title": "Ford to sell used vehicles on Amazon, joining Hyundai - Reuters",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:03:49 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8582029908856594,
+        "authority": 0.7
+      },
+      "rankScore": 0.20329694358600633,
+      "expectedInfoGain": 0.7157931520058648,
+      "rankingFactors": {
+        "R": 0.8470846891534392,
+        "F": 0.8582029908856594,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.5209243158298786
+      }
+    },
+    {
+      "rank": 43,
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQ0hMajFHQmY0Q0JGaVJwWUI4MHFraVlaUmN4NWNsdzV3UkFYVDJiN0hZcEJ0YkZTVFQ1Z0owTFZCYmlOS08wLTRFQWJraE1xT1dnTHlHNTV6VUR5UVl3YWFKYl92bXlQamhNX054V3ZTZFo5SkZNU0EzQzdPUUdQTldLUnBsNjRVVUs0RWZBNGFfY1Qta2I5SUdjUTNoVGgtRmdQUGNncE9LNEtEUmt0VERtSHFiTHloaXQ3TXRlVThaS0x6UWthOW9R?oc=5",
+      "title": "Rothschild turns cautious on hyperscalers, downgrades Microsoft and Amazon - Investing.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 09:03:59 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9609788785439857,
+        "authority": 0.7
+      },
+      "rankScore": 0.19871778683941582,
+      "expectedInfoGain": 0.7481763015236613,
+      "rankingFactors": {
+        "R": 0.96019646494709,
+        "F": 0.9609788785439857,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.7650192940618035
+      }
+    },
+    {
+      "rank": 44,
+      "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE8xMEYtWThpNzF3Tnc2R3R2ck4xOFBiT1ZGMzFhNFRyM3p1NDlHWDA5dTdnaEVlYlg1ZEJ3dThJMFdDZThwbThiWnRhdmk2NzdhLTlTTTdCTnc0aE1lS29lb1ZBcTZGRWprc3JtMklRONIBdEFVX3lxTE1YNnZFeU11V0kwWmdrNEZlQTBvZlI3UlhWVEtDY0FLMElkbUhuQ3FjOVRrT0M2dUhPaTNaNXlnM3pxNHBiSmM2THpMRWJNdFRtZC0yQ19MX1c5LWQtd3M3bmxJd2ZqV0hGOEtEeUJOTWhUdnFM?oc=5",
+      "title": "Ford partners with Amazon for dealers to sell used vehicles online - CNBC",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:00:01 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8578795243737853,
+        "authority": 0.7
+      },
+      "rankScore": 0.1982763991913249,
+      "expectedInfoGain": 0.7156880866421789,
+      "rankingFactors": {
+        "R": 0.8467077199074073,
+        "F": 0.8578795243737853,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.609547528405449
+      }
+    },
+    {
+      "rank": 45,
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNZGhXeHFVcXd4UHVIOE80dXJVNUxoZ2JVVXFUMUxkUUxrTTY4R0Z4aHBzMHp3RTdRN0hjQ2RFRUhsMXQyUzA3SmlGWk1zRTJJV1JrTVI0M3lEMUt1MnVVNDBHdEJtN2tGY0FfUld2dUxxc3RfVERENFZKcnZqdF9kb0dMU0JwQWpiMVgzT3hUWG5WYzhEb3c3LXhjMEk0Z0tUd3o3YnRTdTlLQXZHU3d5RnNJNktkeWpaT3AzSw?oc=5",
+      "title": "Amazon Bedrock AgentCore and Claude: Transforming business with agentic AI | Artificial Intelligence - Amazon Web Services (AWS)",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 18:20:41 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8803534359011054,
+        "authority": 0.7
+      },
+      "rankScore": 0.1971808129256753,
+      "expectedInfoGain": 0.7229381299684992,
+      "rankingFactors": {
+        "R": 0.8725674305555555,
+        "F": 0.8803534359011054,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.666371586778076
+      }
+    },
+    {
+      "rank": 46,
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPZlEzS0NxYUcyU0hoZk5qTGh5blRQYjZrcHliOWNxam9LOFhwdUJJSFpITlZkcE02SFBOY0M1LUFBVURkUWdpNVBid2psTGhDUzRPSVdrM3pEcU9fSlVjMnJxb0ZSTnpZT3B1Y2pobWpadUJkUWtWVnVtWlJIMnRrNENzQ1VhSlhRTzlRUlUyZ01nTUpIdkE3UWVEMGdWam9zTWRoaw?oc=5",
+      "title": "Amazon is selling a $900 gaming monitor for only $500 ahead of Black Friday - TheStreet",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:45:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.982282242860665,
+        "authority": 0.7
+      },
+      "rankScore": 0.1963926196701043,
+      "expectedInfoGain": 0.7546607339985442,
+      "rankingFactors": {
+        "R": 0.982122650462963,
+        "F": 0.982282242860665,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.8426124936171506
+      }
+    },
+    {
+      "rank": 47,
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1vWDhpaV9OQTBPN0t3ZE1FVXZITVFrV0JCZldhd1M0U1ZpbnJCcVZWU0Y2QTZIQ1hDM0hVaEhJUEY5cmpJU1pCTzA1SEY0MjhCbnRkbnJMcjhQSkFxLVFIQ010blhRaW9qeWNjNUJra29MNUR6eUNmVHNHRQ?oc=5",
+      "title": "Amazon Is Selling a ‘Durable’ 20-Piece Grill Tool Set for $41, and It’s the ‘Perfect Gift’ - parade.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 10:01:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9664299765208814,
+        "authority": 0.7
+      },
+      "rankScore": 0.1958963449707534,
+      "expectedInfoGain": 0.7498424233134496,
+      "rankingFactors": {
+        "R": 0.965852845568783,
+        "F": 0.9664299765208814,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.827750964038652
+      }
+    },
+    {
+      "rank": 48,
+      "url": "https://news.google.com/rss/articles/CBMi1wNBVV95cUxOLVM5WlBWNThsam5IQUxWWk4wTWpDaU84aWpISGo3NjhDWVhMdkkzbXJxWUU0eTFCQ2dPb2JoRy1acWc3MDFwS1FrWUNwR3hiY182ZFpZUVpBTzA3bkk0c21RZVljamw2RFhrNm1Rd2dKbHhlOXRPcFQyY3h4NXNvaXVIVHlYRERNWEJvOFBXc2JFN1JxMlpKc0VPaG5YTXIyZU5XU2QtXzl1Wk1WR01fRFh4dG9aaUFlSjRQVlZVVkhXdzc2MGJ4QlV1MTZLOWJxWlpVaFlYTUMzb1dkMHJKZDNnLWpwSkNuRkNHV0R0OENRdklEQlNpWDVwdnAtbTVsUXRMTlZqMHhZTDF2d1NNS1JkSkN5c0hVX3NnUXZfVWNsLU9xa3BxNklfelcyV0VvS1ZVdVRvQ1dWNnRCd3FfaVFKeE5VdmxNYWhaVTRDOXF6LW5WT1hIcmRvQjZOOFhIZU1MWDN1VlgtVFdiMmlyaC12WnZOcGctaVJXU0NSeVB1RTdEaTF4YlZESXUzcVpLakZNR3BPMGhBSUVkSEFzZnk2Mk5tNjF6dWVISnJUa3NMWVJ3WXJrSEZ1dzl2U0s0S2RSQWh4ejhiN1F4aVdENm9YckxSUTA?oc=5",
+      "title": "Amazon Moves Forward With $15 Billion Bond Sale - The Wall Street Journal",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 20:26:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8913886037279274,
+        "authority": 0.7
+      },
+      "rankScore": 0.19234000295483314,
+      "expectedInfoGain": 0.7264619753310144,
+      "rankingFactors": {
+        "R": 0.8850245651455027,
+        "F": 0.8913886037279274,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.776967683116903
+      }
+    },
+    {
+      "rank": 49,
+      "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQQ2tIenM2NzZia3VfMUtiNk56czcyVnZvQm02TjlmYVlVemFSc2p4bmtIS0lYczBJZXpxbGpfQUpuaWJtV1FXZjFVdzdadTZWM1J2OGZ1SG01cDVlMGdVVTdwdW1BdDFXRWZsUHVJMHhUVnRHQlVneHZtMUpnYlMxeFlPUTQxNDBmOTlEVVdHb2pmc3ZvSVVkLUhYQQ?oc=5",
+      "title": "Amazon Autos adds Ford to its used car line-up - ConsumerAffairs",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:27:22 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.980565402321505,
+        "authority": 0.7
+      },
+      "rankScore": 0.19225953182201552,
+      "expectedInfoGain": 0.7541408101002098,
+      "rankingFactors": {
+        "R": 0.9803733316798942,
+        "F": 0.980565402321505,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.9225145455901584
+      }
+    },
+    {
+      "rank": 50,
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbjlvSXlqc3F0ZDBKZ3ozWkRJYldFSGxrbllHVF9oRHhiUVpBUW03dXZURnIxOXJDUm85dlV1X01FajNOaUZCQ19FZGs1RlR5OUhhZ1dRTVhXUkxIS0toczlsUC1MdnFxSUJTNXR6MVZodXdJY0xMUkozekVCUGZpbVNnNkxwVWlRYWFTYWwzUS1rMXBXQzlINWpZanlLTDYyb05tczNZMGtTZw?oc=5",
+      "title": "Amazon’s Zoox offers free robotaxi rides in San Francisco - Los Angeles Times",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9896181512438361,
+        "authority": 0.7
+      },
+      "rankScore": 0.1845452806951646,
+      "expectedInfoGain": 0.7568771996210991,
+      "rankingFactors": {
+        "R": 0.989563179563492,
+        "F": 0.9896181512438361,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.10130888619863
+      }
+    },
+    {
+      "rank": 51,
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQek5nX2J1QTA1NGo1R2tmdUVybU5laG5IdkJVUjhfUjFJS2I4aWNwbkF4cmktV3Z6VFhkdjhDTFpRZGF6RTBRZDVLS1hzcWFGSjM3RVo1dXR4bGdPMG05ZUNBRnNjSkhHbnNoZk1BYmFRV0pnZVBKdUxnY0VvZFNIUV9YUXhlcEV1NkppZi1KVGZQY00?oc=5",
+      "title": "Amazon just dropped the new M5 MacBook Pro to new lows again, 24GB/1TB M4 now $300 off - 9to5Toys",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 15:40:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9994846467290275,
+        "authority": 0.7
+      },
+      "rankScore": 0.182696074879396,
+      "expectedInfoGain": 0.7598452550450684,
+      "rankingFactors": {
+        "R": 0.9994837202380953,
+        "F": 0.9994846467290275,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.159067213385228
+      }
+    },
+    {
+      "rank": 52,
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPWU8wWE9tM3ByUGhLXzdXY1FLejE3SWFOYmpmQWxpSmFoYU1WazNKNDMwYWxDVnhERW0xbmFhOFlnSjFTbWc2UTdoZGFUWUNzc2I4dzE4Q0NpNGdkZDZ5b3dlUUE0TkJ1eTYxRTBnN1MzSDJyY09oX3h4OGFIdVZSeg?oc=5",
+      "title": "I Asked ChatGPT for the Best Amazon Deals This Black Friday: Here’s What It Said - AOL.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 11:24:38 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9744817567652125,
+        "authority": 0.7
+      },
+      "rankScore": 0.18264107790635745,
+      "expectedInfoGain": 0.7522947216000994,
+      "rankingFactors": {
+        "R": 0.974149720568783,
+        "F": 0.9744817567652125,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.118978765476904
+      }
+    },
+    {
+      "rank": 53,
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQb2tNMTF4TmswaHRIa0lKV0Z5dEI3MVhlMVhXTFNqd25sX0E1aTBxTGpPOTkzSnVDWDlIM1hEZmw5cXNOS0pSM2Z2eV9kbFFnSHFmRzg5T2V3MW94NTlhLWs0NXZJbTJNNEdZQ0t1M29jYW5ScHpqRXJVeWRUR19qeg?oc=5",
+      "title": "Ford Taps Amazon to Let Shoppers Buy Its Used Cars Online - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:37:50 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8611040330370083,
+        "authority": 0.7
+      },
+      "rankScore": 0.18224528765585618,
+      "expectedInfoGain": 0.7167345007888846,
+      "rankingFactors": {
+        "R": 0.8504593055555556,
+        "F": 0.8611040330370083,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.9328012812179476
+      }
+    },
+    {
+      "rank": 54,
+      "url": "https://news.google.com/rss/articles/CBMijANBVV95cUxNb3dSYlNZbTQ1YnRWT2dseXZVZ1UxS0ROaGs4cU5pQkx2TVY1VW9zbmY1cnFiVjBJX0RsbDBlODZ0R1Rtemt1eUpUSExQemJPUDRjQWJKdXk4eXVVRURCN0FJSTdWc3pKWmZ1TGs1VmF3c2V3NjNmS2p5UVhRbGhIZ25HSGp4b1NyZnp3VXRYaXZBU2NmdTNhMlBCdHV4RmdnS3RlYVJtYW4zc29lSFJfTlM1WVFlcHV1ZExtSVBxb3oweWRxcW5RVFpGeGN5ZU93VkNCMFF3UUtPcXl6S21ZTGN4QmRRN1ZyMXU0aHBFa2xUcmpIUXA3VVk3LU1LR1ZacWlqbEpjYm9Oa2tWTWVNNXlNLVV3eUV2MGVvRnozYjdKQ0FucTNERHk3Z09HWHl6ZlNtclgtcERFX3NiTGpIVklBcGE3VWpfQkppOUpGLWZMYzNHTE0wZUY5UFFfUlBVS3d1c01zWUNFRGVFYy05clhBRkliUkRuN0RLQWRpUm5zR0dpUGRjV2ZpbEw?oc=5",
+      "title": "Microsoft and Amazon Stocks Drop. This Analyst Downgraded Them ‘With a Heavy Heart.’ - Barron's",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:17:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9854055623477079,
+        "authority": 0.7
+      },
+      "rankScore": 0.1809685582057661,
+      "expectedInfoGain": 0.7556054484394578,
+      "rankingFactors": {
+        "R": 0.9852974272486772,
+        "F": 0.9854055623477079,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.1753410422837876
+      }
+    },
+    {
+      "rank": 55,
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOWm1BSXZIcWRHX1VSTU5TZmpsMlQweGJxYm5YX056WEF4SWd6cWtYQWQ1ZTZUZXlIbTVTS0lnQlpQekxLd05PSmxNd0UwMUFkNGQzbzFaNVZvcHpBY0tsR09MS3hHNHpOakJuMlZvcjBLVnZkU0NyeFlWeTFtNEZkQ1dNTHJaVmpkTEw3WWpKVm5KalRfcHhOb3UweWNxSE8yRmdxcW9LdkFtWGwzbzM1NWhYZXNqc0FzY1E?oc=5",
+      "title": "Meet Anja, driving change and trucks for A.S.L., an Amazon Freight Partner - About Amazon Europe",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 09:15:57 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9621204022249719,
+        "authority": 0.7
+      },
+      "rankScore": 0.18014753341591924,
+      "expectedInfoGain": 0.7485256059686664,
+      "rankingFactors": {
+        "R": 0.9613836375661375,
+        "F": 0.9621204022249719,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.15506996834918
+      }
+    },
+    {
+      "rank": 56,
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOQ2F1Yy1kSFlhRy1Od3l6Q0FxYkx0b0FYNDIzdjB3OFhBbGZ4S2lrdnNDWjFNM1BodTBHb2lRVFg0T0c1bTUzRHRvOW9tRlg4QUpqSUFGVVhIT1NCX2xRakIwRTJPWmw2aVlHTGRfZ0tUY0dYU2tRSWd4djZOQVVZa0ltNEdmRlRrZU1NRDYwaw?oc=5",
+      "title": "Enthuse Foundation and Amazon Small Business Celebrate Women Founders at 7th Annual Pitch Competition - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:15:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9852100615083246,
+        "authority": 0.7
+      },
+      "rankScore": 0.17543173939109244,
+      "expectedInfoGain": 0.7555463497520423,
+      "rankingFactors": {
+        "R": 0.9850989368386244,
+        "F": 0.9852100615083246,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.306782526209195
+      }
+    },
+    {
+      "rank": 57,
+      "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxOanJOaHdsbzRPdE8xQXZ1dWJza1Z1YWxlNVd4a1pOd3NwOFVNUEtLN21QNzRsV3FfSXZLTi02NTBPTDNyOElDc2pfR01ibDFwMldQa2xPUHRxMXNJWjNPVjBhNVZqNmh5dk5DNkJlRGFYcnQyVE5MT1l0S05lS3hranJ6cC1RZFhkY0RBRnYyYlVIYkp3QnZRUlJWcmd4NzUzSFlKNGw5eTZDd1ExMVh5VmlJY2taekhqeGNwMklYR3NMWDFxRVpPcDhjVmRUbFE3YUt2cXhRRGh0S0VranhTSGNTdUJjMWFONThiRk5feW02MjJES3pabE5sZXAxQUFuLU5Ucld3?oc=5",
+      "title": "Amazon Black Friday 2025 deals from Dyson, Apple and more are up to 70% off — start the holiday shopping season early - Yahoo",
+      "publisher": "news.google.com",
+      "publishedDate": "Sun, 16 Nov 2025 15:20:54 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7496681679474078,
+        "authority": 0.7
+      },
+      "rankScore": 0.17240361073986546,
+      "expectedInfoGain": 0.679231412940127,
+      "rankingFactors": {
+        "R": 0.7118745849867725,
+        "F": 0.7496681679474078,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.9397748691296175
+      }
+    },
+    {
+      "rank": 58,
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOa0Fqa095VkNmRmZkYkwtNlBBbEk5RlJyQmtGQ2d4YkU2UGdJWFhuOHlZdzZ5UzFERHZ2RUd1UWJ5UF9OY0NUeXFYbHN2YUJPaTFHVkg1bFEyVk02dTZlb2ZSS3JxVXVJRUcyM1ZLWFdyaGFid285Y1hCREhrbWpRVm1QcS1vaU9xN2ZZ?oc=5",
+      "title": "Everything you need to know about Amazon Leo, Amazon’s satellite broadband network - About Amazon",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 13 Nov 2025 21:11:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5056355687925882,
+        "authority": 0.7
+      },
+      "rankScore": 0.1675668407275474,
+      "expectedInfoGain": 0.583554374753412,
+      "rankingFactors": {
+        "R": 0.31806026289682543,
+        "F": 0.5056355687925882,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.4825170195947823
+      }
+    },
+    {
+      "rank": 59,
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQbGhpaHlocVI3ZnBaMHI0NEVkOHNWeE41NWxsUW5WX0lMZ1VBNnhBSFlISnB3cGxfbV9BNnFhUlBBbHVwb2stUFhZcnVMNEZodWJ2dTdQV1JvVGVRVzhrSXBkdjN6TmdYZUkwNGhOTmhFU0FzZXZvZUZRcXBhd0lSOFJxOERqM3UzU00tQ1R5VkQ0Zw?oc=5",
+      "title": "Amazon raises $15B in first U.S. bond sale since 2022 - Seeking Alpha",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 08:31:22 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9578743841687094,
+        "authority": 0.7
+      },
+      "rankScore": 0.16482680906050257,
+      "expectedInfoGain": 0.7472252441828461,
+      "rankingFactors": {
+        "R": 0.9569605770502645,
+        "F": 0.9578743841687094,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.533396286938759
+      }
+    },
+    {
+      "rank": 60,
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1SVTVWSEUxY0dvMHFNUEZYMjFYMEJyYjNqYmVhTUtSeFhqSjRYX0tjN1JNX09BWTVUWGgwS2hTT0VON0JmckVEX2swb0dNY2RLbGdlOTZEc0xHcXpwNHNIdmpZRW1POHB1UUdxQ0cwZ0Q1bTctOE9vYjhR?oc=5",
+      "title": "Get a sneak peek at some of Amazon’s best deals for Black Friday Week and Cyber Monday events, happening November 20 through December 1 - About Amazon",
+      "publisher": "news.google.com",
+      "publishedDate": "Sun, 09 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.26398455511849467,
+        "authority": 0.7
+      },
+      "rankScore": 0.163779630802572,
+      "expectedInfoGain": 0.4995976832677742,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.26398455511849467,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.050426239328954
+      }
+    },
+    {
+      "rank": 61,
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5CcXVWWElfMGZkZ1MzV3JkNGdTVnVrOTJhb082b3V1amNGel9RMjZpQ1A1MHFDMHVLMDVNNndRdXl3cG0tNzVoU2hVN0ZKcTNUM1FMMkpvc2Y4dGdoU3pyWVlkTGVLaXN3bURPTU00WEU?oc=5",
+      "title": "Ford And Amazon Team Up To Sell Used Cars Online - Jalopnik",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:52:40 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9948023033620378,
+        "authority": 0.7
+      },
+      "rankScore": 0.16196099468235803,
+      "expectedInfoGain": 0.7584385451570834,
+      "rankingFactors": {
+        "R": 0.9947879976851852,
+        "F": 0.9948023033620378,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.682846920300484
+      }
+    },
+    {
+      "rank": 62,
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOMWNiUlRUSHU2Z2lScU9iQmg0TkM4Yzc4SHR6eGRSdzhXZWxtT0xmbF9pWnItNEZUOHl0bWxINVVCOGNFYlBTVXlnWC15cWtnLUlMWlhlVHBtNnhSWlVzMWVZUllmY3AyR1FOZVREeXhGbktQQzlPWmQwZkNCVGs0Wm1n?oc=5",
+      "title": "X, Amazon Web Services down amid Cloudflare system issues - Straight Arrow News",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:38:01 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9874622632627703,
+        "authority": 0.7
+      },
+      "rankScore": 0.1604256298344527,
+      "expectedInfoGain": 0.7562266996084631,
+      "rankingFactors": {
+        "R": 0.9873824007936508,
+        "F": 0.9874622632627703,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.713877080544005
+      }
+    },
+    {
+      "rank": 63,
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZlZua3JvOUw0c09KRTdOMy1taEtoU1NqMkZMRFkxZEtpQzBRYy0zUGRCNDlmbzVJUmlWdGVtbkZ4aENySHlJd212Uk9adWJXdlA1OV9ub1RMemtBNGR1NHpmSnBSU1VRZHdYY08xNzV1NmVDQ3MzekRuX0hUNllobi1JcmFpZXJ4cUs0WVE0X0dUSVJwUXMwcA?oc=5",
+      "title": "Amazon Just Issued a Massive Warning to the Quantum Computing Industry - The Motley Fool",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 11:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8426948267074377,
+        "authority": 0.7
+      },
+      "rankScore": 0.1581684551015829,
+      "expectedInfoGain": 0.7107315774287347,
+      "rankingFactors": {
+        "R": 0.8288490228174603,
+        "F": 0.8426948267074377,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.493510270251239
+      }
+    },
+    {
+      "rank": 64,
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPUk13TVQxa3FtY2djR2RMbzNGanJtWkJpN2xtU3ljc29zaktKamYwZTFST1VpSkw3M2wzRDIzVW05XzAxNS1BbXZDdXBWUzFKMXlHdDdGYXVLTmU0cktZVXpPX2YtYnF6eG5uYmpha0hyM0t1c25NeWd5Wl9WZHUxZ0dFS2pVZlJ2c0xKYW9CRURKMDdTUUNzbUFXODNZZU42eG5EZEVOX3N5V1ZVaTZjZDRFTVNvQ1lWQ0HSAboBQVVfeXFMT0tmVlZLaXl4S3dfcVdCeW9QYnJUMnV4N2ttZWtsU1NmVXBaVWhGOW5fTC1yVFlOX1Q1b2luWGRjdmtnbmZaRW9BUE5MZ1RHMWxlaFdEejRvZEdpZ2RyaGg4dDNqMU9CbnJaUC1KY0hRM1dwTjBBWGpXWjRFaWszMVNXUE1PSjhwVl80cEZlTkRPYkJSc1o5WFpGeDgxUDduMVpERzVHRk80YXBCMkxCOUZLbW1JTlpvN3lR?oc=5",
+      "title": "Can Brazil’s Cop30 spark a climate breakthrough in the Amazon? - South China Morning Post",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 15:00:17 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9955542865708584,
+        "authority": 0.7
+      },
+      "rankScore": 0.1574483309059461,
+      "expectedInfoGain": 0.7586647005253112,
+      "rankingFactors": {
+        "R": 0.9955437169312169,
+        "F": 0.9955542865708584,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.818499479543609
+      }
+    },
+    {
+      "rank": 65,
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQOUtoemtPc043THg2MWRNMWxGbXE5U3lTRzRKOXhIVzg4NE16NGR1RkRiSS1uREgwbXdfVGJiSDJxa0RxTU9pTUhQLUZROWgtckZaRWV4clFadHhNTXhKaGZ5ZUROM2RjcENkMnM5S29nYnRUY2dhUE43aFFEUy1zMw?oc=5",
+      "title": "Amazon to raise $15 billion in first US bond sale in three years to fund AI push - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:31:34 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8605688569574881,
+        "authority": 0.7
+      },
+      "rankScore": 0.1562562776153076,
+      "expectedInfoGain": 0.716560969416639,
+      "rankingFactors": {
+        "R": 0.8498376058201058,
+        "F": 0.8605688569574881,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.585805961541998
+      }
+    },
+    {
+      "rank": 66,
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQM0hiWGE1UWtlWEdYeXVtd2pndXNyUXFoZ1RvY0VkN0RNMnZWR1FNeG5ZcHB0M1A3a2J4ZjhMb05FRVFyeFNVQThLT0pNeW5XczJzMVl5NW11R0dJd01RaHRNcVBleWg2bi1BUmNpQWdSRnFVVldqaF9zMkhJU2t1YTRCTFlJbW1QRVd4TWtn?oc=5",
+      "title": "Naturium Brings Its Cult-Favourite Skincare and Body Care to Amazon Canada - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:57:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9893236609492009,
+        "authority": 0.7
+      },
+      "rankScore": 0.15526131780553226,
+      "expectedInfoGain": 0.75678836585865,
+      "rankingFactors": {
+        "R": 0.9892654447751322,
+        "F": 0.9893236609492009,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.8742879202309854
+      }
+    },
+    {
+      "rank": 67,
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPaklmVXNQYnlJWkZkLWZ5bElfQ3BwVUdadUFUaXdORG9YNWJnb084ZTZpVGN2eEFld2wwT3dSTEtlcVU4RHpzdGVwNWxIaUJsNUpIMktNQmppOHRxWWhYZG5obDQ4NmtpNUpxanQ4b3lUQ0pEOHJmQ0lidk1OUVowRFk2UzlqZjFzMHBuRzF1NzN3WjB4NnM3aWJ3LWx5RV9OZmNfcXR0YWE5TGR6aFVVWElVSXlLdW5Tc3NnSVNMbzgzclpfdHNqU01HX2Fjdw?oc=5",
+      "title": "AWS Weekly Roundup - Amazon Web Services (AWS)",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 17:59:08 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8784733429777631,
+        "authority": 0.7
+      },
+      "rankScore": 0.15274821078403122,
+      "expectedInfoGain": 0.7223354349784105,
+      "rankingFactors": {
+        "R": 0.8704295568783069,
+        "F": 0.8784733429777631,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.728928943067697
+      }
+    },
+    {
+      "rank": 68,
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQWS0zSTZ1YzlTelF5VXBtTXN2OXpZMTQ0ak8wVzl5eVJwREJXemZXUE9FUHliOUdfdnJhVWNfZm95cUozSWs4enFPSG0wdDhOVWZHUFVWbkhNNW5ZYy1VQmgzdU5uUlZvcVNZZEFmRUVON29idXd4U0N5UmVJVW9ESm9zekJDZmtkWmRtLTBkM0FmOG9uaDQ4Ykk5RzFwUVVwUldjY1J1S3pNQzlieFJLSTZ4RnFDajhzQVE?oc=5",
+      "title": "Omnicom Allegedly Pivoted A Chunk Of Its Q3 Spend From The Trade Desk To Amazon - AdExchanger",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:33:36 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9929223856905884,
+        "authority": 0.7
+      },
+      "rankScore": 0.15191103118836763,
+      "expectedInfoGain": 0.7578728442127152,
+      "rankingFactors": {
+        "R": 0.9928965757275132,
+        "F": 0.9929223856905884,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.988925677641955
+      }
+    },
+    {
+      "rank": 69,
+      "url": "https://news.google.com/rss/articles/CBMizwNBVV95cUxQOVdYNFJiQmhGWUR5amlsUEV2YlJ4RVFwLXNWNDFtRU8zRndhcFRYenBUUGhZakZVNkl4aXNyVmVQaVNya3dYY2FVdDJlQkdPX0gyMmZLSXJBZHhOaWJJYWlvRHNzbmFLR25ZcDB4WmJvZVRHUHRiMWE4NDVMeFZvRUFFdThGTm1NemdNVzFwam01OGlpbklvOXN6UEVhMjdRenAyWWJ5NEF3djhoUGNUYWYtODByb1NfRW1DUGJYUDV3NlN4dVkwT0VnU3NXeWw1UHAzaU8xSy1jTlZmOGh1R0hhbmNoY0JVV1ZzNjBBRUtuMUtrSWhFWWVnNFZNOU05RUpCQzVwS2o5YUZUeEx2dTM5dmdHWV9UZ3JwRDRlOXItdnVYUkdvcEEwcGMzWS1Vcl8wMFg1NHIxLXBQZjFKV2ktbnFZMnBua2FXRGlDMDJiSVF2SmMwd1JzU3l1b0xuX3V1LThlOWV5d0k3RVZmX3o2VEtEU0Q5OVR0eWNyU1NSaWpNdjRLQ3hVd1k1eGZWcm1LZGNkNUdncDdCVGs5eE9qVDg4dDNwZF9WYXExM0ZpUTF0SWhCRDUzcWs0a3drMVMtTjRUOWNRQjFEX0dn?oc=5",
+      "title": "As Amazon raises $15 billion in a bond deal, investors worry about companies taking on too much AI debt - MarketWatch",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9808216020114208,
+        "authority": 0.7
+      },
+      "rankScore": 0.15150021143251774,
+      "expectedInfoGain": 0.7542184253215544,
+      "rankingFactors": {
+        "R": 0.9806345667989418,
+        "F": 0.9808216020114208,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.978332493334529
+      }
+    },
+    {
+      "rank": 70,
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPTmZzUjBOenY3bnUyQ0dERkcyeWJVa3htcFZpZFhiM0RSaHBmaG5NcUxwVldhTzFnREQ1Z0wzbjZsYTFLQlJoYjV3cmFod2JERXFhdnc5YWYyN1BXRWlCOFpYZC1zdG4tdWRKbE1xaGxwZ1JZY3hQLW11emEwbHR6dGhNUVlWMXhv?oc=5",
+      "title": "Amazon Launched Thousands of Black Friday Deals Early—and We’re Snapping Up These 50 Under $25 ASAP - Real Simple",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 05:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9379979303993187,
+        "authority": 0.7
+      },
+      "rankScore": 0.15106895329698009,
+      "expectedInfoGain": 0.7410984767622787,
+      "rankingFactors": {
+        "R": 0.9359919146825397,
+        "F": 0.9379979303993187,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.905696773481871
+      }
+    },
+    {
+      "rank": 71,
+      "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxPbUlhM1lvSTlkYXJkQXhhS1BZUktJeno2RkRsT2Y3SFNCYWdHSDFjOTd4bVczTHVYSUpQdE5DNHpJME1vV0pmZ0NVYWx1WVVIajl4ODhGQlozRVNLQ05Ic1lrV0tZZjl6bFNYSkNnRXQ4OWRORi10ZGRpMWhYb3JoQ3poa1NzTDZraDV6N09GZUtuWFE1MjVwRXVITmRMSEtnRUstZDduWVZ1cVVDaGJrR25odGNYRU90QTFabjdBVGdaTll6bXd3OVo5b29BOU9OeG91ekZ4ZlhTWXpCa3FJQ0hRNkNvOVRINW1FWHBVOXBubFNMajVjZFRJNGpyQTBvSV9FYWRPQ3dpTmJ1dXluZUJITm4?oc=5",
+      "title": "Amazon Black Friday 2025 deals: We found the best early sales from Dyson, Apple and more — start the holiday shopping season now - Yahoo",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 14 Nov 2025 16:55:24 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5686649279383145,
+        "authority": 0.7
+      },
+      "rankScore": 0.15093741881529213,
+      "expectedInfoGain": 0.6106300397859853,
+      "rankingFactors": {
+        "R": 0.43553533730158733,
+        "F": 0.5686649279383145,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.045584220127923
+      }
+    },
+    {
+      "rank": 72,
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxON2VBcGxGaFN4RktvaGVhekNsWC1GNElNR2w4WXZPbzkwUTN5M0xZcV9JbFZvb2ZyWjNJUElNZEdQaWxUUVRxTWIyUUlLU0Y4YWczN2g3ZUNBZ1FUcVV1SExDcEZnakdwWXdGMjhsbU56aHFuVGlwNzdYeGFrZkJTODA3TU9PZEh2R1pzRC1mdFRiVXBkbmR2bU83eC1RZ0l3?oc=5",
+      "title": "Shop Certified Pre-Owned Ford Vehicles Now on Amazon Autos - Ford",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 17 Nov 2025 14:00:51 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8579504513038159,
+        "authority": 0.7
+      },
+      "rankScore": 0.14381371481616168,
+      "expectedInfoGain": 0.7157111356519216,
+      "rankingFactors": {
+        "R": 0.846790453042328,
+        "F": 0.8579504513038159,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 4.976654254198366
+      }
+    },
+    {
+      "rank": 73,
+      "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBnYktMLWtpVkpxUDFFQTA5WU1mQmJTN2RmUUdVYWd2SU9HYVNhMmpoREpEcFZ3VHRrT3JXekVJMHlKOWxZSnRaeXFOdVZ1cUUwOWhhRTNSUUU4ZVY5bkhNQ3hfQy1iNmNhQjhIV3ZR?oc=5",
+      "title": "Amazon extends Haul’s ultra low-price shopping experience to 14 new destinations with new Amazon Bazaar app - About Amazon",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 07 Nov 2025 11:56:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.20308280503786383,
+        "authority": 0.7
+      },
+      "rankScore": 0.131975458167686,
+      "expectedInfoGain": 0.4904624207556796,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.20308280503786383,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.716315348058921
+      }
+    },
+    {
+      "rank": 74,
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNV1BvTXFtMW1yOW5PR08yc3BmZzZfWEgyS3dKWkJmUVhXREJmVkY1SzJJOV9aTE5IUFhYbzBWaXd5R3ZHMHRDZEdwM3NLNmowUmM1UHNDVFBXRGlIUC11a3RVM1NLYVZjcUFpbmljRk91V0YzVllpMXhUckJsekhZMFBTXzlrbDV5MmtqbnRYNXEwUQ?oc=5",
+      "title": "Amazon introduces Kindle Translate, an AI-powered translation service for authors to reach global readers - About Amazon",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 06 Nov 2025 17:15:51 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Amazon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.18171926729171362,
+        "authority": 0.7
+      },
+      "rankScore": 0.12894126144003268,
+      "expectedInfoGain": 0.487257890093757,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.18171926729171362,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.7789136282055713
+      }
+    }
+  ],
+  "topicQueues": {
+    "company-news": [
+      {
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOMmw3eE5LUHhDTlJHVDhrX2VyaWpla0N3MkprU1k5bHVDbEw2bjhvQ0pnX05RY2JCa1JCeVBqVVFQSUNNV1h5SFB6ckR5U0MyTjE1SmthYTNqUTJ5M0tYTXQ4bXgzd3lNQ1NoWVR2MkRSZlZCU2I4RENzYmZLUmYtVHV6aTgwYXRvcmtFcllXOFFxMWFIR1R4aUhhMlp0TmtRa0VRWHkyQjVPclJ6LTMxTzdPXzlsbk91?oc=5",
+        "title": "EU to probe market power of US cloud providers Amazon, Microsoft - RFI",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 15:15:20 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9970418113368686,
+          "authority": 0.7
+        },
+        "rankScore": 0.37897364645936094,
+        "expectedInfoGain": 0.759111776164816,
+        "rankingFactors": {
+          "R": 0.9970366964285714,
+          "F": 0.9970418113368686,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.0030727288215777
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOGFGQlZsM09lbllEcGZBb0pQNkFyeHNKSUc3SUc5c0cxOXREQmNMSDdqWnBKNkhpMkJkUDVGcTJqd2RTdVRlWFpfUXVraW5Db1ptMmlRZWtPSlVna3U3NnBuamlhQ2RpT0ZHZm5HWVFNRUV1U2tnXzJOMEViWGJJUG5WNTlGaHhKTzZKZXJDd1RuOWc1UnU5ZU5ZVm5Nc0lTXzdvVXo0Q1hiUQ?oc=5",
+        "title": "Ford Motor Company partners with Amazon to sell used cars - kyma.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:37:15 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.987387156617748,
+          "authority": 0.7
+        },
+        "rankScore": 0.375872146276923,
+        "expectedInfoGain": 0.7562040075204399,
+        "rankingFactors": {
+          "R": 0.9873062268518519,
+          "F": 0.987387156617748,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.011864978585852
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5keFBNd3dCYkhzdHluQjBjTmpRMkJ0VVN1UkZXaFkwbVJFaTkyVDlZbmcwdmloX0s2QkJadGJiTjlvR0t6TXJUNkd0dG5RX0JYbmVfNllWLUxWZDJWUWVxY0VqdTU4UjB2czFUcklxbDc3WG9qb1hZTXJaM0FRUdIBVEFVX3lxTE56a0ppaEZpNVpFT01VR3d2Q05lRWlzRUt6RVJQdThvWE0xaDRkQ3JhZVlrX0JtbHJIdU5qU29YQjU0cHFnemI1akVZcXljLUpGQ1ItTg?oc=5",
+        "title": "15 Best Amazon Holiday Home Essentials for 2025 - TODAY.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:35:04 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9871733160942422,
+          "authority": 0.7
+        },
+        "rankScore": 0.37580921988275756,
+        "expectedInfoGain": 0.7561394614518347,
+        "rankingFactors": {
+          "R": 0.9870897602513228,
+          "F": 0.9871733160942422,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.0120300978452046
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiwJBVV95cUxQWEFJek9FZkVCb1BPSlFPcVR6STRFSXVBaGloc2RneHRtNjlscUY4cU16Qy02bFp6a2UyWlp1MWtJYjBOUUZ5RDQ5aTVmUDUwY3M5RWlUN29zSkkyZEZ0bnN5bUctMmEtQnIxWURGQTZ1V0Vfa2ZVa0I2MWxuVmZKclRvV19SM1Q1VjFVWVBqeVp2WHYwbV9wazBHZ3dDcGpSaU9GSWxkMmZlNWxubzZEalBoVlExamtINms1WDFfRHpBUGVIN1A4LUJLSm11N2VCa0FWZElHZm9ib3pkX3pHQmhYa0FMTlYwa1pCRW5zUUhUclJELUx5c2hLajh2RlJCcHVHcDUzOHV6ZFU?oc=5",
+        "title": "Black Friday 2025 deals from Amazon, Walmart and Target are live: Here's what to shop during the biggest sale of the year - Yahoo",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 16:20:27 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8699150458334025,
+          "authority": 0.7
+        },
+        "rankScore": 0.34252355865334627,
+        "expectedInfoGain": 0.7195832162004072,
+        "rankingFactors": {
+          "R": 0.8606397288359788,
+          "F": 0.8699150458334025,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.1008283898179023
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZHF4WGU0UEhiS3BIeFk0c0VaTHBWbllCRE1ZU1Zsd3BCM0ZTdEo4ZE9ZOGUyMjFBODhJb3JheWxOMkFtOEVWTDQ4MXo0ejRpdkVmY0dWQmZIbG5jVmdETEZNLWRYQVM2X2dZYnNRZmhsMzh2RUhHMmZ5ZElmX1BKa3BsOVg?oc=5",
+        "title": "Amazon Germany hires 12,000 seasonal workers ahead of holidays - Yahoo",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 08:05:39 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9554337171005584,
+          "authority": 0.7
+        },
+        "rankScore": 0.3404885513540198,
+        "expectedInfoGain": 0.7464764657992107,
+        "rankingFactors": {
+          "R": 0.9544093882275132,
+          "F": 0.9554337171005584,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.19236876785049
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWldETUNjYUpXWkUybmtSOUxzVXRaLVpvWmktOFUtV0h0ZzdGckVWVXVqZTJlckpWdTBNOXpINWRaNUpkMzVpUFM1a3ZxWnBfcmlUeU1IXzVxZTI0bVlzRGJNaV9aNkpaUW1fODlVTnJDV0EtekQydGl1QkpXaWUxRWg0UnlLVmNsb3pfa1ZWYTd3emRiSXdpcG51MTcwVzBLS0k4?oc=5",
+        "title": "Here are Tuesday's biggest analyst calls: Nvidia, Amazon, Meta, Microsoft, Deckers, Netflix &amp; more - CNBC",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:24:50 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9861716364286999,
+          "authority": 0.7
+        },
+        "rankScore": 0.33747701804099395,
+        "expectedInfoGain": 0.7558369302361303,
+        "rankingFactors": {
+          "R": 0.9860745651455026,
+          "F": 0.9861716364286999,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.2396693399261856
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOWDViNkFSVEFmT3k2S0JKYTlFaGJHVzh4Tk96eWM5S0UxOFRJUkNGMU1oZmdmcTdhU1hkRFNYREFRUkI2MkxtNXJfYi03NlJFS01WVU1ESVZ6MWh0Vk1Yb3IwQUxNVHVWOVhtWHpKazFaQUpDcHJ5UXJXWTkxVlZvUDFnbmR0VnhxX01qVUU4NmQ?oc=5",
+        "title": "Ford turns to Amazon to give used cars sales a boost - TechCrunch",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 20:37:42 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8924017112805849,
+          "authority": 0.7
+        },
+        "rankScore": 0.3345069564754002,
+        "expectedInfoGain": 0.7267843005908973,
+        "rankingFactors": {
+          "R": 0.8861602926587302,
+          "F": 0.8924017112805849,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.172703097863214
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxPcWNGa2pwdGVvNWx5bGFBQS1xRy00NFhfdy01RkxJOEdLM01ibVZmTkVOOHYxOEhqalVra21WZ0hIeWFxcGpaM0pjaHhxRmlyUzJIeGV5ekJyb1hJWnd2eHA4bm8zbjlWQzRzd2c1TkUwb3NpRVpPbFFPWk5aQmhla2toX0lVVGVVZU5SeFhsMWptRFJlWUxaQXZNeTNkendxTjl3SFppVUJlY2s1U0lSRXF5ZDRmVVNveWtXTDB3eHAyQkU4VjQ2bTFB?oc=5",
+        "title": "Amazon teams up with Ford to sell pre-owned cars - WBIR",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:53:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9830621430103383,
+          "authority": 0.7
+        },
+        "rankScore": 0.3302972748255488,
+        "expectedInfoGain": 0.7548967691202015,
+        "rankingFactors": {
+          "R": 0.9829163177910053,
+          "F": 0.9830621430103383,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.28550710725334
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxOSTlzc0piaEplT1BfdHR6eTg0TVJHaTBOUmFjbW9iMlUzaWJ4LW9vZ3FScEs3b1lrT1lwcDF4aTJEazc2eVd1N1J2VGp2VlQzcVRSMkxpVUl4MTIzR1FQQzljamNNdXBJRFh2YW1fOXp6a0owdTNTU0I1dFliMnJUdzN1cXJjdm9sMkpoU2xtdzJObHNRWHRwcmozSENSd0w0LWRvQnFZbmJHSEJnU2xxLTVn?oc=5",
+        "title": "Amazon to Raise $15 Billion From First US Bond Sale Since 2022 - Bloomberg.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 22:19:30 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9014599341308096,
+          "authority": 0.7
+        },
+        "rankScore": 0.32304855867715254,
+        "expectedInfoGain": 0.7296579546533516,
+        "rankingFactors": {
+          "R": 0.896259763558201,
+          "F": 0.9014599341308096,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.258663396119824
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+        "title": "What the Tech: Amazon shipping - WBBJ TV",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9370817766964176,
+          "authority": 0.7
+        },
+        "rankScore": 0.3196763862765249,
+        "expectedInfoGain": 0.7408144599568435,
+        "rankingFactors": {
+          "R": 0.935014623015873,
+          "F": 0.9370817766964176,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.317388746117856
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE93czBvR2pLckVwTE9EZFc1eU9QcWJTM0hIbHBKVHRlenB6VlVTbmh2ODlzVmRkRTVYLUNmM1R4Xy1BNDBBVk50d2lZS1dXQVdESXpRMjhwbldJQjhCTUk0VUlDMmRPZk5sVGZ3eHNDRG1KVzBCU05icm9zckpXZnc?oc=5",
+        "title": "Amazon, Microsoft cloud services could face tougher EU rules - Tech Xplore",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:10:50 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9789583825811983,
+          "authority": 0.7
+        },
+        "rankScore": 0.3173801481427594,
+        "expectedInfoGain": 0.7536537164645606,
+        "rankingFactors": {
+          "R": 0.978733060515873,
+          "F": 0.9789583825811983,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.3746088747981897
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQM2hxa0ZNV3B2cEljMHRtVEEwMEY3SGNtX24xTUdNcWdtOUVUWGxDX3BRQmV5ZDFBOEpERUhKaWVfdEZPcUxwUlkwTXRKQVNOSnFfbURLZW5jSmhTdDFhUnpQWjREMnBMeThQVmxVbU9TWXA4TDdnNzdWVThuWFFHNTk1Ym1Sai1tZjItZGhJLWo1VGRZV1NvUlRJYkxidU01QmE3c1F1S24zRDRs?oc=5",
+        "title": "Colombia bans all new oil and mining projects in its Amazon - Mongabay",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 08:42:52 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9589678271661698,
+          "authority": 0.7
+        },
+        "rankScore": 0.31492716156228323,
+        "expectedInfoGain": 0.7475604166344493,
+        "rankingFactors": {
+          "R": 0.9581016170634921,
+          "F": 0.9589678271661698,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.3737565630286355
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxPT1NETC02VVY3RXlmRlpqdjlYenRLdUxJNTlvcWxQR0dJaFMwR052MzY2a2dFODZwTjJZZk5FcDA0X3Fsa2hoQmotVjB5Vnhzb0tkVWNzakRvbk5FUFRMdmxYWXBvNjVVeTR5c0c1TXJYbzBWTWdZYlZhX2ZoZkd0V3hFUTVRdkdwSXNKeXBB?oc=5",
+        "title": "Amazon, X, Spotify Are Down in Massive Internet Outage - Men's Journal",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:25:37 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9921363034754208,
+          "authority": 0.7
+        },
+        "rankScore": 0.3075582344335989,
+        "expectedInfoGain": 0.7576361315332178,
+        "rankingFactors": {
+          "R": 0.9921045734126984,
+          "F": 0.9921363034754208,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.463390820696071
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9neXNESmRhZE8wM2hWYlV0RnJxLXA5SkRBdUVtYUsyWGt3X3Raem9yTUtkXy1HSVFSNXg0NEd6TXhWSW94d0RXdnBvdUlqMi1tbFZqTzRHb0xnNGZ4T0g3eUF3?oc=5",
+        "title": "Amazon’s Next Ad War - ADWEEK",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9721032486469583,
+          "authority": 0.7
+        },
+        "rankScore": 0.302754018646916,
+        "expectedInfoGain": 0.7515714004914882,
+        "rankingFactors": {
+          "R": 0.971706087962963,
+          "F": 0.9721032486469583,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.4824489658318996
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiVEFVX3lxTE1tcl9ud3kxbHlhSERRUGRJNG9NNU53VWdRa2tOQWJqUUl1aFM0WEIwTmVIQ0tWSFpVaklpa25XWEFvaXJ0VGk5NVNHSjRkR0FlNHJRYQ?oc=5",
+        "title": "Amazon | E-commerce, Amazon Web Services, History, &amp; Facts - britannica.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Sun, 16 Nov 2025 04:49:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7041153440685558,
+          "authority": 0.7
+        },
+        "rankScore": 0.3016795647961108,
+        "expectedInfoGain": 0.662995245558696,
+        "rankingFactors": {
+          "R": 0.649186292989418,
+          "F": 0.7041153440685558,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.1976803301436054
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQRjVmU1BxR0JiSUVwVy1QcS1peWxqTUstS29tUWxRVkd4VXd0Znc1Y05NS1FKQXJlMjdsNXh6WjdpQUJtUTdEQTdiamQyWnZ4V1FsNlU5Q3RkY0NNQVd6bEoxd1A5MnBqeW1hVWRuTTQ2R1RtZXBqWU5QMktBZV92VkpXUmF2N2JiUWFJUDJR?oc=5",
+        "title": "You can now buy pre-owned Ford vehicles on Amazon - The Verge",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8578781016680157,
+          "authority": 0.7
+        },
+        "rankScore": 0.2988504261123406,
+        "expectedInfoGain": 0.7156876093474246,
+        "rankingFactors": {
+          "R": 0.8467059606481482,
+          "F": 0.8578781016680157,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.3948020374526457
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOandIcGpyS2dlZVRMbTJzemtKZmRZVUJKLXBiRUVaWVg0YWIxdVJhR0tlWUYxOW5kQm1YMzJBbHFodnJpcG1GSXZ4OWhVak5lWFVJX19fUlc5Q1IyTlo3MmFhQmJlNHBmYW45UHRQNzdjNENOSHA2ZndWd0RXeFJINVNoUmFZYkN0NjVobUxfZGQ2aVZHQ1pjN1B5d3I1cmdsMVY2N0dIM1NJakg2XzBVNW9FcGdWUkJDMEE?oc=5",
+        "title": "AMZN, MSFT: Analyst Downgrades Amazon and Microsoft, Citing Cautious Stance on Hyperscalers - TipRanks",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:58:20 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9835824242163274,
+          "authority": 0.7
+        },
+        "rankScore": 0.2887747189794693,
+        "expectedInfoGain": 0.7550541927495126,
+        "rankingFactors": {
+          "R": 0.9834455274470899,
+          "F": 0.9835824242163274,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.614682460493343
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNUVdYTlpDUzBwTGNVWi12TWdmczBhTmp1a05MQURqLTRnTWNFazNDbWlLcm1HZnYyY1hEdjhpVDhKTXhVOXZ1RlVWX01xcmhOTlBMMFRnV1F0Snd5RmtMVElWWW1JY0VtZjZRR0xFSm5aVk5YQ192cjZmajAxUThFNElDZkttMDQ4eUlBU2E5elFaNG9waGRMM2VnbGljc3dnR0dxeU53Y0hEcElOV1Jpd3pxYUFBV09kcUx3YkNzSUhUMTNf?oc=5",
+        "title": "Amazon to raise $15 billion in first US bond sale in three years to fund AI push - Reuters",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 23:01:25 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9052163696104802,
+          "authority": 0.7
+        },
+        "rankScore": 0.2885929087825503,
+        "expectedInfoGain": 0.7308451793999053,
+        "rankingFactors": {
+          "R": 0.9004181597222222,
+          "F": 0.9052163696104802,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.5324433039017755
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBEa2E5NjM4LV9mQS05NFp6M2I0Tjh1NHRSMkhMMVpRdnJERUNYcUloWFBkVDZ5ODU1cnlnR281blIzdWp6R1FuRTdBa0tQRlBPWUFKMTZFTVk2akJYS2Vmb1pxV0lGRVp2bTg0UWtfTjAwd9IBhgFBVV95cUxQLWFRMHY1d3F1MU01eGJrc2dHNXExMjZaVmxCNVVObFNOSGRTWENwQW85T19IRzhBVV9KWVJZeUdfN0pPT3ZUWHg3bjE5VlhfN3RXVS1sTzJWMXZ3VmIzSE9WN3dFdVg5NkZpYlpCVi1XUjkzVUFwOUNVTEZJcGl6UmEwOGVIdw?oc=5",
+        "title": "Amazon Pilots New Pedal-Assist Electric Delivery Vehicle - IEEE Spectrum",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:14:13 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9851335054510219,
+          "authority": 0.7
+        },
+        "rankScore": 0.2855679458940756,
+        "expectedInfoGain": 0.7555232185259866,
+        "rankingFactors": {
+          "R": 0.9850212847222222,
+          "F": 0.9851335054510219,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.645686357271447
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPTWZLbHZDbzJQSGx0U2poaEkxaDRRT2drRVptZmhGMTJQTEZ5ZklSMklRZEJSOWowTVo5Y2lvbWc3M3I5czAzcHl6OGRvcGo2UjJYNXlPUzNlb2YzZmxlNDVXdUxXaEgtOU5oekhSTU45RlNZOEhmMGxleUtUeEZzbGU3WDNJN1BxOGFReFVTU0NsOVU5NTNFY3VyRnhXTm8tYXNLTi1TRG04cXR5alg4eHBB0gG3AUFVX3lxTE5vbkp1Nl9nel9PYnJpbkR5Mk9iVXd3TGREWnVIOElxNHJmUW5jRVJLZEx2MF9WTkR0T3VRUThTRTQwUVQwUF95TzVaQzh3dUdUUXQ0Q3A5Ykw3c2hnRVpxQjJUenpXT1gzOHVSMGxMWFE5RTdPeVE4LWg3akRfeS0yd0Y1WVFVRkRhbHBvRmRXaFRPdWswZ1hmQmJGYnVHSW9CMXF6NXY0WU5KM2dHZGdMSEhUQ2JaZw?oc=5",
+        "title": "EU to assess whether Amazon and Microsoft cloud businesses need extra scrutiny - abcnews.go.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:10:34 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9847768500582121,
+          "authority": 0.7
+        },
+        "rankScore": 0.28258577399447493,
+        "expectedInfoGain": 0.7554154062289699,
+        "rankingFactors": {
+          "R": 0.984659191468254,
+          "F": 0.9847768500582121,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.673225178857516
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQRGRMQlB0c0JiWnV5YkNzQWR3bExScDRrMmpZN2xmbVBuMTc1U0RETWpEZktKVVdTbElpcjljU2lfV1AxRXVXMnRCR3lsZVdveHF6bHIzNDA0Y0pNZGY1bWxjYmYxQXduVWJmenM1Zi1BMjZvQVUzTjV5c01pX2VWS21XdG1DX1N2?oc=5",
+        "title": "The Best Black Friday Fishing Deals from Amazon - Wired2Fish",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:00:19 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9896492376540966,
+          "authority": 0.7
+        },
+        "rankScore": 0.27720997781889806,
+        "expectedInfoGain": 0.7568865632274795,
+        "rankingFactors": {
+          "R": 0.9895945171957672,
+          "F": 0.9896492376540966,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.730372727499568
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxQX25rcmhvS1lGU000V3hQYnJZR3QtOEJOd2ZBUE1RU3RZYXJWNnlic0t4RzJ5Zk1HdmxJNjF3ekNuRlZYcEc3ay1udXMxel9sejMzQTdSQjFQVEh5T2JBck1GUUt5dVRFUUFnclNiRWNDSkxHRmxjODVDS09ISERlQWJRc1ZIaEVMSnIxTDBET291NnhjdU5lX3VxYjluNUs1RzN2SFRodzBBQ0hIcWFfTzNoTkVMSl9rYjQ5ZFVRNHBIZDVacTRYNlNHYUM?oc=5",
+        "title": "Needham reiterates Buy rating on Amazon stock, maintains $265 price target - Investing.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:20:22 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9740693666101321,
+          "authority": 0.7
+        },
+        "rankScore": 0.27506329507646193,
+        "expectedInfoGain": 0.7521693767177102,
+        "rankingFactors": {
+          "R": 0.9737264781746032,
+          "F": 0.9740693666101321,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.734531979298156
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTFAxQmsyY1prbnVxOGR4ZmVtbVZwbnpxMGtha2xSQXNoTDJ4emJXVDhNYlY4QUZzSzRYSUk2d3hmd2x2ajRXSV83UV9SN2lQNlNfWXlyWUVXYUNWYXJkU1FtNzNjQXJ4RVV1MXh2SWJSODJYZ3dvTFE?oc=5",
+        "title": "Amazon Editors Just Released the Very Best Books of 2025—See the Ranked List - Biography",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 16:15:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8694448319889976,
+          "authority": 0.7
+        },
+        "rankScore": 0.2741737481478604,
+        "expectedInfoGain": 0.7194315809491433,
+        "rankingFactors": {
+          "R": 0.860099041005291,
+          "F": 0.8694448319889976,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.6239987810983196
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxNVzFFU2RTQXBjaHJvXzJ0aVc3cXFpdGc4T01INTVPOVRXcG0zbG9NZFh4b0wzTkpDVXpKVzR1LU12a3pPM1BEQXozVHNzRmhHRG5Jdk5SalF0V2ZjdTBoX3RxdUp4S2s0Zk5PcVFEcHlSbjgxdExoaFBGS2FaVzFOUnlXcFJLdThyRG5LamtVaTBXTTZ1U2ZV?oc=5",
+        "title": "Amazon selling a tasteless Christmas baby outfit is Claus for concern - The Guardian",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:43:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9762589801055305,
+          "authority": 0.7
+        },
+        "rankScore": 0.27061790437702044,
+        "expectedInfoGain": 0.7528346535634486,
+        "rankingFactors": {
+          "R": 0.9759720436507936,
+          "F": 0.9762589801055305,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.781909997036307
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE1IR2kzTFRZWThqSG1tU0FHMzNfNHU0dDJwNXFnR1o4NVhfcEJLb2txS01GUG0waW1obVd2XzRaRWRKTms3ZnB4Q2pMcEVSc1JGTEtuYnp5TG1jUHpKdS1QMnRRNkpRQmdaQXlNTzJBMWFxb3ViZU82Z3ZZOFVRZw?oc=5",
+        "title": "How Amazon is using generative and agentic AI to transform the shopping experience - About Amazon",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:05:06 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.990118980864352,
+          "authority": 0.7
+        },
+        "rankScore": 0.26547629518227944,
+        "expectedInfoGain": 0.7570282295701289,
+        "rankingFactors": {
+          "R": 0.9900692162698412,
+          "F": 0.990118980864352,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.8515850315386677
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPakhRRGp2d2syUlo0SFc5eURyNEY2ZU1oY3h0ZWVIa1R3UGlqNFAyeHRkLWItNExxRmdCZE5wbW9UcHd3XzJyRDBqaW5KU1BvdXdOVHY3WVA2SXZtUjRfeXVCU05fa1BobkZvN1BEWENhdHVwNTFkckg1a1hycDhsdVBjbWlrWnJ3SkZVNVB1eEhyZkExSVNnVl9rU2dYcmJWNi1fc3owbzBKTVRH?oc=5",
+        "title": "Amazon satellite network gets a rebrand — and drops its affordability pitch - TechCrunch",
+        "publisher": "news.google.com",
+        "publishedDate": "Sun, 16 Nov 2025 18:46:03 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7650818718146452,
+          "authority": 0.7
+        },
+        "rankScore": 0.26122839176975926,
+        "expectedInfoGain": 0.6845963003654507,
+        "rankingFactors": {
+          "R": 0.7322267972883598,
+          "F": 0.7650818718146452,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.620681066584976
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBKVHc1c3ZIajhjeGF5U25yVDNTOWhicW0tTmhfdmxQQ2U4WHFrN180YjcxOUp4UEptU01KV1lQWW02NEI1MlhCSGxGSm9KMDdDZVRMRXAzNmV3SzVCdEVJQU5wLVFLX3Z1Z01nMVRnalBWUFJhWnpzVUNoWU7SAVhBVV95cUxPQlpINTBmU1hQQnhETGtzMTY0RFdFVjVuT1hQN3hnbFVSRFljZU9hNmpUUS1rR21LZnRrUzdqTm41dXhCYTRwTU5TOTFielNfX2YwMkRoQWR3?oc=5",
+        "title": "The 23 Best Holiday Gifts on Amazon | NBC Select 2025 - NBC News",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 21:33:35 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8973629169490885,
+          "authority": 0.7
+        },
+        "rankScore": 0.25849022954921014,
+        "expectedInfoGain": 0.7283601084252997,
+        "rankingFactors": {
+          "R": 0.8917044725529101,
+          "F": 0.8973629169490885,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.817747153134227
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5HYW5fcDJhWGhLNzByWVJyTEtJSHh1TzByelZOSkxhUzBvSHJad1dUbGRXQjlwYUlrOVoyejQ4QkV3ZGpkZEE1V2E1WHM0VzBoWm9xM2UxQmpUNDVzTzJhVzdOMmRUUE1fVTFVenVMQkHSAXZBVV95cUxOZDkxSHpXTjdtdHRqdVRKRnBNVzNObkhPeWkwZG1SNFBIWEJhLWFzRGN3OW0yUmViSk5jMWxmTGh3TFhQMzNvMjFwUHIxYVk5LW0yRDlESnV5b1BfSHQ1blRDS0VMakttNV9waXpBUkd4NElsVGR3?oc=5",
+        "title": "Used Ford vehicles now available on Amazon in select cities - The Hill",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:35:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9813082462151144,
+          "authority": 0.7
+        },
+        "rankScore": 0.2584374961026828,
+        "expectedInfoGain": 0.7543658450671877,
+        "rankingFactors": {
+          "R": 0.9811307208994708,
+          "F": 0.9813082462151144,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.9189489003850353
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1PRWZ4dnZzX0d3d3prNW9wVmxhNnprdTB4aXlDMlVwTHZzNHR5YW5KSVY0U1dybGFKQWRFTXFJejY0enBibDcyV0ZrN3R3ajVCS3FtOXdUT0hlNlMxUDdYUTYybUtPRGpTMVQ5cEVUZnNBeDRTeVZWZS1Lbw?oc=5",
+        "title": "Amazon early Black Friday flash sale – hundreds of items at $1 or less: Wallets, stocking stuffers, winter gloves/hats, more - 9to5Toys",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:01:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9897163325177517,
+          "authority": 0.7
+        },
+        "rankScore": 0.2574649446120885,
+        "expectedInfoGain": 0.7569068085086151,
+        "rankingFactors": {
+          "R": 0.9896623908730159,
+          "F": 0.9897163325177517,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 2.939844139360465
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPX2pMdUJHSGNpT3NWZ3RzM2h2YzE3eVNRT1Z0REVab0ladnYxVVhXc045NzlCZ05vekVlcC1NbWR0NzZlTi1lUHdYNXpsekdKdHFXWXZ1ejVFUkxWUENFTGRib1NqU3NucEJBWHdDQUliYVExTjlQUTB4Um0xWnRjdjVkLVFRU050M1o2bFBqUm96WDdNYUIxRzhkZ2I5M0k?oc=5",
+        "title": "Amazon begins Prime Air deliveries in San Antonio - Unmanned airspace",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:34:56 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9930537300334076,
+          "authority": 0.7
+        },
+        "rankScore": 0.24102453380650574,
+        "expectedInfoGain": 0.7579123791974715,
+        "rankingFactors": {
+          "R": 0.9930287979497354,
+          "F": 0.9930537300334076,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.1445445292549463
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNT1Fqakt2dDh5Z3dldUE0VEt4VVJZaWJEWjA5VWQyVlV5Vl82c1lWd3VYWTNrWWdsLWJmNkNHRC1NMjc4WG5uQzR1b2hpS3NmM0xfMDFOa0VoOW9ORVpmalJhcGRwSkFTX0RnaXFfbzdYRGdQTFMySlE1N09xWGFyWUNod1pkZlM0eXkyZ3NUM1hNQUx6UFdfdG85YnpfZG1ldUppLXQyOFc4Tkl6Q2pfV1Viaw?oc=5",
+        "title": "Microsoft and Amazon Are Downgraded as Redburn Breaks Ranks With Peers - Bloomberg.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:52:10 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9947529674573288,
+          "authority": 0.7
+        },
+        "rankScore": 0.23917584445048296,
+        "expectedInfoGain": 0.758423726864631,
+        "rankingFactors": {
+          "R": 0.994738544973545,
+          "F": 0.9947529674573288,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.170987975843225
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNUlYzYWQ0V0FRaGlxRy10ZTlmQkVvT25aWUg2eEFFRE1MTHY1OUdXT1hjOFU2bm83MG5MdVJMX0JvRmdjN0Q4dTE1X29VaG8tTGU5cl9hMk5MZkd2Q2JBTnhIZW5hNkFOc3p6aU84TnhZOERJU3phbEwzM0JEWlZDTkhNZ2kxWUdmclpLZmFR0gFYQVVfeXFMUDJoZzB0dVBBSmlvNGUxVXh6ckR2ZEJoUTRoVEc0eElRTGlnMUdGUUFEVm5RNDRBellSb0VBVEVIRlRGWGI4em9OUW1GOXpjMTdfT3Y0Y25vYw?oc=5",
+        "title": "I Found 41+ Best Early Black Friday Deals From Amazon, Target, REI and More - NBC News",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 22:16:40 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9012065787131797,
+          "authority": 0.7
+        },
+        "rankScore": 0.2381022468672978,
+        "expectedInfoGain": 0.7295777702891197,
+        "rankingFactors": {
+          "R": 0.895978556547619,
+          "F": 0.9012065787131797,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.064136436712155
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMidEFVX3lxTE1nd2JIVEJjdWxwWFd4SlN5eERvWEptODZ3STFjeU9uR2xwbldCQXZlOHVQTERNcnFBNmMwUDJDLU5zSm1TUTZycjIzZHVsZFdTZ29CRzVabjhWbjZvenFacEU1TjA2b25lMDlTVVlVMnBZcHRY0gF6QVVfeXFMT1oxcmh0UGRJWGgwZkJqNzQ3UnlvTDJpYXBuMzlwX3RzMHBpaUZiX2otY1VCR3ExZDVkM25ZYmVScG4wbnludGVsaXVwWEV2eVpUdWZ4NEpESjVUUGlCa0ZFMHNOcmYtOU1fbkZOX213NWVIUkhLUFpzVFE?oc=5",
+        "title": "Ford to start selling certified used cars on Amazon - CBS News",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 17:44:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8771554648435079,
+          "authority": 0.7
+        },
+        "rankScore": 0.2350695367837284,
+        "expectedInfoGain": 0.7219125717106532,
+        "rankingFactors": {
+          "R": 0.8689283465608466,
+          "F": 0.8771554648435079,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.0710596599968465
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdHdzeTA2Y1RWYmlwbU9NLWRVbVJjbVd1dHFTOHl0dHBzQnFlX244R292Yk5tLXAtMlBVYU42ZXdQaWYxZzJjODNlZVJnM295OW52QXE4OVlxNUZDV2xSRFpBSi1LQzFyTFo4ZEJlMnNjbG9ucmdhb2FoOGo4VWduR2dBLV8tNTFNTm5jZXo3R3VfUzc3bXc?oc=5",
+        "title": "Exclusive: Amazon Facility Lands $54M North of Chicago - CommercialSearch",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:56:51 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9776012783382602,
+          "authority": 0.7
+        },
+        "rankScore": 0.2212178671602407,
+        "expectedInfoGain": 0.7532420635265327,
+        "rankingFactors": {
+          "R": 0.9773458118386243,
+          "F": 0.9776012783382602,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.4049784187681214
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNNU1nc0E0V1VXc2lGMkppRFRBSXpjNEludjhLMEhSUVZUUXNfdEluZWpIVUhkcl90Y0o5bndsb3FJRDZraXNKbUpvU2U1NzJOSkl4bWxLa1lMUzhyMzZKRlVlZF9iQlJDRi1lVG5GR0VRZEg1LTZKN3Bnam1RRHBrSmRxczd6ZTlTSldpcVQtenA2QUF5aTVnSUh6QzBtZ1N6UnM4WU9sSG1mQkU4R2VZ?oc=5",
+        "title": "What The Tech: Tips to save money on shipping without an Amazon Prime subscription - WAKA 8",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:15:06 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9852198387241489,
+          "authority": 0.7
+        },
+        "rankScore": 0.21665623730942304,
+        "expectedInfoGain": 0.7555493121181461,
+        "rankingFactors": {
+          "R": 0.9851089087301588,
+          "F": 0.9852198387241489,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.4873185351183285
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPRFhCRGtrSk1IaWlTeW5qU084QlNRa29sbWpVRnFNVmd3b0Q0VlBSeEUtQW9KSmlFTzZoOFk0UkphNng0bTlnS2tiWVhLd3JPdjdHSm9IRUFkSll4YWNtVHVfR2ZMZUhoanZielNyeHpZS2g4NWtxTkFkeDNyVG9NWGZuZFdhUDNhejhIVENBLUcwTzREM2lLczdHMUNFckZBNk1UZk1lVnQ?oc=5",
+        "title": "Microsoft’s Azure, Amazon’s AWS Come Under EU’s Digital Markets Act Scanner For Potential Curbs - Stocktwits",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:15:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9735509061126432,
+          "authority": 0.7
+        },
+        "rankScore": 0.21178705847679535,
+        "expectedInfoGain": 0.752011753972452,
+        "rankingFactors": {
+          "R": 0.9731941203703703,
+          "F": 0.9735509061126432,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.550791815992132
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilwJBVV95cUxOSmdXaDFoY0NHVDhjRGZPREFOUkJZUWZKbjVRcE9UQjlYN2dKX2xMV2EtZ3BQYktSRHVkSzFBV1QyQWlkNWI0bHhEbWJiN0xfM2d1OXFERVlLSVhuZXltbUxieGpWWldjT1pFVWF0dU52bk53dzB1QlE3TnNTdWZfYjVqbW15aFQwcVJlNlFSMHlvaE1PeG9KWlBNM2hvQnNIbnlHby1tWUhHRjJxRFI2aVozbWwxaFZ1d0xHV0g2Qm9LU0hCMklodDB4WXh3RlZmLTlQcVpSeU4weFlnd2pBMG5MdmFZV2MzXzZ1dUpCOFhEQUhEMkdrNkxzbk80R29jcjVweHEweGoxTkNmRjJlNGNwemgyWWM?oc=5",
+        "title": "Amazon's early Black Friday kitchen deals include this 'very dependable' KitchenAid mixer — plus 11 more markdowns on air fryers, coffee machines &amp; more - Yahoo Lifestyle Canada",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:44:02 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9880518454358461,
+          "authority": 0.7
+        },
+        "rankScore": 0.21124458546517716,
+        "expectedInfoGain": 0.7564046649602182,
+        "rankingFactors": {
+          "R": 0.9879792542989418,
+          "F": 0.9880518454358461,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.58070557545679
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNOWRfSVRHdllVa3k1OXdnQUM3aUFLVzBPZDJrc2FFYXZCMU5fcVh3bFV4VTBNZGJZc3BvczRmZms1MEhKVmRxZVBWNzk0OWdhMVk4TFRjRWhHOF96MnNBT19NNkJ2VG1qM3g0aWY2Q241dzVJWWcwbGN0SlZDS3I1S2ZGNENZWVh6aDFZ?oc=5",
+        "title": "My Worn-out Sweats Don’t Stand a Chance Against These 13 Effortlessly Chic Lounge Sets From Amazon—From $20 - Travel + Leisure",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.972103253468899,
+          "authority": 0.7
+        },
+        "rankScore": 0.2095821051969962,
+        "expectedInfoGain": 0.7515714143596205,
+        "rankingFactors": {
+          "R": 0.9717061755952381,
+          "F": 0.972103253468899,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.586047643014096
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxNTThQQUdLUUttb2tKSU00N3lVVFltbk9sc1dBU2FZc2pwWlAxX3hWa1hmbnVfaWJrYjl3cUlxRmh5SWxBRWNpUXhqN1VhdDY5WGYySDdyWkl5WW5jY0JPemx1QU9LYWJNbV9TYnh2SzRSWVRhV1pRTDI1UEQ3dng1eFRmODJIbWVHQ01SM3piMA?oc=5",
+        "title": "Amazon downgraded, Alphabet upgraded: Wall Street's top analyst calls - Yahoo Finance",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:41:44 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9937238765333187,
+          "authority": 0.7
+        },
+        "rankScore": 0.20913309030580257,
+        "expectedInfoGain": 0.7581141003292041,
+        "rankingFactors": {
+          "R": 0.993703458994709,
+          "F": 0.9937238765333187,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.625031788229496
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxNeUl6V1JFYWJVd1FNNmlVemRHcW04RkViMElFYU1sTm1wQXBpM3pfNHBMMlhjQkFfUDBiYVp6bnA2TVVwbUF6Umg5eVd2cVNjMjU4dzVxTjZLT0gtX05NSF9Ia1l0NW9JRTR6SlltS2s1RkZpRTlWT2kwVkQzbHAtOWRISThXV3RnSUJPcndVVy1YRm1MYTVNYUh5d01OX0d1WXNFZDl3VmtmQUxUVXUwcmdRaHpoc0NUQkYzMlZiSXQxUjVhdDduVWcxRWFZMWFaZTZvYk0wZzVvem1I?oc=5",
+        "title": "Amazon ash art performance by Brazilian artivist Mundano demands action for forests at COP30 - greenpeace.org",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 15:04:52 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9960070638211245,
+          "authority": 0.7
+        },
+        "rankScore": 0.20839071909651793,
+        "expectedInfoGain": 0.7588008209818987,
+        "rankingFactors": {
+          "R": 0.9959984093915344,
+          "F": 0.9960070638211245,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.641240954835679
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9xUTdQQUhuRC1WZnBKREwxQnB5TGRsd2VwWnFrZ3N5NmpNWkpESkJJT2E1MXA1ZmhwSml5Z1o3SkFlMlJ3d1ZqQWRVQ3FJeUdlODlxZ1loZENoV3lQOFRBN2xHS1dOM1VpREdyUWhTdmRVMmNKVUJF?oc=5",
+        "title": "Why Amazon Should Buy - Wait For It - DirecTV - Next in Media | Mike Shields",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:54:49 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9774041066070082,
+          "authority": 0.7
+        },
+        "rankScore": 0.20787289922679011,
+        "expectedInfoGain": 0.7531822633124797,
+        "rankingFactors": {
+          "R": 0.9771443154761905,
+          "F": 0.9774041066070082,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.6232826218041776
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPbi1FSFJKTHRFc1dOMmptbVdJOGxmSkRhNzlXZ3Q0VjZBVUEteVhISDNxczc4dFR5TXBaekMxVGM0QWNoaGZUM1JhU1Y1ZjNaVS12ZlJoRndreU8xbXVVTFNCMzVuT0JCZVNpaklWX3MwQ2F4RTRPd05aTGFIbVpvYXBuMzZDS3Z4VmRCams2Sy0xNmtkdXBRVW9kdkFWSlZmRFVPVUxFOEZnYURrS1h5RHdR?oc=5",
+        "title": "Ford to sell used vehicles on Amazon, joining Hyundai - Reuters",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:03:49 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8582029908856594,
+          "authority": 0.7
+        },
+        "rankScore": 0.20329694358600633,
+        "expectedInfoGain": 0.7157931520058648,
+        "rankingFactors": {
+          "R": 0.8470846891534392,
+          "F": 0.8582029908856594,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.5209243158298786
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxOQ0hMajFHQmY0Q0JGaVJwWUI4MHFraVlaUmN4NWNsdzV3UkFYVDJiN0hZcEJ0YkZTVFQ1Z0owTFZCYmlOS08wLTRFQWJraE1xT1dnTHlHNTV6VUR5UVl3YWFKYl92bXlQamhNX054V3ZTZFo5SkZNU0EzQzdPUUdQTldLUnBsNjRVVUs0RWZBNGFfY1Qta2I5SUdjUTNoVGgtRmdQUGNncE9LNEtEUmt0VERtSHFiTHloaXQ3TXRlVThaS0x6UWthOW9R?oc=5",
+        "title": "Rothschild turns cautious on hyperscalers, downgrades Microsoft and Amazon - Investing.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 09:03:59 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9609788785439857,
+          "authority": 0.7
+        },
+        "rankScore": 0.19871778683941582,
+        "expectedInfoGain": 0.7481763015236613,
+        "rankingFactors": {
+          "R": 0.96019646494709,
+          "F": 0.9609788785439857,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.7650192940618035
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE8xMEYtWThpNzF3Tnc2R3R2ck4xOFBiT1ZGMzFhNFRyM3p1NDlHWDA5dTdnaEVlYlg1ZEJ3dThJMFdDZThwbThiWnRhdmk2NzdhLTlTTTdCTnc0aE1lS29lb1ZBcTZGRWprc3JtMklRONIBdEFVX3lxTE1YNnZFeU11V0kwWmdrNEZlQTBvZlI3UlhWVEtDY0FLMElkbUhuQ3FjOVRrT0M2dUhPaTNaNXlnM3pxNHBiSmM2THpMRWJNdFRtZC0yQ19MX1c5LWQtd3M3bmxJd2ZqV0hGOEtEeUJOTWhUdnFM?oc=5",
+        "title": "Ford partners with Amazon for dealers to sell used vehicles online - CNBC",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:00:01 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8578795243737853,
+          "authority": 0.7
+        },
+        "rankScore": 0.1982763991913249,
+        "expectedInfoGain": 0.7156880866421789,
+        "rankingFactors": {
+          "R": 0.8467077199074073,
+          "F": 0.8578795243737853,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.609547528405449
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxNZGhXeHFVcXd4UHVIOE80dXJVNUxoZ2JVVXFUMUxkUUxrTTY4R0Z4aHBzMHp3RTdRN0hjQ2RFRUhsMXQyUzA3SmlGWk1zRTJJV1JrTVI0M3lEMUt1MnVVNDBHdEJtN2tGY0FfUld2dUxxc3RfVERENFZKcnZqdF9kb0dMU0JwQWpiMVgzT3hUWG5WYzhEb3c3LXhjMEk0Z0tUd3o3YnRTdTlLQXZHU3d5RnNJNktkeWpaT3AzSw?oc=5",
+        "title": "Amazon Bedrock AgentCore and Claude: Transforming business with agentic AI | Artificial Intelligence - Amazon Web Services (AWS)",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 18:20:41 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8803534359011054,
+          "authority": 0.7
+        },
+        "rankScore": 0.1971808129256753,
+        "expectedInfoGain": 0.7229381299684992,
+        "rankingFactors": {
+          "R": 0.8725674305555555,
+          "F": 0.8803534359011054,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.666371586778076
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPZlEzS0NxYUcyU0hoZk5qTGh5blRQYjZrcHliOWNxam9LOFhwdUJJSFpITlZkcE02SFBOY0M1LUFBVURkUWdpNVBid2psTGhDUzRPSVdrM3pEcU9fSlVjMnJxb0ZSTnpZT3B1Y2pobWpadUJkUWtWVnVtWlJIMnRrNENzQ1VhSlhRTzlRUlUyZ01nTUpIdkE3UWVEMGdWam9zTWRoaw?oc=5",
+        "title": "Amazon is selling a $900 gaming monitor for only $500 ahead of Black Friday - TheStreet",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:45:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.982282242860665,
+          "authority": 0.7
+        },
+        "rankScore": 0.1963926196701043,
+        "expectedInfoGain": 0.7546607339985442,
+        "rankingFactors": {
+          "R": 0.982122650462963,
+          "F": 0.982282242860665,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.8426124936171506
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1vWDhpaV9OQTBPN0t3ZE1FVXZITVFrV0JCZldhd1M0U1ZpbnJCcVZWU0Y2QTZIQ1hDM0hVaEhJUEY5cmpJU1pCTzA1SEY0MjhCbnRkbnJMcjhQSkFxLVFIQ010blhRaW9qeWNjNUJra29MNUR6eUNmVHNHRQ?oc=5",
+        "title": "Amazon Is Selling a ‘Durable’ 20-Piece Grill Tool Set for $41, and It’s the ‘Perfect Gift’ - parade.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 10:01:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9664299765208814,
+          "authority": 0.7
+        },
+        "rankScore": 0.1958963449707534,
+        "expectedInfoGain": 0.7498424233134496,
+        "rankingFactors": {
+          "R": 0.965852845568783,
+          "F": 0.9664299765208814,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.827750964038652
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi1wNBVV95cUxOLVM5WlBWNThsam5IQUxWWk4wTWpDaU84aWpISGo3NjhDWVhMdkkzbXJxWUU0eTFCQ2dPb2JoRy1acWc3MDFwS1FrWUNwR3hiY182ZFpZUVpBTzA3bkk0c21RZVljamw2RFhrNm1Rd2dKbHhlOXRPcFQyY3h4NXNvaXVIVHlYRERNWEJvOFBXc2JFN1JxMlpKc0VPaG5YTXIyZU5XU2QtXzl1Wk1WR01fRFh4dG9aaUFlSjRQVlZVVkhXdzc2MGJ4QlV1MTZLOWJxWlpVaFlYTUMzb1dkMHJKZDNnLWpwSkNuRkNHV0R0OENRdklEQlNpWDVwdnAtbTVsUXRMTlZqMHhZTDF2d1NNS1JkSkN5c0hVX3NnUXZfVWNsLU9xa3BxNklfelcyV0VvS1ZVdVRvQ1dWNnRCd3FfaVFKeE5VdmxNYWhaVTRDOXF6LW5WT1hIcmRvQjZOOFhIZU1MWDN1VlgtVFdiMmlyaC12WnZOcGctaVJXU0NSeVB1RTdEaTF4YlZESXUzcVpLakZNR3BPMGhBSUVkSEFzZnk2Mk5tNjF6dWVISnJUa3NMWVJ3WXJrSEZ1dzl2U0s0S2RSQWh4ejhiN1F4aVdENm9YckxSUTA?oc=5",
+        "title": "Amazon Moves Forward With $15 Billion Bond Sale - The Wall Street Journal",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 20:26:15 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8913886037279274,
+          "authority": 0.7
+        },
+        "rankScore": 0.19234000295483314,
+        "expectedInfoGain": 0.7264619753310144,
+        "rankingFactors": {
+          "R": 0.8850245651455027,
+          "F": 0.8913886037279274,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.776967683116903
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQQ2tIenM2NzZia3VfMUtiNk56czcyVnZvQm02TjlmYVlVemFSc2p4bmtIS0lYczBJZXpxbGpfQUpuaWJtV1FXZjFVdzdadTZWM1J2OGZ1SG01cDVlMGdVVTdwdW1BdDFXRWZsUHVJMHhUVnRHQlVneHZtMUpnYlMxeFlPUTQxNDBmOTlEVVdHb2pmc3ZvSVVkLUhYQQ?oc=5",
+        "title": "Amazon Autos adds Ford to its used car line-up - ConsumerAffairs",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:27:22 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.980565402321505,
+          "authority": 0.7
+        },
+        "rankScore": 0.19225953182201552,
+        "expectedInfoGain": 0.7541408101002098,
+        "rankingFactors": {
+          "R": 0.9803733316798942,
+          "F": 0.980565402321505,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.9225145455901584
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPbjlvSXlqc3F0ZDBKZ3ozWkRJYldFSGxrbllHVF9oRHhiUVpBUW03dXZURnIxOXJDUm85dlV1X01FajNOaUZCQ19FZGs1RlR5OUhhZ1dRTVhXUkxIS0toczlsUC1MdnFxSUJTNXR6MVZodXdJY0xMUkozekVCUGZpbVNnNkxwVWlRYWFTYWwzUS1rMXBXQzlINWpZanlLTDYyb05tczNZMGtTZw?oc=5",
+        "title": "Amazon’s Zoox offers free robotaxi rides in San Francisco - Los Angeles Times",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9896181512438361,
+          "authority": 0.7
+        },
+        "rankScore": 0.1845452806951646,
+        "expectedInfoGain": 0.7568771996210991,
+        "rankingFactors": {
+          "R": 0.989563179563492,
+          "F": 0.9896181512438361,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.10130888619863
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQek5nX2J1QTA1NGo1R2tmdUVybU5laG5IdkJVUjhfUjFJS2I4aWNwbkF4cmktV3Z6VFhkdjhDTFpRZGF6RTBRZDVLS1hzcWFGSjM3RVo1dXR4bGdPMG05ZUNBRnNjSkhHbnNoZk1BYmFRV0pnZVBKdUxnY0VvZFNIUV9YUXhlcEV1NkppZi1KVGZQY00?oc=5",
+        "title": "Amazon just dropped the new M5 MacBook Pro to new lows again, 24GB/1TB M4 now $300 off - 9to5Toys",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 15:40:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9994846467290275,
+          "authority": 0.7
+        },
+        "rankScore": 0.182696074879396,
+        "expectedInfoGain": 0.7598452550450684,
+        "rankingFactors": {
+          "R": 0.9994837202380953,
+          "F": 0.9994846467290275,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.159067213385228
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxPWU8wWE9tM3ByUGhLXzdXY1FLejE3SWFOYmpmQWxpSmFoYU1WazNKNDMwYWxDVnhERW0xbmFhOFlnSjFTbWc2UTdoZGFUWUNzc2I4dzE4Q0NpNGdkZDZ5b3dlUUE0TkJ1eTYxRTBnN1MzSDJyY09oX3h4OGFIdVZSeg?oc=5",
+        "title": "I Asked ChatGPT for the Best Amazon Deals This Black Friday: Here’s What It Said - AOL.com",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 11:24:38 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9744817567652125,
+          "authority": 0.7
+        },
+        "rankScore": 0.18264107790635745,
+        "expectedInfoGain": 0.7522947216000994,
+        "rankingFactors": {
+          "R": 0.974149720568783,
+          "F": 0.9744817567652125,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.118978765476904
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQb2tNMTF4TmswaHRIa0lKV0Z5dEI3MVhlMVhXTFNqd25sX0E1aTBxTGpPOTkzSnVDWDlIM1hEZmw5cXNOS0pSM2Z2eV9kbFFnSHFmRzg5T2V3MW94NTlhLWs0NXZJbTJNNEdZQ0t1M29jYW5ScHpqRXJVeWRUR19qeg?oc=5",
+        "title": "Ford Taps Amazon to Let Shoppers Buy Its Used Cars Online - Yahoo Finance",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:37:50 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8611040330370083,
+          "authority": 0.7
+        },
+        "rankScore": 0.18224528765585618,
+        "expectedInfoGain": 0.7167345007888846,
+        "rankingFactors": {
+          "R": 0.8504593055555556,
+          "F": 0.8611040330370083,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.9328012812179476
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijANBVV95cUxNb3dSYlNZbTQ1YnRWT2dseXZVZ1UxS0ROaGs4cU5pQkx2TVY1VW9zbmY1cnFiVjBJX0RsbDBlODZ0R1Rtemt1eUpUSExQemJPUDRjQWJKdXk4eXVVRURCN0FJSTdWc3pKWmZ1TGs1VmF3c2V3NjNmS2p5UVhRbGhIZ25HSGp4b1NyZnp3VXRYaXZBU2NmdTNhMlBCdHV4RmdnS3RlYVJtYW4zc29lSFJfTlM1WVFlcHV1ZExtSVBxb3oweWRxcW5RVFpGeGN5ZU93VkNCMFF3UUtPcXl6S21ZTGN4QmRRN1ZyMXU0aHBFa2xUcmpIUXA3VVk3LU1LR1ZacWlqbEpjYm9Oa2tWTWVNNXlNLVV3eUV2MGVvRnozYjdKQ0FucTNERHk3Z09HWHl6ZlNtclgtcERFX3NiTGpIVklBcGE3VWpfQkppOUpGLWZMYzNHTE0wZUY5UFFfUlBVS3d1c01zWUNFRGVFYy05clhBRkliUkRuN0RLQWRpUm5zR0dpUGRjV2ZpbEw?oc=5",
+        "title": "Microsoft and Amazon Stocks Drop. This Analyst Downgraded Them ‘With a Heavy Heart.’ - Barron's",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:17:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9854055623477079,
+          "authority": 0.7
+        },
+        "rankScore": 0.1809685582057661,
+        "expectedInfoGain": 0.7556054484394578,
+        "rankingFactors": {
+          "R": 0.9852974272486772,
+          "F": 0.9854055623477079,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.1753410422837876
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxOWm1BSXZIcWRHX1VSTU5TZmpsMlQweGJxYm5YX056WEF4SWd6cWtYQWQ1ZTZUZXlIbTVTS0lnQlpQekxLd05PSmxNd0UwMUFkNGQzbzFaNVZvcHpBY0tsR09MS3hHNHpOakJuMlZvcjBLVnZkU0NyeFlWeTFtNEZkQ1dNTHJaVmpkTEw3WWpKVm5KalRfcHhOb3UweWNxSE8yRmdxcW9LdkFtWGwzbzM1NWhYZXNqc0FzY1E?oc=5",
+        "title": "Meet Anja, driving change and trucks for A.S.L., an Amazon Freight Partner - About Amazon Europe",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 09:15:57 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9621204022249719,
+          "authority": 0.7
+        },
+        "rankScore": 0.18014753341591924,
+        "expectedInfoGain": 0.7485256059686664,
+        "rankingFactors": {
+          "R": 0.9613836375661375,
+          "F": 0.9621204022249719,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.15506996834918
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOQ2F1Yy1kSFlhRy1Od3l6Q0FxYkx0b0FYNDIzdjB3OFhBbGZ4S2lrdnNDWjFNM1BodTBHb2lRVFg0T0c1bTUzRHRvOW9tRlg4QUpqSUFGVVhIT1NCX2xRakIwRTJPWmw2aVlHTGRfZ0tUY0dYU2tRSWd4djZOQVVZa0ltNEdmRlRrZU1NRDYwaw?oc=5",
+        "title": "Enthuse Foundation and Amazon Small Business Celebrate Women Founders at 7th Annual Pitch Competition - Yahoo Finance",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:15:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9852100615083246,
+          "authority": 0.7
+        },
+        "rankScore": 0.17543173939109244,
+        "expectedInfoGain": 0.7555463497520423,
+        "rankingFactors": {
+          "R": 0.9850989368386244,
+          "F": 0.9852100615083246,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.306782526209195
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMihgJBVV95cUxOanJOaHdsbzRPdE8xQXZ1dWJza1Z1YWxlNVd4a1pOd3NwOFVNUEtLN21QNzRsV3FfSXZLTi02NTBPTDNyOElDc2pfR01ibDFwMldQa2xPUHRxMXNJWjNPVjBhNVZqNmh5dk5DNkJlRGFYcnQyVE5MT1l0S05lS3hranJ6cC1RZFhkY0RBRnYyYlVIYkp3QnZRUlJWcmd4NzUzSFlKNGw5eTZDd1ExMVh5VmlJY2taekhqeGNwMklYR3NMWDFxRVpPcDhjVmRUbFE3YUt2cXhRRGh0S0VranhTSGNTdUJjMWFONThiRk5feW02MjJES3pabE5sZXAxQUFuLU5Ucld3?oc=5",
+        "title": "Amazon Black Friday 2025 deals from Dyson, Apple and more are up to 70% off — start the holiday shopping season early - Yahoo",
+        "publisher": "news.google.com",
+        "publishedDate": "Sun, 16 Nov 2025 15:20:54 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7496681679474078,
+          "authority": 0.7
+        },
+        "rankScore": 0.17240361073986546,
+        "expectedInfoGain": 0.679231412940127,
+        "rankingFactors": {
+          "R": 0.7118745849867725,
+          "F": 0.7496681679474078,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.9397748691296175
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOa0Fqa095VkNmRmZkYkwtNlBBbEk5RlJyQmtGQ2d4YkU2UGdJWFhuOHlZdzZ5UzFERHZ2RUd1UWJ5UF9OY0NUeXFYbHN2YUJPaTFHVkg1bFEyVk02dTZlb2ZSS3JxVXVJRUcyM1ZLWFdyaGFid285Y1hCREhrbWpRVm1QcS1vaU9xN2ZZ?oc=5",
+        "title": "Everything you need to know about Amazon Leo, Amazon’s satellite broadband network - About Amazon",
+        "publisher": "news.google.com",
+        "publishedDate": "Thu, 13 Nov 2025 21:11:15 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5056355687925882,
+          "authority": 0.7
+        },
+        "rankScore": 0.1675668407275474,
+        "expectedInfoGain": 0.583554374753412,
+        "rankingFactors": {
+          "R": 0.31806026289682543,
+          "F": 0.5056355687925882,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.4825170195947823
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQbGhpaHlocVI3ZnBaMHI0NEVkOHNWeE41NWxsUW5WX0lMZ1VBNnhBSFlISnB3cGxfbV9BNnFhUlBBbHVwb2stUFhZcnVMNEZodWJ2dTdQV1JvVGVRVzhrSXBkdjN6TmdYZUkwNGhOTmhFU0FzZXZvZUZRcXBhd0lSOFJxOERqM3UzU00tQ1R5VkQ0Zw?oc=5",
+        "title": "Amazon raises $15B in first U.S. bond sale since 2022 - Seeking Alpha",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 08:31:22 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9578743841687094,
+          "authority": 0.7
+        },
+        "rankScore": 0.16482680906050257,
+        "expectedInfoGain": 0.7472252441828461,
+        "rankingFactors": {
+          "R": 0.9569605770502645,
+          "F": 0.9578743841687094,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.533396286938759
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1SVTVWSEUxY0dvMHFNUEZYMjFYMEJyYjNqYmVhTUtSeFhqSjRYX0tjN1JNX09BWTVUWGgwS2hTT0VON0JmckVEX2swb0dNY2RLbGdlOTZEc0xHcXpwNHNIdmpZRW1POHB1UUdxQ0cwZ0Q1bTctOE9vYjhR?oc=5",
+        "title": "Get a sneak peek at some of Amazon’s best deals for Black Friday Week and Cyber Monday events, happening November 20 through December 1 - About Amazon",
+        "publisher": "news.google.com",
+        "publishedDate": "Sun, 09 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.26398455511849467,
+          "authority": 0.7
+        },
+        "rankScore": 0.163779630802572,
+        "expectedInfoGain": 0.4995976832677742,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.26398455511849467,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.050426239328954
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5CcXVWWElfMGZkZ1MzV3JkNGdTVnVrOTJhb082b3V1amNGel9RMjZpQ1A1MHFDMHVLMDVNNndRdXl3cG0tNzVoU2hVN0ZKcTNUM1FMMkpvc2Y4dGdoU3pyWVlkTGVLaXN3bURPTU00WEU?oc=5",
+        "title": "Ford And Amazon Team Up To Sell Used Cars Online - Jalopnik",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:52:40 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9948023033620378,
+          "authority": 0.7
+        },
+        "rankScore": 0.16196099468235803,
+        "expectedInfoGain": 0.7584385451570834,
+        "rankingFactors": {
+          "R": 0.9947879976851852,
+          "F": 0.9948023033620378,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.682846920300484
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOMWNiUlRUSHU2Z2lScU9iQmg0TkM4Yzc4SHR6eGRSdzhXZWxtT0xmbF9pWnItNEZUOHl0bWxINVVCOGNFYlBTVXlnWC15cWtnLUlMWlhlVHBtNnhSWlVzMWVZUllmY3AyR1FOZVREeXhGbktQQzlPWmQwZkNCVGs0Wm1n?oc=5",
+        "title": "X, Amazon Web Services down amid Cloudflare system issues - Straight Arrow News",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:38:01 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9874622632627703,
+          "authority": 0.7
+        },
+        "rankScore": 0.1604256298344527,
+        "expectedInfoGain": 0.7562266996084631,
+        "rankingFactors": {
+          "R": 0.9873824007936508,
+          "F": 0.9874622632627703,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.713877080544005
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZlZua3JvOUw0c09KRTdOMy1taEtoU1NqMkZMRFkxZEtpQzBRYy0zUGRCNDlmbzVJUmlWdGVtbkZ4aENySHlJd212Uk9adWJXdlA1OV9ub1RMemtBNGR1NHpmSnBSU1VRZHdYY08xNzV1NmVDQ3MzekRuX0hUNllobi1JcmFpZXJ4cUs0WVE0X0dUSVJwUXMwcA?oc=5",
+        "title": "Amazon Just Issued a Massive Warning to the Quantum Computing Industry - The Motley Fool",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 11:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8426948267074377,
+          "authority": 0.7
+        },
+        "rankScore": 0.1581684551015829,
+        "expectedInfoGain": 0.7107315774287347,
+        "rankingFactors": {
+          "R": 0.8288490228174603,
+          "F": 0.8426948267074377,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.493510270251239
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPUk13TVQxa3FtY2djR2RMbzNGanJtWkJpN2xtU3ljc29zaktKamYwZTFST1VpSkw3M2wzRDIzVW05XzAxNS1BbXZDdXBWUzFKMXlHdDdGYXVLTmU0cktZVXpPX2YtYnF6eG5uYmpha0hyM0t1c25NeWd5Wl9WZHUxZ0dFS2pVZlJ2c0xKYW9CRURKMDdTUUNzbUFXODNZZU42eG5EZEVOX3N5V1ZVaTZjZDRFTVNvQ1lWQ0HSAboBQVVfeXFMT0tmVlZLaXl4S3dfcVdCeW9QYnJUMnV4N2ttZWtsU1NmVXBaVWhGOW5fTC1yVFlOX1Q1b2luWGRjdmtnbmZaRW9BUE5MZ1RHMWxlaFdEejRvZEdpZ2RyaGg4dDNqMU9CbnJaUC1KY0hRM1dwTjBBWGpXWjRFaWszMVNXUE1PSjhwVl80cEZlTkRPYkJSc1o5WFpGeDgxUDduMVpERzVHRk80YXBCMkxCOUZLbW1JTlpvN3lR?oc=5",
+        "title": "Can Brazil’s Cop30 spark a climate breakthrough in the Amazon? - South China Morning Post",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 15:00:17 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9955542865708584,
+          "authority": 0.7
+        },
+        "rankScore": 0.1574483309059461,
+        "expectedInfoGain": 0.7586647005253112,
+        "rankingFactors": {
+          "R": 0.9955437169312169,
+          "F": 0.9955542865708584,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.818499479543609
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQOUtoemtPc043THg2MWRNMWxGbXE5U3lTRzRKOXhIVzg4NE16NGR1RkRiSS1uREgwbXdfVGJiSDJxa0RxTU9pTUhQLUZROWgtckZaRWV4clFadHhNTXhKaGZ5ZUROM2RjcENkMnM5S29nYnRUY2dhUE43aFFEUy1zMw?oc=5",
+        "title": "Amazon to raise $15 billion in first US bond sale in three years to fund AI push - Yahoo Finance",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:31:34 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8605688569574881,
+          "authority": 0.7
+        },
+        "rankScore": 0.1562562776153076,
+        "expectedInfoGain": 0.716560969416639,
+        "rankingFactors": {
+          "R": 0.8498376058201058,
+          "F": 0.8605688569574881,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.585805961541998
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQM0hiWGE1UWtlWEdYeXVtd2pndXNyUXFoZ1RvY0VkN0RNMnZWR1FNeG5ZcHB0M1A3a2J4ZjhMb05FRVFyeFNVQThLT0pNeW5XczJzMVl5NW11R0dJd01RaHRNcVBleWg2bi1BUmNpQWdSRnFVVldqaF9zMkhJU2t1YTRCTFlJbW1QRVd4TWtn?oc=5",
+        "title": "Naturium Brings Its Cult-Favourite Skincare and Body Care to Amazon Canada - Yahoo Finance",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 13:57:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9893236609492009,
+          "authority": 0.7
+        },
+        "rankScore": 0.15526131780553226,
+        "expectedInfoGain": 0.75678836585865,
+        "rankingFactors": {
+          "R": 0.9892654447751322,
+          "F": 0.9893236609492009,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.8742879202309854
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPaklmVXNQYnlJWkZkLWZ5bElfQ3BwVUdadUFUaXdORG9YNWJnb084ZTZpVGN2eEFld2wwT3dSTEtlcVU4RHpzdGVwNWxIaUJsNUpIMktNQmppOHRxWWhYZG5obDQ4NmtpNUpxanQ4b3lUQ0pEOHJmQ0lidk1OUVowRFk2UzlqZjFzMHBuRzF1NzN3WjB4NnM3aWJ3LWx5RV9OZmNfcXR0YWE5TGR6aFVVWElVSXlLdW5Tc3NnSVNMbzgzclpfdHNqU01HX2Fjdw?oc=5",
+        "title": "AWS Weekly Roundup - Amazon Web Services (AWS)",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 17:59:08 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8784733429777631,
+          "authority": 0.7
+        },
+        "rankScore": 0.15274821078403122,
+        "expectedInfoGain": 0.7223354349784105,
+        "rankingFactors": {
+          "R": 0.8704295568783069,
+          "F": 0.8784733429777631,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.728928943067697
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxQWS0zSTZ1YzlTelF5VXBtTXN2OXpZMTQ0ak8wVzl5eVJwREJXemZXUE9FUHliOUdfdnJhVWNfZm95cUozSWs4enFPSG0wdDhOVWZHUFVWbkhNNW5ZYy1VQmgzdU5uUlZvcVNZZEFmRUVON29idXd4U0N5UmVJVW9ESm9zekJDZmtkWmRtLTBkM0FmOG9uaDQ4Ykk5RzFwUVVwUldjY1J1S3pNQzlieFJLSTZ4RnFDajhzQVE?oc=5",
+        "title": "Omnicom Allegedly Pivoted A Chunk Of Its Q3 Spend From The Trade Desk To Amazon - AdExchanger",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:33:36 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9929223856905884,
+          "authority": 0.7
+        },
+        "rankScore": 0.15191103118836763,
+        "expectedInfoGain": 0.7578728442127152,
+        "rankingFactors": {
+          "R": 0.9928965757275132,
+          "F": 0.9929223856905884,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.988925677641955
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizwNBVV95cUxQOVdYNFJiQmhGWUR5amlsUEV2YlJ4RVFwLXNWNDFtRU8zRndhcFRYenBUUGhZakZVNkl4aXNyVmVQaVNya3dYY2FVdDJlQkdPX0gyMmZLSXJBZHhOaWJJYWlvRHNzbmFLR25ZcDB4WmJvZVRHUHRiMWE4NDVMeFZvRUFFdThGTm1NemdNVzFwam01OGlpbklvOXN6UEVhMjdRenAyWWJ5NEF3djhoUGNUYWYtODByb1NfRW1DUGJYUDV3NlN4dVkwT0VnU3NXeWw1UHAzaU8xSy1jTlZmOGh1R0hhbmNoY0JVV1ZzNjBBRUtuMUtrSWhFWWVnNFZNOU05RUpCQzVwS2o5YUZUeEx2dTM5dmdHWV9UZ3JwRDRlOXItdnVYUkdvcEEwcGMzWS1Vcl8wMFg1NHIxLXBQZjFKV2ktbnFZMnBua2FXRGlDMDJiSVF2SmMwd1JzU3l1b0xuX3V1LThlOWV5d0k3RVZmX3o2VEtEU0Q5OVR0eWNyU1NSaWpNdjRLQ3hVd1k1eGZWcm1LZGNkNUdncDdCVGs5eE9qVDg4dDNwZF9WYXExM0ZpUTF0SWhCRDUzcWs0a3drMVMtTjRUOWNRQjFEX0dn?oc=5",
+        "title": "As Amazon raises $15 billion in a bond deal, investors worry about companies taking on too much AI debt - MarketWatch",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 12:30:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9808216020114208,
+          "authority": 0.7
+        },
+        "rankScore": 0.15150021143251774,
+        "expectedInfoGain": 0.7542184253215544,
+        "rankingFactors": {
+          "R": 0.9806345667989418,
+          "F": 0.9808216020114208,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.978332493334529
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPTmZzUjBOenY3bnUyQ0dERkcyeWJVa3htcFZpZFhiM0RSaHBmaG5NcUxwVldhTzFnREQ1Z0wzbjZsYTFLQlJoYjV3cmFod2JERXFhdnc5YWYyN1BXRWlCOFpYZC1zdG4tdWRKbE1xaGxwZ1JZY3hQLW11emEwbHR6dGhNUVlWMXhv?oc=5",
+        "title": "Amazon Launched Thousands of Black Friday Deals Early—and We’re Snapping Up These 50 Under $25 ASAP - Real Simple",
+        "publisher": "news.google.com",
+        "publishedDate": "Tue, 18 Nov 2025 05:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9379979303993187,
+          "authority": 0.7
+        },
+        "rankScore": 0.15106895329698009,
+        "expectedInfoGain": 0.7410984767622787,
+        "rankingFactors": {
+          "R": 0.9359919146825397,
+          "F": 0.9379979303993187,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.905696773481871
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilAJBVV95cUxPbUlhM1lvSTlkYXJkQXhhS1BZUktJeno2RkRsT2Y3SFNCYWdHSDFjOTd4bVczTHVYSUpQdE5DNHpJME1vV0pmZ0NVYWx1WVVIajl4ODhGQlozRVNLQ05Ic1lrV0tZZjl6bFNYSkNnRXQ4OWRORi10ZGRpMWhYb3JoQ3poa1NzTDZraDV6N09GZUtuWFE1MjVwRXVITmRMSEtnRUstZDduWVZ1cVVDaGJrR25odGNYRU90QTFabjdBVGdaTll6bXd3OVo5b29BOU9OeG91ekZ4ZlhTWXpCa3FJQ0hRNkNvOVRINW1FWHBVOXBubFNMajVjZFRJNGpyQTBvSV9FYWRPQ3dpTmJ1dXluZUJITm4?oc=5",
+        "title": "Amazon Black Friday 2025 deals: We found the best early sales from Dyson, Apple and more — start the holiday shopping season now - Yahoo",
+        "publisher": "news.google.com",
+        "publishedDate": "Fri, 14 Nov 2025 16:55:24 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5686649279383145,
+          "authority": 0.7
+        },
+        "rankScore": 0.15093741881529213,
+        "expectedInfoGain": 0.6106300397859853,
+        "rankingFactors": {
+          "R": 0.43553533730158733,
+          "F": 0.5686649279383145,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.045584220127923
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxON2VBcGxGaFN4RktvaGVhekNsWC1GNElNR2w4WXZPbzkwUTN5M0xZcV9JbFZvb2ZyWjNJUElNZEdQaWxUUVRxTWIyUUlLU0Y4YWczN2g3ZUNBZ1FUcVV1SExDcEZnakdwWXdGMjhsbU56aHFuVGlwNzdYeGFrZkJTODA3TU9PZEh2R1pzRC1mdFRiVXBkbmR2bU83eC1RZ0l3?oc=5",
+        "title": "Shop Certified Pre-Owned Ford Vehicles Now on Amazon Autos - Ford",
+        "publisher": "news.google.com",
+        "publishedDate": "Mon, 17 Nov 2025 14:00:51 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8579504513038159,
+          "authority": 0.7
+        },
+        "rankScore": 0.14381371481616168,
+        "expectedInfoGain": 0.7157111356519216,
+        "rankingFactors": {
+          "R": 0.846790453042328,
+          "F": 0.8579504513038159,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 4.976654254198366
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMibkFVX3lxTFBnYktMLWtpVkpxUDFFQTA5WU1mQmJTN2RmUUdVYWd2SU9HYVNhMmpoREpEcFZ3VHRrT3JXekVJMHlKOWxZSnRaeXFOdVZ1cUUwOWhhRTNSUUU4ZVY5bkhNQ3hfQy1iNmNhQjhIV3ZR?oc=5",
+        "title": "Amazon extends Haul’s ultra low-price shopping experience to 14 new destinations with new Amazon Bazaar app - About Amazon",
+        "publisher": "news.google.com",
+        "publishedDate": "Fri, 07 Nov 2025 11:56:15 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.20308280503786383,
+          "authority": 0.7
+        },
+        "rankScore": 0.131975458167686,
+        "expectedInfoGain": 0.4904624207556796,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.20308280503786383,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.716315348058921
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNV1BvTXFtMW1yOW5PR08yc3BmZzZfWEgyS3dKWkJmUVhXREJmVkY1SzJJOV9aTE5IUFhYbzBWaXd5R3ZHMHRDZEdwM3NLNmowUmM1UHNDVFBXRGlIUC11a3RVM1NLYVZjcUFpbmljRk91V0YzVllpMXhUckJsekhZMFBTXzlrbDV5MmtqbnRYNXEwUQ?oc=5",
+        "title": "Amazon introduces Kindle Translate, an AI-powered translation service for authors to reach global readers - About Amazon",
+        "publisher": "news.google.com",
+        "publishedDate": "Thu, 06 Nov 2025 17:15:51 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Amazon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.18171926729171362,
+          "authority": 0.7
+        },
+        "rankScore": 0.12894126144003268,
+        "expectedInfoGain": 0.487257890093757,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.18171926729171362,
+          "A": 0.7,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.7789136282055713
+        }
+      }
+    ]
+  }
+}

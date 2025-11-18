@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "totalUnits": 8,
+    "byType": {
+      "quote": 2,
+      "stat": 2,
+      "claim": 4
+    },
+    "byTopic": {
+      "company-news": 8
+    },
+    "dedupeRemoved": 0
+  },
+  "evidenceCount": 8,
+  "units": [
+    {
+      "id": "c74c5119-91d6-4baf-b6b1-59eba30bc0f8",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "If you love hosting but hate the anxiety of shattered...",
+      "context": "Janelle Lam on shatter-proof wine glasses",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5keFBNd3dCYkhzdHluQjBjTmpRMkJ0VVN1UkZXaFkwbVJFaTkyVDlZbmcwdmloX0s2QkJadGJiTjlvR0t6TXJUNkd0dG5RX0JYbmVfNllWLUxWZDJWUWVxY0VqdTU4UjB2czFUcklxbDc3WG9qb1hZTXJaM0FRUdIBVEFVX3lxTE56a0ppaEZpNVpFT01VR3d2Q05lRWlzRUt6RVJQdThvWE0xaDRkQ3JhZVlrX0JtbHJIdU5qU29YQjU0cHFnemI1akVZcXljLUpGQ1ItTg?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 13:35:04 GMT"
+    },
+    {
+      "id": "a8260ee4-343b-493c-8fe5-d42dc0ad3363",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "2,638 Amazon Reviews",
+      "context": "Number of reviews for Govino Unbreakable Stemless Wine Glass",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5keFBNd3dCYkhzdHluQjBjTmpRMkJ0VVN1UkZXaFkwbVJFaTkyVDlZbmcwdmloX0s2QkJadGJiTjlvR0t6TXJUNkd0dG5RX0JYbmVfNllWLUxWZDJWUWVxY0VqdTU4UjB2czFUcklxbDc3WG9qb1hZTXJaM0FRUdIBVEFVX3lxTE56a0ppaEZpNVpFT01VR3d2Q05lRWlzRUt6RVJQdThvWE0xaDRkQ3JhZVlrX0JtbHJIdU5qU29YQjU0cHFnemI1akVZcXljLUpGQ1ItTg?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 13:35:04 GMT"
+    },
+    {
+      "id": "7b1b57df-4c8a-42be-ab7c-05c6657fce2f",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "These battery-operated candles flicker like real flames and come with a remote control",
+      "context": "Description of GenSwin Flameless Tapering Candles",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5keFBNd3dCYkhzdHluQjBjTmpRMkJ0VVN1UkZXaFkwbVJFaTkyVDlZbmcwdmloX0s2QkJadGJiTjlvR0t6TXJUNkd0dG5RX0JYbmVfNllWLUxWZDJWUWVxY0VqdTU4UjB2czFUcklxbDc3WG9qb1hZTXJaM0FRUdIBVEFVX3lxTE56a0ppaEZpNVpFT01VR3d2Q05lRWlzRUt6RVJQdThvWE0xaDRkQ3JhZVlrX0JtbHJIdU5qU29YQjU0cHFnemI1akVZcXljLUpGQ1ItTg?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 13:35:04 GMT"
+    },
+    {
+      "id": "6f35228d-311e-43fb-a9c4-f168aa06f010",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "More than 200 million people pay $139 a year for Amazon Prime.",
+      "context": "Number of Amazon Prime subscribers and subscription cost.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT"
+    },
+    {
+      "id": "ee65cb4c-951b-4b95-9337-9715bd595382",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "You would need to place around 20 orders a year just to break even on shipping alone.",
+      "context": "Claim about the number of orders needed to break even on Amazon Prime shipping costs.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT"
+    },
+    {
+      "id": "bd5db4cb-e77b-46c1-a0ea-e75a4e912e45",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Amazon offers free delivery once your order reaches the minimum amount, usually $35.",
+      "context": "Claim about Amazon's free delivery threshold.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT"
+    },
+    {
+      "id": "e03429a4-c0fa-4302-ba0e-8db5062157b8",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Amazon told me I needed to spend at least $50 to qualify for free shipping without an Amazon Prime subscription.",
+      "context": "Claim about the minimum spending requirement for free shipping without Amazon Prime.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT"
+    },
+    {
+      "id": "4b1ac6e1-b068-45ed-b0df-fb960dbbaea0",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "It is one of the easiest ways to avoid paying...",
+      "context": "Short quote about avoiding shipping costs.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMickFVX3lxTE5UM2I2QmZPMlhROFNzQWl6cnlsZWU5b2lwSXpwZkozV051MXpiNkdFLVpveFV5TF9ldkZOb0dFSFNGaXRNcTAwWlVBaTA2T3E4ZGRsalMwUEZvQmRwN2lpVzQyTFlaYUlOQjdzQWRWeGYzdw?oc=5",
+      "publisher": "news.google.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 04:50:09 GMT"
+    }
+  ]
+}

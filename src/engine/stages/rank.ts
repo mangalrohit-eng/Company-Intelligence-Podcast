@@ -115,6 +115,81 @@ export class RankStage {
   }
 
   /**
+   * Extract actual source from title for Google News articles
+   * Example: "15 Best Amazon Holiday Home Essentials for 2025 - TODAY.com" → "TODAY.com"
+   */
+  private extractSourceFromTitle(title: string): string | null {
+    const lastHyphenIndex = title.lastIndexOf(' - ');
+    if (lastHyphenIndex === -1) {
+      return null;
+    }
+    const source = title.substring(lastHyphenIndex + 3).trim();
+    return source || null;
+  }
+
+  /**
+   * Calculate domain authority for a given domain/publisher
+   */
+  private calculateDomainAuthority(domainOrPublisher: string): number {
+    // Known high-authority domains
+    const highAuthority = ['reuters.com', 'bloomberg.com', 'wsj.com', 'ft.com', 'nytimes.com', 'theguardian.com', 'bbc.com', 'cnn.com', 'ap.org'];
+    // Known medium-authority domains
+    const mediumAuthority = ['cnbc.com', 'forbes.com', 'techcrunch.com', 'theverge.com', 'wired.com', 'time.com', 'usatoday.com', 'today.com'];
+    
+    const normalized = domainOrPublisher.toLowerCase().replace(/^www\./, '');
+    
+    if (highAuthority.some(d => normalized.includes(d))) {
+      return 0.9;
+    }
+    if (mediumAuthority.some(d => normalized.includes(d))) {
+      return 0.7;
+    }
+    // Default authority for unknown sources
+    return 0.5;
+  }
+
+  /**
+   * Get the actual domain/publisher for authority calculation
+   * For Google News articles, extract source from title instead of using Google URL
+   */
+  private getActualSource(item: DiscoveryItem): { domain: string; publisher: string; authority: number } {
+    const urlDomain = new URL(item.url).hostname;
+    const isGoogleNews = urlDomain.includes('google.com') || urlDomain.includes('news.google');
+    
+    if (isGoogleNews && item.title) {
+      // Extract source from title (words after last hyphen)
+      const extractedSource = this.extractSourceFromTitle(item.title);
+      if (extractedSource) {
+        // Use extracted source for authority calculation
+        const authority = this.calculateDomainAuthority(extractedSource);
+        logger.debug('Extracted source from Google News title', {
+          title: item.title,
+          extractedSource,
+          authority,
+        });
+        return {
+          domain: extractedSource,
+          publisher: extractedSource,
+          authority,
+        };
+      }
+    }
+    
+    // For non-Google articles, prefer discovery stage authority if available
+    // Otherwise calculate from publisher/domain
+    const publisher = item.publisher || urlDomain;
+    const authority = item.scores.authority !== undefined && item.scores.authority !== null
+      ? item.scores.authority
+      : this.calculateDomainAuthority(publisher);
+    
+    return {
+      domain: urlDomain,
+      publisher,
+      authority,
+    };
+  }
+
+  /**
    * Compute R, F, A, D, S, C ranking factors per requirements
    */
   private computeRankingFactors(
@@ -138,11 +213,17 @@ export class RankStage {
     const F = item.scores.recency;
 
     // A: Authority - publisher/domain authority
-    const A = item.scores.authority;
+    // For Google News articles, extract actual source from title
+    const actualSource = this.getActualSource(item);
+    const A = actualSource.authority;
 
     // D: Diversity - how unique is this source compared to others
-    const domain = new URL(item.url).hostname;
-    const domainCount = allItems.filter(i => new URL(i.url).hostname === domain).length;
+    // Use actual source domain (not Google URL) for diversity calculation
+    const actualDomain = actualSource.domain;
+    const domainCount = allItems.filter(i => {
+      const otherSource = this.getActualSource(i);
+      return otherSource.domain === actualDomain;
+    }).length;
     const D = Math.max(0.3, 1 - (domainCount / allItems.length) * 2); // Penalize over-represented domains
 
     // S: Specificity - relevance to specific topics/entities

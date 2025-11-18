@@ -667,6 +667,8 @@ function Step2({ formData, setFormData }: any) {
       const { api } = await import('@/lib/api');
       const response = await api.post('/competitors/suggest', { 
         companyName: value 
+      }, {
+        requireAuth: false, // Skip auth for local development
       });
       
       if (response.ok) {

@@ -28,6 +28,14 @@ export class SummarizeStage {
   ): Promise<SummarizeOutput> {
     await emitter.emit('summarize', 0, 'Starting topic summarization with [CHECK] marking');
 
+    logger.info('Summarize stage starting', {
+      topicCount: topicIds.length,
+      topicIds,
+      evidenceByTopicSize: evidenceByTopic.size,
+      evidenceByTopicKeys: Array.from(evidenceByTopic.keys()),
+      totalEvidenceUnits: Array.from(evidenceByTopic.values()).reduce((sum, units) => sum + units.length, 0),
+    });
+
     const summaries: TopicSummary[] = [];
     let totalInferences = 0;
 
@@ -41,38 +49,67 @@ export class SummarizeStage {
       // Select EXACTLY ONE best stat and ONE best quote per requirements
       const stats = evidence.filter((e) => e.type === 'stat');
       const quotes = evidence.filter((e) => e.type === 'quote');
+      const claims = evidence.filter((e) => e.type === 'claim');
 
-      if (stats.length === 0 || quotes.length === 0) {
-        logger.warn('Missing stat or quote for topic', { 
-          topicId, 
-          statsCount: stats.length, 
-          quotesCount: quotes.length 
-        });
-        continue;
-      }
+      logger.info('Evidence breakdown for topic', {
+        topicId,
+        statsCount: stats.length,
+        quotesCount: quotes.length,
+        claimsCount: claims.length,
+        totalEvidence: evidence.length,
+        // Check if evidence has required fields
+        statsWithSpan: stats.filter(s => s.span).length,
+        statsWithAuthority: stats.filter(s => s.authority !== undefined && s.authority !== null).length,
+        quotesWithSpan: quotes.filter(q => q.span).length,
+        quotesWithAuthority: quotes.filter(q => q.authority !== undefined && q.authority !== null).length,
+        // Sample evidence to see structure
+        sampleStat: stats[0] ? { hasSpan: !!stats[0].span, hasAuthority: stats[0].authority !== undefined, authority: stats[0].authority } : null,
+        sampleQuote: quotes[0] ? { hasSpan: !!quotes[0].span, hasAuthority: quotes[0].authority !== undefined, authority: quotes[0].authority } : null,
+      });
 
-      // Pick best stat (highest authority)
-      const stat = stats
-        .filter(s => s.span && s.authority !== undefined) // ✅ Filter out invalid evidence
+      // More lenient: allow using claims as fallback for missing stats/quotes
+      let stat = stats
+        .filter(s => s.span && s.authority !== undefined)
         .sort((a, b) => b.authority - a.authority)[0];
-
-      // Pick best quote (highest authority, prefer shorter)
-      const quote = quotes
-        .filter(q => q.span && q.authority !== undefined) // ✅ Filter out invalid evidence
+      
+      let quote = quotes
+        .filter(q => q.span && q.authority !== undefined)
         .sort((a, b) => {
           const authorityDiff = b.authority - a.authority;
           if (Math.abs(authorityDiff) > 0.1) return authorityDiff;
-          return (a.span?.length || 0) - (b.span?.length || 0); // ✅ Safe length access
+          return (a.span?.length || 0) - (b.span?.length || 0);
         })[0];
-      
-      // Check if we have valid stat and quote after filtering
+
+      // Fallback: use claims if stat or quote is missing
+      if (!stat && claims.length > 0) {
+        logger.info('Using claim as fallback for missing stat', { topicId });
+        stat = claims
+          .filter(c => c.span && c.authority !== undefined)
+          .sort((a, b) => b.authority - a.authority)[0];
+      }
+
+      if (!quote && claims.length > 0) {
+        logger.info('Using claim as fallback for missing quote', { topicId });
+        quote = claims
+          .filter(c => c.span && c.authority !== undefined)
+          .sort((a, b) => {
+            const authorityDiff = b.authority - a.authority;
+            if (Math.abs(authorityDiff) > 0.1) return authorityDiff;
+            return (a.span?.length || 0) - (b.span?.length || 0);
+          })[0];
+      }
+
       if (!stat || !quote) {
-        logger.warn('Missing valid stat or quote for topic after filtering', { 
-          topicId,
-          statsAvailable: stats.length,
-          quotesAvailable: quotes.length,
+        logger.warn('Missing stat or quote for topic (even after fallback)', { 
+          topicId, 
+          statsCount: stats.length, 
+          quotesCount: quotes.length,
+          claimsCount: claims.length,
+          hasStat: !!stat,
+          hasQuote: !!quote,
           validStatsAfterFilter: stats.filter(s => s.span && s.authority !== undefined).length,
           validQuotesAfterFilter: quotes.filter(q => q.span && q.authority !== undefined).length,
+          validClaimsAfterFilter: claims.filter(c => c.span && c.authority !== undefined).length,
         });
         continue;
       }

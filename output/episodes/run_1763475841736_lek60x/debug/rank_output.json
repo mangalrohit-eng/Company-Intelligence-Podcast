@@ -1,0 +1,222 @@
+{
+  "totalRanked": 65,
+  "topicCount": 1,
+  "topicDistribution": [
+    {
+      "topicId": "company-news",
+      "itemCount": 65
+    }
+  ],
+  "topItems": [
+    {
+      "rank": 1,
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPdHdzeTA2Y1RWYmlwbU9NLWRVbVJjbVd1dHFTOHl0dHBzQnFlX244R292Yk5tLXAtMlBVYU42ZXdQaWYxZzJjODNlZVJnM295OW52QXE4OVlxNUZDV2xSRFpBSi1LQzFyTFo4ZEJlMnNjbG9ucmdhb2FoOGo4VWduR2dBLV8tNTFNTm5jZXo3R3VfUzc3bXc?oc=5",
+      "title": "Exclusive: Amazon Facility Lands $54M North of Chicago - CommercialSearch",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9854633067199796,
+        "authority": 0.7
+      },
+      "rankScore": 0.3749885188769324,
+      "expectedInfoGain": 0.7556228072679175,
+      "rankingFactors": {
+        "R": 0.9853554083994709,
+        "F": 0.9854633067199796,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.0150558463255392
+      }
+    },
+    {
+      "rank": 2,
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxNOWRfSVRHdllVa3k1OXdnQUM3aUFLVzBPZDJrc2FFYXZCMU5fcVh3bFV4VTBNZGJZc3BvczRmZms1MEhKVmRxZVBWNzk0OWdhMVk4TFRjRWhHOF96MnNBT19NNkJ2VG1qM3g0aWY2Q241dzVJWWcwbGN0SlZDS3I1S2ZGNENZWVh6aDFZ?oc=5",
+      "title": "My Worn-out Sweats Don’t Stand a Chance Against These 13 Effortlessly Chic Lounge Sets From Amazon—From $20 - Travel + Leisure",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9799210658409588,
+        "authority": 0.7
+      },
+      "rankScore": 0.36115698825142706,
+      "expectedInfoGain": 0.7539455152828899,
+      "rankingFactors": {
+        "R": 0.9797157027116402,
+        "F": 0.9799210658409588,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.0875839034243326
+      }
+    },
+    {
+      "rank": 3,
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOMWNiUlRUSHU2Z2lScU9iQmg0TkM4Yzc4SHR6eGRSdzhXZWxtT0xmbF9pWnItNEZUOHl0bWxINVVCOGNFYlBTVXlnWC15cWtnLUlMWlhlVHBtNnhSWlVzMWVZUllmY3AyR1FOZVREeXhGbktQQzlPWmQwZkNCVGs0Wm1n?oc=5",
+      "title": "X, Amazon Web Services down amid Cloudflare system issues - Straight Arrow News",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9954036166839884,
+        "authority": 0.7
+      },
+      "rankScore": 0.3603509741843022,
+      "expectedInfoGain": 0.758619357234741,
+      "rankingFactors": {
+        "R": 0.9953920982142858,
+        "F": 0.9954036166839884,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.1052235503233128
+      }
+    },
+    {
+      "rank": 4,
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNZlZua3JvOUw0c09KRTdOMy1taEtoU1NqMkZMRFkxZEtpQzBRYy0zUGRCNDlmbzVJUmlWdGVtbkZ4aENySHlJd212Uk9adWJXdlA1OV9ub1RMemtBNGR1NHpmSnBSU1VRZHdYY08xNzV1NmVDQ3MzekRuX0hUNllobi1JcmFpZXJ4cUs0WVE0X0dUSVJwUXMwcA?oc=5",
+      "title": "Amazon Just Issued a Massive Warning to the Quantum Computing Industry - The Motley Fool",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8494719351408717,
+        "authority": 0.7
+      },
+      "rankScore": 0.34747787054358736,
+      "expectedInfoGain": 0.7129496005389879,
+      "rankingFactors": {
+        "R": 0.8368587351190476,
+        "F": 0.8494719351408717,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.0517841882237393
+      }
+    },
+    {
+      "rank": 5,
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1vWDhpaV9OQTBPN0t3ZE1FVXZITVFrV0JCZldhd1M0U1ZpbnJCcVZWU0Y2QTZIQ1hDM0hVaEhJUEY5cmpJU1pCTzA1SEY0MjhCbnRkbnJMcjhQSkFxLVFIQ010blhRaW9qeWNjNUJra29MNUR6eUNmVHNHRQ?oc=5",
+      "title": "Amazon Is Selling a ‘Durable’ 20-Piece Grill Tool Set for $41, and It’s the ‘Perfect Gift’ - parade.com",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9742021699207152,
+        "authority": 0.7
+      },
+      "rankScore": 0.341749862722345,
+      "expectedInfoGain": 0.7522097071845358,
+      "rankingFactors": {
+        "R": 0.9738625446428572,
+        "F": 0.9742021699207152,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.201053428939251
+      }
+    },
+    {
+      "rank": 6,
+      "url": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOQ0ZnUVp2emJIV3dLczlrdTU0R0hpaFlBWjVxTDlXMnl4bGd1ZmZ0LXYya05PWTBrSU15T2hpZ2hxUElwRG5JZGswY3hRVjFDVjV6SDBxeDFZTmMxYVFTRnFCMjFvRldsMVJjNWVFMkZERURNV3FMWXBBMGhuOFVCdk5hd3d0X2Fqd3ZYdWRjd2dkUQ?oc=5",
+      "title": "Microsoft and Amazon Are Downgraded as Redburn Breaks Ranks With Peers - Yahoo Finance",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9917663784513534,
+        "authority": 0.7
+      },
+      "rankScore": 0.33254961597389715,
+      "expectedInfoGain": 0.7575246539403221,
+      "rankingFactors": {
+        "R": 0.991731314484127,
+        "F": 0.9917663784513534,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.2779297210187806
+      }
+    },
+    {
+      "rank": 7,
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQRGRMQlB0c0JiWnV5YkNzQWR3bExScDRrMmpZN2xmbVBuMTc1U0RETWpEZktKVVdTbElpcjljU2lfV1AxRXVXMnRCR3lsZVdveHF6bHIzNDA0Y0pNZGY1bWxjYmYxQXduVWJmenM1Zi1BMjZvQVUzTjV5c01pX2VWS21XdG1DX1N2?oc=5",
+      "title": "The Best Black Friday Fishing Deals from Amazon - Wired2Fish",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.997608160981903,
+        "authority": 0.7
+      },
+      "rankScore": 0.3224822323734906,
+      "expectedInfoGain": 0.7592818454270474,
+      "rankingFactors": {
+        "R": 0.9976041418650794,
+        "F": 0.997608160981903,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.3544920284093873
+      }
+    },
+    {
+      "rank": 8,
+      "url": "https://news.google.com/rss/articles/CBMiYkFVX3lxTE9neXNESmRhZE8wM2hWYlV0RnJxLXA5SkRBdUVtYUsyWGt3X3Raem9yTUtkXy1HSVFSNXg0NEd6TXhWSW94d0RXdnBvdUlqMi1tbFZqTzRHb0xnNGZ4T0g3eUF3?oc=5",
+      "title": "Amazon’s Next Ad War - ADWEEK",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9799210771826379,
+        "authority": 0.7
+      },
+      "rankScore": 0.3198982910213914,
+      "expectedInfoGain": 0.7539455293849353,
+      "rankingFactors": {
+        "R": 0.9797157853835979,
+        "F": 0.9799210771826379,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.3568288751330635
+      }
+    },
+    {
+      "rank": 9,
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNNkJaYlpxQUdFRXFzX1J1Z3JqQ0RtUnM4Z0FLR3hQeklIVG5yTTF4cGo4M2pIQ0xDQXpYOW45bUt6ckM3cWlwZU9nOGtTTno5SXcyV3FEQW9pb1dCX3l2OEhOTy10YWUtYThoZE5ydGJZbFVpQVlmQ2QtSFJsYTNhcjlldWtxQ1UtdjBELW16c2pnYkhXZWN5SVpBUXdUMWtf0gGmAUFVX3lxTE5uYjRMRTNEQWY4bG9QQThoTVE0LWZza0YxR01scVowaC10Z3BmSGJGaXM5ZEtOYldDWGt0S2ZMbXJBNHh0VEVhV09ZUmtTeXdpUjk0RzZYQjNzbHEyb0dxZnRmUmVKSzM2T1JXN2ZJMDNaMUlIaldlX3lZNDFaLWw3eHIyYUNCS01HU2g3bTdRVVFzUk8zclJTcG42amQ1aU1JWEh1aFE?oc=5",
+      "title": "EU probes Amazon, Microsoft's cloud services for potential curbs - CNBC",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9799291638332273,
+        "authority": 0.7
+      },
+      "rankScore": 0.310014737403408,
+      "expectedInfoGain": 0.7539479621245873,
+      "rankingFactors": {
+        "R": 0.9797239169973545,
+        "F": 0.9799291638332273,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.4319745843034206
+      }
+    },
+    {
+      "rank": 10,
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPWldETUNjYUpXWkUybmtSOUxzVXRaLVpvWmktOFUtV0h0ZzdGckVWVXVqZTJlckpWdTBNOXpINWRaNUpkMzVpUFM1a3ZxWnBfcmlUeU1IXzVxZTI0bVlzRGJNaV9aNkpaUW1fODlVTnJDV0EtekQydGl1QkpXaWUxRWg0UnlLVmNsb3pfa1ZWYTd3emRiSXdpcG51MTcwVzBLS0k4?oc=5",
+      "title": "Here are Tuesday's biggest analyst calls: Nvidia, Amazon, Meta, Microsoft, Deckers, Netflix &amp; more - CNBC",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9941026120348606,
+        "authority": 0.7
+      },
+      "rankScore": 0.306611178675505,
+      "expectedInfoGain": 0.7582280408627687,
+      "rankingFactors": {
+        "R": 0.9940843270502645,
+        "F": 0.9941026120348606,
+        "A": 0.7,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 2.4729301917110535
+      }
+    }
+  ]
+}

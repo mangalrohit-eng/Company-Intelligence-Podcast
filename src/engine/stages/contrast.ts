@@ -29,6 +29,22 @@ export class ContrastStage {
   ): Promise<ContrastOutput> {
     await emitter.emit('contrast', 0, 'Generating competitor contrasts');
 
+    // Early return if no competitors - cannot generate contrasts
+    if (!competitors || competitors.length === 0) {
+      logger.info('Skipping contrast generation - no competitors provided', {
+        companyName,
+        topicCount: topicIds.length,
+      });
+      await emitter.emit('contrast', 100, 'Skipped: No competitors to contrast');
+      return {
+        contrasts: [],
+        stats: {
+          totalContrasts: 0,
+          byTopic: {},
+        },
+      };
+    }
+
     const contrasts: CompetitorContrast[] = [];
     const byTopic: Record<string, number> = {};
 

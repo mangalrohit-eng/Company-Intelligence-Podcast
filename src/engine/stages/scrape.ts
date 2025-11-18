@@ -105,6 +105,13 @@ export class ScrapeStage {
 
     let stopReason: 'targets_met' | 'time_cap' | 'fetch_cap' | 'queue_exhausted' = 'queue_exhausted';
 
+    logger.info('Starting scrape loop', {
+      totalItems: rankedItems.length,
+      topicCount: Object.keys(perTopicProgress).length,
+      timeCapMs,
+      fetchCap,
+    });
+
     for (let i = 0; i < rankedItems.length; i++) {
       const item = rankedItems[i];
 
@@ -122,11 +129,20 @@ export class ScrapeStage {
       }
 
       // Check if all topics met targets with sufficient breadth/confidence
-      if (this.allTopicsMetTargets(perTopicProgress)) {
-        stopReason = 'targets_met';
-        logger.info('Scrape stopping: all topic targets met');
-        break;
+      // Only check after we've processed at least one item (to avoid false positives)
+      if (i > 0 || stats.successCount > 0 || stats.failureCount > 0) {
+        const allTargetsMet = this.allTopicsMetTargets(perTopicProgress);
+        if (allTargetsMet) {
+          stopReason = 'targets_met';
+          logger.info('Scrape stopping: all topic targets met', {
+            progress: perTopicProgress,
+            itemsProcessed: i + 1,
+          });
+          break;
+        }
       }
+
+      logger.debug(`Processing item ${i + 1}/${rankedItems.length}`, { url: item.url });
 
       const pct = Math.round(((i + 1) / rankedItems.length) * 100);
       await emitter.emit('scrape', pct, `Scraping ${i + 1}/${rankedItems.length}`);
@@ -267,6 +283,13 @@ export class ScrapeStage {
   }>): boolean {
     const MIN_BREADTH = 3; // At least 3 unique sources
     const MIN_CONFIDENCE = 0.6; // At least 60% confidence
+
+    // If no topics, don't stop (return false to continue scraping)
+    const topicCount = Object.keys(progress).length;
+    if (topicCount === 0) {
+      logger.debug('No topics to check - continuing scrape');
+      return false;
+    }
 
     for (const topicProgress of Object.values(progress)) {
       if (topicProgress.fetched < topicProgress.target ||
