@@ -336,13 +336,13 @@ export class PipelineOrchestrator {
             url: item.url,
             title: item.title,
             blocked: item.blocked,
-            reason: item.reason,
+            blockReason: item.blockReason,
           })),
           sampleBlockedItems: disambiguateOutput.items.filter(i => i.blocked).slice(0, 5).map(item => ({
             url: item.url,
             title: item.title,
             blocked: item.blocked,
-            reason: item.reason,
+            blockReason: item.blockReason,
           })),
         };
         await fs.writeFile(
@@ -400,7 +400,9 @@ export class PipelineOrchestrator {
             title: item.title,
             publisher: item.publisher,
             scores: item.scores,
-            finalScore: item.scores?.finalScore,
+            rankScore: item.rankScore,
+            expectedInfoGain: item.expectedInfoGain,
+            rankingFactors: item.rankingFactors,
           })),
         };
         await fs.writeFile(
@@ -535,41 +537,111 @@ export class PipelineOrchestrator {
       // Stage 7: Summarize
       let summarizeOutput;
       if (input.flags.enable.summarize && extractOutput) {
+        const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+        
+        // Save debug input
+        const summarizeInput = {
+          topicCount: topicIds.length,
+          topicIds: topicIds,
+          evidenceCount: extractOutput.units.length,
+          evidenceByTopic: Array.from(evidenceByTopic.entries()).map(([topicId, units]) => ({
+            topicId,
+            unitCount: units.length,
+            sampleUnits: units.slice(0, 3).map(u => ({
+              id: u.id,
+              type: u.type,
+              span: u.span?.substring(0, 100),
+            })),
+          })),
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'summarize_input.json'),
+          JSON.stringify(summarizeInput, null, 2)
+        );
+        
         summarizeOutput = await executeStageWithErrorHandling(
           'summarize',
           async () => {
             const stage = new SummarizeStage(llmGateway);
-            const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
             return await stage.execute(topicIds, evidenceByTopic, emitter);
           },
           (error) => {
             logger.error('Summarize stage failed - likely OpenAI API issue', {
               error: error.message,
-              topicCount: input.config.topics.standard.length + input.config.topics.special.length,
+              topicCount: topicIds.length,
               evidenceCount: extractOutput?.units.length,
             });
           }
         );
+        
+        // Save debug output if successful
+        if (summarizeOutput) {
+          const summarizeOutputSummary = {
+            summaryCount: summarizeOutput.summaries.length,
+            summaries: summarizeOutput.summaries.map(s => ({
+              topicId: s.topicId,
+              summary: s.summary.substring(0, 200),
+              stat: s.stat?.substring(0, 100),
+              quote: s.quote?.substring(0, 100),
+            })),
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'summarize_output.json'),
+            JSON.stringify(summarizeOutputSummary, null, 2)
+          );
+          logger.info('Saved summarize debug output', { summaryCount: summarizeOutput.summaries.length });
+        }
       }
 
       // Stage 8: Competitor Contrasts
       let contrastOutput;
       if (input.flags.enable.contrast && extractOutput && summarizeOutput) {
+        const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
+        const competitors = input.config.competitors?.map(c => c.name) || [];
+        
+        // Save debug input
+        const contrastInput = {
+          topicCount: topicIds.length,
+          topicIds: topicIds,
+          companyName: input.config.company.name,
+          competitorCount: competitors.length,
+          competitors: competitors,
+          evidenceCount: extractOutput.units.length,
+        };
+        await fs.writeFile(
+          path.join(debugDir, 'contrast_input.json'),
+          JSON.stringify(contrastInput, null, 2)
+        );
+        
         contrastOutput = await executeStageWithErrorHandling(
           'contrast',
           async () => {
             const stage = new ContrastStage(llmGateway);
-            const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
-            const competitors = input.config.competitors?.map(c => c.name) || [];
             return await stage.execute(topicIds, evidenceByTopic, input.config.company.name, competitors, emitter);
           },
           (error) => {
             logger.error('Contrast stage failed', {
               error: error.message,
-              competitorCount: input.config.competitors?.length || 0,
+              competitorCount: competitors.length,
             });
           }
         );
+        
+        // Save debug output if successful
+        if (contrastOutput) {
+          const contrastOutputSummary = {
+            contrastCount: contrastOutput.contrasts.length,
+            contrasts: contrastOutput.contrasts.map(c => ({
+              topicId: c.topicId,
+              comparison: c.comparison.substring(0, 200),
+            })),
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'contrast_output.json'),
+            JSON.stringify(contrastOutputSummary, null, 2)
+          );
+          logger.info('Saved contrast debug output', { contrastCount: contrastOutput.contrasts.length });
+        }
       }
 
       // Stage 9: Outline
