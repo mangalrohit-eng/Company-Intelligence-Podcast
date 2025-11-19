@@ -6,7 +6,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { AdminSettings, PipelineSettings, DiscoverySettings, ModelSettings, RankingWeights, calculateArticlesNeeded } from '@/types/admin-settings';
-import { AlertCircle, CheckCircle2, Settings, Save, RotateCcw } from 'lucide-react';
+import { AlertCircle, CheckCircle2, Settings, Save, RotateCcw, StopCircle, Trash2 } from 'lucide-react';
 import { RssFeedManager } from './RssFeedManager';
 
 export default function AdminSettingsPage() {
@@ -17,6 +17,8 @@ export default function AdminSettingsPage() {
   const [localRanking, setLocalRanking] = useState<RankingWeights | null>(null);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [stopping, setStopping] = useState(false);
+  const [deleting, setDeleting] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
 
   // Example podcast durations for preview
@@ -653,6 +655,34 @@ export default function AdminSettingsPage() {
             setLocalDiscovery({ ...localDiscovery, rssFeeds: updatedFeeds });
           }}
         />
+
+        {/* Run Management Section */}
+        <div className="mt-6 sm:mt-8 bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Run Management</h3>
+          <p className="text-sm text-gray-600 mb-4">
+            Manage active and failed pipeline runs across all podcasts
+          </p>
+          <div className="flex flex-col sm:flex-row gap-3">
+            <Button
+              onClick={handleStopAllRuns}
+              disabled={stopping}
+              variant="destructive"
+              className="bg-red-600 hover:bg-red-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed"
+            >
+              <StopCircle className="w-4 h-4 mr-2" />
+              {stopping ? 'Stopping...' : 'Stop All Active Runs'}
+            </Button>
+            <Button
+              onClick={handleDeleteFailedRuns}
+              disabled={deleting}
+              variant="outline"
+              className="border-red-300 text-red-700 hover:bg-red-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              <Trash2 className="w-4 h-4 mr-2" />
+              {deleting ? 'Deleting...' : 'Delete All Failed Runs'}
+            </Button>
+          </div>
+        </div>
 
         {/* Action Buttons */}
         <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
