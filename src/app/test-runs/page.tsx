@@ -1,8 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import { useToastContext } from '@/contexts/ToastContext';
 
 export default function TestRunsPage() {
+  const toast = useToastContext();
   const [result, setResult] = useState<string>('');
   const [runs, setRuns] = useState<any[]>([]);
 
@@ -12,9 +14,10 @@ export default function TestRunsPage() {
       const response = await api.post('/podcasts/test-podcast-123/runs');
       const data = await response.json();
       setResult(JSON.stringify(data, null, 2));
-      alert('Run created! Check console and refresh to see it in the list.');
+      toast.success('Run Created', 'Check console and refresh to see it in the list');
     } catch (error) {
       setResult(`Error: ${error}`);
+      toast.error('Failed to Create Run', String(error));
     }
   };
 

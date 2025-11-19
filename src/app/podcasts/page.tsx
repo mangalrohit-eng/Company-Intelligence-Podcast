@@ -13,6 +13,8 @@ import { Badge } from '@/components/ui/badge';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
+import { useToastContext } from '@/contexts/ToastContext';
+import { confirmDialog } from '@/components/ui/confirm-dialog';
 
 interface Podcast {
   id: string;
@@ -323,27 +325,37 @@ const getCadenceDisplay = (cadence: string) => {
 
 function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
   const [showMenu, setShowMenu] = useState(false);
+  const toast = useToastContext();
 
   const handleRunNow = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
+    const confirmed = await confirmDialog({
+      title: 'Start Pipeline Run',
+      message: `Start a new pipeline run for "${podcast.title}"?`,
+      confirmText: 'Start Run',
+      cancelText: 'Cancel',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.post(`/podcasts/${podcast.id}/runs`);
 
         if (response.ok) {
           const data = await response.json();
-          alert(`✅ Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress view...`);
-          window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+          toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting to progress view...`);
+          setTimeout(() => {
+            window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+          }, 1000);
         } else {
           const error = await response.text();
-          alert(`❌ Failed to start pipeline:\n\n${error}`);
+          toast.error('Failed to Start Pipeline', error);
         }
       } catch (error) {
         console.error('Error starting pipeline:', error);
-        alert(`❌ Error starting pipeline:\n\n${error instanceof Error ? error.message : 'Network error'}`);
+        toast.error('Error Starting Pipeline', error instanceof Error ? error.message : 'Network error');
       }
     }
   };
@@ -354,7 +366,14 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     setShowMenu(false);
     
     const action = podcast.status === 'active' ? 'pause' : 'resume';
-    if (confirm(`${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`)) {
+    const confirmed = await confirmDialog({
+      title: action === 'pause' ? 'Pause Podcast' : 'Resume Podcast',
+      message: `${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`,
+      confirmText: action === 'pause' ? 'Pause' : 'Resume',
+      cancelText: 'Cancel',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.patch(`/podcasts/${podcast.id}`, {
@@ -362,14 +381,14 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
         });
 
         if (response.ok) {
-          alert(`✅ Podcast ${action}d successfully!`);
+          toast.success('Podcast Updated', `Podcast ${action}d successfully!`);
           onUpdate();
         } else {
-          alert(`❌ Failed to ${action} podcast`);
+          toast.error('Failed to Update Podcast', `Failed to ${action} podcast`);
         }
       } catch (error) {
         console.error(`Error ${action}ing podcast:`, error);
-        alert(`❌ Error ${action}ing podcast`);
+        toast.error('Error Updating Podcast', `Error ${action}ing podcast`);
       }
     }
   };
@@ -379,21 +398,30 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     e.stopPropagation();
     setShowMenu(false);
     
-    if (confirm(`Clone "${podcast.title}"?`)) {
+    const confirmed = await confirmDialog({
+      title: 'Clone Podcast',
+      message: `Clone "${podcast.title}"?`,
+      confirmText: 'Clone',
+      cancelText: 'Cancel',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.post(`/podcasts/${podcast.id}/clone`);
 
         if (response.ok) {
           const data = await response.json();
-          alert(`✅ Podcast cloned successfully!\n\nRedirecting to edit...`);
-          window.location.href = `/podcasts/${data.id}/edit`;
+          toast.success('Podcast Cloned', 'Redirecting to edit...');
+          setTimeout(() => {
+            window.location.href = `/podcasts/${data.id}/edit`;
+          }, 1000);
         } else {
-          alert(`❌ Failed to clone podcast`);
+          toast.error('Failed to Clone Podcast', 'Please try again');
         }
       } catch (error) {
         console.error('Error cloning podcast:', error);
-        alert(`❌ Error cloning podcast`);
+        toast.error('Error Cloning Podcast', 'Please try again');
       }
     }
   };
@@ -403,7 +431,15 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     e.stopPropagation();
     setShowMenu(false);
     
-    if (confirm(`Archive "${podcast.title}"? It will be hidden but can be restored later.`)) {
+    const confirmed = await confirmDialog({
+      title: 'Archive Podcast',
+      message: `Archive "${podcast.title}"? It will be hidden but can be restored later.`,
+      confirmText: 'Archive',
+      cancelText: 'Cancel',
+      variant: 'default',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.patch(`/podcasts/${podcast.id}`, {
@@ -411,14 +447,14 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
         });
 
         if (response.ok) {
-          alert(`✅ Podcast archived successfully!`);
+          toast.success('Podcast Archived', 'The podcast has been archived successfully');
           onUpdate();
         } else {
-          alert(`❌ Failed to archive podcast`);
+          toast.error('Failed to Archive', 'Please try again');
         }
       } catch (error) {
         console.error('Error archiving podcast:', error);
-        alert(`❌ Error archiving podcast`);
+        toast.error('Error Archiving Podcast', 'Please try again');
       }
     }
   };
@@ -523,7 +559,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
                     e.stopPropagation();
                     setShowMenu(false);
                     navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
-                    alert('RSS URL copied to clipboard!');
+                    toast.success('RSS URL Copied', 'The RSS feed URL has been copied to your clipboard');
                   }}
                   className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
                 >
@@ -561,30 +597,47 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
 
 function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
   const [showMenu, setShowMenu] = useState(false);
+  const toast = useToastContext();
 
   const handleRunNow = async () => {
-    if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
+    const confirmed = await confirmDialog({
+      title: 'Start Pipeline Run',
+      message: `Start a new pipeline run for "${podcast.title}"?`,
+      confirmText: 'Start Run',
+      cancelText: 'Cancel',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.post(`/podcasts/${podcast.id}/runs`);
 
         if (response.ok) {
           const data = await response.json();
-          alert(`✅ Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress view...`);
-          window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+          toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting to progress view...`);
+          setTimeout(() => {
+            window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+          }, 1000);
         } else {
-          alert(`❌ Failed to start pipeline`);
+          toast.error('Failed to Start Pipeline', 'Please try again');
         }
       } catch (error) {
         console.error('Error starting pipeline:', error);
-        alert(`❌ Error starting pipeline`);
+        toast.error('Error Starting Pipeline', 'Please try again');
       }
     }
   };
 
   const handlePauseResume = async () => {
     const action = podcast.status === 'active' ? 'pause' : 'resume';
-    if (confirm(`${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`)) {
+    const confirmed = await confirmDialog({
+      title: action === 'pause' ? 'Pause Podcast' : 'Resume Podcast',
+      message: `${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`,
+      confirmText: action === 'pause' ? 'Pause' : 'Resume',
+      cancelText: 'Cancel',
+    });
+
+    if (confirmed) {
       try {
         const { api } = await import('@/lib/api');
         const response = await api.patch(`/podcasts/${podcast.id}`, {
@@ -592,13 +645,13 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
         });
 
         if (response.ok) {
-          alert(`✅ Podcast ${action}d successfully!`);
+          toast.success('Podcast Updated', `Podcast ${action}d successfully!`);
           onUpdate();
         } else {
-          alert(`❌ Failed to ${action} podcast`);
+          toast.error('Failed to Update Podcast', `Failed to ${action} podcast`);
         }
       } catch (error) {
-        alert(`❌ Error ${action}ing podcast`);
+        toast.error('Error Updating Podcast', `Error ${action}ing podcast`);
       }
     }
   };
@@ -709,7 +762,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
                       onClick={() => {
                         setShowMenu(false);
                         navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
-                        alert('RSS URL copied to clipboard!');
+                        toast.success('RSS URL Copied', 'The RSS feed URL has been copied to your clipboard');
                       }}
                       className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
                     >

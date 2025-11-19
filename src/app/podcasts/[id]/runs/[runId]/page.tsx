@@ -6,6 +6,8 @@ import { ArrowLeft, CheckCircle2, Circle, Loader2, XCircle, Download, Play, Rota
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
+import { confirmDialog } from '@/components/ui/confirm-dialog';
 
 interface RunData {
   id: string;
@@ -31,6 +33,7 @@ export default function RunProgressPage() {
   const router = useRouter();
   const podcastId = params.id as string;
   const runId = params.runId as string;
+  const toast = useToastContext();
 
   const [run, setRun] = useState<RunData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -214,7 +217,14 @@ export default function RunProgressPage() {
   }, [run, runId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleResume = async (stageId: string) => {
-    if (!confirm(`Resume pipeline from ${stageId} stage? This will re-execute the stage using saved inputs.`)) {
+    const confirmed = await confirmDialog({
+      title: 'Resume Pipeline',
+      message: `Resume pipeline from ${stageId} stage? This will re-execute the stage using saved inputs.`,
+      confirmText: 'Resume',
+      cancelText: 'Cancel',
+    });
+
+    if (!confirmed) {
       return;
     }
 
@@ -226,6 +236,7 @@ export default function RunProgressPage() {
       });
 
       if (response.ok) {
+        toast.success('Pipeline Resumed', `Resuming from ${stageId} stage...`);
         // Refresh run data
         await fetchRun();
         // Start polling again
@@ -235,18 +246,26 @@ export default function RunProgressPage() {
         setTimeout(() => clearInterval(interval), 60000); // Poll for 1 minute
       } else {
         const error = await response.json();
-        alert(`Failed to resume: ${error.error || error.details || 'Unknown error'}`);
+        toast.error('Failed to Resume', error.error || error.details || 'Unknown error');
       }
     } catch (error: any) {
       console.error('Error resuming pipeline:', error);
-      alert(`Failed to resume pipeline: ${error.message}`);
+      toast.error('Failed to Resume Pipeline', error.message);
     } finally {
       setResumingStage(null);
     }
   };
 
   const handleStop = async () => {
-    if (!confirm('Are you sure you want to stop this pipeline execution? This action cannot be undone.')) {
+    const confirmed = await confirmDialog({
+      title: 'Stop Pipeline',
+      message: 'Are you sure you want to stop this pipeline execution? This action cannot be undone.',
+      confirmText: 'Stop',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+    });
+
+    if (!confirmed) {
       return;
     }
 
@@ -257,17 +276,18 @@ export default function RunProgressPage() {
 
       if (response.ok) {
         const data = await response.json();
+        toast.success('Pipeline Stopped', 'The pipeline execution has been stopped');
         // Immediately refresh run data to see the updated status
         await fetchRun();
         // Force a re-render by updating state
         setRun((prev) => prev ? { ...prev, status: 'failed' } : null);
       } else {
         const error = await response.json();
-        alert(`Failed to stop pipeline: ${error.error || error.details || 'Unknown error'}`);
+        toast.error('Failed to Stop Pipeline', error.error || error.details || 'Unknown error');
       }
     } catch (error: any) {
       console.error('Error stopping pipeline:', error);
-      alert(`Failed to stop pipeline: ${error.message}`);
+      toast.error('Failed to Stop Pipeline', error.message);
     } finally {
       setStopping(false);
     }

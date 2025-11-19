@@ -1,12 +1,29 @@
 /**
  * Persistent storage for runs
- * Saves all runs (successful and failed) to disk
+ * Uses DynamoDB for production (Vercel), falls back to local file for development
  */
 
+import 'dotenv/config';
 import { promises as fs } from 'fs';
 import { join } from 'path';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 
 const RUNS_DB_FILE = join(process.cwd(), 'data', 'runs.json');
+const RUNS_TABLE = 'runs';
+
+// Initialize DynamoDB client
+const getDynamoClient = () => {
+  try {
+    const client = new DynamoDBClient({
+      region: process.env.AWS_REGION || 'us-east-1',
+    });
+    return DynamoDBDocumentClient.from(client);
+  } catch (error) {
+    console.warn('Failed to initialize DynamoDB client:', error);
+    return null;
+  }
+};
 
 export interface PersistedRun {
   id: string;
@@ -31,23 +48,22 @@ async function ensureDataDir() {
 }
 
 /**
- * Load all runs from disk
+ * Load all runs from disk (local dev fallback)
  */
-export async function loadRuns(): Promise<Record<string, PersistedRun[]>> {
+async function loadRunsFromDisk(): Promise<Record<string, PersistedRun[]>> {
   try {
     await ensureDataDir();
     const data = await fs.readFile(RUNS_DB_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    // File doesn't exist or is invalid, return empty object
     return {};
   }
 }
 
 /**
- * Save all runs to disk
+ * Save all runs to disk (local dev fallback)
  */
-export async function saveRuns(runs: Record<string, PersistedRun[]>): Promise<void> {
+async function saveRunsToDisk(runs: Record<string, PersistedRun[]>): Promise<void> {
   try {
     await ensureDataDir();
     await fs.writeFile(RUNS_DB_FILE, JSON.stringify(runs, null, 2));
@@ -57,16 +73,59 @@ export async function saveRuns(runs: Record<string, PersistedRun[]>): Promise<vo
 }
 
 /**
- * Save a single run (upsert)
+ * Save a single run to DynamoDB (or disk fallback)
  */
 export async function saveRun(run: PersistedRun): Promise<void> {
-  const allRuns = await loadRuns();
+  const docClient = getDynamoClient();
+  
+  if (docClient && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+    // Use DynamoDB (production/Vercel)
+    try {
+      const now = new Date().toISOString();
+      // Map our status ('completed') to DynamoDB status ('success')
+      const dynamoStatus = run.status === 'completed' ? 'success' : run.status;
+      await docClient.send(
+        new PutCommand({
+          TableName: RUNS_TABLE,
+          Item: {
+            id: run.id,
+            podcastId: run.podcastId,
+            status: dynamoStatus,
+            createdAt: run.createdAt,
+            startedAt: run.startedAt || now,
+            finishedAt: run.completedAt, // DynamoDB uses 'finishedAt', we use 'completedAt'
+            completedAt: run.completedAt, // Keep both for compatibility
+            duration: run.duration,
+            errorMessage: run.error, // DynamoDB uses 'errorMessage', we use 'error'
+            error: run.error, // Keep both for compatibility
+            progress: run.progress,
+            output: run.output,
+            updatedAt: now,
+          },
+        })
+      );
+      console.log(`✅ Saved run ${run.id} to DynamoDB`);
+    } catch (error: any) {
+      console.error(`❌ Failed to save run to DynamoDB:`, error);
+      // Fallback to disk
+      await saveRunToDisk(run);
+    }
+  } else {
+    // Fallback to disk (local dev)
+    await saveRunToDisk(run);
+  }
+}
+
+/**
+ * Save run to disk (fallback)
+ */
+async function saveRunToDisk(run: PersistedRun): Promise<void> {
+  const allRuns = await loadRunsFromDisk();
   
   if (!allRuns[run.podcastId]) {
     allRuns[run.podcastId] = [];
   }
   
-  // Find existing run and update, or add new
   const existingIndex = allRuns[run.podcastId].findIndex(r => r.id === run.id);
   if (existingIndex >= 0) {
     allRuns[run.podcastId][existingIndex] = run;
@@ -74,35 +133,100 @@ export async function saveRun(run: PersistedRun): Promise<void> {
     allRuns[run.podcastId].push(run);
   }
   
-  await saveRuns(allRuns);
+  await saveRunsToDisk(allRuns);
 }
 
 /**
- * Get runs for a specific podcast
+ * Get runs for a specific podcast from DynamoDB (or disk fallback)
  */
 export async function getRunsForPodcast(podcastId: string): Promise<PersistedRun[]> {
-  const allRuns = await loadRuns();
-  return allRuns[podcastId] || [];
+  const docClient = getDynamoClient();
+  
+  if (docClient && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+    // Use DynamoDB (production/Vercel)
+    try {
+      let allRuns: any[] = [];
+      let lastEvaluatedKey: any = undefined;
+      
+      // Handle pagination for DynamoDB Query
+      do {
+        const response = await docClient.send(
+          new QueryCommand({
+            TableName: RUNS_TABLE,
+            IndexName: 'PodcastIdIndex',
+            KeyConditionExpression: 'podcastId = :podcastId',
+            ExpressionAttributeValues: {
+              ':podcastId': podcastId,
+            },
+            ScanIndexForward: false, // Sort descending (newest first)
+            ExclusiveStartKey: lastEvaluatedKey,
+          })
+        );
+        
+        if (response.Items) {
+          allRuns = allRuns.concat(response.Items);
+        }
+        
+        lastEvaluatedKey = response.LastEvaluatedKey;
+      } while (lastEvaluatedKey);
+      
+      const runs = allRuns.map((item: any) => ({
+        id: item.id,
+        podcastId: item.podcastId,
+        // Map DynamoDB status ('success') to our status ('completed')
+        status: item.status === 'success' ? 'completed' : item.status,
+        createdAt: item.createdAt,
+        startedAt: item.startedAt,
+        completedAt: item.completedAt || item.finishedAt,
+        duration: item.duration,
+        error: item.error || item.errorMessage,
+        progress: item.progress,
+        output: item.output,
+      }));
+      
+      console.log(`✅ Fetched ${runs.length} runs from DynamoDB for podcast ${podcastId}`);
+      return runs;
+    } catch (error: any) {
+      console.error(`❌ Failed to fetch runs from DynamoDB:`, {
+        error: error.message,
+        code: error.code,
+        name: error.name,
+        table: RUNS_TABLE,
+        index: 'PodcastIdIndex',
+      });
+      // Fallback to disk
+      const diskRuns = await loadRunsFromDisk();
+      return diskRuns[podcastId] || [];
+    }
+  } else {
+    // Fallback to disk (local dev)
+    const diskRuns = await loadRunsFromDisk();
+    return diskRuns[podcastId] || [];
+  }
 }
 
 /**
  * Delete old failed runs (keep only last 50 per podcast)
+ * Note: This is a simplified version - in production, you'd want to use DynamoDB TTL or batch delete
  */
 export async function cleanupOldRuns(): Promise<void> {
-  const allRuns = await loadRuns();
-  
-  for (const podcastId in allRuns) {
-    const runs = allRuns[podcastId];
+  // For now, this is a no-op in production (DynamoDB)
+  // In local dev, clean up disk storage
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+    const allRuns = await loadRunsFromDisk();
     
-    // Keep all completed runs, but limit failed runs to last 50
-    const completedRuns = runs.filter(r => r.status === 'completed');
-    const failedRuns = runs.filter(r => r.status === 'failed' || r.status === 'running')
-      .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-      .slice(0, 50); // Keep only last 50 failed
+    for (const podcastId in allRuns) {
+      const runs = allRuns[podcastId];
+      
+      const completedRuns = runs.filter(r => r.status === 'completed');
+      const failedRuns = runs.filter(r => r.status === 'failed' || r.status === 'running')
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+        .slice(0, 50);
+      
+      allRuns[podcastId] = [...completedRuns, ...failedRuns];
+    }
     
-    allRuns[podcastId] = [...completedRuns, ...failedRuns];
+    await saveRunsToDisk(allRuns);
   }
-  
-  await saveRuns(allRuns);
 }
 

@@ -346,11 +346,13 @@ export async function GET(
 
     console.log(`📋 Fetching runs for podcast: ${podcastId}`);
 
-    // Load runs from persistent storage (includes all runs - completed, failed, running)
+    // Load runs from persistent storage (DynamoDB on Vercel, disk on local)
     const runs = await getRunsForPodcast(podcastId);
-    console.log(`💾 Loaded ${runs.length} persisted runs from disk`);
+    const storageType = process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY ? 'DynamoDB' : 'disk';
+    console.log(`💾 Loaded ${runs.length} persisted runs from ${storageType}`);
     
     // Also merge in-memory runs (in case of recent updates not yet persisted)
+    // Note: On Vercel, in-memory runs only exist during the same function invocation
     const memoryRuns = runsStore[podcastId] || [];
     console.log(`🧠 Found ${memoryRuns.length} runs in memory`);
     
@@ -366,79 +368,82 @@ export async function GET(
       }
     }
     
-    // Also check file system for completed runs with audio
-    const fs = await import('fs/promises');
-    const path = await import('path');
-    const outputDir = path.join(process.cwd(), 'output', 'episodes');
-    
-    try {
-      const dirs = await fs.readdir(outputDir);
+    // Also check file system for completed runs with audio (local dev only)
+    // On Vercel, filesystem is read-only except /tmp, so skip this check
+    if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const outputDir = path.join(process.cwd(), 'output', 'episodes');
       
-      for (const dir of dirs) {
-        const dirPath = path.join(outputDir, dir);
-        const stat = await fs.stat(dirPath);
+      try {
+        const dirs = await fs.readdir(outputDir);
         
-        if (stat.isDirectory() && dir.startsWith('run_')) {
-          // Check if this run already exists
-          const existingRun = runs.find(r => r.id === dir);
+        for (const dir of dirs) {
+          const dirPath = path.join(outputDir, dir);
+          const stat = await fs.stat(dirPath);
           
-          // Check if audio file exists
-          const audioPath = path.join(dirPath, 'audio.mp3');
-          const hasAudio = await fs.access(audioPath).then(() => true).catch(() => false);
-          
-          if (hasAudio) {
-            const audioStats = await fs.stat(audioPath);
+          if (stat.isDirectory() && dir.startsWith('run_')) {
+            // Check if this run already exists
+            const existingRun = runs.find(r => r.id === dir);
             
-            if (existingRun) {
-              // Update existing run with audio info
-              if (!existingRun.output) {
-                existingRun.output = {};
-              }
-              existingRun.output.audioPath = `/output/episodes/${dir}/audio.mp3`;
-              existingRun.output.audioSize = audioStats.size;
-              existingRun.status = 'completed';
-            } else {
-              // Add completed run from file system (not in DB yet)
-              runs.push({
-                id: dir,
-                podcastId,
-                status: 'completed',
-                createdAt: stat.birthtime.toISOString(),
-                startedAt: stat.birthtime.toISOString(),
-                completedAt: stat.mtime.toISOString(),
-                duration: Math.floor((stat.mtime.getTime() - stat.birthtime.getTime()) / 1000),
-                progress: {
-                  currentStage: 'completed',
-                  stages: {
-                    prepare: { status: 'completed' },
-                    discover: { status: 'completed' },
-                    disambiguate: { status: 'completed' },
-                    rank: { status: 'completed' },
-                    scrape: { status: 'completed' },
-                    extract: { status: 'completed' },
-                    summarize: { status: 'completed' },
-                    contrast: { status: 'completed' },
-                    outline: { status: 'completed' },
-                    script: { status: 'completed' },
-                    qa: { status: 'completed' },
-                    tts: { status: 'completed' },
-                    publish: { status: 'completed' },
+            // Check if audio file exists
+            const audioPath = path.join(dirPath, 'audio.mp3');
+            const hasAudio = await fs.access(audioPath).then(() => true).catch(() => false);
+            
+            if (hasAudio) {
+              const audioStats = await fs.stat(audioPath);
+              
+              if (existingRun) {
+                // Update existing run with audio info
+                if (!existingRun.output) {
+                  existingRun.output = {};
+                }
+                existingRun.output.audioPath = `/output/episodes/${dir}/audio.mp3`;
+                existingRun.output.audioSize = audioStats.size;
+                existingRun.status = 'completed';
+              } else {
+                // Add completed run from file system (not in DB yet)
+                runs.push({
+                  id: dir,
+                  podcastId,
+                  status: 'completed',
+                  createdAt: stat.birthtime.toISOString(),
+                  startedAt: stat.birthtime.toISOString(),
+                  completedAt: stat.mtime.toISOString(),
+                  duration: Math.floor((stat.mtime.getTime() - stat.birthtime.getTime()) / 1000),
+                  progress: {
+                    currentStage: 'completed',
+                    stages: {
+                      prepare: { status: 'completed' },
+                      discover: { status: 'completed' },
+                      disambiguate: { status: 'completed' },
+                      rank: { status: 'completed' },
+                      scrape: { status: 'completed' },
+                      extract: { status: 'completed' },
+                      summarize: { status: 'completed' },
+                      contrast: { status: 'completed' },
+                      outline: { status: 'completed' },
+                      script: { status: 'completed' },
+                      qa: { status: 'completed' },
+                      tts: { status: 'completed' },
+                      package: { status: 'completed' },
+                    },
                   },
-                },
-                output: {
-                  audioPath: `/output/episodes/${dir}/audio.mp3`,
-                  audioSize: audioStats.size,
-                },
-              });
+                  output: {
+                    audioPath: `/output/episodes/${dir}/audio.mp3`,
+                    audioSize: audioStats.size,
+                  },
+                });
+              }
             }
           }
         }
+      } catch (err) {
+        console.log('📂 No output directory or error reading (local dev only):', err);
       }
-    } catch (err) {
-      console.log('📂 No output directory or error reading:', err);
     }
     
-    console.log(`✅ Found ${runs.length} total runs (persisted + memory + filesystem) for podcast ${podcastId}`);
+    console.log(`✅ Found ${runs.length} total runs (${storageType} + memory${!process.env.AWS_ACCESS_KEY_ID ? ' + filesystem' : ''}) for podcast ${podcastId}`);
     
     // Sort by createdAt descending (newest first)
     runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());

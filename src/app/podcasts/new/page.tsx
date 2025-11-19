@@ -13,10 +13,12 @@ import { Select } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
 
 type Step = 1 | 2 | 3 | 4 | 5;
 
 export default function NewPodcastPage() {
+  const toast = useToastContext();
   const [setupMode, setSetupMode] = useState<'choice' | 'easy' | 'advanced'>('choice');
   const [easyModeCompany, setEasyModeCompany] = useState('');
   const [currentStep, setCurrentStep] = useState<Step>(1);
@@ -94,7 +96,7 @@ export default function NewPodcastPage() {
 
   const handleEasyModeSubmit = async () => {
     if (!easyModeCompany.trim()) {
-      alert('Please enter your company name');
+      toast.warning('Company Name Required', 'Please enter your company name');
       return;
     }
 
@@ -149,11 +151,11 @@ export default function NewPodcastPage() {
         window.location.href = `/podcasts/${data.id}`;
       } else {
         const error = await response.text();
-        alert(`Failed to create podcast: ${error}`);
+        toast.error('Failed to Create Podcast', String(error));
       }
     } catch (error) {
       console.error('Error creating podcast:', error);
-      alert('Failed to create podcast. Please try again.');
+      toast.error('Failed to Create Podcast', 'Please try again');
     }
   };
 
@@ -196,7 +198,7 @@ export default function NewPodcastPage() {
         console.warn('⚠️ Using default topics as fallback:', defaultTopics);
         topicsToSubmit = defaultTopics;
         
-        alert('⚠️ Warning: No topics selected. The podcast will be created with default topics.');
+        toast.warning('No Topics Selected', 'The podcast will be created with default topics');
       }
 
       // Create podcast via AWS Lambda API Gateway with auth token
@@ -219,11 +221,11 @@ export default function NewPodcastPage() {
         window.location.href = `/podcasts/${data.id}`;
       } else {
         const error = await response.text();
-        alert(`Failed to create podcast: ${error}`);
+        toast.error('Failed to Create Podcast', String(error));
       }
     } catch (error) {
       console.error('Error creating podcast:', error);
-      alert('Failed to create podcast. Please try again.');
+      toast.error('Failed to Create Podcast', 'Please try again');
     }
   };
 
@@ -511,11 +513,11 @@ function Step1({ formData, setFormData }: any) {
     if (file) {
       // Validate file size and type
       if (file.size > 10 * 1024 * 1024) {
-        alert('File size must be less than 10MB');
+        toast.error('File Too Large', 'File size must be less than 10MB');
         return;
       }
       if (!file.type.startsWith('image/')) {
-        alert('File must be an image');
+        toast.error('Invalid File Type', 'File must be an image');
         return;
       }
       
@@ -1649,7 +1651,7 @@ function Step5({ formData, setFormData }: any) {
         
         audio.onerror = () => {
           setIsPlayingPreview(null);
-          alert('Failed to play audio preview');
+          toast.error('Playback Failed', 'Failed to play audio preview');
         };
         
         await audio.play();
@@ -1658,7 +1660,7 @@ function Step5({ formData, setFormData }: any) {
       }
     } catch (error) {
       console.error('Voice preview error:', error);
-      alert('Failed to generate voice preview. Make sure OpenAI API key is configured.');
+      toast.error('Voice Preview Failed', 'Failed to generate voice preview. Make sure OpenAI API key is configured.');
       setIsPlayingPreview(null);
     }
   };

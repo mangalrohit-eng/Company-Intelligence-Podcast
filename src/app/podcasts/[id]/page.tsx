@@ -6,13 +6,15 @@
 
 import { useParams } from 'next/navigation';
 import { useState, useEffect } from 'react';
-import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss, Brain } from 'lucide-react';
+import Link from 'next/link';
+import { Play, Settings, Copy, Calendar, Clock, TrendingUp, BarChart3, Users, Rss, Brain, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { RSSValidator } from '@/components/RSSValidator';
+import { useToastContext } from '@/contexts/ToastContext';
 
 type Tab = 'overview' | 'episodes' | 'runs' | 'rss' | 'suggestions' | 'validation' | 'team' | 'settings';
 
@@ -23,6 +25,7 @@ export default function PodcastDetailPage() {
   const [podcast, setPodcast] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [runningPipeline, setRunningPipeline] = useState(false);
+  const toast = useToastContext();
 
   useEffect(() => {
     const fetchPodcast = async () => {
@@ -63,14 +66,16 @@ export default function PodcastDetailPage() {
       
       if (response.ok) {
         const data = await response.json();
-        alert(`Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress page...`);
-        window.location.href = `/podcasts/${podcastId}/runs/${data.runId}`;
+        toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting to progress page...`);
+        setTimeout(() => {
+          window.location.href = `/podcasts/${podcastId}/runs/${data.runId}`;
+        }, 1000);
       } else {
         throw new Error('Failed to start pipeline');
       }
     } catch (error: any) {
       console.error('Error starting pipeline:', error);
-      alert(`Error starting pipeline: ${error.message}`);
+      toast.error('Error Starting Pipeline', error.message);
     } finally {
       setRunningPipeline(false);
     }
@@ -78,7 +83,7 @@ export default function PodcastDetailPage() {
 
   const handleCopyRSS = () => {
     navigator.clipboard.writeText(podcast.rssUrl);
-    alert('RSS URL copied to clipboard!');
+    toast.success('RSS URL Copied', 'The RSS feed URL has been copied to your clipboard');
   };
 
   if (loading) {
@@ -146,7 +151,10 @@ export default function PodcastDetailPage() {
                 size="lg"
                 variant="outline"
                 className="gap-2 flex-1 sm:flex-initial"
-                onClick={() => alert('Submit your RSS feed to:\n\n• Apple Podcasts: https://podcastsconnect.apple.com\n• Spotify: https://podcasters.spotify.com\n\nYour RSS URL has been copied to clipboard!')}
+                onClick={() => {
+                  navigator.clipboard.writeText(podcast.rssUrl);
+                  toast.info('RSS Feed Help', 'Submit your RSS feed to Apple Podcasts or Spotify. RSS URL copied to clipboard.');
+                }}
               >
                 <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
@@ -306,20 +314,113 @@ function OverviewTab({ podcast }: any) {
   );
 }
 
-function EpisodesTab({ podcastId: _podcastId }: { podcastId: string }) {
+function EpisodesTab({ podcastId }: { podcastId: string }) {
+  const [episodes, setEpisodes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchEpisodes();
+  }, [podcastId]);
+
+  const fetchEpisodes = async () => {
+    try {
+      setLoading(true);
+      const { api } = await import('@/lib/api');
+      const response = await api.get(`/podcasts/${podcastId}/episodes`);
+
+      if (response.ok) {
+        const data = await response.json();
+        setEpisodes(data.episodes || []);
+      } else {
+        console.error('Failed to fetch episodes');
+        setEpisodes([]);
+      }
+    } catch (error) {
+      console.error('Error fetching episodes:', error);
+      setEpisodes([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4"></div>
+        <p className="text-muted">Loading episodes...</p>
+      </div>
+    );
+  }
+
+  if (episodes.length === 0) {
+    return (
+      <div className="space-y-4">
+        <Card className="p-6">
+          <div className="text-center py-8">
+            <h3 className="text-lg font-semibold mb-2">No Episodes Yet</h3>
+            <p className="text-muted mb-4">
+              Episodes will appear here once pipeline runs are completed.
+            </p>
+            <p className="text-sm text-muted">
+              💡 Tip: Go to the "Runs" tab to start a new pipeline run.
+            </p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      <Card className="p-6">
-        <div className="text-center py-8">
-          <h3 className="text-lg font-semibold mb-2">No Published Episodes Yet</h3>
-          <p className="text-muted mb-4">
-            Episodes will appear here once pipeline runs are completed and published.
-          </p>
-          <p className="text-sm text-muted">
-            💡 Tip: Go to the "Runs" tab to see completed podcast generations.
-          </p>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h3 className="text-xl font-semibold">Episodes ({episodes.length})</h3>
+          <p className="text-sm text-muted">All published episodes for this podcast</p>
         </div>
-      </Card>
+      </div>
+
+      <div className="space-y-3">
+        {episodes.map((episode) => (
+          <Card key={episode.id} className="hover:border-primary transition-all">
+            <Link href={`/podcasts/${podcastId}/episodes/${episode.id}`}>
+              <div className="p-6">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h4 className="text-lg font-semibold truncate">{episode.title}</h4>
+                      <Badge variant="outline">Episode {episode.episodeNumber}</Badge>
+                    </div>
+                    {episode.description && (
+                      <p className="text-sm text-muted mb-3 line-clamp-2">{episode.description}</p>
+                    )}
+                    <div className="flex items-center gap-4 text-xs text-muted">
+                      <span className="flex items-center gap-1">
+                        <Calendar className="w-3 h-3" />
+                        {new Date(episode.pubDate).toLocaleDateString()}
+                      </span>
+                      {episode.durationSeconds > 0 && (
+                        <span className="flex items-center gap-1">
+                          <Clock className="w-3 h-3" />
+                          {Math.floor(episode.durationSeconds / 60)}:{(episode.durationSeconds % 60).toString().padStart(2, '0')}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 flex-shrink-0">
+                    <Button variant="outline" size="sm" onClick={(e) => e.stopPropagation()}>
+                      <Play className="w-4 h-4 mr-2" />
+                      Play
+                    </Button>
+                    <Button variant="ghost" size="sm" onClick={(e) => e.stopPropagation()}>
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </Link>
+          </Card>
+        ))}
+      </div>
     </div>
   );
 }

@@ -10,6 +10,8 @@ import { Play, Mic, TrendingUp, Globe, Sparkles, Zap, Radio, LogOut } from 'luci
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
+import { Dashboard } from '@/components/Dashboard';
+import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 export default function Home() {
   const { user, signOut } = useAuth();
@@ -24,6 +26,15 @@ export default function Home() {
       console.error('Logout error:', error);
     }
   };
+
+  // Show dashboard for authenticated users, marketing page for others
+  if (isAuthenticated) {
+    return (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-background overflow-hidden">

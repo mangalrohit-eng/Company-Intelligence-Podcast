@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
+import { useToastContext } from '@/contexts/ToastContext';
 
 export default function AuthDebugPage() {
   const { user, getToken } = useAuth();
+  const toast = useToastContext();
   const [sessionInfo, setSessionInfo] = useState<any>(null);
   const [tokenInfo, setTokenInfo] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -44,10 +46,10 @@ export default function AuthDebugPage() {
       const response = await api.get('/podcasts');
       
       if (response.ok) {
-        alert('✅ API call successful!');
+        toast.success('API Call Successful', 'The API call completed successfully');
       } else {
         const data = await response.json();
-        alert(`❌ API call failed: ${JSON.stringify(data)}`);
+        toast.error('API Call Failed', JSON.stringify(data));
       }
     } catch (err: any) {
       setError(err.message);

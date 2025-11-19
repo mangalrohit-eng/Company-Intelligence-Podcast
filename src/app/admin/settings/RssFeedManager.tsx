@@ -58,9 +58,22 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
     setFormData({ name: '', url: '', description: '', enabled: true });
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this RSS feed?')) {
+  const handleDelete = async (id: string) => {
+    const { confirmDialog } = await import('@/components/ui/confirm-dialog');
+    const { useToastContext } = await import('@/contexts/ToastContext');
+    const toast = useToastContext();
+    
+    const confirmed = await confirmDialog({
+      title: 'Delete RSS Feed',
+      message: 'Are you sure you want to delete this RSS feed?',
+      confirmText: 'Delete',
+      cancelText: 'Cancel',
+      variant: 'destructive',
+    });
+
+    if (confirmed) {
       onChange(feeds.filter(f => f.id !== id));
+      toast.success('RSS Feed Deleted', 'The RSS feed has been deleted');
     }
   };
 

@@ -10,6 +10,7 @@ import {
   FileText, Settings, Copy, ChevronRight 
 } from 'lucide-react';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
 
 // All 13 stages
 const PIPELINE_STAGES = [
@@ -118,6 +119,7 @@ interface RunResult {
 }
 
 export default function TestPipelinePage() {
+  const toast = useToastContext();
   const [selectedStage, setSelectedStage] = useState<string>('summarize');
   const [runMode, setRunMode] = useState<RunMode>('free');
   const [llmProvider, setLlmProvider] = useState<ProviderMode>('replay');
@@ -180,9 +182,9 @@ export default function TestPipelinePage() {
       window.open(`${protocols[0]}${encodedPath}`, '_blank');
       
       // Show success message
-      alert(`📋 File path copied to clipboard!\n\n✨ Trying to open:\n${absolutePath}\n\n💡 If the file doesn't open automatically:\n1. The path is copied to your clipboard\n2. Press Ctrl+P in your editor\n3. Paste the path and press Enter`);
+      toast.info('File Path Copied', `Path copied to clipboard. Trying to open: ${absolutePath}`);
     } catch (err) {
-      alert(`📋 Path copied to clipboard:\n${absolutePath}\n\n💡 Use Ctrl+P in your editor and paste to open.`);
+      toast.info('Path Copied', `Path copied to clipboard: ${absolutePath}`);
     }
   };
 
