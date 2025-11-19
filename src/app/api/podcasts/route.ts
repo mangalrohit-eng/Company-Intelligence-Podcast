@@ -26,13 +26,31 @@ const TABLE_NAME = 'podcasts';
 // GET /api/podcasts - List all podcasts
 export async function GET(request: NextRequest) {
   try {
-    console.log(`📡 Fetching podcasts from DynamoDB table: ${TABLE_NAME}`);
-    console.log(`🔑 AWS Region: ${process.env.AWS_REGION || 'us-east-1'}`);
-    console.log(`🔑 AWS Credentials check:`, {
+    // Enhanced logging for debugging
+    const envCheck = {
       hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
       hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
       region: process.env.AWS_REGION || 'us-east-1',
-    });
+      accessKeyPrefix: process.env.AWS_ACCESS_KEY_ID?.substring(0, 7) || 'NOT_SET',
+      secretKeyLength: process.env.AWS_SECRET_ACCESS_KEY?.length || 0,
+    };
+    
+    console.log(`📡 Fetching podcasts from DynamoDB table: ${TABLE_NAME}`);
+    console.log(`🔑 AWS Environment Check:`, envCheck);
+    
+    // Check if credentials are missing
+    if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+      console.error('❌ Missing AWS credentials in environment variables');
+      return NextResponse.json({
+        podcasts: [],
+        count: 0,
+        error: 'AWS credentials not configured',
+        debug: {
+          message: 'AWS_ACCESS_KEY_ID or AWS_SECRET_ACCESS_KEY is missing',
+          envCheck,
+        },
+      }, { status: 200 }); // Return 200 so frontend can show error
+    }
     
     const command = new ScanCommand({
       TableName: TABLE_NAME,
@@ -54,21 +72,44 @@ export async function GET(request: NextRequest) {
       code: error.code,
       message: error.message,
       statusCode: error.$metadata?.httpStatusCode,
+      stack: error.stack?.split('\n').slice(0, 3).join('\n'),
     });
     
-    // If DynamoDB is not available, return empty list
-    if (error.name === 'ResourceNotFoundException' || error.code === 'CredentialsError') {
+    // Enhanced error handling with more specific messages
+    if (error.name === 'ResourceNotFoundException') {
       return NextResponse.json({
         podcasts: [],
         count: 0,
-        warning: 'Database not configured. Running in local mode.',
-      });
+        error: 'DynamoDB table not found',
+        debug: {
+          message: `Table '${TABLE_NAME}' does not exist in region ${process.env.AWS_REGION || 'us-east-1'}`,
+          suggestion: 'Check if the table exists in AWS Console or if the region is correct',
+        },
+      }, { status: 200 });
+    }
+    
+    if (error.name === 'UnrecognizedClientException' || error.code === 'CredentialsError' || error.message?.includes('credentials')) {
+      return NextResponse.json({
+        podcasts: [],
+        count: 0,
+        error: 'AWS credentials invalid or missing',
+        debug: {
+          message: 'Unable to authenticate with AWS. Check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY',
+          suggestion: 'Verify credentials in Vercel environment variables and ensure they have DynamoDB permissions',
+        },
+      }, { status: 200 });
     }
 
-    return NextResponse.json(
-      { error: 'Failed to fetch podcasts', details: error.message },
-      { status: 500 }
-    );
+    return NextResponse.json({
+      podcasts: [],
+      count: 0,
+      error: 'Failed to fetch podcasts',
+      debug: {
+        message: error.message,
+        code: error.code,
+        name: error.name,
+      },
+    }, { status: 200 }); // Return 200 so frontend can display error
   }
 }
 
