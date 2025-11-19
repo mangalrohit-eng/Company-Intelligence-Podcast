@@ -10,6 +10,7 @@ import { IEventEmitter } from '@/utils/event-emitter';
 import { IHttpGateway } from '@/gateways/types';
 import { logger } from '@/utils/logger';
 import { DEMO_CITIBANK_ARTICLES } from '../demo-articles';
+import { PlaywrightHttpGateway } from '@/gateways/http/playwright';
 
 export interface ScrapedContent {
   url: string;
@@ -353,32 +354,44 @@ export class ScrapeStage {
         // Fetch content
         const fetchStart = Date.now();
         
-        // Handle Google News redirect URLs - these require special handling
+        // Handle Google News redirect URLs - these require JavaScript execution
         let urlToFetch = item.url;
         let isGoogleNewsUrl = item.url.includes('news.google.com/rss/articles');
+        let useHeadlessBrowser = false;
         
         if (isGoogleNewsUrl) {
-          // Google News URLs are complex redirects - try multiple strategies
-          try {
-            const urlObj = new URL(item.url);
-            
-            // Strategy 1: Check for URL in query params
-            const urlParam = urlObj.searchParams.get('url');
-            if (urlParam) {
-              urlToFetch = decodeURIComponent(urlParam);
-              logger.info('Extracted actual URL from Google News query param', { 
-                original: item.url, 
-                extracted: urlToFetch 
-              });
-            } else {
-              // Strategy 2: Google News URLs often redirect via Location header
-              // We'll fetch and follow redirects, then check the final URL
-              logger.info('Google News URL - will follow redirects to get actual article', { 
-                url: item.url 
-              });
+          // Google News URLs require JavaScript to resolve the actual article URL
+          // On Vercel, we need to use a headless browser service API
+          const headlessBrowserApiKey = process.env.HEADLESS_BROWSER_API_KEY;
+          const headlessBrowserApiUrl = process.env.HEADLESS_BROWSER_API_URL || 'https://app.scrapingbee.com/api/v1';
+          
+          if (headlessBrowserApiKey) {
+            // Use headless browser service (e.g., ScrapingBee, ScraperAPI, Browserless)
+            useHeadlessBrowser = true;
+            urlToFetch = `${headlessBrowserApiUrl}?api_key=${headlessBrowserApiKey}&url=${encodeURIComponent(item.url)}&render_js=true&premium_proxy=true`;
+            logger.info('Using headless browser service for Google News URL', {
+              originalUrl: item.url,
+              serviceUrl: headlessBrowserApiUrl,
+            });
+          } else {
+            // Try to extract URL from query params as fallback
+            try {
+              const urlObj = new URL(item.url);
+              const urlParam = urlObj.searchParams.get('url');
+              if (urlParam) {
+                urlToFetch = decodeURIComponent(urlParam);
+                logger.info('Extracted actual URL from Google News query param', { 
+                  original: item.url, 
+                  extracted: urlToFetch 
+                });
+              } else {
+                logger.warn('Google News URL requires headless browser - HEADLESS_BROWSER_API_KEY not configured', {
+                  url: item.url,
+                });
+              }
+            } catch (e) {
+              logger.warn('Could not parse Google News URL', { url: item.url, error: e });
             }
-          } catch (e) {
-            logger.debug('Could not parse Google News URL, will follow redirect', { url: item.url });
           }
         }
         
