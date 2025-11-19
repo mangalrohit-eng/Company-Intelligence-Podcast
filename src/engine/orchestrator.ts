@@ -122,13 +122,33 @@ export class PipelineOrchestrator {
             const writeDebugFile = async (filename: string, content: string | object) => {
               try {
                 const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+                const s3Key = getDebugFileKey(input.runId, filename);
+                logger.debug(`Writing debug file to S3`, { 
+                  filename, 
+                  s3Key, 
+                  contentLength: jsonContent.length,
+                  runId: input.runId,
+                });
                 await writeToS3(
-                  getDebugFileKey(input.runId, filename),
+                  s3Key,
                   jsonContent,
                   'application/json'
                 );
-              } catch (error) {
-                logger.warn(`Failed to write debug file ${filename} to S3`, { error });
+                logger.info(`Successfully wrote debug file to S3`, { 
+                  filename, 
+                  s3Key,
+                  runId: input.runId,
+                });
+              } catch (error: any) {
+                logger.error(`Failed to write debug file ${filename} to S3`, { 
+                  filename,
+                  runId: input.runId,
+                  error: error.message,
+                  errorName: error.name,
+                  stack: error.stack,
+                });
+                // Don't throw - continue pipeline even if debug file save fails
+                // But log as error so we know it happened
               }
             };
 
@@ -318,8 +338,17 @@ export class PipelineOrchestrator {
         
         // Save input BEFORE execution
         const discoverInput = { topicIds, companyName, sources };
+        logger.info('About to save discover input to S3', { 
+          runId: input.runId,
+          topicCount: topicIds.length, 
+          feedCount: rssFeeds.length,
+        });
         await writeDebugFile('discover_input.json', discoverInput);
-        logger.info('Saved discover input', { topicCount: topicIds.length, feedCount: rssFeeds.length });
+        logger.info('Discover input save completed (check logs above for success/failure)', { 
+          runId: input.runId,
+          topicCount: topicIds.length, 
+          feedCount: rssFeeds.length,
+        });
         
         logger.info('About to call discover stage execute()', { 
           runId: input.runId,
