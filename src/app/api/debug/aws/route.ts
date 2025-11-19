@@ -60,21 +60,36 @@ export async function GET(request: NextRequest) {
         hasPodcastsTable: listResponse.TableNames?.includes('podcasts') || false,
       };
 
-      // Test 4: Try to scan podcasts table
+      // Test 4: Try to scan podcasts table (get all items, handle pagination)
       if (listResponse.TableNames?.includes('podcasts')) {
         try {
           const { ScanCommand } = await import('@aws-sdk/lib-dynamodb');
-          const scanCommand = new ScanCommand({
-            TableName: 'podcasts',
-            Limit: 1,
-          });
-          const scanResponse = await docClient.send(scanCommand);
+          let allItems: any[] = [];
+          let lastEvaluatedKey: any = undefined;
+          let totalScanned = 0;
+          
+          // Scan all pages
+          do {
+            const scanCommand = new ScanCommand({
+              TableName: 'podcasts',
+              Limit: 100,
+              ExclusiveStartKey: lastEvaluatedKey,
+            });
+            const scanResponse = await docClient.send(scanCommand);
+            
+            if (scanResponse.Items) {
+              allItems = allItems.concat(scanResponse.Items);
+            }
+            totalScanned += scanResponse.ScannedCount || 0;
+            lastEvaluatedKey = scanResponse.LastEvaluatedKey;
+          } while (lastEvaluatedKey);
           
           results.tests.podcastsTable = {
             status: 'PASSED',
             message: 'Successfully accessed podcasts table',
-            itemCount: scanResponse.Count || 0,
-            scannedCount: scanResponse.ScannedCount || 0,
+            itemCount: allItems.length,
+            totalScanned: totalScanned,
+            sampleIds: allItems.slice(0, 5).map((item: any) => item.id),
           };
         } catch (scanError: any) {
           results.tests.podcastsTable = {

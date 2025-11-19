@@ -52,18 +52,35 @@ export async function GET(request: NextRequest) {
       }, { status: 200 }); // Return 200 so frontend can show error
     }
     
-    const command = new ScanCommand({
-      TableName: TABLE_NAME,
-      Limit: 100, // Limit to 100 podcasts
-    });
-
-    const response = await docClient.send(command);
+    // DynamoDB Scan can be paginated - we need to handle all pages
+    let allItems: any[] = [];
+    let lastEvaluatedKey: any = undefined;
+    let totalScanned = 0;
     
-    console.log(`✅ Successfully fetched ${response.Count || 0} podcasts from DynamoDB`);
+    do {
+      const command = new ScanCommand({
+        TableName: TABLE_NAME,
+        Limit: 100, // Scan up to 100 items per page
+        ExclusiveStartKey: lastEvaluatedKey,
+      });
+
+      const response = await docClient.send(command);
+      
+      if (response.Items) {
+        allItems = allItems.concat(response.Items);
+      }
+      
+      totalScanned += response.ScannedCount || 0;
+      lastEvaluatedKey = response.LastEvaluatedKey;
+      
+      console.log(`📄 Scan page: ${response.Items?.length || 0} items, ${response.ScannedCount || 0} scanned, hasMore: ${!!lastEvaluatedKey}`);
+    } while (lastEvaluatedKey);
+    
+    console.log(`✅ Successfully fetched ${allItems.length} podcasts from DynamoDB (scanned ${totalScanned} items)`);
 
     return NextResponse.json({
-      podcasts: response.Items || [],
-      count: response.Count || 0,
+      podcasts: allItems,
+      count: allItems.length,
     });
   } catch (error: any) {
     console.error('❌ Failed to fetch podcasts:', error);
