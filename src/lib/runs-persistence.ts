@@ -183,7 +183,7 @@ export async function getRunsForPodcast(podcastId: string): Promise<PersistedRun
       output: item.output,
     }));
     
-    console.log(`✅ Fetched ${runs.length} runs from DynamoDB for podcast ${podcastId}`);
+    // Log removed to reduce noise from frequent polling
     return runs;
   } catch (error: any) {
     console.error(`❌ Failed to fetch runs from DynamoDB:`, {
