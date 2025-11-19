@@ -321,7 +321,20 @@ export class PipelineOrchestrator {
         await writeDebugFile('discover_input.json', discoverInput);
         logger.info('Saved discover input', { topicCount: topicIds.length, feedCount: rssFeeds.length });
         
+        logger.info('About to call discover stage execute()', { 
+          runId: input.runId,
+          topicCount: topicIds.length,
+          feedCount: rssFeeds.length,
+          companyName,
+        });
+        
         discoverOutput = await stage.execute(topicIds, companyName, sources, emitter);
+        
+        logger.info('Discover stage execute() returned', { 
+          runId: input.runId,
+          itemCount: discoverOutput.items.length,
+          stats: discoverOutput.stats,
+        });
         
         // Save output AFTER execution
         // Disambiguate stage receives: discoverOutput.items
