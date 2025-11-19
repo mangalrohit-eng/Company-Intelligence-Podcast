@@ -68,6 +68,23 @@ export class DiscoverStage {
             bodyPreview: response.body.substring(0, 500) 
           });
           
+          // Check if response is actually RSS/XML
+          const isRss = response.body.includes('<rss') || response.body.includes('<?xml');
+          const hasChannel = response.body.includes('<channel');
+          const hasItems = response.body.includes('<item>');
+          
+          if (!isRss && !hasChannel) {
+            logger.warn('RSS feed response does not appear to be valid RSS/XML', { 
+              feedUrl,
+              bodyLength,
+              contentType: response.headers?.['content-type'],
+              bodyStart: response.body.substring(0, 200),
+              isRss,
+              hasChannel,
+              hasItems
+            });
+          }
+          
           const matches = response.body.matchAll(/<item>[\s\S]*?<\/item>/g);
           const matchesArray = Array.from(matches);
           logger.info('RSS items found', { feedUrl, itemCount: matchesArray.length });
@@ -78,12 +95,15 @@ export class DiscoverStage {
               bodyLength,
               hasRssTag: response.body.includes('<rss'),
               hasChannelTag: response.body.includes('<channel'),
+              hasItemsTag: response.body.includes('<item>'),
+              contentType: response.headers?.['content-type'],
               bodySample: response.body.substring(0, 1000)
             });
           }
           
           let articlesFound = 0;
           let articlesMatched = 0;
+          const articlesBeforeFeed = items.length; // Track items before processing this feed
           
           for (const match of matchesArray) {
             const itemXml = match[0];
@@ -116,7 +136,9 @@ export class DiscoverStage {
                 companyWords.some(word => normalizedTitle.includes(word));
               
               // ✅ Include articles that mention the company or key words (more lenient matching)
-              if (titleContainsCompany || titleContainsKeyWords) {
+              const shouldInclude = titleContainsCompany || titleContainsKeyWords;
+              
+              if (shouldInclude) {
                 articlesMatched++;
                 const relevance = titleContainsCompany ? 0.9 : 0.7; // Lower relevance if only partial match
                 
@@ -147,6 +169,40 @@ export class DiscoverStage {
                   company: companyName,
                   normalizedTitle: normalizedTitle.substring(0, 50),
                   normalizedCompany
+                });
+              }
+            }
+          }
+          
+          // If this feed had articles but none matched, and we still have 0 total items,
+          // include the first article as a fallback (with very low relevance)
+          if (articlesFound > 0 && articlesMatched === 0 && items.length === articlesBeforeFeed) {
+            const firstMatch = matchesArray[0];
+            if (firstMatch) {
+              const itemXml = firstMatch[0];
+              const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
+              const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
+              const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
+              
+              if (title && link) {
+                logger.warn('No company matches found in RSS feed, including first article as fallback', {
+                  feedUrl,
+                  title: title.substring(0, 100),
+                  companyName
+                });
+                
+                items.push({
+                  url: link,
+                  title,
+                  publisher: new URL(feedUrl).hostname,
+                  publishedDate: pubDate,
+                  topicIds: [topicIds[0] || 'company-news'],
+                  entityIds: [companyName],
+                  scores: {
+                    relevance: 0.3, // Very low relevance for fallback
+                    recency: this.calculateRecency(pubDate),
+                    authority: 0.7,
+                  },
                 });
               }
             }
@@ -235,7 +291,20 @@ export class DiscoverStage {
       totalItemsFound: items.length,
       itemsByTopic,
       avgLatencyMs,
+      rssFeedCount: sources.rssFeeds.length,
+      newsApiCount: sources.newsApis.length,
     });
+    
+    // Log warning if no items found
+    if (items.length === 0) {
+      logger.error('Discover stage returned 0 items', {
+        companyName,
+        rssFeeds: sources.rssFeeds,
+        newsApis: sources.newsApis,
+        topicIds,
+        avgLatencyMs,
+      });
+    }
 
     return {
       items,
