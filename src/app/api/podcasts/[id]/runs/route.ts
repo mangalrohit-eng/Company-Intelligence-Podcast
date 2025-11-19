@@ -51,7 +51,6 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     console.log(`✅ [${runId}] Modules imported`);
     
     // Create emitter with real-time callback that updates run status
-    console.log(`⚙️ [${runId}] Creating realtime emitter...`);
     const emitter = new RealtimeEventEmitter((update) => {
       // Update the run in runsStore in real-time
       if (update.currentStage) {
@@ -87,12 +86,6 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         }
       }
       
-      console.log(`📊 [${runId}] Status update:`, {
-        currentStage: run.progress.currentStage,
-        stageStatus: update.stageStatus,
-        error: update.error,
-      });
-      
       // Save run to DynamoDB after each update (async, fire-and-forget, with timeout)
       // Use a timeout to prevent hanging if DynamoDB is slow
       Promise.race([
@@ -101,12 +94,12 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
           setTimeout(() => reject(new Error('Save timeout')), 5000)
         )
       ]).catch(err => {
-        // Log but don't block - DynamoDB saves are best-effort
+        // Log errors but don't block - DynamoDB saves are best-effort
         if (err.message !== 'Save timeout') {
-          console.error(`❌ [${runId}] Failed to persist run:`, err);
-        } else {
-          console.warn(`⏱️ [${runId}] Run save timed out (non-blocking)`);
+          // Only log actual errors, not timeouts (too verbose)
+          console.error(`❌ [${runId}] Failed to persist run:`, err.message);
         }
+        // Timeouts are expected and don't need logging
       });
     });
     console.log(`✅ [${runId}] Emitter created`);
@@ -392,17 +385,12 @@ export async function GET(
       );
     }
 
-    console.log(`📋 Fetching runs for podcast: ${podcastId}`);
-
-    // Load runs from persistent storage (DynamoDB on Vercel, disk on local)
+    // Load runs from persistent storage (DynamoDB)
     const runs = await getRunsForPodcast(podcastId);
-    const storageType = process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY ? 'DynamoDB' : 'disk';
-    console.log(`💾 Loaded ${runs.length} persisted runs from ${storageType}`);
     
     // Also merge in-memory runs (in case of recent updates not yet persisted)
     // Note: On Vercel, in-memory runs only exist during the same function invocation
     const memoryRuns = runsStore[podcastId] || [];
-    console.log(`🧠 Found ${memoryRuns.length} runs in memory`);
     
     // Merge memory runs with persisted runs (memory takes precedence for same ID)
     for (const memRun of memoryRuns) {
@@ -415,9 +403,6 @@ export async function GET(
         runs.push(memRun);
       }
     }
-    
-    // All runs are stored in DynamoDB - no filesystem fallback
-    console.log(`✅ Found ${runs.length} total runs (${storageType} + memory) for podcast ${podcastId}`);
     
     // Sort by createdAt descending (newest first)
     runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
@@ -565,9 +550,8 @@ export async function POST(
     }
     runsStore[podcastId].push(run);
     
-    // Also persist to disk immediately
+    // Persist to DynamoDB immediately
     await saveRun(run);
-    console.log(`💾 Run ${runId} persisted to disk`);
     
     // Execute the REAL pipeline in the background
     executePipeline(runId, podcastId, run, podcast).catch(error => {
