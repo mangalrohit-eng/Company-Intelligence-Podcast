@@ -49,16 +49,49 @@ export default function PodcastsPage() {
       const { api } = await import('@/lib/api');
       const response = await api.get('/podcasts');
       
+      console.log('📡 Podcasts API Response:', {
+        status: response.status,
+        ok: response.ok,
+        statusText: response.statusText,
+      });
+      
       if (response.ok) {
         const data = await response.json();
-        setPodcasts(data.podcasts || []);
+        console.log('📦 Podcasts Data:', {
+          podcastsCount: data.podcasts?.length || 0,
+          count: data.count,
+          hasError: !!data.error,
+          error: data.error,
+          debug: data.debug,
+          rawData: data,
+        });
+        
+        // Check for error in response (even with 200 status)
+        if (data.error) {
+          console.error('❌ API returned error:', data.error, data.debug);
+          // Still try to show podcasts if any exist
+        }
+        
+        // Map podcasts to include cadence from config.schedule
+        const mappedPodcasts = (data.podcasts || []).map((p: any) => ({
+          ...p,
+          cadence: p.config?.schedule || p.cadence || 'manual',
+        }));
+        
+        console.log('✅ Mapped podcasts:', mappedPodcasts.length);
+        setPodcasts(mappedPodcasts);
       } else {
-        console.error('Failed to fetch podcasts:', response.statusText);
+        const errorText = await response.text().catch(() => 'Unknown error');
+        console.error('❌ Failed to fetch podcasts:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText,
+        });
         // Show empty state on error
         setPodcasts([]);
       }
     } catch (error) {
-      console.error('Error fetching podcasts:', error);
+      console.error('❌ Error fetching podcasts:', error);
       // Show empty state on error
       setPodcasts([]);
     } finally {
@@ -77,8 +110,10 @@ export default function PodcastsPage() {
       // Status filter
       const matchesStatus = statusFilter === 'all' || podcast.status === statusFilter;
       
-      // Cadence filter
-      const matchesCadence = cadenceFilter === 'all' || podcast.cadence === cadenceFilter;
+      // Cadence filter - normalize cadence values for comparison
+      const podcastCadence = podcast.cadence?.toLowerCase() || 'manual';
+      const filterCadence = cadenceFilter.toLowerCase();
+      const matchesCadence = cadenceFilter === 'all' || podcastCadence === filterCadence;
       
       return matchesSearch && matchesStatus && matchesCadence;
     })
@@ -270,6 +305,7 @@ export default function PodcastsPage() {
   );
 }
 
+
 function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -372,16 +408,6 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     }
   };
 
-  const getCadenceColor = (cadence: string) => {
-    if (!cadence) return 'outline';
-    switch (cadence.toLowerCase()) {
-      case 'daily': return 'success';
-      case 'weekly': return 'default';
-      case 'monthly': return 'warning';
-      default: return 'outline';
-    }
-  };
-
   return (
     <Card className="group hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all">
       <Link href={`/podcasts/${podcast.id}`} className="block p-4">
@@ -413,7 +439,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
         <div className="flex items-center gap-2 mb-4">
           <Badge variant={getCadenceColor(podcast.cadence)}>
             <Calendar className="w-3 h-3 mr-1" />
-            {podcast.cadence || 'Not Set'}
+            {getCadenceDisplay(podcast.cadence)}
           </Badge>
           <Badge variant="success">
             {podcast.status}
@@ -587,7 +613,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
             <p className="text-sm text-muted truncate mb-2">{podcast.subtitle}</p>
             <div className="flex gap-2 flex-wrap">
               <Badge variant={getCadenceColor(podcast.cadence)}>
-                {podcast.cadence || 'Not Set'}
+                {getCadenceDisplay(podcast.cadence)}
               </Badge>
               <Badge variant="success">
                 {podcast.status}
