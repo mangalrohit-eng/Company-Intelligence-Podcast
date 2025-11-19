@@ -1293,6 +1293,8 @@ export class PipelineOrchestrator {
         telemetry,
         error: error instanceof Error ? error.message : String(error),
       };
+    } finally {
+      cleanup();
     }
   }
 }
