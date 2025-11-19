@@ -18,14 +18,21 @@ export class NodeFetchHttpGateway implements IHttpGateway {
       const timeout = request.timeout || 30000;
       const timeoutId = setTimeout(() => controller.abort(), timeout);
 
+      // Follow redirects explicitly (fetch follows redirects by default, but be explicit)
       const response = await fetch(request.url, {
         method: request.method || 'GET',
         headers: {
-          'User-Agent': 'Mozilla/5.0 (compatible; PodcastBot/1.0)',
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+          'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+          'Accept-Language': 'en-US,en;q=0.5',
+          'Accept-Encoding': 'gzip, deflate, br',
+          'Connection': 'keep-alive',
+          'Upgrade-Insecure-Requests': '1',
           ...request.headers,
         },
         body: request.body,
         signal: controller.signal,
+        redirect: 'follow', // Explicitly follow redirects (default, but be explicit)
       });
 
       clearTimeout(timeoutId);
@@ -40,9 +47,11 @@ export class NodeFetchHttpGateway implements IHttpGateway {
 
       logger.debug('Node fetch successful', {
         url: request.url,
+        finalUrl: response.url, // This will show if we were redirected
         status: response.status,
         latencyMs,
         bodyLength: body.length,
+        wasRedirected: response.url !== request.url,
       });
 
       return {

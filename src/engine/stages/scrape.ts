@@ -352,11 +352,62 @@ export class ScrapeStage {
 
         // Fetch content
         const fetchStart = Date.now();
-        const response = await this.httpGateway.fetch({ url: item.url });
+        
+        // Handle Google News redirect URLs - extract actual URL if possible
+        let urlToFetch = item.url;
+        if (item.url.includes('news.google.com/rss/articles')) {
+          // Google News RSS article URLs are redirects - try to extract actual URL
+          // The actual URL is often in the query parameter or can be extracted from redirect
+          try {
+            const urlObj = new URL(item.url);
+            // Check if there's a URL parameter
+            const urlParam = urlObj.searchParams.get('url');
+            if (urlParam) {
+              urlToFetch = decodeURIComponent(urlParam);
+              logger.debug('Extracted actual URL from Google News redirect', { 
+                original: item.url, 
+                extracted: urlToFetch 
+              });
+            }
+          } catch (e) {
+            // If extraction fails, use original URL and let fetch follow redirect
+            logger.debug('Could not extract URL from Google News redirect, will follow redirect', { url: item.url });
+          }
+        }
+        
+        const response = await this.httpGateway.fetch({ url: urlToFetch });
         const latencyMs = Date.now() - fetchStart;
 
         if (response.status === 200) {
-          const content = this.extractTextFromHtml(response.body);
+          // Check if we got redirected to Google News landing page (content is just "Google News")
+          let content = this.extractTextFromHtml(response.body);
+          
+          // If content is just "Google News" or very short, it might be a redirect page
+          if (content.trim().toLowerCase() === 'google news' || content.trim().length < 50) {
+            logger.warn('Got minimal content from Google News redirect, trying to follow redirect manually', {
+              url: item.url,
+              finalUrl: response.url,
+              contentLength: content.length,
+            });
+            
+            // Try fetching with explicit redirect following
+            // If the response URL is different from request URL, we were redirected
+            if (response.url !== urlToFetch) {
+              logger.info('Following redirect to actual article', { 
+                original: urlToFetch, 
+                redirected: response.url 
+              });
+              // Try fetching the redirected URL again (sometimes need second fetch)
+              const redirectResponse = await this.httpGateway.fetch({ url: response.url });
+              if (redirectResponse.status === 200) {
+                content = this.extractTextFromHtml(redirectResponse.body);
+                logger.debug('Got content from redirected URL', { 
+                  url: redirectResponse.url, 
+                  contentLength: content.length 
+                });
+              }
+            }
+          }
 
           // Thread-safe: use mutex-like pattern for shared state
           contents.push({
