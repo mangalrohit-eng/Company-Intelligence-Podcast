@@ -60,7 +60,17 @@ export class GatewayFactory {
   }
 
   static createHttpGateway(config: GatewayConfig): IHttpGateway {
-    switch (config.httpProvider) {
+    // Default to 'openai' (node-fetch) if not specified or invalid
+    const httpProvider = config.httpProvider || 'openai';
+    
+    // Log what we're using
+    logger.info('Creating HTTP gateway', { 
+      requestedProvider: config.httpProvider, 
+      actualProvider: httpProvider,
+      isVercel: !!process.env.VERCEL 
+    });
+    
+    switch (httpProvider) {
       case 'replay':
         logger.info('Creating Replay HTTP gateway', { cassetteKey: config.cassetteKey });
         return new ReplayHttpGateway(config.cassettePath, config.cassetteKey);
@@ -73,13 +83,19 @@ export class GatewayFactory {
         logger.info('Creating Playwright HTTP gateway');
         return new PlaywrightHttpGateway();
         
-      case 'stub': // Legacy alias for playwright
+      case 'stub': // Legacy alias for playwright - but warn and use node-fetch instead on Vercel
+        if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
+          logger.warn('HTTP provider "stub" (Playwright) not available on Vercel, using node-fetch instead');
+          return new NodeFetchHttpGateway();
+        }
         logger.warn('HTTP provider "stub" is deprecated, use "playwright" instead');
         logger.info('Creating Playwright HTTP gateway');
         return new PlaywrightHttpGateway();
 
       default:
-        throw new Error(`Unknown HTTP provider: ${config.httpProvider}`);
+        // Fallback to node-fetch for unknown providers
+        logger.warn(`Unknown HTTP provider "${httpProvider}", defaulting to node-fetch`);
+        return new NodeFetchHttpGateway();
     }
   }
 }
