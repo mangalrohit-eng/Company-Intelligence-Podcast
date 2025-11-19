@@ -54,8 +54,12 @@ export class NodeFetchHttpGateway implements IHttpGateway {
         wasRedirected: response.url !== request.url,
       });
 
+      // response.url is the final URL after redirects
+      // If it's different from request.url, we were redirected
+      const finalUrl = response.url || request.url;
+      
       return {
-        url: response.url,
+        url: finalUrl, // Return final URL after redirects
         status: response.status,
         headers,
         body,
