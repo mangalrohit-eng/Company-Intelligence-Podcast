@@ -51,22 +51,81 @@ export class DiscoverStage {
     
     emitter.emit('discover', 20, 'Querying news sources');
 
-    // Parse RSS feeds
+    // Parse RSS feeds with retry logic
     for (const feedUrl of sources.rssFeeds) {
       const startTime = Date.now();
-      try {
-        logger.info('Fetching RSS feed', { 
-          feedUrl,
-          isVercel: !!process.env.VERCEL,
-        });
-        
-        // On Vercel, use shorter timeout for RSS feeds (8 seconds)
-        const timeout = process.env.VERCEL ? 8000 : 30000;
-        const response = await this.httpGateway.fetch({ 
-          url: feedUrl, 
-          method: 'GET',
-          timeout,
-        });
+      let response: any = null;
+      let lastError: any = null;
+      const maxRetries = process.env.VERCEL ? 3 : 2; // More retries on Vercel due to network variability
+      const timeout = process.env.VERCEL ? 15000 : 30000; // Increased to 15s on Vercel (was 8s)
+      
+      // Retry loop for RSS feed fetching
+      for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+          logger.info('Fetching RSS feed', { 
+            feedUrl,
+            attempt,
+            maxRetries,
+            timeout,
+            isVercel: !!process.env.VERCEL,
+          });
+          
+          response = await this.httpGateway.fetch({ 
+            url: feedUrl, 
+            method: 'GET',
+            timeout,
+          });
+          
+          // Success - break out of retry loop
+          if (response.status === 200) {
+            break;
+          } else {
+            logger.warn('RSS feed returned non-200 status', {
+              feedUrl,
+              attempt,
+              status: response.status,
+            });
+            // If it's the last attempt, we'll handle it below
+            if (attempt < maxRetries) {
+              // Wait before retry (exponential backoff)
+              await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+              continue;
+            }
+          }
+        } catch (error: any) {
+          lastError = error;
+          const errorLatency = Date.now() - startTime;
+          const isTimeout = error.name === 'AbortError' || error.message?.includes('timeout');
+          
+          logger.warn('RSS feed fetch attempt failed', { 
+            feedUrl, 
+            attempt,
+            maxRetries,
+            error: error.message,
+            errorName: error.name,
+            latency: errorLatency,
+            isTimeout,
+            isVercel: !!process.env.VERCEL,
+          });
+          
+          // If not the last attempt, wait and retry
+          if (attempt < maxRetries) {
+            // Exponential backoff: 1s, 2s, 3s
+            const backoffMs = 1000 * attempt;
+            logger.info('Retrying RSS feed fetch after backoff', {
+              feedUrl,
+              attempt,
+              nextAttempt: attempt + 1,
+              backoffMs,
+            });
+            await new Promise(resolve => setTimeout(resolve, backoffMs));
+            continue;
+          }
+        }
+      }
+      
+      // If we have a response, process it
+      if (response && response.status === 200) {
         const latency = Date.now() - startTime;
         latencies.push(latency);
         
@@ -88,7 +147,7 @@ export class DiscoverStage {
             bodyPreview: response.body?.substring(0, 500),
             headers: response.headers,
             isVercel: !!process.env.VERCEL,
-          });
+        });
         }
         
         if (response.status === 200 && response.body) {
@@ -251,32 +310,55 @@ export class DiscoverStage {
             companyName,
             itemsAdded: items.length
           });
+        } else {
+          // Response was not 200 or we don't have a response
+          const errorLatency = Date.now() - startTime;
+          logger.error('Failed to fetch RSS feed after all retries', { 
+            feedUrl, 
+            attempts: maxRetries,
+            error: lastError?.message || `HTTP ${response?.status || 'no response'}`,
+            errorName: lastError?.name,
+            errorCode: lastError?.code,
+            latency: errorLatency,
+            isVercel: !!process.env.VERCEL,
+            nodeEnv: process.env.NODE_ENV,
+            isTimeout: lastError?.name === 'AbortError' || lastError?.message?.includes('timeout'),
+          });
+          
+          // If timeout on Vercel, log as warning but continue
+          if (process.env.VERCEL && (lastError?.name === 'AbortError' || lastError?.message?.includes('timeout'))) {
+            logger.warn('RSS feed fetch timed out on Vercel after all retries', {
+              feedUrl,
+              timeout,
+              attempts: maxRetries,
+            });
+          }
+          
+          // Continue to next feed - don't fail entire discovery
+          // But log this as a critical issue if it's the only feed
+          if (sources.rssFeeds.length === 1) {
+            logger.error('CRITICAL: Only RSS feed failed after all retries, discovery will return 0 items', {
+              feedUrl,
+              error: lastError?.message || `HTTP ${response?.status || 'no response'}`,
+              attempts: maxRetries,
+            });
+          }
         }
       } catch (error: any) {
+        // This catch block should rarely be hit now due to retry logic above
         const errorLatency = Date.now() - startTime;
-        logger.error('Failed to fetch RSS feed', { 
+        logger.error('Unexpected error in RSS feed fetch', { 
           feedUrl, 
           error: error.message,
           errorName: error.name,
           errorCode: error.code,
           latency: errorLatency,
           isVercel: !!process.env.VERCEL,
-          nodeEnv: process.env.NODE_ENV,
-          isTimeout: error.name === 'AbortError' || error.message?.includes('timeout'),
         });
         
-        // If timeout on Vercel, log as warning but continue
-        if (process.env.VERCEL && (error.name === 'AbortError' || error.message?.includes('timeout'))) {
-          logger.warn('RSS feed fetch timed out on Vercel - this may be due to serverless function limits', {
-            feedUrl,
-            timeout: 8000,
-          });
-        }
-        
         // Continue to next feed - don't fail entire discovery
-        // But log this as a critical issue if it's the only feed
         if (sources.rssFeeds.length === 1) {
-          logger.error('CRITICAL: Only RSS feed failed, discovery will return 0 items', {
+          logger.error('CRITICAL: Only RSS feed failed with unexpected error', {
             feedUrl,
             error: error.message,
           });
@@ -362,7 +444,7 @@ export class DiscoverStage {
         newsApis: sources.newsApis,
         topicIds,
         avgLatencyMs,
-      });
+    });
     }
 
     return {
