@@ -105,7 +105,7 @@ export default function NewPodcastPage() {
       const companyName = easyModeCompany.trim();
       const { api } = await import('@/lib/api');
       const response = await api.post('/podcasts', {
-        // Auto-generated branding
+        // Step 1: Branding & Metadata
         title: `${companyName} Intelligence Briefing`,
         subtitle: `Daily insights for ${companyName}`,
         description: `Stay ahead of the curve with AI-powered intelligence briefings tailored for ${companyName}. Get daily updates on industry trends, competitor moves, and market insights.`,
@@ -115,20 +115,20 @@ export default function NewPodcastPage() {
         explicit: false,
         language: 'en',
         
-        // Company settings
+        // Step 2: Company & Industry
         companyId: companyName,
         industryId: 'technology', // Default
         competitorIds: [],
         
-        // Smart defaults for cadence
+        // Step 3: Preset & Cadence
         cadence: 'daily',
         durationMinutes: 5,
         publishTime: '09:00',
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
         timeWindowHours: 24,
         
-        // Topics & regions defaults
-        topics: ['company-news', 'competitor-analysis', 'industry-trends'],
+        // Step 4: Topics & Regions (FIXED: use topicIds not topics)
+        topicIds: ['company-news', 'competitor-analysis', 'industry-trends'], // Backend expects topicIds
         topicPriorities: {
           'company-news': 3,
           'competitor-analysis': 2,
@@ -140,7 +140,7 @@ export default function NewPodcastPage() {
         allowDomains: [],
         blockDomains: [],
         
-        // Voice defaults
+        // Step 5: Voice & Review
         voiceId: 'alloy',
         voiceSpeed: 1.0,
         voiceTone: 'professional',
@@ -203,16 +203,48 @@ export default function NewPodcastPage() {
 
       // Create podcast via AWS Lambda API Gateway with auth token
       const { api } = await import('@/lib/api');
+      
+      // Ensure topicIds is always an array (required by backend)
+      const topicIds = Array.isArray(topicsToSubmit) && topicsToSubmit.length > 0 
+        ? topicsToSubmit 
+        : ['company-news', 'competitor-analysis', 'industry-trends']; // Fallback defaults
+      
       const response = await api.post('/podcasts', {
-          title: formData.title,
-          description: formData.description,
+          // Step 1: Branding & Metadata
+          title: formData.title || 'Untitled Podcast',
+          subtitle: formData.subtitle || '',
+          description: formData.description || '',
+          author: formData.author || formData.companyId || 'Unknown',
+          email: formData.email || '',
+          category: formData.category || 'Business',
+          explicit: formData.explicit || false,
+          language: formData.language || 'en',
+          
+          // Step 2: Company & Industry
           companyId: formData.companyId,
-          competitors: formData.competitorIds || [],
-          topics: topicsToSubmit, // Use the topics we determined above
-          topicPriorities: formData.topicPriorities || {}, // Include priorities
-          duration: formData.durationMinutes || 5,
-          voice: formData.voiceId || 'alloy',
-          schedule: formData.cadence || 'weekly',
+          industryId: formData.industryId || 'general',
+          competitorIds: formData.competitorIds || [],
+          
+          // Step 3: Preset & Cadence
+          cadence: formData.cadence || 'weekly',
+          durationMinutes: formData.durationMinutes || 5,
+          publishTime: formData.publishTime || '09:00',
+          timezone: formData.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone,
+          timeWindowHours: formData.timeWindowHours || 24,
+          
+          // Step 4: Topics & Regions (FIXED: use topicIds not topics)
+          topicIds: topicIds, // Backend expects topicIds, not topics
+          topicPriorities: formData.topicPriorities || {},
+          regions: formData.regions || ['US'],
+          sourceLanguages: formData.sourceLanguages || ['en'],
+          robotsMode: formData.robotsMode || 'strict',
+          allowDomains: formData.allowDomains || [],
+          blockDomains: formData.blockDomains || [],
+          
+          // Step 5: Voice & Review
+          voiceId: formData.voiceId || 'alloy',
+          voiceSpeed: formData.voiceSpeed || 1.0,
+          voiceTone: formData.voiceTone || 'professional',
         });
 
       if (response.ok) {
