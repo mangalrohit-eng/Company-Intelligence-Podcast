@@ -156,35 +156,35 @@ export default function EpisodeDetailPage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-8">
       <div className="max-w-5xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4 sm:mb-6 md:mb-8">
           <Button
             variant="ghost"
             onClick={() => router.push(`/podcasts/${podcastId}`)}
-            className="mb-4"
+            className="mb-3 sm:mb-4 text-sm sm:text-base"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Podcast
           </Button>
-          <div className="text-sm text-muted mb-2">
+          <div className="text-xs sm:text-sm text-muted mb-2">
             {new Date(episode.pubDate).toLocaleDateString()}
           </div>
-          <h1 className="text-4xl font-bold mb-4">{episode.title}</h1>
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 break-words">{episode.title}</h1>
           {episode.description && (
-            <p className="text-lg text-muted">{episode.description}</p>
+            <p className="text-sm sm:text-base md:text-lg text-muted break-words">{episode.description}</p>
           )}
         </div>
 
         {/* Audio Player */}
-        <div className="bg-secondary border border-border rounded-lg p-6 mb-8">
-          <div className="flex items-center gap-4 mb-4">
+        <div className="bg-secondary border border-border rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 md:mb-8">
+          <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
             <button
               onClick={togglePlay}
-              className="w-16 h-16 bg-primary hover:bg-accent text-background rounded-full flex items-center justify-center transition-all"
+              className="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-primary hover:bg-accent text-background rounded-full flex items-center justify-center transition-all flex-shrink-0"
             >
-              {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
+              {isPlaying ? <Pause className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8" /> : <Play className="w-6 h-6 sm:w-7 sm:h-7 md:w-8 md:h-8 ml-0.5 sm:ml-1" />}
             </button>
 
             <div className="flex-1">
@@ -224,16 +224,16 @@ export default function EpisodeDetailPage() {
         </div>
 
         {/* Tabs */}
-        <Tabs defaultValue="transcript">
-          <TabsList className="mb-8">
-            <TabsTrigger value="transcript">Transcript</TabsTrigger>
-            <TabsTrigger value="shownotes">Show Notes</TabsTrigger>
-            <TabsTrigger value="sources">Sources</TabsTrigger>
-          </TabsList>
+              <Tabs defaultValue="transcript">
+                <TabsList className="mb-4 sm:mb-6 md:mb-8">
+                  <TabsTrigger value="transcript">Transcript</TabsTrigger>
+                  <TabsTrigger value="shownotes">Show Notes</TabsTrigger>
+                  <TabsTrigger value="sources">Sources</TabsTrigger>
+                </TabsList>
 
           <TabsContent value="transcript">
-            <Card className="p-8">
-              <h2 className="text-2xl font-semibold mb-6">Transcript</h2>
+            <Card className="p-4 sm:p-6 md:p-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Transcript</h2>
               {episode.transcript ? (
                 <div className="prose prose-invert max-w-none">
                   {episode.transcript.split('\n\n').map((paragraph: string, idx: number) => (
@@ -249,8 +249,8 @@ export default function EpisodeDetailPage() {
           </TabsContent>
 
           <TabsContent value="shownotes">
-            <Card className="p-8">
-              <h2 className="text-2xl font-semibold mb-6">Show Notes</h2>
+            <Card className="p-4 sm:p-6 md:p-8">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-4 sm:mb-6">Show Notes</h2>
               {episode.showNotes ? (
                 <div className="prose prose-invert max-w-none whitespace-pre-wrap">
                   {episode.showNotes}
@@ -262,8 +262,8 @@ export default function EpisodeDetailPage() {
           </TabsContent>
 
           <TabsContent value="sources">
-            <Card className="p-6">
-              <h2 className="text-2xl font-semibold mb-4">Sources</h2>
+            <Card className="p-4 sm:p-6">
+              <h2 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4">Sources</h2>
               {episode.runId && (
                 <div className="text-sm text-muted mb-4">
                   Sources are available in the run details. 

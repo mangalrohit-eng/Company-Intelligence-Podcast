@@ -65,11 +65,16 @@ export class GatewayFactory {
         logger.info('Creating Replay HTTP gateway', { cassetteKey: config.cassetteKey });
         return new ReplayHttpGateway(config.cassettePath, config.cassetteKey);
 
-      case 'openai': // Use simple fetch for RSS/API requests
+      case 'openai': // Use native fetch for HTTP requests (RSS feeds, APIs, scraping)
         logger.info('Creating Node Fetch HTTP gateway');
         return new NodeFetchHttpGateway();
         
-      case 'stub': // Playwright for complex scraping
+      case 'playwright': // Playwright for complex scraping (explicit opt-in)
+        logger.info('Creating Playwright HTTP gateway');
+        return new PlaywrightHttpGateway();
+        
+      case 'stub': // Legacy alias for playwright
+        logger.warn('HTTP provider "stub" is deprecated, use "playwright" instead');
         logger.info('Creating Playwright HTTP gateway');
         return new PlaywrightHttpGateway();
 

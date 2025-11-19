@@ -1,0 +1,63 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 20,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 20,
+      "sampleUnits": [
+        {
+          "id": "f8c50770-06d9-4302-b9e5-6a1fcf89ecbe",
+          "type": "claim",
+          "span": "Verizon is set to cut at least 15,000 jobs and convert 180 stores into franchises",
+          "authority": 0.3,
+          "publisher": "USA Today",
+          "context": "according to reports from Reuters, the Wall Street Journal and Bloomberg",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "da5e167c-43d6-4c83-ba84-ed66bd31bcb6",
+          "type": "stat",
+          "span": "The layoffs will affect about 15% of Verizon's workforce",
+          "authority": 0.3,
+          "publisher": "USA Today",
+          "context": "as reported by anonymous sources",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "d8c9821e-08f7-42f3-a195-b7262df06030",
+          "type": "stat",
+          "span": "Up to 20,000 jobs will be cut",
+          "authority": 0.3,
+          "publisher": "USA Today",
+          "context": "according to Bloomberg",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 4,
+      "validQuotes": 4,
+      "validClaims": 12
+    }
+  ]
+}

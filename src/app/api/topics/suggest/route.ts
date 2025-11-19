@@ -76,15 +76,15 @@ export async function POST(request: NextRequest) {
     // Use gpt-3.5-turbo as default (widely available and cheaper)
     let model = 'gpt-3.5-turbo'; // Default - widely available
     try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const settingsPath = path.join(process.cwd(), 'data', 'admin-settings.json');
-      const settingsData = await fs.readFile(settingsPath, 'utf-8');
-      const settings = JSON.parse(settingsData);
-      model = settings.models?.topicSuggestion || 'gpt-3.5-turbo';
-      console.log(`📋 Using model from settings: ${model} for topic suggestions`);
+      const { isS3Available, readFromS3, getAdminSettingsKey } = await import('@/lib/s3-storage');
+      if (isS3Available()) {
+        const settingsData = await readFromS3(getAdminSettingsKey());
+        const settings = JSON.parse(settingsData.toString('utf-8'));
+        model = settings.models?.topicSuggestion || 'gpt-3.5-turbo';
+        console.log(`📋 Using model from settings: ${model} for topic suggestions`);
+      }
     } catch (error) {
-      // Use default if settings file doesn't exist
+      // Use default if settings not found in S3
       console.log('⚠️ Using default model (gpt-3.5-turbo) - admin settings not found');
     }
 

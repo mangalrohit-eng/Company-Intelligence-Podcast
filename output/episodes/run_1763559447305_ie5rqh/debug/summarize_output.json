@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a move that's sent ripples through the tech industry, Verizon is set to make a significant reduction in its workforce. Anonymous sources have leaked to USA Today that the layoffs will affect about 15% of Verizon's workforce, a staggering figure that underscores the scale of the company's restructuring efforts. Analysts watching the situation unfold at capacityglobal.com have ominously noted, \"The job cuts are only the opening act of what...\" This statement, while foreboding, hints at a broader strategy or series of changes within Verizon that could reshape its operations [CHECK]. As the story develops, the implications of this initial wave of layoffs could reveal much about the future direction of one of the telecom sector's giants.",
+      "onAirStat": {
+        "span": "The layoffs will affect about 15% of Verizon's workforce",
+        "evidenceId": "da5e167c-43d6-4c83-ba84-ed66bd31bcb6"
+      },
+      "onAirQuote": {
+        "span": "The job cuts are only the opening act of what...",
+        "evidenceId": "0801b5c2-c7c7-4872-be7e-10165c585788"
+      }
+    }
+  ]
+}

@@ -160,8 +160,14 @@ export class DiscoverStage {
             itemsAdded: items.length
           });
         }
-      } catch (error) {
-        logger.warn('Failed to fetch RSS feed', { feedUrl, error });
+      } catch (error: any) {
+        logger.error('Failed to fetch RSS feed', { 
+          feedUrl, 
+          error: error.message,
+          stack: error.stack,
+          errorName: error.name,
+        });
+        // Continue to next feed - don't fail entire discovery
       }
     }
 

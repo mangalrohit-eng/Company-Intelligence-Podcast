@@ -138,7 +138,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         provider: {
           llm: flags.provider?.llm || 'replay',
           tts: flags.provider?.tts || 'stub',
-          http: flags.provider?.http || 'replay',
+          // Always use node-fetch for HTTP - same behavior in local and production
+          http: flags.provider?.http || 'openai',
         },
         cassetteKey: flags.cassetteKey || 'default',
         enable: {

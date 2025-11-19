@@ -1,0 +1,62 @@
+{
+  "itemCount": 95,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "title": "Verizon Reportedly Plans to Cut 15,000 Jobs &amp; Get Rid of Some of Its Stores - | Cord Cutters News",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7735002078327009,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNczJ6Y0tFSzJHTm9oYy15REhZSGlkZTBOdUFPeDRMMXlyaV96RDA3MmUzeFBsZDR0czNsSXdNbTI3cEpRWWdoRmZ2eGdENGxuWnlTa2dyZDkwaXBOZ1NjU21iamh1dTNXczBlWEljZG5zTmN3cGxPdW5yMy1UZkR4R2JrSU1OUTVuNm5ueFJtZzFSTldEdERFMGppUU43YWc5Ul9jVzhsa0Q4akZfa2Q0NHMwMU9rcW9UQzVRZVhB?oc=5",
+      "title": "Verizon vs T-Mobile: which carrier has the best Black Friday iPhone deal right now? - TechRadar",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8658216249930887,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPVWZuQ1MyUnZRdHUzc21iWW1GLUd5NmNMUzVRRnlrWmRMb0R0Skl5THh4dDdCMHZJUDZCaDh6bHlBbTB1WmFrMlBoeW9qRTlOSDFPSEVjWXZuaW9vNTY0TzZyWnp2b1I0VTBRV0QwU3BUMGRQdk1KZ2hjYUZHMHQxRUYtNFBKR2xCNXc4dVY0VXlwZ2NlNHhPbER0bnBtWldMUlBwYTMwTktiZw?oc=5",
+      "title": "Analysts: Verizon cuts could hit stores, network, enterprise and more - Fierce Network",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7824193754110634,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQjJQSllMNEd0dTEtOXA5T1ZwS3pELTh4QklCU1FnZFBpaEVKYmZjSmpMX29Mb3hsQTdlR1VSVzdWeUJXLU1haU1PRG4yQTJNMGljYkdnRHlWQWFxbUNNdU80eUhncGR0Y2p3OWM4TUYzd0F6TWdPSlk3dHJCSkV3bUJGYUVzOWZoeXZvTmQtbFMzRnJLYnB6UXUzcTUyTGJi?oc=5",
+      "title": "It's time for Verizon to stop with the meaningless freebies: they cause more harm than good - PhoneArena",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8769036871713551,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQODlENThLOWdKMjgwRlpKcEZIcjlaTXk3SGhpOUJSTm1Gc0FsUGlfQmJkVHpiWkFiX1JpbnpmWWVkUjBJdUUwUEdETzNYcFJSVzZqNDRIVDZuZHYzOE40N3ROUXZYV29TdndWYzBsd1FxTDNnM3cxakZzeEJIbVVXUmxMUVJSaXQtODBn?oc=5",
+      "title": "AT&amp;T vs. Verizon: Which Major Phone Carrier Is Best? - CNET",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8610775183321235,
+        "authority": 0.7
+      }
+    }
+  ]
+}

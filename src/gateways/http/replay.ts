@@ -32,7 +32,21 @@ export class ReplayHttpGateway implements IHttpGateway {
     const response = this.responseMap.get(request.url);
 
     if (!response) {
-      throw new Error(`Replay miss: no cassette entry for URL ${request.url}`);
+      // If no cassette exists, log warning and return empty response
+      // This prevents discover stage from failing completely when replay is used without cassettes
+      logger.warn('Replay miss: no cassette entry for URL, returning empty response', { 
+        url: request.url,
+        cassetteSize: this.responseMap.size,
+      });
+      
+      // Return empty response instead of throwing - allows discover stage to continue
+      return {
+        url: request.url,
+        status: 404,
+        headers: {},
+        body: '',
+        latencyMs: 0,
+      };
     }
 
     logger.debug('Replaying HTTP response', { url: request.url, status: response.status });

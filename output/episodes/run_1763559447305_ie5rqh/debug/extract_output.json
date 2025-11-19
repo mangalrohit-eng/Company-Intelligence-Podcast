@@ -1,0 +1,236 @@
+{
+  "units": [
+    {
+      "id": "f8c50770-06d9-4302-b9e5-6a1fcf89ecbe",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon is set to cut at least 15,000 jobs and convert 180 stores into franchises",
+      "context": "according to reports from Reuters, the Wall Street Journal and Bloomberg",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5",
+      "publisher": "USA Today",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 00:20:16 GMT"
+    },
+    {
+      "id": "da5e167c-43d6-4c83-ba84-ed66bd31bcb6",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "The layoffs will affect about 15% of Verizon's workforce",
+      "context": "as reported by anonymous sources",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5",
+      "publisher": "USA Today",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 00:20:16 GMT"
+    },
+    {
+      "id": "d8c9821e-08f7-42f3-a195-b7262df06030",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Up to 20,000 jobs will be cut",
+      "context": "according to Bloomberg",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5",
+      "publisher": "USA Today",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 00:20:16 GMT"
+    },
+    {
+      "id": "000a492e-b3dd-4089-9e0e-f6d1a3a3287d",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon had about 100,000 U.S. employees at the end of 2024",
+      "context": "after cutting almost 20,000 over three years, according to Reuters",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5",
+      "publisher": "USA Today",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 00:20:16 GMT"
+    },
+    {
+      "id": "72205cf5-6d62-4890-8134-25abe886ad41",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Employers slashed more than 150,000 jobs in October",
+      "context": "largest wave of layoffs in more than 20 years, a report from Challenger, Gray & Christmas said",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5",
+      "publisher": "USA Today",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 00:20:16 GMT"
+    },
+    {
+      "id": "faabb4ae-391b-40c3-b121-baf992743734",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Troy council committee recommended a First Amendment lease with Verizon for a city cell tower",
+      "context": "The committee recommended preparing legislation for the Director of Public Service and Safety to execute the amendment.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNOG52cFdYTHhndk5CcjV4Snh1WGtDY3hnOU9fWTFoczJDeGU5ZDR3RG1xTXJ5UnRsWHl6SXIyeGo0dEhBUFhvbEhZUnpKcEtHRkh3WVlXbTYxVW5TSF9UbWluRUZLWi1ma1R4Z05YanZNaUNzUm9TbmNVbVVKQmVSOWtkU2ZIWjVFTEF4RGRsY0E2dVI0SU0wNjUtdnBITlBLM2ZXRTFiOVN4ekwweDJtWDZURmlCdGV4Q1E4ZGh2dHowTnZjR01HakVQMEVlX2hULWZQckctVGgxbzM3T2o5VG9TamRIREE?oc=5",
+      "publisher": "Citizen Portal AI",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 01:18:52 GMT"
+    },
+    {
+      "id": "18c13fd1-bafc-4d11-942d-63bc772cdd8f",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "It is a recommendation of the committee that legislation be...",
+      "context": "Councilmember Sievert during the committee report",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNOG52cFdYTHhndk5CcjV4Snh1WGtDY3hnOU9fWTFoczJDeGU5ZDR3RG1xTXJ5UnRsWHl6SXIyeGo0dEhBUFhvbEhZUnpKcEtHRkh3WVlXbTYxVW5TSF9UbWluRUZLWi1ma1R4Z05YanZNaUNzUm9TbmNVbVVKQmVSOWtkU2ZIWjVFTEF4RGRsY0E2dVI0SU0wNjUtdnBITlBLM2ZXRTFiOVN4ekwweDJtWDZURmlCdGV4Q1E4ZGh2dHowTnZjR01HakVQMEVlX2hULWZQckctVGgxbzM3T2o5VG9TamRIREE?oc=5",
+      "publisher": "Citizen Portal AI",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 01:18:52 GMT"
+    },
+    {
+      "id": "efe2a4b5-214a-4c8a-9ee6-d29d2f20a674",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Ordinance O30-2025 was read for the first time and will be carried to the council's next meeting for second reading",
+      "context": "The ordinance was described as authorizing the director to execute the amendment with Cellco Partnership (DBA Verizon Wireless).",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxNOG52cFdYTHhndk5CcjV4Snh1WGtDY3hnOU9fWTFoczJDeGU5ZDR3RG1xTXJ5UnRsWHl6SXIyeGo0dEhBUFhvbEhZUnpKcEtHRkh3WVlXbTYxVW5TSF9UbWluRUZLWi1ma1R4Z05YanZNaUNzUm9TbmNVbVVKQmVSOWtkU2ZIWjVFTEF4RGRsY0E2dVI0SU0wNjUtdnBITlBLM2ZXRTFiOVN4ekwweDJtWDZURmlCdGV4Q1E4ZGh2dHowTnZjR01HakVQMEVlX2hULWZQckctVGgxbzM3T2o5VG9TamRIREE?oc=5",
+      "publisher": "Citizen Portal AI",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 01:18:52 GMT"
+    },
+    {
+      "id": "eaad373f-08f1-44e6-bdc7-b664a2a3edfa",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon is preparing to cut around 15,000 jobs, roughly 15% of its workforce",
+      "context": "largest cuts in Verizon's history",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DOENjNV9aUjlmdmNNdHdBYTRtU0JMWXN0THpORUlSajlxUHZndUp5RkkwV0NvUDM0RmZXOE9aMzBoVGlUUlhzYnRBMmtmQk0tSlBpdGttTzMzMlhNOVRvcGRtdUEzempLczg4eQ?oc=5",
+      "publisher": "capacityglobal.com",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:31:10 GMT"
+    },
+    {
+      "id": "eede3e69-4239-4ec3-aa63-f48235deb6d2",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Analysts projecting up to $1 billion in gross annualised reductions from 2026",
+      "context": "expected savings from job cuts",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DOENjNV9aUjlmdmNNdHdBYTRtU0JMWXN0THpORUlSajlxUHZndUp5RkkwV0NvUDM0RmZXOE9aMzBoVGlUUlhzYnRBMmtmQk0tSlBpdGttTzMzMlhNOVRvcGRtdUEzempLczg4eQ?oc=5",
+      "publisher": "capacityglobal.com",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:31:10 GMT"
+    },
+    {
+      "id": "0294f747-d593-4657-99a9-238524fce2d1",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon added only 44,000 postpaid wireless subscribers in the most recent quarter",
+      "context": "trailing AT&T and T-Mobile in subscriber growth",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DOENjNV9aUjlmdmNNdHdBYTRtU0JMWXN0THpORUlSajlxUHZndUp5RkkwV0NvUDM0RmZXOE9aMzBoVGlUUlhzYnRBMmtmQk0tSlBpdGttTzMzMlhNOVRvcGRtdUEzempLczg4eQ?oc=5",
+      "publisher": "capacityglobal.com",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:31:10 GMT"
+    },
+    {
+      "id": "d9f3d9fd-8659-4337-98d4-3362b6ce6a5d",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Verizon must 'fundamentally restructure our expense base'",
+      "context": "CEO Dan Schulman's statement",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DOENjNV9aUjlmdmNNdHdBYTRtU0JMWXN0THpORUlSajlxUHZndUp5RkkwV0NvUDM0RmZXOE9aMzBoVGlUUlhzYnRBMmtmQk0tSlBpdGttTzMzMlhNOVRvcGRtdUEzempLczg4eQ?oc=5",
+      "publisher": "capacityglobal.com",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:31:10 GMT"
+    },
+    {
+      "id": "0801b5c2-c7c7-4872-be7e-10165c585788",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "The job cuts are only the opening act of what...",
+      "context": "analysts' perspective",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMibEFVX3lxTE5DOENjNV9aUjlmdmNNdHdBYTRtU0JMWXN0THpORUlSajlxUHZndUp5RkkwV0NvUDM0RmZXOE9aMzBoVGlUUlhzYnRBMmtmQk0tSlBpdGttTzMzMlhNOVRvcGRtdUEzempLczg4eQ?oc=5",
+      "publisher": "capacityglobal.com",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:31:10 GMT"
+    },
+    {
+      "id": "adcb56fc-1a6a-402e-9b2f-8bba38a9fb8d",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon intends to slash about 15,000 jobs, or 15% of its workforce",
+      "context": "largest round of layoffs",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+      "publisher": "ROI-NJ",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT"
+    },
+    {
+      "id": "e77d193c-1e70-4218-8c56-b47fbb8d92de",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon had revenue of $134.8 billion in 2024",
+      "context": "financial performance",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+      "publisher": "ROI-NJ",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT"
+    },
+    {
+      "id": "3111a105-4b6c-4b22-bd82-575a1df7c26b",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Verizon has battled subscriber losses, rising operational costs and competition",
+      "context": "challenges in the wireless and Internet markets",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+      "publisher": "ROI-NJ",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT"
+    },
+    {
+      "id": "5098f114-d435-495e-833a-97b27aef014f",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon has lost postpaid phone subscribers for three straight quarters",
+      "context": "competitive landscape",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+      "publisher": "ROI-NJ",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT"
+    },
+    {
+      "id": "10201b9d-ad17-4276-884b-4b9daf4d1dd3",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon asked SCOTUS to review a $47 million fine by the FCC over privacy violations",
+      "context": "Verizon petitioned the Supreme Court to challenge the fine.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    },
+    {
+      "id": "569a8d9a-2d94-45c9-a0d4-208fd3840c73",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon, AT&T, and T-Mobile were fined for selling access to customers' geolocation data",
+      "context": "The FCC imposed fines on the three carriers totaling around $200 million.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    },
+    {
+      "id": "002792de-f450-4440-add2-f61b14ed6f14",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon argued the fine violated its 7th Amendment right to a jury trial",
+      "context": "Verizon stated that the fine infringed on its constitutional rights.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 20,
+    "byType": {
+      "claim": 12,
+      "stat": 4,
+      "quote": 4
+    },
+    "byTopic": {
+      "company-news": 20
+    },
+    "dedupeRemoved": 0
+  }
+}

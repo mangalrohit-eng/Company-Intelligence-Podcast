@@ -52,15 +52,15 @@ export async function POST(request: NextRequest) {
     // Load admin settings to get the model preference
     let model = 'gpt-4'; // Default
     try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const settingsPath = path.join(process.cwd(), 'data', 'admin-settings.json');
-      const settingsData = await fs.readFile(settingsPath, 'utf-8');
-      const settings = JSON.parse(settingsData);
-      model = settings.models?.competitorIdentification || 'gpt-4';
-      console.log(`📋 Using model: ${model} for competitor identification`);
+      const { isS3Available, readFromS3, getAdminSettingsKey } = await import('@/lib/s3-storage');
+      if (isS3Available()) {
+        const settingsData = await readFromS3(getAdminSettingsKey());
+        const settings = JSON.parse(settingsData.toString('utf-8'));
+        model = settings.models?.competitorIdentification || 'gpt-4';
+        console.log(`📋 Using model: ${model} for competitor identification`);
+      }
     } catch (error) {
-      // Use default if settings file doesn't exist
+      // Use default if settings not found in S3
       console.log('⚠️ Using default model (gpt-4) - admin settings not found');
     }
 

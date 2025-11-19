@@ -160,16 +160,16 @@ export function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Dashboard</h1>
-          <p className="text-muted">Welcome back! Here's what's happening with your podcasts.</p>
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2">Dashboard</h1>
+          <p className="text-sm sm:text-base text-muted">Welcome back! Here's what's happening with your podcasts.</p>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 md:gap-4 mb-4 sm:mb-6 md:mb-8">
           <StatCard
             label="Total Podcasts"
             value={stats.totalPodcasts}
@@ -201,25 +201,25 @@ export function Dashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="mb-8">
-          <div className="flex flex-wrap gap-3">
-            <Link href="/podcasts/new">
-              <Button size="lg" className="gap-2">
-                <Plus className="w-5 h-5" />
-                Create New Podcast
+        <div className="mb-4 sm:mb-6 md:mb-8">
+          <div className="flex flex-wrap gap-2 sm:gap-3">
+            <Link href="/podcasts/new" className="flex-1 sm:flex-initial min-w-[140px]">
+              <Button size="lg" className="gap-2 w-full sm:w-auto">
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">Create New Podcast</span>
               </Button>
             </Link>
-            <Link href="/podcasts">
-              <Button size="lg" variant="outline" className="gap-2">
-                <Mic className="w-5 h-5" />
-                View All Podcasts
+            <Link href="/podcasts" className="flex-1 sm:flex-initial min-w-[140px]">
+              <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                <Mic className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="text-sm sm:text-base">View All Podcasts</span>
               </Button>
             </Link>
             {stats.activeRuns > 0 && (
-              <Link href="/podcasts?filter=running">
-                <Button size="lg" variant="outline" className="gap-2">
-                  <Activity className="w-5 h-5" />
-                  Active Runs ({stats.activeRuns})
+              <Link href="/podcasts?filter=running" className="flex-1 sm:flex-initial min-w-[140px]">
+                <Button size="lg" variant="outline" className="gap-2 w-full sm:w-auto">
+                  <Activity className="w-4 h-4 sm:w-5 sm:h-5" />
+                  <span className="text-sm sm:text-base">Active Runs ({stats.activeRuns})</span>
                 </Button>
               </Link>
             )}

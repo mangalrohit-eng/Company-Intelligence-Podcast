@@ -26,17 +26,25 @@ import { isS3Available, writeToS3, getDebugFileKey, getAudioFileKey } from '@/li
 
 export class PipelineOrchestrator {
   /**
-   * Load admin settings from file system
+   * Load admin settings from S3
    */
   private async loadAdminSettings(): Promise<AdminSettings> {
     try {
-      const fs = await import('fs/promises');
-      const path = await import('path');
-      const settingsPath = path.join(process.cwd(), 'data', 'admin-settings.json');
-      const data = await fs.readFile(settingsPath, 'utf-8');
-      return JSON.parse(data);
-    } catch (error) {
-      logger.info('Using default admin settings (file not found or error loading)');
+      const { isS3Available, readFromS3, getAdminSettingsKey } = await import('@/lib/s3-storage');
+      if (!isS3Available()) {
+        logger.info('S3 not available, using default admin settings');
+        return DEFAULT_ADMIN_SETTINGS;
+      }
+      
+      const data = await readFromS3(getAdminSettingsKey());
+      return JSON.parse(data.toString('utf-8'));
+    } catch (error: any) {
+      // If file doesn't exist in S3, return defaults
+      if (error.message?.includes('not found') || error.message?.includes('NoSuchKey')) {
+        logger.info('Admin settings not found in S3, using defaults');
+        return DEFAULT_ADMIN_SETTINGS;
+      }
+      logger.warn('Error loading admin settings from S3, using defaults', { error: error.message });
       return DEFAULT_ADMIN_SETTINGS;
     }
   }
@@ -81,27 +89,12 @@ export class PipelineOrchestrator {
       formula: `(${input.config.durationMinutes} × ${adminSettings.pipeline.wordsPerMinute}) / (${adminSettings.pipeline.scrapeSuccessRate} × ${adminSettings.pipeline.relevantTextRate} × ${adminSettings.pipeline.wordsPerArticle})`,
     });
 
-    // Determine storage method: S3 (Vercel/production) or local filesystem (dev)
-    const fs = await import('fs/promises');
-    const path = await import('path');
+    // Always use S3 for file storage - consistent behavior across all environments
     const useS3 = isS3Available();
-    const debugDir = path.join(process.cwd(), 'output', 'episodes', input.runId, 'debug');
-    
-    let canWriteFiles = false;
-    if (useS3) {
-      logger.info('Using S3 for debug file storage', { runId: input.runId });
-      canWriteFiles = true;
-    } else {
-      // Try local filesystem (for local dev)
-      try {
-        await fs.mkdir(debugDir, { recursive: true });
-        logger.info('Using local filesystem for debug file storage', { debugDir });
-        canWriteFiles = true;
-      } catch (error) {
-        logger.warn('Failed to create debug directory, file saving disabled', { error });
-        canWriteFiles = false;
-      }
+    if (!useS3) {
+      throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
     }
+    logger.info('Using S3 for all file storage', { runId: input.runId });
 
     const telemetry: RunTelemetry = {
       startTime: startTime.toISOString(),
@@ -125,39 +118,25 @@ export class PipelineOrchestrator {
       const ttsGateway = GatewayFactory.createTtsGateway(gatewayConfig);
       const httpGateway = GatewayFactory.createHttpGateway(gatewayConfig);
 
-      // Helper to write debug file (S3 or local filesystem)
-      const writeDebugFile = async (filename: string, content: string | object) => {
-        if (!canWriteFiles) {
-          return;
-        }
-        try {
-          const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
-          
-          if (useS3) {
-            await writeToS3(
-              getDebugFileKey(input.runId, filename),
-              jsonContent,
-              'application/json'
-            );
-          } else {
-            await fs.writeFile(
-              path.join(debugDir, filename),
-              jsonContent
-            );
-          }
-        } catch (error) {
-          logger.warn(`Failed to write debug file ${filename}`, { error, useS3 });
-        }
-      };
+            // Helper to write debug file to S3
+            const writeDebugFile = async (filename: string, content: string | object) => {
+              try {
+                const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+                await writeToS3(
+                  getDebugFileKey(input.runId, filename),
+                  jsonContent,
+                  'application/json'
+                );
+              } catch (error) {
+                logger.warn(`Failed to write debug file ${filename} to S3`, { error });
+              }
+            };
 
-      // Helper to save stage input/output (S3 or local filesystem)
-      const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
-        if (!canWriteFiles) {
-          return;
-        }
-        await writeDebugFile(`${stageName}_input.json`, inputData);
-        await writeDebugFile(`${stageName}_output.json`, outputData);
-      };
+            // Helper to save stage input/output to S3
+            const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
+              await writeDebugFile(`${stageName}_input.json`, inputData);
+              await writeDebugFile(`${stageName}_output.json`, outputData);
+            };
 
       // Helper to execute stage with comprehensive error handling
       const executeStageWithErrorHandling = async <T>(
@@ -212,30 +191,21 @@ export class PipelineOrchestrator {
             (emitter as any).markStageFailed(stageName, errorMessage);
           }
           
-          // Save error details (S3 or local filesystem)
-          if (canWriteFiles) {
-            try {
-              const errorJson = JSON.stringify({
-                error: errorMessage,
-                stack: errorStack,
-                timestamp: new Date().toISOString(),
-              }, null, 2);
-              
-              if (useS3) {
-                await writeToS3(
-                  getDebugFileKey(input.runId, `${stageName}_error.json`),
-                  errorJson,
-                  'application/json'
-                );
-              } else {
-                await fs.writeFile(
-                  path.join(debugDir, `${stageName}_error.json`),
-                  errorJson
-                );
-              }
-            } catch (saveError) {
-              logger.warn(`Failed to save ${stageName} error details`, { saveError, useS3 });
-            }
+          // Save error details to S3
+          try {
+            const errorJson = JSON.stringify({
+              error: errorMessage,
+              stack: errorStack,
+              timestamp: new Date().toISOString(),
+            }, null, 2);
+            
+            await writeToS3(
+              getDebugFileKey(input.runId, `${stageName}_error.json`),
+              errorJson,
+              'application/json'
+            );
+          } catch (saveError) {
+            logger.warn(`Failed to save ${stageName} error details to S3`, { saveError });
           }
           
           // Call custom error handler if provided
@@ -517,10 +487,7 @@ export class PipelineOrchestrator {
           sampleUrls: limitedRankedItems.slice(0, 3).map(i => i.url),
           totalRankedItems: allRankedItems.length,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'scrape_input.json'),
-          JSON.stringify(scrapeInput, null, 2)
-        );
+        await writeDebugFile('scrape_input.json', scrapeInput);
         logger.info('Saved scrape input', { itemCount: limitedRankedItems.length, articleLimit });
         
         scrapeOutput = await stage.execute(
@@ -584,10 +551,7 @@ export class PipelineOrchestrator {
           } : null,
           sampleUrls: scrapeOutput.contents.slice(0, 3).map(c => c.url),
         };
-        await fs.writeFile(
-          path.join(debugDir, 'extract_input.json'),
-          JSON.stringify(extractInput, null, 2)
-        );
+        await writeDebugFile('extract_input.json', extractInput);
         logger.info('Saved extract input', { contentCount: scrapeOutput.contents.length });
         
         extractOutput = await stage.execute(scrapeOutput.contents, emitter);
@@ -678,10 +642,7 @@ export class PipelineOrchestrator {
             validClaims: units.filter(u => u.type === 'claim' && u.span && u.authority !== undefined).length,
           })),
         };
-        await fs.writeFile(
-          path.join(debugDir, 'summarize_input.json'),
-          JSON.stringify(summarizeInput, null, 2)
-        );
+        await writeDebugFile('summarize_input.json', summarizeInput);
         
         summarizeOutput = await executeStageWithErrorHandling(
           'summarize',
@@ -1022,17 +983,10 @@ export class PipelineOrchestrator {
             finalSpeed: input.config.voice.speed,
           };
 
-          // Save audio to S3 or local disk
-          audioS3Key = `runs/${input.runId}/audio.mp3`;
-          if (useS3) {
-            await writeToS3(getAudioFileKey(input.runId), ttsOutput.audioBuffer, 'audio/mpeg');
-            logger.info('Audio saved to S3', { s3Key: audioS3Key, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
-          } else {
-            const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
-            await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
-            await fs.writeFile(audioPath, ttsOutput.audioBuffer);
-            logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
-          }
+          // Save audio to S3
+          audioS3Key = getAudioFileKey(input.runId);
+          await writeToS3(audioS3Key, ttsOutput.audioBuffer, 'audio/mpeg');
+          logger.info('Audio saved to S3', { s3Key: audioS3Key, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
         } else {
           // Save error output if stage failed
           const errorOutput = {
@@ -1047,56 +1001,92 @@ export class PipelineOrchestrator {
       }
 
       // Stage 13: Package & RSS
+      // Note: Package stage is non-critical - if it fails, pipeline can still succeed with audio
       let packageOutput;
       if (input.flags.enable.package && ttsOutput && outlineOutput && extractOutput) {
-        const stage = new PackageStage();
-        const stageStart = Date.now();
-        const outputDir = `./output/episodes/${input.runId}`;
-        const audioUrl = `https://cdn.example.com/${audioS3Key}`;
-        
-        // Save input BEFORE execution
-        const packageInput = {
-          scriptLength: finalScript.length,
-          wordCount: finalScript.split(/\s+/).length,
-          audioUrl,
-          audioDurationSeconds: ttsOutput.durationSeconds,
-          outlineTheme: outlineOutput.outline.theme,
-          outlineSectionCount: outlineOutput.outline.sections?.length || 0,
-          evidenceCount: extractOutput.units.length,
-        };
-        await writeDebugFile('package_input.json', packageInput);
-        logger.info('Saved package input', { scriptLength: packageInput.scriptLength, evidenceCount: packageInput.evidenceCount });
-        
-        packageOutput = await stage.execute(
-          input.runId,
-          finalScript,
-          audioUrl,
-          ttsOutput.durationSeconds,
-          outlineOutput.outline,
-          extractOutput.units,
-          new Date(),
-          outputDir,
-          emitter
-        );
-        
-        // Save output AFTER execution
-        if (packageOutput) {
-          const packageOutputSummary = {
-            showNotesPath: packageOutput.showNotesPath,
-            transcriptTxtPath: packageOutput.transcriptTxtPath,
-            transcriptVttPath: packageOutput.transcriptVttPath,
-            sourcesJsonPath: packageOutput.sourcesJsonPath,
-            rssItemGenerated: !!packageOutput.rssItem,
+        try {
+          const stage = new PackageStage();
+          const stageStart = Date.now();
+          // Generate audio URL - always use S3 URL or serve-file endpoint
+          const audioUrl = audioS3Key
+            ? `https://${process.env.S3_BUCKET_MEDIA || 'podcast-platform-media-' + process.env.AWS_ACCOUNT_ID}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${audioS3Key}`
+            : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/serve-file/episodes/${input.runId}/audio.mp3`;
+          
+          // Save input BEFORE execution
+          const packageInput = {
+            scriptLength: finalScript.length,
+            wordCount: finalScript.split(/\s+/).length,
+            audioUrl,
+            audioDurationSeconds: ttsOutput.durationSeconds,
+            outlineTheme: outlineOutput.outline.theme,
+            outlineSectionCount: outlineOutput.outline.sections?.length || 0,
+            evidenceCount: extractOutput.units.length,
           };
-          await writeDebugFile('package_output.json', packageOutputSummary);
-          logger.info('Saved package output', { showNotesPath: packageOutput.showNotesPath });
+          await writeDebugFile('package_input.json', packageInput);
+          logger.info('Saved package input', { scriptLength: packageInput.scriptLength, evidenceCount: packageInput.evidenceCount });
+          
+          // Package stage no longer needs outputDir - all files go to S3
+          packageOutput = await stage.execute(
+            input.runId,
+            finalScript,
+            audioUrl,
+            ttsOutput.durationSeconds,
+            outlineOutput.outline,
+            extractOutput.units,
+            new Date(),
+            '', // outputDir no longer used - kept for backward compatibility
+            emitter
+          );
+          
+          // Save output AFTER execution
+          if (packageOutput) {
+            const packageOutputSummary = {
+              showNotesPath: packageOutput.showNotesPath,
+              transcriptTxtPath: packageOutput.transcriptTxtPath,
+              transcriptVttPath: packageOutput.transcriptVttPath,
+              sourcesJsonPath: packageOutput.sourcesJsonPath,
+              rssItemGenerated: !!packageOutput.rssItem,
+            };
+            await writeDebugFile('package_output.json', packageOutputSummary);
+            logger.info('Saved package output', { showNotesPath: packageOutput.showNotesPath });
+          }
+          
+          telemetry.stages.package = {
+            startTime: new Date(stageStart).toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: Date.now() - stageStart,
+            status: 'success',
+          };
+        } catch (packageError: any) {
+          // Package stage failed, but don't fail the entire pipeline - audio is the critical output
+          logger.error('Package stage failed, but continuing pipeline (audio already generated)', {
+            runId: input.runId,
+            error: packageError.message,
+            stack: packageError.stack,
+          });
+          
+          // Save error details
+          try {
+            await writeDebugFile('package_error.json', {
+              error: packageError.message,
+              stack: packageError.stack,
+              timestamp: new Date().toISOString(),
+            });
+          } catch (saveError) {
+            logger.warn('Failed to save package error details', { saveError });
+          }
+          
+          // Mark package stage as failed in telemetry, but don't throw
+          telemetry.stages.package = {
+            startTime: new Date().toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: 0,
+            status: 'failed',
+            error: packageError.message,
+          };
+          
+          // packageOutput remains undefined, which is fine - pipeline can still succeed
         }
-        telemetry.stages.package = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
       }
 
       // Finalize

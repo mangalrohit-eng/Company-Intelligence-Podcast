@@ -5,35 +5,39 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import { join } from 'path';
 import { AdminSettings, DEFAULT_ADMIN_SETTINGS } from '@/types/admin-settings';
-
-const SETTINGS_FILE = join(process.cwd(), 'data', 'admin-settings.json');
-
-async function ensureDataDir() {
-  const dataDir = join(process.cwd(), 'data');
-  try {
-    await fs.access(dataDir);
-  } catch {
-    await fs.mkdir(dataDir, { recursive: true });
-  }
-}
+import { isS3Available, readFromS3, writeToS3, getAdminSettingsKey } from '@/lib/s3-storage';
 
 async function loadSettings(): Promise<AdminSettings> {
+  if (!isS3Available()) {
+    console.warn('S3 not available, returning default admin settings');
+    return DEFAULT_ADMIN_SETTINGS;
+  }
+  
   try {
-    await ensureDataDir();
-    const data = await fs.readFile(SETTINGS_FILE, 'utf-8');
-    return JSON.parse(data);
-  } catch (error) {
-    // If file doesn't exist, return defaults
+    const data = await readFromS3(getAdminSettingsKey());
+    return JSON.parse(data.toString('utf-8'));
+  } catch (error: any) {
+    // If file doesn't exist in S3, return defaults
+    if (error.message?.includes('not found') || error.message?.includes('NoSuchKey')) {
+      console.log('Admin settings not found in S3, using defaults');
+      return DEFAULT_ADMIN_SETTINGS;
+    }
+    console.error('Error loading admin settings from S3:', error);
     return DEFAULT_ADMIN_SETTINGS;
   }
 }
 
 async function saveSettings(settings: AdminSettings): Promise<void> {
-  await ensureDataDir();
-  await fs.writeFile(SETTINGS_FILE, JSON.stringify(settings, null, 2));
+  if (!isS3Available()) {
+    throw new Error('AWS credentials required. S3 storage must be configured for admin settings.');
+  }
+  
+  await writeToS3(
+    getAdminSettingsKey(),
+    JSON.stringify(settings, null, 2),
+    'application/json'
+  );
 }
 
 export async function GET(request: NextRequest) {

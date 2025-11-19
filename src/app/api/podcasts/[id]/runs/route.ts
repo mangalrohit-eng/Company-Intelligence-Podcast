@@ -298,10 +298,19 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     run.progress.currentStage = output.status === 'success' ? 'completed' : 'failed';
     
     if (output.status === 'success') {
+      // Generate audio URL - use S3 if available, otherwise use serve-file endpoint
+      const hasS3 = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+      const audioPath = output.artifacts?.mp3S3Key
+        ? (hasS3 && process.env.S3_BUCKET_MEDIA
+            ? `https://${process.env.S3_BUCKET_MEDIA}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${output.artifacts.mp3S3Key}`
+            : `/api/serve-file/episodes/${runId}/audio.mp3`)
+        : undefined;
+      
       run.output = {
         episodeId: output.episodeId,
         episodeTitle: output.episode?.title || 'Generated Episode',
         audioS3Key: output.artifacts?.mp3S3Key,
+        audioPath: audioPath,
         transcriptS3Key: output.artifacts?.transcriptS3Key,
         showNotesS3Key: output.artifacts?.showNotesS3Key,
       };
@@ -311,9 +320,15 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         run.progress.stages[stage].status = 'completed';
       });
       
-      // Persist completed run to disk
-      await saveRun(run);
-      console.log(`✅ Pipeline completed successfully for run ${runId}`);
+      // Persist completed run to DynamoDB (don't let save errors mark run as failed)
+      try {
+        await saveRun(run);
+        console.log(`✅ Pipeline completed successfully for run ${runId}`);
+      } catch (saveError: any) {
+        // Log but don't fail - the pipeline succeeded, just couldn't save status
+        console.error(`⚠️ [${runId}] Pipeline succeeded but failed to save status:`, saveError.message);
+        console.log(`✅ Pipeline completed successfully for run ${runId} (status save failed but run succeeded)`);
+      }
     } else {
       // Pipeline failed
       run.error = output.error || 'Unknown error';
@@ -322,9 +337,13 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         errorMessage: typeof output.error === 'string' ? output.error : JSON.stringify(output.error),
       };
       
-      // Persist failed run to disk
-      await saveRun(run);
-      console.error(`❌ Pipeline failed for run ${runId}:`, output.error);
+      // Persist failed run to DynamoDB
+      try {
+        await saveRun(run);
+        console.error(`❌ Pipeline failed for run ${runId}:`, output.error);
+      } catch (saveError: any) {
+        console.error(`⚠️ [${runId}] Pipeline failed and also failed to save status:`, saveError.message);
+      }
     }
   } catch (error: any) {
     console.error(`❌ [${runId}] Pipeline exception:`, {
@@ -333,13 +352,29 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
       name: error.name,
       fullError: error,
     });
-    run.status = 'failed';
-    run.error = error.message || 'Unknown error';
-    run.completedAt = new Date().toISOString();
     
-    // Persist exception-failed run to disk
-    await saveRun(run);
-    throw error;
+    // Only mark as failed if the pipeline itself failed, not if saveRun() failed
+    // Check if this is a saveRun error by checking if run.status was already set to completed
+    if (run.status !== 'completed') {
+      run.status = 'failed';
+      run.error = error.message || 'Unknown error';
+      run.completedAt = new Date().toISOString();
+      
+      // Persist exception-failed run to DynamoDB
+      try {
+        await saveRun(run);
+      } catch (saveError: any) {
+        console.error(`⚠️ [${runId}] Failed to save failed run status:`, saveError.message);
+      }
+    } else {
+      // Pipeline completed but saveRun() failed - log but don't change status
+      console.error(`⚠️ [${runId}] Pipeline completed but saveRun() failed:`, error.message);
+    }
+    
+    // Re-throw only if it's a pipeline error, not a saveRun error
+    if (!error.message?.includes('save run to DynamoDB') && !error.message?.includes('AWS credentials required')) {
+      throw error;
+    }
   }
 }
 

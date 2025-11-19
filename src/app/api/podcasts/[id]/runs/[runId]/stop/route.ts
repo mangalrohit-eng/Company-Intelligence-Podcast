@@ -4,9 +4,6 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile, writeFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
 import { runsStore } from '@/lib/runs-store';
 import { saveRun, getRunsForPodcast } from '@/lib/runs-persistence';
 
@@ -83,17 +80,22 @@ export async function POST(
     await saveRun(run);
     console.log(`✅ Run ${runId} stopped and saved`);
 
-    // Create a stop flag file that the orchestrator can check
-    const stopFlagPath = join(process.cwd(), 'output', 'episodes', runId, 'stop.flag');
+    // Create a stop flag in S3 that the orchestrator can check
     try {
-      await writeFile(stopFlagPath, JSON.stringify({ 
-        stopped: true, 
-        stoppedAt: new Date().toISOString(),
-        stoppedBy: 'user',
-      }), 'utf-8');
-      console.log(`🚩 Stop flag created at ${stopFlagPath}`);
+      const { isS3Available, writeToS3, getStopFlagKey } = await import('@/lib/s3-storage');
+      if (isS3Available()) {
+        const stopFlagContent = JSON.stringify({ 
+          stopped: true, 
+          stoppedAt: new Date().toISOString(),
+          stoppedBy: 'user',
+        });
+        await writeToS3(getStopFlagKey(runId), stopFlagContent, 'application/json');
+        console.log(`🚩 Stop flag created in S3 for run ${runId}`);
+      } else {
+        console.warn(`⚠️  S3 not available, cannot create stop flag file`);
+      }
     } catch (error) {
-      console.warn(`⚠️  Could not create stop flag file: ${error}`);
+      console.warn(`⚠️  Could not create stop flag in S3: ${error}`);
       // Continue anyway - the run status is already updated
     }
 

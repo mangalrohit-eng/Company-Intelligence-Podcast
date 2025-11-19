@@ -7,8 +7,7 @@
 import { EvidenceUnit, ThematicOutline } from '@/types/shared';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { logger } from '@/utils/logger';
-import * as fs from 'fs/promises';
-import * as path from 'path';
+import { isS3Available, writeToS3 } from '@/lib/s3-storage';
 
 export interface PackageOutput {
   showNotesPath: string;
@@ -32,8 +31,10 @@ export class PackageStage {
   ): Promise<PackageOutput> {
     await emitter.emit('package', 0, 'Starting episode packaging');
 
-    // Ensure output directory exists
-    await fs.mkdir(outputDir, { recursive: true });
+    // Always use S3 - outputDir parameter is kept for backward compatibility but not used
+    if (!isS3Available()) {
+      throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
+    }
 
     // Step 1: Generate show_notes.md (thesis, bullets, ≤10 sources)
     await emitter.emit('package', 20, 'Generating show notes');
@@ -119,10 +120,12 @@ ${topSources.join('\n')}
 *Episode ID: ${episodeId}*
 `;
 
-    const filePath = path.join(outputDir, `${episodeId}_show_notes.md`);
-    await fs.writeFile(filePath, showNotes, 'utf-8');
-
-    return filePath;
+    const filename = `${episodeId}_show_notes.md`;
+    // Always save to S3
+    const s3Key = `runs/${episodeId}/${filename}`;
+    await writeToS3(s3Key, showNotes, 'text/markdown');
+    logger.info('Show notes saved to S3', { s3Key });
+    return s3Key;
   }
 
   /**
@@ -155,10 +158,12 @@ ${topSources.join('\n')}
 
 ${segments.join('\n')}`;
 
-    const filePath = path.join(outputDir, `${episodeId}_transcript.vtt`);
-    await fs.writeFile(filePath, vtt, 'utf-8');
-
-    return filePath;
+    const filename = `${episodeId}_transcript.vtt`;
+    // Always save to S3
+    const s3Key = `runs/${episodeId}/${filename}`;
+    await writeToS3(s3Key, vtt, 'text/vtt');
+    logger.info('VTT transcript saved to S3', { s3Key });
+    return s3Key;
   }
 
   /**
@@ -169,10 +174,12 @@ ${segments.join('\n')}`;
     script: string,
     outputDir: string
   ): Promise<string> {
-    const filePath = path.join(outputDir, `${episodeId}_transcript.txt`);
-    await fs.writeFile(filePath, script, 'utf-8');
-
-    return filePath;
+    const filename = `${episodeId}_transcript.txt`;
+    // Always save to S3
+    const s3Key = `runs/${episodeId}/${filename}`;
+    await writeToS3(s3Key, script, 'text/plain');
+    logger.info('TXT transcript saved to S3', { s3Key });
+    return s3Key;
   }
 
   /**
@@ -193,10 +200,14 @@ ${segments.join('\n')}`;
       authority: e.authority,
     }));
 
-    const filePath = path.join(outputDir, `${episodeId}_sources.json`);
-    await fs.writeFile(filePath, JSON.stringify(sources, null, 2), 'utf-8');
-
-    return filePath;
+    const filename = `${episodeId}_sources.json`;
+    const content = JSON.stringify(sources, null, 2);
+    
+    // Always save to S3
+    const s3Key = `runs/${episodeId}/${filename}`;
+    await writeToS3(s3Key, content, 'application/json');
+    logger.info('Sources JSON saved to S3', { s3Key });
+    return s3Key;
   }
 
   /**

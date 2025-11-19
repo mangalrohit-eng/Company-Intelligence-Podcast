@@ -7,9 +7,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { readFile } from 'fs/promises';
-import { join } from 'path';
-import { existsSync } from 'fs';
+import { isS3Available, readFromS3, writeToS3, getDebugFileKey, getAudioFileKey } from '@/lib/s3-storage';
 import { logger } from '@/utils/logger';
 import { RealtimeEventEmitter } from '@/utils/realtime-event-emitter';
 import { runsStore } from '@/lib/runs-store';
@@ -28,8 +26,8 @@ import { ScriptStage } from '@/engine/stages/script';
 import { QAStage } from '@/engine/stages/qa';
 import { TtsStage } from '@/engine/stages/tts';
 import { PackageStage } from '@/engine/stages/package';
-import { writeFile, mkdir } from 'fs/promises';
 import { AdminSettings, DEFAULT_ADMIN_SETTINGS } from '@/types/admin-settings';
+import { isS3Available, writeToS3, getDebugFileKey, getAudioFileKey } from '@/lib/s3-storage';
 
 const STAGES = [
   'prepare',
@@ -50,38 +48,54 @@ const STAGES = [
 type StageName = typeof STAGES[number];
 
 async function loadStageOutput(runId: string, stageName: string): Promise<any> {
-  const filePath = join(process.cwd(), 'output', 'episodes', runId, 'debug', `${stageName}_output.json`);
-  if (!existsSync(filePath)) {
-    return null;
+  if (!isS3Available()) {
+    throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
   }
-  const content = await readFile(filePath, 'utf-8');
-  return JSON.parse(content);
+  try {
+    const content = await readFromS3(getDebugFileKey(runId, `${stageName}_output.json`));
+    return JSON.parse(content.toString('utf-8'));
+  } catch (error: any) {
+    if (error.message?.includes('not found') || error.message?.includes('NoSuchKey')) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 async function loadStageInput(runId: string, stageName: string): Promise<any> {
-  const filePath = join(process.cwd(), 'output', 'episodes', runId, 'debug', `${stageName}_input.json`);
-  if (!existsSync(filePath)) {
-    return null;
+  if (!isS3Available()) {
+    throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
   }
-  const content = await readFile(filePath, 'utf-8');
-  return JSON.parse(content);
+  try {
+    const content = await readFromS3(getDebugFileKey(runId, `${stageName}_input.json`));
+    return JSON.parse(content.toString('utf-8'));
+  } catch (error: any) {
+    if (error.message?.includes('not found') || error.message?.includes('NoSuchKey')) {
+      return null;
+    }
+    throw error;
+  }
 }
 
 async function saveStageInput(runId: string, stageName: string, input: any): Promise<void> {
-  const debugDir = join(process.cwd(), 'output', 'episodes', runId, 'debug');
-  await mkdir(debugDir, { recursive: true });
-  await writeFile(
-    join(debugDir, `${stageName}_input.json`),
-    JSON.stringify(input, null, 2)
+  if (!isS3Available()) {
+    throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
+  }
+  await writeToS3(
+    getDebugFileKey(runId, `${stageName}_input.json`),
+    JSON.stringify(input, null, 2),
+    'application/json'
   );
 }
 
 async function saveStageOutput(runId: string, stageName: string, output: any): Promise<void> {
-  const debugDir = join(process.cwd(), 'output', 'episodes', runId, 'debug');
-  await mkdir(debugDir, { recursive: true });
-  await writeFile(
-    join(debugDir, `${stageName}_output.json`),
-    JSON.stringify(output, null, 2)
+  if (!isS3Available()) {
+    throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
+  }
+  await writeToS3(
+    getDebugFileKey(runId, `${stageName}_output.json`),
+    JSON.stringify(output, null, 2),
+    'application/json'
   );
 }
 
@@ -328,12 +342,10 @@ export async function POST(
         const stage = new TtsStage(ttsGateway);
         stageOutput = await stage.execute(script, voiceId, speed, emitter);
         
-        // Save audio file
+        // Save audio file to S3
         if (stageOutput?.audioBuffer) {
-          const audioPath = join(process.cwd(), 'output', 'episodes', runId, 'audio.mp3');
-          await mkdir(join(process.cwd(), 'output', 'episodes', runId), { recursive: true });
-          await writeFile(audioPath, stageOutput.audioBuffer);
-          logger.info(`Saved audio file to ${audioPath}`);
+          await writeToS3(getAudioFileKey(runId), stageOutput.audioBuffer, 'audio/mpeg');
+          logger.info(`Saved audio file to S3: ${getAudioFileKey(runId)}`);
         }
         break;
       }
@@ -348,10 +360,14 @@ export async function POST(
         }
 
         const script = scriptOutput.script?.narrative || scriptOutput.narrative || '';
-        const audioUrl = `http://localhost:3000/output/episodes/${runId}/audio.mp3`;
+        // Generate audio URL - use S3 URL or serve-file endpoint
+        const audioS3Key = getAudioFileKey(runId);
+        const audioUrl = process.env.S3_BUCKET_MEDIA
+          ? `https://${process.env.S3_BUCKET_MEDIA}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${audioS3Key}`
+          : `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/serve-file/episodes/${runId}/audio.mp3`;
         const audioDurationSeconds = ttsOutput.durationSeconds || 0;
         const outline = outlineOutput.outline || outlineOutput;
-        const outputDir = join(process.cwd(), 'output', 'episodes', runId);
+        const outputDir = ''; // No longer used - all files go to S3
 
         // Save input BEFORE execution
         const packageInputToSave = {

@@ -23,6 +23,7 @@ interface RunData {
   output?: {
     episodeTitle?: string;
     audioS3Key?: string;
+    audioPath?: string;
     transcriptS3Key?: string;
     error?: string;
   };
@@ -313,7 +314,8 @@ export default function RunProgressPage() {
     );
   }
 
-  const audioPath = `/api/serve-file/episodes/${runId}/audio.mp3`;
+  // Use audioPath from run output if available, otherwise fallback to serve-file endpoint
+  const audioPath = run.output?.audioPath || `/api/serve-file/episodes/${runId}/audio.mp3`;
 
   return (
     <ProtectedRoute>
@@ -485,18 +487,20 @@ export default function RunProgressPage() {
             </div>
           </Card>
 
-          {run.status === 'completed' && (
+          {(run.status === 'completed' || (run.status === 'failed' && run.output?.audioPath)) && (
             <>
               <Card className="p-6 mb-6">
                 <h3 className="font-semibold mb-4">🎙️ Generated Podcast</h3>
                 <div className="space-y-4">
-                  <div>
-                    <p className="text-sm text-muted mb-2">Audio Player:</p>
-                    <audio controls className="w-full">
-                      <source src={audioPath} type="audio/mpeg" />
-                      Your browser does not support the audio element.
-                    </audio>
-                  </div>
+                  {run.output?.audioPath && (
+                    <div>
+                      <p className="text-sm text-muted mb-2">Audio Player:</p>
+                      <audio controls className="w-full">
+                        <source src={audioPath} type="audio/mpeg" />
+                        Your browser does not support the audio element.
+                      </audio>
+                    </div>
+                  )}
                   
                   <div className="flex gap-2">
                     <Button

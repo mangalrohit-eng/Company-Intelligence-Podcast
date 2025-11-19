@@ -38,18 +38,10 @@ function getMediaBucket(): string | null {
 /**
  * Check if S3 storage is available and should be used
  * 
- * For local development: Only use S3 if explicitly enabled via USE_S3_STORAGE=true
- * For Vercel/production: Use S3 if credentials are available
+ * Always use S3 when AWS credentials are present - no difference between local and Vercel.
+ * This ensures consistent behavior across all environments.
  */
 export function isS3Available(): boolean {
-  // In local dev, only use S3 if explicitly enabled
-  const isLocalDev = process.env.NODE_ENV !== 'production' && !process.env.VERCEL;
-  
-  if (isLocalDev && process.env.USE_S3_STORAGE !== 'true') {
-    return false; // Default to local filesystem in dev
-  }
-  
-  // On Vercel or if USE_S3_STORAGE=true, check for credentials
   return !!(
     process.env.AWS_ACCESS_KEY_ID &&
     process.env.AWS_SECRET_ACCESS_KEY &&
@@ -142,5 +134,19 @@ export function getDebugFileKey(runId: string, filename: string): string {
  */
 export function getAudioFileKey(runId: string): string {
   return `runs/${runId}/audio.mp3`;
+}
+
+/**
+ * Get S3 key for admin settings
+ */
+export function getAdminSettingsKey(): string {
+  return 'admin/settings.json';
+}
+
+/**
+ * Get S3 key for a stop flag
+ */
+export function getStopFlagKey(runId: string): string {
+  return `runs/${runId}/stop.flag`;
 }
 
