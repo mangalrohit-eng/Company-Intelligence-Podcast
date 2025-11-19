@@ -343,12 +343,26 @@ export class PipelineOrchestrator {
           topicCount: topicIds.length, 
           feedCount: rssFeeds.length,
         });
-        await writeDebugFile('discover_input.json', discoverInput);
-        logger.info('Discover input save completed (check logs above for success/failure)', { 
-          runId: input.runId,
-          topicCount: topicIds.length, 
-          feedCount: rssFeeds.length,
-        });
+        
+        // Save discover input with timeout to prevent hanging
+        // On Vercel, S3 writes can sometimes hang, so we use Promise.race with timeout
+        const discoverInputSavePromise = writeDebugFile('discover_input.json', discoverInput);
+        const timeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Discover input save timeout')), 5000)
+        );
+        
+        try {
+          await Promise.race([discoverInputSavePromise, timeoutPromise]);
+          logger.info('Discover input saved to S3 successfully', { 
+            runId: input.runId,
+          });
+        } catch (error: any) {
+          // Log but don't block - continue pipeline even if debug file save fails
+          logger.warn('Discover input save failed or timed out, continuing pipeline', { 
+            runId: input.runId,
+            error: error.message,
+          });
+        }
         
         logger.info('About to call discover stage execute()', { 
           runId: input.runId,
