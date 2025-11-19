@@ -61,7 +61,7 @@ export class PipelineOrchestrator {
     };
     
     try {
-    const startTime = new Date();
+      const startTime = new Date();
     logger.info('Pipeline execution started', { runId: input.runId });
 
     // Load admin settings
@@ -114,9 +114,8 @@ export class PipelineOrchestrator {
       stages: {},
     };
 
-    try {
-      // Initialize gateways
-      const gatewayConfig = {
+    // Initialize gateways
+    const gatewayConfig = {
         llmProvider: input.flags.provider.llm,
         ttsProvider: input.flags.provider.tts,
         httpProvider: input.flags.provider.http,
