@@ -134,8 +134,16 @@ export class PipelineOrchestrator {
 
             // Helper to save stage input/output to S3
             const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
-              await writeDebugFile(`${stageName}_input.json`, inputData);
-              await writeDebugFile(`${stageName}_output.json`, outputData);
+              try {
+                logger.debug(`Saving ${stageName} input to S3`, { runId: input.runId });
+                await writeDebugFile(`${stageName}_input.json`, inputData);
+                logger.debug(`Saving ${stageName} output to S3`, { runId: input.runId });
+                await writeDebugFile(`${stageName}_output.json`, outputData);
+                logger.debug(`${stageName} IO saved to S3`, { runId: input.runId });
+              } catch (error: any) {
+                logger.error(`Failed to save ${stageName} IO to S3`, { runId: input.runId, error: error.message });
+                // Don't throw - continue pipeline even if debug file save fails
+              }
             };
 
       // Helper to execute stage with comprehensive error handling
@@ -229,13 +237,15 @@ export class PipelineOrchestrator {
           
           logger.info('Starting prepare stage', { runId: input.runId });
           const prepareOutput = await stage.execute(input, emitter);
-          logger.info('Prepare stage completed successfully', { 
+          logger.info('Prepare stage execute() returned', { 
             runId: input.runId,
             speechBudgetWords: prepareOutput.speechBudgetWords,
             evidenceTargetUnits: prepareOutput.evidenceTargetUnits,
           });
           
+          logger.info('Saving prepare stage IO to S3', { runId: input.runId });
           await saveStageIO('prepare', prepareInput, prepareOutput);
+          logger.info('Prepare stage IO saved to S3', { runId: input.runId });
           
           telemetry.stages.prepare = {
             startTime: new Date(stageStart).toISOString(),
@@ -245,11 +255,18 @@ export class PipelineOrchestrator {
           };
           
           logger.info('Prepare stage telemetry updated', { runId: input.runId });
+          logger.info('Prepare stage fully completed, exiting try block', { runId: input.runId });
         } catch (error: any) {
           logger.error('Prepare stage failed', { runId: input.runId, error: error.message, stack: error.stack });
           throw error;
         }
       }
+      
+      logger.info('Prepare stage block completed, checking discover stage', { 
+        runId: input.runId,
+        enableDiscover: input.flags.enable.discover,
+        dryRun: input.flags.dryRun,
+      });
       
       logger.info('Moving to discover stage', { 
         runId: input.runId, 
