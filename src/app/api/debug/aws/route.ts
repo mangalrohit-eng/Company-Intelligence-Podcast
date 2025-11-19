@@ -4,8 +4,8 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server';
-import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, ListTablesCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
 export async function GET(request: NextRequest) {
   const envCheck = {
@@ -48,9 +48,10 @@ export async function GET(request: NextRequest) {
     };
 
     // Test 3: Try to list tables (requires DynamoDB permissions)
+    // Note: ListTablesCommand must be used with the base client, not docClient
     try {
       const listCommand = new ListTablesCommand({});
-      const listResponse = await docClient.send(listCommand);
+      const listResponse = await client.send(listCommand);
       
       results.tests.dynamodbConnection = {
         status: 'PASSED',
