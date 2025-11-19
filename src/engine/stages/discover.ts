@@ -36,7 +36,15 @@ export class DiscoverStage {
     sources: DiscoveryConfig,
     emitter: any
   ): Promise<DiscoverOutput> {
+    logger.info('Discover stage execute() called', {
+      topicCount: topicIds.length,
+      companyName,
+      rssFeedCount: sources.rssFeeds?.length || 0,
+      newsApiCount: sources.newsApis?.length || 0,
+    });
+    
     emitter.emit('discover', 0, 'Starting discovery');
+    logger.info('Discover stage: emitted initial event, starting RSS feed processing');
 
     const items: DiscoveryItem[] = [];
     const latencies: number[] = [];
