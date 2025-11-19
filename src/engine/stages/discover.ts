@@ -197,7 +197,7 @@ export class DiscoverStage {
           const articlesBeforeFeed = items.length; // Track items before processing this feed
           
           for (const match of matchesArray) {
-            const itemXml = match[0];
+            const itemXml = (match as RegExpMatchArray)[0];
             const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
             const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
             const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
@@ -272,7 +272,7 @@ export class DiscoverStage {
           if (articlesFound > 0 && articlesMatched === 0 && items.length === articlesBeforeFeed) {
             const firstMatch = matchesArray[0];
             if (firstMatch) {
-              const itemXml = firstMatch[0];
+              const itemXml = (firstMatch as RegExpMatchArray)[0];
               const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
               const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
               const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
