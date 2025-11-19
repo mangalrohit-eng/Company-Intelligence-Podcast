@@ -114,35 +114,35 @@ export default function PodcastDetailPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen p-4 md:p-8">
+      <div className="min-h-screen p-3 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row gap-8 mb-8">
+        <div className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
           {/* Cover Art */}
-          <div className="w-full md:w-72 h-72 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center text-8xl shadow-lg">
+          <div className="w-full md:w-72 h-48 sm:h-64 md:h-72 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center text-6xl sm:text-7xl md:text-8xl shadow-lg flex-shrink-0">
             🎙️
           </div>
 
           {/* Info */}
-          <div className="flex-1">
-            <div className="mb-4">
-              <h1 className="text-4xl md:text-5xl font-bold mb-2">{podcast.title}</h1>
-              <p className="text-lg md:text-xl text-muted mb-4">{podcast.subtitle}</p>
-              <p className="text-muted max-w-2xl leading-relaxed">{podcast.description}</p>
+          <div className="flex-1 min-w-0">
+            <div className="mb-3 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 break-words">{podcast.title}</h1>
+              <p className="text-base sm:text-lg md:text-xl text-muted mb-3 sm:mb-4 break-words">{podcast.subtitle}</p>
+              <p className="text-sm sm:text-base text-muted max-w-2xl leading-relaxed break-words">{podcast.description}</p>
             </div>
 
-            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6">
-              <Button size="lg" className="gap-2 flex-1 sm:flex-initial" onClick={handleRunNow} disabled={runningPipeline}>
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <Button size="lg" className="gap-2 flex-1 sm:flex-initial min-w-[120px] sm:min-w-0" onClick={handleRunNow} disabled={runningPipeline}>
                 <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">{runningPipeline ? 'Starting...' : 'Run Now'}</span>
                 <span className="sm:hidden">{runningPipeline ? 'Starting...' : 'Run'}</span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial" onClick={() => setActiveTab('settings')}>
+              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial min-w-[100px] sm:min-w-0" onClick={() => setActiveTab('settings')}>
                 <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Settings</span>
                 <span className="sm:hidden">Config</span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial" onClick={handleCopyRSS}>
+              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial min-w-[100px] sm:min-w-0" onClick={handleCopyRSS}>
                 <Copy className="w-4 h-4 sm:w-5 sm:h-5" />
                 <span className="hidden sm:inline">Copy RSS</span>
                 <span className="sm:hidden">RSS</span>
@@ -150,7 +150,7 @@ export default function PodcastDetailPage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="gap-2 flex-1 sm:flex-initial"
+                className="gap-2 flex-1 sm:flex-initial min-w-[80px] sm:min-w-0"
                 onClick={() => {
                   navigator.clipboard.writeText(podcast.rssUrl);
                   toast.info('RSS Feed Help', 'Submit your RSS feed to Apple Podcasts or Spotify. RSS URL copied to clipboard.');
@@ -185,7 +185,7 @@ export default function PodcastDetailPage() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as Tab)}>
-          <TabsList className="mb-8">
+          <TabsList className="mb-4 sm:mb-6 md:mb-8">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="episodes">Episodes</TabsTrigger>
             <TabsTrigger value="runs">Runs</TabsTrigger>

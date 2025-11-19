@@ -1,6 +1,7 @@
 /**
  * Persistent storage for runs
- * Uses DynamoDB for production (Vercel), falls back to local file for development
+ * ALL runs are stored in DynamoDB only - no local filesystem fallback
+ * Requires AWS credentials to be set in environment variables
  */
 
 import 'dotenv/config';
@@ -76,132 +77,123 @@ async function saveRunsToDisk(runs: Record<string, PersistedRun[]>): Promise<voi
  * Save a single run to DynamoDB (or disk fallback)
  */
 export async function saveRun(run: PersistedRun): Promise<void> {
+  // Require AWS credentials - no local fallback
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+    throw new Error('AWS credentials required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env file. All runs must be stored in DynamoDB.');
+  }
+
   const docClient = getDynamoClient();
-  
-  if (docClient && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
-    // Use DynamoDB (production/Vercel)
-    try {
-      const now = new Date().toISOString();
-      // Map our status ('completed') to DynamoDB status ('success')
-      const dynamoStatus = run.status === 'completed' ? 'success' : run.status;
-      await docClient.send(
-        new PutCommand({
-          TableName: RUNS_TABLE,
-          Item: {
-            id: run.id,
-            podcastId: run.podcastId,
-            status: dynamoStatus,
-            createdAt: run.createdAt,
-            startedAt: run.startedAt || now,
-            finishedAt: run.completedAt, // DynamoDB uses 'finishedAt', we use 'completedAt'
-            completedAt: run.completedAt, // Keep both for compatibility
-            duration: run.duration,
-            errorMessage: run.error, // DynamoDB uses 'errorMessage', we use 'error'
-            error: run.error, // Keep both for compatibility
-            progress: run.progress,
-            output: run.output,
-            updatedAt: now,
-          },
-        })
-      );
-      console.log(`✅ Saved run ${run.id} to DynamoDB`);
-    } catch (error: any) {
-      console.error(`❌ Failed to save run to DynamoDB:`, error);
-      // Fallback to disk
-      await saveRunToDisk(run);
-    }
-  } else {
-    // Fallback to disk (local dev)
-    await saveRunToDisk(run);
+  if (!docClient) {
+    throw new Error('Failed to initialize DynamoDB client. Check AWS credentials and region.');
+  }
+
+  try {
+    const now = new Date().toISOString();
+    // Map our status ('completed') to DynamoDB status ('success')
+    const dynamoStatus = run.status === 'completed' ? 'success' : run.status;
+    await docClient.send(
+      new PutCommand({
+        TableName: RUNS_TABLE,
+        Item: {
+          id: run.id,
+          podcastId: run.podcastId,
+          status: dynamoStatus,
+          createdAt: run.createdAt,
+          startedAt: run.startedAt || now,
+          finishedAt: run.completedAt, // DynamoDB uses 'finishedAt', we use 'completedAt'
+          completedAt: run.completedAt, // Keep both for compatibility
+          duration: run.duration,
+          errorMessage: run.error, // DynamoDB uses 'errorMessage', we use 'error'
+          error: run.error, // Keep both for compatibility
+          progress: run.progress,
+          output: run.output,
+          updatedAt: now,
+        },
+      })
+    );
+    console.log(`✅ Saved run ${run.id} to DynamoDB`);
+  } catch (error: any) {
+    console.error(`❌ Failed to save run to DynamoDB:`, error);
+    throw new Error(`Failed to save run to DynamoDB: ${error.message}. All runs must be stored in DynamoDB.`);
   }
 }
 
 /**
- * Save run to disk (fallback)
+ * Save run to disk (DEPRECATED - no longer used)
+ * All runs must be stored in DynamoDB
  */
 async function saveRunToDisk(run: PersistedRun): Promise<void> {
-  const allRuns = await loadRunsFromDisk();
-  
-  if (!allRuns[run.podcastId]) {
-    allRuns[run.podcastId] = [];
-  }
-  
-  const existingIndex = allRuns[run.podcastId].findIndex(r => r.id === run.id);
-  if (existingIndex >= 0) {
-    allRuns[run.podcastId][existingIndex] = run;
-  } else {
-    allRuns[run.podcastId].push(run);
-  }
-  
-  await saveRunsToDisk(allRuns);
+  // This function is kept for reference but should never be called
+  // All runs must be stored in DynamoDB
+  throw new Error('Local filesystem storage is disabled. All runs must be stored in DynamoDB. Please set AWS credentials.');
 }
 
 /**
- * Get runs for a specific podcast from DynamoDB (or disk fallback)
+ * Get runs for a specific podcast from DynamoDB only
+ * Requires AWS credentials
  */
 export async function getRunsForPodcast(podcastId: string): Promise<PersistedRun[]> {
+  // Require AWS credentials - no local fallback
+  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+    throw new Error('AWS credentials required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env file. All runs must be stored in DynamoDB.');
+  }
+
   const docClient = getDynamoClient();
-  
-  if (docClient && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
-    // Use DynamoDB (production/Vercel)
-    try {
-      let allRuns: any[] = [];
-      let lastEvaluatedKey: any = undefined;
+  if (!docClient) {
+    throw new Error('Failed to initialize DynamoDB client. Check AWS credentials and region.');
+  }
+
+  try {
+    let allRuns: any[] = [];
+    let lastEvaluatedKey: any = undefined;
+    
+    // Handle pagination for DynamoDB Query
+    do {
+      const response = await docClient.send(
+        new QueryCommand({
+          TableName: RUNS_TABLE,
+          IndexName: 'PodcastIdIndex',
+          KeyConditionExpression: 'podcastId = :podcastId',
+          ExpressionAttributeValues: {
+            ':podcastId': podcastId,
+          },
+          ScanIndexForward: false, // Sort descending (newest first)
+          ExclusiveStartKey: lastEvaluatedKey,
+        })
+      );
       
-      // Handle pagination for DynamoDB Query
-      do {
-        const response = await docClient.send(
-          new QueryCommand({
-            TableName: RUNS_TABLE,
-            IndexName: 'PodcastIdIndex',
-            KeyConditionExpression: 'podcastId = :podcastId',
-            ExpressionAttributeValues: {
-              ':podcastId': podcastId,
-            },
-            ScanIndexForward: false, // Sort descending (newest first)
-            ExclusiveStartKey: lastEvaluatedKey,
-          })
-        );
-        
-        if (response.Items) {
-          allRuns = allRuns.concat(response.Items);
-        }
-        
-        lastEvaluatedKey = response.LastEvaluatedKey;
-      } while (lastEvaluatedKey);
+      if (response.Items) {
+        allRuns = allRuns.concat(response.Items);
+      }
       
-      const runs = allRuns.map((item: any) => ({
-        id: item.id,
-        podcastId: item.podcastId,
-        // Map DynamoDB status ('success') to our status ('completed')
-        status: item.status === 'success' ? 'completed' : item.status,
-        createdAt: item.createdAt,
-        startedAt: item.startedAt,
-        completedAt: item.completedAt || item.finishedAt,
-        duration: item.duration,
-        error: item.error || item.errorMessage,
-        progress: item.progress,
-        output: item.output,
-      }));
-      
-      console.log(`✅ Fetched ${runs.length} runs from DynamoDB for podcast ${podcastId}`);
-      return runs;
-    } catch (error: any) {
-      console.error(`❌ Failed to fetch runs from DynamoDB:`, {
-        error: error.message,
-        code: error.code,
-        name: error.name,
-        table: RUNS_TABLE,
-        index: 'PodcastIdIndex',
-      });
-      // Fallback to disk
-      const diskRuns = await loadRunsFromDisk();
-      return diskRuns[podcastId] || [];
-    }
-  } else {
-    // Fallback to disk (local dev)
-    const diskRuns = await loadRunsFromDisk();
-    return diskRuns[podcastId] || [];
+      lastEvaluatedKey = response.LastEvaluatedKey;
+    } while (lastEvaluatedKey);
+    
+    const runs = allRuns.map((item: any) => ({
+      id: item.id,
+      podcastId: item.podcastId,
+      // Map DynamoDB status ('success') to our status ('completed')
+      status: item.status === 'success' ? 'completed' : item.status,
+      createdAt: item.createdAt,
+      startedAt: item.startedAt,
+      completedAt: item.completedAt || item.finishedAt,
+      duration: item.duration,
+      error: item.error || item.errorMessage,
+      progress: item.progress,
+      output: item.output,
+    }));
+    
+    console.log(`✅ Fetched ${runs.length} runs from DynamoDB for podcast ${podcastId}`);
+    return runs;
+  } catch (error: any) {
+    console.error(`❌ Failed to fetch runs from DynamoDB:`, {
+      error: error.message,
+      code: error.code,
+      name: error.name,
+      table: RUNS_TABLE,
+      index: 'PodcastIdIndex',
+    });
+    throw new Error(`Failed to fetch runs from DynamoDB: ${error.message}. All runs must be stored in DynamoDB.`);
   }
 }
 

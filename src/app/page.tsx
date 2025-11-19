@@ -41,18 +41,18 @@ export default function Home() {
       {/* Header - Only show for unauthenticated users */}
       {!isAuthenticated && (
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-lg border-b border-border">
-          <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <Radio className="w-6 h-6 text-primary" />
-              <span className="text-xl font-bold text-primary">Podcast AI</span>
+          <div className="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between">
+            <Link href="/" className="flex items-center gap-1.5 sm:gap-2">
+              <Radio className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+              <span className="text-lg sm:text-xl font-bold text-primary">Podcast AI</span>
             </Link>
             
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2 sm:gap-3">
               <Link href="/auth/login">
-                <Button variant="ghost">Sign In</Button>
+                <Button variant="ghost" size="sm" className="text-sm sm:text-base px-3 sm:px-6 py-2 sm:py-3">Sign In</Button>
               </Link>
               <Link href="/auth/signup">
-                <Button>Get Started</Button>
+                <Button size="sm" className="text-sm sm:text-base px-3 sm:px-6 py-2 sm:py-3">Get Started</Button>
               </Link>
             </div>
           </div>

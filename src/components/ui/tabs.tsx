@@ -26,7 +26,7 @@ export function Tabs({ defaultValue, children, className }: TabsProps) {
 
 export function TabsList({ children, className }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={cn('border-b border-border flex gap-8', className)}>
+    <div className={cn('border-b border-border flex gap-4 sm:gap-8 overflow-x-auto scrollbar-hide -mx-4 sm:mx-0 px-4 sm:px-0', className)}>
       {children}
     </div>
   );
@@ -43,7 +43,7 @@ export function TabsTrigger({ value, children }: { value: string; children: Reac
     <button
       onClick={() => setActiveTab(value)}
       className={cn(
-        'px-4 py-3 font-medium capitalize transition-all',
+        'px-3 sm:px-4 py-2.5 sm:py-3 font-medium capitalize transition-all whitespace-nowrap flex-shrink-0 text-sm sm:text-base',
         isActive
           ? 'text-primary border-b-2 border-primary'
           : 'text-muted hover:text-foreground'
