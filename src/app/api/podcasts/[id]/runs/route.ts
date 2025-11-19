@@ -407,11 +407,13 @@ export async function GET(
     // Sort by createdAt descending (newest first)
     runs.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 
+    // Return response without logging (reduces log noise from frequent polling)
     return NextResponse.json({
       runs,
       total: runs.length,
     });
   } catch (error) {
+    // Only log errors, not successful requests
     console.error('Error fetching runs:', error);
     return NextResponse.json(
       {

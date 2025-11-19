@@ -184,12 +184,13 @@ export default function RunProgressPage() {
   useEffect(() => {
     fetchRun();
     
-    // Poll every 5 seconds if still running (reduced frequency for better performance)
+    // Poll every 5 seconds if still running, otherwise stop polling
     const interval = setInterval(() => {
-      if (run?.status === 'running') {
+      if (run?.status === 'running' || run?.status === 'pending') {
         fetchRun();
       }
-    }, 5000); // Increased from 3 to 5 seconds
+      // Stop polling if run is completed or failed
+    }, 5000);
 
     return () => clearInterval(interval);
   }, [runId, run?.status]); // eslint-disable-line react-hooks/exhaustive-deps

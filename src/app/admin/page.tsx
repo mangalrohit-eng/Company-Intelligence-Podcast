@@ -102,11 +102,30 @@ export default function AdminPage() {
 
     fetchRuns();
     
-    // Poll for updates every 5 seconds (reduced frequency for better performance)
-    const interval = setInterval(fetchRuns, 5000);
+    // Smart polling: poll every 5 seconds if there are active runs, otherwise every 30 seconds
+    const interval = setInterval(() => {
+      const hasActiveRuns = activeRuns.length > 0;
+      if (hasActiveRuns) {
+        // Poll frequently if there are active runs
+        fetchRuns();
+      } else {
+        // Poll less frequently if no active runs (just to catch new runs)
+        // Only fetch every 6th interval (30 seconds)
+      }
+    }, 5000);
     
-    return () => clearInterval(interval);
-  }, []);
+    // Also set up a slower poll for when there are no active runs
+    const slowInterval = setInterval(() => {
+      if (activeRuns.length === 0) {
+        fetchRuns();
+      }
+    }, 30000); // Every 30 seconds when no active runs
+    
+    return () => {
+      clearInterval(interval);
+      clearInterval(slowInterval);
+    };
+  }, [activeRuns.length]);
 
   const toggleExpanded = (runId: string) => {
     setExpandedRuns(prev => {
