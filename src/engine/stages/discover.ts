@@ -56,8 +56,22 @@ export class DiscoverStage {
           feedUrl, 
           status: response.status, 
           bodyLength: response.body?.length || 0,
-          latency 
+          latency,
+          contentType: response.headers?.['content-type'],
+          finalUrl: response.url !== feedUrl ? response.url : undefined, // Log if redirected
+          isVercel: !!process.env.VERCEL,
         });
+        
+        // Check for redirects or non-200 status
+        if (response.status !== 200) {
+          logger.warn('RSS feed returned non-200 status', {
+            feedUrl,
+            status: response.status,
+            bodyPreview: response.body?.substring(0, 500),
+            headers: response.headers,
+            isVercel: !!process.env.VERCEL,
+          });
+        }
         
         if (response.status === 200 && response.body) {
           // Parse RSS feed (simple XML parsing)
@@ -146,6 +160,7 @@ export class DiscoverStage {
                 items.push({
                   url: link,
                   title,
+                  snippet: title, // Use title as snippet for now
                   publisher: new URL(feedUrl).hostname,
                   publishedDate: pubDate,
                   topicIds: [topicIds[0] || 'company-news'],
@@ -154,6 +169,7 @@ export class DiscoverStage {
                     relevance,
                     recency: this.calculateRecency(pubDate),
                     authority: 0.7,
+                    expectedInfoGain: 0.5,
                   },
                 });
                 
@@ -194,6 +210,7 @@ export class DiscoverStage {
                 items.push({
                   url: link,
                   title,
+                  snippet: title, // Use title as snippet for now
                   publisher: new URL(feedUrl).hostname,
                   publishedDate: pubDate,
                   topicIds: [topicIds[0] || 'company-news'],
@@ -202,6 +219,7 @@ export class DiscoverStage {
                     relevance: 0.3, // Very low relevance for fallback
                     recency: this.calculateRecency(pubDate),
                     authority: 0.7,
+                    expectedInfoGain: 0.3,
                   },
                 });
               }
@@ -222,8 +240,18 @@ export class DiscoverStage {
           error: error.message,
           stack: error.stack,
           errorName: error.name,
+          errorCode: error.code,
+          isVercel: !!process.env.VERCEL,
+          nodeEnv: process.env.NODE_ENV,
         });
         // Continue to next feed - don't fail entire discovery
+        // But log this as a critical issue if it's the only feed
+        if (sources.rssFeeds.length === 1) {
+          logger.error('CRITICAL: Only RSS feed failed, discovery will return 0 items', {
+            feedUrl,
+            error: error.message,
+          });
+        }
       }
     }
 
@@ -242,6 +270,7 @@ export class DiscoverStage {
               items.push({
                 url: article.url,
                 title: article.title,
+                snippet: article.description || article.title,
                 publisher: article.source?.name || 'Unknown',
                 publishedDate: article.publishedAt,
                 topicIds: [topicIds[0]],
@@ -250,6 +279,7 @@ export class DiscoverStage {
                   relevance: 0.8,
                   recency: this.calculateRecency(article.publishedAt),
                   authority: 0.7,
+                  expectedInfoGain: 0.5,
                 },
               });
             }

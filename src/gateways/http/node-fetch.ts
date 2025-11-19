@@ -58,7 +58,12 @@ export class NodeFetchHttpGateway implements IHttpGateway {
       logger.error('Node fetch failed', {
         url: request.url,
         error: error.message,
+        errorName: error.name,
+        errorCode: error.code,
         latencyMs,
+        isVercel: !!process.env.VERCEL,
+        nodeEnv: process.env.NODE_ENV,
+        stack: error.stack?.split('\n').slice(0, 5).join('\n'),
       });
 
       throw new Error(`HTTP fetch failed for ${request.url}: ${error.message}`);
