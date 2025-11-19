@@ -109,16 +109,32 @@ export function removeLogStreamer(runId: string) {
 // Create a Winston transport that streams to S3
 export function createS3LogTransport(runId: string) {
   const streamer = getLogStreamer(runId);
+  const winston = require('winston');
   
-  return {
-    log: (info: any) => {
-      streamer.addLog(info.level, info.message, {
-        ...info,
-        level: undefined,
-        message: undefined,
-        timestamp: undefined,
+  // Create a custom transport class
+  class S3LogTransport extends winston.Transport {
+    constructor() {
+      super();
+      this.setMaxListeners(0); // Allow unlimited listeners
+    }
+    
+    log(info: any, callback: () => void) {
+      setImmediate(() => {
+        streamer.addLog(info.level, info.message, {
+          ...info,
+          level: undefined,
+          message: undefined,
+          timestamp: undefined,
+        });
+        this.emit('logged', info);
       });
-    },
-  };
+      
+      if (callback) {
+        callback();
+      }
+    }
+  }
+  
+  return new S3LogTransport();
 }
 
