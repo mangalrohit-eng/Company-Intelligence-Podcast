@@ -1,0 +1,24 @@
+{
+  "itemCount": 5,
+  "articleLimit": 5,
+  "topicTargets": {
+    "company-news": {
+      "targetUnits": 1
+    },
+    "competitor-analysis": {
+      "targetUnits": 1
+    },
+    "industry-trends": {
+      "targetUnits": 1
+    },
+    "layoff": {
+      "targetUnits": 1
+    }
+  },
+  "sampleUrls": [
+    "https://news.google.com/rss/articles/CBMipwFBVV95cUxOWDBYcVd1YjU1aFh2SEk3OERqbm9xSVkzUkJmMVdhc3ludWlIVkZjcHBTY0ItRWxVcmdHTUhPclF2QXFVWVdISnJpekJHZVNleGRZS1ZZTGs0dXFhTXJOaldWUXNHTjl0UkxvRWo3bWNyMWNNcDlxbGVtUm01SjQ5Tk9HYmU3NmJFYzgzcjdjRXp2Q08wQ2FKbVd1VFBEa0pxX1J2SDJVTQ?oc=5",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxOYzg5VHdwVWgzN3pDSVdtQ29iVHRnaDZSeEROQXllekQzQmp6RWotTjNJaTF6WlVHcGRBYWxvVjE2WlRpRkVPM2RyWHhzcG1MeFJYWU5jSHlkU3FhZVRJZEt3OXBMdzdyTkprc3RSMDNvWHhLems3bmkwNUVCTjlCYzduTDk1WUFRdmtMY1FuRUJ4RlF4ajFVTUNMc3NLN1Y5VnBtVnUxdXZlQXlibkJz?oc=5",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxPTlYzLTU2d0h4NndNeW1yeVpDYTlaS2UwQ2dkTTlPQlJScVlnMGREQnZmQnFuenBLU3hKeWt5N2ozQk43NERLS0pxSU5xNE11UUVYTXZiTVM5bUQwaU0tdURXVUM3NW5ONU5mQVZZbnNRTnIyMVRITllNU3FfckpPZGl0UWhaUzFtN1g2Y0RyLTdHSENsQWRyUnA5YjdFdw?oc=5"
+  ],
+  "totalRankedItems": 97
+}

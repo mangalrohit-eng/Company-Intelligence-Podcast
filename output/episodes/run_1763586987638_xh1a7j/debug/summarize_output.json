@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a bold move signaling a major shift within the telecom giant, Verizon has announced layoffs that will see about 15 percent of its U.S. workforce leaving the company. This decision marks the largest reduction to date for the firm, highlighting a critical juncture in its operational strategy. According to CEO Dan Schulman, the rationale behind this significant cutback stems from the need to \"lower costs and 'fundamentally restructure' its expense base.\" This statement sheds light on the pressing financial pressures facing Verizon, pushing the company toward drastic measures to remain competitive and sustainable in a rapidly evolving market landscape.",
+      "onAirStat": {
+        "span": "Verizon's layoffs represent about 15 percent of its U.S. workforce",
+        "evidenceId": "54415bee-21ea-4422-8a39-cc489b86e3fb"
+      },
+      "onAirQuote": {
+        "span": "Verizon needed to lower costs and 'fundamentally restructure' its expense...",
+        "evidenceId": "a69f6d49-eeb3-4f6a-9d97-27f186d28b0c"
+      }
+    }
+  ]
+}

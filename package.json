@@ -34,6 +34,7 @@
     "deploy": "cd infra/cdk && cdk deploy",
     "deploy:update": "cd infra/cdk && cdk deploy --require-approval never --hotswap",
     "deploy:frontend": "powershell -ExecutionPolicy Bypass -File scripts/deploy-to-aws.ps1",
+    "deploy:amplify:setup": "powershell -ExecutionPolicy Bypass -File scripts/deploy-amplify.ps1",
     "deploy:all": "npm run deploy && npm run deploy:frontend",
     "build:frontend": "next build",
     "sync:frontend": "powershell -ExecutionPolicy Bypass -File scripts/deploy-to-aws.ps1",

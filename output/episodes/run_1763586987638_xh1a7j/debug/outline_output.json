@@ -1,0 +1,59 @@
+{
+  "outline": {
+    "theme": "Corporate Strategy and Workforce Management",
+    "subThemes": [
+      "Cost Reduction",
+      "Operational Restructuring"
+    ],
+    "sections": [
+      {
+        "section": "cold_open",
+        "title": "A Bold Move by Verizon",
+        "bulletPoints": [
+          "Verizon announces layoffs affecting 15% of its U.S. workforce.",
+          "CEO Dan Schulman cites the need to lower costs and 'fundamentally restructure' as key reasons."
+        ]
+      },
+      {
+        "section": "company_deep_dive",
+        "title": "Behind Verizon's Strategic Shift",
+        "bulletPoints": [
+          "Understanding the financial pressures leading to Verizon's largest workforce reduction.",
+          "Analyzing the impact of these layoffs on Verizon's operational strategy and future sustainability.",
+          "Exploring the challenges and opportunities this presents within the telecom industry."
+        ]
+      },
+      {
+        "section": "competitor_moves",
+        "title": "How Competitors Are Responding",
+        "bulletPoints": [
+          "Comparing Verizon's strategy with actions taken by other telecom giants.",
+          "Examining market reactions and potential shifts in competitive dynamics.",
+          "Highlighting new opportunities for smaller competitors in the wake of Verizon's announcement."
+        ]
+      },
+      {
+        "section": "industry_special_topics",
+        "title": "Cost Reduction & Operational Restructuring Across Industries",
+        "bulletPoints": [
+          "Exploring similar trends of workforce reductions and operational restructuring in other sectors.",
+          "The role of technology and automation in driving cost reduction strategies.",
+          "Assessing the long-term impacts of such strategies on workforce management and corporate culture."
+        ]
+      },
+      {
+        "section": "takeaways",
+        "title": "The Bigger Picture",
+        "bulletPoints": [
+          "Key lessons from Verizon's strategy for other companies facing similar financial pressures.",
+          "The balance between cost reduction and maintaining a competitive edge in the market.",
+          "Predictions for the future of workforce management and operational restructuring in the telecom industry and beyond."
+        ]
+      }
+    ]
+  },
+  "knowledgeGraph": {
+    "entities": 2,
+    "relationships": 1
+  }
+}

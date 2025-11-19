@@ -1,0 +1,13 @@
+{
+  "topicCount": 4,
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "companyName": "Verizon",
+  "competitorCount": 0,
+  "competitors": [],
+  "evidenceCount": 10
+}

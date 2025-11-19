@@ -1,0 +1,98 @@
+{
+  "frozenConfig": {
+    "title": "VZ2",
+    "subtitle": "Company Intelligence Updates for Verizon",
+    "description": "AI-powered intelligence briefing for Verizon",
+    "author": "Verizon",
+    "email": "podcast@example.com",
+    "category": "Business",
+    "explicit": false,
+    "language": "en",
+    "coverArtS3Key": "default-cover.png",
+    "company": {
+      "id": "verizon",
+      "name": "Verizon"
+    },
+    "industry": {
+      "id": "technology",
+      "name": "Technology"
+    },
+    "competitors": [],
+    "topics": {
+      "standard": [
+        {
+          "id": "company-news",
+          "name": "Company News & Announcements",
+          "priority": 68
+        },
+        {
+          "id": "competitor-analysis",
+          "name": "Competitive Intelligence",
+          "priority": 45
+        },
+        {
+          "id": "industry-trends",
+          "name": "Industry Trends & Market Analysis",
+          "priority": 59
+        },
+        {
+          "id": "layoff",
+          "name": "layoff",
+          "priority": 70
+        }
+      ],
+      "special": []
+    },
+    "cadence": "daily",
+    "durationMinutes": 2,
+    "publishTime": "09:00",
+    "timezone": "UTC",
+    "timeWindowHours": 24,
+    "timeWindow": {
+      "startIso": "2025-11-18T21:16:33.765Z",
+      "endIso": "2025-11-19T21:16:33.765Z"
+    },
+    "regions": [
+      "US"
+    ],
+    "sourceLanguages": [
+      "en"
+    ],
+    "voice": {
+      "provider": "openai-tts",
+      "voiceId": "fable",
+      "speed": 1,
+      "tone": "professional"
+    },
+    "robotsMode": "permissive",
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": []
+    }
+  },
+  "speechBudgetWords": 300,
+  "evidenceTargetUnits": 4,
+  "topicAllocations": {
+    "company-news": {
+      "targetUnits": 1,
+      "timeBudgetSeconds": 34,
+      "priorityWeight": 68
+    },
+    "competitor-analysis": {
+      "targetUnits": 1,
+      "timeBudgetSeconds": 22,
+      "priorityWeight": 45
+    },
+    "industry-trends": {
+      "targetUnits": 1,
+      "timeBudgetSeconds": 29,
+      "priorityWeight": 59
+    },
+    "layoff": {
+      "targetUnits": 1,
+      "timeBudgetSeconds": 35,
+      "priorityWeight": 70
+    }
+  },
+  "globalTimeBudgetSeconds": 120
+}

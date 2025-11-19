@@ -1,0 +1,63 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 10,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 10,
+      "sampleUnits": [
+        {
+          "id": "e6f27d4f-2176-453e-86ca-ba9636c1cebe",
+          "type": "claim",
+          "span": "Verizon planned to cut about 15,000 jobs",
+          "authority": 0.3,
+          "publisher": "Broadband Breakfast",
+          "context": "in response to intensifying wireless competition",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "54415bee-21ea-4422-8a39-cc489b86e3fb",
+          "type": "stat",
+          "span": "Verizon's layoffs represent about 15 percent of its U.S. workforce",
+          "authority": 0.3,
+          "publisher": "Broadband Breakfast",
+          "context": "largest reduction to date",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "21bd9d38-056c-4bdb-9802-6af8cb9b9d0b",
+          "type": "stat",
+          "span": "Verizon shed nearly 20,000 positions over the past three years",
+          "authority": 0.3,
+          "publisher": "Broadband Breakfast",
+          "context": "through voluntary programs and restructuring efforts",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 6,
+      "validQuotes": 1,
+      "validClaims": 3
+    }
+  ]
+}
