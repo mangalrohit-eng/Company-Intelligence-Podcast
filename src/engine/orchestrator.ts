@@ -50,19 +50,29 @@ export class PipelineOrchestrator {
   }
 
   async execute(input: PipelineInput, emitter: IEventEmitter): Promise<PipelineOutput> {
-    // Enable S3 log streaming for this run
-    enableS3LogStreaming(input.runId);
+    // Enable S3 log streaming for this run (non-blocking - don't fail pipeline if logging fails)
+    try {
+      enableS3LogStreaming(input.runId);
+    } catch (logError: any) {
+      // Log to console but don't throw - logging is non-critical
+      console.error(`⚠️ Failed to enable S3 log streaming for ${input.runId}:`, logError.message);
+    }
     
     // Cleanup on exit
     const cleanup = () => {
-      disableS3LogStreaming();
-      const { removeLogStreamer } = require('@/utils/log-streamer');
-      removeLogStreamer(input.runId);
+      try {
+        disableS3LogStreaming();
+        const { removeLogStreamer } = require('@/utils/log-streamer');
+        removeLogStreamer(input.runId);
+      } catch (cleanupError) {
+        // Ignore cleanup errors
+        console.error(`⚠️ Cleanup error (non-critical):`, cleanupError);
+      }
     };
     
     try {
       const startTime = new Date();
-    logger.info('Pipeline execution started', { runId: input.runId });
+      logger.info('Pipeline execution started', { runId: input.runId });
 
     // Load admin settings
     const adminSettings = await this.loadAdminSettings();

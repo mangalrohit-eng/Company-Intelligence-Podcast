@@ -47,21 +47,34 @@ export const logger = winston.createLogger({
  * Enable S3 log streaming for a specific run
  */
 export function enableS3LogStreaming(runId: string) {
-  if (currentRunId === runId && s3Transport) {
-    return; // Already enabled for this run
-  }
+  try {
+    if (currentRunId === runId && s3Transport) {
+      return; // Already enabled for this run
+    }
 
-  // Remove old transport if exists
-  if (s3Transport) {
-    logger.remove(s3Transport);
+    // Remove old transport if exists
+    if (s3Transport) {
+      try {
+        logger.remove(s3Transport);
+      } catch (removeError) {
+        // Ignore remove errors
+      }
+      s3Transport = null;
+    }
+
+    // Add S3 transport for this run
+    const { createS3LogTransport } = require('./log-streamer');
+    s3Transport = createS3LogTransport(runId);
+    logger.add(s3Transport);
+    currentRunId = runId;
+  } catch (error: any) {
+    // Log error but don't throw - logging is non-critical
+    console.error(`Failed to enable S3 log streaming:`, error.message);
+    // Reset state on error
     s3Transport = null;
+    currentRunId = null;
+    throw error; // Re-throw so caller knows it failed, but pipeline can continue
   }
-
-  // Add S3 transport for this run
-  const { createS3LogTransport } = require('./log-streamer');
-  s3Transport = createS3LogTransport(runId);
-  logger.add(s3Transport);
-  currentRunId = runId;
 }
 
 /**
