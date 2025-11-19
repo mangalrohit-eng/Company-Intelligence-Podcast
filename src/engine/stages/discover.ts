@@ -52,7 +52,8 @@ export class DiscoverStage {
     emitter.emit('discover', 20, 'Querying news sources');
 
     // Parse RSS feeds with retry logic
-    for (const feedUrl of sources.rssFeeds) {
+    try {
+      for (const feedUrl of sources.rssFeeds) {
       const startTime = Date.now();
       let response: any = null;
       let lastError: any = null;
@@ -344,26 +345,15 @@ export class DiscoverStage {
             });
           }
         }
-      } catch (error: any) {
-        // This catch block should rarely be hit now due to retry logic above
-        const errorLatency = Date.now() - startTime;
-        logger.error('Unexpected error in RSS feed fetch', { 
-          feedUrl, 
-          error: error.message,
-          errorName: error.name,
-          errorCode: error.code,
-          latency: errorLatency,
-          isVercel: !!process.env.VERCEL,
-        });
-        
-        // Continue to next feed - don't fail entire discovery
-        if (sources.rssFeeds.length === 1) {
-          logger.error('CRITICAL: Only RSS feed failed with unexpected error', {
-            feedUrl,
-            error: error.message,
-          });
-        }
       }
+    } catch (error: any) {
+      // This catch block handles unexpected errors outside the retry loop
+      logger.error('Unexpected error in RSS feed processing', { 
+        error: error.message,
+        errorName: error.name,
+        errorCode: error.code,
+        isVercel: !!process.env.VERCEL,
+      });
     }
 
     // Parse News APIs
