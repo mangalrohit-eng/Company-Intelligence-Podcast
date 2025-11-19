@@ -5,12 +5,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { ArrowLeft, ArrowRight, Check, Zap, Sparkles, Settings } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Check, Zap, Sparkles, Settings, Plus, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 
 type Step = 1 | 2 | 3 | 4 | 5;
@@ -164,17 +165,30 @@ export default function NewPodcastPage() {
         companyId: formData.companyId,
         topicIds: formData.topicIds,
         topicIdsLength: formData.topicIds?.length || 0,
+        specialTopicIds: formData.specialTopicIds,
+        specialTopicIdsLength: formData.specialTopicIds?.length || 0,
         topicPriorities: formData.topicPriorities,
         hasTopics: !!(formData.topicIds && formData.topicIds.length > 0),
+        hasSpecialTopics: !!(formData.specialTopicIds && formData.specialTopicIds.length > 0),
         allFormDataKeys: Object.keys(formData),
       });
 
-      // Check if topics are missing and try to get them from Step4's default topics
+      // Check if topics are missing - check both standard and special topics
       let topicsToSubmit = formData.topicIds || [];
+      
+      // If topicIds is empty, check if we have special topics
+      if (topicsToSubmit.length === 0 && formData.specialTopicIds && formData.specialTopicIds.length > 0) {
+        console.log('📋 No standard topics, but found special topics:', formData.specialTopicIds);
+        topicsToSubmit = formData.specialTopicIds;
+      }
+      
+      // If still empty, try to get them from Step4's default topics
       if (topicsToSubmit.length === 0) {
         console.warn('⚠️ WARNING: formData.topicIds is empty!', {
           formDataKeys: Object.keys(formData),
           formDataTopicIds: formData.topicIds,
+          formDataSpecialTopicIds: formData.specialTopicIds,
+          hasSpecialTopics: !!(formData.specialTopicIds && formData.specialTopicIds.length > 0),
         });
         
         // Try to get default topics as fallback
@@ -182,7 +196,7 @@ export default function NewPodcastPage() {
         console.warn('⚠️ Using default topics as fallback:', defaultTopics);
         topicsToSubmit = defaultTopics;
         
-        alert('⚠️ Warning: No topics were synced from Step 4. Using default topics. Please go back to Step 4 and ensure topics are selected.');
+        alert('⚠️ Warning: No topics selected. The podcast will be created with default topics.');
       }
 
       // Create podcast via AWS Lambda API Gateway with auth token
@@ -986,22 +1000,39 @@ function Step3({ formData, setFormData }: any) {
   );
 }
 
+// Default topic priorities for Step 4 - only the 3 pipeline defaults
+const DEFAULT_TOPIC_PRIORITIES = {
+  'Company News & Announcements': 3,
+  'Competitive Intelligence': 2,
+  'Industry Trends & Market Analysis': 2,
+};
+
 function Step4({ formData, setFormData, currentStep }: any) {
-  // Helper to convert topic name to ID (e.g., 'Strategy' -> 'strategy', 'Product Launches' -> 'product-launches')
+  // Helper to convert topic name to ID
+  // Maps default topic display names to their expected IDs
   const topicNameToId = (name: string): string => {
+    // Map default topic display names to their expected IDs
+    const defaultTopicMap: Record<string, string> = {
+      'Company News & Announcements': 'company-news',
+      'Competitive Intelligence': 'competitor-analysis',
+      'Industry Trends & Market Analysis': 'industry-trends',
+    };
+    
+    // If it's a default topic, use the mapped ID
+    if (defaultTopicMap[name]) {
+      return defaultTopicMap[name];
+    }
+    
+    // Otherwise, convert name to ID (e.g., 'Strategy' -> 'strategy', 'Product Launches' -> 'product-launches')
     return name.toLowerCase().replace(/\s+/g, '-').replace(/&/g, 'and').replace(/[^a-z0-9-]/g, '');
   };
 
   // Initialize topic priorities from formData or defaults
+  // Check if formData.topicPriorities exists and has keys, otherwise use defaults
   const [topicPriorities, setTopicPriorities] = useState<Record<string, number>>(
-    formData.topicPriorities || {
-      'Earnings': 80,
-      'Product Launches': 70,
-      'M&A': 60,
-      'Leadership': 50,
-      'Technology': 85,
-      'Strategy': 75,
-    }
+    (formData.topicPriorities && Object.keys(formData.topicPriorities).length > 0)
+      ? formData.topicPriorities
+      : DEFAULT_TOPIC_PRIORITIES
   );
 
   // Track which topics are selected (all are selected by default)
@@ -1009,12 +1040,28 @@ function Step4({ formData, setFormData, currentStep }: any) {
     new Set(Object.keys(topicPriorities))
   );
 
+  // Safeguard: If topicPriorities becomes empty, restore defaults
+  useEffect(() => {
+    if (Object.keys(topicPriorities).length === 0) {
+      console.warn('⚠️ topicPriorities is empty, restoring defaults');
+      setTopicPriorities(DEFAULT_TOPIC_PRIORITIES);
+      setSelectedTopics(new Set(Object.keys(DEFAULT_TOPIC_PRIORITIES)));
+    }
+  }, [topicPriorities]);
+
   const [selectedRegions, setSelectedRegions] = useState<string[]>(
     formData.regions || ['US', 'UK']
   );
   const [selectedLanguages, setSelectedLanguages] = useState<string[]>(
     formData.sourceLanguages || ['en']
   );
+
+  // Custom topics (user-added)
+  const [customTopics, setCustomTopics] = useState<Array<{ id: string; name: string; priority: number }>>(
+    formData.customTopics || []
+  );
+  const [newCustomTopicName, setNewCustomTopicName] = useState('');
+  const [showAddCustomTopic, setShowAddCustomTopic] = useState(false);
 
   // AI-suggested special topics
   const [suggestedSpecialTopics, setSuggestedSpecialTopics] = useState<Array<{ name: string; desc: string }>>([]);
@@ -1128,25 +1175,38 @@ function Step4({ formData, setFormData, currentStep }: any) {
       priorities[topicId] = topicPriorities[topic] || 50;
     });
 
-    // Convert selected special topics to IDs and add to formData
+    // Add custom topics
+    customTopics.forEach(customTopic => {
+      const topicId = topicNameToId(customTopic.name);
+      topicIds.push(topicId);
+      priorities[topicId] = customTopic.priority;
+    });
+
+    // Convert selected special topics to IDs
     const specialTopicIds = selectedSpecialTopicsArray.map(topicNameToId);
+    
+    // Combine standard, custom, and special topics into a single array
+    const allTopicIds = [...topicIds, ...specialTopicIds];
 
     // Debug logging
     console.log('🔄 Step4: Syncing topics to formData', {
       selectedTopicsCount: selectedTopics.size,
       selectedTopicsArray: selectedTopicsArray,
-      topicIds,
-      topicIdsLength: topicIds.length,
+      standardTopicIds: selectedTopicsArray.map(topicNameToId),
+      customTopicIds: customTopics.map(t => topicNameToId(t.name)),
+      specialTopicIds: specialTopicIds,
+      allTopicIds: allTopicIds,
+      allTopicIdsLength: allTopicIds.length,
       priorities,
-      specialTopicIds,
     });
 
     setFormData((prev: any) => {
       const updated = {
         ...prev,
-        topicIds,
+        topicIds: allTopicIds, // Combined standard + custom + special topics
         topicPriorities: priorities,
-        specialTopicIds, // Store special topic IDs separately
+        customTopics, // Store custom topics for reference
+        specialTopicIds, // Store special topic IDs separately for reference
         specialTopics: selectedSpecialTopicsArray, // Store special topic names for reference
         regions: selectedRegions,
         sourceLanguages: selectedLanguages,
@@ -1156,41 +1216,58 @@ function Step4({ formData, setFormData, currentStep }: any) {
       console.log('🔄 Step4: Updated formData with topics', {
         topicIds: updated.topicIds,
         topicIdsLength: updated.topicIds?.length || 0,
+        standardCount: selectedTopicsArray.length,
+        customCount: customTopics.length,
+        specialCount: specialTopicIds.length,
       });
       
       return updated;
     });
-  }, [selectedTopicsArray.join(','), topicPriorities, selectedRegions.join(','), selectedLanguages.join(','), selectedSpecialTopicsArray.join(',')]);
+  }, [selectedTopicsArray.join(','), topicPriorities, selectedRegions.join(','), selectedLanguages.join(','), selectedSpecialTopicsArray.join(','), JSON.stringify(customTopics)]);
 
   // Force sync when Step4 becomes active (currentStep === 4) and on mount
   useEffect(() => {
-    // Sync immediately when Step4 is active and we have topics
-    if (currentStep === 4 && selectedTopics.size > 0) {
-      const topicIds = Array.from(selectedTopics).map(topicNameToId);
+    // Sync immediately when Step4 is active and we have topics (standard, custom, or special)
+    if (currentStep === 4 && (selectedTopics.size > 0 || customTopics.length > 0 || selectedSpecialTopics.size > 0)) {
+      const standardTopicIds = Array.from(selectedTopics).map(topicNameToId);
+      const customTopicIds = customTopics.map(t => topicNameToId(t.name));
+      const specialTopicIds = Array.from(selectedSpecialTopics).map(topicNameToId);
+      const allTopicIds = [...standardTopicIds, ...customTopicIds, ...specialTopicIds];
+      
       const priorities: Record<string, number> = {};
       Array.from(selectedTopics).forEach(topic => {
         const topicId = topicNameToId(topic);
         priorities[topicId] = topicPriorities[topic] || 50;
       });
+      customTopics.forEach(customTopic => {
+        const topicId = topicNameToId(customTopic.name);
+        priorities[topicId] = customTopic.priority;
+      });
       
       console.log('🔄 Step4: Force sync when Step4 is active', { 
-        topicIds,
+        standardTopicIds,
+        customTopicIds,
+        specialTopicIds,
+        allTopicIds,
         selectedTopicsCount: selectedTopics.size,
-        selectedTopicsArray: Array.from(selectedTopics),
+        customTopicsCount: customTopics.length,
+        selectedSpecialTopicsCount: selectedSpecialTopics.size,
         priorities,
       });
       
       setFormData((prev: any) => {
         const updated = {
           ...prev,
-          topicIds,
+          topicIds: allTopicIds, // Include standard, custom, and special
           topicPriorities: priorities,
+          customTopics, // Keep custom topics for reference
+          specialTopicIds, // Keep separate for reference
         };
         console.log('🔄 Step4: Setting formData.topicIds to:', updated.topicIds);
         return updated;
       });
     }
-  }, [currentStep, selectedTopics, topicPriorities]); // Re-sync when step changes or topics change
+  }, [currentStep, selectedTopics, customTopics, selectedSpecialTopics, topicPriorities]); // Re-sync when step changes or topics change
 
   const regions = ['US', 'UK', 'EU', 'APAC', 'LATAM', 'MEA', 'Global'];
   const languages = [
@@ -1225,6 +1302,29 @@ function Step4({ formData, setFormData, currentStep }: any) {
     );
   };
 
+  const addCustomTopic = () => {
+    if (newCustomTopicName.trim()) {
+      const newTopic = {
+        id: `custom_${Date.now()}`,
+        name: newCustomTopicName.trim(),
+        priority: 50, // Default priority
+      };
+      setCustomTopics(prev => [...prev, newTopic]);
+      setNewCustomTopicName('');
+      setShowAddCustomTopic(false);
+    }
+  };
+
+  const removeCustomTopic = (id: string) => {
+    setCustomTopics(prev => prev.filter(t => t.id !== id));
+  };
+
+  const updateCustomTopicPriority = (id: string, priority: number) => {
+    setCustomTopics(prev =>
+      prev.map(t => t.id === id ? { ...t, priority } : t)
+    );
+  };
+
   return (
     <div className="space-y-6">
       <div>
@@ -1233,7 +1333,7 @@ function Step4({ formData, setFormData, currentStep }: any) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-4">Standard Topics with Priority</label>
+        <label className="block text-sm font-medium mb-4">Default Topics with Priority</label>
         <div className="space-y-4">
           {Object.entries(topicPriorities).map(([topic, priority]) => (
             <div key={topic} className="space-y-2">
@@ -1262,6 +1362,107 @@ function Step4({ formData, setFormData, currentStep }: any) {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Custom Topics Section */}
+      <div>
+        <div className="flex items-center justify-between mb-4">
+          <label className="block text-sm font-medium">Custom Topics</label>
+          {!showAddCustomTopic && (
+            <Button
+              type="button"
+              variant="outline"
+              size="sm"
+              onClick={() => setShowAddCustomTopic(true)}
+              className="gap-2"
+            >
+              <Plus className="w-4 h-4" />
+              Add Custom Topic
+            </Button>
+          )}
+        </div>
+
+        {showAddCustomTopic && (
+          <Card className="p-4 mb-4 border-primary/30">
+            <div className="space-y-3">
+              <div>
+                <Label htmlFor="custom-topic-name">Topic Name</Label>
+                <Input
+                  id="custom-topic-name"
+                  value={newCustomTopicName}
+                  onChange={(e) => setNewCustomTopicName(e.target.value)}
+                  placeholder="e.g., Sustainability, AI & Machine Learning"
+                  className="mt-1"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      e.preventDefault();
+                      addCustomTopic();
+                    } else if (e.key === 'Escape') {
+                      setShowAddCustomTopic(false);
+                      setNewCustomTopicName('');
+                    }
+                  }}
+                />
+              </div>
+              <div className="flex gap-2">
+                <Button
+                  type="button"
+                  onClick={addCustomTopic}
+                  disabled={!newCustomTopicName.trim()}
+                  size="sm"
+                >
+                  Add Topic
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => {
+                    setShowAddCustomTopic(false);
+                    setNewCustomTopicName('');
+                  }}
+                  size="sm"
+                >
+                  Cancel
+                </Button>
+              </div>
+            </div>
+          </Card>
+        )}
+
+        {customTopics.length > 0 && (
+          <div className="space-y-4">
+            {customTopics.map((customTopic) => (
+              <div key={customTopic.id} className="space-y-2 p-3 border border-border rounded-lg bg-secondary/50">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{customTopic.name}</span>
+                    <span className="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded">Custom</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-muted">Priority: {customTopic.priority}</span>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => removeCustomTopic(customTopic.id)}
+                      className="text-red-500 hover:text-red-700 hover:bg-red-50"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </Button>
+                  </div>
+                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={customTopic.priority}
+                  onChange={(e) => updateCustomTopicPriority(customTopic.id, parseInt(e.target.value))}
+                  className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer"
+                />
+              </div>
+            ))}
+          </div>
+        )}
       </div>
 
       <Card className="p-4 bg-primary/10 border-primary/30">

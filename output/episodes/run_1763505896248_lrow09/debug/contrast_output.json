@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "company-news",
+      "sentences": [
+        "While La Liga and Bundesliga often highlight their developmental success, the English Premier League stands out for its depth of talent, as emphasized by the concern, \"I can't see anyone coming through",
+        "I'm racking my brains...\" [DAZN], showcasing the league's unmatched competitive intensity."
+      ],
+      "boundStatOrQuote": {
+        "span": "I can't see anyone coming through. I'm racking my brains...",
+        "evidenceId": "201e5a3a-7fcf-408f-8d96-e5d70aefdc40"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "company-news": 1
+    }
+  }
+}

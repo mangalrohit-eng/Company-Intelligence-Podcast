@@ -69,16 +69,38 @@ export class TtsStage {
       const progress = 20 + Math.round((i / chunks.length) * 60);
       await emitter.emit('tts', progress, `Processing chunk ${i + 1}/${chunks.length}`);
       
-      const response = await this.ttsGateway.synthesize({
-        text: chunks[i],
-        voice,
-        speed,
-        model: 'tts-1',
-        responseFormat: 'mp3',
-      });
-      
-      audioBuffers.push(response.audioBuffer);
-      totalDuration += response.durationSeconds;
+      try {
+        logger.info('TTS chunk processing', { 
+          chunkIndex: i + 1, 
+          totalChunks: chunks.length,
+          chunkLength: chunks[i].length,
+          voice,
+        });
+        
+        const response = await this.ttsGateway.synthesize({
+          text: chunks[i],
+          voice,
+          speed,
+          model: 'tts-1',
+          responseFormat: 'mp3',
+        });
+        
+        logger.info('TTS chunk completed', { 
+          chunkIndex: i + 1,
+          durationSeconds: response.durationSeconds,
+          latencyMs: response.latencyMs,
+        });
+        
+        audioBuffers.push(response.audioBuffer);
+        totalDuration += response.durationSeconds;
+      } catch (error: any) {
+        logger.error('TTS chunk failed', { 
+          chunkIndex: i + 1,
+          error: error.message,
+          errorType: error.constructor.name,
+        });
+        throw new Error(`TTS failed on chunk ${i + 1}/${chunks.length}: ${error.message}`);
+      }
     }
 
     // Combine audio buffers

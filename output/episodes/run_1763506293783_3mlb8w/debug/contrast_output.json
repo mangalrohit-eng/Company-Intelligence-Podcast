@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "company-news",
+      "sentences": [
+        "While La Liga and Bundesliga boast technical prowess and tactical innovations, the English Premier League's sheer intensity and player impact, encapsulated by talkSPORT's exclamation \"So f****** good,\" sets a global benchmark for thrilling football",
+        "Icons like Vincent Kompany and Virgil van Dijk underscore its unmatched competitive edge."
+      ],
+      "boundStatOrQuote": {
+        "span": "So f****** good.",
+        "evidenceId": "29ef6cdf-ad8a-4b6b-8535-66b8523486a6"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "company-news": 1
+    }
+  }
+}

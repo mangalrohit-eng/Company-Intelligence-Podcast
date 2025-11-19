@@ -49,14 +49,26 @@ export async function POST(
       error: 'Pipeline stopped by user',
     };
 
-    // Update progress to mark current stage as failed
-    if (run.progress.currentStage) {
-      const currentStageId = run.progress.currentStage;
-      if (run.progress.stages[currentStageId]) {
-        run.progress.stages[currentStageId].status = 'failed';
-        run.progress.stages[currentStageId].completedAt = new Date().toISOString();
+    // Mark all running stages as failed (in case multiple stages were in progress)
+    const stageOrder = ['prepare', 'discover', 'disambiguate', 'rank', 'scrape', 'extract', 'summarize', 'contrast', 'outline', 'script', 'qa', 'tts', 'package'];
+    const currentStageIndex = run.progress.currentStage ? stageOrder.indexOf(run.progress.currentStage) : -1;
+    
+    // Mark all stages from current onwards as failed
+    if (currentStageIndex >= 0) {
+      for (let i = currentStageIndex; i < stageOrder.length; i++) {
+        const stageId = stageOrder[i];
+        if (run.progress.stages[stageId]) {
+          // Mark as failed if it was running or pending
+          if (run.progress.stages[stageId].status === 'running' || run.progress.stages[stageId].status === 'pending') {
+            run.progress.stages[stageId].status = 'failed';
+            run.progress.stages[stageId].completedAt = new Date().toISOString();
+          }
+        }
       }
     }
+    
+    // Clear current stage to stop UI from showing it as running
+    run.progress.currentStage = '';
 
     // Update in memory store
     const runIndex = memoryRuns.findIndex(r => r.id === runId);

@@ -12,6 +12,11 @@ const inter = Inter({ subsets: ['latin'] });
 export const metadata = {
   title: 'AI Podcast Platform',
   description: 'Generate AI-powered company intelligence podcasts',
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 5,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

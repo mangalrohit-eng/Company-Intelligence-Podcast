@@ -1,0 +1,79 @@
+{
+  "config": {
+    "title": "English Premier League",
+    "subtitle": "Company Intelligence Updates for English Premier League",
+    "description": "AI-powered intelligence briefing for English Premier League",
+    "author": "English Premier League",
+    "email": "podcast@example.com",
+    "category": "Business",
+    "explicit": false,
+    "language": "en",
+    "coverArtS3Key": "default-cover.png",
+    "company": {
+      "id": "english-premier-league",
+      "name": "English Premier League"
+    },
+    "industry": {
+      "id": "technology",
+      "name": "Technology"
+    },
+    "competitors": [
+      {
+        "id": "la liga",
+        "name": "La Liga",
+        "isAiSuggested": false
+      },
+      {
+        "id": "bundesliga",
+        "name": "Bundesliga",
+        "isAiSuggested": false
+      }
+    ],
+    "topics": {
+      "standard": [
+        {
+          "id": "company-news",
+          "name": "Company News & Announcements",
+          "priority": 3
+        },
+        {
+          "id": "competitor-analysis",
+          "name": "Competitive Intelligence",
+          "priority": 2
+        },
+        {
+          "id": "industry-trends",
+          "name": "Industry Trends & Market Analysis",
+          "priority": 2
+        }
+      ],
+      "special": []
+    },
+    "cadence": "daily",
+    "durationMinutes": 2,
+    "publishTime": "09:00",
+    "timezone": "UTC",
+    "timeWindowHours": 24,
+    "timeWindow": {
+      "startIso": "2025-11-17T22:51:34.011Z",
+      "endIso": "2025-11-18T22:51:34.011Z"
+    },
+    "regions": [
+      "US"
+    ],
+    "sourceLanguages": [
+      "en"
+    ],
+    "voice": {
+      "provider": "openai-tts",
+      "voiceId": "alloy",
+      "speed": 1,
+      "tone": "professional"
+    },
+    "robotsMode": "permissive",
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": []
+    }
+  }
+}

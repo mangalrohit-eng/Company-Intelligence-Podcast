@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "earnings",
+      "sentences": [
+        "While Verizon plans to cut a staggering 15,000 jobs or 15% of its workforce to navigate through subscriber losses and escalating operational challenges, competitors like AT&T and T-Mobile continue to aggressively expand and innovate, not showing signs of such drastic workforce reductions",
+        "This move highlights Verizon's struggle in a fiercely competitive market where others seem to be finding more stable footing."
+      ],
+      "boundStatOrQuote": {
+        "span": "Verizon intends to slash about 15,000 jobs, or 15% of its workforce",
+        "evidenceId": "2e08c6c1-ae90-4f95-a5ea-02564759d024"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "earnings": 1
+    }
+  }
+}

@@ -155,17 +155,17 @@ export default function AdminSettingsPage() {
     JSON.stringify(localRanking) !== JSON.stringify(settings?.ranking);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="container mx-auto py-8 px-4 max-w-6xl">
+    <div className="min-h-screen bg-gray-50 overflow-x-hidden">
+      <div className="container mx-auto py-4 sm:py-8 px-4 max-w-6xl">
         {/* Header */}
-        <div className="mb-8 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="mb-6 sm:mb-8 bg-white rounded-lg shadow-sm border border-gray-200 p-4 sm:p-6">
           <div className="flex items-center gap-3 mb-2">
-            <div className="p-2 bg-indigo-100 rounded-lg">
-              <Settings className="w-6 h-6 text-indigo-600" />
+            <div className="p-2 bg-indigo-100 rounded-lg flex-shrink-0">
+              <Settings className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-600" />
             </div>
-            <h1 className="text-3xl font-bold text-gray-900">Admin Settings</h1>
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Admin Settings</h1>
           </div>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600">
             Configure global pipeline parameters for podcast generation
           </p>
         </div>
@@ -655,11 +655,11 @@ export default function AdminSettingsPage() {
         />
 
         {/* Action Buttons */}
-        <div className="mt-8 flex items-center gap-4 bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+        <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 bg-white p-4 sm:p-6 rounded-lg shadow-sm border border-gray-200">
           <Button
             onClick={handleSave}
             disabled={!hasChanges || saving}
-            className="bg-indigo-600 hover:bg-indigo-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed px-6"
+            className="bg-indigo-600 hover:bg-indigo-700 text-white disabled:bg-gray-300 disabled:cursor-not-allowed px-6 w-full sm:w-auto"
           >
             <Save className="w-4 h-4 mr-2" />
             {saving ? 'Saving...' : 'Save Changes'}
@@ -668,13 +668,13 @@ export default function AdminSettingsPage() {
             variant="outline"
             onClick={handleReset}
             disabled={!hasChanges}
-            className="border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed w-full sm:w-auto"
           >
             <RotateCcw className="w-4 h-4 mr-2" />
             Reset
           </Button>
           {settings && (
-            <span className="text-sm text-gray-500 ml-auto">
+            <span className="text-xs sm:text-sm text-gray-500 sm:ml-auto text-center sm:text-left">
               Last updated: {new Date(settings.updatedAt).toLocaleString()}
             </span>
           )}

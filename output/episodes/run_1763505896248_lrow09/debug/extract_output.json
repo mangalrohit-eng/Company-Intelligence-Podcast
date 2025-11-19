@@ -1,0 +1,59 @@
+{
+  "units": [
+    {
+      "id": "201e5a3a-7fcf-408f-8d96-e5d70aefdc40",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "I can't see anyone coming through. I'm racking my brains...",
+      "context": "Former England striker Robbie Fowler expressing concerns over finding a successor to Harry Kane",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYlhfLUpPOVlZbkJmREh3Zk9rZEhMZGpCc2JHd3Vac3c1NFVTdlVBaEQ0QTJHM3ppSmtwZXg2WkVCbFNPaWVXY19TRVRycUs4d2lmaFFjTldvTWRSMUREVE1KNTlHNkJfUmpFblZudFRBWUVsZkdQUzRVQkNsVkhEVzRYN2k5R2E3SFBDekN1dDVxMWxhMHZEemNtanM1Y0ZkVlVJcWJDMnZtMjZrWmdJSi1TQjIzWGRnSno4ZkFCRjIzb25WV0NXVUpnMXlqcDJ4VUZ2d011b3lQUQ?oc=5",
+      "publisher": "DAZN",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 15:00:54 GMT"
+    },
+    {
+      "id": "31451ca3-e2a7-4921-9e69-ba4b66877785",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "You’ve got Liam Delap at Chelsea. He's probably the one...",
+      "context": "Robbie Fowler mentioning Liam Delap as a potential successor to Harry Kane",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYlhfLUpPOVlZbkJmREh3Zk9rZEhMZGpCc2JHd3Vac3c1NFVTdlVBaEQ0QTJHM3ppSmtwZXg2WkVCbFNPaWVXY19TRVRycUs4d2lmaFFjTldvTWRSMUREVE1KNTlHNkJfUmpFblZudFRBWUVsZkdQUzRVQkNsVkhEVzRYN2k5R2E3SFBDekN1dDVxMWxhMHZEemNtanM1Y0ZkVlVJcWJDMnZtMjZrWmdJSi1TQjIzWGRnSno4ZkFCRjIzb25WV0NXVUpnMXlqcDJ4VUZ2d011b3lQUQ?oc=5",
+      "publisher": "DAZN",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 15:00:54 GMT"
+    },
+    {
+      "id": "58ed72ce-8a6a-4e3c-a778-edd39547b714",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "England completed their World Cup qualifying campaign with eight wins from eight games without conceding a single goal",
+      "context": "England's impressive performance in the World Cup qualifying campaign",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYlhfLUpPOVlZbkJmREh3Zk9rZEhMZGpCc2JHd3Vac3c1NFVTdlVBaEQ0QTJHM3ppSmtwZXg2WkVCbFNPaWVXY19TRVRycUs4d2lmaFFjTldvTWRSMUREVE1KNTlHNkJfUmpFblZudFRBWUVsZkdQUzRVQkNsVkhEVzRYN2k5R2E3SFBDekN1dDVxMWxhMHZEemNtanM1Y0ZkVlVJcWJDMnZtMjZrWmdJSi1TQjIzWGRnSno4ZkFCRjIzb25WV0NXVUpnMXlqcDJ4VUZ2d011b3lQUQ?oc=5",
+      "publisher": "DAZN",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 15:00:54 GMT"
+    },
+    {
+      "id": "e7343372-d78e-453d-b07c-41e34f0b931f",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Harry Kane scored his 77th and 78th goals for England against Albania",
+      "context": "Highlighting Harry Kane's goal-scoring record for England",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxOYlhfLUpPOVlZbkJmREh3Zk9rZEhMZGpCc2JHd3Vac3c1NFVTdlVBaEQ0QTJHM3ppSmtwZXg2WkVCbFNPaWVXY19TRVRycUs4d2lmaFFjTldvTWRSMUREVE1KNTlHNkJfUmpFblZudFRBWUVsZkdQUzRVQkNsVkhEVzRYN2k5R2E3SFBDekN1dDVxMWxhMHZEemNtanM1Y0ZkVlVJcWJDMnZtMjZrWmdJSi1TQjIzWGRnSno4ZkFCRjIzb25WV0NXVUpnMXlqcDJ4VUZ2d011b3lQUQ?oc=5",
+      "publisher": "DAZN",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 15:00:54 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 4,
+    "byType": {
+      "quote": 2,
+      "claim": 2
+    },
+    "byTopic": {
+      "company-news": 4
+    },
+    "dedupeRemoved": 0
+  }
+}

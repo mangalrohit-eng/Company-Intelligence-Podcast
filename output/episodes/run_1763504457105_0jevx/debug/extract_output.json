@@ -1,0 +1,136 @@
+{
+  "units": [
+    {
+      "id": "7eb81b5f-56eb-4ada-99d2-5b9423fda497",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Neymar's contract with Santos ends on December 31 this year.",
+      "context": "Contract details",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "fb9665c0-dd75-49b6-b208-8e045a14f2d8",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Neymar will become a free agent in January next year.",
+      "context": "Upcoming free agency",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "57f24705-9ee5-4cb5-9d47-df26764d478c",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Pre-contact with Neymar has begun.",
+      "context": "Expert statement on transfer market",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "4c0c3a20-e1da-4ce4-9efc-f9353df5af74",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Neymar is focused on preventing Santos relegation.",
+      "context": "Fabrizio Romano's statement",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "f621893c-1824-44e2-a920-3a5e8a2353ac",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Santos has 9 wins, 9 draws and 15 losses in 33 games this season.",
+      "context": "Team performance in Brazilian professional football",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "f91710b4-983c-44d6-8161-8ed7a960d075",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Santos remains 16th out of 20 clubs in the Brazilian Professional Football League.",
+      "context": "Team ranking in the league",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "7e3e2454-ca69-4e7e-8c50-255586efd926",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Neymar is likely to leave the team after this season.",
+      "context": "Potential departure from Santos",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "19cc0bf7-c2e3-47bd-b422-fee8bf74950b",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Neymar dreams of a 2026 North American World Cup challenge.",
+      "context": "Future aspirations",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "c11debde-14ad-427a-94f7-cf3adc25a2a2",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Chelsea could seek to recruit Neymar.",
+      "context": "Potential interest from Chelsea",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "a23cd1eb-ea78-4e9f-bd21-3f6e8e9ef116",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Manchester United is a candidate to embrace Neymar.",
+      "context": "Potential interest from Manchester United",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    },
+    {
+      "id": "42fc88e8-c564-4f1a-af70-a587ea25fadd",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Manchester City is a possible team to embrace Neymar.",
+      "context": "Potential interest from Manchester City",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "publisher": "매일경제",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:59:00 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 11,
+    "byType": {
+      "claim": 10,
+      "quote": 1
+    },
+    "byTopic": {
+      "company-news": 11
+    },
+    "dedupeRemoved": 0
+  }
+}

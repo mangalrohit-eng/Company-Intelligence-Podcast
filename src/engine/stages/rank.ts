@@ -165,26 +165,59 @@ export class RankStage {
       'today', 'today.com',
     ];
     
-    const normalized = domainOrPublisher.toLowerCase().replace(/^www\./, '').replace(/\.com$/, '').replace(/\.org$/, '').trim();
+    // Normalize: lowercase, remove www, remove common TLDs, remove spaces
+    const normalized = domainOrPublisher.toLowerCase()
+      .replace(/^www\./, '')
+      .replace(/\.(com|org|net|co|io)$/, '')
+      .replace(/\s+/g, '')
+      .trim();
     
-    // Check if normalized matches any high-authority publisher (name or domain)
-    if (highAuthority.some(pub => {
-      const pubNormalized = pub.toLowerCase().replace(/\.com$/, '').replace(/\.org$/, '');
-      return normalized === pubNormalized || normalized.includes(pubNormalized) || pubNormalized.includes(normalized);
-    })) {
-      return 0.9;
+    // Use exact matching only (no substring matching to avoid false positives)
+    // Check high-authority publishers
+    for (const pub of highAuthority) {
+      const pubNormalized = pub.toLowerCase()
+        .replace(/\.(com|org|net|co|io)$/, '')
+        .replace(/\s+/g, '');
+      
+      // Exact match or match at word boundaries
+      if (normalized === pubNormalized || 
+          normalized === pubNormalized.replace(/\s+/g, '') ||
+          // Handle cases like "wallstreetjournal" matching "wall street journal"
+          normalized.replace(/[^a-z0-9]/g, '') === pubNormalized.replace(/[^a-z0-9]/g, '')) {
+        logger.debug('Matched high-authority publisher', { 
+          input: domainOrPublisher, 
+          normalized, 
+          matched: pub 
+        });
+        return 0.9;
+      }
     }
     
-    // Check if normalized matches any medium-authority publisher
-    if (mediumAuthority.some(pub => {
-      const pubNormalized = pub.toLowerCase().replace(/\.com$/, '').replace(/\.org$/, '');
-      return normalized === pubNormalized || normalized.includes(pubNormalized) || pubNormalized.includes(normalized);
-    })) {
-      return 0.7;
+    // Check medium-authority publishers
+    for (const pub of mediumAuthority) {
+      const pubNormalized = pub.toLowerCase()
+        .replace(/\.(com|org|net|co|io)$/, '')
+        .replace(/\s+/g, '');
+      
+      // Exact match or match at word boundaries
+      if (normalized === pubNormalized || 
+          normalized === pubNormalized.replace(/\s+/g, '') ||
+          normalized.replace(/[^a-z0-9]/g, '') === pubNormalized.replace(/[^a-z0-9]/g, '')) {
+        logger.debug('Matched medium-authority publisher', { 
+          input: domainOrPublisher, 
+          normalized, 
+          matched: pub 
+        });
+        return 0.7;
+      }
     }
     
     // Default authority for unknown sources
-    return 0.5;
+    logger.debug('Unknown publisher, using default authority', { 
+      input: domainOrPublisher, 
+      normalized 
+    });
+    return 0.3;
   }
 
   /**

@@ -1,0 +1,17 @@
+{
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "companyName": "English Premier League",
+  "sources": {
+    "rssFeeds": [
+      "https://news.google.com/rss/search?q=English%20Premier%20League"
+    ],
+    "newsApis": [],
+    "irUrls": [],
+    "regulatorUrls": [],
+    "tradePublications": []
+  }
+}

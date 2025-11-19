@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "As the clock ticks down to December 31st, the soccer world is on the edge of its seats, marking the end of Neymar's contract with Santos, a detail that has fans and analysts alike speculating about what's next for the celebrated player. Amidst the swirling rumors and potential offers that are bound to captivate headlines, it's Neymar's current dedication that stands out: \"Neymar is focused on preventing Santos relegation,\" says renowned football journalist Fabrizio Romano. This statement not only highlights Neymar's professionalism but also his deep connection to a club that's been a significant part of his journey, suggesting that [CHECK] despite the uncertainty of his future, his immediate commitment remains unwaveringly clear.",
+      "onAirStat": {
+        "span": "Neymar's contract with Santos ends on December 31 this year.",
+        "evidenceId": "7eb81b5f-56eb-4ada-99d2-5b9423fda497"
+      },
+      "onAirQuote": {
+        "span": "Neymar is focused on preventing Santos relegation.",
+        "evidenceId": "4c0c3a20-e1da-4ce4-9efc-f9353df5af74"
+      }
+    }
+  ]
+}

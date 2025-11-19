@@ -1,0 +1,59 @@
+{
+  "outline": {
+    "theme": "Football (Soccer) Excellence and Recognition",
+    "subThemes": [
+      "Defensive Mastery in Football",
+      "Hall of Fame Inductions"
+    ],
+    "sections": [
+      {
+        "section": "cold_open",
+        "title": "A Defender's Legacy",
+        "bulletPoints": [
+          "Unveiling the extraordinary: John Terry's induction into the Premier League Hall of Fame.",
+          "\"So f****** good\": The universal acclaim for defensive giants in football."
+        ]
+      },
+      {
+        "section": "company_deep_dive",
+        "title": "John Terry: A Class Apart",
+        "bulletPoints": [
+          "The unprecedented achievement of the Premier League's highest-scoring defender.",
+          "A career retrospective: Exploring Terry's journey from a promising young talent to a footballing legend.",
+          "The importance of defensive roles in shaping football's narrative and Terry's impact on that evolution."
+        ]
+      },
+      {
+        "section": "competitor_moves",
+        "title": "Giants Among Men: Kompany and Van Dijk",
+        "bulletPoints": [
+          "Vincent Kompany and Virgil van Dijk: Redefining defensive mastery in football.",
+          "Comparative analysis: How do Terry, Kompany, and Van Dijk stack against each other in terms of career achievements and influence on the game?",
+          "The role of leadership and charisma in elevating a defender's status within the sport."
+        ]
+      },
+      {
+        "section": "industry_special_topics",
+        "title": "The Evolution of Defensive Greatness",
+        "bulletPoints": [
+          "From brute to brain: The changing perception and role of defenders in modern football.",
+          "Hall of Fame Inductions: The criteria, the controversy, and the celebration of defensive legends.",
+          "The unseen heroes: How defensive strategies and players contribute to the spectacle of football."
+        ]
+      },
+      {
+        "section": "takeaways",
+        "title": "Beyond the Goal Line: The Legacy of Defensive Excellence",
+        "bulletPoints": [
+          "John Terry's Hall of Fame induction is a testament to the evolving appreciation for defensive roles in football.",
+          "The impact of players like Terry, Kompany, and Van Dijk goes beyond statistics, influencing future generations and the tactical approach to the game.",
+          "Defensive mastery in football is not just about preventing goals but also about leadership, strategy, and occasionally, spectacular goal-scoring feats."
+        ]
+      }
+    ]
+  },
+  "knowledgeGraph": {
+    "entities": 2,
+    "relationships": 1
+  }
+}

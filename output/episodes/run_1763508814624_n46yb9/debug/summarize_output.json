@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a bold move that's sending ripples through the telecom industry, Verizon is set to streamline its operations significantly. \"Verizon plans to cut at least 15,000 jobs and transition 180 company-owned retail locations into franchised operations,\" reveals a recent report from Cord Cutters News. This strategic reshuffling means Verizon's U.S. headcount will be reduced by roughly 15%, primarily affecting non-union management roles—a decision that could reshape not only the company's internal dynamics but potentially the entire telecom landscape. With leadership positions taking more than a 20% hit, it's clear that Verizon is aiming for a leaner, more agile structure to navigate the fast-evolving tech world. [CHECK]",
+      "onAirStat": {
+        "span": "Verizon's U.S. headcount will be reduced by roughly 15%, affecting non-union management roles primarily.",
+        "evidenceId": "846a2486-a8a7-4188-9f4a-766ea72ee0d0"
+      },
+      "onAirQuote": {
+        "span": "Verizon plans to cut at least 15,000 jobs and transition 180 company-owned retail locations into franchised operations.",
+        "evidenceId": "e3a01a70-cbd2-455e-b7fd-10f48594d5de"
+      }
+    }
+  ]
+}

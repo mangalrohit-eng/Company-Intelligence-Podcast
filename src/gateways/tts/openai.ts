@@ -15,15 +15,27 @@ export class OpenAiTtsGateway implements ITtsGateway {
 
   async synthesize(request: TtsRequest): Promise<TtsResponse> {
     const startTime = Date.now();
+    const TIMEOUT_MS = 60000; // 60 second timeout for TTS calls
 
     try {
-      const response = await this.client.audio.speech.create({
-        model: request.model || 'tts-1',
-        voice: request.voice as 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer',
-        input: request.text,
-        speed: request.speed || 1.0,
-        response_format: request.responseFormat || 'mp3',
+      // Create a timeout promise
+      const timeoutPromise = new Promise<never>((_, reject) => {
+        setTimeout(() => {
+          reject(new Error(`TTS API call timed out after ${TIMEOUT_MS}ms`));
+        }, TIMEOUT_MS);
       });
+
+      // Race between API call and timeout
+      const response = await Promise.race([
+        this.client.audio.speech.create({
+          model: request.model || 'tts-1',
+          voice: request.voice as 'alloy' | 'echo' | 'fable' | 'onyx' | 'nova' | 'shimmer',
+          input: request.text,
+          speed: request.speed || 1.0,
+          response_format: request.responseFormat || 'mp3',
+        }),
+        timeoutPromise,
+      ]);
 
       const audioBuffer = Buffer.from(await response.arrayBuffer());
       const latencyMs = Date.now() - startTime;

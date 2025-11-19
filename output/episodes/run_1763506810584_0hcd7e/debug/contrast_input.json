@@ -1,0 +1,21 @@
+{
+  "topicCount": 6,
+  "topicIds": [
+    "earnings",
+    "product-launches",
+    "m-and-a",
+    "leadership",
+    "technology",
+    "strategy"
+  ],
+  "companyName": "Verizon",
+  "competitorCount": 5,
+  "competitors": [
+    "AT&T",
+    "T-Mobile",
+    "Sprint",
+    "Comcast",
+    "Charter Communications"
+  ],
+  "evidenceCount": 6
+}

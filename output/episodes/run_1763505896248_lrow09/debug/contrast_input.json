@@ -1,0 +1,15 @@
+{
+  "topicCount": 3,
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "companyName": "English Premier League",
+  "competitorCount": 2,
+  "competitors": [
+    "La Liga",
+    "Bundesliga"
+  ],
+  "evidenceCount": 4
+}

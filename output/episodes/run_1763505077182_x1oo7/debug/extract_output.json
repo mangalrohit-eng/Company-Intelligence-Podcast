@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "totalUnits": 8,
+    "byType": {
+      "claim": 6,
+      "quote": 1,
+      "stat": 1
+    },
+    "byTopic": {
+      "company-news": 8
+    },
+    "dedupeRemoved": 0
+  },
+  "evidenceCount": 8,
+  "units": [
+    {
+      "id": "1bd118b7-d868-41e6-a621-4aacbfbd6f29",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Premier League Foundation celebrates its 15-year anniversary",
+      "context": "Official charity celebrates community impact",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPd2g1VU1WUkFqSzlWLVhmQWdpdkQ1QjFNVHlYU2pQUDREMFlBLVdxWHk4RDFvWG12NnhpaE1XWTRoVnkzUDUxaUlaaHQ3OXF4UUh6RWp3MXp5X1hYby1oMlJpRzBTMXc5eklsZnZIc3ZqQWdsZjRzYU8ycDdSRnJHOG1UTDJ6TG8?oc=5",
+      "publisher": "Premier League",
+      "authority": 0.5,
+      "publishedDate": "Mon, 17 Nov 2025 16:51:56 GMT"
+    },
+    {
+      "id": "f45c880b-34cb-4053-afdb-b695b9e965f0",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "More than £1.3bn invested into grassroots facilities by Football Foundation",
+      "context": "Improving over 14,700 grass pitches and 1,270 3G pitches",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPd2g1VU1WUkFqSzlWLVhmQWdpdkQ1QjFNVHlYU2pQUDREMFlBLVdxWHk4RDFvWG12NnhpaE1XWTRoVnkzUDUxaUlaaHQ3OXF4UUh6RWp3MXp5X1hYby1oMlJpRzBTMXc5eklsZnZIc3ZqQWdsZjRzYU8ycDdSRnJHOG1UTDJ6TG8?oc=5",
+      "publisher": "Premier League",
+      "authority": 0.5,
+      "publishedDate": "Mon, 17 Nov 2025 16:51:56 GMT"
+    },
+    {
+      "id": "e0a8f421-e140-4d59-82a2-caf2cf6447c0",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Premier League Stadium Fund supported over 1,000 lower league clubs",
+      "context": "Improving facilities across 100+ leagues",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPd2g1VU1WUkFqSzlWLVhmQWdpdkQ1QjFNVHlYU2pQUDREMFlBLVdxWHk4RDFvWG12NnhpaE1XWTRoVnkzUDUxaUlaaHQ3OXF4UUh6RWp3MXp5X1hYby1oMlJpRzBTMXc5eklsZnZIc3ZqQWdsZjRzYU8ycDdSRnJHOG1UTDJ6TG8?oc=5",
+      "publisher": "Premier League",
+      "authority": 0.5,
+      "publishedDate": "Mon, 17 Nov 2025 16:51:56 GMT"
+    },
+    {
+      "id": "d4044d27-a1f1-4ce7-b952-8cfeec4202b5",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Arsenal have an 'AI dossier' powering Mikel Arteta's Premier League title pursuit",
+      "context": "The AI dossier assists with transfers, tactics, and injuries.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcVJuZHdHSE1jdVJSUml1WWFvNDZPSmEwMFdOZW8yNHZpMjdGQmJIVVlnWGRpLTB4RFNVZ3JfRjlyX2FXVlJuUG9uVUVrN2xweXY1Vl9zWWdZbzFRT1lFZTZzVEhQZU1JaC1wZ0NPZlowdFRMckhvS0hMdDFFRzdtc3U1ZTR3NjhWSGdkNGt0YmhmaVUxekcwYXZXdG05OFUxT2piYWw3cUFFR2RCaDhCcWhGU2x1c3E3anQyUzlEa1lURjJqQnNYMw?oc=5",
+      "publisher": "Goal.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:24:26 GMT"
+    },
+    {
+      "id": "07206d73-9c81-4cbd-908f-3cd9538a1912",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Arsenal has rapidly expanded their data science department and invested heavily in AI infrastructure",
+      "context": "The club is aiming to build the most technologically advanced operation in English football.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcVJuZHdHSE1jdVJSUml1WWFvNDZPSmEwMFdOZW8yNHZpMjdGQmJIVVlnWGRpLTB4RFNVZ3JfRjlyX2FXVlJuUG9uVUVrN2xweXY1Vl9zWWdZbzFRT1lFZTZzVEhQZU1JaC1wZ0NPZlowdFRMckhvS0hMdDFFRzdtc3U1ZTR3NjhWSGdkNGt0YmhmaVUxekcwYXZXdG05OFUxT2piYWw3cUFFR2RCaDhCcWhGU2x1c3E3anQyUzlEa1lURjJqQnNYMw?oc=5",
+      "publisher": "Goal.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:24:26 GMT"
+    },
+    {
+      "id": "53531a1a-235e-428f-8803-f648c5e66e14",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "It will improve and it will give us good insight,...",
+      "context": "Mikel Arteta on the club's adoption of AI",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcVJuZHdHSE1jdVJSUml1WWFvNDZPSmEwMFdOZW8yNHZpMjdGQmJIVVlnWGRpLTB4RFNVZ3JfRjlyX2FXVlJuUG9uVUVrN2xweXY1Vl9zWWdZbzFRT1lFZTZzVEhQZU1JaC1wZ0NPZlowdFRMckhvS0hMdDFFRzdtc3U1ZTR3NjhWSGdkNGt0YmhmaVUxekcwYXZXdG05OFUxT2piYWw3cUFFR2RCaDhCcWhGU2x1c3E3anQyUzlEa1lURjJqQnNYMw?oc=5",
+      "publisher": "Goal.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:24:26 GMT"
+    },
+    {
+      "id": "c90d1d1b-059a-4f0a-a138-eea6ba3692b1",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Every day, enormous volumes of information are collected, including GPS sprint maps, recovery times, energy outputs, bio-mechanical readings, match actions, and even micro-movements during training drills.",
+      "context": "Arsenal's AI-driven performance models collect vast amounts of data.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcVJuZHdHSE1jdVJSUml1WWFvNDZPSmEwMFdOZW8yNHZpMjdGQmJIVVlnWGRpLTB4RFNVZ3JfRjlyX2FXVlJuUG9uVUVrN2xweXY1Vl9zWWdZbzFRT1lFZTZzVEhQZU1JaC1wZ0NPZlowdFRMckhvS0hMdDFFRzdtc3U1ZTR3NjhWSGdkNGt0YmhmaVUxekcwYXZXdG05OFUxT2piYWw3cUFFR2RCaDhCcWhGU2x1c3E3anQyUzlEa1lURjJqQnNYMw?oc=5",
+      "publisher": "Goal.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:24:26 GMT"
+    },
+    {
+      "id": "2bfc8c26-0b11-4742-a801-a2ea18dfcde0",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Arsenal's AI system profiles every player, from academy prospects to first-team starters, to personalize training and prevent injuries",
+      "context": "Individual player profiles include sprint mechanics, joint stress patterns, and muscle fatigue responses.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPcVJuZHdHSE1jdVJSUml1WWFvNDZPSmEwMFdOZW8yNHZpMjdGQmJIVVlnWGRpLTB4RFNVZ3JfRjlyX2FXVlJuUG9uVUVrN2xweXY1Vl9zWWdZbzFRT1lFZTZzVEhQZU1JaC1wZ0NPZlowdFRMckhvS0hMdDFFRzdtc3U1ZTR3NjhWSGdkNGt0YmhmaVUxekcwYXZXdG05OFUxT2piYWw3cUFFR2RCaDhCcWhGU2x1c3E3anQyUzlEa1lURjJqQnNYMw?oc=5",
+      "publisher": "Goal.com",
+      "authority": 0.5,
+      "publishedDate": "Tue, 18 Nov 2025 16:24:26 GMT"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "itemCount": 5,
+  "articleLimit": 5,
+  "topicTargets": {
+    "company-news": {
+      "targetUnits": 1
+    },
+    "competitor-analysis": {
+      "targetUnits": 1
+    },
+    "industry-trends": {
+      "targetUnits": 1
+    }
+  },
+  "sampleUrls": [
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOclpHU2s2UFNUYVdCclMwRnVvRzVFSDBlQ2ViSUgzSDBDNGU3QmNPOXl5MGlWMmx0eW5QdWRxTlRmOEF4UnRSLXpZU0gwWHU3a2VwS1RBcDVkWmZfRjhIMWNaOWdFaXJpb2RjS1AyaHd1a2JWVk0wbE4zWHN6QjQtQVdlVHdOMWwxSWhNMUh0UUxBWDk0Z1Fz?oc=5",
+    "https://news.google.com/rss/articles/CBMiigFBVV95cUxPVEZxSGZUajJQS2RxZi1mVl80MGF4N1FHaGNlS3drUDNlaEM4MHE0ZXNnSlliUTZRcjdvM2JKRzR0cFFad2NXUW1JQTZrTW8ySGYyUXBfNjN4R3Y4TWFJeGU4T1F0bGxnb2RZUWZHOVpCbUlIRVBNeS1YNXY3Qy1hVGtQNlVXZXVYWUE?oc=5",
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxORk5LS1N5Qm1tSS1HTGJrLVRUeGJ1RTUxSnFmZ3l3SmlCNnNJU1dUOHh1TnFjbVFkdmdtM0R6Zi0zeVFxRjNDMWg0NUhHWDB3ZThBWWFOLTVlNkVuT2pkN0JKMjdXNjIxWGFtWjZiU3pHUUpIUTkwY0FzajVqZ1JxLWQ4X1B1QQ?oc=5"
+  ],
+  "totalRankedItems": 79
+}

@@ -55,14 +55,27 @@ Target length: ~${targetWords} words
       messages: [
         {
           role: 'system',
-          content: `You are a professional podcast scriptwriter. Create an engaging, thematic narrative that flows naturally between topics. Use conversational language, smooth transitions, and maintain the listener's interest. Incorporate the provided summaries and contrasts seamlessly.`,
+          content: `You are a professional scriptwriter for senior executives. Write a direct, high-density intelligence briefing with zero filler.
+
+CRITICAL REQUIREMENTS:
+- Audience: C-suite executives and senior decision-makers
+- Style: Direct, no-nonsense, intelligence briefing format
+- Density: Maximum information per word - every sentence must add value
+- No filler: Eliminate words like "actually", "basically", "essentially", "in other words", "as you know", "needless to say"
+- No business jargon: Avoid "synergy", "leverage", "paradigm", "circle back", "deep dive", "low-hanging fruit", "move the needle"
+- Be specific: Use concrete numbers, dates, and facts instead of vague qualifiers
+- Transitions: Use brief, functional transitions only when necessary - no elaborate bridges
+- Tone: Authoritative, confident, and efficient - like a military or intelligence briefing
+- Structure: Lead with the most important information, support with evidence, conclude with implications
+
+Write as if briefing a CEO who values their time and expects actionable intelligence.`,
         },
         {
           role: 'user',
-          content: `Write a podcast script based on the following outline and summaries. Target length: ~${targetWords} words.\n\n${context}`,
+          content: `Write an executive intelligence briefing script based on the following outline and summaries. Target length: ~${targetWords} words. Be direct, high-density, and executive-focused.\n\n${context}`,
         },
       ],
-      temperature: 0.8,
+      temperature: 0.6, // Lower temperature for more focused, direct output
       maxTokens: Math.round(targetWords * 1.5),
     });
 

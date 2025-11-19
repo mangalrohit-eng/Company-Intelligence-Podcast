@@ -102,8 +102,8 @@ export default function AdminPage() {
 
     fetchRuns();
     
-    // Poll for updates every 3 seconds
-    const interval = setInterval(fetchRuns, 3000);
+    // Poll for updates every 5 seconds (reduced frequency for better performance)
+    const interval = setInterval(fetchRuns, 5000);
     
     return () => clearInterval(interval);
   }, []);

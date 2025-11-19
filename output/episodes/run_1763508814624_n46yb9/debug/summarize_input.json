@@ -1,0 +1,63 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 6,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 6,
+      "sampleUnits": [
+        {
+          "id": "e3a01a70-cbd2-455e-b7fd-10f48594d5de",
+          "type": "claim",
+          "span": "Verizon plans to cut at least 15,000 jobs and transition 180 company-owned retail locations into fra",
+          "authority": 0.3,
+          "publisher": "| Cord Cutters News",
+          "context": "According to the article, Verizon Communications is preparing to eliminate 15,000 positions and conv",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "846a2486-a8a7-4188-9f4a-766ea72ee0d0",
+          "type": "stat",
+          "span": "Verizon's U.S. headcount will be reduced by roughly 15%, affecting non-union management roles primar",
+          "authority": 0.3,
+          "publisher": "| Cord Cutters News",
+          "context": "Reports indicate that the downsizing will impact leadership positions by more than 20%.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "676983d1-e981-419d-a522-b548e908da1e",
+          "type": "stat",
+          "span": "Verizon employed approximately 100,000 people in the U.S. at the end of 2024, with nearly 20,000 job",
+          "authority": 0.3,
+          "publisher": "| Cord Cutters News",
+          "context": "The company's workforce has already been reduced by about 20,000 through previous cuts.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 3,
+      "validQuotes": 0,
+      "validClaims": 3
+    }
+  ]
+}

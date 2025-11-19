@@ -1,0 +1,30 @@
+{
+  "itemCount": 5,
+  "articleLimit": 5,
+  "topicTargets": {
+    "earnings": {
+      "targetUnits": 1
+    },
+    "product-launches": {
+      "targetUnits": 1
+    },
+    "m-and-a": {
+      "targetUnits": 1
+    },
+    "leadership": {
+      "targetUnits": 1
+    },
+    "technology": {
+      "targetUnits": 1
+    },
+    "strategy": {
+      "targetUnits": 1
+    }
+  },
+  "sampleUrls": [
+    "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQbVJlQmlVY3o2MVNDcG9PVmdNYmg1UVlOVzR6STdTV1JNUmlZU1M4RXdxU2ZJR1VCZDRuRnBFdkFKRHpRcDlyR2NvbV9QLWdfb3dtSV9teDRzaG1LQXRfMUE0Y0JldWpQVFVMOGpjMU84S0R0SkN4NUJST3FDcS1lbVR3dE1WT3NGczJCN0dYNTJDNEl0Ynd3ZzRRb0tZWHVRb0lDa1gxZF91cVladDdiT1IyZmhzWlQ1OFVzY3UwLW5UeXZKU2dZVmpIbFh1aGFmNkl1cFlLcm1GN3J4RWZEa3F2ZDBKcG8?oc=5",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxQajktdExhM3A1dlFQOUFJTlF5SF9OMkJucmxVSy1iTVZ0Z3pwOE5tNG83YlhjSGpjUHJieFh6a29KR2V1X3FzNWtXdzhNQ1UxdlJIYU12N2hrSFluTXotbjc2Y1kwX1dZS3RQX2lseVFFUUJKUmI4V1phRmN1aHZpMWJwamtpWUQyNDBhUk1tSVBLaVJTcW5pa2tBQkpnQm5ZWm50dG9R?oc=5",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQQ1RfRjFjbWhsZ21heGxtc1llMEhsN3c2cFd4b0VMd1pDbDVjMlRTMnR4TDNLYnIyYzNkVkpLMnQ2YXlwY0xUbHB6cmFYRlJjaHJEaFl0c0pjNVBFLVJQUFFOMnU2V1kwdV9CQjNTU1ltY3BYOE93WGUyU3F1OEtpZThyRGJuVjNra0hCZ1JaZjVJZw?oc=5"
+  ],
+  "totalRankedItems": 94
+}

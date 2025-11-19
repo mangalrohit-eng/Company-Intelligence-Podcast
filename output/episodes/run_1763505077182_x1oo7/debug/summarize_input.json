@@ -1,0 +1,62 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 16,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 16,
+      "sampleUnits": [
+        {
+          "id": "e6349849-b910-41f2-a156-13a5c057afcb",
+          "type": "claim",
+          "span": "Neymar's contract with Santos ends on December 31 this year.",
+          "authority": 0.5,
+          "publisher": "매일경제",
+          "context": "Contract expiration",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "0bd75c06-639f-4e27-97b8-d07d6ef32f9a",
+          "type": "claim",
+          "span": "Neymar will become a free agent in January next year.",
+          "authority": 0.5,
+          "publisher": "매일경제",
+          "context": "Upcoming free agency",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "265e117b-fc1c-4a0b-97bb-669d235117dd",
+          "type": "claim",
+          "span": "The number of teams watching Neymar's situation is increasing rapidly.",
+          "authority": 0.5,
+          "publisher": "매일경제",
+          "context": "Interest from multiple teams",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 1,
+      "validQuotes": 2,
+      "validClaims": 13
+    }
+  ]
+}

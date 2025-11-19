@@ -1,0 +1,20 @@
+{
+  "contrasts": [
+    {
+      "topicId": "earnings",
+      "sentences": [
+        "While Verizon showcases a robust financial stance with a $4.84 million earnings figure, competitors like AT&T, T-Mobile, and Comcast leverage customer satisfaction and competitive pricing strategies, a contrast highlighted by Verizon CEO Dan Schulman's admission that price hikes are pushing customers away."
+      ],
+      "boundStatOrQuote": {
+        "span": "$4.84 million",
+        "evidenceId": "cfecc564-f16c-49a7-8939-dcb06def150e"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "earnings": 1
+    }
+  }
+}

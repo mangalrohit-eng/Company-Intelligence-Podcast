@@ -1,0 +1,21 @@
+{
+  "scriptLength": 2679,
+  "finalScriptLength": 2679,
+  "checkMarkers": 0,
+  "evidenceBindings": 0,
+  "dateChecks": {
+    "inWindow": 1,
+    "outsideWindow": 5
+  },
+  "stats": {
+    "totalChecks": 0,
+    "resolved": 0,
+    "failed": 0,
+    "checksVerified": 0,
+    "checksFailed": 0,
+    "statsBound": 0,
+    "quotesBound": 0,
+    "totalBindings": 0,
+    "dateViolations": 5
+  }
+}

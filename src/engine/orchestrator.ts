@@ -969,7 +969,6 @@ export class PipelineOrchestrator {
       let audioS3Key: string | undefined;
       const finalScript = qaOutput?.script || scriptOutput?.script.narrative || '';
       if (input.flags.enable.tts && finalScript) {
-        const stage = new TtsStage(ttsGateway);
         const stageStart = Date.now();
         
         // Save input BEFORE execution
@@ -985,43 +984,72 @@ export class PipelineOrchestrator {
         );
         logger.info('Saved TTS input', { scriptLength: ttsInput.scriptLength, voiceId: ttsInput.voiceId });
         
-        ttsOutput = await stage.execute(
-          { narrative: finalScript }, // Wrap in Script object
-          input.config.voice.voiceId,
-          input.config.voice.speed,
-          emitter
+        ttsOutput = await executeStageWithErrorHandling(
+          'tts',
+          async () => {
+            const stage = new TtsStage(ttsGateway);
+            return await stage.execute(
+              { narrative: finalScript }, // Wrap in Script object
+              input.config.voice.voiceId,
+              input.config.voice.speed,
+              emitter
+            );
+          },
+          (error) => {
+            logger.error('TTS stage failed', {
+              error: error.message,
+              scriptLength: finalScript.length,
+              wordCount: finalScript.split(/\s+/).length,
+              voiceId: input.config.voice.voiceId,
+            });
+          }
         );
         
-        // Save output AFTER execution
-        const ttsOutputSummary = {
-          audioSize: ttsOutput.audioBuffer.length,
-          audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
-          durationSeconds: ttsOutput.durationSeconds,
-        };
-        await fs.writeFile(
-          path.join(debugDir, 'tts_output.json'),
-          JSON.stringify(ttsOutputSummary, null, 2)
-        );
-        logger.info('Saved TTS output', { audioSizeKB: ttsOutputSummary.audioSizeKB });
-        
-        telemetry.stages.tts = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
-        telemetry.tts = {
-          audioDurationSeconds: ttsOutput.durationSeconds,
-          generationTimeSeconds: (Date.now() - stageStart) / 1000,
-          finalSpeed: input.config.voice.speed,
-        };
+        // Save output AFTER execution (only if successful)
+        if (ttsOutput) {
+          const ttsOutputSummary = {
+            audioSize: ttsOutput.audioBuffer.length,
+            audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
+            durationSeconds: ttsOutput.durationSeconds,
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'tts_output.json'),
+            JSON.stringify(ttsOutputSummary, null, 2)
+          );
+          logger.info('Saved TTS output', { audioSizeKB: ttsOutputSummary.audioSizeKB });
+          
+          telemetry.stages.tts = {
+            startTime: new Date(stageStart).toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: Date.now() - stageStart,
+            status: 'success',
+          };
+          telemetry.tts = {
+            audioDurationSeconds: ttsOutput.durationSeconds,
+            generationTimeSeconds: (Date.now() - stageStart) / 1000,
+            finalSpeed: input.config.voice.speed,
+          };
 
-        // Save audio to local disk (TODO: Upload to S3 in production)
-        audioS3Key = `runs/${input.runId}/audio.mp3`;
-        const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
-        await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
-        await fs.writeFile(audioPath, ttsOutput.audioBuffer);
-        logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          // Save audio to local disk (TODO: Upload to S3 in production)
+          audioS3Key = `runs/${input.runId}/audio.mp3`;
+          const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
+          await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
+          await fs.writeFile(audioPath, ttsOutput.audioBuffer);
+          logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+        } else {
+          // Save error output if stage failed
+          const errorOutput = {
+            error: 'TTS stage failed',
+            audioSize: 0,
+            durationSeconds: 0,
+            message: 'TTS stage encountered an error. Check server logs and tts_error.json for details.',
+          };
+          await fs.writeFile(
+            path.join(debugDir, 'tts_output.json'),
+            JSON.stringify(errorOutput, null, 2)
+          );
+          logger.warn('Saved TTS error output');
+        }
       }
 
       // Stage 13: Package & RSS

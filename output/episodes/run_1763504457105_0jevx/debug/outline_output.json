@@ -1,0 +1,55 @@
+{
+  "outline": {
+    "theme": "Sports Management and Player Transfers",
+    "subThemes": [
+      "Player Contracts",
+      "Professional Dedication"
+    ],
+    "sections": [
+      {
+        "section": "cold_open",
+        "title": "The Countdown Begins: Neymar's Future Hangs in the Balance",
+        "bulletPoints": [
+          "As the world watches, Neymar's contract with Santos is ticking to a close—what will the next chapter hold for this soccer icon?",
+          "\"Neymar is focused on preventing Santos relegation,\" says Fabrizio Romano, highlighting an unwavering dedication amidst swirling transfer rumors."
+        ]
+      },
+      {
+        "section": "company_deep_dive",
+        "title": "Neymar and Santos: A Legacy in Limbo",
+        "bulletPoints": [
+          "Explore Neymar's journey with Santos, from rising star to key player, and the impact of his tenure on the club's success.",
+          "Analyzing the significance of Neymar's potential departure, and what it means for Santos both on and off the pitch, including fan sentiment and financial implications."
+        ]
+      },
+      {
+        "section": "competitor_moves",
+        "title": "The Transfer Market Heats Up: Who's Vying for Neymar?",
+        "bulletPoints": [
+          "Insight into top clubs rumored to be interested in Neymar, and how their offers reflect their ambitions for the upcoming seasons.",
+          "Comparing approaches: How different clubs' strategies in the transfer market may influence Neymar's decision, including financial packages, team dynamics, and potential for success."
+        ]
+      },
+      {
+        "section": "industry_special_topics",
+        "title": "Navigating Player Contracts and Professional Dedication in Modern Soccer",
+        "bulletPoints": [
+          "The delicate balance between player loyalty and career progression, exemplified by Neymar's current situation.",
+          "How Neymar's focus on Santos amidst personal career uncertainty exemplifies a broader trend of professional dedication in the sport."
+        ]
+      },
+      {
+        "section": "takeaways",
+        "title": "The Future of Neymar: Dedication Amidst Uncertainty",
+        "bulletPoints": [
+          "Neymar's situation highlights the complexity of player transfers and the impact on all parties involved, from the player and clubs to the fans.",
+          "Regardless of his next move, Neymar's dedication to Santos in a time of personal career transition sets a precedent for professional athletes."
+        ]
+      }
+    ]
+  },
+  "knowledgeGraph": {
+    "entities": 2,
+    "relationships": 1
+  }
+}

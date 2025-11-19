@@ -1,0 +1,56 @@
+[
+  {
+    "id": "82eab74d-26c4-4a23-9398-5e61f20af7c2",
+    "type": "claim",
+    "span": "Verizon to cut about 15,000 jobs",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiigNBVV95cUxNN2FRVFVqQW80YktGRDh1R2M5d2NkVkJXQjVIa3hqWEtXOGpxWEJzUXJFTlVTNjhER0E0Qy13VEp2b0lOVTJBN0ZEemR3QlRPc2VNVE1jbDUwRU5icTRaMGRHbjBxclFuY25PN0NlMjFxaTItc21JMThkUENGZTdTME1aNl9EUVp6MlFNUFlveVR4TFoxQUNPb2RKSkhjUTg1OEllUlBONVVtSDd1S21JUlhJaFBxY1dxb0dBRUhvbjVwanNSUkRiU0lwanltc2xHa29YRmdxQ21tb1g1SmhITUoyR2Y1bWRualZQcjQ3dGFac0t3X2tMSWZXdy1IcTZtQTR3VHBDaTNCVmhraFRneXZPVDlRZndtNGlxdUZ3UVU0YkVtandBTDJVd1RmVVF1OHZLeVFNb2Y5VWFGRWUwR090SHVDbVk3TXN0RmlGUktXUjVZNVZaOXU3cl9leUJsY2VWVkZNY280c1hxMUx4NFU5UWcwTkgxZ09XYVlkcENrU1pVcl9sdEpR?oc=5",
+    "publisher": "The Wall Street Journal",
+    "publishedDate": "Thu, 13 Nov 2025 17:37:00 GMT",
+    "authority": 0.9
+  },
+  {
+    "id": "ea2849f3-78d9-4d90-980e-8e18a55f41ac",
+    "type": "claim",
+    "span": "Nomura Asset Management Co. Ltd. has a $67.86 million position in Verizon Communications Inc. $VZ",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxORy10MldyY3dxTUloc0F5N28tOElmOGtJRE5hT2JsSUE3QTM1aW1iNkJwZW8wc1ZaQmVFZ1AtNFotTFZLZ3dDVFNaeWhBQTBoS3hEaG5aWVhtX2hHTFVyUko2NlNCTTBWX2x2cXN6OU1qcWJLb3EwbmhjeXNneFN4RVdfV3hSenNMZWdUVUxQRzJCSmg1OUF0b2dianVQWDZvYzJ4UmVucUJJRjhoTkxfWjhKNEhNMDI3TmV1eURwbXZQQmhIOFBCTmJWMVdhWmFCSjdXdlczbFJQMTFyN3NNVEtfTTE?oc=5",
+    "publisher": "MarketBeat",
+    "publishedDate": "Tue, 18 Nov 2025 11:21:11 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "2e08c6c1-ae90-4f95-a5ea-02564759d024",
+    "type": "stat",
+    "span": "Verizon intends to slash about 15,000 jobs, or 15% of its workforce",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+    "publisher": "ROI-NJ",
+    "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "886b80ed-fe2b-4708-88de-b5e79d34c43d",
+    "type": "stat",
+    "span": "Verizon had revenue of $134.8 billion in 2024",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+    "publisher": "ROI-NJ",
+    "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "2e3f963f-439b-4732-9c2d-9c958ec5e159",
+    "type": "quote",
+    "span": "Verizon has battled subscriber losses, rising operational costs and competition",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+    "publisher": "ROI-NJ",
+    "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "dfe2d3d4-0952-4980-bb5f-181d9f41a8b7",
+    "type": "claim",
+    "span": "Verizon has lost postpaid phone subscribers for three straight quarters",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMivwFBVV95cUxONGdXUTEzMFpFMFl4bjVPeVBDbGYyV09EMER4TDB1TnRRYi1PdGFVM1BwbXNIREk4aHZVRWdkelFKbUROMXp1X1NUazhPbjRIWXBneGwzVGF6a25BM2ZmQzNlUjEyaVhXeXdTY0xBeUxwdzVaZ1VQX2lIZFNMTXpYUWl5T1dIbFN3NkxOTnlBMkFBT2hDaXE1WFFsbm1IU0hSU1YycXFCX21zRTlmTUVmXzl1cU1aMHh1bnR6VlRYVQ?oc=5",
+    "publisher": "ROI-NJ",
+    "publishedDate": "Mon, 17 Nov 2025 10:26:23 GMT",
+    "authority": 0.5
+  }
+]

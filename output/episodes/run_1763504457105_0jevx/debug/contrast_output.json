@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "company-news",
+      "sentences": [
+        "While Neymar's current focus lies on preventing Santos' relegation, his potential move to the English Premier League, with giants like Chelsea, Manchester United, and Manchester City showing interest, highlights the league's global appeal and financial muscle, a contrast to the more regional allure of competitors like La Liga and Bundesliga",
+        "This move underscores the Premier League's unmatched ability to attract world-class talent, further cementing its status as football's most prestigious domestic competition."
+      ],
+      "boundStatOrQuote": {
+        "span": "Neymar is focused on preventing Santos relegation.",
+        "evidenceId": "4c0c3a20-e1da-4ce4-9efc-f9353df5af74"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "company-news": 1
+    }
+  }
+}

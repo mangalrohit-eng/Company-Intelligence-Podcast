@@ -430,7 +430,21 @@ export class PodcastPlatformStack extends cdk.Stack {
           s3OriginSource: {
             s3BucketSource: frontendBucket,
           },
-          behaviors: [{ isDefaultBehavior: true }],
+          behaviors: [{
+            isDefaultBehavior: true,
+            defaultTtl: cdk.Duration.days(1),
+            maxTtl: cdk.Duration.days(7),
+            minTtl: cdk.Duration.minutes(0),
+            compress: true,
+            allowedMethods: cloudfront.CloudFrontAllowedMethods.GET_HEAD_OPTIONS,
+            cachedMethods: cloudfront.CloudFrontAllowedCachedMethods.GET_HEAD,
+            forwardedValues: {
+              queryString: false,
+              cookies: {
+                forward: 'none',
+              },
+            },
+          }],
         },
         {
           s3OriginSource: {

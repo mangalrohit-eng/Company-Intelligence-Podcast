@@ -1,0 +1,81 @@
+{
+  "units": [
+    {
+      "id": "e3a01a70-cbd2-455e-b7fd-10f48594d5de",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon plans to cut at least 15,000 jobs and transition 180 company-owned retail locations into franchised operations.",
+      "context": "According to the article, Verizon Communications is preparing to eliminate 15,000 positions and convert 180 retail locations into franchises.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "publisher": "| Cord Cutters News",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 18:28:50 GMT"
+    },
+    {
+      "id": "846a2486-a8a7-4188-9f4a-766ea72ee0d0",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon's U.S. headcount will be reduced by roughly 15%, affecting non-union management roles primarily.",
+      "context": "Reports indicate that the downsizing will impact leadership positions by more than 20%.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "publisher": "| Cord Cutters News",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 18:28:50 GMT"
+    },
+    {
+      "id": "676983d1-e981-419d-a522-b548e908da1e",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon employed approximately 100,000 people in the U.S. at the end of 2024, with nearly 20,000 job cuts over the previous three years.",
+      "context": "The company's workforce has already been reduced by about 20,000 through previous cuts.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "publisher": "| Cord Cutters News",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 18:28:50 GMT"
+    },
+    {
+      "id": "0b4486a8-825f-4c8e-a8f2-497741eb73d5",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon faces pressure from slowing customer growth, competitive pricing, and cable providers entering the wireless service market.",
+      "context": "The telecommunications giant is under pressure due to various factors affecting its market.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "publisher": "| Cord Cutters News",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 18:28:50 GMT"
+    },
+    {
+      "id": "ab834a52-8e8c-4ec9-b9ea-51b505c2d757",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon's restructuring reflects a broader strategic pivot towards capital efficiency and away from labor-intensive retail footprints.",
+      "context": "The company's restructuring is seen as a move towards efficiency and away from traditional operating models.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPeEZuQ0VoajRLenNSV04ybG02U2xhVjF4WjhLVlczUDJwUjkweXRHTDROcExHejI0Z2p5bmV6YmlXQnU1Y2tfQU5qUl9RSkE4d3VuRkxNZUdjWWpZTDU4UDE1d09jYzI2X0FrUlVUYTcxRjIzb3hDQWstbkV4amI1T3pwLU84WUJDczVIdVZSRFNGeTFmU2c2UHZNbHozLUQ0REZB0gGrAUFVX3lxTFBHdVRmVHUyb0JzTzRqZGJpZVB5Z3ZqMFhIZHNtTjEyZmdNU1ZhdTJHbTN0MVNSRW9Ta3VaT1E1eTJ3eEI5WllWNHg5QXRDeGhsQUlxczZESDdTMGxKUTlnSEFHS3cyNUhLREk1UEtya3phdmFaLVN6TV9ndW5KY0lFNGRKamFWOWlFTzA3aDJQOWZ4Q09uOUtrZ3ZURmVPbmVvalhueklfNm1lTQ?oc=5",
+      "publisher": "| Cord Cutters News",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 18:28:50 GMT"
+    },
+    {
+      "id": "cfbd5227-487a-4301-b045-3c1dcd0cd98a",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "$4.84 million",
+      "context": "Frank Rimerman Advisors LLC's stock position in Verizon Communications Inc.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQbVJlQmlVY3o2MVNDcG9PVmdNYmg1UVlOVzR6STdTV1JNUmlZU1M4RXdxU2ZJR1VCZDRuRnBFdkFKRHpRcDlyR2NvbV9QLWdfb3dtSV9teDRzaG1LQXRfMUE0Y0JldWpQVFVMOGpjMU84S0R0SkN4NUJST3FDcS1lbVR3dE1WT3NGczJCN0dYNTJDNEl0Ynd3ZzRRb0tZWHVRb0lDa1gxZF91cVladDdiT1IyZmhzWlQ1OFVzY3UwLW5UeXZKU2dZVmpIbFh1aGFmNkl1cFlLcm1GN3J4RWZEa3F2ZDBKcG8?oc=5",
+      "publisher": "MarketBeat",
+      "authority": 0.3,
+      "publishedDate": "Tue, 18 Nov 2025 10:18:05 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 6,
+    "byType": {
+      "claim": 3,
+      "stat": 3
+    },
+    "byTopic": {
+      "company-news": 6
+    },
+    "dedupeRemoved": 0
+  }
+}

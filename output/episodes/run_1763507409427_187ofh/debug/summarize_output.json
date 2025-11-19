@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "earnings",
+      "topicName": "earnings",
+      "paragraph": "In the ever-fluctuating world of stock investments, Frank Rimerman Advisors LLC has made a notable move by securing a stock position in Verizon Communications Inc. valued at an impressive $4.84 million, according to MarketBeat. This strategic investment highlights the firm's confidence in Verizon's potential for growth and profitability. Meanwhile, on the customer front, reactions to Verizon's services and offerings exhibit a range of sentiments. One customer's observation, \"Seems kind of random to what people are getting,\" as reported by Android Authority, reflects the diverse experiences of users interacting with the telecommunications giant. This juxtaposition of a significant financial investment with the varied customer experiences underscores the complexities and challenges of navigating success in the competitive telecom sector.",
+      "onAirStat": {
+        "span": "$4.84 million",
+        "evidenceId": "cfecc564-f16c-49a7-8939-dcb06def150e"
+      },
+      "onAirQuote": {
+        "span": "Seems kind of random to what people are getting.",
+        "evidenceId": "6da58c0c-d180-41a7-b715-f15f84e7e8c3"
+      }
+    }
+  ]
+}

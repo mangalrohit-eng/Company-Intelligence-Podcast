@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "earnings",
+      "topicName": "earnings",
+      "paragraph": "In a bold move signaling the pressures facing the telecom giant, Verizon has announced plans to cut approximately 15,000 jobs, which translates to a staggering 15% of its workforce, marking the company's largest round of layoffs to date. This decision underscores the formidable challenges Verizon faces, as highlighted by a company spokesperson who noted, \"Verizon has battled subscriber losses, rising operational costs, and competition.\" This maneuver reflects the company's urgent strategy to streamline operations and regain its competitive edge in the fiercely contested wireless and Internet markets.",
+      "onAirStat": {
+        "span": "Verizon intends to slash about 15,000 jobs, or 15% of its workforce",
+        "evidenceId": "2e08c6c1-ae90-4f95-a5ea-02564759d024"
+      },
+      "onAirQuote": {
+        "span": "Verizon has battled subscriber losses, rising operational costs and competition",
+        "evidenceId": "2e3f963f-439b-4732-9c2d-9c958ec5e159"
+      }
+    }
+  ]
+}

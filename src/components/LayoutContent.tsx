@@ -12,10 +12,12 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
   const isAuthenticated = !!user;
 
   return (
-    <div className="flex min-h-screen">
+    <div className="flex min-h-screen overflow-x-hidden">
       <Navigation />
-      <main className={`flex-1 ${isAuthenticated ? 'lg:ml-64 pt-16 lg:pt-0' : ''}`}>
-        {children}
+      <main className={`flex-1 overflow-x-hidden ${isAuthenticated ? 'lg:ml-64 pt-16 lg:pt-0' : ''}`}>
+        <div className="w-full max-w-full overflow-x-hidden">
+          {children}
+        </div>
       </main>
     </div>
   );

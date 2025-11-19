@@ -1,0 +1,65 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "earnings"
+  ],
+  "topicIdsFromConfig": [
+    "earnings",
+    "product-launches",
+    "m-and-a",
+    "leadership",
+    "technology",
+    "strategy"
+  ],
+  "topicIdsFromEvidence": [
+    "earnings"
+  ],
+  "evidenceCount": 6,
+  "evidenceByTopic": [
+    {
+      "topicId": "earnings",
+      "unitCount": 6,
+      "sampleUnits": [
+        {
+          "id": "82eab74d-26c4-4a23-9398-5e61f20af7c2",
+          "type": "claim",
+          "span": "Verizon to cut about 15,000 jobs",
+          "authority": 0.9,
+          "publisher": "The Wall Street Journal",
+          "context": "mostly through layoffs",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "ea2849f3-78d9-4d90-980e-8e18a55f41ac",
+          "type": "claim",
+          "span": "Nomura Asset Management Co. Ltd. has a $67.86 million position in Verizon Communications Inc. $VZ",
+          "authority": 0.5,
+          "publisher": "MarketBeat",
+          "context": "as per the article",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "2e08c6c1-ae90-4f95-a5ea-02564759d024",
+          "type": "stat",
+          "span": "Verizon intends to slash about 15,000 jobs, or 15% of its workforce",
+          "authority": 0.5,
+          "publisher": "ROI-NJ",
+          "context": "largest round of layoffs",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 2,
+      "validQuotes": 1,
+      "validClaims": 3
+    }
+  ]
+}

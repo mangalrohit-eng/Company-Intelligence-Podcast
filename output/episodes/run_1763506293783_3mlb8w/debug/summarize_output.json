@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a stunning nod to defensive prowess blended with offensive brilliance, John Terry's recent induction into the Premier League's Hall of Fame shines a spotlight on an extraordinary achievement that sets him apart. With an impressive tally of 41 goals, Terry holds the enviable title of the top flight's highest-scoring defender in league history. This statistic not only underscores his exceptional talent but also echoes the sentiments of peers and fans alike who marvel at the impact of such players on the game. In a similar vein, when reflecting on the caliber of legends like Vincent Kompany and Virgil van Dijk, Troy Deeney couldn't help but sum up their influence with a raw and candid \"So f****** good.\" This quote, while not directly about Terry, captures the awe and respect that top defenders command in the world of football, a realm where Terry's legacy now stands immortalized for future generations to admire.",
+      "onAirStat": {
+        "span": "John Terry is the top flight's highest-scoring defender in league history, with 41 goals.",
+        "evidenceId": "cc2ad767-08f0-42fd-975b-00913aaf7a2a"
+      },
+      "onAirQuote": {
+        "span": "So f****** good.",
+        "evidenceId": "29ef6cdf-ad8a-4b6b-8535-66b8523486a6"
+      }
+    }
+  ]
+}

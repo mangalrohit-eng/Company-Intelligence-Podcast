@@ -1,0 +1,5 @@
+{
+  "error": "Failed to parse outline LLM response: Expected ',' or '}' after property value in JSON at position 2587 (line 48 column 1)",
+  "stack": "Error: Failed to parse outline LLM response: Expected ',' or '}' after property value in JSON at position 2587 (line 48 column 1)\n    at OutlineStage.execute (webpack-internal:///(rsc)/./src/engine/stages/outline.ts:74:19)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async _utils_logger__WEBPACK_IMPORTED_MODULE_15__.logger.error.error (webpack-internal:///(rsc)/./src/engine/orchestrator.ts:699:28)\n    at async executeStageWithErrorHandling (webpack-internal:///(rsc)/./src/engine/orchestrator.ts:145:36)\n    at async PipelineOrchestrator.execute (webpack-internal:///(rsc)/./src/engine/orchestrator.ts:697:33)\n    at async executePipeline (webpack-internal:///(rsc)/./src/app/api/podcasts/[id]/runs/route.ts:299:24)",
+  "timestamp": "2025-11-18T22:33:50.464Z"
+}

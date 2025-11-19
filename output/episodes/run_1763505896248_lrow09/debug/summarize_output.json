@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a stunning display of skill and strategy, England's football team wrapped up their World Cup qualifying campaign with a perfect record, achieving eight wins out of eight games and not allowing a single goal against them—a testament to their defensive prowess and tactical acumen. Amidst this backdrop of unparalleled success, Robbie Fowler pointed to a rising star poised to make waves, saying, \"You’ve got Liam Delap at Chelsea. He's probably the one...\" suggesting Delap could be the heir apparent to Harry Kane's striking legacy. With England's team in such formidable form and potential talents like Delap waiting in the wings, the future of English football looks incredibly bright. [CHECK for the interpretation of Delap's potential impact based on Fowler's statement]",
+      "onAirStat": {
+        "span": "England completed their World Cup qualifying campaign with eight wins from eight games without conceding a single goal",
+        "evidenceId": "58ed72ce-8a6a-4e3c-a778-edd39547b714"
+      },
+      "onAirQuote": {
+        "span": "You’ve got Liam Delap at Chelsea. He's probably the one...",
+        "evidenceId": "31451ca3-e2a7-4921-9e69-ba4b66877785"
+      }
+    }
+  ]
+}

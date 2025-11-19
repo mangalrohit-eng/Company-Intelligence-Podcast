@@ -1,0 +1,71 @@
+{
+  "units": [
+    {
+      "id": "cfecc564-f16c-49a7-8939-dcb06def150e",
+      "type": "stat",
+      "topicId": "earnings",
+      "span": "$4.84 million",
+      "context": "Frank Rimerman Advisors LLC's stock position in Verizon Communications Inc.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQbVJlQmlVY3o2MVNDcG9PVmdNYmg1UVlOVzR6STdTV1JNUmlZU1M4RXdxU2ZJR1VCZDRuRnBFdkFKRHpRcDlyR2NvbV9QLWdfb3dtSV9teDRzaG1LQXRfMUE0Y0JldWpQVFVMOGpjMU84S0R0SkN4NUJST3FDcS1lbVR3dE1WT3NGczJCN0dYNTJDNEl0Ynd3ZzRRb0tZWHVRb0lDa1gxZF91cVladDdiT1IyZmhzWlQ1OFVzY3UwLW5UeXZKU2dZVmpIbFh1aGFmNkl1cFlLcm1GN3J4RWZEa3F2ZDBKcG8?oc=5",
+      "publisher": "MarketBeat",
+      "authority": 0.3,
+      "publishedDate": "Tue, 18 Nov 2025 10:18:05 GMT"
+    },
+    {
+      "id": "56623c24-846d-4586-bc92-c827fbb304bf",
+      "type": "claim",
+      "topicId": "earnings",
+      "span": "Nomura Asset Management Co. Ltd. has $67.86 million position in Verizon Communications Inc. $VZ",
+      "context": "reported in the article",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxORy10MldyY3dxTUloc0F5N28tOElmOGtJRE5hT2JsSUE3QTM1aW1iNkJwZW8wc1ZaQmVFZ1AtNFotTFZLZ3dDVFNaeWhBQTBoS3hEaG5aWVhtX2hHTFVyUko2NlNCTTBWX2x2cXN6OU1qcWJLb3EwbmhjeXNneFN4RVdfV3hSenNMZWdUVUxQRzJCSmg1OUF0b2dianVQWDZvYzJ4UmVucUJJRjhoTkxfWjhKNEhNMDI3TmV1eURwbXZQQmhIOFBCTmJWMVdhWmFCSjdXdlczbFJQMTFyN3NNVEtfTTE?oc=5",
+      "publisher": "MarketBeat",
+      "authority": 0.3,
+      "publishedDate": "Tue, 18 Nov 2025 11:21:11 GMT"
+    },
+    {
+      "id": "c6bfcf1a-09f6-40ed-ad9f-3fab9a6db176",
+      "type": "quote",
+      "topicId": "earnings",
+      "span": "They're trying hard to stop the churn to ATT and...",
+      "context": "Reddit commenter",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTi0yQ1dwdkxRbFN2d1dnT0Jxek03N0NfbTd1QVYxc3c4OFlacnRwcGxuS0dGWkgxbjhtX0hnUEJxZE9vdmExaDZ2OFBZUjQwNW1CN1hNX1BrSktkRW1BSFV2cE12VmRzZGJXUkwzTV9yRHdhbjN1WFYwSzlYTjdFSk5B?oc=5",
+      "publisher": "Android Authority",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 17:23:43 GMT"
+    },
+    {
+      "id": "6da58c0c-d180-41a7-b715-f15f84e7e8c3",
+      "type": "quote",
+      "topicId": "earnings",
+      "span": "Seems kind of random to what people are getting.",
+      "context": "Verizon customer",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTi0yQ1dwdkxRbFN2d1dnT0Jxek03N0NfbTd1QVYxc3c4OFlacnRwcGxuS0dGWkgxbjhtX0hnUEJxZE9vdmExaDZ2OFBZUjQwNW1CN1hNX1BrSktkRW1BSFV2cE12VmRzZGJXUkwzTV9yRHdhbjN1WFYwSzlYTjdFSk5B?oc=5",
+      "publisher": "Android Authority",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 17:23:43 GMT"
+    },
+    {
+      "id": "3bc1b84c-757b-4877-8810-9be075ef51be",
+      "type": "claim",
+      "topicId": "earnings",
+      "span": "Verizon CEO Dan Schulman acknowledged that price increases are a contributing factor to the growing number of customers choosing to leave.",
+      "context": "Earnings call on October 29",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiggFBVV95cUxNTi0yQ1dwdkxRbFN2d1dnT0Jxek03N0NfbTd1QVYxc3c4OFlacnRwcGxuS0dGWkgxbjhtX0hnUEJxZE9vdmExaDZ2OFBZUjQwNW1CN1hNX1BrSktkRW1BSFV2cE12VmRzZGJXUkwzTV9yRHdhbjN1WFYwSzlYTjdFSk5B?oc=5",
+      "publisher": "Android Authority",
+      "authority": 0.3,
+      "publishedDate": "Fri, 14 Nov 2025 17:23:43 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 5,
+    "byType": {
+      "stat": 1,
+      "claim": 2,
+      "quote": 2
+    },
+    "byTopic": {
+      "earnings": 5
+    },
+    "dedupeRemoved": 0
+  }
+}

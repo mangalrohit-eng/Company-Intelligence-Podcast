@@ -1,0 +1,52 @@
+{
+  "itemCount": 4,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTE5pcEFFcnd3eGpXeS1mNjBCdFV3WXpLNlZSeVM0Ni1EQWRXUkM5RHNRMDdfQ25nSmstdXlWTXQxTmh2VWd1ekh2dXZFbC0wRjl5?oc=5",
+      "title": "Can we see Neymar (33, Santos FC) playing in the English Premier League.Neymar is once again at the - 매일경제",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9685353542621239,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOMHpOeXlmODlIaXdwS1R3RTNUVHVNeEdkWGtXenRYd3NwTTdZbkRKWmxibEhzZUtOYTR2ei10UEoza1dqODhFTi1mYnc2cERtRFdGbUlKMndSTEV0OVFrVk5PZ2wtN1FZNWdDdm52cDNLY01KT1o0Z3N1dFVGV3BROXFTWHFXRDM1Tk51ak1IeEY3QmpKbFEwckJSdjV1Tmds?oc=5",
+      "title": "GEODIS Preview: Nashville SC Hosts English Premier League Power Aston Villa - Nashville SC",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 1.576602439694195e-7,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixAFBVV95cUxNQWY0YVBvcmtvbG5raUFPcHRuQmMyQzZiZldPcDdFbTZhVmtTenJ3Q1VLdzZLRWctSS04SzVjbDFVUkhfNzV1QXB2NHBITFprMEZmWVU4WWUyMW85Mnk5X3R2VFBpSk5LaHowcHkyZTNDbUxkc2pwMmFYMkQ3UnNJQ2JkYlNZY3prTzhoY3FUYzZKTFQyWGlJc0hwcWRmV0wtZ2tMakJhQUV0MDhIaUFBM24yTll3T2tqcjBYQ1pGX1VmTGRC?oc=5",
+      "title": "English Premier League: Weekend of must-watch games after international break - USA Today",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.010889390297062663,
+        "authority": 0.7
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNWkJwRkhRZzBvSmRsLUs5bkY3VlF0ajhTUTFUMkJYWVhHclFkTXdmLWtwT3FtTTFjQ284WVRQSHRGOEQ0MGVtc0dhc2ROOEwtR1B6c0JIdWVMTVc0cjMwLVlHa2h4WTZxcTlIOHN2bUNVRGZVRlNrUi1ObGY5WGxhQ0hIYmhONWo3OURKVnRHWEl6bjI2R1ZIZG1YLVUxMXZo?oc=5",
+      "title": "Where to watch and live stream English Premier League soccer - Goal.com",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.08046231565510761,
+        "authority": 0.7
+      }
+    }
+  ]
+}

@@ -80,14 +80,14 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
   return (
     <Card className="border-2 border-purple-200">
       <CardHeader className="bg-gradient-to-r from-purple-50 to-indigo-50">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="p-2 bg-purple-100 rounded-lg">
-              <Radio className="w-6 h-6 text-purple-600" />
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="p-2 bg-purple-100 rounded-lg flex-shrink-0">
+              <Radio className="w-5 h-5 sm:w-6 sm:h-6 text-purple-600" />
             </div>
-            <div>
-              <CardTitle>RSS Feed Discovery</CardTitle>
-              <CardDescription>
+            <div className="min-w-0">
+              <CardTitle className="text-lg sm:text-xl">RSS Feed Discovery</CardTitle>
+              <CardDescription className="text-xs sm:text-sm break-words">
                 Manage news sources for article discovery • Use {'{company}'} placeholder for company name
               </CardDescription>
             </div>
@@ -95,7 +95,7 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
           {!showAddForm && !editingId && (
             <Button
               onClick={() => setShowAddForm(true)}
-              className="flex items-center gap-2"
+              className="flex items-center gap-2 w-full sm:w-auto flex-shrink-0"
               size="sm"
             >
               <Plus className="w-4 h-4" />
@@ -158,11 +158,11 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
               </Label>
             </div>
 
-            <div className="flex items-center gap-2 pt-2">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 pt-2">
               <Button
                 onClick={editingId ? handleUpdate : handleAdd}
                 disabled={!formData.name || !formData.url}
-                className="flex items-center gap-2"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <Save className="w-4 h-4" />
                 {editingId ? 'Update Feed' : 'Add Feed'}
@@ -170,7 +170,7 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
               <Button
                 variant="outline"
                 onClick={cancelEdit}
-                className="flex items-center gap-2"
+                className="flex items-center justify-center gap-2 w-full sm:w-auto"
               >
                 <X className="w-4 h-4" />
                 Cancel
@@ -197,11 +197,11 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
                     : 'bg-gray-50 border-gray-300 opacity-60'
                 }`}
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h4 className="font-semibold text-lg">{feed.name}</h4>
-                      <span className={`px-2 py-0.5 rounded text-xs font-medium ${
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4">
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <h4 className="font-semibold text-base sm:text-lg">{feed.name}</h4>
+                      <span className={`px-2 py-0.5 rounded text-xs font-medium flex-shrink-0 ${
                         feed.enabled 
                           ? 'bg-green-100 text-green-800' 
                           : 'bg-gray-200 text-gray-600'
@@ -210,16 +210,16 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
                       </span>
                     </div>
 
-                    <code className="text-sm bg-gray-100 px-2 py-1 rounded block mb-2 break-all">
+                    <code className="text-xs sm:text-sm bg-gray-100 px-2 py-1 rounded block mb-2 break-all overflow-x-auto">
                       {feed.url}
                     </code>
 
                     {feed.description && (
-                      <p className="text-sm text-gray-600">{feed.description}</p>
+                      <p className="text-sm text-gray-600 break-words">{feed.description}</p>
                     )}
                   </div>
 
-                  <div className="flex items-center gap-2 ml-4">
+                  <div className="flex items-center gap-2 flex-shrink-0 sm:ml-4">
                     <Button
                       size="sm"
                       variant="outline"

@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { Mail, CheckCircle, Radio } from 'lucide-react';
@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { useAuth } from '@/contexts/AuthContext';
 
-export default function VerifyPage() {
+function VerifyForm() {
   const searchParams = useSearchParams();
   const [code, setCode] = useState('');
   const [email, setEmail] = useState('');
@@ -159,5 +159,20 @@ export default function VerifyPage() {
         </Card>
       </div>
     </div>
+  );
+}
+
+export default function VerifyPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center p-4">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-4"></div>
+          <p className="text-muted">Loading...</p>
+        </div>
+      </div>
+    }>
+      <VerifyForm />
+    </Suspense>
   );
 }

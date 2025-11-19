@@ -180,12 +180,12 @@ export default function RunProgressPage() {
   useEffect(() => {
     fetchRun();
     
-    // Poll every 3 seconds if still running
+    // Poll every 5 seconds if still running (reduced frequency for better performance)
     const interval = setInterval(() => {
       if (run?.status === 'running') {
         fetchRun();
       }
-    }, 3000);
+    }, 5000); // Increased from 3 to 5 seconds
 
     return () => clearInterval(interval);
   }, [runId, run?.status]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -257,10 +257,10 @@ export default function RunProgressPage() {
 
       if (response.ok) {
         const data = await response.json();
-        alert('Pipeline execution stopped successfully.');
-        // Refresh run data
+        // Immediately refresh run data to see the updated status
         await fetchRun();
-        // Continue polling to see the updated status
+        // Force a re-render by updating state
+        setRun((prev) => prev ? { ...prev, status: 'failed' } : null);
       } else {
         const error = await response.json();
         alert(`Failed to stop pipeline: ${error.error || error.details || 'Unknown error'}`);
@@ -381,8 +381,9 @@ export default function RunProgressPage() {
               {stages.map((stage) => {
                 const stageProgress = run.progress.stages[stage.id];
                 const isCompleted = stageProgress?.status === 'completed';
-                const isRunning = run.progress.currentStage === stage.id;
-                const hasStarted = isRunning || isCompleted || stageProgress?.status === 'running' || stageProgress?.startedAt;
+                const isFailed = stageProgress?.status === 'failed';
+                const isRunning = run.status === 'running' && (run.progress.currentStage === stage.id || stageProgress?.status === 'running');
+                const hasStarted = isRunning || isCompleted || isFailed || stageProgress?.status === 'running' || stageProgress?.startedAt;
                 // Show resume button for all stages (except when currently running)
                 // This allows re-running any stage from the latest input JSON
                 const canResume = !isRunning && run.status !== 'running';
@@ -391,6 +392,8 @@ export default function RunProgressPage() {
                   <div key={stage.name} className="flex items-center gap-4">
                     {isCompleted ? (
                       <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    ) : isFailed ? (
+                      <XCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
                     ) : isRunning ? (
                       <Loader2 className="w-5 h-5 animate-spin text-blue-500 flex-shrink-0" />
                     ) : (

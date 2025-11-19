@@ -575,15 +575,15 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
   return (
     <Card className="hover:border-primary transition-all">
       <Link href={`/podcasts/${podcast.id}`} className="block">
-        <div className="p-4 flex items-center gap-4">
+        <div className="p-4 flex flex-col sm:flex-row items-start sm:items-center gap-4">
           {/* Cover Art */}
-          <div className="w-20 h-20 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-            <div className="text-3xl">🎙️</div>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="text-2xl sm:text-3xl">🎙️</div>
           </div>
 
           {/* Info */}
-          <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg mb-1 truncate">{podcast.title}</h3>
+          <div className="flex-1 min-w-0 w-full sm:w-auto">
+            <h3 className="font-semibold text-base sm:text-lg mb-1 truncate">{podcast.title}</h3>
             <p className="text-sm text-muted truncate mb-2">{podcast.subtitle}</p>
             <div className="flex gap-2 flex-wrap">
               <Badge variant={getCadenceColor(podcast.cadence)}>
@@ -608,7 +608,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
           </div>
 
           {/* Actions */}
-          <div className="flex gap-2 items-center flex-shrink-0">
+          <div className="flex gap-2 items-center flex-shrink-0 w-full sm:w-auto justify-end sm:justify-start">
             <Button
               size="sm"
               className="gap-2"

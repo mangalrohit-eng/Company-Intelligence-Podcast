@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "company-news",
+      "sentences": [
+        "While La Liga and Bundesliga may boast about their tactical gameplay and development academies, the English Premier League sets itself apart by not just chasing high-profile talents like Neymar, indicating its unmatched global appeal, but also by investing significantly in grassroots facilities and innovation, as evidenced by Arsenal's pioneering use of an 'AI dossier' to enhance their title chase",
+        "This dual focus on star power and technological advancement solidifies the EPL's status as a leader in modern football."
+      ],
+      "boundStatOrQuote": {
+        "span": "\"Pre-contact with Neymar has begun,\"",
+        "evidenceId": "ec8a7293-66b3-4d56-bb3e-79749a735021"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "company-news": 1
+    }
+  }
+}

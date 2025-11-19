@@ -125,29 +125,32 @@ export default function PodcastDetailPage() {
               <p className="text-muted max-w-2xl leading-relaxed">{podcast.description}</p>
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-6">
-              <Button size="lg" className="gap-2" onClick={handleRunNow} disabled={runningPipeline}>
-                <Play className="w-5 h-5" />
-                {runningPipeline ? 'Starting...' : 'Run Now'}
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-6">
+              <Button size="lg" className="gap-2 flex-1 sm:flex-initial" onClick={handleRunNow} disabled={runningPipeline}>
+                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">{runningPipeline ? 'Starting...' : 'Run Now'}</span>
+                <span className="sm:hidden">{runningPipeline ? 'Starting...' : 'Run'}</span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={() => setActiveTab('settings')}>
-                <Settings className="w-5 h-5" />
-                Settings
+              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial" onClick={() => setActiveTab('settings')}>
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Settings</span>
+                <span className="sm:hidden">Config</span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={handleCopyRSS}>
-                <Copy className="w-5 h-5" />
-                Copy RSS
+              <Button size="lg" variant="outline" className="gap-2 flex-1 sm:flex-initial" onClick={handleCopyRSS}>
+                <Copy className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Copy RSS</span>
+                <span className="sm:hidden">RSS</span>
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="gap-2"
+                className="gap-2 flex-1 sm:flex-initial"
                 onClick={() => alert('Submit your RSS feed to:\n\n• Apple Podcasts: https://podcastsconnect.apple.com\n• Spotify: https://podcasters.spotify.com\n\nYour RSS URL has been copied to clipboard!')}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Help
+                <span className="hidden sm:inline">Help</span>
               </Button>
             </div>
 
@@ -351,7 +354,7 @@ function RunsTab({ podcastId }: { podcastId: string }) {
   // Fetch runs on mount and set up polling
   useEffect(() => {
     fetchRuns();
-    const interval = setInterval(fetchRuns, 3000); // Poll every 3 seconds
+    const interval = setInterval(fetchRuns, 5000); // Poll every 5 seconds (reduced frequency)
     return () => clearInterval(interval);
   }, [podcastId]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -387,26 +390,26 @@ function RunsTab({ podcastId }: { podcastId: string }) {
         return (
           <div
             key={run.id}
-            className="bg-secondary border border-border rounded-lg p-6 hover:border-primary transition-all cursor-pointer"
+            className="bg-secondary border border-border rounded-lg p-4 sm:p-6 hover:border-primary transition-all cursor-pointer"
           >
-            <div className="flex items-center justify-between">
-              <div>
-                <div className="flex items-center gap-3 mb-2">
-                  <span className="font-mono text-sm">{run.id.substring(0, 20)}</span>
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex flex-wrap items-center gap-2 sm:gap-3 mb-2">
+                  <span className="font-mono text-xs sm:text-sm truncate">{run.id.substring(0, 20)}</span>
                   <span
-                    className={`px-2 py-1 text-xs rounded ${
+                    className={`px-2 py-1 text-xs rounded flex-shrink-0 ${
                       statusColors[run.status as keyof typeof statusColors] || 'bg-gray-500/20 text-gray-500'
                     }`}
                   >
                     {run.status}
                   </span>
                   {run.progress?.currentStage && (
-                    <span className="text-xs text-muted">
+                    <span className="text-xs text-muted flex-shrink-0">
                       Stage: {run.progress.currentStage}
                     </span>
                   )}
                 </div>
-                <div className="text-sm text-muted">
+                <div className="text-xs sm:text-sm text-muted">
                   {new Date(run.startedAt).toLocaleString()}
                   {run.duration && (
                     <> • {Math.floor(run.duration / 60)}m {run.duration % 60}s</>
@@ -415,7 +418,7 @@ function RunsTab({ podcastId }: { podcastId: string }) {
               </div>
               <button
                 onClick={() => window.location.href = `/podcasts/${podcastId}/runs/${run.id}`}
-                className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all"
+                className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all text-sm whitespace-nowrap flex-shrink-0 w-full sm:w-auto"
               >
                 View Details
               </button>

@@ -12,6 +12,34 @@ const getApiBaseUrl = () => {
   return process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
 };
 
+// Cache auth session to avoid fetching on every request
+let cachedSession: { token: string | null; timestamp: number } | null = null;
+const SESSION_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+async function getCachedAuthToken(): Promise<string | null> {
+  // Check cache first
+  if (cachedSession && Date.now() - cachedSession.timestamp < SESSION_CACHE_TTL) {
+    return cachedSession.token;
+  }
+
+  // Fetch new session
+  try {
+    const session = await fetchAuthSession({ forceRefresh: false });
+    const token = session.tokens?.idToken?.toString() || null;
+    
+    // Update cache
+    cachedSession = {
+      token,
+      timestamp: Date.now(),
+    };
+    
+    return token;
+  } catch (error) {
+    cachedSession = null;
+    return null;
+  }
+}
+
 export interface ApiOptions extends RequestInit {
   requireAuth?: boolean;
 }
@@ -30,49 +58,28 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
   // Add authentication token if required
   if (requireAuth) {
     try {
-      console.log('🔐 Fetching auth session...');
-      const session = await fetchAuthSession({ forceRefresh: false });
-      console.log('📊 Session:', {
-        hasTokens: !!session.tokens,
-        hasIdToken: !!session.tokens?.idToken,
-        hasAccessToken: !!session.tokens?.accessToken,
-        credentials: !!session.credentials,
-        identityId: session.identityId,
-      });
-      
-      const token = session.tokens?.idToken?.toString();
+      // Use cached session to avoid fetching on every request
+      const token = await getCachedAuthToken();
       
       if (token) {
-        console.log('✅ Token retrieved (length:', token.length, ')');
-        console.log('✅ Token preview:', token.substring(0, 50) + '...');
         (finalHeaders as Record<string, string>)['Authorization'] = `Bearer ${token}`;
       } else {
-        console.error('❌ No auth token available for API call');
-        console.error('❌ Full session:', JSON.stringify(session, null, 2));
-        
         // No token available - redirect to login
         if (typeof window !== 'undefined') {
-          console.log('🔄 Redirecting to login due to missing token');
           window.location.href = '/auth/login';
         }
         throw new Error('No authentication token available');
       }
     } catch (error) {
-      console.error('❌ Failed to get auth token:', error);
+      // Clear cache on error
+      cachedSession = null;
       // Redirect to login on auth error
       if (typeof window !== 'undefined') {
-        console.log('🔄 Redirecting to login due to auth error');
         window.location.href = '/auth/login';
       }
       throw error;
     }
   }
-  
-  console.log('🌐 API Call:', {
-    url: endpoint,
-    method: fetchOptions.method || 'GET',
-    hasAuthHeader: !!(finalHeaders as Record<string, string>)['Authorization'],
-  });
 
   const API_BASE_URL = getApiBaseUrl();
   const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
@@ -84,17 +91,20 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
 
   // Handle authentication errors
   if (response.status === 401 || response.status === 403) {
-    console.error('❌ Authentication failed:', response.status, response.statusText);
-    
-    // Try to refresh the token once
+    // Clear cache and try to refresh the token once
     if (requireAuth) {
+      cachedSession = null; // Clear cache
       try {
-        console.log('🔄 Attempting to refresh token...');
         const refreshedSession = await fetchAuthSession({ forceRefresh: true });
         const newToken = refreshedSession.tokens?.idToken?.toString();
         
         if (newToken) {
-          console.log('✅ Token refreshed successfully, retrying request');
+          // Update cache with new token
+          cachedSession = {
+            token: newToken,
+            timestamp: Date.now(),
+          };
+          
           (finalHeaders as Record<string, string>)['Authorization'] = `Bearer ${newToken}`;
           
           // Retry the request with the new token
@@ -105,7 +115,7 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
           
           // If retry still fails with auth error, redirect to login
           if (retryResponse.status === 401 || retryResponse.status === 403) {
-            console.error('❌ Auth still failed after token refresh, redirecting to login');
+            cachedSession = null;
             if (typeof window !== 'undefined') {
               window.location.href = '/auth/login';
             }
@@ -113,13 +123,13 @@ export async function apiCall(endpoint: string, options: ApiOptions = {}): Promi
           
           return retryResponse;
         } else {
-          console.error('❌ Token refresh failed, redirecting to login');
+          cachedSession = null;
           if (typeof window !== 'undefined') {
             window.location.href = '/auth/login';
           }
         }
       } catch (refreshError) {
-        console.error('❌ Token refresh error:', refreshError);
+        cachedSession = null;
         if (typeof window !== 'undefined') {
           window.location.href = '/auth/login';
         }
