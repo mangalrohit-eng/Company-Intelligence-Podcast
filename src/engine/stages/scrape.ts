@@ -402,25 +402,26 @@ export class ScrapeStage {
           let content = this.extractTextFromHtml(response.body);
           let finalUrl = response.url;
           
-          // Check if we got minimal content (Google News landing page)
+          // If we used headless browser service, the response should contain the actual article
+          // If we still got minimal content, try to extract the actual URL from the response
           const isMinimalContent = content.trim().toLowerCase() === 'google news' || 
                                    content.trim().length < 100 ||
                                    (content.trim().toLowerCase().includes('google news') && content.trim().length < 200);
           
-          if (isMinimalContent && isGoogleNewsUrl) {
+          if (isMinimalContent && isGoogleNewsUrl && !useHeadlessBrowser) {
+            // Headless browser wasn't used - try to extract URL from HTML
             logger.warn('Got minimal content from Google News - attempting to extract actual article URL', {
               originalUrl: item.url,
               fetchedUrl: urlToFetch,
               finalUrl: finalUrl,
               contentLength: content.length,
-              contentPreview: content.substring(0, 200),
+              hasHeadlessBrowserKey: !!process.env.HEADLESS_BROWSER_API_KEY,
             });
             
-            // Strategy 3: Try to extract article URL from the HTML body
-            // Google News redirect pages sometimes contain the actual URL in meta tags or JavaScript
+            // Try to extract article URL from meta tags or canonical link
             const metaUrlMatch = response.body.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i) ||
                                  response.body.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i) ||
-                                 response.body.match(/url["\s:=]+(https?:\/\/[^"'\s>]+)/i);
+                                 response.body.match(/<a[^>]+href="(https?:\/\/[^"]+)"[^>]*class="[^"]*WwrzSb[^"]*"/i); // Google News article link class
             
             if (metaUrlMatch && metaUrlMatch[1] && !metaUrlMatch[1].includes('news.google.com')) {
               const extractedUrl = metaUrlMatch[1];
@@ -444,30 +445,11 @@ export class ScrapeStage {
               } catch (directError) {
                 logger.warn('Failed to fetch extracted URL', { url: extractedUrl, error: directError });
               }
-            }
-            
-            // Strategy 4: If final URL is different and not Google News, try fetching it
-            if (finalUrl !== urlToFetch && !finalUrl.includes('news.google.com') && content.trim().length < 100) {
-              logger.info('Final URL is different from request URL, trying direct fetch', {
-                original: urlToFetch,
-                final: finalUrl,
+            } else if (!process.env.HEADLESS_BROWSER_API_KEY) {
+              logger.warn('Google News scraping requires HEADLESS_BROWSER_API_KEY environment variable', {
+                originalUrl: item.url,
+                suggestion: 'Configure HEADLESS_BROWSER_API_KEY and HEADLESS_BROWSER_API_URL for proper Google News scraping',
               });
-              
-              try {
-                const finalResponse = await this.httpGateway.fetch({ url: finalUrl });
-                if (finalResponse.status === 200) {
-                  const finalContent = this.extractTextFromHtml(finalResponse.body);
-                  if (finalContent.trim().length > 100) {
-                    content = finalContent;
-                    logger.info('Successfully fetched content from final redirect URL', {
-                      url: finalUrl,
-                      contentLength: content.length,
-                    });
-                  }
-                }
-              } catch (finalError) {
-                logger.warn('Failed to fetch final redirect URL', { url: finalUrl, error: finalError });
-              }
             }
             
             // If we still have minimal content, log it but continue
@@ -476,8 +458,16 @@ export class ScrapeStage {
                 originalUrl: item.url,
                 finalUrl: finalUrl,
                 contentLength: content.length,
+                usedHeadlessBrowser: useHeadlessBrowser,
               });
             }
+          } else if (isMinimalContent && isGoogleNewsUrl && useHeadlessBrowser) {
+            // Headless browser was used but still got minimal content - this shouldn't happen
+            logger.error('Headless browser service returned minimal content - service may not be working correctly', {
+              originalUrl: item.url,
+              serviceUrl: urlToFetch.substring(0, 100), // Don't log full API key
+              contentLength: content.length,
+            });
           }
 
           // Thread-safe: use mutex-like pattern for shared state
