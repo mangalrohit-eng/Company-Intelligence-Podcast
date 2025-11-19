@@ -29,6 +29,7 @@
     "sync:runs": "tsx scripts/sync-runs-to-dynamodb.ts",
     "stop:all-runs": "tsx scripts/stop-all-runs.ts",
     "delete:failed-runs": "tsx scripts/delete-failed-runs.ts",
+    "stop:run": "tsx scripts/stop-specific-run.ts",
     "deploy": "cd infra/cdk && cdk deploy",
     "deploy:update": "cd infra/cdk && cdk deploy --require-approval never --hotswap",
     "deploy:frontend": "powershell -ExecutionPolicy Bypass -File scripts/deploy-to-aws.ps1",

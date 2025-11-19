@@ -7,6 +7,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient, ScanCommand, UpdateCommand } from '@aws-sdk/lib-dynamodb';
 import { isS3Available, writeToS3, getStopFlagKey } from '@/lib/s3-storage';
+import { runsStore } from '@/lib/runs-store';
 
 const RUNS_TABLE = process.env.RUNS_TABLE || 'runs';
 
@@ -41,6 +42,19 @@ async function getAllRunningRuns() {
     }
     lastEvaluatedKey = response.LastEvaluatedKey;
   } while (lastEvaluatedKey);
+
+  // Also check in-memory store for running runs
+  for (const podcastId in runsStore) {
+    const memoryRuns = runsStore[podcastId] || [];
+    for (const run of memoryRuns) {
+      if (run.status === 'running') {
+        // Check if already in runningRuns (avoid duplicates)
+        if (!runningRuns.find(r => r.id === run.id)) {
+          runningRuns.push(run);
+        }
+      }
+    }
+  }
 
   return runningRuns;
 }
@@ -78,21 +92,37 @@ async function stopRun(run: any) {
     updatedRun.progress.currentStage = '';
   }
 
-  await client.send(new UpdateCommand({
-    TableName: RUNS_TABLE,
-    Key: { id: runId },
-    UpdateExpression: 'SET #status = :status, completedAt = :completedAt, #output = :output, progress = :progress',
-    ExpressionAttributeNames: {
-      '#status': 'status',
-      '#output': 'output',
-    },
-    ExpressionAttributeValues: {
-      ':status': 'failed',
-      ':completedAt': updatedRun.completedAt,
-      ':output': updatedRun.output,
-      ':progress': updatedRun.progress,
-    },
-  }));
+  // Update in DynamoDB (if it exists there)
+  try {
+    await client.send(new UpdateCommand({
+      TableName: RUNS_TABLE,
+      Key: { id: runId },
+      UpdateExpression: 'SET #status = :status, completedAt = :completedAt, #output = :output, progress = :progress',
+      ExpressionAttributeNames: {
+        '#status': 'status',
+        '#output': 'output',
+      },
+      ExpressionAttributeValues: {
+        ':status': 'failed',
+        ':completedAt': updatedRun.completedAt,
+        ':output': updatedRun.output,
+        ':progress': updatedRun.progress,
+      },
+    }));
+  } catch (error: any) {
+    // If run doesn't exist in DynamoDB, that's okay - it might be in-memory only
+    console.log(`Run ${runId} not found in DynamoDB, updating in-memory store only`);
+  }
+
+  // Also update in-memory store
+  for (const podcastId in runsStore) {
+    const memoryRuns = runsStore[podcastId] || [];
+    const runIndex = memoryRuns.findIndex(r => r.id === runId);
+    if (runIndex >= 0) {
+      memoryRuns[runIndex] = updatedRun;
+      console.log(`Updated run ${runId} in in-memory store for podcast ${podcastId}`);
+    }
+  }
 
   if (isS3Available()) {
     try {
