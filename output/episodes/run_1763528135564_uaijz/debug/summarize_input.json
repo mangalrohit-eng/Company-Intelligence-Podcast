@@ -1,0 +1,18 @@
+{
+  "topicCount": 4,
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [],
+  "evidenceCount": 0,
+  "evidenceByTopic": []
+}

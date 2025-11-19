@@ -93,8 +93,21 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
         error: update.error,
       });
       
-      // Save run to disk after each update (async, fire-and-forget)
-      saveRun(run).catch(err => console.error(`❌ [${runId}] Failed to persist run:`, err));
+      // Save run to DynamoDB after each update (async, fire-and-forget, with timeout)
+      // Use a timeout to prevent hanging if DynamoDB is slow
+      Promise.race([
+        saveRun(run),
+        new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('Save timeout')), 5000)
+        )
+      ]).catch(err => {
+        // Log but don't block - DynamoDB saves are best-effort
+        if (err.message !== 'Save timeout') {
+          console.error(`❌ [${runId}] Failed to persist run:`, err);
+        } else {
+          console.warn(`⏱️ [${runId}] Run save timed out (non-blocking)`);
+        }
+      });
     });
     console.log(`✅ [${runId}] Emitter created`);
     

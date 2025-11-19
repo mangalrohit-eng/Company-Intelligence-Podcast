@@ -24,6 +24,7 @@ export async function GET(
     // Get all runs for this podcast
     const runs = await getRunsForPodcast(podcastId);
     console.log(`📊 Found ${runs.length} total runs for podcast ${podcastId}`);
+    console.log(`📊 Run IDs:`, runs.map(r => ({ id: r.id, status: r.status, hasOutput: !!r.output, hasEpisodeId: !!r.output?.episodeId })));
 
     // For local dev, also check filesystem for completed runs with audio
     // This ensures runs that exist in the filesystem but might not be in the database are included
@@ -73,10 +74,16 @@ export async function GET(
 
     // Filter to completed runs that have episodes
     const completedRuns = runs.filter((run: any) => {
+      console.log(`🔍 Checking run ${run.id}:`, {
+        status: run.status,
+        hasOutput: !!run.output,
+        outputKeys: run.output ? Object.keys(run.output) : [],
+      });
+      
       const isCompleted = run.status === 'completed' || run.status === 'success';
       
       if (!isCompleted) {
-        console.log(`⏭️ Skipping run ${run.id}: status is ${run.status}`);
+        console.log(`⏭️ Skipping run ${run.id}: status is ${run.status} (not completed)`);
         return false;
       }
       
@@ -88,8 +95,9 @@ export async function GET(
         };
       }
       
-      // Ensure episodeId exists
+      // Ensure episodeId exists (use run.id as fallback)
       if (!run.output.episodeId) {
+        console.log(`⚠️ Run ${run.id} has no episodeId in output, setting to run.id`);
         run.output.episodeId = run.id;
       }
       
@@ -97,6 +105,8 @@ export async function GET(
         episodeId: run.output.episodeId,
         hasAudioS3Key: !!run.output.audioS3Key,
         audioS3Key: run.output.audioS3Key,
+        hasMp3S3Key: !!run.output.mp3S3Key,
+        mp3S3Key: run.output.mp3S3Key,
       });
       
       return true;

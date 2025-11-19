@@ -250,27 +250,42 @@ export class PipelineOrchestrator {
 
       // Stage 1: Prepare
       if (input.flags.enable.discover || input.flags.dryRun) {
-        const stage = new PrepareStage();
-        const stageStart = Date.now();
-        
-        const prepareInput = { config: input.config };
-        await saveStageIO('prepare', prepareInput, {});
-        
-        await stage.execute(input, emitter);
-        
-        const prepareOutput = {
-          speechBudgetWords: Math.round(input.config.durationMinutes * 150),
-          evidenceTargetUnits: Math.round(input.config.durationMinutes * 2),
-        };
-        await saveStageIO('prepare', prepareInput, prepareOutput);
-        
-        telemetry.stages.prepare = {
-          startTime: new Date(stageStart).toISOString(),
-          endTime: new Date().toISOString(),
-          durationMs: Date.now() - stageStart,
-          status: 'success',
-        };
+        try {
+          const stage = new PrepareStage();
+          const stageStart = Date.now();
+          
+          const prepareInput = { config: input.config };
+          await saveStageIO('prepare', prepareInput, {});
+          
+          logger.info('Starting prepare stage', { runId: input.runId });
+          const prepareOutput = await stage.execute(input, emitter);
+          logger.info('Prepare stage completed successfully', { 
+            runId: input.runId,
+            speechBudgetWords: prepareOutput.speechBudgetWords,
+            evidenceTargetUnits: prepareOutput.evidenceTargetUnits,
+          });
+          
+          await saveStageIO('prepare', prepareInput, prepareOutput);
+          
+          telemetry.stages.prepare = {
+            startTime: new Date(stageStart).toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: Date.now() - stageStart,
+            status: 'success',
+          };
+          
+          logger.info('Prepare stage telemetry updated', { runId: input.runId });
+        } catch (error: any) {
+          logger.error('Prepare stage failed', { runId: input.runId, error: error.message, stack: error.stack });
+          throw error;
+        }
       }
+      
+      logger.info('Moving to discover stage', { 
+        runId: input.runId, 
+        enableDiscover: input.flags.enable.discover,
+        dryRun: input.flags.dryRun,
+      });
 
       // Stage 2: Discover
       let discoverOutput;
