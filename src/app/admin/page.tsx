@@ -103,29 +103,24 @@ export default function AdminPage() {
     fetchRuns();
     
     // Smart polling: poll every 5 seconds if there are active runs, otherwise every 30 seconds
+    let pollCount = 0;
     const interval = setInterval(() => {
+      pollCount++;
       const hasActiveRuns = activeRuns.length > 0;
+      
       if (hasActiveRuns) {
         // Poll frequently if there are active runs
         fetchRuns();
       } else {
-        // Poll less frequently if no active runs (just to catch new runs)
-        // Only fetch every 6th interval (30 seconds)
+        // Poll every 30 seconds (every 6th interval) if no active runs
+        if (pollCount % 6 === 0) {
+          fetchRuns();
+        }
       }
     }, 5000);
     
-    // Also set up a slower poll for when there are no active runs
-    const slowInterval = setInterval(() => {
-      if (activeRuns.length === 0) {
-        fetchRuns();
-      }
-    }, 30000); // Every 30 seconds when no active runs
-    
-    return () => {
-      clearInterval(interval);
-      clearInterval(slowInterval);
-    };
-  }, [activeRuns.length]);
+    return () => clearInterval(interval);
+  }, []); // Only run once on mount
 
   const toggleExpanded = (runId: string) => {
     setExpandedRuns(prev => {
