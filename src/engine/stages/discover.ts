@@ -55,12 +55,22 @@ export class DiscoverStage {
     for (const feedUrl of sources.rssFeeds) {
       const startTime = Date.now();
       try {
-        logger.info('Fetching RSS feed', { feedUrl });
-        const response = await this.httpGateway.fetch({ url: feedUrl, method: 'GET' });
+        logger.info('Fetching RSS feed', { 
+          feedUrl,
+          isVercel: !!process.env.VERCEL,
+        });
+        
+        // On Vercel, use shorter timeout for RSS feeds (8 seconds)
+        const timeout = process.env.VERCEL ? 8000 : 30000;
+        const response = await this.httpGateway.fetch({ 
+          url: feedUrl, 
+          method: 'GET',
+          timeout,
+        });
         const latency = Date.now() - startTime;
         latencies.push(latency);
         
-        logger.info('RSS feed response', { 
+        logger.info('RSS feed response received', { 
           feedUrl, 
           status: response.status, 
           bodyLength: response.body?.length || 0,
@@ -243,15 +253,26 @@ export class DiscoverStage {
           });
         }
       } catch (error: any) {
+        const errorLatency = Date.now() - startTime;
         logger.error('Failed to fetch RSS feed', { 
           feedUrl, 
           error: error.message,
-          stack: error.stack,
           errorName: error.name,
           errorCode: error.code,
+          latency: errorLatency,
           isVercel: !!process.env.VERCEL,
           nodeEnv: process.env.NODE_ENV,
+          isTimeout: error.name === 'AbortError' || error.message?.includes('timeout'),
         });
+        
+        // If timeout on Vercel, log as warning but continue
+        if (process.env.VERCEL && (error.name === 'AbortError' || error.message?.includes('timeout'))) {
+          logger.warn('RSS feed fetch timed out on Vercel - this may be due to serverless function limits', {
+            feedUrl,
+            timeout: 8000,
+          });
+        }
+        
         // Continue to next feed - don't fail entire discovery
         // But log this as a critical issue if it's the only feed
         if (sources.rssFeeds.length === 1) {

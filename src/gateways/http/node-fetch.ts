@@ -15,8 +15,17 @@ export class NodeFetchHttpGateway implements IHttpGateway {
 
     try {
       const controller = new AbortController();
-      const timeout = request.timeout || 30000;
+      // On Vercel, use shorter timeout to avoid serverless function timeouts
+      // Vercel Hobby: 10s, Pro: 60s - use 8s for RSS feeds to be safe
+      const defaultTimeout = process.env.VERCEL ? 8000 : 30000;
+      const timeout = request.timeout || defaultTimeout;
       const timeoutId = setTimeout(() => controller.abort(), timeout);
+      
+      logger.debug('Starting HTTP fetch', {
+        url: request.url,
+        timeout,
+        isVercel: !!process.env.VERCEL,
+      });
 
       // Follow redirects explicitly (fetch follows redirects by default, but be explicit)
       const response = await fetch(request.url, {
