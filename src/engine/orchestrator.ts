@@ -118,7 +118,8 @@ export class PipelineOrchestrator {
       const ttsGateway = GatewayFactory.createTtsGateway(gatewayConfig);
       const httpGateway = GatewayFactory.createHttpGateway(gatewayConfig);
 
-            // Helper to write debug file to S3
+            // Helper to write debug file to S3 with timeout protection
+            // On Vercel, S3 writes can hang, so we add a timeout to prevent pipeline blocking
             const writeDebugFile = async (filename: string, content: string | object) => {
               try {
                 const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
@@ -129,26 +130,41 @@ export class PipelineOrchestrator {
                   contentLength: jsonContent.length,
                   runId: input.runId,
                 });
-                await writeToS3(
+                
+                // Add timeout to prevent hanging on Vercel (5 seconds)
+                const writePromise = writeToS3(
                   s3Key,
                   jsonContent,
                   'application/json'
                 );
+                const timeoutPromise = new Promise((_, reject) => 
+                  setTimeout(() => reject(new Error('S3 write timeout')), 5000)
+                );
+                
+                await Promise.race([writePromise, timeoutPromise]);
+                
                 logger.info(`Successfully wrote debug file to S3`, { 
                   filename, 
                   s3Key,
                   runId: input.runId,
                 });
               } catch (error: any) {
-                logger.error(`Failed to write debug file ${filename} to S3`, { 
-                  filename,
-                  runId: input.runId,
-                  error: error.message,
-                  errorName: error.name,
-                  stack: error.stack,
-                });
+                // Log but don't throw - continue pipeline even if debug file save fails
+                if (error.message === 'S3 write timeout') {
+                  logger.warn(`Debug file ${filename} write timed out after 5s, continuing pipeline`, { 
+                    filename,
+                    runId: input.runId,
+                  });
+                } else {
+                  logger.error(`Failed to write debug file ${filename} to S3`, { 
+                    filename,
+                    runId: input.runId,
+                    error: error.message,
+                    errorName: error.name,
+                  });
+                }
                 // Don't throw - continue pipeline even if debug file save fails
-                // But log as error so we know it happened
+                // Debug files are non-critical - pipeline can proceed without them
               }
             };
 
@@ -343,26 +359,10 @@ export class PipelineOrchestrator {
           topicCount: topicIds.length, 
           feedCount: rssFeeds.length,
         });
-        
-        // Save discover input with timeout to prevent hanging
-        // On Vercel, S3 writes can sometimes hang, so we use Promise.race with timeout
-        const discoverInputSavePromise = writeDebugFile('discover_input.json', discoverInput);
-        const timeoutPromise = new Promise((_, reject) => 
-          setTimeout(() => reject(new Error('Discover input save timeout')), 5000)
-        );
-        
-        try {
-          await Promise.race([discoverInputSavePromise, timeoutPromise]);
-          logger.info('Discover input saved to S3 successfully', { 
-            runId: input.runId,
-          });
-        } catch (error: any) {
-          // Log but don't block - continue pipeline even if debug file save fails
-          logger.warn('Discover input save failed or timed out, continuing pipeline', { 
-            runId: input.runId,
-            error: error.message,
-          });
-        }
+        await writeDebugFile('discover_input.json', discoverInput);
+        logger.info('Discover input save completed (check logs above for success/failure)', { 
+          runId: input.runId,
+        });
         
         logger.info('About to call discover stage execute()', { 
           runId: input.runId,
