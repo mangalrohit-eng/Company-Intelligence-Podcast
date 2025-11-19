@@ -495,6 +495,10 @@ export class PipelineOrchestrator {
           stats: disambiguateOutput.stats, // Keep stats for debugging
         });
         logger.info('Saved disambiguate debug output', { passedCount: disambiguateOutput.items.filter(i => !i.blocked).length });
+        } catch (error: any) {
+          logger.error('Disambiguate stage failed', { runId: input.runId, error: error.message, stack: error.stack });
+          throw error;
+        }
       }
 
       // Stage 4: Rank
