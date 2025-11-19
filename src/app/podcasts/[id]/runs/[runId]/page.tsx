@@ -45,14 +45,35 @@ export default function RunProgressPage() {
   const fetchRun = async () => {
     try {
       const { api } = await import('@/lib/api');
-      const response = await api.get(`/podcasts/${podcastId}/runs`);
+      // Use direct get run endpoint instead of fetching all runs
+      const response = await api.get(`/runs/${runId}`);
       
       if (response.ok) {
         const data = await response.json();
-        const foundRun = data.runs?.find((r: any) => r.id === runId);
-        if (foundRun) {
-          setRun(foundRun);
+        // Ensure progress structure exists (for backward compatibility)
+        if (data && !data.progress) {
+          data.progress = {
+            currentStage: 'prepare',
+            stages: {
+              prepare: { status: 'pending' },
+              discover: { status: 'pending' },
+              disambiguate: { status: 'pending' },
+              rank: { status: 'pending' },
+              scrape: { status: 'pending' },
+              extract: { status: 'pending' },
+              summarize: { status: 'pending' },
+              contrast: { status: 'pending' },
+              outline: { status: 'pending' },
+              script: { status: 'pending' },
+              qa: { status: 'pending' },
+              tts: { status: 'pending' },
+              package: { status: 'pending' },
+            },
+          };
         }
+        setRun(data);
+      } else {
+        console.error('Failed to fetch run:', response.statusText);
       }
     } catch (error) {
       console.error('Error fetching run:', error);

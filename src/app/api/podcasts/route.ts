@@ -130,6 +130,45 @@ export async function GET(request: NextRequest) {
   }
 }
 
+// Helper to extract auth context from Next.js request
+function extractAuthFromRequest(request: NextRequest): { userId: string; orgId: string } | null {
+  try {
+    const authHeader = request.headers.get('authorization');
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return null;
+    }
+
+    const token = authHeader.substring(7);
+    
+    // Decode JWT token (without verification for local dev)
+    // Format: header.payload.signature
+    const parts = token.split('.');
+    if (parts.length !== 3) {
+      return null;
+    }
+
+    // Decode payload (base64url)
+    const payload = JSON.parse(Buffer.from(parts[1], 'base64url').toString());
+    
+    const userId = payload.sub;
+    if (!userId) {
+      return null;
+    }
+
+    // Extract orgId from custom claim or generate for legacy users
+    let orgId = payload['custom:org_id'];
+    if (!orgId) {
+      // Legacy user - generate orgId
+      orgId = `org-${userId}`;
+    }
+
+    return { userId, orgId };
+  } catch (error) {
+    console.error('Failed to extract auth from request:', error);
+    return null;
+  }
+}
+
 // POST /api/podcasts - Create new podcast
 export async function POST(request: NextRequest) {
   let body: any;
@@ -144,6 +183,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Extract auth context from request
+    const auth = extractAuthFromRequest(request);
+    if (!auth) {
+      return NextResponse.json(
+        { error: 'Authentication required - Please log in' },
+        { status: 401 }
+      );
+    }
+
+    const { userId, orgId } = auth;
     const podcastId = `podcast_${randomUUID()}`;
     const now = new Date().toISOString();
 
@@ -155,10 +204,14 @@ export async function POST(request: NextRequest) {
       topicsLength: topics?.length || 0,
       topicPriorities: topicPriorities,
       hasTopics: !!topics && topics.length > 0,
+      userId: userId.substring(0, 8) + '...',
+      orgId: orgId.substring(0, 12) + '...',
     });
 
     const podcast = {
       id: podcastId,
+      orgId, // CRITICAL: Add orgId so it shows up in Amplify
+      ownerUserId: userId, // Track owner
       title,
       description: description || '',
       companyId,

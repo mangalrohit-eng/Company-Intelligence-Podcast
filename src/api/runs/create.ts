@@ -85,12 +85,33 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
     const runId = uuidv4();
     const now = new Date().toISOString();
 
+    // Initialize progress structure with all pipeline stages
+    const initialStages = {
+      prepare: { status: 'pending' as const },
+      discover: { status: 'pending' as const },
+      disambiguate: { status: 'pending' as const },
+      rank: { status: 'pending' as const },
+      scrape: { status: 'pending' as const },
+      extract: { status: 'pending' as const },
+      summarize: { status: 'pending' as const },
+      contrast: { status: 'pending' as const },
+      outline: { status: 'pending' as const },
+      script: { status: 'pending' as const },
+      qa: { status: 'pending' as const },
+      tts: { status: 'pending' as const },
+      package: { status: 'pending' as const },
+    };
+
     // Create run record
     const run = {
       id: runId,
       podcastId,
       configVersion: podcast.currentConfigVersion,
-      status: 'pending',
+      status: 'pending' as const,
+      progress: {
+        currentStage: 'prepare',
+        stages: initialStages,
+      },
       createdAt: now,
       updatedAt: now,
     };
@@ -170,6 +191,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
 
     return acceptedResponse({
       ...run,
+      runId: run.id, // Include runId for frontend compatibility
       executionArn: result.executionArn,
     });
   } catch (error) {

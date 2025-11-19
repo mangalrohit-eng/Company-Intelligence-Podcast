@@ -179,8 +179,10 @@ export class PodcastPlatformStack extends cdk.Stack {
       PODCAST_TOPICS_TABLE: podcastTopicsTable.tableName,
       RUNS_TABLE: runsTable.tableName,
       EVENTS_TABLE: eventsTable.tableName,
+      RUN_EVENTS_TABLE: eventsTable.tableName, // Alias for runs/events.ts
       EPISODES_TABLE: episodesTable.tableName,
       MEDIA_BUCKET: mediaBucket.bucketName,
+      S3_BUCKET_MEDIA: mediaBucket.bucketName, // Alias for episodes/get.ts
       RSS_BUCKET: rssBucket.bucketName,
       CLOUDFRONT_DOMAIN: `https://dhycfwg0k4xij.cloudfront.net`,  // TODO: Make this dynamic
       USER_POOL_ID: userPool.userPoolId,
@@ -394,11 +396,229 @@ export class PodcastPlatformStack extends cdk.Stack {
       resources: ['*'],
     }));
 
+    // Create state machine first (needed for Lambda environment)
     const stateMachine = new sfn.StateMachine(this, 'PipelineStateMachine', {
       stateMachineName: 'podcast-pipeline',
       definitionBody: sfn.DefinitionBody.fromFile('../../infra/stepfunctions/podcast_pipeline.asl.json'),
       timeout: cdk.Duration.hours(2),
       role: stateMachineRole,
+    });
+
+    // Create Run Lambda (needs state machine ARN)
+    const createRunLambda = new NodejsFunction(this, 'CreateRunLambda', {
+      functionName: 'run-create',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/runs/create.ts',
+      handler: 'handler',
+      environment: {
+        ...lambdaEnv,
+        STATE_MACHINE_ARN: stateMachine.stateMachineArn,
+      },
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    runsTable.grantReadWriteData(createRunLambda);
+    podcastsTable.grantReadData(createRunLambda);
+    podcastConfigsTable.grantReadData(createRunLambda);
+    stateMachine.grantStartExecution(createRunLambda);
+
+    // Get Run Lambda
+    const getRunLambda = new NodejsFunction(this, 'GetRunLambda', {
+      functionName: 'run-get',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/runs/get.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    runsTable.grantReadData(getRunLambda);
+    podcastsTable.grantReadData(getRunLambda);
+
+    // List Runs Lambda
+    const listRunsLambda = new NodejsFunction(this, 'ListRunsLambda', {
+      functionName: 'run-list',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/runs/list.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    runsTable.grantReadData(listRunsLambda);
+    podcastsTable.grantReadData(listRunsLambda);
+
+    // Get Run Events Lambda
+    const getRunEventsLambda = new NodejsFunction(this, 'GetRunEventsLambda', {
+      functionName: 'run-events',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/runs/events.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    eventsTable.grantReadData(getRunEventsLambda);
+
+    // Get Podcast Lambda
+    const getPodcastLambda = new NodejsFunction(this, 'GetPodcastLambda', {
+      functionName: 'podcast-get',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/podcasts/get.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    podcastsTable.grantReadData(getPodcastLambda);
+
+    // Get Episode Lambda
+    const getEpisodeLambda = new NodejsFunction(this, 'GetEpisodeLambda', {
+      functionName: 'episode-get',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/episodes/get.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    episodesTable.grantReadData(getEpisodeLambda);
+    mediaBucket.grantRead(getEpisodeLambda);
+
+    // List Episodes Lambda
+    const listEpisodesLambda = new NodejsFunction(this, 'ListEpisodesLambda', {
+      functionName: 'episode-list',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/episodes/list.ts',
+      handler: 'handler',
+      environment: lambdaEnv,
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    episodesTable.grantReadData(listEpisodesLambda);
+    podcastsTable.grantReadData(listEpisodesLambda);
+
+    // Add routes for creating runs
+    const createRunIntegration = new HttpLambdaIntegration(
+      'CreateRunIntegration',
+      createRunLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts/{id}/runs',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: createRunIntegration,
+      authorizer: authorizer,
+    });
+
+    // Add routes for getting/listing runs
+    const getRunIntegration = new HttpLambdaIntegration(
+      'GetRunIntegration',
+      getRunLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/runs/{id}',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: getRunIntegration,
+      authorizer: authorizer,
+    });
+
+    const listRunsIntegration = new HttpLambdaIntegration(
+      'ListRunsIntegration',
+      listRunsLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts/{id}/runs',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: listRunsIntegration,
+      authorizer: authorizer,
+    });
+
+    const getRunEventsIntegration = new HttpLambdaIntegration(
+      'GetRunEventsIntegration',
+      getRunEventsLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/runs/{id}/events',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: getRunEventsIntegration,
+      authorizer: authorizer,
+    });
+
+    // Add route for getting podcast
+    const getPodcastIntegration = new HttpLambdaIntegration(
+      'GetPodcastIntegration',
+      getPodcastLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts/{id}',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: getPodcastIntegration,
+      authorizer: authorizer,
+    });
+
+    // Add routes for episodes
+    const getEpisodeIntegration = new HttpLambdaIntegration(
+      'GetEpisodeIntegration',
+      getEpisodeLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/episodes/{id}',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: getEpisodeIntegration,
+      authorizer: authorizer,
+    });
+
+    const listEpisodesIntegration = new HttpLambdaIntegration(
+      'ListEpisodesIntegration',
+      listEpisodesLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts/{id}/episodes',
+      methods: [apigatewayv2.HttpMethod.GET],
+      integration: listEpisodesIntegration,
+      authorizer: authorizer,
     });
 
     // ========================================================================

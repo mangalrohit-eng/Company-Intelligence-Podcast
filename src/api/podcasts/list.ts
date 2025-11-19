@@ -51,10 +51,14 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       })
     );
 
-    // If no results and this is a legacy user, also check for podcasts without orgId
+    // If no results, also check for legacy podcasts without orgId
     // (old format podcasts that were created before orgId system)
-    if ((!result.Items || result.Items.length === 0) && isLegacyUser) {
-      logger.info('No podcasts found with orgId, checking for legacy podcasts without orgId');
+    // This handles the case where user has orgId but podcasts don't (or vice versa)
+    if (!result.Items || result.Items.length === 0) {
+      logger.info('No podcasts found with orgId, checking for legacy podcasts without orgId', {
+        orgId: orgId.substring(0, 12) + '...',
+        isLegacyUser,
+      });
       
       // Scan for podcasts without orgId (legacy format)
       // Note: This is less efficient but necessary for backward compatibility
@@ -66,16 +70,51 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         })
       );
       
+      logger.info('Legacy scan completed', {
+        found: scanResult.Items?.length || 0,
+        scannedCount: scanResult.ScannedCount || 0,
+      });
+      
       if (scanResult.Items && scanResult.Items.length > 0) {
-        logger.info('Found legacy podcasts without orgId', { count: scanResult.Items.length });
+        logger.info('Found legacy podcasts without orgId', { 
+          count: scanResult.Items.length,
+          podcastIds: scanResult.Items.map((p: any) => p.id).slice(0, 5),
+        });
         result = scanResult;
+      } else {
+        logger.warn('No legacy podcasts found either', {
+          scannedCount: scanResult.ScannedCount || 0,
+        });
       }
     }
 
     logger.info('Listed podcasts', { orgId: orgId.substring(0, 12) + '...', count: result.Items?.length || 0 });
 
+    // Transform podcasts to ensure frontend compatibility
+    // Legacy podcasts might be missing some fields that the frontend expects
+    const transformedPodcasts = (result.Items || []).map((podcast: any) => {
+      // Ensure all required fields exist with defaults
+      return {
+        ...podcast,
+        // Frontend expects these fields
+        subtitle: podcast.subtitle || podcast.title || '',
+        coverArtUrl: podcast.coverArtUrl || '',
+        cadence: podcast.config?.schedule || podcast.cadence || 'manual',
+        status: podcast.status || 'active',
+        updatedAt: podcast.updatedAt || podcast.createdAt || new Date().toISOString(),
+        // Map old format fields to new format if needed
+        lastRun: podcast.lastRunAt || podcast.lastRun,
+        nextRun: podcast.nextRunAt || podcast.nextRun,
+      };
+    });
+
+    logger.info('Transformed podcasts for frontend', { 
+      count: transformedPodcasts.length,
+      sampleIds: transformedPodcasts.slice(0, 3).map((p: any) => p.id),
+    });
+
     return successResponse({
-      podcasts: result.Items || [],
+      podcasts: transformedPodcasts,
       nextToken: result.LastEvaluatedKey,
     });
   } catch (error) {
