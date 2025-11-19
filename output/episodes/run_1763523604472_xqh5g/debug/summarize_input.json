@@ -1,0 +1,63 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 4,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 4,
+      "sampleUnits": [
+        {
+          "id": "03f16fd9-9487-4950-8a82-9a9dc6bdbece",
+          "type": "claim",
+          "span": "Bookkeeper boosts business by 50% with new educational assets",
+          "authority": 0.3,
+          "publisher": "Verizon",
+          "context": "as per the title of the article",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "699553dd-0925-4879-a1e9-22fd82e99c70",
+          "type": "claim",
+          "span": "Verizon has asked the Supreme Court to review a $47 million fine imposed by the FCC over alleged pri",
+          "authority": 0.3,
+          "publisher": "MediaPost",
+          "context": "Verizon argues the fine violated their 7th Amendment right to a jury trial.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "c62a09e7-af8e-4205-b3cf-ad980b6b1021",
+          "type": "claim",
+          "span": "In April 2024, the FCC imposed fines totaling around $200 million on Verizon, AT&T, and T-Mobile for",
+          "authority": 0.3,
+          "publisher": "MediaPost",
+          "context": "Verizon's fine was $47 million, AT&T's was $57 million, and T-Mobile's was $92 million.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 0,
+      "validQuotes": 0,
+      "validClaims": 4
+    }
+  ]
+}

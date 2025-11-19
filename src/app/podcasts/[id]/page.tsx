@@ -14,7 +14,7 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { RSSValidator } from '@/components/RSSValidator';
 
-type Tab = 'overview' | 'episodes' | 'runs' | 'rss' | 'settings';
+type Tab = 'overview' | 'episodes' | 'runs' | 'rss' | 'suggestions' | 'validation' | 'team' | 'settings';
 
 export default function PodcastDetailPage() {
   const params = useParams();
@@ -34,9 +34,10 @@ export default function PodcastDetailPage() {
           const data = await response.json();
           const foundPodcast = data.podcasts?.find((p: any) => p.id === podcastId);
           if (foundPodcast) {
+            const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://example.com';
             setPodcast({
               ...foundPodcast,
-              rssUrl: `https://example.com/rss/${podcastId}.xml`,
+              rssUrl: `${baseUrl}/rss/${podcastId}.xml`,
               lastRun: foundPodcast.lastRunAt || new Date().toISOString(),
               nextRun: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
             });
@@ -430,19 +431,194 @@ function RunsTab({ podcastId }: { podcastId: string }) {
   );
 }
 
-function SuggestionsTab({ podcastId: _podcastId }: { podcastId: string }) {
+function SuggestionsTab({ podcastId }: { podcastId: string }) {
+  const [podcast, setPodcast] = useState<any>(null);
+  const [competitorSuggestions, setCompetitorSuggestions] = useState<string[]>([]);
+  const [topicSuggestions, setTopicSuggestions] = useState<Array<{ name: string; desc: string }>>([]);
+  const [loadingCompetitors, setLoadingCompetitors] = useState(false);
+  const [loadingTopics, setLoadingTopics] = useState(false);
+  const [error, setError] = useState<string>('');
+
+  useEffect(() => {
+    const fetchPodcast = async () => {
+      try {
+        const { api } = await import('@/lib/api');
+        const response = await api.get('/podcasts');
+        if (response.ok) {
+          const data = await response.json();
+          const foundPodcast = data.podcasts?.find((p: any) => p.id === podcastId);
+          if (foundPodcast) {
+            setPodcast(foundPodcast);
+            // Auto-fetch suggestions if we have a company name
+            if (foundPodcast.companyId) {
+              fetchSuggestions(foundPodcast);
+            }
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching podcast:', error);
+      }
+    };
+    fetchPodcast();
+  }, [podcastId]);
+
+  const fetchSuggestions = async (podcastData: any) => {
+    if (!podcastData.companyId) {
+      setError('Company name is required to generate suggestions');
+      return;
+    }
+
+    // Fetch competitor suggestions
+    setLoadingCompetitors(true);
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/competitors/suggest', {
+        companyName: podcastData.companyId,
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setCompetitorSuggestions(data.competitors || []);
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        setError(errorData.error || 'Failed to fetch competitor suggestions');
+      }
+    } catch (error: any) {
+      console.error('Error fetching competitor suggestions:', error);
+      setError(error.message || 'Failed to fetch competitor suggestions');
+    } finally {
+      setLoadingCompetitors(false);
+    }
+
+    // Fetch topic suggestions
+    setLoadingTopics(true);
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.post('/topics/suggest', {
+        companyName: podcastData.companyId,
+        industry: podcastData.industryId,
+        competitors: podcastData.competitors || [],
+      });
+      if (response.ok) {
+        const data = await response.json();
+        if (data.fallback) {
+          setError(data.error || 'OpenAI API key not configured. Suggestions unavailable.');
+        } else {
+          setTopicSuggestions(data.topics || []);
+        }
+      } else {
+        const errorData = await response.json().catch(() => ({}));
+        setError(errorData.error || 'Failed to fetch topic suggestions');
+      }
+    } catch (error: any) {
+      console.error('Error fetching topic suggestions:', error);
+      setError(error.message || 'Failed to fetch topic suggestions');
+    } finally {
+      setLoadingTopics(false);
+    }
+  };
+
+  const handleRefresh = () => {
+    if (podcast) {
+      fetchSuggestions(podcast);
+    }
+  };
+
+  if (!podcast) {
+    return (
+      <Card className="p-6">
+        <div className="text-center py-12">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted">Loading podcast...</p>
+        </div>
+      </Card>
+    );
+  }
+
   return (
-    <Card className="p-6">
-      <div className="text-center py-12">
-        <Brain className="w-16 h-16 mx-auto mb-4 text-muted" />
-        <h3 className="text-xl font-semibold mb-2">AI Suggestions Coming Soon</h3>
-        <p className="text-muted max-w-md mx-auto">
-          We're working on AI-powered competitor and topic suggestions based on industry analysis 
-          and news patterns. This feature will help you discover relevant competitors and trending 
-          topics automatically.
-        </p>
-      </div>
-    </Card>
+    <div className="space-y-6">
+      <Card className="p-6">
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h3 className="text-xl font-semibold mb-1">AI Suggestions</h3>
+            <p className="text-sm text-muted">
+              AI-powered competitor and topic suggestions for {podcast.companyId || 'your podcast'}
+            </p>
+          </div>
+          <Button onClick={handleRefresh} variant="outline" disabled={loadingCompetitors || loadingTopics}>
+            {loadingCompetitors || loadingTopics ? 'Refreshing...' : 'Refresh Now'}
+          </Button>
+        </div>
+
+        {error && (
+          <div className="mb-4 p-4 bg-yellow-500/10 border border-yellow-500/20 rounded-lg">
+            <p className="text-sm text-yellow-400">{error}</p>
+          </div>
+        )}
+
+        {/* Competitor Suggestions */}
+        <div className="mb-6">
+          <h4 className="font-semibold mb-3 flex items-center gap-2">
+            <Users className="w-5 h-5" />
+            Competitor Suggestions
+          </h4>
+          {loadingCompetitors ? (
+            <div className="p-4 bg-secondary rounded-lg text-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
+              <p className="text-sm text-muted">Generating competitor suggestions...</p>
+            </div>
+          ) : competitorSuggestions.length > 0 ? (
+            <div className="space-y-2">
+              {competitorSuggestions.map((competitor, idx) => (
+                <div key={idx} className="p-3 bg-secondary rounded-lg flex items-center justify-between">
+                  <span>{competitor}</span>
+                  <Button size="sm" variant="outline">
+                    Add
+                  </Button>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 bg-secondary rounded-lg text-center text-muted">
+              <p className="text-sm">No competitor suggestions available</p>
+            </div>
+          )}
+        </div>
+
+        {/* Topic Suggestions */}
+        <div>
+          <h4 className="font-semibold mb-3 flex items-center gap-2">
+            <Brain className="w-5 h-5" />
+            Topic Suggestions
+          </h4>
+          {loadingTopics ? (
+            <div className="p-4 bg-secondary rounded-lg text-center">
+              <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
+              <p className="text-sm text-muted">Generating topic suggestions...</p>
+            </div>
+          ) : topicSuggestions.length > 0 ? (
+            <div className="space-y-2">
+              {topicSuggestions.map((topic, idx) => (
+                <div key={idx} className="p-3 bg-secondary rounded-lg">
+                  <div className="flex items-start justify-between mb-2">
+                    <div className="flex-1">
+                      <div className="font-medium">{topic.name}</div>
+                      <div className="text-sm text-muted mt-1">{topic.desc}</div>
+                    </div>
+                    <Button size="sm" variant="outline" className="ml-4">
+                      Add
+                    </Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <div className="p-4 bg-secondary rounded-lg text-center text-muted">
+              <p className="text-sm">No topic suggestions available</p>
+            </div>
+          )}
+        </div>
+      </Card>
+    </div>
   );
 }
 
@@ -480,7 +656,7 @@ function ValidationTab({ podcast }: any) {
           ))}
         </div>
         <div className="mt-4 pt-4 border-t border-border">
-          <Button>Validate RSS Feed</Button>
+          <RSSValidator podcastId={podcast.id} rssUrl={podcast.rssUrl || `https://example.com/rss/${podcast.id}.xml`} />
         </div>
       </Card>
     </div>

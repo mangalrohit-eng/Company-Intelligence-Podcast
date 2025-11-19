@@ -305,6 +305,21 @@ export default function PodcastsPage() {
   );
 }
 
+// Helper functions for cadence display (used by both PodcastCard and PodcastListItem)
+const getCadenceColor = (cadence: string) => {
+  if (!cadence || cadence === 'manual') return 'outline';
+  switch (cadence.toLowerCase()) {
+    case 'daily': return 'success';
+    case 'weekly': return 'default';
+    case 'monthly': return 'warning';
+    default: return 'outline';
+  }
+};
+
+const getCadenceDisplay = (cadence: string) => {
+  if (!cadence || cadence === 'manual') return 'Not Set';
+  return cadence.charAt(0).toUpperCase() + cadence.slice(1);
+};
 
 function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
   const [showMenu, setShowMenu] = useState(false);
@@ -585,16 +600,6 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
       } catch (error) {
         alert(`❌ Error ${action}ing podcast`);
       }
-    }
-  };
-
-  const getCadenceColor = (cadence: string) => {
-    if (!cadence) return 'outline';
-    switch (cadence.toLowerCase()) {
-      case 'daily': return 'success';
-      case 'weekly': return 'default';
-      case 'monthly': return 'warning';
-      default: return 'outline';
     }
   };
 

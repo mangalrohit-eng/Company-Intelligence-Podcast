@@ -1,0 +1,58 @@
+{
+  "units": [
+    {
+      "id": "03f16fd9-9487-4950-8a82-9a9dc6bdbece",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Bookkeeper boosts business by 50% with new educational assets",
+      "context": "as per the title of the article",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMijAFBVV95cUxONkUzUGhqckVxSS1kTkRfMnhxd2JFU1BGaGxiZG12QWpOWHg4azhMa29GVE53OFpETXZaeGRRTG9KVElFSm5vck1UQ1RzUV9JT3pVcXIxQ2RXcUxiOUVTYWJSV0VHZE5zSmgzVGt4ZkZBNTRlSUtuTGY0NkhuWGh3Z3JCZHR6NjBldkxHYg?oc=5",
+      "publisher": "Verizon",
+      "authority": 0.3,
+      "publishedDate": "Tue, 18 Nov 2025 14:00:04 GMT"
+    },
+    {
+      "id": "699553dd-0925-4879-a1e9-22fd82e99c70",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon has asked the Supreme Court to review a $47 million fine imposed by the FCC over alleged privacy violations.",
+      "context": "Verizon argues the fine violated their 7th Amendment right to a jury trial.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    },
+    {
+      "id": "c62a09e7-af8e-4205-b3cf-ad980b6b1021",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "In April 2024, the FCC imposed fines totaling around $200 million on Verizon, AT&T, and T-Mobile for selling geolocation data.",
+      "context": "Verizon's fine was $47 million, AT&T's was $57 million, and T-Mobile's was $92 million.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    },
+    {
+      "id": "f60a53ec-12b7-4a4f-be01-10a67de82352",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon, AT&T, and T-Mobile paid the fines and then sued to vacate them in different circuit courts.",
+      "context": "Verizon sued in the 2nd Circuit, T-Mobile in the D.C. Circuit, and AT&T in the 5th Circuit.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPVmpYd3M3UWlEZmFMOEV2WjNPMl8zS3hZZmhETXZpWmNLWUdfZEZGdXJwNGo1RHZyR3YwZlNvR1RzMW0zRmg3QUZPQUMtejEyakZyb1J1MWNXOFJaQTBWNUl6X2dZbUgxNXZpZ1Ezd3hfT2hXNG83NEs3NU5WalpDem1zMlNzcWdySHlJWnFXU0ktLW80SWF3bFY5SlVvUjBVMUE?oc=5",
+      "publisher": "MediaPost",
+      "authority": 0.3,
+      "publishedDate": "Mon, 17 Nov 2025 11:14:09 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 4,
+    "byType": {
+      "claim": 4
+    },
+    "byTopic": {
+      "company-news": 4
+    },
+    "dedupeRemoved": 0
+  }
+}
