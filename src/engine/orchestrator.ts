@@ -612,22 +612,46 @@ export class PipelineOrchestrator {
       // Stage 6: Extract Evidence
       let extractOutput;
       if (input.flags.enable.extract && scrapeOutput) {
-        const stage = new ExtractStage(llmGateway);
-        const stageStart = Date.now();
-        
-        // Save input BEFORE execution
-        const extractInput = {
-          contentCount: scrapeOutput.contents.length,
-          sampleContent: scrapeOutput.contents[0] ? {
-            url: scrapeOutput.contents[0].url,
-            contentLength: scrapeOutput.contents[0].content.length,
-          } : null,
-          sampleUrls: scrapeOutput.contents.slice(0, 3).map(c => c.url),
-        };
-        await writeDebugFile('extract_input.json', extractInput);
-        logger.info('Saved extract input', { contentCount: scrapeOutput.contents.length });
-        
-        extractOutput = await stage.execute(scrapeOutput.contents, emitter);
+        try {
+          const stage = new ExtractStage(llmGateway);
+          const stageStart = Date.now();
+          
+          logger.info('Starting extract stage', { 
+            runId: input.runId,
+            contentCount: scrapeOutput.contents.length,
+          });
+          
+          // Save input BEFORE execution
+          const extractInput = {
+            contentCount: scrapeOutput.contents.length,
+            sampleContent: scrapeOutput.contents[0] ? {
+              url: scrapeOutput.contents[0].url,
+              contentLength: scrapeOutput.contents[0].content.length,
+            } : null,
+            sampleUrls: scrapeOutput.contents.slice(0, 3).map(c => c.url),
+          };
+          await writeDebugFile('extract_input.json', extractInput);
+          logger.info('Saved extract input', { contentCount: scrapeOutput.contents.length });
+          
+          logger.info('About to call extract stage execute()', { 
+            runId: input.runId,
+            contentCount: scrapeOutput.contents.length,
+          });
+          
+          // Add timeout wrapper for extract stage (Vercel has function timeouts)
+          // Extract stage can take long if there are many articles (each requires LLM call)
+          const extractPromise = stage.execute(scrapeOutput.contents, emitter);
+          const extractTimeout = 240000; // 4 minutes timeout for extract stage
+          const timeoutPromise = new Promise((_, reject) => 
+            setTimeout(() => reject(new Error('Extract stage timeout')), extractTimeout)
+          );
+          
+          extractOutput = await Promise.race([extractPromise, timeoutPromise]);
+          
+          logger.info('Extract stage execute() returned', { 
+            runId: input.runId,
+            unitCount: extractOutput.units.length,
+          });
         telemetry.stages.extract = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),
@@ -657,6 +681,38 @@ export class PipelineOrchestrator {
           stats: extractOutput.stats, // Keep stats for debugging
         });
         logger.info('Saved extract debug output', { evidenceCount: extractOutput.units.length });
+        } catch (extractError: any) {
+          logger.error('Extract stage failed', { 
+            runId: input.runId,
+            error: extractError.message,
+            errorName: extractError.name,
+            stack: extractError.stack,
+            isTimeout: extractError.message?.includes('timeout'),
+          });
+          
+          // Save error details
+          try {
+            await writeDebugFile('extract_error.json', {
+              error: extractError.message,
+              stack: extractError.stack,
+              timestamp: new Date().toISOString(),
+              isTimeout: extractError.message?.includes('timeout'),
+            });
+          } catch (saveError) {
+            logger.warn('Failed to save extract error details', { saveError });
+          }
+          
+          // Mark stage as failed in telemetry
+          telemetry.stages.extract = {
+            startTime: new Date().toISOString(),
+            endTime: new Date().toISOString(),
+            durationMs: 0,
+            status: 'failed',
+            error: extractError.message,
+          };
+          
+          throw extractError; // Re-throw to fail the pipeline
+        }
       }
 
       // Group evidence by topic

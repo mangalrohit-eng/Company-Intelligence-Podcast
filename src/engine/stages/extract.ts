@@ -44,8 +44,19 @@ export class ExtractStage {
 
       await emitter.emit('extract', pct, `Extracting from ${i + 1}/${contents.length} documents`);
 
+      logger.info('Extracting evidence from article', {
+        index: i + 1,
+        total: contents.length,
+        url: content.url,
+        contentLength: content.content.length,
+      });
+
       // Use LLM to extract structured evidence with ≤10-word quote constraint
-      const response = await this.llmGateway.complete({
+      // Add timeout for individual LLM calls (30 seconds per article)
+      const llmCallStart = Date.now();
+      let response;
+      try {
+        const llmPromise = this.llmGateway.complete({
         model: process.env.EXTRACT_MODEL || 'gpt-3.5-turbo', // ✅ Use model from env/admin settings
         messages: [
           {
@@ -75,7 +86,31 @@ Return JSON with extracted evidence.`,
         temperature: 0.3,
         maxTokens: 1000,
         responseFormat: 'json_object',
-      });
+        });
+        
+        const llmTimeout = 30000; // 30 seconds per LLM call
+        const llmTimeoutPromise = new Promise((_, reject) => 
+          setTimeout(() => reject(new Error('LLM call timeout')), llmTimeout)
+        );
+        
+        response = await Promise.race([llmPromise, llmTimeoutPromise]);
+        
+        const llmLatency = Date.now() - llmCallStart;
+        logger.info('LLM extraction call completed', {
+          index: i + 1,
+          url: content.url,
+          latencyMs: llmLatency,
+        });
+      } catch (llmError: any) {
+        logger.error('LLM extraction call failed', {
+          index: i + 1,
+          url: content.url,
+          error: llmError.message,
+          isTimeout: llmError.message?.includes('timeout'),
+        });
+        // Continue to next article instead of failing entire stage
+        continue;
+      }
 
       try {
         logger.debug('LLM extraction response', { content: response.content.substring(0, 500) });
