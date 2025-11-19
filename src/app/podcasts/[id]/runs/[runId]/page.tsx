@@ -525,16 +525,22 @@ export default function RunProgressPage() {
               </Card>
 
               <div className="mt-6 flex gap-4">
-                <Button onClick={() => router.push(`/podcasts/${podcastId}`)}>
+                {run.output?.episodeId && (
+                  <Button onClick={() => router.push(`/podcasts/${podcastId}/episodes/${run.output.episodeId}`)}>
+                    <Play className="w-4 h-4 mr-2" />
+                    View Episode
+                  </Button>
+                )}
+                <Button variant="outline" onClick={() => router.push(`/podcasts/${podcastId}`)}>
                   View Podcast
                 </Button>
-              <Button
-                variant="outline"
-                onClick={() => router.push('/podcasts')}
-              >
-                Back to All Podcasts
-              </Button>
-            </div>
+                <Button
+                  variant="outline"
+                  onClick={() => router.push('/podcasts')}
+                >
+                  Back to All Podcasts
+                </Button>
+              </div>
           </>
         )}
         </div>

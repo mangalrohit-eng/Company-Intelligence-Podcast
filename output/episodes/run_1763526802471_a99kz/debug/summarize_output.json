@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a bold move that signifies more than just a financial investment, Frank Rimerman Advisors LLC has recently amassed a whopping $4.84 million stock position in Verizon Communications Inc., according to MarketBeat. This isn't just a tale of numbers and market strategies; it's a story of purpose and impact. \"Verizon is tackling food insecurity by giving fans the chance...\" reveals a deeper mission beneath the surface of this investment. Through its partnership with organizations like the Detroit Lions, Verizon is leveraging its vast resources and connectivity to address critical social issues, showcasing that their investment in the community goes beyond the financial. This strategic alignment not only boosts Verizon's profile but also underscores a growing trend where companies are increasingly evaluated by their contribution to societal well-being alongside their balance sheets.",
+      "onAirStat": {
+        "span": "$4.84 Million Stock Position",
+        "evidenceId": "d948eb02-f4f8-4d58-ab76-38e17f5a335b"
+      },
+      "onAirQuote": {
+        "span": "Verizon is tackling food insecurity by giving fans the chance...",
+        "evidenceId": "2156951d-83cb-4b97-b89e-c90a64d36c7e"
+      }
+    }
+  ]
+}

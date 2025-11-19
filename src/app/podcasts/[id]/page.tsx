@@ -326,17 +326,33 @@ function EpisodesTab({ podcastId }: { podcastId: string }) {
     try {
       setLoading(true);
       const { api } = await import('@/lib/api');
+      console.log(`🔍 Fetching episodes for podcast: ${podcastId}`);
       const response = await api.get(`/podcasts/${podcastId}/episodes`);
+
+      console.log(`📡 Episodes API response:`, {
+        status: response.status,
+        ok: response.ok,
+      });
 
       if (response.ok) {
         const data = await response.json();
+        console.log(`📦 Episodes data:`, {
+          episodesCount: data.episodes?.length || 0,
+          count: data.count,
+          episodes: data.episodes,
+        });
         setEpisodes(data.episodes || []);
       } else {
-        console.error('Failed to fetch episodes');
+        const errorText = await response.text().catch(() => 'Unknown error');
+        console.error('❌ Failed to fetch episodes:', {
+          status: response.status,
+          statusText: response.statusText,
+          errorText,
+        });
         setEpisodes([]);
       }
     } catch (error) {
-      console.error('Error fetching episodes:', error);
+      console.error('❌ Error fetching episodes:', error);
       setEpisodes([]);
     } finally {
       setLoading(false);

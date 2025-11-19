@@ -106,8 +106,8 @@ export default function PodcastsPage() {
     .filter(podcast => {
       // Search filter
       const matchesSearch = searchQuery === '' || 
-        podcast.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        podcast.subtitle.toLowerCase().includes(searchQuery.toLowerCase());
+        (podcast.title || '').toLowerCase().includes(searchQuery.toLowerCase()) ||
+        (podcast.subtitle || '').toLowerCase().includes(searchQuery.toLowerCase());
       
       // Status filter
       const matchesStatus = statusFilter === 'all' || podcast.status === statusFilter;

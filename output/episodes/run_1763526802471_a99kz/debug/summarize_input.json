@@ -1,0 +1,63 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends",
+    "layoff"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 5,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 5,
+      "sampleUnits": [
+        {
+          "id": "d948eb02-f4f8-4d58-ab76-38e17f5a335b",
+          "type": "stat",
+          "span": "$4.84 Million Stock Position",
+          "authority": 0.3,
+          "publisher": "MarketBeat",
+          "context": "Frank Rimerman Advisors LLC's stock position in Verizon Communications Inc.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "2267f2d3-5a21-4ec0-891b-39e3c4f4e58e",
+          "type": "quote",
+          "span": "Renowned gospel musician CeCe Winans will perform the national anthem.",
+          "authority": 0.3,
+          "publisher": "Detroit Lions",
+          "context": "Detroit Lions Thanksgiving Halftime Show",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "5fcd0310-53b3-485d-8b1c-3425695f74cd",
+          "type": "claim",
+          "span": "The Detroit Lions will partner with Feeding America to raise funds for 5 million meals.",
+          "authority": 0.3,
+          "publisher": "Detroit Lions",
+          "context": "Opportunity to give back to the local community",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 2,
+      "validQuotes": 2,
+      "validClaims": 1
+    }
+  ]
+}

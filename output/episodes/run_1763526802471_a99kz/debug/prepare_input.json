@@ -1,0 +1,73 @@
+{
+  "config": {
+    "title": "VZ2",
+    "subtitle": "Company Intelligence Updates for Verizon",
+    "description": "AI-powered intelligence briefing for Verizon",
+    "author": "Verizon",
+    "email": "podcast@example.com",
+    "category": "Business",
+    "explicit": false,
+    "language": "en",
+    "coverArtS3Key": "default-cover.png",
+    "company": {
+      "id": "verizon",
+      "name": "Verizon"
+    },
+    "industry": {
+      "id": "technology",
+      "name": "Technology"
+    },
+    "competitors": [],
+    "topics": {
+      "standard": [
+        {
+          "id": "company-news",
+          "name": "Company News & Announcements",
+          "priority": 68
+        },
+        {
+          "id": "competitor-analysis",
+          "name": "Competitive Intelligence",
+          "priority": 45
+        },
+        {
+          "id": "industry-trends",
+          "name": "Industry Trends & Market Analysis",
+          "priority": 59
+        },
+        {
+          "id": "layoff",
+          "name": "layoff",
+          "priority": 70
+        }
+      ],
+      "special": []
+    },
+    "cadence": "daily",
+    "durationMinutes": 2,
+    "publishTime": "09:00",
+    "timezone": "UTC",
+    "timeWindowHours": 24,
+    "timeWindow": {
+      "startIso": "2025-11-18T04:33:22.953Z",
+      "endIso": "2025-11-19T04:33:22.953Z"
+    },
+    "regions": [
+      "US"
+    ],
+    "sourceLanguages": [
+      "en"
+    ],
+    "voice": {
+      "provider": "openai-tts",
+      "voiceId": "fable",
+      "speed": 1,
+      "tone": "professional"
+    },
+    "robotsMode": "permissive",
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": []
+    }
+  }
+}

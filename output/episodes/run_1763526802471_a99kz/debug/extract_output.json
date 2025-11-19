@@ -1,0 +1,71 @@
+{
+  "units": [
+    {
+      "id": "d948eb02-f4f8-4d58-ab76-38e17f5a335b",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "$4.84 Million Stock Position",
+      "context": "Frank Rimerman Advisors LLC's stock position in Verizon Communications Inc.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi5wFBVV95cUxQbVJlQmlVY3o2MVNDcG9PVmdNYmg1UVlOVzR6STdTV1JNUmlZU1M4RXdxU2ZJR1VCZDRuRnBFdkFKRHpRcDlyR2NvbV9QLWdfb3dtSV9teDRzaG1LQXRfMUE0Y0JldWpQVFVMOGpjMU84S0R0SkN4NUJST3FDcS1lbVR3dE1WT3NGczJCN0dYNTJDNEl0Ynd3ZzRRb0tZWHVRb0lDa1gxZF91cVladDdiT1IyZmhzWlQ1OFVzY3UwLW5UeXZKU2dZVmpIbFh1aGFmNkl1cFlLcm1GN3J4RWZEa3F2ZDBKcG8?oc=5",
+      "publisher": "MarketBeat",
+      "authority": 0.3,
+      "publishedDate": "Tue, 18 Nov 2025 10:18:05 GMT"
+    },
+    {
+      "id": "2267f2d3-5a21-4ec0-891b-39e3c4f4e58e",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Renowned gospel musician CeCe Winans will perform the national anthem.",
+      "context": "Detroit Lions Thanksgiving Halftime Show",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOLWtfTjdLLTJ6emRrUDdRVUpvd09Hamk1NGI1VzlnSW5ZT0owdndXSl9DR1dtVnVRMDhYT1RiWi1fcHVyc2tET2NDd0p1ZFZvOTdtTlFTMVJHNkNPMzBNWlVTMHA3VW9CSHZOYXh4Sy1aZmV2OXIxWXJRN3psTGJ3bXFqSEJ4NURnUU5UUmd0VmR3THVrY3d1WWtSZ3hhd0xtaFV6em1aa0tTYWdmLWpFcDhqS0VFZDk1Z0dTczUxSTdJTkM4OUVqN00tZnJOYTFzOTJEbE5yMnQ5UldIQUE?oc=5",
+      "publisher": "Detroit Lions",
+      "authority": 0.3,
+      "publishedDate": "Sun, 16 Nov 2025 17:29:03 GMT"
+    },
+    {
+      "id": "5fcd0310-53b3-485d-8b1c-3425695f74cd",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "The Detroit Lions will partner with Feeding America to raise funds for 5 million meals.",
+      "context": "Opportunity to give back to the local community",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOLWtfTjdLLTJ6emRrUDdRVUpvd09Hamk1NGI1VzlnSW5ZT0owdndXSl9DR1dtVnVRMDhYT1RiWi1fcHVyc2tET2NDd0p1ZFZvOTdtTlFTMVJHNkNPMzBNWlVTMHA3VW9CSHZOYXh4Sy1aZmV2OXIxWXJRN3psTGJ3bXFqSEJ4NURnUU5UUmd0VmR3THVrY3d1WWtSZ3hhd0xtaFV6em1aa0tTYWdmLWpFcDhqS0VFZDk1Z0dTczUxSTdJTkM4OUVqN00tZnJOYTFzOTJEbE5yMnQ5UldIQUE?oc=5",
+      "publisher": "Detroit Lions",
+      "authority": 0.3,
+      "publishedDate": "Sun, 16 Nov 2025 17:29:03 GMT"
+    },
+    {
+      "id": "c43750e5-f558-4a65-af3b-e098cb0bc55d",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Nearly 50 million people in the U.S., including almost 14 million children, experience food insecurity.",
+      "context": "Opportunity to give back to the local community",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOLWtfTjdLLTJ6emRrUDdRVUpvd09Hamk1NGI1VzlnSW5ZT0owdndXSl9DR1dtVnVRMDhYT1RiWi1fcHVyc2tET2NDd0p1ZFZvOTdtTlFTMVJHNkNPMzBNWlVTMHA3VW9CSHZOYXh4Sy1aZmV2OXIxWXJRN3psTGJ3bXFqSEJ4NURnUU5UUmd0VmR3THVrY3d1WWtSZ3hhd0xtaFV6em1aa0tTYWdmLWpFcDhqS0VFZDk1Z0dTczUxSTdJTkM4OUVqN00tZnJOYTFzOTJEbE5yMnQ5UldIQUE?oc=5",
+      "publisher": "Detroit Lions",
+      "authority": 0.3,
+      "publishedDate": "Sun, 16 Nov 2025 17:29:03 GMT"
+    },
+    {
+      "id": "2156951d-83cb-4b97-b89e-c90a64d36c7e",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Verizon is tackling food insecurity by giving fans the chance...",
+      "context": "Partnership focused on connection",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxOLWtfTjdLLTJ6emRrUDdRVUpvd09Hamk1NGI1VzlnSW5ZT0owdndXSl9DR1dtVnVRMDhYT1RiWi1fcHVyc2tET2NDd0p1ZFZvOTdtTlFTMVJHNkNPMzBNWlVTMHA3VW9CSHZOYXh4Sy1aZmV2OXIxWXJRN3psTGJ3bXFqSEJ4NURnUU5UUmd0VmR3THVrY3d1WWtSZ3hhd0xtaFV6em1aa0tTYWdmLWpFcDhqS0VFZDk1Z0dTczUxSTdJTkM4OUVqN00tZnJOYTFzOTJEbE5yMnQ5UldIQUE?oc=5",
+      "publisher": "Detroit Lions",
+      "authority": 0.3,
+      "publishedDate": "Sun, 16 Nov 2025 17:29:03 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 5,
+    "byType": {
+      "stat": 2,
+      "quote": 2,
+      "claim": 1
+    },
+    "byTopic": {
+      "company-news": 5
+    },
+    "dedupeRemoved": 0
+  }
+}

@@ -22,6 +22,7 @@ import { TtsStage } from './stages/tts';
 import { PackageStage } from './stages/package';
 import { logger } from '@/utils/logger';
 import { AdminSettings, DEFAULT_ADMIN_SETTINGS, calculateArticlesNeeded } from '@/types/admin-settings';
+import { isS3Available, writeToS3, getDebugFileKey, getAudioFileKey } from '@/lib/s3-storage';
 
 export class PipelineOrchestrator {
   /**
@@ -80,12 +81,27 @@ export class PipelineOrchestrator {
       formula: `(${input.config.durationMinutes} × ${adminSettings.pipeline.wordsPerMinute}) / (${adminSettings.pipeline.scrapeSuccessRate} × ${adminSettings.pipeline.relevantTextRate} × ${adminSettings.pipeline.wordsPerArticle})`,
     });
 
-    // Create debug output directory
+    // Determine storage method: S3 (Vercel/production) or local filesystem (dev)
     const fs = await import('fs/promises');
     const path = await import('path');
+    const useS3 = isS3Available();
     const debugDir = path.join(process.cwd(), 'output', 'episodes', input.runId, 'debug');
-    await fs.mkdir(debugDir, { recursive: true });
-    logger.info('Debug output directory created', { debugDir });
+    
+    let canWriteFiles = false;
+    if (useS3) {
+      logger.info('Using S3 for debug file storage', { runId: input.runId });
+      canWriteFiles = true;
+    } else {
+      // Try local filesystem (for local dev)
+      try {
+        await fs.mkdir(debugDir, { recursive: true });
+        logger.info('Using local filesystem for debug file storage', { debugDir });
+        canWriteFiles = true;
+      } catch (error) {
+        logger.warn('Failed to create debug directory, file saving disabled', { error });
+        canWriteFiles = false;
+      }
+    }
 
     const telemetry: RunTelemetry = {
       startTime: startTime.toISOString(),
@@ -109,20 +125,38 @@ export class PipelineOrchestrator {
       const ttsGateway = GatewayFactory.createTtsGateway(gatewayConfig);
       const httpGateway = GatewayFactory.createHttpGateway(gatewayConfig);
 
-      // Helper to save stage input/output
-      const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
-        try {
-          await fs.writeFile(
-            path.join(debugDir, `${stageName}_input.json`),
-            JSON.stringify(inputData, null, 2)
-          );
-          await fs.writeFile(
-            path.join(debugDir, `${stageName}_output.json`),
-            JSON.stringify(outputData, null, 2)
-          );
-        } catch (error) {
-          logger.warn(`Failed to save ${stageName} I/O`, { error });
+      // Helper to write debug file (S3 or local filesystem)
+      const writeDebugFile = async (filename: string, content: string | object) => {
+        if (!canWriteFiles) {
+          return;
         }
+        try {
+          const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
+          
+          if (useS3) {
+            await writeToS3(
+              getDebugFileKey(input.runId, filename),
+              jsonContent,
+              'application/json'
+            );
+          } else {
+            await fs.writeFile(
+              path.join(debugDir, filename),
+              jsonContent
+            );
+          }
+        } catch (error) {
+          logger.warn(`Failed to write debug file ${filename}`, { error, useS3 });
+        }
+      };
+
+      // Helper to save stage input/output (S3 or local filesystem)
+      const saveStageIO = async (stageName: string, inputData: any, outputData: any) => {
+        if (!canWriteFiles) {
+          return;
+        }
+        await writeDebugFile(`${stageName}_input.json`, inputData);
+        await writeDebugFile(`${stageName}_output.json`, outputData);
       };
 
       // Helper to execute stage with comprehensive error handling
@@ -178,18 +212,30 @@ export class PipelineOrchestrator {
             (emitter as any).markStageFailed(stageName, errorMessage);
           }
           
-          // Save error details
-          try {
-            await fs.writeFile(
-              path.join(debugDir, `${stageName}_error.json`),
-              JSON.stringify({
+          // Save error details (S3 or local filesystem)
+          if (canWriteFiles) {
+            try {
+              const errorJson = JSON.stringify({
                 error: errorMessage,
                 stack: errorStack,
                 timestamp: new Date().toISOString(),
-              }, null, 2)
-            );
-          } catch (saveError) {
-            logger.warn(`Failed to save ${stageName} error details`, { saveError });
+              }, null, 2);
+              
+              if (useS3) {
+                await writeToS3(
+                  getDebugFileKey(input.runId, `${stageName}_error.json`),
+                  errorJson,
+                  'application/json'
+                );
+              } else {
+                await fs.writeFile(
+                  path.join(debugDir, `${stageName}_error.json`),
+                  errorJson
+                );
+              }
+            } catch (saveError) {
+              logger.warn(`Failed to save ${stageName} error details`, { saveError, useS3 });
+            }
           }
           
           // Call custom error handler if provided
@@ -270,23 +316,17 @@ export class PipelineOrchestrator {
         
         // Save input BEFORE execution
         const discoverInput = { topicIds, companyName, sources };
-        await fs.writeFile(
-          path.join(debugDir, 'discover_input.json'),
-          JSON.stringify(discoverInput, null, 2)
-        );
+        await writeDebugFile('discover_input.json', discoverInput);
         logger.info('Saved discover input', { topicCount: topicIds.length, feedCount: rssFeeds.length });
         
         discoverOutput = await stage.execute(topicIds, companyName, sources, emitter);
         
-        // Save output AFTER execution (exact format next stage expects)
+        // Save output AFTER execution
         // Disambiguate stage receives: discoverOutput.items
-        await fs.writeFile(
-          path.join(debugDir, 'discover_output.json'),
-          JSON.stringify({
-            items: discoverOutput.items, // Exact format disambiguate stage expects
-            stats: discoverOutput.stats, // Keep stats for debugging
-          }, null, 2)
-        );
+        await writeDebugFile('discover_output.json', {
+          items: discoverOutput.items, // Exact format disambiguate stage expects
+          stats: discoverOutput.stats, // Keep stats for debugging
+        });
         
         telemetry.stages.discover = {
           startTime: new Date(stageStart).toISOString(),
@@ -320,10 +360,7 @@ export class PipelineOrchestrator {
             publisher: item.publisher,
           })),
         };
-        await fs.writeFile(
-          path.join(debugDir, 'disambiguate_input.json'),
-          JSON.stringify(disambiguateInput, null, 2)
-        );
+        await writeDebugFile('disambiguate_input.json', disambiguateInput);
         
         // Extract company name and competitors for entity variation matching
         const companyName = input.config.company.name;
@@ -349,23 +386,20 @@ export class PipelineOrchestrator {
         
         // Save output AFTER execution (exact format next stage expects)
         // Rank stage receives: disambiguateOutput.items.filter(item => !item.blocked)
-        await fs.writeFile(
-          path.join(debugDir, 'disambiguate_output.json'),
-          JSON.stringify({
-            items: disambiguateOutput.items.map(item => ({
-              url: item.url,
-              title: item.title,
-              publisher: item.publisher,
-              publishedDate: item.publishedDate,
-              topicIds: item.topicIds,
-              entityIds: item.entityIds,
-              scores: item.scores,
-              blocked: item.blocked,
-              blockReason: item.blockReason,
-            })), // Exact format rank stage expects
-            stats: disambiguateOutput.stats, // Keep stats for debugging
-          }, null, 2)
-        );
+        await writeDebugFile('disambiguate_output.json', {
+          items: disambiguateOutput.items.map(item => ({
+            url: item.url,
+            title: item.title,
+            publisher: item.publisher,
+            publishedDate: item.publishedDate,
+            topicIds: item.topicIds,
+            entityIds: item.entityIds,
+            scores: item.scores,
+            blocked: item.blocked,
+            blockReason: item.blockReason,
+          })), // Exact format rank stage expects
+          stats: disambiguateOutput.stats, // Keep stats for debugging
+        });
         logger.info('Saved disambiguate debug output', { passedCount: disambiguateOutput.items.filter(i => !i.blocked).length });
       }
 
@@ -389,10 +423,7 @@ export class PipelineOrchestrator {
             scores: item.scores,
           })),
         };
-        await fs.writeFile(
-          path.join(debugDir, 'rank_input.json'),
-          JSON.stringify(rankInput, null, 2)
-        );
+        await writeDebugFile('rank_input.json', rankInput);
         
         rankOutput = await stage.execute(validItems, adminSettings.ranking, emitter);
         telemetry.stages.rank = {
@@ -405,41 +436,38 @@ export class PipelineOrchestrator {
         // Save output AFTER execution (exact format next stage expects)
         // Scrape stage receives: Array.from(rankOutput.topicQueues.values()).flat()
         const rankedItems = Array.from(rankOutput.topicQueues.values()).flat();
-        await fs.writeFile(
-          path.join(debugDir, 'rank_output.json'),
-          JSON.stringify({
-            topicQueues: Object.fromEntries(
-              Array.from(rankOutput.topicQueues.entries()).map(([topicId, items]) => [
-                topicId,
-                items.map(item => ({
-                  url: item.url,
-                  title: item.title,
-                  publisher: item.publisher,
-                  publishedDate: item.publishedDate,
-                  topicIds: item.topicIds,
-                  entityIds: item.entityIds,
-                  scores: item.scores,
-                  rankScore: item.rankScore,
-                  expectedInfoGain: item.expectedInfoGain,
-                  rankingFactors: item.rankingFactors,
-                })),
-              ])
-            ), // Exact format scrape stage expects (can extract flat array from this)
-            // Also save flat array for convenience
-            rankedItems: rankedItems.map(item => ({
-              url: item.url,
-              title: item.title,
-              publisher: item.publisher,
-              publishedDate: item.publishedDate,
-              topicIds: item.topicIds,
-              entityIds: item.entityIds,
-              scores: item.scores,
-              rankScore: item.rankScore,
-              expectedInfoGain: item.expectedInfoGain,
-              rankingFactors: item.rankingFactors,
-            })),
-          }, null, 2)
-        );
+        await writeDebugFile('rank_output.json', {
+          topicQueues: Object.fromEntries(
+            Array.from(rankOutput.topicQueues.entries()).map(([topicId, items]) => [
+              topicId,
+              items.map(item => ({
+                url: item.url,
+                title: item.title,
+                publisher: item.publisher,
+                publishedDate: item.publishedDate,
+                topicIds: item.topicIds,
+                entityIds: item.entityIds,
+                scores: item.scores,
+                rankScore: item.rankScore,
+                expectedInfoGain: item.expectedInfoGain,
+                rankingFactors: item.rankingFactors,
+              })),
+            ])
+          ), // Exact format scrape stage expects (can extract flat array from this)
+          // Also save flat array for convenience
+          rankedItems: rankedItems.map(item => ({
+            url: item.url,
+            title: item.title,
+            publisher: item.publisher,
+            publishedDate: item.publishedDate,
+            topicIds: item.topicIds,
+            entityIds: item.entityIds,
+            scores: item.scores,
+            rankScore: item.rankScore,
+            expectedInfoGain: item.expectedInfoGain,
+            rankingFactors: item.rankingFactors,
+          })),
+        });
         logger.info('Saved rank debug output', { totalRanked: rankedItems.length });
       }
 
@@ -509,23 +537,20 @@ export class PipelineOrchestrator {
         
         // Save output AFTER execution (exact format next stage expects)
         // Extract stage receives: scrapeOutput.contents
-        await fs.writeFile(
-          path.join(debugDir, 'scrape_output.json'),
-          JSON.stringify({
-            contents: scrapeOutput.contents.map(c => ({
-              url: c.url,
-              title: c.title,
-              content: c.content, // Full content - exact format extract stage expects
-              publisher: c.publisher,
-              publishedDate: c.publishedDate,
-              topicIds: c.topicIds,
-              entityIds: c.entityIds,
-              scrapedAt: c.scrapedAt,
-              latencyMs: c.latencyMs,
-            })), // Exact format extract stage expects
-            stats: scrapeOutput.stats, // Keep stats for debugging
-          }, null, 2)
-        );
+        await writeDebugFile('scrape_output.json', {
+          contents: scrapeOutput.contents.map(c => ({
+            url: c.url,
+            title: c.title,
+            content: c.content, // Full content - exact format extract stage expects
+            publisher: c.publisher,
+            publishedDate: c.publishedDate,
+            topicIds: c.topicIds,
+            entityIds: c.entityIds,
+            scrapedAt: c.scrapedAt,
+            latencyMs: c.latencyMs,
+          })), // Exact format extract stage expects
+          stats: scrapeOutput.stats, // Keep stats for debugging
+        });
         logger.info('Saved scrape debug output', { successCount: scrapeOutput.stats.successCount });
       }
 
@@ -565,23 +590,20 @@ export class PipelineOrchestrator {
         
         // Save output AFTER execution (exact format next stage expects)
         // Summarize stage receives: extractOutput.units (grouped by topic into Map)
-        await fs.writeFile(
-          path.join(debugDir, 'extract_output.json'),
-          JSON.stringify({
-            units: extractOutput.units.map(u => ({
-              id: u.id,
-              type: u.type,
-              topicId: u.topicId,
-              span: u.span, // Full span - exact format summarize stage expects
-              context: u.context, // Full context - exact format summarize stage expects
-              sourceUrl: u.sourceUrl,
-              publisher: u.publisher,
-              authority: u.authority,
-              publishedDate: u.publishedDate,
-            })), // Exact format summarize stage expects (can group by topicId)
-            stats: extractOutput.stats, // Keep stats for debugging
-          }, null, 2)
-        );
+        await writeDebugFile('extract_output.json', {
+          units: extractOutput.units.map(u => ({
+            id: u.id,
+            type: u.type,
+            topicId: u.topicId,
+            span: u.span, // Full span - exact format summarize stage expects
+            context: u.context, // Full context - exact format summarize stage expects
+            sourceUrl: u.sourceUrl,
+            publisher: u.publisher,
+            authority: u.authority,
+            publishedDate: u.publishedDate,
+          })), // Exact format summarize stage expects (can group by topicId)
+          stats: extractOutput.stats, // Keep stats for debugging
+        });
         logger.info('Saved extract debug output', { evidenceCount: extractOutput.units.length });
       }
 
@@ -674,10 +696,7 @@ export class PipelineOrchestrator {
               onAirQuote: s.onAirQuote, // Full quote object - exact format outline stage expects
             })), // Exact format outline stage expects
           };
-          await fs.writeFile(
-            path.join(debugDir, 'summarize_output.json'),
-            JSON.stringify(summarizeOutputSummary, null, 2)
-          );
+          await writeDebugFile('summarize_output.json', summarizeOutputSummary);
           logger.info('Saved summarize debug output', { summaryCount: summarizeOutput.summaries.length });
         } else {
           // Save error output so UI can display it
@@ -689,10 +708,7 @@ export class PipelineOrchestrator {
             evidenceCount: extractOutput?.units.length || 0,
             message: 'Summarize stage encountered an error. Check summarize_error.json for details.',
           };
-          await fs.writeFile(
-            path.join(debugDir, 'summarize_output.json'),
-            JSON.stringify(errorOutput, null, 2)
-          );
+          await writeDebugFile('summarize_output.json', errorOutput);
           logger.warn('Saved summarize error output', { topicIds, evidenceCount: extractOutput?.units.length });
         }
       }
@@ -712,10 +728,7 @@ export class PipelineOrchestrator {
           competitors: competitors,
           evidenceCount: extractOutput.units.length,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'contrast_input.json'),
-          JSON.stringify(contrastInput, null, 2)
-        );
+        await writeDebugFile('contrast_input.json', contrastInput);
         
         contrastOutput = await executeStageWithErrorHandling(
           'contrast',
@@ -743,10 +756,7 @@ export class PipelineOrchestrator {
             })), // Exact format script stage expects
             stats: contrastOutput.stats, // Keep stats for debugging
           };
-          await fs.writeFile(
-            path.join(debugDir, 'contrast_output.json'),
-            JSON.stringify(contrastOutputSummary, null, 2)
-          );
+          await writeDebugFile('contrast_output.json', contrastOutputSummary);
           logger.info('Saved contrast debug output', { contrastCount: contrastOutput.contrasts.length });
         } else {
           // Save error output if stage failed
@@ -757,10 +767,7 @@ export class PipelineOrchestrator {
             contrasts: [],
             message: 'Contrast stage encountered an error. Check server logs for details.',
           };
-          await fs.writeFile(
-            path.join(debugDir, 'contrast_output.json'),
-            JSON.stringify(errorOutput, null, 2)
-          );
+          await writeDebugFile('contrast_output.json', errorOutput);
           logger.warn('Saved contrast error output');
         }
       }
@@ -778,10 +785,7 @@ export class PipelineOrchestrator {
           })),
           companyName: input.config.company.name,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'outline_input.json'),
-          JSON.stringify(outlineInput, null, 2)
-        );
+        await writeDebugFile('outline_input.json', outlineInput);
 
         outlineOutput = await executeStageWithErrorHandling(
           'outline',
@@ -808,10 +812,7 @@ export class PipelineOrchestrator {
             }, // Exact format script stage expects
             knowledgeGraph: outlineOutput.knowledgeGraph, // Keep for debugging
           };
-          await fs.writeFile(
-            path.join(debugDir, 'outline_output.json'),
-            JSON.stringify(outlineOutputSummary, null, 2)
-          );
+          await writeDebugFile('outline_output.json', outlineOutputSummary);
           logger.info('Saved outline debug output', { sectionCount: outlineOutput.outline.sections?.length || 0 });
         } else {
           // Save error output if stage failed
@@ -823,10 +824,7 @@ export class PipelineOrchestrator {
             segments: [],
             message: 'Outline stage encountered an error. Check server logs for details.',
           };
-          await fs.writeFile(
-            path.join(debugDir, 'outline_output.json'),
-            JSON.stringify(errorOutput, null, 2)
-          );
+          await writeDebugFile('outline_output.json', errorOutput);
           logger.warn('Saved outline error output');
         }
       }
@@ -844,10 +842,7 @@ export class PipelineOrchestrator {
           outlineTheme: outlineOutput.outline.theme,
           outlineSubThemes: outlineOutput.outline.subThemes,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'script_input.json'),
-          JSON.stringify(scriptInput, null, 2)
-        );
+        await writeDebugFile('script_input.json', scriptInput);
         logger.info('Saved script input', { 
           outlineSectionCount: scriptInput.outlineSectionCount,
           summaryCount: scriptInput.summaryCount,
@@ -887,10 +882,7 @@ export class PipelineOrchestrator {
             }, // Exact format QA stage expects
             stats: scriptOutput.stats, // Keep stats for debugging
           };
-          await fs.writeFile(
-            path.join(debugDir, 'script_output.json'),
-            JSON.stringify(scriptOutputSummary, null, 2)
-          );
+          await writeDebugFile('script_output.json', scriptOutputSummary);
           logger.info('Saved script debug output', { 
             narrativeLength: scriptOutput.script.narrative.length,
             wordCount: scriptOutput.stats.wordCount,
@@ -904,10 +896,7 @@ export class PipelineOrchestrator {
             wordCount: 0,
             message: 'Script stage encountered an error. Check server logs for details.',
           };
-          await fs.writeFile(
-            path.join(debugDir, 'script_output.json'),
-            JSON.stringify(errorOutput, null, 2)
-          );
+          await writeDebugFile('script_output.json', errorOutput);
           logger.warn('Saved script error output');
         }
       }
@@ -928,10 +917,7 @@ export class PipelineOrchestrator {
           timeWindowStart: timeWindowStart.toISOString(),
           timeWindowEnd: timeWindowEnd.toISOString(),
         };
-        await fs.writeFile(
-          path.join(debugDir, 'qa_input.json'),
-          JSON.stringify(qaInput, null, 2)
-        );
+        await writeDebugFile('qa_input.json', qaInput);
         logger.info('Saved QA input', { scriptLength: qaInput.scriptLength, evidenceCount: qaInput.evidenceCount });
         
         qaOutput = await stage.execute(
@@ -949,10 +935,7 @@ export class PipelineOrchestrator {
             script: qaOutput.script || qaOutput.finalScript || '', // Full script - exact format TTS stage expects
             finalScript: qaOutput.finalScript || qaOutput.script || '', // Alias for compatibility
           }; // Exact format TTS stage expects
-          await fs.writeFile(
-            path.join(debugDir, 'qa_output.json'),
-            JSON.stringify(qaOutputSummary, null, 2)
-          );
+          await writeDebugFile('qa_output.json', qaOutputSummary);
           logger.info('Saved QA output', { scriptLength: qaOutputSummary.script.length });
         }
         
@@ -978,10 +961,7 @@ export class PipelineOrchestrator {
           voiceId: input.config.voice.voiceId,
           speed: input.config.voice.speed,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'tts_input.json'),
-          JSON.stringify(ttsInput, null, 2)
-        );
+        await writeDebugFile('tts_input.json', ttsInput);
         logger.info('Saved TTS input', { scriptLength: ttsInput.scriptLength, voiceId: ttsInput.voiceId });
         
         ttsOutput = await executeStageWithErrorHandling(
@@ -1012,10 +992,7 @@ export class PipelineOrchestrator {
             audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
             durationSeconds: ttsOutput.durationSeconds,
           };
-          await fs.writeFile(
-            path.join(debugDir, 'tts_output.json'),
-            JSON.stringify(ttsOutputSummary, null, 2)
-          );
+          await writeDebugFile('tts_output.json', ttsOutputSummary);
           logger.info('Saved TTS output', { audioSizeKB: ttsOutputSummary.audioSizeKB });
           
           telemetry.stages.tts = {
@@ -1030,12 +1007,17 @@ export class PipelineOrchestrator {
             finalSpeed: input.config.voice.speed,
           };
 
-          // Save audio to local disk (TODO: Upload to S3 in production)
+          // Save audio to S3 or local disk
           audioS3Key = `runs/${input.runId}/audio.mp3`;
-          const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
-          await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
-          await fs.writeFile(audioPath, ttsOutput.audioBuffer);
-          logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          if (useS3) {
+            await writeToS3(getAudioFileKey(input.runId), ttsOutput.audioBuffer, 'audio/mpeg');
+            logger.info('Audio saved to S3', { s3Key: audioS3Key, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          } else {
+            const audioPath = `./output/episodes/${input.runId}/audio.mp3`;
+            await fs.mkdir(`./output/episodes/${input.runId}`, { recursive: true });
+            await fs.writeFile(audioPath, ttsOutput.audioBuffer);
+            logger.info('Audio saved to disk', { audioPath, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          }
         } else {
           // Save error output if stage failed
           const errorOutput = {
@@ -1044,10 +1026,7 @@ export class PipelineOrchestrator {
             durationSeconds: 0,
             message: 'TTS stage encountered an error. Check server logs and tts_error.json for details.',
           };
-          await fs.writeFile(
-            path.join(debugDir, 'tts_output.json'),
-            JSON.stringify(errorOutput, null, 2)
-          );
+          await writeDebugFile('tts_output.json', errorOutput);
           logger.warn('Saved TTS error output');
         }
       }
@@ -1070,10 +1049,7 @@ export class PipelineOrchestrator {
           outlineSectionCount: outlineOutput.outline.sections?.length || 0,
           evidenceCount: extractOutput.units.length,
         };
-        await fs.writeFile(
-          path.join(debugDir, 'package_input.json'),
-          JSON.stringify(packageInput, null, 2)
-        );
+        await writeDebugFile('package_input.json', packageInput);
         logger.info('Saved package input', { scriptLength: packageInput.scriptLength, evidenceCount: packageInput.evidenceCount });
         
         packageOutput = await stage.execute(
@@ -1097,10 +1073,7 @@ export class PipelineOrchestrator {
             sourcesJsonPath: packageOutput.sourcesJsonPath,
             rssItemGenerated: !!packageOutput.rssItem,
           };
-          await fs.writeFile(
-            path.join(debugDir, 'package_output.json'),
-            JSON.stringify(packageOutputSummary, null, 2)
-          );
+          await writeDebugFile('package_output.json', packageOutputSummary);
           logger.info('Saved package output', { showNotesPath: packageOutput.showNotesPath });
         }
         telemetry.stages.package = {
