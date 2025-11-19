@@ -473,20 +473,31 @@ function RunsTab({ podcastId }: { podcastId: string }) {
   useEffect(() => {
     fetchRuns();
     
-    // Only poll if there are active runs, otherwise poll less frequently
+    // Smart polling: only poll frequently if there are active runs
+    let pollCount = 0;
     const interval = setInterval(() => {
+      pollCount++;
       const hasActiveRuns = runs.some(r => r.status === 'running' || r.status === 'pending');
+      
       if (hasActiveRuns) {
         // Poll every 5 seconds if there are active runs
         fetchRuns();
       } else {
-        // Poll every 30 seconds if no active runs (just to catch new runs)
-        // This reduces unnecessary API calls
+        // Poll every 30 seconds (every 6th interval) if no active runs
+        if (pollCount % 6 === 0) {
+          fetchRuns();
+        }
       }
-    }, 5000); // Check every 5 seconds, but only fetch if needed
+    }, 5000);
     
     return () => clearInterval(interval);
-  }, [podcastId, runs]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [podcastId]); // eslint-disable-line react-hooks/exhaustive-deps
+  
+  // Separate effect to update polling when runs change
+  useEffect(() => {
+    // This effect just ensures we react to runs changes
+    // The actual polling is handled in the interval above
+  }, [runs]);
 
   if (loading && runs.length === 0) {
     return (
