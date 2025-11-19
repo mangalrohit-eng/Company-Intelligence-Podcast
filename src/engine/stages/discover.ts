@@ -52,8 +52,7 @@ export class DiscoverStage {
     emitter.emit('discover', 20, 'Querying news sources');
 
     // Parse RSS feeds with retry logic
-    try {
-      for (const feedUrl of sources.rssFeeds) {
+    for (const feedUrl of sources.rssFeeds) {
       const startTime = Date.now();
       let response: any = null;
       let lastError: any = null;
@@ -346,14 +345,6 @@ export class DiscoverStage {
           }
         }
       }
-    } catch (error: any) {
-      // This catch block handles unexpected errors outside the retry loop
-      logger.error('Unexpected error in RSS feed processing', { 
-        error: error.message,
-        errorName: error.name,
-        errorCode: error.code,
-        isVercel: !!process.env.VERCEL,
-      });
     }
 
     // Parse News APIs
