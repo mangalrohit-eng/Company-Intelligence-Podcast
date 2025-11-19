@@ -12,9 +12,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Use static export for S3/CloudFront deployment
-  // Note: API routes won't work with static export - use API Gateway endpoints instead
-  output: 'export',
+  // Static export configuration:
+  // - Disabled by default (works for Vercel and local dev)
+  // - Enable only for AWS S3/CloudFront deployment by setting ENABLE_STATIC_EXPORT=true
+  // - Vercel handles Next.js natively, so no static export needed
+  // - Local dev needs dynamic routes, so no static export
+  ...(process.env.ENABLE_STATIC_EXPORT === 'true'
+    ? { output: 'export' }
+    : {}),
   // Optimize production builds
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
