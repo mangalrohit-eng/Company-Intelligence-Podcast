@@ -353,25 +353,32 @@ export class ScrapeStage {
         // Fetch content
         const fetchStart = Date.now();
         
-        // Handle Google News redirect URLs - extract actual URL if possible
+        // Handle Google News redirect URLs - these require special handling
         let urlToFetch = item.url;
-        if (item.url.includes('news.google.com/rss/articles')) {
-          // Google News RSS article URLs are redirects - try to extract actual URL
-          // The actual URL is often in the query parameter or can be extracted from redirect
+        let isGoogleNewsUrl = item.url.includes('news.google.com/rss/articles');
+        
+        if (isGoogleNewsUrl) {
+          // Google News URLs are complex redirects - try multiple strategies
           try {
             const urlObj = new URL(item.url);
-            // Check if there's a URL parameter
+            
+            // Strategy 1: Check for URL in query params
             const urlParam = urlObj.searchParams.get('url');
             if (urlParam) {
               urlToFetch = decodeURIComponent(urlParam);
-              logger.debug('Extracted actual URL from Google News redirect', { 
+              logger.info('Extracted actual URL from Google News query param', { 
                 original: item.url, 
                 extracted: urlToFetch 
               });
+            } else {
+              // Strategy 2: Google News URLs often redirect via Location header
+              // We'll fetch and follow redirects, then check the final URL
+              logger.info('Google News URL - will follow redirects to get actual article', { 
+                url: item.url 
+              });
             }
           } catch (e) {
-            // If extraction fails, use original URL and let fetch follow redirect
-            logger.debug('Could not extract URL from Google News redirect, will follow redirect', { url: item.url });
+            logger.debug('Could not parse Google News URL, will follow redirect', { url: item.url });
           }
         }
         
@@ -379,33 +386,84 @@ export class ScrapeStage {
         const latencyMs = Date.now() - fetchStart;
 
         if (response.status === 200) {
-          // Check if we got redirected to Google News landing page (content is just "Google News")
           let content = this.extractTextFromHtml(response.body);
+          let finalUrl = response.url;
           
-          // If content is just "Google News" or very short, it might be a redirect page
-          if (content.trim().toLowerCase() === 'google news' || content.trim().length < 50) {
-            logger.warn('Got minimal content from Google News redirect, trying to follow redirect manually', {
-              url: item.url,
-              finalUrl: response.url,
+          // Check if we got minimal content (Google News landing page)
+          const isMinimalContent = content.trim().toLowerCase() === 'google news' || 
+                                   content.trim().length < 100 ||
+                                   (content.trim().toLowerCase().includes('google news') && content.trim().length < 200);
+          
+          if (isMinimalContent && isGoogleNewsUrl) {
+            logger.warn('Got minimal content from Google News - attempting to extract actual article URL', {
+              originalUrl: item.url,
+              fetchedUrl: urlToFetch,
+              finalUrl: finalUrl,
               contentLength: content.length,
+              contentPreview: content.substring(0, 200),
             });
             
-            // Try fetching with explicit redirect following
-            // If the response URL is different from request URL, we were redirected
-            if (response.url !== urlToFetch) {
-              logger.info('Following redirect to actual article', { 
-                original: urlToFetch, 
-                redirected: response.url 
+            // Strategy 3: Try to extract article URL from the HTML body
+            // Google News redirect pages sometimes contain the actual URL in meta tags or JavaScript
+            const metaUrlMatch = response.body.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i) ||
+                                 response.body.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i) ||
+                                 response.body.match(/url["\s:=]+(https?:\/\/[^"'\s>]+)/i);
+            
+            if (metaUrlMatch && metaUrlMatch[1] && !metaUrlMatch[1].includes('news.google.com')) {
+              const extractedUrl = metaUrlMatch[1];
+              logger.info('Found article URL in page metadata, fetching directly', {
+                extractedUrl,
               });
-              // Try fetching the redirected URL again (sometimes need second fetch)
-              const redirectResponse = await this.httpGateway.fetch({ url: response.url });
-              if (redirectResponse.status === 200) {
-                content = this.extractTextFromHtml(redirectResponse.body);
-                logger.debug('Got content from redirected URL', { 
-                  url: redirectResponse.url, 
-                  contentLength: content.length 
-                });
+              
+              try {
+                const directResponse = await this.httpGateway.fetch({ url: extractedUrl });
+                if (directResponse.status === 200) {
+                  const directContent = this.extractTextFromHtml(directResponse.body);
+                  if (directContent.trim().length > 100) {
+                    content = directContent;
+                    finalUrl = directResponse.url;
+                    logger.info('Successfully fetched article content from extracted URL', {
+                      url: extractedUrl,
+                      contentLength: content.length,
+                    });
+                  }
+                }
+              } catch (directError) {
+                logger.warn('Failed to fetch extracted URL', { url: extractedUrl, error: directError });
               }
+            }
+            
+            // Strategy 4: If final URL is different and not Google News, try fetching it
+            if (finalUrl !== urlToFetch && !finalUrl.includes('news.google.com') && content.trim().length < 100) {
+              logger.info('Final URL is different from request URL, trying direct fetch', {
+                original: urlToFetch,
+                final: finalUrl,
+              });
+              
+              try {
+                const finalResponse = await this.httpGateway.fetch({ url: finalUrl });
+                if (finalResponse.status === 200) {
+                  const finalContent = this.extractTextFromHtml(finalResponse.body);
+                  if (finalContent.trim().length > 100) {
+                    content = finalContent;
+                    logger.info('Successfully fetched content from final redirect URL', {
+                      url: finalUrl,
+                      contentLength: content.length,
+                    });
+                  }
+                }
+              } catch (finalError) {
+                logger.warn('Failed to fetch final redirect URL', { url: finalUrl, error: finalError });
+              }
+            }
+            
+            // If we still have minimal content, log it but continue
+            if (content.trim().length < 100) {
+              logger.warn('Could not extract article content from Google News redirect - content will be minimal', {
+                originalUrl: item.url,
+                finalUrl: finalUrl,
+                contentLength: content.length,
+              });
             }
           }
 
