@@ -6,6 +6,10 @@ import winston from 'winston';
 
 const logLevel = process.env.LOG_LEVEL || 'info';
 
+// Track current run ID for log streaming
+let currentRunId: string | null = null;
+let s3Transport: any = null;
+
 // Enhanced format for lambda debugging
 const lambdaFormat = winston.format.printf(({ level, message, timestamp, ...metadata }) => {
   let msg = `${timestamp} [${level.toUpperCase()}] ${message}`;
@@ -18,6 +22,17 @@ const lambdaFormat = winston.format.printf(({ level, message, timestamp, ...meta
   return msg;
 });
 
+// Create base logger
+const loggerTransports: winston.transport[] = [
+  new winston.transports.Console({
+    format: winston.format.combine(
+      winston.format.colorize(),
+      winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
+      lambdaFormat
+    ),
+  }),
+];
+
 export const logger = winston.createLogger({
   level: logLevel,
   format: winston.format.combine(
@@ -25,16 +40,40 @@ export const logger = winston.createLogger({
     winston.format.errors({ stack: true }),
     winston.format.json()
   ),
-  transports: [
-    new winston.transports.Console({
-      format: winston.format.combine(
-        winston.format.colorize(),
-        winston.format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }),
-        lambdaFormat
-      ),
-    }),
-  ],
+  transports: loggerTransports,
 });
+
+/**
+ * Enable S3 log streaming for a specific run
+ */
+export function enableS3LogStreaming(runId: string) {
+  if (currentRunId === runId && s3Transport) {
+    return; // Already enabled for this run
+  }
+
+  // Remove old transport if exists
+  if (s3Transport) {
+    logger.remove(s3Transport);
+    s3Transport = null;
+  }
+
+  // Add S3 transport for this run
+  const { createS3LogTransport } = require('./log-streamer');
+  s3Transport = createS3LogTransport(runId);
+  logger.add(s3Transport);
+  currentRunId = runId;
+}
+
+/**
+ * Disable S3 log streaming
+ */
+export function disableS3LogStreaming() {
+  if (s3Transport) {
+    logger.remove(s3Transport);
+    s3Transport = null;
+    currentRunId = null;
+  }
+}
 
 // Lambda-specific logging helper
 export const lambdaLogger = {

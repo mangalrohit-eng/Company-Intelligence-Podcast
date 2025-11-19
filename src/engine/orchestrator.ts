@@ -20,7 +20,7 @@ import { ScriptStage } from './stages/script';
 import { QAStage } from './stages/qa';
 import { TtsStage } from './stages/tts';
 import { PackageStage } from './stages/package';
-import { logger } from '@/utils/logger';
+import { logger, enableS3LogStreaming, disableS3LogStreaming } from '@/utils/logger';
 import { AdminSettings, DEFAULT_ADMIN_SETTINGS, calculateArticlesNeeded } from '@/types/admin-settings';
 import { isS3Available, writeToS3, getDebugFileKey, getAudioFileKey } from '@/lib/s3-storage';
 
@@ -50,6 +50,17 @@ export class PipelineOrchestrator {
   }
 
   async execute(input: PipelineInput, emitter: IEventEmitter): Promise<PipelineOutput> {
+    // Enable S3 log streaming for this run
+    enableS3LogStreaming(input.runId);
+    
+    // Cleanup on exit
+    const cleanup = () => {
+      disableS3LogStreaming();
+      const { removeLogStreamer } = require('@/utils/log-streamer');
+      removeLogStreamer(input.runId);
+    };
+    
+    try {
     const startTime = new Date();
     logger.info('Pipeline execution started', { runId: input.runId });
 
@@ -422,26 +433,29 @@ export class PipelineOrchestrator {
       });
       
       if (input.flags.enable.discover && discoverOutput) {
-        logger.info('Starting disambiguate stage', { 
-          runId: input.runId,
-          itemCount: discoverOutput.items.length,
-        });
-        const stage = new DisambiguateStage(llmGateway);
-        const stageStart = Date.now();
-        
-        // Save debug input
-        const disambiguateInput = {
-          itemCount: discoverOutput.items.length,
-          allowDomains: input.config.sourcePolicies?.allowDomains || [],
-          blockDomains: input.config.sourcePolicies?.blockDomains || [],
-          robotsMode: input.config.robotsMode,
-          sampleItems: discoverOutput.items.slice(0, 5).map(item => ({
-            url: item.url,
-            title: item.title,
-            publisher: item.publisher,
-          })),
-        };
-        await writeDebugFile('disambiguate_input.json', disambiguateInput);
+        try {
+          logger.info('Starting disambiguate stage', { 
+            runId: input.runId,
+            itemCount: discoverOutput.items.length,
+          });
+          const stage = new DisambiguateStage(llmGateway);
+          const stageStart = Date.now();
+          
+          // Save debug input with timeout protection
+          logger.info('Saving disambiguate input to S3', { runId: input.runId });
+          const disambiguateInput = {
+            itemCount: discoverOutput.items.length,
+            allowDomains: input.config.sourcePolicies?.allowDomains || [],
+            blockDomains: input.config.sourcePolicies?.blockDomains || [],
+            robotsMode: input.config.robotsMode,
+            sampleItems: discoverOutput.items.slice(0, 5).map(item => ({
+              url: item.url,
+              title: item.title,
+              publisher: item.publisher,
+            })),
+          };
+          await writeDebugFile('disambiguate_input.json', disambiguateInput);
+          logger.info('Disambiguate input saved to S3', { runId: input.runId });
         
         // Extract company name and competitors for entity variation matching
         const companyName = input.config.company.name;
