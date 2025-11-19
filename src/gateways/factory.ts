@@ -79,18 +79,18 @@ export class GatewayFactory {
         logger.info('Creating Node Fetch HTTP gateway');
         return new NodeFetchHttpGateway();
         
-      case 'playwright': // Playwright for complex scraping (explicit opt-in)
-        logger.info('Creating Playwright HTTP gateway');
-        return new PlaywrightHttpGateway();
-        
-      case 'stub': // Legacy alias for playwright - but warn and use node-fetch instead on Vercel
-        if (process.env.VERCEL || process.env.NODE_ENV === 'production') {
-          logger.warn('HTTP provider "stub" (Playwright) not available on Vercel, using node-fetch instead');
+      case 'playwright': // Playwright for complex scraping (explicit opt-in, but not recommended)
+        // Playwright requires browser binaries and is heavy - use only if absolutely necessary
+        if (process.env.VERCEL) {
+          logger.warn('Playwright not available on Vercel, using node-fetch instead');
           return new NodeFetchHttpGateway();
         }
-        logger.warn('HTTP provider "stub" is deprecated, use "playwright" instead');
-        logger.info('Creating Playwright HTTP gateway');
+        logger.info('Creating Playwright HTTP gateway (note: node-fetch is recommended for RSS feeds)');
         return new PlaywrightHttpGateway();
+        
+      case 'stub': // Legacy alias - now maps to node-fetch (Playwright not needed for RSS feeds)
+        logger.warn('HTTP provider "stub" is deprecated, using node-fetch (Playwright not needed for RSS feeds)');
+        return new NodeFetchHttpGateway();
 
       default:
         // Fallback to node-fetch for unknown providers
