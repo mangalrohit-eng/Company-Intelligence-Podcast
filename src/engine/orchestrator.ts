@@ -398,11 +398,34 @@ export class PipelineOrchestrator {
         };
         
         logger.info('Saved discover debug output', { totalItems: discoverOutput.items.length });
+        logger.info('Discover stage fully completed, moving to disambiguate stage', { 
+          runId: input.runId,
+          enableDiscover: input.flags.enable.discover,
+          hasDiscoverOutput: !!discoverOutput,
+          itemCount: discoverOutput.items.length,
+        });
+      } else {
+        logger.warn('Discover stage skipped or failed', {
+          runId: input.runId,
+          enableDiscover: input.flags.enable.discover,
+          hasDiscoverOutput: !!discoverOutput,
+        });
       }
 
       // Stage 3: Disambiguate
       let disambiguateOutput;
+      logger.info('Checking disambiguate stage conditions', {
+        runId: input.runId,
+        enableDiscover: input.flags.enable.discover,
+        hasDiscoverOutput: !!discoverOutput,
+        willExecute: !!(input.flags.enable.discover && discoverOutput),
+      });
+      
       if (input.flags.enable.discover && discoverOutput) {
+        logger.info('Starting disambiguate stage', { 
+          runId: input.runId,
+          itemCount: discoverOutput.items.length,
+        });
         const stage = new DisambiguateStage(llmGateway);
         const stageStart = Date.now();
         
