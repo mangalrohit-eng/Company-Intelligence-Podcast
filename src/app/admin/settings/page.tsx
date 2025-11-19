@@ -117,6 +117,78 @@ export default function AdminSettingsPage() {
     }
   };
 
+  const handleStopAllRuns = async () => {
+    if (!confirm('Are you sure you want to stop all active runs? This action cannot be undone.')) {
+      return;
+    }
+
+    setStopping(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('/api/admin/runs/stop-all', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: 'success',
+          text: data.message || `Successfully stopped ${data.stopped || 0} run(s)`,
+        });
+      } else {
+        setMessage({
+          type: 'error',
+          text: data.error || 'Failed to stop all runs',
+        });
+      }
+    } catch (error: any) {
+      setMessage({
+        type: 'error',
+        text: `Error: ${error.message}`,
+      });
+    } finally {
+      setStopping(false);
+    }
+  };
+
+  const handleDeleteFailedRuns = async () => {
+    if (!confirm('Are you sure you want to delete all failed runs? This action cannot be undone.')) {
+      return;
+    }
+
+    setDeleting(true);
+    setMessage(null);
+
+    try {
+      const response = await fetch('/api/admin/runs/delete-failed', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setMessage({
+          type: 'success',
+          text: data.message || `Successfully deleted ${data.deleted || 0} failed run(s)`,
+        });
+      } else {
+        setMessage({
+          type: 'error',
+          text: data.error || 'Failed to delete failed runs',
+        });
+      }
+    } catch (error: any) {
+      setMessage({
+        type: 'error',
+        text: `Error: ${error.message}`,
+      });
+    } finally {
+      setDeleting(false);
+    }
+  };
+
   const updateSetting = (key: keyof PipelineSettings, value: number) => {
     if (!localSettings) return;
     setLocalSettings({
