@@ -228,7 +228,7 @@ export class PipelineOrchestrator {
           
           // Mark stage as completed in emitter
           if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-            (emitter as any).markStageCompleted(stageName);
+            await (emitter as any).markStageCompleted(stageName);
           }
           
           return result;
@@ -316,7 +316,7 @@ export class PipelineOrchestrator {
           
           // Explicitly mark stage as completed in DynamoDB
           if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-            (emitter as any).markStageCompleted('prepare');
+            await (emitter as any).markStageCompleted('prepare');
           }
           
           logger.info('Prepare stage telemetry updated', { runId: input.runId });
@@ -510,7 +510,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('disambiguate');
+          await (emitter as any).markStageCompleted('disambiguate');
         }
         
         // Save output AFTER execution (exact format next stage expects)
@@ -571,7 +571,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('rank');
+          await (emitter as any).markStageCompleted('rank');
         }
         
         // Save output AFTER execution (exact format next stage expects)
@@ -684,7 +684,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('scrape');
+          await (emitter as any).markStageCompleted('scrape');
         }
         
         telemetry.scrape = {
@@ -776,7 +776,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('extract');
+          await (emitter as any).markStageCompleted('extract');
         }
         
         telemetry.evidence = {
@@ -1356,7 +1356,7 @@ export class PipelineOrchestrator {
           
           // Explicitly mark stage as completed in DynamoDB
           if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-            (emitter as any).markStageCompleted('package');
+            await (emitter as any).markStageCompleted('package');
           }
         } catch (packageError: any) {
           // Package stage failed, but don't fail the entire pipeline - audio is the critical output
