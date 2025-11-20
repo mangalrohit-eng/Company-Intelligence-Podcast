@@ -14,15 +14,40 @@ function getS3Client(): S3Client {
     // Use REGION (non-AWS prefix) for Amplify compatibility, fallback to AWS_REGION for Lambda
     const region = process.env.REGION || process.env.AWS_REGION || 'us-east-1';
     
-    // Configure S3 client to use default credential chain
-    // Explicitly use defaultProvider to ensure IAM roles work in Amplify
-    // This will automatically use:
-    // 1. Explicit credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) if set
-    // 2. IAM roles (when running on AWS services like Amplify, Lambda, EC2)
-    // 3. AWS CLI credentials (for local development)
+    // Configure credentials provider
+    // Amplify doesn't allow env vars starting with "AWS", so we use custom names
+    // Priority:
+    // 1. Custom env vars (AMPLIFY_ACCESS_KEY_ID, AMPLIFY_SECRET_ACCESS_KEY) - for Amplify
+    // 2. Standard AWS env vars (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) - for Lambda/local
+    // 3. IAM roles via defaultProvider (for Lambda/EC2 with IAM roles)
+    
+    let credentialsProvider;
+    
+    // Check for custom Amplify env vars first (non-AWS prefix)
+    if (process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY) {
+      logger.info('Using custom Amplify credentials (AMPLIFY_ACCESS_KEY_ID)');
+      credentialsProvider = async () => ({
+        accessKeyId: process.env.AMPLIFY_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AMPLIFY_SECRET_ACCESS_KEY!,
+      });
+    }
+    // Check for standard AWS env vars (for Lambda/local dev)
+    else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+      logger.info('Using standard AWS credentials (AWS_ACCESS_KEY_ID)');
+      credentialsProvider = async () => ({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      });
+    }
+    // Fall back to default provider (IAM roles, instance metadata, etc.)
+    else {
+      logger.info('Using default credential provider (IAM roles/instance metadata)');
+      credentialsProvider = defaultProvider();
+    }
+    
     s3Client = new S3Client({
       region,
-      credentials: defaultProvider(),
+      credentials: credentialsProvider,
     });
   }
   return s3Client;
