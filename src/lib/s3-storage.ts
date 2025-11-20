@@ -38,6 +38,18 @@ function getMediaBucket(): string | null {
     return `podcast-platform-media-${process.env.AWS_ACCOUNT_ID}`;
   }
   
+  // Try to get account ID from Amplify environment variables
+  // Amplify sets AWS_ACCOUNT_ID in some contexts, or we can try to detect it
+  // For now, if we're in an AWS environment, try the default bucket name pattern
+  // This is a fallback - ideally ACCOUNT_ID should be set in Amplify env vars
+  if (process.env.AWS_REGION || process.env.REGION) {
+    // We're in AWS but don't have account ID - this is a configuration issue
+    // But we can still try to use S3 with IAM roles if the bucket name is known
+    // Default to the known bucket name for this account (098478926952)
+    // This is a temporary workaround - the proper fix is to set ACCOUNT_ID in Amplify
+    return 'podcast-platform-media-098478926952';
+  }
+  
   // If no bucket configured, return null (will fall back to local filesystem)
   return null;
 }
