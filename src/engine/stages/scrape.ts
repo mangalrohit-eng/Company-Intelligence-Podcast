@@ -10,7 +10,8 @@ import { IEventEmitter } from '@/utils/event-emitter';
 import { IHttpGateway } from '@/gateways/types';
 import { logger } from '@/utils/logger';
 import { DEMO_CITIBANK_ARTICLES } from '../demo-articles';
-import { PlaywrightHttpGateway } from '@/gateways/http/playwright';
+// Lazy import PlaywrightHttpGateway to avoid bundling issues in Lambda
+// import { PlaywrightHttpGateway } from '@/gateways/http/playwright';
 
 export interface ScrapedContent {
   url: string;

@@ -157,8 +157,8 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       flags: {
         dryRun: flags.dryRun || false,
         provider: {
-          llm: flags.provider?.llm || 'replay',
-          tts: flags.provider?.tts || 'stub',
+          llm: flags.provider?.llm || 'openai', // Use OpenAI in production
+          tts: flags.provider?.tts || 'openai', // Use OpenAI in production
           // Always use node-fetch for HTTP - same behavior in local and production
           http: flags.provider?.http || 'openai',
         },
@@ -187,7 +187,23 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       })
     );
 
-    logger.info('Run started', { runId, podcastId, executionArn: result.executionArn });
+    logger.info('Step Functions execution started', { runId, podcastId, executionArn: result.executionArn });
+
+    // Update run status to 'running' and store executionArn
+    run.status = 'running';
+    run.startedAt = now;
+    run.executionArn = result.executionArn;
+    run.progress.stages.prepare.status = 'running';
+    run.progress.stages.prepare.startedAt = now;
+
+    await docClient.send(
+      new PutCommand({
+        TableName: process.env.RUNS_TABLE!,
+        Item: run,
+      })
+    );
+
+    logger.info('Run status updated to running', { runId, podcastId });
 
     return acceptedResponse({
       ...run,

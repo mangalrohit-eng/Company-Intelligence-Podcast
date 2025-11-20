@@ -10,8 +10,10 @@ let s3Client: S3Client | null = null;
 
 function getS3Client(): S3Client {
   if (!s3Client) {
+    // Use REGION (non-AWS prefix) for Amplify compatibility, fallback to AWS_REGION for Lambda
+    const region = process.env.REGION || process.env.AWS_REGION || 'us-east-1';
     s3Client = new S3Client({
-      region: process.env.AWS_REGION || 'us-east-1',
+      region,
     });
   }
   return s3Client;
@@ -21,12 +23,17 @@ function getS3Client(): S3Client {
  * Get the S3 bucket name for media/debug files
  */
 function getMediaBucket(): string | null {
-  // Try environment variable first
+  // Try environment variable first (non-AWS prefix for Amplify compatibility)
   if (process.env.S3_BUCKET_MEDIA) {
     return process.env.S3_BUCKET_MEDIA;
   }
   
-  // Fallback: construct from account ID if available
+  // Fallback: construct from account ID if available (non-AWS prefix)
+  if (process.env.ACCOUNT_ID) {
+    return `podcast-platform-media-${process.env.ACCOUNT_ID}`;
+  }
+  
+  // Legacy support: try AWS_ACCOUNT_ID (won't work in Amplify, but works in Lambda)
   if (process.env.AWS_ACCOUNT_ID) {
     return `podcast-platform-media-${process.env.AWS_ACCOUNT_ID}`;
   }
@@ -38,15 +45,37 @@ function getMediaBucket(): string | null {
 /**
  * Check if S3 storage is available and should be used
  * 
- * Always use S3 when AWS credentials are present - no difference between local and Vercel.
- * This ensures consistent behavior across all environments.
+ * Works with:
+ * - Explicit credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)
+ * - IAM roles (when running on AWS services like Amplify, Lambda, EC2)
+ * - Default credential chain (AWS SDK will automatically use IAM roles)
  */
 export function isS3Available(): boolean {
-  return !!(
-    process.env.AWS_ACCESS_KEY_ID &&
-    process.env.AWS_SECRET_ACCESS_KEY &&
-    getMediaBucket()
-  );
+  const bucket = getMediaBucket();
+  if (!bucket) {
+    return false;
+  }
+  
+  // If we have explicit credentials, use them
+  if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+    return true;
+  }
+  
+  // If we're in an AWS environment (Amplify, Lambda, EC2), IAM roles will be available
+  // Check for AWS-specific environment variables that indicate we're in AWS
+  if (
+    process.env.AWS_EXECUTION_ENV || // Lambda
+    process.env.AWS_LAMBDA_FUNCTION_NAME || // Lambda
+    process.env.ECS_CONTAINER_METADATA_URI || // ECS
+    process.env.AWS_REGION || // Any AWS service
+    process.env.REGION || // Amplify uses REGION
+    process.env.AWS_ACCOUNT_ID || // Any AWS service
+    process.env.ACCOUNT_ID // Amplify uses ACCOUNT_ID
+  ) {
+    return true;
+  }
+  
+  return false;
 }
 
 /**
@@ -88,11 +117,19 @@ export async function writeToS3(
 export async function readFromS3(key: string): Promise<Buffer> {
   const bucket = getMediaBucket();
   if (!bucket) {
-    throw new Error('S3 bucket not configured');
+    const error = new Error(`S3 bucket not configured. ACCOUNT_ID: ${process.env.ACCOUNT_ID}, S3_BUCKET_MEDIA: ${process.env.S3_BUCKET_MEDIA}`);
+    logger.error('S3 bucket not configured', { 
+      accountId: process.env.ACCOUNT_ID,
+      awsAccountId: process.env.AWS_ACCOUNT_ID, // Legacy
+      s3BucketMedia: process.env.S3_BUCKET_MEDIA,
+      key 
+    });
+    throw error;
   }
 
   try {
     const client = getS3Client();
+    logger.debug('Reading from S3', { bucket, key });
     const response = await client.send(
       new GetObjectCommand({
         Bucket: bucket,

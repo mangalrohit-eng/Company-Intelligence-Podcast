@@ -63,7 +63,12 @@ Add these **5 variables**:
 | `NEXT_PUBLIC_COGNITO_USER_POOL_ID` | `us-east-1_lvLcARe2P` |
 | `NEXT_PUBLIC_COGNITO_CLIENT_ID` | `3lm7s5lml6i0va070cm1c3uafn` |
 | `NEXT_PUBLIC_AWS_REGION` | `us-east-1` |
+| `ACCOUNT_ID` | `098478926952` |
+| `REGION` | `us-east-1` |
+| `S3_BUCKET_MEDIA` | `podcast-platform-media-098478926952` |
 | `NEXT_DISABLE_ESLINT` | `true` |
+
+**Note**: Amplify doesn't allow environment variables starting with "AWS" prefix, so use `ACCOUNT_ID` and `REGION` instead of `AWS_ACCOUNT_ID` and `AWS_REGION`.
 
 ### Step 5: Deploy!
 

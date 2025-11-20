@@ -40,37 +40,30 @@ export class RealtimeEventEmitter implements IEventEmitter {
       this.currentStage = stage;
     }
 
-    // Call callback asynchronously to prevent blocking (DynamoDB saves are slow)
-    // Use setImmediate to ensure it runs on next tick (non-blocking)
-    setImmediate(() => {
-      try {
-        if (isStageChange) {
-          // Mark old stage as completed if it exists
-          if (oldStage) {
-            this.callback({
-              stageStatus: 'completed',
-              stageCompletedAt: new Date().toISOString(),
-            });
-          }
-
-          // Start new stage
-          this.callback({
-            currentStage: stage,
-            stageStatus: 'running',
-            stageStartedAt: new Date().toISOString(),
-            stageProgress: progress,
-          });
-        } else {
-          // Update progress for current stage
-          this.callback({
-            stageProgress: progress,
-          });
-        }
-      } catch (error) {
-        // Don't let callback errors break the pipeline
-        logger.error('Error in emitter callback', { error, stage, progress });
+    // Call callback SYNCHRONOUSLY to ensure updates happen in order
+    // This prevents stages from appearing to run simultaneously
+    try {
+      if (isStageChange) {
+        // DON'T mark old stage as completed here - let the orchestrator do it explicitly
+        // This prevents stages from appearing as completed before they actually finish
+        
+        // Start new stage - await to ensure it completes before next emit
+        await this.callback({
+          currentStage: stage,
+          stageStatus: 'running',
+          stageStartedAt: new Date().toISOString(),
+          stageProgress: progress,
+        });
+      } else {
+        // Update progress for current stage - await to ensure order
+        await this.callback({
+          stageProgress: progress,
+        });
       }
-    });
+    } catch (error) {
+      // Don't let callback errors break the pipeline
+      logger.error('Error in emitter callback', { error, stage, progress });
+    }
 
     // Log the event (this is fast and non-blocking)
     logger.info(`[${stage}] ${message}`, { progress, level, ...metadata });

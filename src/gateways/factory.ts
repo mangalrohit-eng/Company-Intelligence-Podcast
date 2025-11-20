@@ -9,7 +9,8 @@ import { StubLlmGateway } from './llm/stub';
 import { OpenAiTtsGateway } from './tts/openai';
 import { StubTtsGateway } from './tts/stub';
 import { ReplayHttpGateway } from './http/replay';
-import { PlaywrightHttpGateway } from './http/playwright';
+// Lazy import PlaywrightHttpGateway to avoid bundling playwright in Lambda
+// import { PlaywrightHttpGateway } from './http/playwright';
 import { NodeFetchHttpGateway } from './http/node-fetch';
 import { logger } from '@/utils/logger';
 
@@ -81,12 +82,14 @@ export class GatewayFactory {
         
       case 'playwright': // Playwright for complex scraping (explicit opt-in, but not recommended)
         // Playwright requires browser binaries and is heavy - use only if absolutely necessary
-        if (process.env.VERCEL) {
-          logger.warn('Playwright not available on Vercel, using node-fetch instead');
+        // Always use node-fetch in Lambda/Vercel environments
+        if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
+          logger.warn('Playwright not available on Vercel/Lambda, using node-fetch instead');
           return new NodeFetchHttpGateway();
         }
-        logger.info('Creating Playwright HTTP gateway (note: node-fetch is recommended for RSS feeds)');
-        return new PlaywrightHttpGateway();
+        // For local development only - PlaywrightHttpGateway not bundled in Lambda
+        logger.warn('Playwright HTTP gateway requested but not available in Lambda, using node-fetch');
+        return new NodeFetchHttpGateway();
         
       case 'stub': // Legacy alias - now maps to node-fetch (Playwright not needed for RSS feeds)
         logger.warn('HTTP provider "stub" is deprecated, using node-fetch (Playwright not needed for RSS feeds)');

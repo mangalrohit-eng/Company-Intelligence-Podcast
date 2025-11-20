@@ -70,8 +70,16 @@ export class PipelineOrchestrator {
       }
     };
     
+    // Initialize telemetry outside try block so it's accessible in catch
+    const startTime = new Date();
+    let telemetry: RunTelemetry = {
+      startTime: startTime.toISOString(),
+      endTime: '',
+      durationSeconds: 0,
+      stages: {},
+    };
+    
     try {
-      const startTime = new Date();
       logger.info('Pipeline execution started', { runId: input.runId });
 
     // Load admin settings
@@ -116,13 +124,6 @@ export class PipelineOrchestrator {
       throw new Error('AWS credentials required. S3 storage must be configured for file operations.');
     }
     logger.info('Using S3 for all file storage', { runId: input.runId });
-
-    const telemetry: RunTelemetry = {
-      startTime: startTime.toISOString(),
-      endTime: '',
-      durationSeconds: 0,
-      stages: {},
-    };
 
     // Initialize gateways
     const gatewayConfig = {
@@ -288,6 +289,9 @@ export class PipelineOrchestrator {
           const stage = new PrepareStage();
           const stageStart = Date.now();
           
+          // Mark stage as running BEFORE execution
+          await emitter.emit('prepare', 0, 'Starting prepare stage');
+          
           const prepareInput = { config: input.config };
           await saveStageIO('prepare', prepareInput, {});
           
@@ -309,6 +313,11 @@ export class PipelineOrchestrator {
             durationMs: Date.now() - stageStart,
             status: 'success',
           };
+          
+          // Explicitly mark stage as completed in DynamoDB
+          if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+            (emitter as any).markStageCompleted('prepare');
+          }
           
           logger.info('Prepare stage telemetry updated', { runId: input.runId });
           logger.info('Prepare stage fully completed, exiting try block', { runId: input.runId });
@@ -335,6 +344,9 @@ export class PipelineOrchestrator {
       if (input.flags.enable.discover) {
         const stage = new DiscoverStage(llmGateway, httpGateway);
         const stageStart = Date.now();
+        
+        // Mark stage as running BEFORE execution
+        await emitter.emit('discover', 0, 'Starting discover stage');
         
         // Extract topic IDs from config (both standard and special topics)
         const topicIds = [
@@ -417,6 +429,11 @@ export class PipelineOrchestrator {
           itemsByTopic: discoverOutput.stats.itemsByTopic,
         };
         
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('discover');
+        }
+        
         logger.info('Saved discover debug output', { totalItems: discoverOutput.items.length });
         logger.info('Discover stage fully completed, moving to disambiguate stage', { 
           runId: input.runId,
@@ -449,6 +466,9 @@ export class PipelineOrchestrator {
           });
           const stage = new DisambiguateStage(llmGateway);
           const stageStart = Date.now();
+          
+          // Mark stage as running BEFORE execution
+          await emitter.emit('disambiguate', 0, 'Starting disambiguate stage');
           
           // Save debug input with timeout protection
           logger.info('Saving disambiguate input to S3', { runId: input.runId });
@@ -488,6 +508,11 @@ export class PipelineOrchestrator {
           status: 'success',
         };
         
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('disambiguate');
+        }
+        
         // Save output AFTER execution (exact format next stage expects)
         // Rank stage receives: disambiguateOutput.items.filter(item => !item.blocked)
         await writeDebugFile('disambiguate_output.json', {
@@ -517,6 +542,9 @@ export class PipelineOrchestrator {
         const stage = new RankStage();
         const stageStart = Date.now();
         
+        // Mark stage as running BEFORE execution
+        await emitter.emit('rank', 0, 'Starting rank stage');
+        
         // Filter to non-blocked items
         const validItems = disambiguateOutput.items.filter(item => !item.blocked);
         
@@ -540,6 +568,11 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('rank');
+        }
         
         // Save output AFTER execution (exact format next stage expects)
         // Scrape stage receives: Array.from(rankOutput.topicQueues.values()).flat()
@@ -584,6 +617,10 @@ export class PipelineOrchestrator {
       if (input.flags.enable.scrape && rankOutput) {
         const stage = new ScrapeStage(httpGateway);
         const stageStart = Date.now();
+        
+        // Mark stage as running BEFORE execution
+        await emitter.emit('scrape', 0, 'Starting scrape stage');
+        
         // Get top-ranked items from all topic queues
         const allRankedItems = Array.from(rankOutput.topicQueues.values()).flat();
         
@@ -625,6 +662,12 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('scrape');
+        }
+        
         telemetry.scrape = {
           totalUrls: scrapeOutput.stats.totalUrls,
           successCount: scrapeOutput.stats.successCount,
@@ -665,6 +708,9 @@ export class PipelineOrchestrator {
         try {
           const stage = new ExtractStage(llmGateway);
           const stageStart = Date.now();
+          
+          // Mark stage as running BEFORE execution
+          await emitter.emit('extract', 0, 'Starting extract stage');
           
           logger.info('Starting extract stage', { 
             runId: input.runId,
@@ -708,6 +754,12 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('extract');
+        }
+        
         telemetry.evidence = {
           totalUnits: extractOutput.stats.totalUnits,
           targetUnits: 0,
@@ -779,6 +831,9 @@ export class PipelineOrchestrator {
       // Stage 7: Summarize
       let summarizeOutput;
       if (input.flags.enable.summarize && extractOutput) {
+        // Mark stage as running BEFORE execution
+        await emitter.emit('summarize', 0, 'Starting summarize stage');
+        
         // Use topicIds from evidence (not config) - evidence may have different topicIds from scraped content
         const topicIdsFromConfig = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
         const topicIdsFromEvidence = Array.from(evidenceByTopic.keys());
@@ -871,6 +926,9 @@ export class PipelineOrchestrator {
       // Stage 8: Competitor Contrasts
       let contrastOutput;
       if (input.flags.enable.contrast && extractOutput && summarizeOutput) {
+        // Mark stage as running BEFORE execution
+        await emitter.emit('contrast', 0, 'Starting contrast stage');
+        
         const topicIds = [...input.config.topics.standard, ...input.config.topics.special].map((t) => t.id);
         const competitors = input.config.competitors?.map(c => c.name) || [];
         
@@ -930,6 +988,9 @@ export class PipelineOrchestrator {
       // Stage 9: Outline
       let outlineOutput;
       if (input.flags.enable.outline && summarizeOutput) {
+        // Mark stage as running BEFORE execution
+        await emitter.emit('outline', 0, 'Starting outline stage');
+        
         // Save debug input
         const outlineInput = {
           summaryCount: summarizeOutput.summaries.length,
@@ -987,6 +1048,9 @@ export class PipelineOrchestrator {
       // Stage 10: Script
       let scriptOutput;
       if (input.flags.enable.script && outlineOutput && summarizeOutput && contrastOutput) {
+        // Mark stage as running BEFORE execution
+        await emitter.emit('script', 0, 'Starting script stage');
+        
         // Save debug input BEFORE execution
         // Note: outline has 'sections', not 'segments'
         const scriptInput = {
@@ -1100,6 +1164,11 @@ export class PipelineOrchestrator {
           durationMs: Date.now() - stageStart,
           status: 'success',
         };
+        
+        // Explicitly mark stage as completed in DynamoDB
+        if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+          (emitter as any).markStageCompleted('qa');
+        }
       }
 
       // Stage 12: TTS
@@ -1108,6 +1177,9 @@ export class PipelineOrchestrator {
       const finalScript = qaOutput?.script || scriptOutput?.script.narrative || '';
       if (input.flags.enable.tts && finalScript) {
         const stageStart = Date.now();
+        
+        // Mark stage as running BEFORE execution
+        await emitter.emit('tts', 0, 'Starting TTS stage');
         
         // Save input BEFORE execution
         const ttsInput = {
@@ -1186,6 +1258,10 @@ export class PipelineOrchestrator {
         try {
           const stage = new PackageStage();
           const stageStart = Date.now();
+          
+          // Mark stage as running BEFORE execution
+          await emitter.emit('package', 0, 'Starting package stage');
+          
           // Generate audio URL - always use S3 URL or serve-file endpoint
           const audioUrl = audioS3Key
             ? `https://${process.env.S3_BUCKET_MEDIA || 'podcast-platform-media-' + process.env.AWS_ACCOUNT_ID}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${audioS3Key}`
@@ -1236,6 +1312,11 @@ export class PipelineOrchestrator {
             durationMs: Date.now() - stageStart,
             status: 'success',
           };
+          
+          // Explicitly mark stage as completed in DynamoDB
+          if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
+            (emitter as any).markStageCompleted('package');
+          }
         } catch (packageError: any) {
           // Package stage failed, but don't fail the entire pipeline - audio is the critical output
           logger.error('Package stage failed, but continuing pipeline (audio already generated)', {
@@ -1296,6 +1377,7 @@ export class PipelineOrchestrator {
       logger.error('Pipeline execution failed', { runId: input.runId, error });
 
       const endTime = new Date();
+      // Telemetry is always initialized, just update it
       telemetry.endTime = endTime.toISOString();
       telemetry.durationSeconds = Math.round((endTime.getTime() - startTime.getTime()) / 1000);
 

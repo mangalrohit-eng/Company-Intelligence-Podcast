@@ -62,21 +62,55 @@ export async function GET(
         let s3Key = relativePath;
         if (s3Key.startsWith('episodes/')) {
           s3Key = s3Key.replace('episodes/', 'runs/');
+          console.log(`🔄 Converted path: ${relativePath} -> ${s3Key}`);
         }
         
+        console.log(`🔍 Looking for file in S3 with key: ${s3Key}`);
         fileBuffer = await readFromS3(s3Key);
-        console.log(`✅ Found in S3: ${s3Key}`);
+        console.log(`✅ Found in S3: ${s3Key} (${Math.round(fileBuffer.length/1024)}KB)`);
       } catch (s3Error: any) {
-        console.error(`❌ Not found in S3: ${s3Error.message}`);
+        console.error(`❌ Not found in S3: ${s3Error.message}`, {
+          originalPath: relativePath,
+          s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
+          errorType: s3Error.constructor?.name,
+          errorStack: s3Error.stack,
+        });
         return NextResponse.json(
-          { error: 'File not found', path: relativePath },
+          { 
+            error: 'File not found', 
+            path: relativePath,
+            s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
+            details: s3Error.message 
+          },
           { status: 404 }
         );
       }
     } else {
-      console.error(`❌ File not found: ${filePath} (S3 not available)`);
+      // S3 not available - check why
+      const s3Available = isS3Available();
+      const hasAwsCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+      const hasBucket = !!(process.env.S3_BUCKET_MEDIA || process.env.ACCOUNT_ID || process.env.AWS_ACCOUNT_ID);
+      
+      console.error(`❌ File not found: ${filePath} (S3 not available)`, {
+        s3Available,
+        hasAwsCreds,
+        hasBucket,
+        accountId: process.env.ACCOUNT_ID,
+        awsAccountId: process.env.AWS_ACCOUNT_ID,
+        s3BucketMedia: process.env.S3_BUCKET_MEDIA,
+        region: process.env.REGION,
+        awsRegion: process.env.AWS_REGION,
+      });
+      
       return NextResponse.json(
-        { error: 'File not found', path: relativePath },
+        { 
+          error: 'File not found', 
+          path: relativePath,
+          s3Available,
+          hasAwsCreds,
+          hasBucket,
+          message: 'S3 storage is not configured. Please set AWS_ACCOUNT_ID or S3_BUCKET_MEDIA environment variable.'
+        },
         { status: 404 }
       );
     }

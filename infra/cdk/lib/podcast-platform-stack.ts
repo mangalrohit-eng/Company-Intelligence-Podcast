@@ -186,7 +186,8 @@ export class PodcastPlatformStack extends cdk.Stack {
       RSS_BUCKET: rssBucket.bucketName,
       CLOUDFRONT_DOMAIN: `https://dhycfwg0k4xij.cloudfront.net`,  // TODO: Make this dynamic
       USER_POOL_ID: userPool.userPoolId,
-      OPENAI_API_KEY: process.env.OPENAI_API_KEY || '',  // Pass from local env
+      // OPENAI_API_KEY: Set this via AWS Console or pass during CDK deploy
+      // You can set it via: aws lambda update-function-configuration --function-name pipeline-orchestrator --environment "Variables={OPENAI_API_KEY=sk-...}"
     };
 
     const createPodcastLambda = new NodejsFunction(this, 'CreatePodcastLambda', {
@@ -396,13 +397,103 @@ export class PodcastPlatformStack extends cdk.Stack {
       resources: ['*'],
     }));
 
-    // Create state machine first (needed for Lambda environment)
+    // Create Pipeline Orchestrator Lambda - runs the full pipeline
+    const orchestratorLambda = new NodejsFunction(this, 'OrchestratorLambda', {
+      functionName: 'pipeline-orchestrator',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/pipeline/orchestrator.ts',
+      handler: 'handler',
+      environment: {
+        ...lambdaEnv,
+        // OPENAI_API_KEY is NOT set here - it should be set via AWS Console to avoid being overwritten on CDK deploy
+        // Lambda Console: Configuration > Environment variables > Edit
+        // This way, CDK deployments won't overwrite the manually set value
+      },
+      timeout: cdk.Duration.minutes(15), // Lambda max timeout is 15 minutes
+      memorySize: 3008, // More memory for complex operations
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*', 'playwright', 'chromium-bidi', '@playwright/browser-chromium'],
+        commandHooks: {
+          beforeBundling(inputDir: string, outputDir: string): string[] {
+            return [];
+          },
+          beforeInstall(inputDir: string, outputDir: string): string[] {
+            return [];
+          },
+          afterBundling(inputDir: string, outputDir: string): string[] {
+            // Create a stub for playwright modules to prevent runtime errors
+            return [
+              `echo "module.exports = {};" > "${outputDir}/playwright-stub.js"`,
+            ];
+          },
+        },
+      },
+    });
+
+    // Grant permissions to orchestrator
+    runsTable.grantReadWriteData(orchestratorLambda);
+    podcastsTable.grantReadData(orchestratorLambda);
+    podcastConfigsTable.grantReadData(orchestratorLambda);
+    episodesTable.grantReadWriteData(orchestratorLambda);
+    mediaBucket.grantReadWrite(orchestratorLambda);
+    rssBucket.grantReadWrite(orchestratorLambda);
+    // Note: OPENAI_API_KEY should be set via AWS Console for security
+    // Or pass it during deploy: cdk deploy -c openaiApiKey=sk-...
+
+    // Create state machine that calls orchestrator Lambda
     const stateMachine = new sfn.StateMachine(this, 'PipelineStateMachine', {
       stateMachineName: 'podcast-pipeline',
-      definitionBody: sfn.DefinitionBody.fromFile('../../infra/stepfunctions/podcast_pipeline.asl.json'),
+      definitionBody: sfn.DefinitionBody.fromString(
+        JSON.stringify({
+          Comment: 'AI Podcast Generation Pipeline - Full Orchestrator',
+          StartAt: 'ExecutePipeline',
+          States: {
+            ExecutePipeline: {
+              Type: 'Task',
+              Resource: 'arn:aws:states:::lambda:invoke',
+              Parameters: {
+                'FunctionName': orchestratorLambda.functionArn,
+                'Payload.$': '$',
+              },
+              ResultPath: '$.pipelineOutput',
+              ResultSelector: {
+                'output.$': '$.Payload',
+              },
+              Retry: [
+                {
+                  ErrorEquals: ['States.TaskFailed', 'States.Timeout'],
+                  IntervalSeconds: 5,
+                  MaxAttempts: 1,
+                  BackoffRate: 2.0,
+                },
+              ],
+              Catch: [
+                {
+                  ErrorEquals: ['States.ALL'],
+                  ResultPath: '$.error',
+                  Next: 'HandleFailure',
+                },
+              ],
+              Next: 'Success',
+            },
+            Success: {
+              Type: 'Succeed',
+            },
+            HandleFailure: {
+              Type: 'Fail',
+              Error: 'PipelineExecutionFailed',
+              Cause: 'Pipeline execution failed',
+            },
+          },
+        })
+      ),
       timeout: cdk.Duration.hours(2),
       role: stateMachineRole,
     });
+
+    orchestratorLambda.grantInvoke(stateMachineRole);
 
     // Create Run Lambda (needs state machine ARN)
     const createRunLambda = new NodejsFunction(this, 'CreateRunLambda', {
@@ -618,6 +709,41 @@ export class PodcastPlatformStack extends cdk.Stack {
       path: '/podcasts/{id}/episodes',
       methods: [apigatewayv2.HttpMethod.GET],
       integration: listEpisodesIntegration,
+      authorizer: authorizer,
+    });
+
+    // Resume Run Lambda
+    const resumeRunLambda = new NodejsFunction(this, 'ResumeRunLambda', {
+      functionName: 'run-resume',
+      runtime: lambda.Runtime.NODEJS_18_X,
+      entry: '../../src/api/runs/resume.ts',
+      handler: 'handler',
+      environment: {
+        ...lambdaEnv,
+        STATE_MACHINE_ARN: stateMachine.stateMachineArn,
+      },
+      timeout: cdk.Duration.seconds(30),
+      bundling: {
+        minify: false,
+        sourceMap: true,
+        externalModules: ['@aws-sdk/*'],
+      },
+    });
+
+    runsTable.grantReadWriteData(resumeRunLambda);
+    podcastsTable.grantReadData(resumeRunLambda);
+    podcastConfigsTable.grantReadData(resumeRunLambda);
+    stateMachine.grantStartExecution(resumeRunLambda);
+
+    const resumeRunIntegration = new HttpLambdaIntegration(
+      'ResumeRunIntegration',
+      resumeRunLambda
+    );
+
+    httpApi.addRoutes({
+      path: '/podcasts/{id}/runs/{runId}/resume',
+      methods: [apigatewayv2.HttpMethod.POST],
+      integration: resumeRunIntegration,
       authorizer: authorizer,
     });
 

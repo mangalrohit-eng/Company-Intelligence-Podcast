@@ -72,7 +72,15 @@ Go to **"Advanced settings"** → **"Environment variables"** and add:
 | `NEXT_PUBLIC_COGNITO_USER_POOL_ID` | `us-east-1_lvLcARe2P` |
 | `NEXT_PUBLIC_COGNITO_CLIENT_ID` | `3lm7s5lml6i0va070cm1c3uafn` |
 | `NEXT_PUBLIC_AWS_REGION` | `us-east-1` |
+| `ACCOUNT_ID` | `098478926952` |
+| `REGION` | `us-east-1` |
+| `S3_BUCKET_MEDIA` | `podcast-platform-media-098478926952` |
 | `NEXT_DISABLE_ESLINT` | `true` |
+
+**Note**: 
+- Amplify doesn't allow environment variables starting with "AWS" prefix, so we use `ACCOUNT_ID` and `REGION` instead
+- Amplify uses IAM roles for S3 access, so you don't need to set `AWS_ACCESS_KEY_ID` or `AWS_SECRET_ACCESS_KEY`
+- The `ACCOUNT_ID` (or `S3_BUCKET_MEDIA`) is needed for the serve-file route to know which S3 bucket to read from
 
 ### Step 6: Deploy
 

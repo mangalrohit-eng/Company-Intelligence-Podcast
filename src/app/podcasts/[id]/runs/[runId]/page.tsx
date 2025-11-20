@@ -85,7 +85,7 @@ export default function RunProgressPage() {
   const fetchStageSummary = async (stageId: string) => {
     try {
       // Fetch the output JSON file directly
-      const response = await fetch(`/api/serve-file/episodes/${runId}/debug/${stageId}_output.json`);
+      const response = await fetch(`/api/serve-file/runs/${runId}/debug/${stageId}_output.json`);
       
       if (response.ok) {
         const data = await response.json();
@@ -461,7 +461,7 @@ export default function RunProgressPage() {
                             variant="ghost"
                             size="sm"
                             className="h-7 text-xs"
-                            onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_input.json`, '_blank')}
+                            onClick={() => window.open(`/api/serve-file/runs/${runId}/debug/${stage.id}_input.json`, '_blank')}
                           >
                             📥 Input JSON
                           </Button>
@@ -471,7 +471,7 @@ export default function RunProgressPage() {
                               variant="ghost"
                               size="sm"
                               className="h-7 text-xs"
-                              onClick={() => window.open(`/api/serve-file/episodes/${runId}/debug/${stage.id}_output.json`, '_blank')}
+                              onClick={() => window.open(`/api/serve-file/runs/${runId}/debug/${stage.id}_output.json`, '_blank')}
                             >
                               📤 Output JSON
                             </Button>
