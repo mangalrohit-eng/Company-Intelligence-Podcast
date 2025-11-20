@@ -25,11 +25,22 @@ function getS3Client(): S3Client {
     
     // Check for custom Amplify env vars first (non-AWS prefix)
     if (process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY) {
-      logger.info('Using custom Amplify credentials (AMPLIFY_ACCESS_KEY_ID)');
-      credentialsProvider = async () => ({
-        accessKeyId: process.env.AMPLIFY_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AMPLIFY_SECRET_ACCESS_KEY!,
+      logger.info('Using custom Amplify credentials (AMPLIFY_ACCESS_KEY_ID)', {
+        hasAccessKey: !!process.env.AMPLIFY_ACCESS_KEY_ID,
+        hasSecretKey: !!process.env.AMPLIFY_SECRET_ACCESS_KEY,
+        accessKeyPrefix: process.env.AMPLIFY_ACCESS_KEY_ID?.substring(0, 7),
       });
+      credentialsProvider = async () => {
+        const creds = {
+          accessKeyId: process.env.AMPLIFY_ACCESS_KEY_ID!,
+          secretAccessKey: process.env.AMPLIFY_SECRET_ACCESS_KEY!,
+        };
+        logger.debug('Amplify credentials provider called', {
+          hasAccessKey: !!creds.accessKeyId,
+          hasSecretKey: !!creds.secretAccessKey,
+        });
+        return creds;
+      };
     }
     // Check for standard AWS env vars (for Lambda/local dev)
     else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
