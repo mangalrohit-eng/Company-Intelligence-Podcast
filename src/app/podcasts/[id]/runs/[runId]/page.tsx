@@ -225,7 +225,8 @@ export default function RunProgressPage() {
       
       for (const stage of stages) {
         const stageProgress = run.progress.stages[stage.id];
-        if (stageProgress?.status === 'completed') {
+        // Fetch summaries for completed stages, and also try for running stages (may have partial output)
+        if (stageProgress?.status === 'completed' || stageProgress?.status === 'running') {
           const summary = await fetchStageSummary(stage.id);
           if (summary) {
             summaries[stage.id] = summary;
@@ -237,6 +238,15 @@ export default function RunProgressPage() {
     };
 
     fetchSummaries();
+    
+    // Poll for summaries while run is active (to catch updates as stages complete)
+    if (run.status === 'running') {
+      const interval = setInterval(() => {
+        fetchSummaries();
+      }, 5000); // Poll every 5 seconds
+      
+      return () => clearInterval(interval);
+    }
   }, [run, runId]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleResume = async (stageId: string) => {
