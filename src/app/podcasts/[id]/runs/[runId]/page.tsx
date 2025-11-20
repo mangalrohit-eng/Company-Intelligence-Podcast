@@ -102,32 +102,44 @@ export default function RunProgressPage() {
     try {
       switch (stageId) {
         case 'discover':
-          return outputData.items ? `${outputData.items.length} articles discovered` : null;
+          // Use stats.totalItemsFound if available (more accurate), otherwise fallback to items.length
+          if (outputData.stats?.totalItemsFound !== undefined) {
+            return `${outputData.stats.totalItemsFound.toLocaleString()} articles discovered`;
+          }
+          if (outputData.items) {
+            return `${outputData.items.length.toLocaleString()} articles discovered`;
+          }
+          return null;
         
         case 'disambiguate':
           if (outputData.items) {
             const passed = outputData.items.filter((i: any) => !i.blocked).length;
             const blocked = outputData.items.filter((i: any) => i.blocked).length;
-            return `${passed} passed, ${blocked} blocked`;
+            return `${passed.toLocaleString()} passed, ${blocked.toLocaleString()} blocked`;
           }
           return null;
         
         case 'rank':
-          if (outputData.rankedItems) {
-            return `${outputData.rankedItems.length} articles ranked`;
-          }
           if (outputData.topicQueues) {
             const total = Object.values(outputData.topicQueues).reduce((sum: number, items: any) => sum + (Array.isArray(items) ? items.length : 0), 0);
-            return `${total} articles ranked`;
+            return `${total.toLocaleString()} articles ranked`;
+          }
+          if (outputData.rankedItems) {
+            return `${outputData.rankedItems.length.toLocaleString()} articles ranked`;
           }
           return null;
         
         case 'scrape':
-          if (outputData.contents) {
-            return `${outputData.contents.length} articles scraped`;
-          }
           if (outputData.stats) {
-            return `${outputData.stats.successCount || 0} articles scraped`;
+            const success = outputData.stats.successCount || 0;
+            const failed = outputData.stats.failureCount || 0;
+            if (failed > 0) {
+              return `${success.toLocaleString()} scraped, ${failed.toLocaleString()} failed`;
+            }
+            return `${success.toLocaleString()} articles scraped`;
+          }
+          if (outputData.contents) {
+            return `${outputData.contents.length.toLocaleString()} articles scraped`;
           }
           return null;
         
@@ -138,10 +150,16 @@ export default function RunProgressPage() {
               return acc;
             }, {});
             const parts = [];
-            if (stats.stat) parts.push(`${stats.stat} facts`);
-            if (stats.quote) parts.push(`${stats.quote} quotes`);
-            if (stats.claim) parts.push(`${stats.claim} claims`);
-            return parts.length > 0 ? parts.join(', ') : `${outputData.units.length} evidence units`;
+            if (stats.stat) parts.push(`${stats.stat.toLocaleString()} facts`);
+            if (stats.quote) parts.push(`${stats.quote.toLocaleString()} quotes`);
+            if (stats.claim) parts.push(`${stats.claim.toLocaleString()} claims`);
+            if (parts.length > 0) {
+              return parts.join(', ');
+            }
+            return `${outputData.units.length.toLocaleString()} evidence units`;
+          }
+          if (outputData.stats?.totalUnits) {
+            return `${outputData.stats.totalUnits.toLocaleString()} evidence units`;
           }
           return null;
         
@@ -161,21 +179,35 @@ export default function RunProgressPage() {
           if (outputData.outline) {
             const sections = outputData.outline.sections?.length || 0;
             const themes = outputData.outline.subThemes?.length || 0;
-            return `${sections} sections, ${themes} themes`;
+            if (sections > 0 && themes > 0) {
+              return `${sections} sections, ${themes} themes`;
+            }
+            if (sections > 0) {
+              return `${sections} sections`;
+            }
           }
           return null;
         
         case 'script':
           if (outputData.script?.narrative) {
             const wordCount = outputData.script.narrative.split(/\s+/).filter((w: string) => w.length > 0).length;
-            return `${wordCount.toLocaleString()} words`;
+            // Estimate reading time: average 200 words per minute
+            const readingMinutes = Math.ceil(wordCount / 200);
+            return `${wordCount.toLocaleString()} words (~${readingMinutes} min read)`;
+          }
+          if (outputData.stats?.wordCount) {
+            const readingMinutes = Math.ceil(outputData.stats.wordCount / 200);
+            return `${outputData.stats.wordCount.toLocaleString()} words (~${readingMinutes} min read)`;
           }
           return null;
         
         case 'qa':
           if (outputData.script) {
-            const wordCount = outputData.script.split(/\s+/).filter((w: string) => w.length > 0).length;
-            return `${wordCount.toLocaleString()} words (QA'd)`;
+            const scriptText = typeof outputData.script === 'string' ? outputData.script : outputData.script.narrative || '';
+            if (scriptText) {
+              const wordCount = scriptText.split(/\s+/).filter((w: string) => w.length > 0).length;
+              return `${wordCount.toLocaleString()} words (QA verified)`;
+            }
           }
           return null;
         
@@ -183,6 +215,10 @@ export default function RunProgressPage() {
           if (outputData.durationSeconds) {
             const minutes = Math.floor(outputData.durationSeconds / 60);
             const seconds = Math.floor(outputData.durationSeconds % 60);
+            const fileSizeMB = outputData.audioSizeKB ? (outputData.audioSizeKB / 1024).toFixed(1) : null;
+            if (fileSizeMB) {
+              return `${minutes}m ${seconds}s audio (${fileSizeMB} MB)`;
+            }
             return `${minutes}m ${seconds}s audio`;
           }
           return null;
@@ -192,7 +228,11 @@ export default function RunProgressPage() {
           if (outputData.showNotesPath) files.push('show notes');
           if (outputData.transcriptTxtPath) files.push('transcript');
           if (outputData.transcriptVttPath) files.push('captions');
-          return files.length > 0 ? `${files.length} files generated` : null;
+          if (outputData.rssItem) files.push('RSS item');
+          if (files.length > 0) {
+            return `${files.length} file${files.length > 1 ? 's' : ''} generated`;
+          }
+          return null;
         
         default:
           return null;
