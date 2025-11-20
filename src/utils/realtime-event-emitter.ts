@@ -69,8 +69,9 @@ export class RealtimeEventEmitter implements IEventEmitter {
     logger.info(`[${stage}] ${message}`, { progress, level, ...metadata });
   }
 
-  markStageCompleted(stage: string): void {
-    this.callback({
+  async markStageCompleted(stage: string): Promise<void> {
+    // Await the callback to ensure the update completes before continuing
+    await this.callback({
       currentStage: stage,
       stageStatus: 'completed',
       stageCompletedAt: new Date().toISOString(),

@@ -160,7 +160,7 @@ async function updateRunStatus(
     if (updates.output) {
       // Merge with existing output to preserve any fields that were set earlier
       updatedRun.output = {
-        ...updatedRun.output,
+        ...(updatedRun.output || {}),
         ...updates.output,
       };
     }

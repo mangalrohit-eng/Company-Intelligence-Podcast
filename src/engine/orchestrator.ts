@@ -431,7 +431,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('discover');
+          await (emitter as any).markStageCompleted('discover');
         }
         
         logger.info('Saved discover debug output', { totalItems: discoverOutput.items.length });
@@ -1208,7 +1208,7 @@ export class PipelineOrchestrator {
         
         // Explicitly mark stage as completed in DynamoDB
         if ('markStageCompleted' in emitter && typeof emitter.markStageCompleted === 'function') {
-          (emitter as any).markStageCompleted('qa');
+          await (emitter as any).markStageCompleted('qa');
         }
       }
 
