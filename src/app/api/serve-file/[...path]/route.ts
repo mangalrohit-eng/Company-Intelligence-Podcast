@@ -89,6 +89,7 @@ export async function GET(
       // S3 not available - check why
       const s3Available = isS3Available();
       const hasAwsCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+      const hasAmplifyCreds = !!(process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY);
       const hasBucket = !!(process.env.S3_BUCKET_MEDIA || process.env.ACCOUNT_ID || process.env.AWS_ACCOUNT_ID);
       
       // Log all relevant environment variables for debugging
