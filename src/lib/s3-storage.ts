@@ -82,7 +82,10 @@ export function isS3Available(): boolean {
     process.env.AWS_REGION || // Any AWS service
     process.env.REGION || // Amplify uses REGION
     process.env.AWS_ACCOUNT_ID || // Any AWS service
-    process.env.ACCOUNT_ID // Amplify uses ACCOUNT_ID
+    process.env.ACCOUNT_ID || // Amplify uses ACCOUNT_ID
+    process.env.AMPLIFY_APP_ID || // Amplify-specific
+    process.env.AMPLIFY_BRANCH || // Amplify-specific
+    process.env.S3_BUCKET_MEDIA // If S3_BUCKET_MEDIA is set, we're likely in AWS
   ) {
     return true;
   }
