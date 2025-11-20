@@ -516,6 +516,8 @@ export class PodcastPlatformStack extends cdk.Stack {
     runsTable.grantReadWriteData(createRunLambda);
     podcastsTable.grantReadData(createRunLambda);
     podcastConfigsTable.grantReadData(createRunLambda);
+    podcastTopicsTable.grantReadData(createRunLambda);
+    podcastCompetitorsTable.grantReadData(createRunLambda);
     stateMachine.grantStartExecution(createRunLambda);
 
     // Get Run Lambda

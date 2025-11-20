@@ -648,7 +648,26 @@ export class PipelineOrchestrator {
           totalRankedItems: allRankedItems.length,
         };
         await writeDebugFile('scrape_input.json', scrapeInput);
-        logger.info('Saved scrape input', { itemCount: limitedRankedItems.length, articleLimit });
+        logger.info('Saved scrape input', { 
+          itemCount: limitedRankedItems.length, 
+          articleLimit,
+          sampleItem: limitedRankedItems[0] ? {
+            url: limitedRankedItems[0].url,
+            title: limitedRankedItems[0].title,
+            hasSnippet: !!limitedRankedItems[0].snippet,
+            hasScores: !!limitedRankedItems[0].scores,
+            topicIds: limitedRankedItems[0].topicIds,
+            entityIds: limitedRankedItems[0].entityIds,
+          } : null,
+        });
+        
+        // Validate that limitedRankedItems is properly structured
+        if (!Array.isArray(limitedRankedItems)) {
+          throw new Error(`limitedRankedItems is not an array: ${typeof limitedRankedItems}`);
+        }
+        if (limitedRankedItems.length > 0 && !limitedRankedItems[0].url) {
+          throw new Error(`First ranked item is missing url field: ${JSON.stringify(limitedRankedItems[0])}`);
+        }
         
         scrapeOutput = await stage.execute(
           limitedRankedItems,

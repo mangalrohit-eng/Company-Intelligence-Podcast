@@ -5,7 +5,7 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 import { SFNClient, StartExecutionCommand } from '@aws-sdk/client-sfn';
 import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
-import { DynamoDBDocumentClient, GetCommand, PutCommand } from '@aws-sdk/lib-dynamodb';
+import { DynamoDBDocumentClient, GetCommand, PutCommand, QueryCommand } from '@aws-sdk/lib-dynamodb';
 import { v4 as uuidv4 } from 'uuid';
 import { logger } from '@/utils/logger';
 import { badRequestResponse, notFoundResponse, acceptedResponse, serverErrorResponse, forbiddenResponse } from '@/utils/api-response';
@@ -78,6 +78,61 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
       return serverErrorResponse('Podcast configuration not found');
     }
 
+    // Fetch topics for this config version
+    const topicsResult = await docClient.send(
+      new QueryCommand({
+        TableName: process.env.PODCAST_TOPICS_TABLE!,
+        KeyConditionExpression: 'podcastId = :pid',
+        FilterExpression: '#version = :version',
+        ExpressionAttributeNames: {
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':pid': podcastId,
+          ':version': podcast.currentConfigVersion,
+        },
+      })
+    );
+
+    // Fetch competitors for this config version
+    const competitorsResult = await docClient.send(
+      new QueryCommand({
+        TableName: process.env.PODCAST_COMPETITORS_TABLE!,
+        KeyConditionExpression: 'podcastId = :pid',
+        FilterExpression: '#version = :version',
+        ExpressionAttributeNames: {
+          '#version': 'version',
+        },
+        ExpressionAttributeValues: {
+          ':pid': podcastId,
+          ':version': podcast.currentConfigVersion,
+        },
+      })
+    );
+
+    // Group topics by type
+    const standardTopics = (topicsResult.Items || [])
+      .filter((t: any) => t.type === 'standard')
+      .map((t: any) => ({
+        id: t.topicId,
+        name: t.topicName || t.topicId,
+        priorityWeight: t.priorityWeight || 1,
+      }));
+    
+    const specialTopics = (topicsResult.Items || [])
+      .filter((t: any) => t.type === 'special')
+      .map((t: any) => ({
+        id: t.topicId,
+        name: t.topicName || t.topicId,
+        priorityWeight: t.priorityWeight || 1,
+      }));
+
+    // Map competitors
+    const competitors = (competitorsResult.Items || []).map((c: any) => ({
+      id: c.companyId,
+      name: c.companyName || c.companyId,
+    }));
+
     // Parse flags from request
     const body = event.body ? JSON.parse(event.body) : {};
     const flags = body.flags || {};
@@ -139,10 +194,16 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         explicit: podcast.explicit,
         language: podcast.language,
         coverArtS3Key: podcast.coverArtS3Key,
-        company: { id: config.companyId, name: config.companyId }, // TODO: resolve names
-        industry: { id: config.industryId, name: config.industryId },
-        competitors: [], // TODO: fetch from competitors table
-        topics: { standard: [], special: [] }, // TODO: fetch from topics table
+        company: { 
+          id: config.companyId, 
+          name: config.companyName || config.companyId // Use companyName if available, fallback to ID
+        },
+        industry: { 
+          id: config.industryId, 
+          name: config.industryName || config.industryId // Use industryName if available, fallback to ID
+        },
+        competitors,
+        topics: { standard: standardTopics, special: specialTopics },
         cadence: config.cadence,
         durationMinutes: config.durationMinutes,
         publishTime: config.publishTime,
