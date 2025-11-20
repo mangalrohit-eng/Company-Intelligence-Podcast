@@ -118,12 +118,22 @@ export async function GET(
     console.log(`✅ Serving ${relativePath} (${Math.round(fileBuffer.length/1024)}KB, ${contentType})`);
 
     // Convert Buffer to Uint8Array for NextResponse
+    const headers: Record<string, string> = {
+      'Content-Type': contentType,
+      'Content-Length': fileBuffer.length.toString(),
+      'Cache-Control': 'public, max-age=3600',
+    };
+
+    // Add CORS headers for audio files to allow cross-origin requests
+    if (contentType.startsWith('audio/')) {
+      headers['Access-Control-Allow-Origin'] = '*';
+      headers['Access-Control-Allow-Methods'] = 'GET, HEAD, OPTIONS';
+      headers['Access-Control-Allow-Headers'] = 'Range';
+      headers['Accept-Ranges'] = 'bytes';
+    }
+
     return new NextResponse(new Uint8Array(fileBuffer), {
-      headers: {
-        'Content-Type': contentType,
-        'Content-Length': fileBuffer.length.toString(),
-        'Cache-Control': 'public, max-age=3600',
-      },
+      headers,
     });
   } catch (error: any) {
     console.error('Failed to serve file:', error);

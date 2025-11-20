@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { ArrowLeft, CheckCircle2, Circle, Loader2, XCircle, Download, Play, RotateCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -517,10 +517,7 @@ export default function RunProgressPage() {
                   {run.output?.audioPath && (
                     <div>
                       <p className="text-sm text-muted mb-2">Audio Player:</p>
-                      <audio controls className="w-full">
-                        <source src={audioPath} type="audio/mpeg" />
-                        Your browser does not support the audio element.
-                      </audio>
+                      <AudioPlayerWithDuration src={audioPath} />
                     </div>
                   )}
                   
@@ -572,6 +569,89 @@ export default function RunProgressPage() {
         </div>
       </div>
     </ProtectedRoute>
+  );
+}
+
+// Audio Player component that properly handles duration loading
+function AudioPlayerWithDuration({ src }: { src: string }) {
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [duration, setDuration] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleLoadedMetadata = () => {
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+        setIsLoading(false);
+      }
+    };
+
+    const handleCanPlay = () => {
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+        setIsLoading(false);
+      }
+    };
+
+    const handleError = (e: any) => {
+      console.error('Audio loading error:', e);
+      setIsLoading(false);
+    };
+
+    // Set up event listeners
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('error', handleError);
+
+    // Force load metadata
+    audio.load();
+
+    // Check if duration is already available
+    if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+      setDuration(audio.duration);
+      setIsLoading(false);
+    }
+
+    return () => {
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('error', handleError);
+    };
+  }, [src]);
+
+  const formatDuration = (seconds: number | null) => {
+    if (!seconds || seconds === 0) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <div className="space-y-2">
+      <audio 
+        ref={audioRef}
+        controls 
+        className="w-full"
+        preload="metadata"
+        crossOrigin="anonymous"
+      >
+        <source src={src} type="audio/mpeg" />
+        Your browser does not support the audio element.
+      </audio>
+      {duration !== null && duration > 0 && (
+        <p className="text-xs text-muted-foreground">
+          Duration: {formatDuration(duration)}
+        </p>
+      )}
+      {isLoading && duration === null && (
+        <p className="text-xs text-muted-foreground">
+          Loading audio metadata...
+        </p>
+      )}
+    </div>
   );
 }
 
