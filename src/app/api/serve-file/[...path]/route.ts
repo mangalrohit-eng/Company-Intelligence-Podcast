@@ -91,7 +91,8 @@ export async function GET(
       const hasAwsCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
       const hasBucket = !!(process.env.S3_BUCKET_MEDIA || process.env.ACCOUNT_ID || process.env.AWS_ACCOUNT_ID);
       
-      console.error(`❌ File not found: ${filePath} (S3 not available)`, {
+      // Log all relevant environment variables for debugging
+      const envDebug = {
         s3Available,
         hasAwsCreds,
         hasBucket,
@@ -100,7 +101,27 @@ export async function GET(
         s3BucketMedia: process.env.S3_BUCKET_MEDIA,
         region: process.env.REGION,
         awsRegion: process.env.AWS_REGION,
-      });
+        awsExecutionEnv: process.env.AWS_EXECUTION_ENV,
+        awsLambdaFunctionName: process.env.AWS_LAMBDA_FUNCTION_NAME,
+        // Check for Amplify-specific env vars
+        amplifyAppId: process.env.AMPLIFY_APP_ID,
+        amplifyBranchName: process.env.AMPLIFY_BRANCH,
+        // List all env vars that contain 'ACCOUNT', 'BUCKET', 'S3', or 'REGION' (for debugging)
+        relevantEnvVars: Object.keys(process.env)
+          .filter(key => 
+            key.includes('ACCOUNT') || 
+            key.includes('BUCKET') || 
+            key.includes('S3') || 
+            key.includes('REGION') ||
+            key.includes('AWS')
+          )
+          .reduce((acc, key) => {
+            acc[key] = process.env[key] ? 'SET' : 'NOT SET';
+            return acc;
+          }, {} as Record<string, string>),
+      };
+      
+      console.error(`❌ File not found: ${filePath} (S3 not available)`, envDebug);
       
       return NextResponse.json(
         { 
@@ -109,7 +130,8 @@ export async function GET(
           s3Available,
           hasAwsCreds,
           hasBucket,
-          message: 'S3 storage is not configured. Please set AWS_ACCOUNT_ID or S3_BUCKET_MEDIA environment variable.'
+          envDebug, // Include debug info in response
+          message: 'S3 storage is not configured. Please set ACCOUNT_ID or S3_BUCKET_MEDIA environment variable in Amplify.'
         },
         { status: 404 }
       );
