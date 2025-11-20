@@ -16,8 +16,10 @@ const RUNS_TABLE = 'runs';
 // Initialize DynamoDB client
 const getDynamoClient = () => {
   try {
+    // Use REGION (non-AWS prefix) for Amplify compatibility, fallback to AWS_REGION for Lambda
+    const region = process.env.REGION || process.env.AWS_REGION || 'us-east-1';
     const client = new DynamoDBClient({
-      region: process.env.AWS_REGION || 'us-east-1',
+      region,
     });
     return DynamoDBDocumentClient.from(client);
   } catch (error) {
@@ -75,11 +77,22 @@ async function saveRunsToDisk(runs: Record<string, PersistedRun[]>): Promise<voi
 
 /**
  * Save a single run to DynamoDB (or disk fallback)
+ * Works with explicit AWS credentials or IAM roles (Amplify, Lambda, ECS)
  */
 export async function saveRun(run: PersistedRun): Promise<void> {
-  // Require AWS credentials - no local fallback
-  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-    throw new Error('AWS credentials required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env file. All runs must be stored in DynamoDB.');
+  // Check if we have explicit credentials OR are in an AWS environment (IAM roles)
+  const hasExplicitCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+  const isAwsEnvironment = !!(
+    process.env.AWS_REGION ||
+    process.env.REGION || // Amplify uses REGION
+    process.env.AWS_LAMBDA_FUNCTION_NAME ||
+    process.env.ECS_CONTAINER_METADATA_URI ||
+    process.env.AWS_EXECUTION_ENV ||
+    process.env.ACCOUNT_ID // Amplify uses ACCOUNT_ID
+  );
+
+  if (!hasExplicitCreds && !isAwsEnvironment) {
+    throw new Error('AWS credentials or IAM role required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, or ensure you are running in an AWS environment with IAM roles.');
   }
 
   const docClient = getDynamoClient();
@@ -130,12 +143,22 @@ async function saveRunToDisk(run: PersistedRun): Promise<void> {
 
 /**
  * Get runs for a specific podcast from DynamoDB only
- * Requires AWS credentials
+ * Works with explicit AWS credentials or IAM roles (Amplify, Lambda, ECS)
  */
 export async function getRunsForPodcast(podcastId: string): Promise<PersistedRun[]> {
-  // Require AWS credentials - no local fallback
-  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
-    throw new Error('AWS credentials required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env file. All runs must be stored in DynamoDB.');
+  // Check if we have explicit credentials OR are in an AWS environment (IAM roles)
+  const hasExplicitCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+  const isAwsEnvironment = !!(
+    process.env.AWS_REGION ||
+    process.env.REGION || // Amplify uses REGION
+    process.env.AWS_LAMBDA_FUNCTION_NAME ||
+    process.env.ECS_CONTAINER_METADATA_URI ||
+    process.env.AWS_EXECUTION_ENV ||
+    process.env.ACCOUNT_ID // Amplify uses ACCOUNT_ID
+  );
+
+  if (!hasExplicitCreds && !isAwsEnvironment) {
+    throw new Error('AWS credentials or IAM role required. Please set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY, or ensure you are running in an AWS environment with IAM roles.');
   }
 
   const docClient = getDynamoClient();
