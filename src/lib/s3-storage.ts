@@ -4,6 +4,7 @@
  */
 
 import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { logger } from '@/utils/logger';
 
 let s3Client: S3Client | null = null;
@@ -12,8 +13,16 @@ function getS3Client(): S3Client {
   if (!s3Client) {
     // Use REGION (non-AWS prefix) for Amplify compatibility, fallback to AWS_REGION for Lambda
     const region = process.env.REGION || process.env.AWS_REGION || 'us-east-1';
+    
+    // Configure S3 client to use default credential chain
+    // Explicitly use defaultProvider to ensure IAM roles work in Amplify
+    // This will automatically use:
+    // 1. Explicit credentials (AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY) if set
+    // 2. IAM roles (when running on AWS services like Amplify, Lambda, EC2)
+    // 3. AWS CLI credentials (for local development)
     s3Client = new S3Client({
       region,
+      credentials: defaultProvider(),
     });
   }
   return s3Client;
