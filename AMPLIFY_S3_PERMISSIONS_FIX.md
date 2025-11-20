@@ -4,7 +4,7 @@
 
 Amplify's Next.js API routes are getting the error: `"Could not load credentials from any providers"` when trying to access S3.
 
-This means Amplify's service role doesn't have S3 permissions.
+**Important:** Amplify's Next.js API routes may not automatically use the service role. They might need explicit AWS credentials via environment variables.
 
 ## Solution: Add S3 Permissions to Amplify Service Role
 
