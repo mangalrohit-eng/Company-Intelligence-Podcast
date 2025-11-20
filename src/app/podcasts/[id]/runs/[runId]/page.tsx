@@ -85,15 +85,24 @@ export default function RunProgressPage() {
   const fetchStageSummary = async (stageId: string) => {
     try {
       // Fetch the output JSON file directly
-      const response = await fetch(`/api/serve-file/runs/${runId}/debug/${stageId}_output.json`);
+      const url = `/api/serve-file/runs/${runId}/debug/${stageId}_output.json`;
+      const response = await fetch(url);
       
       if (response.ok) {
         const data = await response.json();
-        return getStageSummary(stageId, data);
+        const summary = getStageSummary(stageId, data);
+        if (summary) {
+          console.log(`✅ Stage summary for ${stageId}:`, summary);
+        }
+        return summary;
+      } else {
+        // Log non-OK responses for debugging
+        const errorText = await response.text();
+        console.warn(`⚠️ Failed to fetch stage summary for ${stageId}:`, response.status, errorText.substring(0, 100));
       }
-    } catch (error) {
-      // Output JSON might not exist yet
-      return null;
+    } catch (error: any) {
+      // Output JSON might not exist yet - this is normal for stages that haven't completed
+      console.debug(`Stage summary not available for ${stageId}:`, error.message);
     }
     return null;
   };
@@ -280,7 +289,7 @@ export default function RunProgressPage() {
     fetchSummaries();
     
     // Poll for summaries while run is active (to catch updates as stages complete)
-    if (run.status === 'running') {
+    if (run.status === 'running' || run.status === 'pending') {
       const interval = setInterval(() => {
         fetchSummaries();
       }, 5000); // Poll every 5 seconds

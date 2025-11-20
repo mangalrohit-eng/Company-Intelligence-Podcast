@@ -283,27 +283,42 @@ export const handler = async (event: any): Promise<any> => {
     const result = await orchestrator.execute(pipelineInput, emitter);
 
     // Update run to completed with all artifacts
+    const now = new Date().toISOString();
+    const audioS3Key = result.artifacts?.mp3S3Key;
+    
+    // Construct audioPath correctly - mp3S3Key is like "runs/{runId}/audio.mp3"
+    let audioPath: string | undefined;
+    if (audioS3Key) {
+      // audioS3Key is already in format "runs/{runId}/audio.mp3", so use it directly
+      audioPath = `/api/serve-file/${audioS3Key}`;
+    }
+    
+    logger.info('Updating run to completed', { 
+      runId, 
+      hasAudioS3Key: !!audioS3Key,
+      audioS3Key,
+      audioPath,
+      hasArtifacts: !!result.artifacts,
+    });
+    
     await updateRunStatus(runId, {
       status: 'completed',
       currentStage: 'package',
       stageStatus: 'completed',
-      stageCompletedAt: new Date().toISOString(),
+      stageCompletedAt: now,
       // Store audio URL and other artifacts for frontend
       output: {
-        audioS3Key: result.artifacts?.mp3S3Key,
-        audioUrl: result.artifacts?.mp3S3Key 
-          ? `https://${process.env.S3_BUCKET_MEDIA || 'podcast-platform-media-' + process.env.AWS_ACCOUNT_ID}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${result.artifacts.mp3S3Key}`
-          : undefined,
-        audioPath: result.artifacts?.mp3S3Key 
-          ? `/api/serve-file/${result.artifacts.mp3S3Key}`
-          : undefined,
+        audioS3Key: audioS3Key,
+        audioPath: audioPath,
         showNotesPath: result.artifacts?.showNotesPath,
         transcriptVttPath: result.artifacts?.transcriptVttPath,
         transcriptTxtPath: result.artifacts?.transcriptTxtPath,
         sourcesJsonPath: result.artifacts?.sourcesJsonPath,
       },
-      finishedAt: new Date().toISOString(),
+      finishedAt: now,
     });
+    
+    logger.info('Run status updated to completed', { runId, audioPath });
 
     logger.info('Pipeline orchestrator completed', { runId, podcastId });
 
