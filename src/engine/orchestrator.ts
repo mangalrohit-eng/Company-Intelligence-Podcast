@@ -1144,8 +1144,30 @@ export class PipelineOrchestrator {
       if (input.flags.enable.qa && scriptOutput && extractOutput) {
         const stage = new QAStage(llmGateway);
         const stageStart = Date.now();
-        const timeWindowStart = new Date(input.config.timeWindow.startIso);
-        const timeWindowEnd = new Date(input.config.timeWindow.endIso);
+        
+        // Calculate time window from timeWindowHours if timeWindow object doesn't exist
+        let timeWindowStart: Date;
+        let timeWindowEnd: Date;
+        
+        if (input.config.timeWindow?.startIso && input.config.timeWindow?.endIso) {
+          // Use existing timeWindow if available
+          timeWindowStart = new Date(input.config.timeWindow.startIso);
+          timeWindowEnd = new Date(input.config.timeWindow.endIso);
+        } else if (input.config.timeWindowHours) {
+          // Calculate from timeWindowHours (hours before now)
+          timeWindowEnd = new Date();
+          timeWindowStart = new Date(timeWindowEnd.getTime() - (input.config.timeWindowHours * 60 * 60 * 1000));
+          logger.info('Calculated time window from timeWindowHours', {
+            timeWindowHours: input.config.timeWindowHours,
+            start: timeWindowStart.toISOString(),
+            end: timeWindowEnd.toISOString(),
+          });
+        } else {
+          // Default to last 24 hours
+          timeWindowEnd = new Date();
+          timeWindowStart = new Date(timeWindowEnd.getTime() - (24 * 60 * 60 * 1000));
+          logger.warn('No timeWindow or timeWindowHours found, defaulting to last 24 hours');
+        }
         
         // Save input BEFORE execution
         const qaInput = {
