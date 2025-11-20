@@ -78,6 +78,8 @@ async function updateRunStatus(
     stageStartedAt?: string;
     stageCompletedAt?: string;
     error?: string;
+    output?: any;
+    finishedAt?: string;
   }
 ): Promise<void> {
   const docClient = getDocClient();
@@ -153,6 +155,14 @@ async function updateRunStatus(
 
     if (updates.error) {
       updatedRun.error = updates.error;
+    }
+
+    if (updates.output) {
+      updatedRun.output = updates.output;
+    }
+
+    if (updates.finishedAt) {
+      updatedRun.finishedAt = updates.finishedAt;
     }
 
     // Use PutCommand to update the entire item (simpler than complex UpdateExpression)
@@ -272,12 +282,27 @@ export const handler = async (event: any): Promise<any> => {
     const orchestrator = new PipelineOrchestrator();
     const result = await orchestrator.execute(pipelineInput, emitter);
 
-    // Update run to completed
+    // Update run to completed with all artifacts
     await updateRunStatus(runId, {
       status: 'completed',
       currentStage: 'package',
       stageStatus: 'completed',
       stageCompletedAt: new Date().toISOString(),
+      // Store audio URL and other artifacts for frontend
+      output: {
+        audioS3Key: result.artifacts?.mp3S3Key,
+        audioUrl: result.artifacts?.mp3S3Key 
+          ? `https://${process.env.S3_BUCKET_MEDIA || 'podcast-platform-media-' + process.env.AWS_ACCOUNT_ID}.s3.${process.env.AWS_REGION || 'us-east-1'}.amazonaws.com/${result.artifacts.mp3S3Key}`
+          : undefined,
+        audioPath: result.artifacts?.mp3S3Key 
+          ? `/api/serve-file/${result.artifacts.mp3S3Key}`
+          : undefined,
+        showNotesPath: result.artifacts?.showNotesPath,
+        transcriptVttPath: result.artifacts?.transcriptVttPath,
+        transcriptTxtPath: result.artifacts?.transcriptTxtPath,
+        sourcesJsonPath: result.artifacts?.sourcesJsonPath,
+      },
+      finishedAt: new Date().toISOString(),
     });
 
     logger.info('Pipeline orchestrator completed', { runId, podcastId });
