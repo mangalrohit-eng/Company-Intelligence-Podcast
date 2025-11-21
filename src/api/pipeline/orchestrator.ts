@@ -69,6 +69,63 @@ async function getOpenAiApiKey(): Promise<string> {
   throw new Error('OPENAI_API_KEY environment variable must be set and not empty');
 }
 
+async function createEpisodeRecord(episode: {
+  episodeId: string;
+  podcastId: string;
+  runId: string;
+  title: string;
+  description: string;
+  pubDate: string;
+  durationSeconds: number;
+  mp3S3Key: string;
+  transcriptS3Key: string;
+  showNotesS3Key: string;
+  sourcesS3Key: string;
+}): Promise<void> {
+  if (!process.env.EPISODES_TABLE) {
+    logger.warn('EPISODES_TABLE not set, skipping episode creation');
+    return;
+  }
+  
+  const docClient = getDocClient();
+  const now = new Date().toISOString();
+  
+  // Get episode number by counting existing episodes for this podcast
+  // We'll use a simple approach: query episodes and count them
+  // For now, we'll use a timestamp-based episode number
+  const episodeNumber = Math.floor(Date.now() / 1000);
+  
+  const episodeRecord = {
+    id: episode.episodeId,
+    podcastId: episode.podcastId,
+    runId: episode.runId,
+    title: episode.title,
+    description: episode.description,
+    pubDate: episode.pubDate,
+    durationSeconds: episode.durationSeconds,
+    mp3S3Key: episode.mp3S3Key,
+    transcriptS3Key: episode.transcriptS3Key,
+    showNotesS3Key: episode.showNotesS3Key,
+    sourcesS3Key: episode.sourcesS3Key,
+    guid: `episode-${episode.episodeId}`,
+    episodeNumber: episodeNumber,
+    createdAt: now,
+    updatedAt: now,
+  };
+  
+  await docClient.send(
+    new PutCommand({
+      TableName: process.env.EPISODES_TABLE,
+      Item: episodeRecord,
+    })
+  );
+  
+  logger.info('Episode record created in DynamoDB', { 
+    episodeId: episode.episodeId, 
+    podcastId: episode.podcastId 
+  });
+}
+
 async function updateRunStatus(
   runId: string,
   updates: {
@@ -185,7 +242,7 @@ async function updateRunStatus(
 export const handler = async (event: any): Promise<any> => {
   try {
     // Validate required environment variables (excluding OPENAI_API_KEY - we'll get it from Secrets Manager)
-    validateEnvironment(['RUNS_TABLE', 'PODCASTS_TABLE', 'PODCAST_CONFIGS_TABLE', 'MEDIA_BUCKET', 'RSS_BUCKET']);
+    validateEnvironment(['RUNS_TABLE', 'PODCASTS_TABLE', 'PODCAST_CONFIGS_TABLE', 'MEDIA_BUCKET', 'RSS_BUCKET', 'EPISODES_TABLE']);
     
     // Get OpenAI API key from Secrets Manager or environment
     const openaiApiKey = await getOpenAiApiKey();
