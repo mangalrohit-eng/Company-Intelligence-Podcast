@@ -639,16 +639,39 @@ function AudioPlayerWithDuration({ src }: { src: string }) {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !src) return;
+
+    // Reset state when src changes
+    setDuration(null);
+    setIsLoading(true);
 
     const handleLoadedMetadata = () => {
+      console.log('Audio metadata loaded', { 
+        duration: audio.duration, 
+        readyState: audio.readyState,
+        src: audio.src 
+      });
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+        setIsLoading(false);
+      } else {
+        console.warn('Audio duration is invalid', { duration: audio.duration });
+      }
+    };
+
+    const handleCanPlay = () => {
+      console.log('Audio can play', { 
+        duration: audio.duration, 
+        readyState: audio.readyState 
+      });
       if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
         setDuration(audio.duration);
         setIsLoading(false);
       }
     };
 
-    const handleCanPlay = () => {
+    const handleLoadedData = () => {
+      console.log('Audio data loaded', { duration: audio.duration });
       if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
         setDuration(audio.duration);
         setIsLoading(false);
@@ -656,27 +679,46 @@ function AudioPlayerWithDuration({ src }: { src: string }) {
     };
 
     const handleError = (e: any) => {
-      console.error('Audio loading error:', e);
+      console.error('Audio loading error:', {
+        error: e,
+        errorCode: audio.error?.code,
+        errorMessage: audio.error?.message,
+        src: audio.src,
+        networkState: audio.networkState,
+      });
       setIsLoading(false);
     };
 
     // Set up event listeners
     audio.addEventListener('loadedmetadata', handleLoadedMetadata);
     audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('loadeddata', handleLoadedData);
     audio.addEventListener('error', handleError);
 
-    // Force load metadata
+    // Set src and force load metadata
+    audio.src = src;
     audio.load();
 
-    // Check if duration is already available
-    if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
-      setDuration(audio.duration);
-      setIsLoading(false);
-    }
+    // Check if duration is already available after a short delay
+    const checkDuration = setTimeout(() => {
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+        setIsLoading(false);
+      } else if (audio.readyState >= 2) {
+        // If metadata is loaded but duration is still 0, there might be an issue
+        console.warn('Audio metadata loaded but duration is 0', {
+          duration: audio.duration,
+          readyState: audio.readyState,
+          src: audio.src,
+        });
+      }
+    }, 1000);
 
     return () => {
+      clearTimeout(checkDuration);
       audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
       audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('loadeddata', handleLoadedData);
       audio.removeEventListener('error', handleError);
     };
   }, [src]);
