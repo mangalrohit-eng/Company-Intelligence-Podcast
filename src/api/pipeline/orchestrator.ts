@@ -388,20 +388,24 @@ export const handler = async (event: any): Promise<any> => {
     
     // Create episode record in episodes table
     try {
+      // Extract episode title from run output or use default
+      const episodeTitle = result.artifacts?.episodeTitle || 
+                          `Episode ${new Date(now).toLocaleDateString()}`;
+      
       await createEpisodeRecord({
         episodeId,
         podcastId,
         runId,
-        title: result.episode?.title || `Episode ${now}`,
-        description: result.episode?.description || '',
+        title: episodeTitle,
+        description: '', // Description can be added later if needed
         pubDate: now,
-        durationSeconds: result.artifacts?.durationSeconds || 0,
+        durationSeconds: result.telemetry?.durationSeconds || 0,
         mp3S3Key: audioS3Key || '',
         transcriptS3Key: result.artifacts?.transcriptTxtPath || '',
         showNotesS3Key: result.artifacts?.showNotesPath || '',
         sourcesS3Key: result.artifacts?.sourcesJsonPath || '',
       });
-      logger.info('Episode record created', { episodeId, podcastId });
+      logger.info('Episode record created', { episodeId, podcastId, title: episodeTitle });
     } catch (episodeError: any) {
       // Don't fail the run if episode creation fails - log and continue
       logger.error('Failed to create episode record', { 
