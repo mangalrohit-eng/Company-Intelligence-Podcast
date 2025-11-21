@@ -212,10 +212,28 @@ export async function readFromS3(key: string): Promise<Buffer> {
     logger.info('File read from S3', { bucket, key, size: buffer.length });
     return buffer;
   } catch (error: any) {
-    if (error.name === 'NoSuchKey' || error.$metadata?.httpStatusCode === 404) {
-      throw new Error('File not found');
+    logger.error('Failed to read file from S3', { 
+      bucket, 
+      key, 
+      errorName: error.name,
+      errorCode: error.Code,
+      errorMessage: error.message,
+      httpStatusCode: error.$metadata?.httpStatusCode,
+      requestId: error.$metadata?.requestId,
+      error 
+    });
+    
+    if (error.name === 'NoSuchKey' || error.Code === 'NoSuchKey' || error.$metadata?.httpStatusCode === 404) {
+      const notFoundError: any = new Error('File not found');
+      notFoundError.code = 'NoSuchKey';
+      notFoundError.s3Key = key;
+      notFoundError.bucket = bucket;
+      throw notFoundError;
     }
-    logger.error('Failed to read file from S3', { bucket, key, error });
+    
+    // For other errors, preserve the original error but add context
+    error.s3Key = key;
+    error.bucket = bucket;
     throw error;
   }
 }

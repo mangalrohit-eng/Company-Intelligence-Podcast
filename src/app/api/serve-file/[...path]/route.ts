@@ -131,19 +131,35 @@ export async function GET(
             }, {} as Record<string, string>),
         };
         
-        console.error(`❌ Not found in S3: ${s3Error.message}`, {
+        // Extract more detailed error information
+        const errorDetails = {
+          message: s3Error.message || 'Unknown error',
+          name: s3Error.name || s3Error.constructor?.name || 'Unknown',
+          code: s3Error.code || s3Error.Code || 'Unknown',
+          httpStatusCode: s3Error.$metadata?.httpStatusCode,
+          requestId: s3Error.$metadata?.requestId,
+          s3Key: s3Error.s3Key || (relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath),
+          bucket: s3Error.bucket || process.env.S3_BUCKET_MEDIA || 'NOT SET',
+        };
+        
+        console.error(`❌ S3 error: ${s3Error.message}`, {
           originalPath: relativePath,
-          s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
-          errorType: s3Error.constructor?.name,
+          s3Key: errorDetails.s3Key,
+          errorType: errorDetails.name,
+          errorCode: errorDetails.code,
+          httpStatusCode: errorDetails.httpStatusCode,
           errorStack: s3Error.stack,
           envDebug,
+          errorDetails,
         });
+        
         return NextResponse.json(
           { 
             error: 'File not found', 
             path: relativePath,
-            s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
-            details: s3Error.message,
+            s3Key: errorDetails.s3Key,
+            details: errorDetails.message,
+            errorDetails, // Include detailed error info
             envDebug, // Include debug info in error response
           },
           { status: 404 }
