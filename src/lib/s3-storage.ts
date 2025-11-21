@@ -243,6 +243,32 @@ export async function readFromS3(key: string): Promise<Buffer> {
 }
 
 /**
+ * Generate a presigned URL for reading from S3 (for large files like audio)
+ * Returns a URL that expires in the specified number of seconds (default 1 hour)
+ */
+export async function getPresignedReadUrl(key: string, expiresIn: number = 3600): Promise<string> {
+  const bucket = getMediaBucket();
+  if (!bucket) {
+    throw new Error('S3 bucket not configured');
+  }
+
+  try {
+    const client = getS3Client();
+    const command = new GetObjectCommand({
+      Bucket: bucket,
+      Key: key,
+    });
+    
+    const url = await getSignedUrl(client, command, { expiresIn });
+    logger.info('Generated presigned URL', { bucket, key, expiresIn });
+    return url;
+  } catch (error: any) {
+    logger.error('Failed to generate presigned URL', { bucket, key, error });
+    throw error;
+  }
+}
+
+/**
  * Get S3 key for a debug file
  */
 export function getDebugFileKey(runId: string, filename: string): string {
