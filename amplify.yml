@@ -8,12 +8,29 @@ frontend:
         # This ensures variables are available at runtime for Next.js API routes
         - |
           echo "Creating .env.production file for runtime access..."
+          echo "=== Debug: Checking environment variables ==="
+          echo "AMPLIFY_ACCESS_KEY_ID length: ${#AMPLIFY_ACCESS_KEY_ID}"
+          echo "AMPLIFY_SECRET_ACCESS_KEY length: ${#AMPLIFY_SECRET_ACCESS_KEY}"
+          echo "All env vars containing 'AMPLIFY':"
+          env | grep -i amplify || echo "No AMPLIFY variables found in environment"
+          echo "All env vars containing 'ACCESS':"
+          env | grep -i access || echo "No ACCESS variables found"
+          echo "=============================================="
           # Remove existing file if any
           rm -f .env.production
           # Create new file with all required variables
+          # Try to get the value, even if it seems empty
           {
-            [ -n "$AMPLIFY_ACCESS_KEY_ID" ] && echo "AMPLIFY_ACCESS_KEY_ID=$AMPLIFY_ACCESS_KEY_ID" || echo "# AMPLIFY_ACCESS_KEY_ID not set"
-            [ -n "$AMPLIFY_SECRET_ACCESS_KEY" ] && echo "AMPLIFY_SECRET_ACCESS_KEY=$AMPLIFY_SECRET_ACCESS_KEY" || echo "# AMPLIFY_SECRET_ACCESS_KEY not set"
+            if [ -n "${AMPLIFY_ACCESS_KEY_ID}" ]; then
+              echo "AMPLIFY_ACCESS_KEY_ID=${AMPLIFY_ACCESS_KEY_ID}"
+            else
+              echo "# AMPLIFY_ACCESS_KEY_ID not set or empty"
+            fi
+            if [ -n "${AMPLIFY_SECRET_ACCESS_KEY}" ]; then
+              echo "AMPLIFY_SECRET_ACCESS_KEY=${AMPLIFY_SECRET_ACCESS_KEY}"
+            else
+              echo "# AMPLIFY_SECRET_ACCESS_KEY not set or empty"
+            fi
             [ -n "$S3_BUCKET_MEDIA" ] && echo "S3_BUCKET_MEDIA=$S3_BUCKET_MEDIA" || echo "# S3_BUCKET_MEDIA not set"
             [ -n "$REGION" ] && echo "REGION=$REGION" || echo "# REGION not set"
             [ -n "$ACCOUNT_ID" ] && echo "ACCOUNT_ID=$ACCOUNT_ID" || echo "# ACCOUNT_ID not set"
