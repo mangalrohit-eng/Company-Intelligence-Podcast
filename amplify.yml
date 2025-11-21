@@ -8,23 +8,19 @@ frontend:
         # This ensures variables are available at runtime for Next.js API routes
         - |
           echo "Creating .env.production file for runtime access..."
-          touch .env.production
-          if [ -n "$AMPLIFY_ACCESS_KEY_ID" ]; then
-            echo "AMPLIFY_ACCESS_KEY_ID=$AMPLIFY_ACCESS_KEY_ID" >> .env.production
-          fi
-          if [ -n "$AMPLIFY_SECRET_ACCESS_KEY" ]; then
-            echo "AMPLIFY_SECRET_ACCESS_KEY=$AMPLIFY_SECRET_ACCESS_KEY" >> .env.production
-          fi
-          if [ -n "$S3_BUCKET_MEDIA" ]; then
-            echo "S3_BUCKET_MEDIA=$S3_BUCKET_MEDIA" >> .env.production
-          fi
-          if [ -n "$REGION" ]; then
-            echo "REGION=$REGION" >> .env.production
-          fi
-          if [ -n "$ACCOUNT_ID" ]; then
-            echo "ACCOUNT_ID=$ACCOUNT_ID" >> .env.production
-          fi
-          echo ".env.production created with $(wc -l < .env.production) variables"
+          # Remove existing file if any
+          rm -f .env.production
+          # Create new file with all required variables
+          {
+            [ -n "$AMPLIFY_ACCESS_KEY_ID" ] && echo "AMPLIFY_ACCESS_KEY_ID=$AMPLIFY_ACCESS_KEY_ID" || echo "# AMPLIFY_ACCESS_KEY_ID not set"
+            [ -n "$AMPLIFY_SECRET_ACCESS_KEY" ] && echo "AMPLIFY_SECRET_ACCESS_KEY=$AMPLIFY_SECRET_ACCESS_KEY" || echo "# AMPLIFY_SECRET_ACCESS_KEY not set"
+            [ -n "$S3_BUCKET_MEDIA" ] && echo "S3_BUCKET_MEDIA=$S3_BUCKET_MEDIA" || echo "# S3_BUCKET_MEDIA not set"
+            [ -n "$REGION" ] && echo "REGION=$REGION" || echo "# REGION not set"
+            [ -n "$ACCOUNT_ID" ] && echo "ACCOUNT_ID=$ACCOUNT_ID" || echo "# ACCOUNT_ID not set"
+          } > .env.production
+          echo ".env.production created:"
+          cat .env.production | sed 's/\(SECRET\|KEY\)=.*/\1=***HIDDEN***/' || true
+          echo "File has $(wc -l < .env.production) lines"
     build:
       commands:
         - npm run build
@@ -32,6 +28,8 @@ frontend:
     baseDirectory: .next
     files:
       - '**/*'
+    # Include .env.production in build artifacts so it's available at runtime
+    name: amplify-build
   cache:
     paths:
       - node_modules/**/*
