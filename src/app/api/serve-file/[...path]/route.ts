@@ -6,6 +6,7 @@
  * Tries local filesystem first, then S3 if not found
  */
 
+import 'dotenv/config'; // Load .env.production file explicitly
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
