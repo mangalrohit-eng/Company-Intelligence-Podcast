@@ -5,6 +5,7 @@
 
 import 'dotenv/config'; // Load .env.production file explicitly
 import { S3Client, PutObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { defaultProvider } from '@aws-sdk/credential-provider-node';
 import { logger } from '@/utils/logger';
 

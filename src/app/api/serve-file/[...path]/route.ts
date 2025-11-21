@@ -11,7 +11,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
-import { isS3Available, readFromS3 } from '@/lib/s3-storage';
+import { isS3Available, readFromS3, getPresignedReadUrl } from '@/lib/s3-storage';
 
 // Handle OPTIONS requests for CORS preflight (required for audio playback)
 export async function OPTIONS(
