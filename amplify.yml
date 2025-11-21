@@ -4,6 +4,27 @@ frontend:
     preBuild:
       commands:
         - npm ci
+        # Create .env.production file from Amplify environment variables
+        # This ensures variables are available at runtime for Next.js API routes
+        - |
+          echo "Creating .env.production file for runtime access..."
+          touch .env.production
+          if [ -n "$AMPLIFY_ACCESS_KEY_ID" ]; then
+            echo "AMPLIFY_ACCESS_KEY_ID=$AMPLIFY_ACCESS_KEY_ID" >> .env.production
+          fi
+          if [ -n "$AMPLIFY_SECRET_ACCESS_KEY" ]; then
+            echo "AMPLIFY_SECRET_ACCESS_KEY=$AMPLIFY_SECRET_ACCESS_KEY" >> .env.production
+          fi
+          if [ -n "$S3_BUCKET_MEDIA" ]; then
+            echo "S3_BUCKET_MEDIA=$S3_BUCKET_MEDIA" >> .env.production
+          fi
+          if [ -n "$REGION" ]; then
+            echo "REGION=$REGION" >> .env.production
+          fi
+          if [ -n "$ACCOUNT_ID" ]; then
+            echo "ACCOUNT_ID=$ACCOUNT_ID" >> .env.production
+          fi
+          echo ".env.production created with $(wc -l < .env.production) variables"
     build:
       commands:
         - npm run build
