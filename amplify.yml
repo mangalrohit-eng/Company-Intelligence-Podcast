@@ -38,9 +38,24 @@ frontend:
           echo ".env.production created:"
           cat .env.production | sed 's/\(SECRET\|KEY\)=.*/\1=***HIDDEN***/' || true
           echo "File has $(wc -l < .env.production) lines"
+          # Copy .env.production to .next directory so it's available at runtime
+          # Next.js API routes need access to this file
+          echo "Copying .env.production to .next directory for runtime access..."
+          mkdir -p .next
+          cp .env.production .next/.env.production || true
+          echo "Verifying .env.production in .next:"
+          [ -f .next/.env.production ] && echo "✅ .env.production copied to .next" || echo "❌ Failed to copy .env.production"
     build:
       commands:
         - npm run build
+        # Ensure .env.production is still available after build
+        - |
+          if [ -f .env.production ]; then
+            echo "✅ .env.production exists in root after build"
+            cp .env.production .next/.env.production 2>/dev/null || true
+          else
+            echo "⚠️ .env.production not found in root after build"
+          fi
   artifacts:
     baseDirectory: .next
     files:
