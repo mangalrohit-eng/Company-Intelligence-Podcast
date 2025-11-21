@@ -8,12 +8,31 @@ import { DynamoDBClient, ListTablesCommand } from '@aws-sdk/client-dynamodb';
 import { DynamoDBDocumentClient } from '@aws-sdk/lib-dynamodb';
 
 export async function GET(request: NextRequest) {
+  // Check for both standard AWS vars and Amplify-specific vars
+  const hasAwsAccessKey = !!process.env.AWS_ACCESS_KEY_ID;
+  const hasAwsSecretKey = !!process.env.AWS_SECRET_ACCESS_KEY;
+  const hasAmplifyAccessKey = !!process.env.AMPLIFY_ACCESS_KEY_ID;
+  const hasAmplifySecretKey = !!process.env.AMPLIFY_SECRET_ACCESS_KEY;
+  
   const envCheck = {
-    hasAccessKey: !!process.env.AWS_ACCESS_KEY_ID,
-    hasSecretKey: !!process.env.AWS_SECRET_ACCESS_KEY,
-    region: process.env.AWS_REGION || 'us-east-1',
-    accessKeyPrefix: process.env.AWS_ACCESS_KEY_ID?.substring(0, 7) || 'NOT_SET',
-    secretKeyLength: process.env.AWS_SECRET_ACCESS_KEY?.length || 0,
+    // Standard AWS credentials
+    hasAwsAccessKey,
+    hasAwsSecretKey,
+    awsAccessKeyPrefix: process.env.AWS_ACCESS_KEY_ID?.substring(0, 7) || 'NOT_SET',
+    awsSecretKeyLength: process.env.AWS_SECRET_ACCESS_KEY?.length || 0,
+    // Amplify-specific credentials (non-AWS prefix)
+    hasAmplifyAccessKey,
+    hasAmplifySecretKey,
+    amplifyAccessKeyPrefix: process.env.AMPLIFY_ACCESS_KEY_ID?.substring(0, 7) || 'NOT_SET',
+    amplifySecretKeyLength: process.env.AMPLIFY_SECRET_ACCESS_KEY?.length || 0,
+    // Combined check
+    hasAnyCredentials: (hasAwsAccessKey && hasAwsSecretKey) || (hasAmplifyAccessKey && hasAmplifySecretKey),
+    // Other env vars
+    region: process.env.AWS_REGION || process.env.REGION || 'us-east-1',
+    s3BucketMedia: process.env.S3_BUCKET_MEDIA || 'NOT_SET',
+    accountId: process.env.ACCOUNT_ID || process.env.AWS_ACCOUNT_ID || 'NOT_SET',
+    amplifyAppId: process.env.AMPLIFY_APP_ID || 'NOT_SET',
+    amplifyBranch: process.env.AMPLIFY_BRANCH || 'NOT_SET',
   };
 
   const results: any = {
@@ -21,18 +40,26 @@ export async function GET(request: NextRequest) {
     tests: {},
   };
 
-  // Test 1: Check if credentials are set
-  if (!process.env.AWS_ACCESS_KEY_ID || !process.env.AWS_SECRET_ACCESS_KEY) {
+  // Test 1: Check if credentials are set (either AWS or Amplify vars)
+  const hasCredentials = (hasAwsAccessKey && hasAwsSecretKey) || (hasAmplifyAccessKey && hasAmplifySecretKey);
+  
+  if (!hasCredentials) {
     results.tests.credentials = {
       status: 'FAILED',
-      message: 'AWS credentials not found in environment variables',
+      message: 'No AWS credentials found in environment variables',
+      details: {
+        awsVars: hasAwsAccessKey && hasAwsSecretKey ? 'SET' : 'NOT SET',
+        amplifyVars: hasAmplifyAccessKey && hasAmplifySecretKey ? 'SET' : 'NOT SET',
+        note: 'Amplify requires AMPLIFY_ACCESS_KEY_ID and AMPLIFY_SECRET_ACCESS_KEY (not AWS_ prefix)',
+      },
     };
     return NextResponse.json(results, { status: 200 });
   }
 
   results.tests.credentials = {
     status: 'PASSED',
-    message: 'AWS credentials found in environment',
+    message: hasAmplifyAccessKey ? 'Amplify credentials found' : 'AWS credentials found in environment',
+    credentialType: hasAmplifyAccessKey ? 'AMPLIFY_*' : 'AWS_*',
   };
 
   // Test 2: Try to create DynamoDB client

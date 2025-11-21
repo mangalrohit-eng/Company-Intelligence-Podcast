@@ -69,18 +69,57 @@ export async function GET(
         fileBuffer = await readFromS3(s3Key);
         console.log(`✅ Found in S3: ${s3Key} (${Math.round(fileBuffer.length/1024)}KB)`);
       } catch (s3Error: any) {
+        // Check credentials and environment for debugging
+        const hasAmplifyCreds = !!(process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY);
+        const hasAwsCreds = !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY);
+        const s3Available = isS3Available();
+        
+        const envDebug = {
+          s3Available,
+          hasAmplifyCreds,
+          hasAwsCreds,
+          amplifyAccessKeyId: process.env.AMPLIFY_ACCESS_KEY_ID ? `${process.env.AMPLIFY_ACCESS_KEY_ID.substring(0, 7)}...` : 'NOT SET',
+          amplifySecretKey: process.env.AMPLIFY_SECRET_ACCESS_KEY ? 'SET' : 'NOT SET',
+          awsAccessKeyId: process.env.AWS_ACCESS_KEY_ID ? `${process.env.AWS_ACCESS_KEY_ID.substring(0, 7)}...` : 'NOT SET',
+          awsSecretKey: process.env.AWS_SECRET_ACCESS_KEY ? 'SET' : 'NOT SET',
+          s3BucketMedia: process.env.S3_BUCKET_MEDIA || 'NOT SET',
+          region: process.env.REGION || process.env.AWS_REGION || 'NOT SET',
+          accountId: process.env.ACCOUNT_ID || process.env.AWS_ACCOUNT_ID || 'NOT SET',
+          amplifyAppId: process.env.AMPLIFY_APP_ID || 'NOT SET',
+          amplifyBranch: process.env.AMPLIFY_BRANCH || 'NOT SET',
+          relevantEnvVars: Object.keys(process.env)
+            .filter(key => 
+              key.includes('ACCOUNT') || 
+              key.includes('BUCKET') || 
+              key.includes('S3') || 
+              key.includes('REGION') ||
+              key.includes('AWS') ||
+              key.includes('AMPLIFY')
+            )
+            .reduce((acc, key) => {
+              if (key.includes('SECRET') || key.includes('KEY')) {
+                acc[key] = process.env[key] ? 'SET' : 'NOT SET';
+              } else {
+                acc[key] = process.env[key] || 'NOT SET';
+              }
+              return acc;
+            }, {} as Record<string, string>),
+        };
+        
         console.error(`❌ Not found in S3: ${s3Error.message}`, {
           originalPath: relativePath,
           s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
           errorType: s3Error.constructor?.name,
           errorStack: s3Error.stack,
+          envDebug,
         });
         return NextResponse.json(
           { 
             error: 'File not found', 
             path: relativePath,
             s3Key: relativePath.startsWith('episodes/') ? relativePath.replace('episodes/', 'runs/') : relativePath,
-            details: s3Error.message 
+            details: s3Error.message,
+            envDebug, // Include debug info in error response
           },
           { status: 404 }
         );
