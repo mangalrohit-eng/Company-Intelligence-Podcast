@@ -220,6 +220,27 @@ export async function GET(
 
     console.log(`✅ Serving ${relativePath} (${Math.round(fileBuffer.length/1024)}KB, ${contentType})`);
 
+    // For large audio files (>10MB), redirect to S3 presigned URL to avoid Amplify response size limits
+    // Amplify has a ~10MB limit for API route responses
+    const LARGE_FILE_THRESHOLD = 10 * 1024 * 1024; // 10MB
+    const isLargeAudioFile = contentType.startsWith('audio/') && fileBuffer.length > LARGE_FILE_THRESHOLD;
+    
+    if (isLargeAudioFile && isS3Available()) {
+      // Generate presigned URL and redirect
+      try {
+        let s3Key = relativePath;
+        if (s3Key.startsWith('episodes/')) {
+          s3Key = s3Key.replace('episodes/', 'runs/');
+        }
+        const presignedUrl = await getPresignedReadUrl(s3Key, 3600); // 1 hour expiry
+        console.log(`🔄 Redirecting large audio file to S3 presigned URL: ${s3Key} (${Math.round(fileBuffer.length/1024/1024)}MB)`);
+        return NextResponse.redirect(presignedUrl, 307); // 307 Temporary Redirect
+      } catch (error: any) {
+        console.error('Failed to generate presigned URL, falling back to direct serve', error);
+        // Fall through to serve directly (may fail with 413, but worth trying)
+      }
+    }
+
     // Convert Buffer to Uint8Array for NextResponse
     const headers: Record<string, string> = {
       'Content-Type': contentType,
