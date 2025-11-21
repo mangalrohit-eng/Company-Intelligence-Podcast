@@ -23,28 +23,13 @@ function getS3Client(): S3Client {
     
     let credentialsProvider;
     
-    // In Lambda/ECS environments, prefer IAM roles over explicit credentials
-    // This is more secure and works better with Amplify's service roles
-    const isLambdaOrEcs = !!(process.env.AWS_LAMBDA_FUNCTION_NAME || 
-                              process.env.AWS_EXECUTION_ENV || 
-                              process.env.ECS_CONTAINER_METADATA_URI);
+    // Priority for credentials:
+    // 1. Explicit credentials (AMPLIFY_ACCESS_KEY_ID or AWS_ACCESS_KEY_ID) - most reliable
+    // 2. IAM roles via defaultProvider - works in regular Lambda, but may not work in Amplify Lambda
     
-    if (isLambdaOrEcs) {
-      // In Lambda/ECS, use IAM roles (defaultProvider) - this is the recommended approach
-      logger.info('Using default credential provider (IAM roles) - Lambda/ECS environment detected');
-      credentialsProvider = defaultProvider();
-    }
-    // Check for standard AWS env vars (for local dev)
-    else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
-      logger.info('Using standard AWS credentials (AWS_ACCESS_KEY_ID)');
-      credentialsProvider = async () => ({
-        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
-      });
-    }
-    // Fallback to custom Amplify env vars (non-AWS prefix) - only if not in Lambda
-    else if (process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY) {
-      logger.info('Using custom Amplify credentials (AMPLIFY_ACCESS_KEY_ID) - fallback mode', {
+    // Check for custom Amplify env vars first (non-AWS prefix) - works in Amplify Lambda
+    if (process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY) {
+      logger.info('Using custom Amplify credentials (AMPLIFY_ACCESS_KEY_ID)', {
         hasAccessKey: !!process.env.AMPLIFY_ACCESS_KEY_ID,
         hasSecretKey: !!process.env.AMPLIFY_SECRET_ACCESS_KEY,
         accessKeyPrefix: process.env.AMPLIFY_ACCESS_KEY_ID?.substring(0, 7),
@@ -61,7 +46,15 @@ function getS3Client(): S3Client {
         return creds;
       };
     }
-    // Final fallback to default provider
+    // Check for standard AWS env vars (for local dev or Lambda)
+    else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+      logger.info('Using standard AWS credentials (AWS_ACCESS_KEY_ID)');
+      credentialsProvider = async () => ({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      });
+    }
+    // Fallback to IAM roles (defaultProvider) - works in regular Lambda, but may fail in Amplify Lambda
     else {
       logger.info('Using default credential provider (IAM roles/instance metadata)');
       credentialsProvider = defaultProvider();
