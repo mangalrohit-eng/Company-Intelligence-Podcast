@@ -220,7 +220,7 @@ export const handler = async (event: APIGatewayProxyEvent): Promise<APIGatewayPr
         provider: {
           llm: flags.provider?.llm || 'openai', // Use OpenAI in production
           tts: flags.provider?.tts || 'openai', // Use OpenAI in production
-          // Always use node-fetch for HTTP - same behavior in local and production
+          // Respect http provider flag - can be 'openai' (node-fetch), 'playwright', 'replay', or 'stub'
           http: flags.provider?.http || 'openai',
         },
         cassetteKey: flags.cassetteKey || 'default',

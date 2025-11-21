@@ -396,7 +396,8 @@ export default function RunProgressPage() {
   }
 
   // Use audioPath from run output if available, otherwise fallback to serve-file endpoint
-  const audioPath = run.output?.audioPath || `/api/serve-file/episodes/${runId}/audio.mp3`;
+  // Audio is stored in S3 as runs/{runId}/audio.mp3
+  const audioPath = run.output?.audioPath || `/api/serve-file/runs/${runId}/audio.mp3`;
 
   return (
     <ProtectedRoute>

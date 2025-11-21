@@ -31,6 +31,15 @@ export class PodcastPlatformStack extends cdk.Stack {
       encryption: s3.BucketEncryption.S3_MANAGED,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
+      cors: [
+        {
+          allowedOrigins: ['*'], // In production, restrict to your domain
+          allowedMethods: [s3.HttpMethods.GET, s3.HttpMethods.HEAD, s3.HttpMethods.OPTIONS],
+          allowedHeaders: ['*'],
+          exposedHeaders: ['Content-Length', 'Content-Type', 'ETag', 'Accept-Ranges'],
+          maxAge: 3600,
+        },
+      ],
     });
 
     const rssBucket = new s3.Bucket(this, 'RssBucket', {
@@ -398,6 +407,8 @@ export class PodcastPlatformStack extends cdk.Stack {
     }));
 
     // Create Pipeline Orchestrator Lambda - runs the full pipeline
+    // Note: Playwright is handled via playwright-aws-lambda npm package
+    // which bundles browsers automatically for Lambda
     const orchestratorLambda = new NodejsFunction(this, 'OrchestratorLambda', {
       functionName: 'pipeline-orchestrator',
       runtime: lambda.Runtime.NODEJS_18_X,
@@ -405,16 +416,30 @@ export class PodcastPlatformStack extends cdk.Stack {
       handler: 'handler',
       environment: {
         ...lambdaEnv,
-        // OPENAI_API_KEY is NOT set here - it should be set via AWS Console to avoid being overwritten on CDK deploy
-        // Lambda Console: Configuration > Environment variables > Edit
-        // This way, CDK deployments won't overwrite the manually set value
+        // Note: AWS_REGION is automatically set by Lambda runtime, don't set it manually
+        REGION: this.region || 'us-east-1', // Set non-AWS prefix for S3 client compatibility
+        // OPENAI_API_KEY: 
+        // - If set locally during CDK deploy (process.env.OPENAI_API_KEY), it will be included
+        // - If not set locally, CDK will REMOVE it from Lambda (this is CDK behavior)
+        // - RECOMMENDED: Use AWS Secrets Manager instead (set OPENAI_SECRET_ARN)
+        // - Or set it manually in Lambda console AFTER each CDK deployment
+        ...(process.env.OPENAI_API_KEY ? { OPENAI_API_KEY: process.env.OPENAI_API_KEY } : {}),
       },
       timeout: cdk.Duration.minutes(15), // Lambda max timeout is 15 minutes
-      memorySize: 3008, // More memory for complex operations
+      memorySize: 3008, // More memory for complex operations (Playwright needs more memory)
       bundling: {
         minify: false,
         sourceMap: true,
-        externalModules: ['@aws-sdk/*', 'playwright', 'chromium-bidi', '@playwright/browser-chromium'],
+        // Exclude playwright (not available in Lambda), but include playwright-aws-lambda
+        // playwright-aws-lambda will be bundled and provides Playwright functionality in Lambda
+        externalModules: [
+          '@aws-sdk/*',
+          'playwright', // Exclude regular playwright - not available in Lambda
+          'playwright-core', // Exclude playwright-core - not available in Lambda
+          'chromium-bidi', // Exclude chromium-bidi - not available in Lambda
+          '@playwright/browser-chromium', // Exclude browser binaries - not available in Lambda
+          // Note: playwright-aws-lambda should be bundled (not excluded)
+        ],
         commandHooks: {
           beforeBundling(inputDir: string, outputDir: string): string[] {
             return [];
@@ -423,10 +448,8 @@ export class PodcastPlatformStack extends cdk.Stack {
             return [];
           },
           afterBundling(inputDir: string, outputDir: string): string[] {
-            // Create a stub for playwright modules to prevent runtime errors
-            return [
-              `echo "module.exports = {};" > "${outputDir}/playwright-stub.js"`,
-            ];
+            // No stub needed - Playwright will be available from layer at runtime
+            return [];
           },
         },
       },

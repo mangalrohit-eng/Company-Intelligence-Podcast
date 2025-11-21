@@ -1,0 +1,84 @@
+{
+  "runId": "test-tesla-full-$(Get-Date -Format 'yyyyMMddHHmmss')",
+  "podcastId": "test-tesla-podcast",
+  "configVersion": 1,
+  "config": {
+    "title": "Tesla Intelligence Podcast",
+    "subtitle": "Latest news and insights about Tesla",
+    "description": "Weekly podcast covering Tesla news and industry developments",
+    "author": "AI Podcast Platform",
+    "email": "podcast@example.com",
+    "category": "Technology",
+    "explicit": false,
+    "language": "en",
+    "coverArtS3Key": "",
+    "company": {
+      "id": "Tesla",
+      "name": "Tesla"
+    },
+    "industry": {
+      "id": "Automotive",
+      "name": "Automotive"
+    },
+    "competitors": [
+      {"id": "Ford", "name": "Ford", "isAiSuggested": false},
+      {"id": "GM", "name": "General Motors", "isAiSuggested": false},
+      {"id": "Toyota", "name": "Toyota", "isAiSuggested": false}
+    ],
+    "topics": {
+      "standard": [
+        {
+          "id": "tesla-news",
+          "name": "Tesla News",
+          "priority": 80
+        }
+      ],
+      "special": []
+    },
+    "cadence": "weekly",
+    "durationMinutes": 5,
+    "publishTime": "09:00",
+    "timezone": "America/New_York",
+    "timeWindowHours": 168,
+    "timeWindow": {
+      "startIso": "2025-11-14T00:00:00Z",
+      "endIso": "2025-11-21T23:59:59Z"
+    },
+    "regions": ["US"],
+    "sourceLanguages": ["en"],
+    "voice": {
+      "provider": "openai-tts",
+      "voiceId": "onyx",
+      "speed": 1.0,
+      "tone": "professional"
+    },
+    "robotsMode": "permissive",
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": []
+    }
+  },
+  "flags": {
+    "enable": {
+      "prepare": true,
+      "discover": true,
+      "scrape": true,
+      "extract": false,
+      "summarize": false,
+      "contrast": false,
+      "outline": false,
+      "script": false,
+      "qa": false,
+      "tts": false,
+      "package": false
+    },
+    "provider": {
+      "llm": "openai",
+      "tts": "openai",
+      "http": "playwright"
+    },
+    "cassetteKey": "default",
+    "dryRun": false
+  }
+}
+

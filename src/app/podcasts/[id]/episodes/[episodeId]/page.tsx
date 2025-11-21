@@ -46,9 +46,13 @@ export default function EpisodeDetailPage() {
         
         if (run && run.status === 'completed' && run.output) {
           // Construct episode from run data
-          const audioPath = `/api/serve-file/episodes/${run.id}/${run.id}.mp3`;
-          const transcriptPath = `/api/serve-file/episodes/${run.id}/${run.id}_transcript.txt`;
-          const showNotesPath = `/api/serve-file/episodes/${run.id}/${run.id}_show_notes.md`;
+          // Use the correct audio path - audio is stored as audio.mp3 in S3
+          // Prefer audioPath from run.output (presigned URL) or fallback to serve-file endpoint
+          const audioPath = run.output?.audioPath || run.output?.audioS3Key 
+            ? `/api/serve-file/runs/${run.id}/audio.mp3`
+            : `/api/serve-file/runs/${run.id}/audio.mp3`;
+          const transcriptPath = `/api/serve-file/runs/${run.id}/${run.id}_transcript.txt`;
+          const showNotesPath = `/api/serve-file/runs/${run.id}/${run.id}_show_notes.md`;
           
           // Fetch transcript and show notes
           let transcript = '';
@@ -107,19 +111,83 @@ export default function EpisodeDetailPage() {
 
   useEffect(() => {
     const audio = audioRef.current;
-    if (!audio) return;
+    if (!audio || !episode?.audioUrl) return;
+
+    // Reset duration when episode changes
+    setDuration(0);
+    setCurrentTime(0);
 
     const updateTime = () => setCurrentTime(audio.currentTime);
-    const updateDuration = () => setDuration(audio.duration);
+    
+    const handleLoadedMetadata = () => {
+      const duration = audio.duration;
+      console.log('Episode audio metadata loaded', { duration, src: audio.src, readyState: audio.readyState });
+      if (duration && isFinite(duration) && duration > 0) {
+        setDuration(duration);
+      } else {
+        console.warn('Episode audio duration is invalid', { duration, readyState: audio.readyState });
+      }
+    };
+
+    const handleCanPlay = () => {
+      const duration = audio.duration;
+      console.log('Episode audio can play', { duration, readyState: audio.readyState });
+      if (duration && isFinite(duration) && duration > 0) {
+        setDuration(duration);
+      }
+    };
+
+    const handleLoadedData = () => {
+      const duration = audio.duration;
+      console.log('Episode audio data loaded', { duration });
+      if (duration && isFinite(duration) && duration > 0) {
+        setDuration(duration);
+      }
+    };
+
+    const handleError = (e: any) => {
+      console.error('Episode audio loading error', {
+        error: e,
+        errorCode: audio.error?.code,
+        errorMessage: audio.error?.message,
+        src: audio.src,
+        networkState: audio.networkState,
+      });
+    };
+
     const handleEnded = () => setIsPlaying(false);
 
+    // Set up event listeners
     audio.addEventListener('timeupdate', updateTime);
-    audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+    audio.addEventListener('canplay', handleCanPlay);
+    audio.addEventListener('loadeddata', handleLoadedData);
+    audio.addEventListener('error', handleError);
     audio.addEventListener('ended', handleEnded);
 
+    // Force load metadata
+    audio.load();
+
+    // Fallback: check duration after a delay
+    const checkDuration = setTimeout(() => {
+      if (audio.duration && isFinite(audio.duration) && audio.duration > 0) {
+        setDuration(audio.duration);
+      } else if (audio.readyState >= 2) {
+        console.warn('Episode audio metadata loaded but duration is 0', {
+          duration: audio.duration,
+          readyState: audio.readyState,
+          src: audio.src,
+        });
+      }
+    }, 2000);
+
     return () => {
+      clearTimeout(checkDuration);
       audio.removeEventListener('timeupdate', updateTime);
-      audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      audio.removeEventListener('canplay', handleCanPlay);
+      audio.removeEventListener('loadeddata', handleLoadedData);
+      audio.removeEventListener('error', handleError);
       audio.removeEventListener('ended', handleEnded);
     };
   }, [episode]);
@@ -217,8 +285,38 @@ export default function EpisodeDetailPage() {
           <audio 
             ref={audioRef} 
             src={episode.audioUrl} 
+            crossOrigin="anonymous"
+            preload="metadata"
             onTimeUpdate={(e) => setCurrentTime(e.currentTarget.currentTime)}
-            onLoadedMetadata={(e) => setDuration(e.currentTarget.duration)}
+            onLoadedMetadata={(e) => {
+              const duration = e.currentTarget.duration;
+              console.log('Audio metadata loaded', { duration, src: e.currentTarget.src });
+              if (duration && isFinite(duration) && duration > 0) {
+                setDuration(duration);
+              }
+            }}
+            onCanPlay={(e) => {
+              const duration = e.currentTarget.duration;
+              console.log('Audio can play', { duration });
+              if (duration && isFinite(duration) && duration > 0) {
+                setDuration(duration);
+              }
+            }}
+            onLoadedData={(e) => {
+              const duration = e.currentTarget.duration;
+              console.log('Audio data loaded', { duration });
+              if (duration && isFinite(duration) && duration > 0) {
+                setDuration(duration);
+              }
+            }}
+            onError={(e) => {
+              console.error('Audio loading error', {
+                error: e,
+                errorCode: audioRef.current?.error?.code,
+                errorMessage: audioRef.current?.error?.message,
+                src: episode.audioUrl,
+              });
+            }}
             onEnded={() => setIsPlaying(false)}
           />
         </div>

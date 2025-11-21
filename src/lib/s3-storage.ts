@@ -11,10 +11,26 @@ import { logger } from '@/utils/logger';
 
 let s3Client: S3Client | null = null;
 
+function resetS3Client() {
+  s3Client = null;
+  logger.info('S3 client reset');
+}
+
 function getS3Client(): S3Client {
   if (!s3Client) {
     // Use REGION (non-AWS prefix) for Amplify compatibility, fallback to AWS_REGION for Lambda
     const region = process.env.REGION || process.env.AWS_REGION || 'us-east-1';
+    
+    logger.info('Initializing S3 client', {
+      region,
+      hasREGION: !!process.env.REGION,
+      hasAWS_REGION: !!process.env.AWS_REGION,
+      hasAMPLIFY_ACCESS_KEY_ID: !!process.env.AMPLIFY_ACCESS_KEY_ID,
+      hasAMPLIFY_SECRET_ACCESS_KEY: !!process.env.AMPLIFY_SECRET_ACCESS_KEY,
+      hasAWS_ACCESS_KEY_ID: !!process.env.AWS_ACCESS_KEY_ID,
+      hasAWS_SECRET_ACCESS_KEY: !!process.env.AWS_SECRET_ACCESS_KEY,
+      isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
+    });
     
     // Configure credentials provider
     // Priority:
@@ -47,23 +63,59 @@ function getS3Client(): S3Client {
         return creds;
       };
     }
-    // Check for standard AWS env vars (for local dev or Lambda)
-    else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
-      logger.info('Using standard AWS credentials (AWS_ACCESS_KEY_ID)');
+    // Check for explicit AKIA keys (long-term IAM user keys) - prioritize these if set
+    // AKIA keys are long-term, ASIA keys are temporary from IAM roles
+    if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_ACCESS_KEY_ID.startsWith('AKIA')) {
+      logger.info('Using explicit AKIA credentials (AWS_ACCESS_KEY_ID)', {
+        accessKeyPrefix: process.env.AWS_ACCESS_KEY_ID.substring(0, 7),
+        isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
+      });
       credentialsProvider = async () => ({
         accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
         secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
       });
     }
-    // Fallback to IAM roles (defaultProvider) - works in regular Lambda, but may fail in Amplify Lambda
+    // In Lambda, use IAM role (defaultProvider) if no explicit AKIA key is set
+    // This will use temporary ASIA credentials from the IAM role
+    else if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+      logger.info('Using IAM role via defaultProvider (Lambda environment)', {
+        region,
+        hasAWS_ACCESS_KEY_ID: !!process.env.AWS_ACCESS_KEY_ID,
+        hasAWS_SECRET_ACCESS_KEY: !!process.env.AWS_SECRET_ACCESS_KEY,
+        awsAccessKeyPrefix: process.env.AWS_ACCESS_KEY_ID?.substring(0, 4) || 'none',
+        note: 'Using temporary ASIA credentials from IAM role (this is normal for Lambda)',
+      });
+      credentialsProvider = defaultProvider();
+    }
+    // Check for standard AWS env vars (for local dev only, not Lambda)
+    else if (process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY) {
+      logger.info('Using standard AWS credentials (AWS_ACCESS_KEY_ID) - local dev');
+      credentialsProvider = async () => ({
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+      });
+    }
+    // Fallback to IAM roles (defaultProvider) - for EC2, ECS, etc.
     else {
-      logger.info('Using default credential provider (IAM roles/instance metadata)');
+      logger.info('Using default credential provider (IAM roles/instance metadata)', {
+        region,
+        isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
+      });
       credentialsProvider = defaultProvider();
     }
     
     s3Client = new S3Client({
       region,
       credentials: credentialsProvider,
+      // Add maxAttempts to prevent infinite retries
+      maxAttempts: 3,
+    });
+    
+    logger.info('S3 client initialized', { 
+      region,
+      maxAttempts: 3,
+      credentialsType: process.env.AMPLIFY_ACCESS_KEY_ID ? 'AMPLIFY' : 
+                       process.env.AWS_ACCESS_KEY_ID ? 'AWS_ENV' : 'IAM_ROLE',
     });
   }
   return s3Client;
@@ -157,10 +209,17 @@ export async function writeToS3(
   }
 
   try {
+    logger.info('Starting S3 write', { bucket, key, contentType, contentSize: typeof content === 'string' ? content.length : content.length });
+    
     const client = getS3Client();
     const body = typeof content === 'string' ? content : content;
     
-    await client.send(
+    // Add timeout to prevent hanging (30 seconds for JSON, 60 seconds for audio)
+    const timeoutMs = contentType.startsWith('audio/') ? 60000 : 30000;
+    
+    logger.debug('Sending PutObjectCommand to S3', { bucket, key, timeoutMs });
+    
+    const writePromise = client.send(
       new PutObjectCommand({
         Bucket: bucket,
         Key: key,
@@ -169,9 +228,26 @@ export async function writeToS3(
       })
     );
     
-    logger.info('File written to S3', { bucket, key, contentType });
+    const timeoutPromise = new Promise((_, reject) => 
+      setTimeout(() => reject(new Error(`S3 write timeout after ${timeoutMs}ms`)), timeoutMs)
+    );
+    
+    logger.debug('Waiting for S3 write to complete or timeout', { timeoutMs });
+    await Promise.race([writePromise, timeoutPromise]);
+    
+    logger.info('File written to S3 successfully', { bucket, key, contentType, size: typeof content === 'string' ? content.length : content.length });
   } catch (error) {
-    logger.error('Failed to write file to S3', { bucket, key, error });
+    logger.error('Failed to write file to S3', { 
+      bucket, 
+      key, 
+      contentType,
+      error: error instanceof Error ? error.message : String(error),
+      errorName: error instanceof Error ? error.name : 'Unknown',
+      errorStack: error instanceof Error ? error.stack : undefined,
+    });
+    // Reset S3 client on error to force re-initialization on next call
+    // This helps if credentials or region were misconfigured
+    resetS3Client();
     throw error;
   }
 }

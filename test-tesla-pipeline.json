@@ -1,0 +1,52 @@
+{
+  "runId": "test-tesla-playwright-20251121",
+  "podcastId": "test-tesla-podcast",
+  "configVersion": 1,
+  "config": {
+    "companyId": "Tesla",
+    "companyName": "Tesla",
+    "industry": "Automotive",
+    "competitors": ["Ford", "GM", "Toyota"],
+    "durationMinutes": 5,
+    "voice": "onyx",
+    "version": 1,
+    "topics": {
+      "standard": [
+        {
+          "id": "tesla-news",
+          "name": "Tesla News",
+          "description": "Latest news about Tesla"
+        }
+      ],
+      "special": []
+    },
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": [],
+      "robotsMode": "permissive"
+    }
+  },
+  "flags": {
+    "enable": {
+      "prepare": true,
+      "discover": true,
+      "scrape": true,
+      "extract": false,
+      "summarize": false,
+      "contrast": false,
+      "outline": false,
+      "script": false,
+      "qa": false,
+      "tts": false,
+      "package": false
+    },
+    "provider": {
+      "llm": "openai",
+      "tts": "openai",
+      "http": "playwright"
+    },
+    "cassetteKey": "default",
+    "dryRun": false
+  }
+}
+

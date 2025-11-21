@@ -60,7 +60,7 @@ export class GatewayFactory {
     }
   }
 
-  static createHttpGateway(config: GatewayConfig): IHttpGateway {
+  static async createHttpGateway(config: GatewayConfig): Promise<IHttpGateway> {
     // Default to 'openai' (node-fetch) if not specified or invalid
     const httpProvider = config.httpProvider || 'openai';
     
@@ -68,7 +68,8 @@ export class GatewayFactory {
     logger.info('Creating HTTP gateway', { 
       requestedProvider: config.httpProvider, 
       actualProvider: httpProvider,
-      isVercel: !!process.env.VERCEL 
+      isVercel: !!process.env.VERCEL,
+      isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
     });
     
     switch (httpProvider) {
@@ -80,16 +81,51 @@ export class GatewayFactory {
         logger.info('Creating Node Fetch HTTP gateway');
         return new NodeFetchHttpGateway();
         
-      case 'playwright': // Playwright for complex scraping (explicit opt-in, but not recommended)
-        // Playwright requires browser binaries and is heavy - use only if absolutely necessary
-        // Always use node-fetch in Lambda/Vercel environments
-        if (process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME) {
-          logger.warn('Playwright not available on Vercel/Lambda, using node-fetch instead');
+      case 'playwright': // Playwright for complex scraping with JavaScript execution
+        // Try to use Playwright if available
+        try {
+          // Dynamic import - handle bundler transformations
+          const playwrightModule = await import('./http/playwright') as any;
+          
+          // Try different ways to access the class (handle bundler renaming)
+          let PlaywrightHttpGatewayClass = playwrightModule.PlaywrightHttpGateway || 
+                                          playwrightModule.PlaywrightHttpGateway2 ||
+                                          playwrightModule.default;
+          
+          // If still not found, search all exports
+          if (!PlaywrightHttpGatewayClass) {
+            const keys = Object.keys(playwrightModule);
+            for (const key of keys) {
+              const value = playwrightModule[key];
+              if (typeof value === 'function' && 
+                  key.toLowerCase().includes('playwright') && 
+                  key.toLowerCase().includes('gateway')) {
+                PlaywrightHttpGatewayClass = value;
+                break;
+              }
+            }
+          }
+          
+          if (!PlaywrightHttpGatewayClass || typeof PlaywrightHttpGatewayClass !== 'function') {
+            throw new Error(`PlaywrightHttpGateway is not a constructor. Available exports: ${Object.keys(playwrightModule).join(', ')}`);
+          }
+          
+          const gateway = new PlaywrightHttpGatewayClass();
+          
+          if (process.env.AWS_LAMBDA_FUNCTION_NAME) {
+            logger.info('Playwright HTTP gateway available in Lambda (using playwright-aws-lambda)');
+          } else {
+            logger.info('Creating Playwright HTTP gateway with stealth mode');
+          }
+          
+          return gateway;
+        } catch (error) {
+          logger.warn('Playwright not available, using node-fetch instead', {
+            error: error instanceof Error ? error.message : String(error),
+            errorName: error instanceof Error ? error.name : 'Unknown',
+          });
           return new NodeFetchHttpGateway();
         }
-        // For local development only - PlaywrightHttpGateway not bundled in Lambda
-        logger.warn('Playwright HTTP gateway requested but not available in Lambda, using node-fetch');
-        return new NodeFetchHttpGateway();
         
       case 'stub': // Legacy alias - now maps to node-fetch (Playwright not needed for RSS feeds)
         logger.warn('HTTP provider "stub" is deprecated, using node-fetch (Playwright not needed for RSS feeds)');

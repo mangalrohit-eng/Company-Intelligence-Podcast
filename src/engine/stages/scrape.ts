@@ -10,8 +10,6 @@ import { IEventEmitter } from '@/utils/event-emitter';
 import { IHttpGateway } from '@/gateways/types';
 import { logger } from '@/utils/logger';
 import { DEMO_CITIBANK_ARTICLES } from '../demo-articles';
-// Lazy import PlaywrightHttpGateway to avoid bundling issues in Lambda
-// import { PlaywrightHttpGateway } from '@/gateways/http/playwright';
 
 export interface ScrapedContent {
   url: string;
@@ -358,58 +356,112 @@ export class ScrapeStage {
         // Handle Google News redirect URLs - these require JavaScript execution
         let urlToFetch = item.url;
         let isGoogleNewsUrl = item.url.includes('news.google.com/rss/articles');
-        let useHeadlessBrowser = false;
+        let usePlaywright = false;
+        let httpGatewayToUse = this.httpGateway;
         
         if (isGoogleNewsUrl) {
           // Google News URLs require JavaScript to resolve the actual article URL
-          // On Vercel, we need to use a headless browser service API
-          const headlessBrowserApiKey = process.env.HEADLESS_BROWSER_API_KEY;
-          const headlessBrowserApiUrl = process.env.HEADLESS_BROWSER_API_URL || 'https://app.scrapingbee.com/api/v1';
+          // Check if the main gateway is already Playwright
+          const isMainGatewayPlaywright = this.httpGateway.constructor.name.includes('Playwright');
           
-          if (headlessBrowserApiKey) {
-            // Use headless browser service (e.g., ScrapingBee, ScraperAPI, Browserless)
-            useHeadlessBrowser = true;
-            urlToFetch = `${headlessBrowserApiUrl}?api_key=${headlessBrowserApiKey}&url=${encodeURIComponent(item.url)}&render_js=true&premium_proxy=true`;
-            logger.info('Using headless browser service for Google News URL', {
+          if (isMainGatewayPlaywright) {
+            // Main gateway is already Playwright - use it directly
+            httpGatewayToUse = this.httpGateway;
+            usePlaywright = true;
+            logger.info('Using existing Playwright gateway for Google News URL', {
               originalUrl: item.url,
-              serviceUrl: headlessBrowserApiUrl,
             });
           } else {
-            // Try to extract URL from query params as fallback
+            // Main gateway is not Playwright - create a new Playwright gateway
+            // Use GatewayFactory to create Playwright gateway - it handles bundler issues
             try {
-              const urlObj = new URL(item.url);
-              const urlParam = urlObj.searchParams.get('url');
-              if (urlParam) {
-                urlToFetch = decodeURIComponent(urlParam);
-                logger.info('Extracted actual URL from Google News query param', { 
-                  original: item.url, 
-                  extracted: urlToFetch 
+              logger.info('Creating new Playwright gateway for Google News URL', {
+                originalUrl: item.url,
+                mainGatewayType: this.httpGateway.constructor.name,
+              });
+              
+              const { GatewayFactory } = await import('@/gateways/factory');
+              const playwrightGateway = await GatewayFactory.createHttpGateway({
+                httpProvider: 'playwright',
+                llmProvider: 'openai', // Not used, but required by factory
+                ttsProvider: 'openai', // Not used, but required by factory
+                cassetteKey: 'default',
+                cassettePath: process.env.CASSETTE_PATH || './cassettes',
+                openaiApiKey: process.env.OPENAI_API_KEY,
+              });
+              
+              if (playwrightGateway) {
+                logger.info('Playwright gateway created, initializing...', {
+                  gatewayType: playwrightGateway.constructor.name,
+                });
+                
+                await playwrightGateway.initialize();
+                httpGatewayToUse = playwrightGateway;
+                usePlaywright = true;
+                logger.info('Using Playwright with stealth mode for Google News URL', {
+                  originalUrl: item.url,
+                  importMethod: 'dynamic',
                 });
               } else {
-                logger.warn('Google News URL requires headless browser - HEADLESS_BROWSER_API_KEY not configured', {
-                  url: item.url,
-                });
+                throw new Error('GatewayFactory returned null for Playwright');
               }
-            } catch (e) {
-              logger.warn('Could not parse Google News URL', { url: item.url, error: e });
+            } catch (playwrightError: any) {
+              // Playwright not available - log detailed error and try fallback
+              logger.error('Failed to create/initialize Playwright gateway for Google News URL', {
+                url: item.url,
+                error: playwrightError?.message || String(playwrightError),
+                errorName: playwrightError?.name,
+                errorStack: playwrightError?.stack,
+                isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
+              });
+              
+              // Try to extract URL from query params as fallback
+              try {
+                const urlObj = new URL(item.url);
+                const urlParam = urlObj.searchParams.get('url');
+                if (urlParam) {
+                  urlToFetch = decodeURIComponent(urlParam);
+                  logger.info('Extracted actual URL from Google News query param', { 
+                    original: item.url, 
+                    extracted: urlToFetch 
+                  });
+                } else {
+                  logger.warn('Google News URL requires Playwright - content may be minimal', {
+                    url: item.url,
+                    suggestion: 'Ensure playwright-aws-lambda is installed and Lambda has sufficient memory (3008 MB)',
+                  });
+                }
+              } catch (e) {
+                logger.warn('Could not parse Google News URL', { url: item.url, error: e });
+              }
             }
           }
         }
         
-        const response = await this.httpGateway.fetch({ url: urlToFetch });
+        const response = await httpGatewayToUse.fetch({ url: urlToFetch });
+        
+        // Cleanup Playwright gateway if we created one
+        if (usePlaywright && httpGatewayToUse !== this.httpGateway) {
+          try {
+            await (httpGatewayToUse as any).close();
+          } catch (closeError) {
+            // Ignore cleanup errors
+            logger.debug('Error closing Playwright gateway', { error: closeError });
+          }
+        }
         const latencyMs = Date.now() - fetchStart;
 
         if (response.status === 200) {
           let content = this.extractTextFromHtml(response.body);
           let finalUrl = response.url;
           
-          // If we used headless browser service, the response should contain the actual article
+          // If we used Playwright or headless browser service, the response should contain the actual article
           // If we still got minimal content, try to extract the actual URL from the response
           const isMinimalContent = content.trim().toLowerCase() === 'google news' || 
                                    content.trim().length < 100 ||
                                    (content.trim().toLowerCase().includes('google news') && content.trim().length < 200);
           
-          if (isMinimalContent && isGoogleNewsUrl && !useHeadlessBrowser) {
+          if (isMinimalContent && isGoogleNewsUrl && !usePlaywright) {
             // Headless browser wasn't used - try to extract URL from HTML
             logger.warn('Got minimal content from Google News - attempting to extract actual article URL', {
               originalUrl: item.url,
@@ -419,14 +471,70 @@ export class ScrapeStage {
               hasHeadlessBrowserKey: !!process.env.HEADLESS_BROWSER_API_KEY,
             });
             
-            // Try to extract article URL from meta tags or canonical link
-            const metaUrlMatch = response.body.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i) ||
-                                 response.body.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i) ||
-                                 response.body.match(/<a[^>]+href="(https?:\/\/[^"]+)"[^>]*class="[^"]*WwrzSb[^"]*"/i); // Google News article link class
+            // Try multiple methods to extract the actual article URL from Google News page
+            let extractedUrl: string | null = null;
             
-            if (metaUrlMatch && metaUrlMatch[1] && !metaUrlMatch[1].includes('news.google.com')) {
-              const extractedUrl = metaUrlMatch[1];
-              logger.info('Found article URL in page metadata, fetching directly', {
+            // Method 1: Check for og:url meta tag
+            const ogUrlMatch = response.body.match(/<meta\s+property="og:url"\s+content="([^"]+)"/i);
+            if (ogUrlMatch && ogUrlMatch[1] && !ogUrlMatch[1].includes('news.google.com')) {
+              extractedUrl = ogUrlMatch[1];
+              logger.info('Found article URL in og:url meta tag', { extractedUrl });
+            }
+            
+            // Method 2: Check for canonical link
+            if (!extractedUrl) {
+              const canonicalMatch = response.body.match(/<link\s+rel="canonical"\s+href="([^"]+)"/i);
+              if (canonicalMatch && canonicalMatch[1] && !canonicalMatch[1].includes('news.google.com')) {
+                extractedUrl = canonicalMatch[1];
+                logger.info('Found article URL in canonical link', { extractedUrl });
+              }
+            }
+            
+            // Method 3: Look for article links in the page (Google News specific patterns)
+            if (!extractedUrl) {
+              // Pattern 1: Direct article links in the page
+              const articleLinkMatch = response.body.match(/<a[^>]+href="(https?:\/\/[^"]+)"[^>]*class="[^"]*WwrzSb[^"]*"/i) ||
+                                      response.body.match(/<a[^>]+href="(https?:\/\/[^"]+)"[^>]*data-n-au="[^"]*"/i) ||
+                                      response.body.match(/<a[^>]+href="(https?:\/\/[^"]+)"[^>]*aria-label="[^"]*"/i);
+              
+              if (articleLinkMatch && articleLinkMatch[1] && !articleLinkMatch[1].includes('news.google.com')) {
+                extractedUrl = articleLinkMatch[1];
+                logger.info('Found article URL in page link', { extractedUrl });
+              }
+            }
+            
+            // Method 4: Check if response.url was redirected (NodeFetchHttpGateway should follow redirects)
+            if (!extractedUrl && response.url && response.url !== urlToFetch && !response.url.includes('news.google.com')) {
+              extractedUrl = response.url;
+              logger.info('Using redirected URL from response', { 
+                original: urlToFetch, 
+                redirected: response.url 
+              });
+            }
+            
+            // Method 5: Try to extract from JavaScript data attributes or JSON-LD
+            if (!extractedUrl) {
+              const jsonLdMatch = response.body.match(/<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/i);
+              if (jsonLdMatch) {
+                try {
+                  const jsonLd = JSON.parse(jsonLdMatch[1]);
+                  if (jsonLd.url && !jsonLd.url.includes('news.google.com')) {
+                    extractedUrl = jsonLd.url;
+                    logger.info('Found article URL in JSON-LD', { extractedUrl });
+                  } else if (jsonLd.mainEntityOfPage && jsonLd.mainEntityOfPage['@id'] && !jsonLd.mainEntityOfPage['@id'].includes('news.google.com')) {
+                    extractedUrl = jsonLd.mainEntityOfPage['@id'];
+                    logger.info('Found article URL in JSON-LD mainEntityOfPage', { extractedUrl });
+                  }
+                } catch (e) {
+                  // JSON parsing failed, continue
+                }
+              }
+            }
+            
+            // If we found an extracted URL, fetch it
+            if (extractedUrl) {
+              logger.info('Fetching article content from extracted URL', {
+                originalUrl: item.url,
                 extractedUrl,
               });
               
@@ -441,15 +549,31 @@ export class ScrapeStage {
                       url: extractedUrl,
                       contentLength: content.length,
                     });
+                  } else {
+                    logger.warn('Extracted URL returned minimal content', {
+                      url: extractedUrl,
+                      contentLength: directContent.length,
+                    });
                   }
+                } else {
+                  logger.warn('Extracted URL returned non-200 status', {
+                    url: extractedUrl,
+                    status: directResponse.status,
+                  });
                 }
-              } catch (directError) {
-                logger.warn('Failed to fetch extracted URL', { url: extractedUrl, error: directError });
+              } catch (directError: any) {
+                logger.warn('Failed to fetch extracted URL', { 
+                  url: extractedUrl, 
+                  error: directError?.message || String(directError) 
+                });
               }
-            } else if (!process.env.HEADLESS_BROWSER_API_KEY) {
-              logger.warn('Google News scraping requires HEADLESS_BROWSER_API_KEY environment variable', {
+            } else {
+              logger.warn('Could not extract article URL from Google News page', {
                 originalUrl: item.url,
-                suggestion: 'Configure HEADLESS_BROWSER_API_KEY and HEADLESS_BROWSER_API_URL for proper Google News scraping',
+                fetchedUrl: urlToFetch,
+                responseUrl: response.url,
+                hasHeadlessBrowserKey: !!process.env.HEADLESS_BROWSER_API_KEY,
+                suggestion: 'Google News URLs require JavaScript execution. Consider using HEADLESS_BROWSER_API_KEY or filtering out Google News URLs from discovery.',
               });
             }
             
@@ -459,14 +583,14 @@ export class ScrapeStage {
                 originalUrl: item.url,
                 finalUrl: finalUrl,
                 contentLength: content.length,
-                usedHeadlessBrowser: useHeadlessBrowser,
+                usedPlaywright: usePlaywright,
               });
             }
-          } else if (isMinimalContent && isGoogleNewsUrl && useHeadlessBrowser) {
-            // Headless browser was used but still got minimal content - this shouldn't happen
-            logger.error('Headless browser service returned minimal content - service may not be working correctly', {
+          } else if (isMinimalContent && isGoogleNewsUrl && usePlaywright) {
+            // Playwright was used but still got minimal content - this shouldn't happen
+            logger.error('Playwright returned minimal content - may need to adjust wait times or stealth settings', {
               originalUrl: item.url,
-              serviceUrl: urlToFetch.substring(0, 100), // Don't log full API key
+              finalUrl: finalUrl,
               contentLength: content.length,
             });
           }

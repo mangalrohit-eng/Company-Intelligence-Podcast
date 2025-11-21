@@ -1,0 +1,36 @@
+{
+  "runId": "test-scrape-lambda-20251121",
+  "podcastId": "test-podcast",
+  "configVersion": 1,
+  "config": {
+    "companyId": "Test Company",
+    "industry": "Technology",
+    "competitors": [],
+    "durationMinutes": 5,
+    "voice": "onyx",
+    "version": 1
+  },
+  "flags": {
+    "enable": {
+      "prepare": false,
+      "discover": false,
+      "scrape": true,
+      "extract": false,
+      "summarize": false,
+      "contrast": false,
+      "outline": false,
+      "script": false,
+      "qa": false,
+      "tts": false,
+      "package": false
+    },
+    "provider": {
+      "llm": "openai",
+      "tts": "openai",
+      "http": "playwright"
+    },
+    "cassetteKey": "default",
+    "dryRun": false
+  }
+}
+

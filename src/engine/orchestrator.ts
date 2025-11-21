@@ -137,10 +137,11 @@ export class PipelineOrchestrator {
 
       const llmGateway = GatewayFactory.createLlmGateway(gatewayConfig);
       const ttsGateway = GatewayFactory.createTtsGateway(gatewayConfig);
-      const httpGateway = GatewayFactory.createHttpGateway(gatewayConfig);
+      const httpGateway = await GatewayFactory.createHttpGateway(gatewayConfig);
 
-            // Helper to write debug file to S3 with timeout protection
-            // On Vercel, S3 writes can hang, so we add a timeout to prevent pipeline blocking
+            // Helper to write debug file to S3
+            // In Lambda, S3 writes are reliable, so we don't need a timeout
+            // The timeout was only needed for Vercel's serverless environment
             const writeDebugFile = async (filename: string, content: string | object) => {
               try {
                 const jsonContent = typeof content === 'string' ? content : JSON.stringify(content, null, 2);
@@ -152,17 +153,12 @@ export class PipelineOrchestrator {
                   runId: input.runId,
                 });
                 
-                // Add timeout to prevent hanging on Vercel (5 seconds)
-                const writePromise = writeToS3(
+                // Write to S3 without timeout in Lambda (timeout was only for Vercel)
+                await writeToS3(
                   s3Key,
                   jsonContent,
                   'application/json'
                 );
-                const timeoutPromise = new Promise((_, reject) => 
-                  setTimeout(() => reject(new Error('S3 write timeout')), 5000)
-                );
-                
-                await Promise.race([writePromise, timeoutPromise]);
                 
                 logger.info(`Successfully wrote debug file to S3`, { 
                   filename, 
@@ -171,19 +167,20 @@ export class PipelineOrchestrator {
                 });
               } catch (error: any) {
                 // Log but don't throw - continue pipeline even if debug file save fails
-                if (error.message === 'S3 write timeout') {
-                  logger.warn(`Debug file ${filename} write timed out after 5s, continuing pipeline`, { 
-                    filename,
-                    runId: input.runId,
-                  });
-                } else {
-                  logger.error(`Failed to write debug file ${filename} to S3`, { 
-                    filename,
-                    runId: input.runId,
-                    error: error.message,
-                    errorName: error.name,
-                  });
-                }
+                logger.error(`Failed to write debug file ${filename} to S3`, { 
+                  filename,
+                  runId: input.runId,
+                  error: error.message,
+                  errorName: error.name,
+                  errorCode: error.code,
+                  errorStack: error.stack,
+                  s3Key: getDebugFileKey(input.runId, filename),
+                  bucket: process.env.S3_BUCKET_MEDIA || process.env.MEDIA_BUCKET,
+                  hasAwsCreds: !!(process.env.AWS_ACCESS_KEY_ID && process.env.AWS_SECRET_ACCESS_KEY),
+                  hasAmplifyCreds: !!(process.env.AMPLIFY_ACCESS_KEY_ID && process.env.AMPLIFY_SECRET_ACCESS_KEY),
+                  awsRegion: process.env.AWS_REGION || process.env.REGION,
+                  isLambda: !!process.env.AWS_LAMBDA_FUNCTION_NAME,
+                });
                 // Don't throw - continue pipeline even if debug file save fails
                 // Debug files are non-critical - pipeline can proceed without them
               }
@@ -1277,8 +1274,23 @@ export class PipelineOrchestrator {
 
           // Save audio to S3
           audioS3Key = getAudioFileKey(input.runId);
-          await writeToS3(audioS3Key, ttsOutput.audioBuffer, 'audio/mpeg');
-          logger.info('Audio saved to S3', { s3Key: audioS3Key, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          try {
+            await writeToS3(audioS3Key, ttsOutput.audioBuffer, 'audio/mpeg');
+            logger.info('Audio saved to S3', { s3Key: audioS3Key, sizeKB: Math.round(ttsOutput.audioBuffer.length / 1024) });
+          } catch (error: any) {
+            logger.error('Failed to save audio to S3', { 
+              s3Key: audioS3Key, 
+              error: error.message,
+              errorName: error.name,
+              errorCode: error.code,
+              audioSizeKB: Math.round(ttsOutput.audioBuffer.length / 1024),
+              runId: input.runId,
+            });
+            // Don't throw - continue pipeline even if audio save fails
+            // The audio buffer is in memory and can be retried later if needed
+            // Set audioS3Key to null so package stage knows audio wasn't saved
+            audioS3Key = undefined;
+          }
         } else {
           // Save error output if stage failed
           const errorOutput = {
