@@ -457,7 +457,13 @@ function RunsTab({ podcastId }: { podcastId: string }) {
       if (response.ok) {
         const data = await response.json();
         console.log(`✅ Received ${data.runs?.length || 0} runs:`, data);
-        setRuns(data.runs || []);
+        // Sort runs by startedAt in descending order (newest first)
+        const sortedRuns = (data.runs || []).sort((a: any, b: any) => {
+          const aTime = new Date(a.startedAt || a.createdAt || 0).getTime();
+          const bTime = new Date(b.startedAt || b.createdAt || 0).getTime();
+          return bTime - aTime; // Descending order (newest first)
+        });
+        setRuns(sortedRuns);
       } else {
         const errorText = await response.text();
         console.error(`❌ Failed to fetch runs: ${errorText}`);
