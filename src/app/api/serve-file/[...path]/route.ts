@@ -69,6 +69,23 @@ export async function GET(
       contentType = 'text/vtt';
     }
 
+    // For audio files, always redirect to S3 presigned URL to avoid Amplify response size limits
+    // This avoids loading the entire file into memory and hitting 413 errors
+    if (contentType.startsWith('audio/') && isS3Available()) {
+      try {
+        let s3Key = relativePath;
+        if (s3Key.startsWith('episodes/')) {
+          s3Key = s3Key.replace('episodes/', 'runs/');
+        }
+        const presignedUrl = await getPresignedReadUrl(s3Key, 3600); // 1 hour expiry
+        console.log(`🔄 Redirecting audio file to S3 presigned URL: ${s3Key}`);
+        return NextResponse.redirect(presignedUrl, 307); // 307 Temporary Redirect
+      } catch (error: any) {
+        console.error('Failed to generate presigned URL for audio file', error);
+        // Fall through to try reading from S3 (may fail with 413, but worth trying)
+      }
+    }
+
     let fileBuffer: Buffer;
 
     // Try local filesystem first
