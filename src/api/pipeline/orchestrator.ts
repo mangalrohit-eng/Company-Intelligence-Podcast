@@ -305,6 +305,9 @@ export const handler = async (event: any): Promise<any> => {
       hasArtifacts: !!result.artifacts,
     });
     
+    // Generate episode ID (use runId as episodeId)
+    const episodeId = runId;
+    
     await updateRunStatus(runId, {
       status: 'completed',
       currentStage: 'package',
@@ -312,6 +315,8 @@ export const handler = async (event: any): Promise<any> => {
       stageCompletedAt: now,
       // Store audio URL and other artifacts for frontend
       output: {
+        episodeId: episodeId,
+        episodeTitle: result.episode?.title || `Episode ${now}`,
         audioS3Key: audioS3Key,
         audioPath: audioPath,
         showNotesPath: result.artifacts?.showNotesPath,
@@ -322,7 +327,32 @@ export const handler = async (event: any): Promise<any> => {
       finishedAt: now,
     });
     
-    logger.info('Run status updated to completed', { runId, audioPath });
+    logger.info('Run status updated to completed', { runId, audioPath, episodeId });
+    
+    // Create episode record in episodes table
+    try {
+      await createEpisodeRecord({
+        episodeId,
+        podcastId,
+        runId,
+        title: result.episode?.title || `Episode ${now}`,
+        description: result.episode?.description || '',
+        pubDate: now,
+        durationSeconds: result.artifacts?.durationSeconds || 0,
+        mp3S3Key: audioS3Key || '',
+        transcriptS3Key: result.artifacts?.transcriptTxtPath || '',
+        showNotesS3Key: result.artifacts?.showNotesPath || '',
+        sourcesS3Key: result.artifacts?.sourcesJsonPath || '',
+      });
+      logger.info('Episode record created', { episodeId, podcastId });
+    } catch (episodeError: any) {
+      // Don't fail the run if episode creation fails - log and continue
+      logger.error('Failed to create episode record', { 
+        episodeId, 
+        podcastId, 
+        error: episodeError.message 
+      });
+    }
 
     logger.info('Pipeline orchestrator completed', { runId, podcastId });
 
