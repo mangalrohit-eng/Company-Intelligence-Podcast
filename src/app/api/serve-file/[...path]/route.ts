@@ -13,6 +13,30 @@ import { join } from 'path';
 import { existsSync } from 'fs';
 import { isS3Available, readFromS3 } from '@/lib/s3-storage';
 
+// Handle OPTIONS requests for CORS preflight (required for audio playback)
+export async function OPTIONS(
+  request: NextRequest,
+  { params }: { params: { path: string[] } }
+) {
+  const pathSegments = params.path;
+  const relativePath = pathSegments.join('/');
+  const isAudio = relativePath.endsWith('.mp3');
+  
+  if (isAudio) {
+    return new NextResponse(null, {
+      status: 200,
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'GET, HEAD, OPTIONS',
+        'Access-Control-Allow-Headers': 'Range, Content-Type',
+        'Access-Control-Max-Age': '86400',
+      },
+    });
+  }
+  
+  return new NextResponse(null, { status: 200 });
+}
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { path: string[] } }
@@ -191,8 +215,26 @@ export async function GET(
     if (contentType.startsWith('audio/')) {
       headers['Access-Control-Allow-Origin'] = '*';
       headers['Access-Control-Allow-Methods'] = 'GET, HEAD, OPTIONS';
-      headers['Access-Control-Allow-Headers'] = 'Range';
+      headers['Access-Control-Allow-Headers'] = 'Range, Content-Type';
       headers['Accept-Ranges'] = 'bytes';
+      // Support range requests for audio seeking
+      const range = request.headers.get('range');
+      if (range) {
+        const parts = range.replace(/bytes=/, '').split('-');
+        const start = parseInt(parts[0], 10);
+        const end = parts[1] ? parseInt(parts[1], 10) : fileBuffer.length - 1;
+        const chunksize = (end - start) + 1;
+        const chunk = fileBuffer.slice(start, end + 1);
+        
+        return new NextResponse(new Uint8Array(chunk), {
+          status: 206, // Partial Content
+          headers: {
+            ...headers,
+            'Content-Range': `bytes ${start}-${end}/${fileBuffer.length}`,
+            'Content-Length': chunksize.toString(),
+          },
+        });
+      }
     }
 
     return new NextResponse(new Uint8Array(fileBuffer), {
