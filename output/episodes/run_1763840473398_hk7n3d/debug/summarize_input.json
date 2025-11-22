@@ -1,0 +1,58 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 4,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 4,
+      "sampleUnits": [
+        {
+          "id": "eea877eb-99ed-4e5a-a78b-988837da24b9",
+          "type": "claim",
+          "span": "English Premier League to introduce spending cap in 2026/27 season",
+          "authority": 0.5,
+          "publisher": "abc.net.au",
+          "context": "The Premier League clubs have agreed to implement spending caps.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "768f8519-ffec-404a-9dc5-081293adba6c",
+          "type": "stat",
+          "span": "clubs will be restricted to 85 per cent of their football revenue for on-field spending",
+          "authority": 0.5,
+          "publisher": "abc.net.au",
+          "context": "On-field spending among the clubs will be limited to 85% of their football revenue.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "b564ce4e-8afd-4a56-a8fa-f1e62a9e2545",
+          "type": "claim",
+          "span": "clubs will face points deduction if they exceed the spending limit",
+          "authority": 0.5,
+          "publisher": "abc.net.au",
+          "context": "If clubs exceed the spending limit, they face a points deduction.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 1,
+      "validQuotes": 1,
+      "validClaims": 2
+    }
+  ]
+}

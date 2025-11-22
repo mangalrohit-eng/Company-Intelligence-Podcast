@@ -1,0 +1,22 @@
+{
+  "script": {
+    "narrative": "Welcome to today's episode of \"Beyond the Game,\" where we dive into the evolving world of sports, unpacking the dynamics that shape the games we love. Today, we're exploring a groundbreaking shift in the world of football, specifically within the Premier League, through the lens of financial regulation. A move that's not only redefining competitive balance but is also setting a new standard for financial sustainability in sports.\n\nAt the heart of this transformation is the Premier League's bold new regulation, capping clubs' on-field spending to 85% of their football revenue. This rule could very well be the dawn of a new era, aiming to ensure that success on the field is reflective of sound financial management and not just the depth of one's pockets. The vision? To create an environment where all clubs have the opportunity to thrive, promoting a level playing field that’s been long yearned for by fans and officials alike.\n\nBut how does this stack up against the rest of the sports world? As we cast our gaze across the pond, it's apparent that the Premier League's approach is somewhat of a pioneer. Other sports leagues certainly have their own financial regulations, but none seem to quite mirror this direct link between revenue and spending. This move by the Premier League might just set a precedent, prompting leagues worldwide to consider how they might also adopt similar measures to promote financial prudence and competitive balance.\n\nThe implications of this regulation extend far beyond the pitch. It's poised to influence the global sports industry at large, potentially ushering in a more equitable sports ecosystem. From player transfers to club strategies, the economics of football could see a significant shift, with clubs now incentivized to cultivate and develop talent, rather than solely relying on big-money signings.\n\nAs we reflect on the road ahead, it's clear that the Premier League's spending cap presents both opportunities and challenges. The path to financial sustainability and competitive balance is fraught with complexities. Yet, if successful, this initiative could serve as a beacon for sports leagues worldwide, heralding a future where the playing field is leveled not just in spirit, but in practice.\n\nSo, will others follow the Premier League's lead? Only time will tell. But one thing is for certain: the world of sports",
+    "boundEvidence": {
+      "768f8519-ffec-404a-9dc5-081293adba6c": "clubs will be restricted to 85 per cent of their football revenue for on-field spending",
+      "04f676a0-df38-43ad-83e6-7f87342c539c": "The rules promoted 'the opportunity for all of its clubs..."
+    },
+    "durationEstimateSeconds": 153
+  },
+  "stats": {
+    "wordCount": 382,
+    "estimatedDurationMinutes": 2.55,
+    "bridgeCount": 0,
+    "sectionWordCounts": {
+      "A New Dawn in the Premier League": 68,
+      "The Premier League's Bold Move": 86,
+      "Ripples Across the Pond: How Competitors Are Reacting": 85,
+      "Beyond the Field: The Broader Implications": 59,
+      "The Road Ahead": 62
+    }
+  }
+}

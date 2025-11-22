@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a move that's stirring up the field, the Premier League has announced a game-changing regulation, capping clubs' on-field spending to a tight 85% of their football revenue. This strategic play, aimed at leveling the playing field, embodies the league's vision where \"The rules promoted 'the opportunity for all of its clubs...'\" to thrive. It's a bold step towards fostering a more competitive and financially sustainable ecosystem within one of the world's most beloved sports leagues. By linking spending directly to revenue, the Premier League is not just promoting financial prudence but also ensuring that the spirit of competition remains alive and well, where success is not just bankrolled but earned on the pitch.",
+      "onAirStat": {
+        "span": "clubs will be restricted to 85 per cent of their football revenue for on-field spending",
+        "evidenceId": "768f8519-ffec-404a-9dc5-081293adba6c"
+      },
+      "onAirQuote": {
+        "span": "The rules promoted 'the opportunity for all of its clubs...",
+        "evidenceId": "04f676a0-df38-43ad-83e6-7f87342c539c"
+      }
+    }
+  ]
+}

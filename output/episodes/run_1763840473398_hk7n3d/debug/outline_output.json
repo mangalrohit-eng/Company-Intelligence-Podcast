@@ -1,0 +1,58 @@
+{
+  "outline": {
+    "theme": "Financial Regulation in Sports",
+    "subThemes": [
+      "Financial Sustainability",
+      "Competitive Balance"
+    ],
+    "sections": [
+      {
+        "section": "cold_open",
+        "title": "A New Dawn in the Premier League",
+        "bulletPoints": [
+          "Unveiling the Premier League's groundbreaking financial regulation.",
+          "How this new rule could redefine competitive balance and financial sustainability in sports."
+        ]
+      },
+      {
+        "section": "company_deep_dive",
+        "title": "The Premier League's Bold Move",
+        "bulletPoints": [
+          "An overview of the Premier League's decision to cap clubs' on-field spending to 85% of their football revenue.",
+          "The vision behind the regulation: promoting a level playing field and ensuring all clubs have the opportunity to thrive.",
+          "The potential impact on financial prudence and competitive balance within the league."
+        ]
+      },
+      {
+        "section": "competitor_moves",
+        "title": "Ripples Across the Pond: How Competitors Are Reacting",
+        "bulletPoints": [
+          "A comparative analysis of financial regulations in other sports leagues and how they might respond to the Premier League's new rule.",
+          "Speculations on whether other leagues will adopt similar measures to promote financial sustainability and competitive balance."
+        ]
+      },
+      {
+        "section": "industry_special_topics",
+        "title": "Beyond the Field: The Broader Implications",
+        "bulletPoints": [
+          "Exploring the potential long-term effects of the Premier League's regulation on the global sports industry.",
+          "The role of financial regulation in fostering a more equitable sports ecosystem.",
+          "How this regulation might influence player transfers, club strategies, and the overall economics of football."
+        ]
+      },
+      {
+        "section": "takeaways",
+        "title": "The Road Ahead",
+        "bulletPoints": [
+          "Summarizing the potential benefits and challenges of the Premier League's new spending cap.",
+          "Reflecting on the importance of financial sustainability and competitive balance in sports.",
+          "Considering the future of financial regulation in sports: Will others follow the Premier League's lead?"
+        ]
+      }
+    ]
+  },
+  "knowledgeGraph": {
+    "entities": 2,
+    "relationships": 1
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBkOXFfRHZKbE1IN3FMVkNLOVZraFN2VDNycnBSaFd0NElCdFREUl9TZld4eHh6amtTU2w2bDhNR256ZDVZcUFwdFBhTzhqWUhRazZtUFltVXZ2MDdOWEtINlNNWnpDOE51VzF4eEdRa2w?oc=5",
+      "title": "English Premier League clubs back new spending limits - Financial Times",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 12:49:45 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "English Premier League"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8321743042618263,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihgNBVV95cUxNQXliNkZRc0NLWGlnZlNPNkFnZENVMnZTWUNsYUo1SXliYUI2c1VCUXVDa015NnRXdzI4ZVVmLTZELUpLTTBCTEQtX1ByYkRDLV9aWktqZ3RaWG1CTnZabWpGcUpRbVNVTTEtQ2xoU3hSQXB0TWt2c3J2WnNSOXE1ODhpN0pqVjdjRzlvWGNzNE5ZNmRhMUlhYnF4X2tiSWZwZUVFS19UUno1Mloxb0w1c2lKYUFfczhtRUthM0NKNTd0cUNiTDhvakZZWGFCMGRBeVROWXBWSXZjNkRfbW5jNUNQNGNwbXZwRUlKUWRGLTJadVMwcDRKMUlIbDV0UHFKME80c09pTnVTMVlLSExXNDVIbFBRbDd6X1gyWVBDVi1YTnV3V0FhellNRXhnaFQ2Q2hZcHI4Q2tMYzBlM25lUFU1cEFzS3I0MTdvUjFYUkRrYWxBMXg5WkpxRVZZdmR0WVBzMlh1OVlvQVpGWlJqVTkteXFFSUVZM1o0VS1uV2Q3OU92ZXc?oc=5",
+      "title": "Football: English Premier League Table - Barron's",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 14:31:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "English Premier League"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9696582550002909,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOZURkalJBYTA3aUxRVVoyb0JSckRmYjRudlZiZ1dWcFRlOHFzT3RFTHFKdmQ2ZDBuU19DNXQtbDg5bUMxYzBwOEk4MXo1RnNNdHJWRmVpbE80X21Da1BhWkJLT2ExaUFnT2t2NG9URGc2ODg1YnpmSFJKLWRpaGlXNWlCam9ZNC1aT2QyVEtKZllhbnotem5zMm91dkJtNXMwWm1oWGxkMUR4Zw?oc=5",
+      "title": "English Premier League to introduce spending cap next season - abc.net.au",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 21:11:13 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "English Premier League"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8746209433257617,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    }
+  ],
+  "stats": {
+    "totalInput": 4,
+    "passedConfidenceThreshold": 3,
+    "blockedByPolicy": 0,
+    "blockedByRobots": 0,
+    "finalCount": 3
+  }
+}

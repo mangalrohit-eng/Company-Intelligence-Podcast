@@ -4,12 +4,11 @@
 
 import { fetchAuthSession } from 'aws-amplify/auth';
 
-// Use Next.js API routes in development, AWS Lambda in production
+// Use Next.js API routes (same domain as frontend)
+// Since we're running in a single container, always use relative /api path
 const getApiBaseUrl = () => {
-  if (typeof window !== 'undefined' && window.location.hostname === 'localhost') {
-    return '/api';
-  }
-  return process.env.NEXT_PUBLIC_API_URL || 'https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com';
+  // Always use Next.js API routes (same domain as the app)
+  return '/api';
 };
 
 export interface ApiOptions extends RequestInit {
