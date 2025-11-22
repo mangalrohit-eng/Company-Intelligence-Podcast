@@ -1,0 +1,68 @@
+{
+  "config": {
+    "title": "TMObile Intelligence Briefing",
+    "subtitle": "Daily insights for TMObile",
+    "description": "Stay ahead of the curve with AI-powered intelligence briefings tailored for TMObile. Get daily updates on industry trends, competitor moves, and market insights.",
+    "author": "TMObile",
+    "email": "noreply@example.com",
+    "category": "Business",
+    "explicit": false,
+    "language": "en",
+    "coverArtS3Key": "default-cover.png",
+    "company": {
+      "id": "microsoft",
+      "name": "Microsoft"
+    },
+    "industry": {
+      "id": "technology",
+      "name": "Technology"
+    },
+    "competitors": [],
+    "topics": {
+      "standard": [
+        {
+          "id": "company-news",
+          "name": "Company News & Announcements",
+          "priority": 3
+        },
+        {
+          "id": "competitor-analysis",
+          "name": "Competitive Intelligence",
+          "priority": 2
+        },
+        {
+          "id": "industry-trends",
+          "name": "Industry Trends & Market Analysis",
+          "priority": 2
+        }
+      ],
+      "special": []
+    },
+    "cadence": "daily",
+    "durationMinutes": 5,
+    "publishTime": "09:00",
+    "timezone": "UTC",
+    "timeWindowHours": 24,
+    "timeWindow": {
+      "startIso": "2025-11-21T19:05:38.178Z",
+      "endIso": "2025-11-22T19:05:38.179Z"
+    },
+    "regions": [
+      "US"
+    ],
+    "sourceLanguages": [
+      "en"
+    ],
+    "voice": {
+      "provider": "openai-tts",
+      "voiceId": "alloy",
+      "speed": 1,
+      "tone": "professional"
+    },
+    "robotsMode": "permissive",
+    "sourcePolicies": {
+      "allowDomains": [],
+      "blockDomains": []
+    }
+  }
+}

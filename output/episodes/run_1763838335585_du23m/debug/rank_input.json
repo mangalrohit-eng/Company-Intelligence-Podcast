@@ -1,0 +1,67 @@
+{
+  "itemCount": 76,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxNbjh2TjFGV3pzV0Z5bVB5dVVTOHFNS19fRzRrYWZDTDAwY3BSb29ibUlQTkpqanZ3UDhpdldwMFROeUl5ZlhPTXBrZ0NKLVdueWJHUFhvVVVzUVIyRGRMd0NzVER1WlFDeEtNZldOa096VTAzYXZBMlR5SWRpYmZ5VWluQQ?oc=5",
+      "title": "Yes, Windows is broken – Microsoft Admits - OC3D",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8229475198545002,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOdjY0NUVkY3lDX3ZrQnMxai1sT0hzc3FjWXExZ0xhSW9OUzdEZ3J4LWRYZHBtMnI4cXJ4a3VMZnNrdENlYmVjM0JlVmx0bEUzQTNfem1UQ1dRdTg3cEU4YzFVVGlMaEM0YkZjaUVCUmF1cVNsMjZ1Wl82N2Q1bGpQSGpTc1l1cDh1LTE3RHpHSQ?oc=5",
+      "title": "Microsoft Exec Asks: Why Aren't More People Impressed With AI? - PCMag",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6603424097817409,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPWU95X0gwcWtaMlNOVDhHVXU0OEt3SDVvZXFRbEtaaHhrQlpRODZJaWVOdVIwSUlyVzNUNXNOOC1aeUVVM1VJV1I5VGNpcnFhN241TGZxUHY3c0ZxS2ZZVGdvZEJyTVM2SXJkc3N3MzFfN1dkZ05MZUNyNmFhVDd5NUQtUW54ZXhrbWc4Q3F0dDI?oc=5",
+      "title": "Microsoft Teams Is Rolling Out A Feature To Stop You From Recording Meetings - Currently.com",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.981724856816426,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxNak80N1pEWXIwb2g2eHQ5T0V2RkFodml3NVdBY25Vb0JwaFpOcl9yQlRpS3lYWnFodDBOZmxtT3NzUmNVTExZUlpremp6RVdPbWFoanRBTnZfMkJ0LS1JLXozQkk4TDBYZXZ1OU1sLUtaLWxic0VHX0JsdXlMbzRyU2s3Mm10Y1l0eHNROEVkMzZReWVGUDZ4Y2JWZE1pSmlsQl9SdFNWSHpuclZ4emVUU1dwNTNZTk45LTFHZUdFMFhEX0lBcFdFSEdB?oc=5",
+      "title": "Microsoft President Sees Jobs Risk If Washington State Hikes Taxes - Bloomberg.com",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8485065033921624,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMigAJBVV95cUxNZTFEY0FfNjlvRHVIYkM5OXZvSEthajZmTXBCZUFmOUd1LWoyZndZLTlSMGhSdS13OWdVcEhqRlQ2YndheWo0M21OQlV1bXZIU3FNdm5MbzBMaUdjRkVCVnVjUGNzYmo0ZlhZN2VUYVpsQTJBUkNUZU5teElDWW1yNFZ5R0JLbGFQVng3UkQybkNkV3dZTFV2OFBwWE1meVM3N05IVy1BeWhJU0NUc3BzLUc2NUc3Mlk4NmdFdkRDWUNNTHlqZTVXM2ZHR1BFU3NZckMzdWhpNEc0S2J4Z21GekxqdFBHTDZTSFFiR1ZZWHdfcFpTWHl2QUNFZzJfNDBS0gGGAkFVX3lxTFBiZXZzQnI2Y18tMm1BazdhNDNHcEp4ZkhCdW9abVNWY1V2bkFaVnRZVFEyS1FpVFM2YVhhR2J5SlJ6VUhhTFdqRjVGMUdpSTJYbTJ5M2J6RnRyNDhpSWpPdGhNcC1nLXFRM0xmTElpNmtKY0haSEV6NTNUMEFaRTNpUXFqRzRUR0pxOGZGOFVvSmItNDNZcmFUZWg4Wm9fYkplUW4yajhKWFl1SjhBajFLSnpzNzZhNnA0UEF0ZGdYMFlpTE40MHNta0VLSEI3dmFZWldKLUNGZVpvVGxTXzZhcVBucjBONlJRUGpBZXlWUzZmTHBLZ1pQb01LUU1OZHhndVE4cnc?oc=5",
+      "title": "Microsoft CEO Satya Nadella to employees in internal memo: We need to rapidly rethink the… - The Times of India",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8047257681876129,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

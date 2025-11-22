@@ -123,12 +123,37 @@ export async function POST(
     // Create event emitter
     const emitter = new RealtimeEventEmitter((update) => {
       if (run) {
-        run.progress.currentStage = update.stage;
-        run.progress.stages[update.stage] = {
-          status: update.pct === 100 ? 'completed' : 'running',
-          startedAt: run.progress.stages[update.stage]?.startedAt || new Date().toISOString(),
-          progress: update.pct,
-        };
+        if (update.currentStage) {
+          run.progress.currentStage = update.currentStage;
+          
+          // Ensure the stage exists in the stages object
+          if (!run.progress.stages[update.currentStage]) {
+            run.progress.stages[update.currentStage] = { status: 'pending' };
+          }
+        }
+        
+        const currentStage = run.progress.currentStage;
+        
+        if (update.stageStatus && currentStage && run.progress.stages[currentStage]) {
+          run.progress.stages[currentStage].status = update.stageStatus;
+        }
+        
+        if (update.stageStartedAt && currentStage && run.progress.stages[currentStage]) {
+          run.progress.stages[currentStage].startedAt = update.stageStartedAt;
+        }
+        
+        if (update.stageCompletedAt && currentStage && run.progress.stages[currentStage]) {
+          run.progress.stages[currentStage].completedAt = update.stageCompletedAt;
+        }
+        
+        if (update.stageProgress !== undefined && currentStage && run.progress.stages[currentStage]) {
+          run.progress.stages[currentStage].progress = update.stageProgress;
+        }
+        
+        if (update.error) {
+          run.error = update.error;
+        }
+        
         saveRun(run).catch(err => logger.error(`Failed to persist run update:`, err));
       }
     });
@@ -138,6 +163,8 @@ export async function POST(
       llmProvider: 'openai' as const,
       ttsProvider: 'openai' as const,
       httpProvider: 'stub' as const,
+      cassetteKey: 'default',
+      cassettePath: process.env.CASSETTE_PATH || './cassettes',
       openaiApiKey: process.env.OPENAI_API_KEY || '',
     };
     const llmGateway = GatewayFactory.createLlmGateway(gatewayConfig);
@@ -312,7 +339,7 @@ export async function POST(
         }
 
         const narrative = qaOutput?.finalScript || scriptOutput.script?.narrative || scriptOutput.narrative || '';
-        const script = { narrative, boundEvidence: [], durationEstimateSeconds: 0 };
+        const script = { narrative, boundEvidence: {} as Record<string, string>, durationEstimateSeconds: 0 };
         const voiceId = ttsInput?.voiceId || 'alloy';
         const speed = ttsInput?.speed || 1.0;
 
@@ -554,7 +581,7 @@ export async function POST(
           script: {
             narrative: stageOutput.script?.narrative || stageOutput.narrative,
             narrativeLength: (stageOutput.script?.narrative || stageOutput.narrative || '').length,
-            boundEvidence: stageOutput.script?.boundEvidence || [],
+            boundEvidence: stageOutput.script?.boundEvidence || {},
             durationEstimateSeconds: stageOutput.script?.durationEstimateSeconds || 0,
           },
           stats: stageOutput.stats || {},

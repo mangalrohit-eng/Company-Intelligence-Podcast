@@ -11,10 +11,14 @@ import * as cognito from 'aws-cdk-lib/aws-cognito';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as ec2 from 'aws-cdk-lib/aws-ec2';
 import * as ecs from 'aws-cdk-lib/aws-ecs';
+import * as ecr from 'aws-cdk-lib/aws-ecr';
+import * as logs from 'aws-cdk-lib/aws-logs';
 import * as iam from 'aws-cdk-lib/aws-iam';
+import * as secretsmanager from 'aws-cdk-lib/aws-secretsmanager';
 import * as apigatewayv2 from 'aws-cdk-lib/aws-apigatewayv2';
 import { HttpLambdaIntegration } from 'aws-cdk-lib/aws-apigatewayv2-integrations';
 import { HttpJwtAuthorizer } from 'aws-cdk-lib/aws-apigatewayv2-authorizers';
+import * as elbv2 from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { NodejsFunction } from 'aws-cdk-lib/aws-lambda-nodejs';
 import { Construct } from 'constructs';
 
@@ -336,9 +340,242 @@ export class PodcastPlatformStack extends cdk.Stack {
       natGateways: 1,
     });
 
-    new ecs.Cluster(this, 'Cluster', {
+    const cluster = new ecs.Cluster(this, 'Cluster', {
       vpc,
       clusterName: 'podcast-platform-cluster',
+    });
+
+    // ========================================================================
+    // ECS Fargate: Scraper Container
+    // ========================================================================
+
+    // ECR Repository for scraper container
+    const scraperRepo = new ecr.Repository(this, 'ScraperRepo', {
+      repositoryName: 'podcast-scraper',
+      removalPolicy: cdk.RemovalPolicy.RETAIN,
+    });
+
+    // IAM role for scraper tasks
+    const scraperTaskRole = new iam.Role(this, 'ScraperTaskRole', {
+      assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+      description: 'Role for scraper ECS tasks',
+    });
+
+    // Grant S3 access
+    mediaBucket.grantReadWrite(scraperTaskRole);
+    rssBucket.grantReadWrite(scraperTaskRole);
+
+    // Grant DynamoDB access
+    runsTable.grantReadWriteData(scraperTaskRole);
+    eventsTable.grantWriteData(scraperTaskRole);
+
+    // Grant Secrets Manager access (for OpenAI key)
+    scraperTaskRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['secretsmanager:GetSecretValue'],
+      resources: ['*'], // TODO: Restrict to specific secret in production
+    }));
+
+    // Fargate task definition for scraper
+    const scraperTaskDef = new ecs.FargateTaskDefinition(this, 'ScraperTaskDef', {
+      memoryLimitMiB: 2048,  // 2GB
+      cpu: 1024,              // 1 vCPU
+      taskRole: scraperTaskRole,
+    });
+
+    scraperTaskDef.addContainer('scraper', {
+      image: ecs.ContainerImage.fromEcrRepository(scraperRepo, 'latest'),
+      logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'scraper',
+        logGroup: new logs.LogGroup(this, 'ScraperLogGroup', {
+          logGroupName: '/ecs/podcast-scraper',
+          retention: logs.RetentionDays.ONE_WEEK,
+          removalPolicy: cdk.RemovalPolicy.RETAIN,
+        }),
+      }),
+      environment: {
+        AWS_REGION: this.region,
+        PODCASTS_TABLE: podcastsTable.tableName,
+        RUNS_TABLE: runsTable.tableName,
+        EVENTS_TABLE: eventsTable.tableName,
+        MEDIA_BUCKET: mediaBucket.bucketName,
+        RSS_BUCKET: rssBucket.bucketName,
+        NODE_ENV: 'production',
+      },
+    });
+
+    // Get private subnets for ECS tasks
+    const privateSubnets = vpc.privateSubnets.map(subnet => subnet.subnetId);
+    const securityGroup = new ec2.SecurityGroup(this, 'ScraperSecurityGroup', {
+      vpc,
+      description: 'Security group for scraper ECS tasks',
+      allowAllOutbound: true, // Allow outbound for scraping
+    });
+
+    // ========================================================================
+    // Single Container: Everything in One (App Container)
+    // ========================================================================
+
+    // ECR Repository for app container (reference existing or create if doesn't exist)
+    const appRepo = ecr.Repository.fromRepositoryName(
+      this,
+      'AppRepo',
+      'podcast-platform-app'
+    );
+
+    // OpenAI API Key from Secrets Manager (optional - will be undefined if secret doesn't exist)
+    const openaiSecret = secretsmanager.Secret.fromSecretNameV2(
+      this,
+      'OpenAISecret',
+      'podcast-platform/openai-key'
+    );
+
+    // IAM role for app tasks
+    const appTaskRole = new iam.Role(this, 'AppTaskRole', {
+      assumedBy: new iam.ServicePrincipal('ecs-tasks.amazonaws.com'),
+      description: 'Role for app ECS tasks',
+    });
+
+    // Grant all necessary permissions
+    mediaBucket.grantReadWrite(appTaskRole);
+    rssBucket.grantReadWrite(appTaskRole);
+    runsTable.grantReadWriteData(appTaskRole);
+    eventsTable.grantWriteData(appTaskRole);
+    episodesTable.grantWriteData(appTaskRole);
+    podcastsTable.grantReadWriteData(appTaskRole);
+    podcastConfigsTable.grantReadWriteData(appTaskRole);
+    podcastCompetitorsTable.grantReadWriteData(appTaskRole);
+    podcastTopicsTable.grantReadWriteData(appTaskRole);
+
+    // Grant Secrets Manager access (for OpenAI key)
+    appTaskRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['secretsmanager:GetSecretValue'],
+      resources: ['*'], // TODO: Restrict to specific secret in production
+    }));
+
+    // Grant Step Functions access (to start executions)
+    appTaskRole.addToPolicy(new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ['states:StartExecution'],
+      resources: ['*'], // Will be restricted to specific state machine in production
+    }));
+
+    // Fargate task definition for app
+    const appTaskDef = new ecs.FargateTaskDefinition(this, 'AppTaskDef', {
+      memoryLimitMiB: 4096,  // 4GB
+      cpu: 2048,              // 2 vCPU
+      taskRole: appTaskRole,
+    });
+
+    appTaskDef.addContainer('app', {
+      image: ecs.ContainerImage.fromEcrRepository(appRepo, 'latest'),
+      logging: ecs.LogDrivers.awsLogs({
+        streamPrefix: 'app',
+        logGroup: new logs.LogGroup(this, 'AppLogGroup', {
+          logGroupName: '/ecs/podcast-platform-app',
+          retention: logs.RetentionDays.ONE_WEEK,
+          removalPolicy: cdk.RemovalPolicy.RETAIN,
+        }),
+      }),
+      environment: {
+        AWS_REGION: this.region,
+        PODCASTS_TABLE: podcastsTable.tableName,
+        PODCAST_CONFIGS_TABLE: podcastConfigsTable.tableName,
+        PODCAST_COMPETITORS_TABLE: podcastCompetitorsTable.tableName,
+        PODCAST_TOPICS_TABLE: podcastTopicsTable.tableName,
+        RUNS_TABLE: runsTable.tableName,
+        EVENTS_TABLE: eventsTable.tableName,
+        EPISODES_TABLE: episodesTable.tableName,
+        MEDIA_BUCKET: mediaBucket.bucketName,
+        RSS_BUCKET: rssBucket.bucketName,
+        USER_POOL_ID: userPool.userPoolId,
+        USER_POOL_CLIENT_ID: userPoolClient.userPoolClientId,
+        NODE_ENV: 'production',
+        PORT: '3000',
+      },
+      secrets: {
+        OPENAI_API_KEY: ecs.Secret.fromSecretsManager(openaiSecret, 'apiKey'),
+      },
+      portMappings: [{
+        containerPort: 3000,
+        protocol: ecs.Protocol.TCP,
+      }],
+    });
+
+    // Security group for app
+    const appSecurityGroup = new ec2.SecurityGroup(this, 'AppSecurityGroup', {
+      vpc,
+      description: 'Security group for app container',
+      allowAllOutbound: true,
+    });
+
+    // Application Load Balancer
+    const alb = new elbv2.ApplicationLoadBalancer(this, 'AppLoadBalancer', {
+      vpc,
+      internetFacing: true,
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.PUBLIC,
+      },
+    });
+
+    // Target group
+    const targetGroup = new elbv2.ApplicationTargetGroup(this, 'AppTargetGroup', {
+      vpc,
+      port: 3000,
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      targetType: elbv2.TargetType.IP,
+      healthCheck: {
+        path: '/api/health',
+        interval: cdk.Duration.seconds(30),
+        timeout: cdk.Duration.seconds(5),
+        healthyHttpCodes: '200',
+        healthyThresholdCount: 2,
+        unhealthyThresholdCount: 3,
+      },
+    });
+
+    // Allow ALB to access app
+    appSecurityGroup.addIngressRule(
+      ec2.Peer.ipv4(vpc.vpcCidrBlock),
+      ec2.Port.tcp(3000),
+      'Allow HTTP from ALB'
+    );
+
+    // Listener
+    alb.addListener('AppListener', {
+      port: 80,
+      protocol: elbv2.ApplicationProtocol.HTTP,
+      defaultTargetGroups: [targetGroup],
+    });
+
+    // ECS Service
+    const appService = new ecs.FargateService(this, 'AppService', {
+      cluster,
+      taskDefinition: appTaskDef,
+      desiredCount: 1, // Start with 1, can scale up
+      vpcSubnets: {
+        subnetType: ec2.SubnetType.PRIVATE,
+      },
+      securityGroups: [appSecurityGroup],
+      assignPublicIp: false,
+    });
+
+    // Attach service to target group
+    appService.attachToApplicationTargetGroup(targetGroup);
+
+    // Auto-scaling
+    const scaling = appService.autoScaleTaskCount({
+      minCapacity: 1,
+      maxCapacity: 10,
+    });
+
+    scaling.scaleOnCpuUtilization('CpuScaling', {
+      targetUtilizationPercent: 70,
+    });
+
+    scaling.scaleOnMemoryUtilization('MemoryScaling', {
+      targetUtilizationPercent: 80,
     });
 
     // ========================================================================
@@ -497,6 +734,48 @@ export class PodcastPlatformStack extends cdk.Stack {
       value: `https://${distribution.distributionDomainName}`,
       description: 'CloudFront Distribution URL',
       exportName: 'PodcastPlatformWebsiteUrl',
+    });
+
+    new cdk.CfnOutput(this, 'ScraperTaskDefinitionArn', {
+      value: scraperTaskDef.taskDefinitionArn,
+      description: 'Scraper ECS Task Definition ARN',
+      exportName: 'PodcastPlatformScraperTaskDefArn',
+    });
+
+    new cdk.CfnOutput(this, 'EcsClusterArn', {
+      value: cluster.clusterArn,
+      description: 'ECS Cluster ARN',
+      exportName: 'PodcastPlatformEcsClusterArn',
+    });
+
+    new cdk.CfnOutput(this, 'ScraperSubnetIds', {
+      value: privateSubnets.join(','),
+      description: 'Private Subnet IDs for ECS tasks',
+      exportName: 'PodcastPlatformScraperSubnetIds',
+    });
+
+    new cdk.CfnOutput(this, 'ScraperSecurityGroupId', {
+      value: securityGroup.securityGroupId,
+      description: 'Security Group ID for scraper tasks',
+      exportName: 'PodcastPlatformScraperSecurityGroupId',
+    });
+
+    new cdk.CfnOutput(this, 'ScraperRepoUri', {
+      value: scraperRepo.repositoryUri,
+      description: 'ECR Repository URI for scraper',
+      exportName: 'PodcastPlatformScraperRepoUri',
+    });
+
+    new cdk.CfnOutput(this, 'AppLoadBalancerUrl', {
+      value: `http://${alb.loadBalancerDnsName}`,
+      description: 'Application Load Balancer URL',
+      exportName: 'PodcastPlatformAppUrl',
+    });
+
+    new cdk.CfnOutput(this, 'AppRepoUri', {
+      value: appRepo.repositoryUri,
+      description: 'ECR Repository URI for app',
+      exportName: 'PodcastPlatformAppRepoUri',
     });
   }
 }

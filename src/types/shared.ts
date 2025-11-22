@@ -253,6 +253,7 @@ export interface RunTelemetry {
       durationMs: number;
       status: 'success' | 'failed' | 'skipped';
       metrics?: Record<string, number>;
+      error?: string;
     }
   >;
   discovery?: {

@@ -1,0 +1,173 @@
+[
+  {
+    "id": "ccc884ee-9f0b-49ad-aed5-32b16947f3d6",
+    "type": "claim",
+    "span": "Claude maker commits $30 billion to Azure",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNcGI2Z1RNQnZheVVIc3NRNzlUYlZGdGM0Z3c4azNIcElsaElBVmQybHFFaDVGMW5XUnhzZk9OemUxTnF0ZnlaVXJBVFJNa3FGZGRiVDZCV1VlaG54SlNNX1lYVWtZaWRuYk11QzBKM1liaG5XeVRfU25vTXRMU1loY0U1SVZQbUNxbkxNSDhpQVpETXpqc1lSWGpjeGl5ZGla?oc=5",
+    "publisher": "Reuters",
+    "publishedDate": "Tue, 18 Nov 2025 19:04:05 GMT",
+    "authority": 0.9
+  },
+  {
+    "id": "f4c6ef71-b423-4da9-82da-5b114a4e9c40",
+    "type": "stat",
+    "span": "$30 billion",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "ce5c2c57-fd9c-4106-82e4-be6e06fb8d2e",
+    "type": "stat",
+    "span": "one gigawatt",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "f5fafaaf-6682-4d01-afe3-2cd3cde76bfc",
+    "type": "stat",
+    "span": "$10 billion",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "f0787ea2-b817-4363-813b-756e4f8460ea",
+    "type": "stat",
+    "span": "$5 billion",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "f1cb4b68-2e13-4ef1-a2dc-813fc886a838",
+    "type": "quote",
+    "span": "Dario Amodei, Microsoft Chairman and CEO Satya Nadella, and NVIDIA...",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "4c9c8af4-30df-4111-a5f5-30b63fddd73e",
+    "type": "claim",
+    "span": "Anthropic is scaling its Claude AI model on Microsoft Azure, powered by NVIDIA",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOZmkzNHkzX2I0bUVXSlBoZU9Sa08tZHY2Y1pPVDRfeVdOYTZwOGI2allMX1BjMWlRNDlueHZVU2JlWjE3T0JxcmpZaU9rNTE3SjZ1OERYNWJRdnZmZlNMRFNHMlVDMlNUQTliZ0s5QTlCVm5DNWpyamdtXy1pT1BQaWFBbDNjaVZMckV1akduTHZFck9Sd3A0UWdMZUg1VzUtVlpxYzhCa2N1Wnc?oc=5",
+    "publisher": "The Official Microsoft Blog",
+    "publishedDate": "Tue, 18 Nov 2025 15:10:45 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "c1ae5f30-70ad-4dae-a5b2-502dd38bd11e",
+    "type": "quote",
+    "span": "We downgrade Amazon and Microsoft with a heavy heart",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOElUeG16MjZrcElxQ3pzUzdsRWU2WlJHb3pVZXRCOUlldUU1NmduSmJCSldWcGhyd0NIbWU3TmtUVldSX21aLWdwd0lNUW1jQnNIZHVncEtnQ0NtbUxxMDEzVjJMWW9jcE1NajFaSVdoOFlYUk14d0hPQmxTRy1zTHNtdWRMaDFkU0VvaFpacmowZXMtQWN3YVRqcmN6dlVjRENocjA1UXVoUQ?oc=5",
+    "publisher": "Business Insider",
+    "publishedDate": "Thu, 20 Nov 2025 12:22:00 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "ea9c324a-aa56-4105-bd22-21399369949b",
+    "type": "claim",
+    "span": "AI is far more costly. A GPU costs firms around $40 billion in capex per gigawatt of power",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOElUeG16MjZrcElxQ3pzUzdsRWU2WlJHb3pVZXRCOUlldUU1NmduSmJCSldWcGhyd0NIbWU3TmtUVldSX21aLWdwd0lNUW1jQnNIZHVncEtnQ0NtbUxxMDEzVjJMWW9jcE1NajFaSVdoOFlYUk14d0hPQmxTRy1zTHNtdWRMaDFkU0VvaFpacmowZXMtQWN3YVRqcmN6dlVjRENocjA1UXVoUQ?oc=5",
+    "publisher": "Business Insider",
+    "publishedDate": "Thu, 20 Nov 2025 12:22:00 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "b76099a6-5ef0-4a3d-a354-a3d633818927",
+    "type": "stat",
+    "span": "Amazon, Microsoft, Meta, Alphabet, and Apple are on track to spend around $349 billion in capex this year",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOElUeG16MjZrcElxQ3pzUzdsRWU2WlJHb3pVZXRCOUlldUU1NmduSmJCSldWcGhyd0NIbWU3TmtUVldSX21aLWdwd0lNUW1jQnNIZHVncEtnQ0NtbUxxMDEzVjJMWW9jcE1NajFaSVdoOFlYUk14d0hPQmxTRy1zTHNtdWRMaDFkU0VvaFpacmowZXMtQWN3YVRqcmN6dlVjRENocjA1UXVoUQ?oc=5",
+    "publisher": "Business Insider",
+    "publishedDate": "Thu, 20 Nov 2025 12:22:00 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "48c11677-0966-4853-b185-ae477eb3613d",
+    "type": "claim",
+    "span": "AI chips are known to have a short lifespan, turning projects 'value destructive'",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQOElUeG16MjZrcElxQ3pzUzdsRWU2WlJHb3pVZXRCOUlldUU1NmduSmJCSldWcGhyd0NIbWU3TmtUVldSX21aLWdwd0lNUW1jQnNIZHVncEtnQ0NtbUxxMDEzVjJMWW9jcE1NajFaSVdoOFlYUk14d0hPQmxTRy1zTHNtdWRMaDFkU0VvaFpacmowZXMtQWN3YVRqcmN6dlVjRENocjA1UXVoUQ?oc=5",
+    "publisher": "Business Insider",
+    "publishedDate": "Thu, 20 Nov 2025 12:22:00 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "db6ff607-4eae-4f20-b88e-f41451067ebb",
+    "type": "quote",
+    "span": "Apple could drop 50% tonight and still be overvalued",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcEZpUFZ1SklsaFpZSHl1NDlNbFFFaXNOZ0FZamNoYmdGV2NKNnBRX2kzRkdCeEs5dG1naUdjS0F5Vlh1cEZqVTl1YnQ0TnI0bnZxQ1FBTjhDTUZwd1c3QzY4bzV0SjNTUDA0M2NaQWl5T2ZJYUFQMnRQZWxJS1k3SDFzeXktTzFsMjNreVc4SVJ6Qks1djFfZGxycU9CR3RTZHdiaGpuRVRaUHFVY01MR283UEVyOUNVZGRZdmcwd29TU095cnV6SA?oc=5",
+    "publisher": "The Acquirer's Multiple",
+    "publishedDate": "Tue, 18 Nov 2025 23:31:11 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "4c9ff061-61b8-4647-8eb4-9188db3414a7",
+    "type": "quote",
+    "span": "Microsoft could drop 70%, and it wouldn’t be a big...",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcEZpUFZ1SklsaFpZSHl1NDlNbFFFaXNOZ0FZamNoYmdGV2NKNnBRX2kzRkdCeEs5dG1naUdjS0F5Vlh1cEZqVTl1YnQ0TnI0bnZxQ1FBTjhDTUZwd1c3QzY4bzV0SjNTUDA0M2NaQWl5T2ZJYUFQMnRQZWxJS1k3SDFzeXktTzFsMjNreVc4SVJ6Qks1djFfZGxycU9CR3RTZHdiaGpuRVRaUHFVY01MR283UEVyOUNVZGRZdmcwd29TU095cnV6SA?oc=5",
+    "publisher": "The Acquirer's Multiple",
+    "publishedDate": "Tue, 18 Nov 2025 23:31:11 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "7df70b22-126b-40f4-be36-d47af19e3ef0",
+    "type": "quote",
+    "span": "If you guys don’t pay taxes, you go to prison",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcEZpUFZ1SklsaFpZSHl1NDlNbFFFaXNOZ0FZamNoYmdGV2NKNnBRX2kzRkdCeEs5dG1naUdjS0F5Vlh1cEZqVTl1YnQ0TnI0bnZxQ1FBTjhDTUZwd1c3QzY4bzV0SjNTUDA0M2NaQWl5T2ZJYUFQMnRQZWxJS1k3SDFzeXktTzFsMjNreVc4SVJ6Qks1djFfZGxycU9CR3RTZHdiaGpuRVRaUHFVY01MR283UEVyOUNVZGRZdmcwd29TU095cnV6SA?oc=5",
+    "publisher": "The Acquirer's Multiple",
+    "publishedDate": "Tue, 18 Nov 2025 23:31:11 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "f1ed74ad-077d-4104-8519-120e67c79957",
+    "type": "claim",
+    "span": "Companies took on more debt than any time in history in the last decade",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcEZpUFZ1SklsaFpZSHl1NDlNbFFFaXNOZ0FZamNoYmdGV2NKNnBRX2kzRkdCeEs5dG1naUdjS0F5Vlh1cEZqVTl1YnQ0TnI0bnZxQ1FBTjhDTUZwd1c3QzY4bzV0SjNTUDA0M2NaQWl5T2ZJYUFQMnRQZWxJS1k3SDFzeXktTzFsMjNreVc4SVJ6Qks1djFfZGxycU9CR3RTZHdiaGpuRVRaUHFVY01MR283UEVyOUNVZGRZdmcwd29TU095cnV6SA?oc=5",
+    "publisher": "The Acquirer's Multiple",
+    "publishedDate": "Tue, 18 Nov 2025 23:31:11 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "e9eedc31-e3f8-48fe-a6b9-d0b8ecb3f7e4",
+    "type": "claim",
+    "span": "Xbox Series prices may increase again due to severe RAM shortages",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOOHBoLU9HdWNRUWpreTVUQ251M0h3aE44TE9kMDNWS2c2WVI0STBWVEJZTmRFR180N09KZTBGNEUzc3RNa21MRERoRE5GQldkZG94OW94Z1VHanRxMWlCR21UQWhsUmhscEZCaWplTEVHQzVxTDRaenVaQnp3cGJUem14bURzRG5kZE1XUGNrM1pZQQ?oc=5",
+    "publisher": "The Game Post",
+    "publishedDate": "Fri, 21 Nov 2025 20:53:16 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "92305b7f-e969-4676-bcbc-f39bb22a48dd",
+    "type": "stat",
+    "span": "Microsoft pushed the US price of the Xbox Series X from $499.99 to $599.99",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOOHBoLU9HdWNRUWpreTVUQ251M0h3aE44TE9kMDNWS2c2WVI0STBWVEJZTmRFR180N09KZTBGNEUzc3RNa21MRERoRE5GQldkZG94OW94Z1VHanRxMWlCR21UQWhsUmhscEZCaWplTEVHQzVxTDRaenVaQnp3cGJUem14bURzRG5kZE1XUGNrM1pZQQ?oc=5",
+    "publisher": "The Game Post",
+    "publishedDate": "Fri, 21 Nov 2025 20:53:16 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "43873e49-5709-478a-8e99-d2f2b3181987",
+    "type": "quote",
+    "span": "[Microsoft] didn’t plan ahead at all, apparently",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOOHBoLU9HdWNRUWpreTVUQ251M0h3aE44TE9kMDNWS2c2WVI0STBWVEJZTmRFR180N09KZTBGNEUzc3RNa21MRERoRE5GQldkZG94OW94Z1VHanRxMWlCR21UQWhsUmhscEZCaWplTEVHQzVxTDRaenVaQnp3cGJUem14bURzRG5kZE1XUGNrM1pZQQ?oc=5",
+    "publisher": "The Game Post",
+    "publishedDate": "Fri, 21 Nov 2025 20:53:16 GMT",
+    "authority": 0.5
+  },
+  {
+    "id": "3e5deee9-8b59-4676-a2c3-e2d42d4749ba",
+    "type": "claim",
+    "span": "Sony bought massive amounts of GDDR6 when prices were low",
+    "sourceUrl": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOOHBoLU9HdWNRUWpreTVUQ251M0h3aE44TE9kMDNWS2c2WVI0STBWVEJZTmRFR180N09KZTBGNEUzc3RNa21MRERoRE5GQldkZG94OW94Z1VHanRxMWlCR21UQWhsUmhscEZCaWplTEVHQzVxTDRaenVaQnp3cGJUem14bURzRG5kZE1XUGNrM1pZQQ?oc=5",
+    "publisher": "The Game Post",
+    "publishedDate": "Fri, 21 Nov 2025 20:53:16 GMT",
+    "authority": 0.5
+  }
+]

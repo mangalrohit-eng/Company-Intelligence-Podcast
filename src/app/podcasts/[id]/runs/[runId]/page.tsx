@@ -332,7 +332,7 @@ export default function RunProgressPage() {
                 </span>
                 {run.status === 'running' && (
                   <Button
-                    variant="destructive"
+                    variant="danger"
                     size="sm"
                     onClick={handleStop}
                     disabled={stopping}

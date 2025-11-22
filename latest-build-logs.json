@@ -1,0 +1,1218 @@
+﻿{
+    "events": [
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.39 Setting up libxcb-render0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.40 Setting up fontconfig-config (2.14.1-4) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.47 debconf: unable to initialize frontend: Dialog\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.47 debconf: (TERM is not set, so the dialog frontend is not usable.)\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.47 debconf: falling back to frontend: Readline\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.48 debconf: unable to initialize frontend: Readline\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.48 debconf: (This frontend requires a controlling tty.)\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.48 debconf: falling back to frontend: Teletype\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.57 Setting up libxcb-glx0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.58 Setting up libedit2:amd64 (3.1-20221030-2) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.60 Setting up libxcb-shape0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.61 Setting up libavahi-common3:amd64 (0.8-10+deb12u1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.62 Setting up libnss3:amd64 (2:3.87.1-1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.63 Setting up libxcb-shm0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.64 Setting up dbus-daemon (1.14.10-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.66 Setting up libxcb-present0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.67 Setting up libthai0:amd64 (0.1.29-1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825359584,
+            "message": "#6 25.68 Setting up ca-certificates (20230311+deb12u1) ...\r\n",
+            "ingestionTime": 1763825359590
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.75 debconf: unable to initialize frontend: Dialog\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.75 debconf: (TERM is not set, so the dialog frontend is not usable.)\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.75 debconf: falling back to frontend: Readline\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.76 debconf: unable to initialize frontend: Readline\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.76 debconf: (This frontend requires a controlling tty.)\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 25.76 debconf: falling back to frontend: Teletype\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.02 Updating certificates in /etc/ssl/certs...\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.42 142 added, 0 removed; done.\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.44 Setting up libfreetype6:amd64 (2.12.1+dfsg-5+deb12u4) ...\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.46 Setting up libxcb-sync1:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.47 Setting up dbus (1.14.10-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.50 invoke-rc.d: could not determine current runlevel\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.50 invoke-rc.d: policy-rc.d denied execution of start.\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825361605,
+            "message": "#6 26.50 Setting up shared-mime-info (2.2-1) ...\r\n",
+            "ingestionTime": 1763825361608
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.36 Setting up libgssapi-krb5-2:amd64 (1.20.1-2+deb12u4) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.37 Setting up libgdbm-compat4:amd64 (1.23-3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.38 Setting up libxcb-dri2-0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.39 Setting up libdrm2:amd64 (2.4.114-1+b1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.41 Setting up libwayland-cursor0:amd64 (1.21.0-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.42 Setting up libxcb-randr0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.43 Setting up cpp (4:12.2.0-3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.44 Setting up libllvm15:amd64 (1:15.0.6-4+b1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.45 Setting up libpam-systemd:amd64 (252.39-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.52 debconf: unable to initialize frontend: Dialog\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.52 debconf: (TERM is not set, so the dialog frontend is not usable.)\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.52 debconf: falling back to frontend: Readline\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.53 debconf: unable to initialize frontend: Readline\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.53 debconf: (This frontend requires a controlling tty.)\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.53 debconf: falling back to frontend: Teletype\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.58 Setting up libx11-6:amd64 (2:1.8.4-2+deb12u2) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.59 Setting up libharfbuzz0b:amd64 (6.0.0+dfsg-3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.60 Setting up libgdk-pixbuf-2.0-0:amd64 (2.42.10+dfsg-1+deb12u2) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.62 Setting up libfontconfig1:amd64 (2.14.1-4) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.64 Setting up libxkbfile1:amd64 (1:1.1.0-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.65 Setting up libxcomposite1:amd64 (1:0.4.5-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.66 Setting up libsm6:amd64 (2:1.2.3-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.67 Setting up libavahi-client3:amd64 (0.8-10+deb12u1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.68 Setting up libperl5.36:amd64 (5.36.0-7+deb12u3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.69 Setting up libxmuu1:amd64 (2:1.1.3-3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.70 Setting up libdrm-amdgpu1:amd64 (2.4.114-1+b1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.71 Setting up libxcb-dri3-0:amd64 (1.15-1) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.73 Setting up gtk-update-icon-cache (3.24.38-2~deb12u3) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.74 Setting up libx11-xcb1:amd64 (2:1.8.4-2+deb12u2) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825363629,
+            "message": "#6 28.75 Setting up fontconfig (2.14.1-4) ...\r\n",
+            "ingestionTime": 1763825363636
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 28.76 Regenerating fonts cache... done.\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.78 Setting up libdrm-nouveau2:amd64 (2.4.114-1+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.79 Setting up libxdamage1:amd64 (1:1.1.6-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.80 Setting up libxpm4:amd64 (1:3.5.12-1.1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.81 Setting up libxrender1:amd64 (1:0.9.10-1.1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.82 Setting up libgbm1:amd64 (22.3.6-1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.83 Setting up libdrm-radeon1:amd64 (2.4.114-1+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.85 Setting up libpango-1.0-0:amd64 (1.50.12+ds-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.86 Setting up libdrm-intel1:amd64 (2.4.114-1+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.87 Setting up libgl1-mesa-dri:amd64 (22.3.6-1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.88 Setting up libxext6:amd64 (2:1.3.4-1+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.89 Setting up libcairo2:amd64 (1.16.0-7) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.90 Setting up libxxf86vm1:amd64 (1:1.1.4-1+b2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.92 Setting up dbus-user-session (1.14.10-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.93 Setting up perl (5.36.0-7+deb12u3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.95 Setting up libegl-mesa0:amd64 (22.3.6-1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 30.96 Setting up adwaita-icon-theme (43-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.00 update-alternatives: using /usr/share/icons/Adwaita/cursor.theme to provide /usr/share/icons/default/index.theme (x-cursor-theme) in auto mode\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.01 Setting up libdata-dump-perl (1.25-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.02 Setting up libxfixes3:amd64 (1:6.0.0-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.03 Setting up libipc-system-simple-perl (1.30-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.04 Setting up libxml-xpathengine-perl (0.14-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.06 Setting up libxinerama1:amd64 (2:1.1.4-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.07 Setting up libxv1:amd64 (2:1.0.11-1.1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.08 Setting up libio-html-perl (1.004-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.09 Setting up libxrandr2:amd64 (2:1.5.2-2+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.10 Setting up libxt6:amd64 (1:1.2.1-1.1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.11 Setting up libtimedate-perl (2.3300-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.12 Setting up libregexp-ipv6-perl (0.03-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.14 Setting up libcups2:amd64 (2.4.2-3+deb12u9) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.16 Setting up libgdk-pixbuf2.0-bin (2.42.10+dfsg-1+deb12u2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.17 Setting up libegl1:amd64 (1.6.0-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.18 Setting up libcairo-gobject2:amd64 (1.16.0-7) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.19 Setting up libpangoft2-1.0-0:amd64 (1.50.12+ds-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.20 Setting up liburi-perl (5.17-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.21 Setting up libx11-protocol-perl (0.56-9) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.22 Setting up libpangocairo-1.0-0:amd64 (1.50.12+ds-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.24 Setting up libnet-ssleay-perl:amd64 (1.92-2+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.25 Setting up libhttp-date-perl (6.05-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.26 Setting up libxft2:amd64 (2.3.6-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.27 Setting up libdbusmenu-gtk3-4:amd64 (18.10.20180917~bzr492+repack1-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.28 Setting up libxmu6:amd64 (2:1.1.3-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.29 Setting up libfile-basedir-perl (0.09-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.30 Setting up libtie-ixhash-perl (1.23-4) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.31 Setting up libglx-mesa0:amd64 (22.3.6-1+deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.32 Setting up libfile-listing-perl (6.15-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.34 Setting up libxi6:amd64 (2:1.8-1+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.35 Setting up libglx0:amd64 (1.6.0-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.36 Setting up libfont-afm-perl (1.20-4) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.37 Setting up libclone-perl:amd64 (0.46-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.38 Setting up libio-stringy-perl (2.111-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.39 Setting up libxtst6:amd64 (2:1.2.3-1.1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.40 Setting up libhtml-tagset-perl (3.20-6) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.41 Setting up libauthen-sasl-perl (2.1600-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.42 Setting up libxcursor1:amd64 (1:1.2.1-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.44 Setting up liblwp-mediatypes-perl (6.04-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.45 Setting up libtry-tiny-perl (0.31-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.46 Setting up libxxf86dga1:amd64 (2:1.1.5-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.47 Setting up libnet-http-perl (6.22-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.48 Setting up libencode-locale-perl (1.05-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.49 Setting up dconf-service (0.40.0-4) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.50 Setting up libxaw7:amd64 (2:1.0.14-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.51 Setting up libatspi2.0-0:amd64 (2.46.0-5) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.53 Setting up x11-xserver-utils (7.7+9+b1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.54 Setting up librsvg2-2:amd64 (2.54.7+dfsg-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.55 Setting up libatk-bridge2.0-0:amd64 (2.46.0-5) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.56 Setting up libgl1:amd64 (1.6.0-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.58 Setting up librsvg2-common:amd64 (2.54.7+dfsg-1~deb12u1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.59 Setting up libfile-desktopentry-perl (0.22-3) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.60 Setting up libwww-robotrules-perl (6.02-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.62 Setting up zutty (0.14.0.20230218+dfsg1-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.62 update-alternatives: using /usr/bin/zutty to provide /usr/bin/x-terminal-emulator (x-terminal-emulator) in auto mode\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.62 update-alternatives: warning: skip creation of /usr/share/man/man1/x-terminal-emulator.1.gz because associated file /usr/share/man/man1/zutty.1.gz (of link group x-terminal-emulator) doesn't exist\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.63 Setting up libhtml-parser-perl:amd64 (3.81-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.64 Setting up x11-utils (7.7+5) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.68 Setting up libio-socket-ssl-perl (2.081-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.70 Setting up libhttp-message-perl (6.44-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.71 Setting up libhtml-form-perl (6.11-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.72 Setting up libfile-mimeinfo-perl (0.33-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.73 Setting up libhttp-negotiate-perl (6.01-2) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.74 Setting up dconf-gsettings-backend:amd64 (0.40.0-4) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825365651,
+            "message": "#6 31.75 Setting up libhttp-cookies-perl (6.10-1) ...\r\n",
+            "ingestionTime": 1763825365654
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.76 Setting up libhtml-tree-perl (5.07-3) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.77 Setting up libhtml-format-perl (2.16-2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.79 Setting up libnet-smtp-ssl-perl (1.04-2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.80 Setting up libmailtools-perl (2.21-2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.81 Setting up libhttp-daemon-perl (6.16-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.82 Setting up libgtk-3-common (3.24.38-2~deb12u3) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.83 Setting up gsettings-desktop-schemas (43.0-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.85 Setting up libgtk-3-0:amd64 (3.24.38-2~deb12u3) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.87 Setting up libgtk-3-bin (3.24.38-2~deb12u3) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.88 Setting up libayatana-ido3-0.4-0:amd64 (0.9.3-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.89 Setting up at-spi2-core (2.46.0-5) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.92 Setting up libayatana-indicator3-7:amd64 (0.9.3-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.93 Setting up libayatana-appindicator3-1 (0.5.92-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.95 Setting up liblwp-protocol-https-perl (6.10-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.95 Setting up libwww-perl (6.68-1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.97 Setting up libxml-parser-perl (2.46-4) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.98 Setting up libxml-twig-perl (1:3.52-2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 31.99 Setting up libnet-dbus-perl (1.2.0-2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.00 Processing triggers for libc-bin (2.36-9+deb12u10) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.02 Processing triggers for ca-certificates (20230311+deb12u1) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.03 Updating certificates in /etc/ssl/certs...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.33 0 added, 0 removed; done.\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.33 Running hooks in /etc/ca-certificates/update.d...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.33 done.\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 32.34 Processing triggers for libgdk-pixbuf-2.0-0:amd64 (2.42.10+dfsg-1+deb12u2) ...\r\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#6 DONE 32.5s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#7 [ 3/17] WORKDIR /app\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#7 DONE 0.0s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#8 [ 4/17] COPY package*.json ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#8 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#9 [ 5/17] COPY tsconfig.json ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#9 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#10 [ 6/17] COPY tsconfig.node.json ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#10 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#11 [ 7/17] COPY next.config.* ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#11 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#12 [ 8/17] COPY tailwind.config.* ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#12 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#13 [ 9/17] COPY postcss.config.* ./\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#13 DONE 0.1s\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825367670,
+            "message": "#14 [10/17] RUN npm ci\n",
+            "ingestionTime": 1763825367674
+        },
+        {
+            "timestamp": 1763825379688,
+            "message": "#14 11.64 npm warn deprecated rimraf@3.0.2: Rimraf versions prior to v4 are no longer supported\n",
+            "ingestionTime": 1763825379714
+        },
+        {
+            "timestamp": 1763825379688,
+            "message": "#14 12.86 npm warn deprecated inflight@1.0.6: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.\n",
+            "ingestionTime": 1763825379714
+        },
+        {
+            "timestamp": 1763825381726,
+            "message": "#14 13.58 npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead\n",
+            "ingestionTime": 1763825381729
+        },
+        {
+            "timestamp": 1763825383741,
+            "message": "#14 15.50 npm warn deprecated @humanwhocodes/object-schema@2.0.3: Use @eslint/object-schema instead\n",
+            "ingestionTime": 1763825383744
+        },
+        {
+            "timestamp": 1763825383741,
+            "message": "#14 15.57 npm warn deprecated @humanwhocodes/config-array@0.13.0: Use @eslint/config-array instead\n",
+            "ingestionTime": 1763825383744
+        },
+        {
+            "timestamp": 1763825385756,
+            "message": "#14 17.13 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported\n",
+            "ingestionTime": 1763825385759
+        },
+        {
+            "timestamp": 1763825385756,
+            "message": "#14 17.29 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported\n",
+            "ingestionTime": 1763825385759
+        },
+        {
+            "timestamp": 1763825385756,
+            "message": "#14 17.35 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported\n",
+            "ingestionTime": 1763825385759
+        },
+        {
+            "timestamp": 1763825385756,
+            "message": "#14 17.44 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported\n",
+            "ingestionTime": 1763825385759
+        },
+        {
+            "timestamp": 1763825385756,
+            "message": "#14 17.87 npm warn deprecated glob@7.2.3: Glob versions prior to v9 are no longer supported\n",
+            "ingestionTime": 1763825385759
+        },
+        {
+            "timestamp": 1763825387769,
+            "message": "#14 19.29 npm warn deprecated @aws-cdk/aws-apigatewayv2-integrations-alpha@2.111.0-alpha.0: This package has been stabilized and moved to aws-cdk-lib\n",
+            "ingestionTime": 1763825387771
+        },
+        {
+            "timestamp": 1763825389781,
+            "message": "#14 21.57 npm warn deprecated @aws-cdk/aws-apigatewayv2-alpha@2.111.0-alpha.0: This package has been stabilized and moved to aws-cdk-lib\n",
+            "ingestionTime": 1763825389784
+        },
+        {
+            "timestamp": 1763825397795,
+            "message": "#14 30.89 npm warn deprecated eslint@8.57.1: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n",
+            "ingestionTime": 1763825397819
+        },
+        {
+            "timestamp": 1763825415842,
+            "message": "#14 48.94 \n",
+            "ingestionTime": 1763825415863
+        },
+        {
+            "timestamp": 1763825415842,
+            "message": "#14 48.94 added 1369 packages, and audited 1406 packages in 49s\n",
+            "ingestionTime": 1763825415863
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 48.95 \n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 48.95 205 packages are looking for funding\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 48.95   run `npm fund` for details\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+aws : 
+At line:1 char:191
++ ...  $allLogs = aws logs get-log-events --log-group-name 
+$logGroup --log- ...
++                 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteEx 
+   ception
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+'charmap' codec can't encode characters in position 12-19: 
+character maps to <undefined>
+            "message": "#14 49.02 \n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02 3 high severity vulnerabilities\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02 \n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02 To address all issues, run:\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02   npm audit fix\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02 \n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.02 Run `npm audit` for details.\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.03 npm notice\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.03 npm notice New major version of npm available! 10.8.2 -> 11.6.3\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.03 npm notice Changelog: https://github.com/npm/cli/releases/tag/v11.6.3\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.03 npm notice To update run: npm install -g npm@11.6.3\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825417876,
+            "message": "#14 49.03 npm notice\n",
+            "ingestionTime": 1763825417879
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#14 DONE 51.3s\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#15 [11/17] COPY src/ ./src/\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#15 DONE 0.2s\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#16 [12/17] COPY containers/ ./containers/\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#16 DONE 0.1s\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#17 [13/17] COPY scripts/ ./scripts/\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#17 DONE 0.1s\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#18 [14/17] RUN mkdir -p ./public\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#18 DONE 0.3s\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825419888,
+            "message": "#19 [15/17] RUN npx playwright install chromium\n",
+            "ingestionTime": 1763825419891
+        },
+        {
+            "timestamp": 1763825421902,
+            "message": "#19 1.832 Downloading Chromium 141.0.7390.37 (playwright build v1194) from https://cdn.playwright.dev/dbazure/download/playwright/builds/chromium/1194/chromium-linux.zip\n",
+            "ingestionTime": 1763825421905
+        },
+        {
+            "timestamp": 1763825421902,
+            "message": "#19 2.160 |                                                                                |   0% of 173.9 MiB\n",
+            "ingestionTime": 1763825421905
+        },
+        {
+            "timestamp": 1763825421902,
+            "message": 
+

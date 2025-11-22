@@ -1,0 +1,17 @@
+{
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "companyName": "Accenture",
+  "sources": {
+    "rssFeeds": [
+      "https://news.google.com/rss/search?q=Accenture"
+    ],
+    "newsApis": [],
+    "irUrls": [],
+    "regulatorUrls": [],
+    "tradePublications": []
+  }
+}

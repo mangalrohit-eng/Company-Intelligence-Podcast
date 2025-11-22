@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { runsStore } from '@/lib/runs-store';
-import { saveRun, getRunsForPodcast } from '@/lib/runs-persistence';
+import { saveRun, getRunsForPodcast, PersistedRun } from '@/lib/runs-persistence';
 
 // Helper to map topic IDs to full topic objects
 function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<string, number> = {}) {
@@ -31,7 +31,7 @@ function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<st
 }
 
 // Execute pipeline orchestrator
-async function executePipeline(runId: string, podcastId: string, run: any, podcast: any = null) {
+async function executePipeline(runId: string, podcastId: string, run: PersistedRun, podcast: any = null) {
   console.log(`⚙️ [${runId}] Starting pipeline execution...`);
   
   try {
@@ -219,13 +219,16 @@ async function executePipeline(runId: string, podcastId: string, run: any, podca
     // Mark as completed or failed
     run.status = output.status === 'success' ? 'completed' : 'failed';
     run.completedAt = new Date().toISOString();
-    run.duration = Math.floor((new Date().getTime() - new Date(run.startedAt).getTime()) / 1000);
+    if (run.startedAt) {
+      const startedAt = run.startedAt; // Type guard
+      run.duration = Math.floor((new Date().getTime() - new Date(startedAt).getTime()) / 1000);
+    }
     run.progress.currentStage = output.status === 'success' ? 'completed' : 'failed';
     
     if (output.status === 'success') {
       run.output = {
         episodeId: output.episodeId,
-        episodeTitle: output.episode?.title || 'Generated Episode',
+        episodeTitle: 'Generated Episode', // PipelineOutput doesn't include episode object, use default or fetch separately if needed
         audioS3Key: output.artifacts?.mp3S3Key,
         transcriptS3Key: output.artifacts?.transcriptS3Key,
         showNotesS3Key: output.artifacts?.showNotesS3Key,
@@ -438,7 +441,7 @@ export async function POST(
     const runId = `run_${Date.now()}_${Math.random().toString(36).substring(7)}`;
     const now = new Date().toISOString();
     
-    const run = {
+    const run: PersistedRun = {
       id: runId,
       podcastId,
       status: 'running',

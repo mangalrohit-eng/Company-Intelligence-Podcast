@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a world increasingly fueled by data, Goldman Sachs has cast a spotlight on a startling projection: global data centres are set to consume a staggering 165% more electricity by 2030, according to AI Magazine. This surge underscores not just our growing reliance on digital infrastructure but also the pressing need for innovative solutions to manage this consumption sustainably. Amidst this scenario, Julie Sweet, Chair and CEO at Accenture, offers a glimpse into the proactive strides being made, stating, \"We are writing the playbook for how to be the...,\" suggesting that industry leaders are not merely reacting to trends but are actively shaping the future of technology and sustainability. This blend of foresight and responsibility highlights a crucial narrative in the digital age, where the path forward is being charted with both ambition and awareness.",
+      "onAirStat": {
+        "span": "Goldman Sachs predicts global data centres will consume 165% more electricity by 2030",
+        "evidenceId": "8c9ad2cb-e1ef-4a8b-8836-4d93c8b286b9"
+      },
+      "onAirQuote": {
+        "span": "We are writing the playbook for how to be the...",
+        "evidenceId": "44b64738-a8ca-4c42-b542-3b5419eba1f6"
+      }
+    }
+  ]
+}

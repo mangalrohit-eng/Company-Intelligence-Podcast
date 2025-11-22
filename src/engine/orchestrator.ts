@@ -974,7 +974,11 @@ export class PipelineOrchestrator {
         logger.info('Saved TTS input', { scriptLength: ttsInput.scriptLength, voiceId: ttsInput.voiceId });
         
         ttsOutput = await stage.execute(
-          { narrative: finalScript }, // Wrap in Script object
+          { 
+            narrative: finalScript,
+            boundEvidence: {},
+            durationEstimateSeconds: 0
+          }, // Wrap in Script object
           input.config.voice.voiceId,
           input.config.voice.speed,
           emitter
@@ -1087,11 +1091,9 @@ export class PipelineOrchestrator {
         status: 'success',
         artifacts: {
           mp3S3Key: audioS3Key,
-          showNotesPath: packageOutput?.showNotesPath,
-          transcriptVttPath: packageOutput?.transcriptVttPath,
-          transcriptTxtPath: packageOutput?.transcriptTxtPath,
-          sourcesJsonPath: packageOutput?.sourcesJsonPath,
-          rssItem: packageOutput?.rssItem,
+          showNotesS3Key: packageOutput?.showNotesPath,
+          transcriptS3Key: packageOutput?.transcriptVttPath || packageOutput?.transcriptTxtPath,
+          sourcesS3Key: packageOutput?.sourcesJsonPath,
         },
         telemetry,
       };

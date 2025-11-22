@@ -70,6 +70,7 @@ export class DiscoverStage {
             const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
             const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
             const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
+            const description = itemXml.match(/<description>(.*?)<\/description>/)?.[1] || itemXml.match(/<content:encoded>(.*?)<\/content:encoded>/)?.[1] || '';
             
             if (title && link) {
               // Simple keyword matching instead of LLM classification (faster)
@@ -84,6 +85,7 @@ export class DiscoverStage {
                 items.push({
                   url: link,
                   title,
+                  snippet: description || title, // Use description as snippet, fallback to title
                   publisher: new URL(feedUrl).hostname,
                   publishedDate: pubDate,
                   topicIds: [topicIds[0] || 'company-news'],
@@ -92,6 +94,7 @@ export class DiscoverStage {
                     relevance,
                     recency: this.calculateRecency(pubDate),
                     authority: 0.7,
+                    expectedInfoGain: 0.5,
                   },
                 });
                 
@@ -129,6 +132,7 @@ export class DiscoverStage {
               items.push({
                 url: article.url,
                 title: article.title,
+                snippet: article.description || article.title, // Use description as snippet, fallback to title
                 publisher: article.source?.name || 'Unknown',
                 publishedDate: article.publishedAt,
                 topicIds: [topicIds[0]],
@@ -137,6 +141,7 @@ export class DiscoverStage {
                   relevance: 0.8,
                   recency: this.calculateRecency(article.publishedAt),
                   authority: 0.7,
+                  expectedInfoGain: 0.5,
                 },
               });
             }

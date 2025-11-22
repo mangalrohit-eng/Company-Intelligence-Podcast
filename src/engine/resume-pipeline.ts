@@ -8,7 +8,7 @@ import { readFile } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
 import { PipelineOrchestrator } from './orchestrator';
-import { PipelineInput, PipelineOutput } from './types';
+import { PipelineInput, PipelineOutput } from '@/types/shared';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { logger } from '@/utils/logger';
 
