@@ -59,6 +59,7 @@ export function RssFeedManager({ feeds, onChange }: RssFeedManagerProps) {
   };
 
   const handleDelete = (id: string) => {
+    // Using browser confirm for admin actions - can be enhanced later
     if (confirm('Are you sure you want to delete this RSS feed?')) {
       onChange(feeds.filter(f => f.id !== id));
     }

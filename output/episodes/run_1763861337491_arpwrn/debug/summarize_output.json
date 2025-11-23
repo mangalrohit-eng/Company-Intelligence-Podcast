@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a bold move that's sending ripples through the tech industry, Verizon has announced plans to lay off over 13,000 employees, a decision that affects roughly 13% of its workforce. This drastic step, coming amidst a backdrop of global economic shifts and digital transformation, marks a pivotal moment for the telecommunications giant. Dan Schulman, who recently became Verizon's new CEO, is at the helm during this turbulent time. Although the specifics of his strategy are still unfolding, Schulman's leadership will be crucial as Verizon navigates these challenging waters. \"Dan Schulman, who recently became Verizon’s new CEO, says that...,\" capturing the gravity of the decision and the uncertain journey ahead for one of America's leading tech companies.",
+      "onAirStat": {
+        "span": "Verizon plans to lay off over 13,000 employees",
+        "evidenceId": "156445c0-d0d9-43d0-aa2a-6c293a48fd60"
+      },
+      "onAirQuote": {
+        "span": "Dan Schulman, who recently became Verizon’s new CEO, says that...",
+        "evidenceId": "1ff0901e-fbfb-4369-9878-53d9cf901e44"
+      }
+    }
+  ]
+}

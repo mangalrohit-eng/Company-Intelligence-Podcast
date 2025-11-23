@@ -1,0 +1,67 @@
+{
+  "itemCount": 78,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdGsyTzNFVzdYd2wwMGtEN2ZIX1FMdFBsVWlyOEl2Y1RnLXFvaC1jdmh5MkQtbF81eWVvb0MxN011d052Q1FsQURfZHhPbXRNVk5JTmVCcjlYTW1RblpnMUNOMzduRlA4RUVUT0Z1ZmtjeDFsS0JRenFlczRCaU9LRHRvZmFpNW9seHdEMTlhbjBfRzcwM2V2ZEpWUlRJNDVkMjU2cmY3NzNEZw?oc=5",
+      "title": "Exxon to acquire 40% stake in Enterprise Products' Bahia NGL pipeline (EPD:NYSE) - Seeking Alpha",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7067531027896156,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQWDdlaHp3VnF4bEhSNUZPYmhnYmlILWdsVTdUUlFOaVhUQl9NR0JuLXd2SmpzbUhfSW1NQUFIREVYS3RlYlY1bmdvQW1qcG92Qk5pbHd4d2t2VEdHeFVJeHFVbzlqcjhCTDZVb2xVWHpkU1huT0RZM01sRW14aENPaFlLUDdjdnNlVHZyUHVYYmxIMGZoTkdRZWpvSWVsS0Q2MzRfVGdENGh4VEZH?oc=5",
+      "title": "Exxon Lifts Force Majeure on Giant Mozambique LNG Project - Bloomberg.com",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.714262233129385,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOFpNMjk2UlduWW1oS0pSVlE0cXp6aUtRQXB1Y1RfVnl6NjQ4dGNoT09TVXZhUVVWU1o2VE11UlMwRXQySW5WZ0M2NHkzSmtsNEQ5ZWphaW1oZUZWb2g5ZkZmNXQyNzgwTFBrUHZtWFVXWHBsaGM3Y2xDcER0NC13QW54SExBTU5YZ3gzdHBxRFdzQ1N5cGVMU05qMVZvb1RZbUoxOXdlNENTdw?oc=5",
+      "title": "Exxon Mobil's Options Frenzy: What You Need to Know - Benzinga",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8360463303562767,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOc3dYd1VZT1dreFJPdG0xT3V0ZHRwaWhIbmRWQU1KdmR6bV9mOGtZcDl0M3pHRUtZMzRBZ1NPNW1mUVB2WFF3TzctSG90WUpGb3hRa0ZMZnA4ZUlfU29JeURsODlXYlhVVmNqSVc3Q2xNbWlZRTZqdllrQWdLTDF0OG1TZlJldVpZamRHMGotZDE?oc=5",
+      "title": "Connecting U.S. industry growth - Exxon Mobil Corporation",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7045584299518665,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNSlF6MXB4RG41V0pscVdYWHZFVk55Vi1jN2pFY2M4bGdITzJhakhtTmN4ZEVTSjJ0eThPYTVpMXFRc0JBcVNiR005NG5kSzNGUEJrNk1WNXlwVk53REV5ZU5yaWlad0VhdWdqMVIweWNrbV9rOVg2a19IcUVuVl96aEI5U3NQM3ExRFotNDdCMU1UNEpRMW1IYkt1QVNRQ0dza1E?oc=5",
+      "title": "Exxon lifts force majeure on LNG project in Mozambique - Reuters",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7221173533096745,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

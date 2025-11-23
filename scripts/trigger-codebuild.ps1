@@ -58,8 +58,6 @@ Write-Host "Starting CodeBuild..." -ForegroundColor Yellow
 
 $buildId = aws codebuild start-build `
     --project-name $projectName `
-    --source-location "s3://$bucketName/$s3Key" `
-    --source-type S3 `
     --region $region `
     --query 'build.id' `
     --output text

@@ -13,6 +13,7 @@ import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { RSSValidator } from '@/components/RSSValidator';
+import { useToastContext } from '@/contexts/ToastContext';
 
 type Tab = 'overview' | 'episodes' | 'runs' | 'rss' | 'settings';
 
@@ -23,32 +24,37 @@ export default function PodcastDetailPage() {
   const [podcast, setPodcast] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [runningPipeline, setRunningPipeline] = useState(false);
+  const toast = useToastContext();
+
+  const fetchPodcast = async () => {
+    try {
+      const { api } = await import('@/lib/api');
+      const response = await api.get('/podcasts');
+      
+      if (response.ok) {
+        const data = await response.json();
+        const foundPodcast = data.podcasts?.find((p: any) => p.id === podcastId);
+        if (foundPodcast) {
+          // Generate RSS URL - use API endpoint or construct from base URL
+          const baseUrl = typeof window !== 'undefined' ? window.location.origin : '';
+          const rssUrl = foundPodcast.rssUrl || `${baseUrl}/api/rss/${podcastId}.xml`;
+          
+          setPodcast({
+            ...foundPodcast,
+            rssUrl,
+            lastRun: foundPodcast.lastRunAt || new Date().toISOString(),
+            nextRun: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+          });
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching podcast:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPodcast = async () => {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.get('/podcasts');
-        
-        if (response.ok) {
-          const data = await response.json();
-          const foundPodcast = data.podcasts?.find((p: any) => p.id === podcastId);
-          if (foundPodcast) {
-            setPodcast({
-              ...foundPodcast,
-              rssUrl: `https://example.com/rss/${podcastId}.xml`,
-              lastRun: foundPodcast.lastRunAt || new Date().toISOString(),
-              nextRun: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
-            });
-          }
-        }
-      } catch (error) {
-        console.error('Error fetching podcast:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPodcast();
   }, [podcastId]);
 
@@ -62,14 +68,16 @@ export default function PodcastDetailPage() {
       
       if (response.ok) {
         const data = await response.json();
-        alert(`Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress page...`);
-        window.location.href = `/podcasts/${podcastId}/runs/${data.runId}`;
+        toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting...`);
+        setTimeout(() => {
+          window.location.href = `/podcasts/${podcastId}/runs/${data.runId}`;
+        }, 1000);
       } else {
         throw new Error('Failed to start pipeline');
       }
     } catch (error: any) {
       console.error('Error starting pipeline:', error);
-      alert(`Error starting pipeline: ${error.message}`);
+      toast.error('Error Starting Pipeline', error.message || 'Please try again');
     } finally {
       setRunningPipeline(false);
     }
@@ -77,7 +85,7 @@ export default function PodcastDetailPage() {
 
   const handleCopyRSS = () => {
     navigator.clipboard.writeText(podcast.rssUrl);
-    alert('RSS URL copied to clipboard!');
+    toast.success('RSS URL Copied', 'The RSS URL has been copied to your clipboard');
   };
 
   if (loading) {
@@ -108,46 +116,51 @@ export default function PodcastDetailPage() {
 
   return (
     <ProtectedRoute>
-      <div className="min-h-screen p-4 md:p-8">
+      <div className="min-h-screen p-3 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="flex flex-col md:flex-row gap-8 mb-8">
+        <div className="flex flex-col md:flex-row gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
           {/* Cover Art */}
-          <div className="w-full md:w-72 h-72 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center text-8xl shadow-lg">
+          <div className="w-full md:w-72 h-48 sm:h-64 md:h-72 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center text-5xl sm:text-6xl md:text-8xl shadow-lg">
             🎙️
           </div>
 
           {/* Info */}
           <div className="flex-1">
-            <div className="mb-4">
-              <h1 className="text-4xl md:text-5xl font-bold mb-2">{podcast.title}</h1>
-              <p className="text-lg md:text-xl text-muted mb-4">{podcast.subtitle}</p>
-              <p className="text-muted max-w-2xl leading-relaxed">{podcast.description}</p>
+            <div className="mb-3 sm:mb-4">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-2 break-words">{podcast.title}</h1>
+              <p className="text-base sm:text-lg md:text-xl text-muted mb-3 sm:mb-4 break-words">{podcast.subtitle}</p>
+              <p className="text-sm sm:text-base text-muted max-w-2xl leading-relaxed break-words">{podcast.description}</p>
             </div>
 
-            <div className="flex flex-wrap gap-3 mb-6">
-              <Button size="lg" className="gap-2" onClick={handleRunNow} disabled={runningPipeline}>
-                <Play className="w-5 h-5" />
+            <div className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6">
+              <Button size="default" className="gap-1.5 sm:gap-2 text-sm sm:text-base" onClick={handleRunNow} disabled={runningPipeline}>
+                <Play className="w-4 h-4 sm:w-5 sm:h-5" />
                 {runningPipeline ? 'Starting...' : 'Run Now'}
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={() => setActiveTab('settings')}>
-                <Settings className="w-5 h-5" />
-                Settings
+              <Button size="default" variant="outline" className="gap-1.5 sm:gap-2 text-sm sm:text-base" onClick={() => setActiveTab('settings')}>
+                <Settings className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Settings</span>
+                <span className="sm:hidden">Settings</span>
               </Button>
-              <Button size="lg" variant="outline" className="gap-2" onClick={handleCopyRSS}>
-                <Copy className="w-5 h-5" />
-                Copy RSS
+              <Button size="default" variant="outline" className="gap-1.5 sm:gap-2 text-sm sm:text-base" onClick={handleCopyRSS}>
+                <Copy className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">Copy RSS</span>
+                <span className="sm:hidden">RSS</span>
               </Button>
               <Button
-                size="lg"
+                size="default"
                 variant="outline"
-                className="gap-2"
-                onClick={() => alert('Submit your RSS feed to:\n\n• Apple Podcasts: https://podcastsconnect.apple.com\n• Spotify: https://podcasters.spotify.com\n\nYour RSS URL has been copied to clipboard!')}
+                className="gap-1.5 sm:gap-2 text-sm sm:text-base"
+                onClick={() => {
+                  handleCopyRSS();
+                  toast.info('RSS Submission Help', 'Submit your RSS feed to Apple Podcasts or Spotify. The RSS URL has been copied to your clipboard.');
+                }}
               >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Help
+                <span className="hidden sm:inline">Help</span>
               </Button>
             </div>
 
@@ -173,7 +186,7 @@ export default function PodcastDetailPage() {
 
         {/* Tabs */}
         <Tabs value={activeTab} onValueChange={(value) => setActiveTab(value as Tab)}>
-          <TabsList className="mb-8">
+          <TabsList className="mb-4 sm:mb-8 overflow-x-auto flex-nowrap">
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="episodes">Episodes</TabsTrigger>
             <TabsTrigger value="runs">Runs</TabsTrigger>
@@ -206,7 +219,7 @@ export default function PodcastDetailPage() {
             <TeamTab podcastId={podcastId} />
           </TabsContent>
           <TabsContent value="settings">
-            <SettingsTab podcast={podcast} />
+            {podcast && <SettingsTab podcast={podcast} />}
           </TabsContent>
         </Tabs>
       </div>
@@ -302,20 +315,142 @@ function OverviewTab({ podcast }: any) {
   );
 }
 
-function EpisodesTab({ podcastId: _podcastId }: { podcastId: string }) {
+function EpisodesTab({ podcastId }: { podcastId: string }) {
+  const [episodes, setEpisodes] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  const fetchEpisodes = async () => {
+    try {
+      setLoading(true);
+      const { api } = await import('@/lib/api');
+      const response = await api.get(`/podcasts/${podcastId}/runs`);
+      
+      if (response.ok) {
+        const data = await response.json();
+        const allRuns = data.runs || [];
+        
+        // Debug logging
+        console.log(`[EpisodesTab] Fetched ${allRuns.length} runs for podcast ${podcastId}`);
+        const completedRunsCount = allRuns.filter((r: any) => r.status === 'completed').length;
+        console.log(`[EpisodesTab] ${completedRunsCount} completed runs`);
+        
+        // Filter only completed runs with audio
+        const completedRuns = allRuns.filter(
+          (run: any) => run.status === 'completed' && (run.output?.audioS3Key || run.output?.audioPath)
+        );
+        
+        console.log(`[EpisodesTab] ${completedRuns.length} episodes with audio (audioS3Key or audioPath)`);
+        
+        // Sort by most recent first (completedAt > startedAt > createdAt)
+        completedRuns.sort((a: any, b: any) => {
+          const dateA = new Date(a.completedAt || a.startedAt || a.createdAt).getTime();
+          const dateB = new Date(b.completedAt || b.startedAt || b.createdAt).getTime();
+          return dateB - dateA; // Descending order (newest first)
+        });
+        
+        setEpisodes(completedRuns);
+      } else {
+        const errorText = await response.text();
+        console.error(`[EpisodesTab] Failed to fetch runs: ${errorText}`);
+      }
+    } catch (error) {
+      console.error('Error fetching episodes:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchEpisodes();
+    const interval = setInterval(fetchEpisodes, 10000); // Poll every 10 seconds (reduced for performance)
+    return () => clearInterval(interval);
+  }, [podcastId]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  if (loading && episodes.length === 0) {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+        <p className="mt-4 text-muted">Loading episodes...</p>
+      </div>
+    );
+  }
+
+  if (episodes.length === 0) {
+    return (
+      <div className="space-y-4">
+        <Card className="p-6">
+          <div className="text-center py-8">
+            <h3 className="text-lg font-semibold mb-2">No Published Episodes Yet</h3>
+            <p className="text-muted mb-4">
+              Episodes will appear here once pipeline runs are completed and published.
+            </p>
+            <p className="text-sm text-muted">
+              💡 Tip: Go to the "Runs" tab to start a new podcast generation.
+            </p>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="space-y-4">
-      <Card className="p-6">
-        <div className="text-center py-8">
-          <h3 className="text-lg font-semibold mb-2">No Published Episodes Yet</h3>
-          <p className="text-muted mb-4">
-            Episodes will appear here once pipeline runs are completed and published.
-          </p>
-          <p className="text-sm text-muted">
-            💡 Tip: Go to the "Runs" tab to see completed podcast generations.
-          </p>
-        </div>
-      </Card>
+      {episodes.map((episode) => {
+        // Construct audio URL
+        let audioUrl = null;
+        
+        // Priority 1: Use S3 key (production)
+        if (episode.output?.audioS3Key) {
+          const s3Key = episode.output.audioS3Key.startsWith('/') 
+            ? episode.output.audioS3Key.substring(1) 
+            : episode.output.audioS3Key;
+          
+          // Always use serve-file API which will handle CloudFront/S3 redirect
+          // This works in both local and production
+          audioUrl = `/api/serve-file/${s3Key}`;
+        } 
+        // Priority 2: Use local audioPath (local development)
+        else if (episode.output?.audioPath) {
+          // Remove leading "/output/" to get path for serve-file API
+          const path = episode.output.audioPath.replace(/^\/output\//, '');
+          audioUrl = `/api/serve-file/${path}`;
+        }
+        
+        const episodeTitle = episode.output?.episodeTitle || `Episode ${episode.id.substring(0, 8)}`;
+        const pubDate = episode.completedAt || episode.startedAt || episode.createdAt;
+        
+        return (
+          <Card key={episode.id} className="p-6 hover:border-primary transition-all">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold mb-2">{episodeTitle}</h3>
+                <div className="flex items-center gap-4 text-sm text-muted mb-3">
+                  <span>{new Date(pubDate).toLocaleDateString()}</span>
+                  {episode.duration && (
+                    <span>• {Math.floor(episode.duration / 60)}m {episode.duration % 60}s</span>
+                  )}
+                </div>
+                {audioUrl ? (
+                  <audio controls className="w-full mt-4">
+                    <source src={audioUrl} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                ) : (
+                  <p className="text-sm text-muted mt-4">Audio file not available</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2">
+                <button
+                  onClick={() => window.location.href = `/podcasts/${podcastId}/runs/${episode.id}`}
+                  className="px-4 py-2 border border-border hover:border-primary rounded-lg transition-all text-sm"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+          </Card>
+        );
+      })}
     </div>
   );
 }
@@ -328,21 +463,18 @@ function RunsTab({ podcastId }: { podcastId: string }) {
     try {
       setLoading(true);
       const { api } = await import('@/lib/api');
-      console.log(`🔍 Fetching runs for podcast: ${podcastId}`);
       const response = await api.get(`/podcasts/${podcastId}/runs`);
-      
-      console.log(`📡 Response status: ${response.status}`);
       
       if (response.ok) {
         const data = await response.json();
-        console.log(`✅ Received ${data.runs?.length || 0} runs:`, data);
         setRuns(data.runs || []);
       } else {
+        // Only log errors, not successful requests
         const errorText = await response.text();
-        console.error(`❌ Failed to fetch runs: ${errorText}`);
+        console.error(`Failed to fetch runs: ${errorText}`);
       }
     } catch (error) {
-      console.error('❌ Error fetching runs:', error);
+      console.error('Error fetching runs:', error);
     } finally {
       setLoading(false);
     }
@@ -351,7 +483,7 @@ function RunsTab({ podcastId }: { podcastId: string }) {
   // Fetch runs on mount and set up polling
   useEffect(() => {
     fetchRuns();
-    const interval = setInterval(fetchRuns, 3000); // Poll every 3 seconds
+    const interval = setInterval(fetchRuns, 10000); // Poll every 10 seconds (reduced from 3s)
     return () => clearInterval(interval);
   }, [podcastId]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -503,27 +635,140 @@ function TeamTab({ podcastId: _podcastId }: { podcastId: string }) {
   );
 }
 
-function SettingsTab({ podcast: _podcast }: any) {
+function SettingsTab({ podcast, onUpdate }: { podcast: any; onUpdate?: () => void }) {
+  const [status, setStatus] = useState<string>(podcast?.status || 'active');
+  const [cadence, setCadence] = useState<string>(podcast?.config?.cadence || podcast?.config?.schedule || 'daily');
+  const [durationMinutes, setDurationMinutes] = useState<number>(podcast?.config?.durationMinutes || podcast?.config?.duration || 5);
+  const [timeWindowHours, setTimeWindowHours] = useState<number>(podcast?.config?.timeWindowHours || 24);
+  const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+  const toast = useToastContext();
+
+  // Update local state when podcast prop changes
+  useEffect(() => {
+    if (podcast) {
+      setStatus(podcast.status || 'active');
+      setCadence(podcast.config?.cadence || podcast.config?.schedule || 'daily');
+      setDurationMinutes(podcast.config?.durationMinutes || podcast.config?.duration || 5);
+      setTimeWindowHours(podcast.config?.timeWindowHours || 24);
+    }
+  }, [podcast]);
+
+  const handleSave = async () => {
+    try {
+      setSaving(true);
+      setSaved(false);
+      const { api } = await import('@/lib/api');
+      
+      const updates: any = {
+        status,
+        cadence,
+        durationMinutes: Number(durationMinutes),
+        timeWindowHours: Number(timeWindowHours),
+      };
+
+      const response = await api.patch(`/podcasts/${podcast.id}`, updates);
+
+      if (response.ok) {
+        setSaved(true);
+        toast.success('Settings Saved', 'Podcast configuration updated successfully');
+        setTimeout(() => setSaved(false), 3000);
+        // Refresh podcast data
+        if (onUpdate) {
+          onUpdate();
+        }
+      } else {
+        const error = await response.text();
+        toast.error('Save Failed', error || 'Failed to save settings');
+      }
+    } catch (error: any) {
+      console.error('Error saving settings:', error);
+      toast.error('Error', 'Failed to save settings. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
+
   return (
     <div className="space-y-6 max-w-2xl">
       <Card className="p-6">
         <h3 className="text-xl font-semibold mb-4">Podcast Settings</h3>
-        <div className="space-y-4">
+        <div className="space-y-6">
           <div>
             <label className="block text-sm font-medium mb-2">Status</label>
-            <select className="w-full px-4 py-2 bg-background border border-border rounded-lg">
-              <option>Active</option>
-              <option>Paused</option>
-              <option>Archived</option>
+            <select 
+              value={status}
+              onChange={(e) => setStatus(e.target.value)}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg"
+            >
+              <option value="active">Active</option>
+              <option value="paused">Paused</option>
+              <option value="archived">Archived</option>
             </select>
+            <p className="text-xs text-muted mt-1">
+              Active podcasts will generate episodes according to cadence
+            </p>
           </div>
+
           <div>
             <label className="block text-sm font-medium mb-2">Cadence</label>
-            <select className="w-full px-4 py-2 bg-background border border-border rounded-lg">
-              <option>Daily</option>
-              <option>Weekly</option>
-              <option>Monthly</option>
+            <select 
+              value={cadence}
+              onChange={(e) => setCadence(e.target.value)}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg"
+            >
+              <option value="daily">Daily</option>
+              <option value="weekly">Weekly</option>
+              <option value="monthly">Monthly</option>
+              <option value="custom">Custom</option>
             </select>
+            <p className="text-xs text-muted mt-1">
+              How often new episodes should be generated
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Duration (minutes)
+            </label>
+            <input
+              type="number"
+              min="1"
+              max="60"
+              value={durationMinutes}
+              onChange={(e) => setDurationMinutes(Number(e.target.value))}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg"
+            />
+            <p className="text-xs text-muted mt-1">
+              Target duration for each episode (1-60 minutes)
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium mb-2">
+              Time Window (hours)
+            </label>
+            <input
+              type="number"
+              min="1"
+              max="168"
+              value={timeWindowHours}
+              onChange={(e) => setTimeWindowHours(Number(e.target.value))}
+              className="w-full px-4 py-2 bg-background border border-border rounded-lg"
+            />
+            <p className="text-xs text-muted mt-1">
+              How many hours back to look for news articles (1-168 hours / 1 week)
+            </p>
+          </div>
+
+          <div className="flex gap-3 pt-4">
+            <Button
+              onClick={handleSave}
+              disabled={saving}
+              className="flex-1"
+            >
+              {saving ? 'Saving...' : saved ? 'Saved!' : 'Save Settings'}
+            </Button>
           </div>
         </div>
       </Card>

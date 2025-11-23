@@ -217,7 +217,7 @@ Return JSON with extracted evidence.`,
     } else if (knownMediumAuthority.some(p => publisher.includes(p))) {
       return 0.7;
     } else {
-      return 0.5;
+      return 0.3;
     }
   }
 }

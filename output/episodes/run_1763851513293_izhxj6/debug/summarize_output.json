@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "earnings",
+      "topicName": "earnings",
+      "paragraph": "In a surprising revelation from the telecom giant, Verizon announced it employed 99,600 workers at the end of 2024, a figure that paints a vivid picture of the company's scale and operational might. Amid discussions on the company's future and strategic direction, CEO Dan Schulman candidly remarked, \"Our current cost structure limits our ability to invest significantly,\" signaling a potentially transformative shift in how Verizon approaches its business model. This admission lays bare the challenges of maintaining such a vast workforce in a rapidly evolving industry, suggesting that significant changes could be on the horizon to ensure Verizon remains a dominant player in the telecommunications sector. [CHECK]",
+      "onAirStat": {
+        "span": "Verizon employed 99,600 workers at the end of 2024.",
+        "evidenceId": "5c3e98e5-dfa3-4566-b0fe-b81712488785"
+      },
+      "onAirQuote": {
+        "span": "Our current cost structure limits our ability to invest significantly...",
+        "evidenceId": "1327cfb6-bec1-4f6a-9b1b-964d9f90f112"
+      }
+    }
+  ]
+}

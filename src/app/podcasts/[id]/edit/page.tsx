@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
 
 type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -20,6 +21,7 @@ export default function EditPodcastPage() {
   const params = useParams();
   const router = useRouter();
   const podcastId = params.id as string;
+  const toast = useToastContext();
   
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -112,12 +114,12 @@ export default function EditPodcastPage() {
           voiceTone: data.voiceTone || 'professional',
         });
       } else {
-        alert('Failed to load podcast data');
+        toast.error('Failed to Load', 'Failed to load podcast data');
         router.push('/podcasts');
       }
     } catch (error) {
       console.error('Error fetching podcast:', error);
-      alert('Error loading podcast data');
+      toast.error('Error Loading', 'Error loading podcast data');
       router.push('/podcasts');
     } finally {
       setLoading(false);
@@ -143,15 +145,17 @@ export default function EditPodcastPage() {
       const response = await api.put(`/podcasts/${podcastId}`, formData);
 
       if (response.ok) {
-        alert('✅ Podcast updated successfully!');
-        router.push(`/podcasts/${podcastId}`);
+        toast.success('Podcast Updated', 'Your podcast has been updated successfully');
+        setTimeout(() => {
+          router.push(`/podcasts/${podcastId}`);
+        }, 1000);
       } else {
         const error = await response.text();
-        alert(`❌ Failed to update podcast:\n\n${error}`);
+        toast.error('Failed to Update', error);
       }
     } catch (error) {
       console.error('Error updating podcast:', error);
-      alert('❌ Error updating podcast. Please try again.');
+      toast.error('Error Updating', 'Please try again');
     } finally {
       setSaving(false);
     }

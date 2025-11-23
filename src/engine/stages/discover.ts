@@ -129,18 +129,19 @@ export class DiscoverStage {
           const data = JSON.parse(response.body);
           if (data.articles) {
             for (const article of data.articles) {
+              const publisher = article.source?.name || 'Unknown';
               items.push({
                 url: article.url,
                 title: article.title,
                 snippet: article.description || article.title, // Use description as snippet, fallback to title
-                publisher: article.source?.name || 'Unknown',
+                publisher,
                 publishedDate: article.publishedAt,
                 topicIds: [topicIds[0]],
                 entityIds: [companyName],
                 scores: {
                   relevance: 0.8,
                   recency: this.calculateRecency(article.publishedAt),
-                  authority: 0.7,
+                  authority: publisher === 'Unknown' ? 0.3 : 0.7,
                   expectedInfoGain: 0.5,
                 },
               });

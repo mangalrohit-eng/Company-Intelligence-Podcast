@@ -1,0 +1,67 @@
+{
+  "itemCount": 78,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOTGJvMkFLeEMxN2lPTE8zRE55RWU3R1I1eEVlWXUzZnQtZkdzWjJ2bGxsWFYtRzUwTVZtNHNyLUF3emZ5dXpHc1R0UUwwZ2RzOHd5MFEzcHZ0enl4cXFHS2F1ZHkydkxodG45QzJ6Q1hfSXQ5bzEyVHpzQXNVVjhwSjhKZ2Q1OG14RzlJVzBRYUFBQ1pNdC1GcEI5REQzWWhqdXZsbzFSU09hclg3U08tc1VNVXE5czFxaFlOVzdCRHVCR0pZenJ5bFBpNm8?oc=5",
+      "title": "Exxon freezes plans for major hydrogen plant amid weak customer demand - Reuters",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8627935190806332,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdGsyTzNFVzdYd2wwMGtEN2ZIX1FMdFBsVWlyOEl2Y1RnLXFvaC1jdmh5MkQtbF81eWVvb0MxN011d052Q1FsQURfZHhPbXRNVk5JTmVCcjlYTW1RblpnMUNOMzduRlA4RUVUT0Z1ZmtjeDFsS0JRenFlczRCaU9LRHRvZmFpNW9seHdEMTlhbjBfRzcwM2V2ZEpWUlRJNDVkMjU2cmY3NzNEZw?oc=5",
+      "title": "Exxon to acquire 40% stake in Enterprise Products' Bahia NGL pipeline (EPD:NYSE) - Seeking Alpha",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7094025142473778,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOFpNMjk2UlduWW1oS0pSVlE0cXp6aUtRQXB1Y1RfVnl6NjQ4dGNoT09TVXZhUVVWU1o2VE11UlMwRXQySW5WZ0M2NHkzSmtsNEQ5ZWphaW1oZUZWb2g5ZkZmNXQyNzgwTFBrUHZtWFVXWHBsaGM3Y2xDcER0NC13QW54SExBTU5YZ3gzdHBxRFdzQ1N5cGVMU05qMVZvb1RZbUoxOXdlNENTdw?oc=5",
+      "title": "Exxon Mobil's Options Frenzy: What You Need to Know - Benzinga",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8391804258399285,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOc3dYd1VZT1dreFJPdG0xT3V0ZHRwaWhIbmRWQU1KdmR6bV9mOGtZcDl0M3pHRUtZMzRBZ1NPNW1mUVB2WFF3TzctSG90WUpGb3hRa0ZMZnA4ZUlfU29JeURsODlXYlhVVmNqSVc3Q2xNbWlZRTZqdllrQWdLTDF0OG1TZlJldVpZamRHMGotZDE?oc=5",
+      "title": "Connecting U.S. industry growth - Exxon Mobil Corporation",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7071996153899269,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTjZBcWFJQkdWcUZ2UVdBTVJBLTZ1MFFUaU52bkNpMHlvQWsxQUpULWdNUE1PRjROeGZMdG16eWVkNmtrSWFLMi1BWnowMmduWHQtcTFLYVIwZ1ZMS215WkZJMDNaZUVOWENFRkVVZ2lsZmphdlNSdFBHbkRFNE1wemxFNGNjZzg?oc=5",
+      "title": "Exxon to Buy Stake in Enterprise’s New Permian NGL Pipeline - Yahoo Finance",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.725192382923568,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

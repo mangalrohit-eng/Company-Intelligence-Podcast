@@ -9,7 +9,6 @@ import { DiscoveryItem } from '@/types/shared';
 import { IEventEmitter } from '@/utils/event-emitter';
 import { IHttpGateway } from '@/gateways/types';
 import { logger } from '@/utils/logger';
-import { DEMO_CITIBANK_ARTICLES } from '../demo-articles';
 
 export interface ScrapedContent {
   url: string;
@@ -229,29 +228,12 @@ export class ScrapeStage {
       };
     }
 
-    // FALLBACK: If no content was scraped (e.g., all Google News redirects), use demo articles
-    if (contents.length === 0 && stats.failureCount > 0) {
-      logger.warn('No content scraped successfully - using demo articles as fallback');
-      
-      // Convert demo articles to scraped content format
-      for (const demoArticle of DEMO_CITIBANK_ARTICLES) {
-        contents.push({
-          url: demoArticle.url,
-          title: demoArticle.title,
-          content: demoArticle.content,
-          publisher: demoArticle.publisher,
-          publishedDate: demoArticle.publishedDate,
-          topicIds: Object.keys(topicTargets), // Assign to all topics
-          entityIds: ['Citibank'],
-          scrapedAt: new Date(),
-          latencyMs: 0,
-        });
-      }
-      
-      stats.successCount = contents.length;
-      stopReason = 'targets_met';
-      
-      logger.info('Injected demo articles', { count: contents.length });
+    // No fallback - if scraping fails, return empty results
+    if (contents.length === 0) {
+      logger.warn('No content scraped successfully - returning empty results', {
+        totalUrls: rankedItems.length,
+        failureCount: stats.failureCount,
+      });
     }
 
     logger.info('Scrape stage complete', {

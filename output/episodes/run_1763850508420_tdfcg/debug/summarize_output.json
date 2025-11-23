@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a striking update from the energy sector, we've just learned about the impressive strides being made in global infrastructure and resource management. The Bahia NGL pipeline, stretching an expansive 550 miles, is a testament to the ambitious efforts being undertaken to enhance energy distribution. This development is paralleled by another significant move in the industry, as an Exxon spokesman recently announced, \"We have lifted force majeure for the Rovuma LNG project.\" This decision marks a pivotal moment, potentially signaling a robust resurgence in the LNG sector and underscoring the industry's commitment to overcoming challenges and forging ahead. Together, these developments paint a picture of a sector that is not just expanding but also adapting with resilience and strategic foresight [CHECK].",
+      "onAirStat": {
+        "span": "550-mile pipeline",
+        "evidenceId": "88c0ac6f-c80a-4923-9445-9a21bf9f15ce"
+      },
+      "onAirQuote": {
+        "span": "We have lifted force majeure for the Rovuma LNG project",
+        "evidenceId": "fd4e6bb6-0782-4759-8424-e5d8051de1ca"
+      }
+    }
+  ]
+}

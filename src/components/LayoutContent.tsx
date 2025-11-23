@@ -14,8 +14,10 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen">
       <Navigation />
-      <main className={`flex-1 ${isAuthenticated ? 'lg:ml-64 pt-16 lg:pt-0' : ''}`}>
-        {children}
+      <main className={`flex-1 ${isAuthenticated ? 'lg:ml-64 pt-14 sm:pt-16 lg:pt-0' : ''} overflow-x-hidden`}>
+        <div className="w-full max-w-full">
+          {children}
+        </div>
       </main>
     </div>
   );

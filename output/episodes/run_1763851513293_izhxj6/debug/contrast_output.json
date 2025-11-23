@@ -1,0 +1,21 @@
+{
+  "contrasts": [
+    {
+      "topicId": "earnings",
+      "sentences": [
+        "While Verizon aims to streamline operations by reducing its workforce to 99,600 employees by the end of 2024, competitors like AT&T, T-Mobile, and Comcast are focusing on expanding their services and workforce to adapt to the rapidly changing telecommunications landscape",
+        "This strategic downsizing contrasts sharply with the growth tactics of its rivals, highlighting Verizon's unique approach to cost management and efficiency."
+      ],
+      "boundStatOrQuote": {
+        "span": "Verizon employed 99,600 workers at the end of 2024.",
+        "evidenceId": "5c3e98e5-dfa3-4566-b0fe-b81712488785"
+      }
+    }
+  ],
+  "stats": {
+    "totalContrasts": 1,
+    "byTopic": {
+      "earnings": 1
+    }
+  }
+}

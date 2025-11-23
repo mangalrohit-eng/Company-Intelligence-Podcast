@@ -13,6 +13,8 @@ import { Badge } from '@/components/ui/badge';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { Input } from '@/components/ui/input';
 import { Select } from '@/components/ui/select';
+import { useToastContext } from '@/contexts/ToastContext';
+import { useConfirmDialog } from '@/components/ui/dialog';
 
 interface Podcast {
   id: string;
@@ -37,6 +39,8 @@ export default function PodcastsPage() {
   const [cadenceFilter, setCadenceFilter] = useState<string>('all');
   const [sortBy, setSortBy] = useState<SortOption>('lastRun');
   const [viewMode, setViewMode] = useState<ViewMode>('grid');
+  const toast = useToastContext();
+  const { confirm, ConfirmDialog } = useConfirmDialog();
 
   useEffect(() => {
     fetchPodcasts();
@@ -116,34 +120,36 @@ export default function PodcastsPage() {
 
   return (
     <ProtectedRoute>
-    <div className="min-h-screen p-4 md:p-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
+        {ConfirmDialog}
         {/* Header */}
-        <div className="mb-8">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+        <div className="mb-6 sm:mb-8">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4 sm:mb-6">
             <div>
-              <h1 className="text-4xl font-bold mb-2">My Podcasts</h1>
-              <p className="text-muted">Manage and monitor your AI-generated podcasts</p>
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-2">My Podcasts</h1>
+              <p className="text-sm sm:text-base text-muted">Manage and monitor your AI-generated podcasts</p>
             </div>
-            <Link href="/podcasts/new">
+            <Link href="/podcasts/new" className="w-full md:w-auto">
               <Button size="lg" className="gap-2 w-full md:w-auto">
-                <Plus className="w-5 h-5" />
-                New Podcast
+                <Plus className="w-4 h-4 sm:w-5 sm:h-5" />
+                <span className="hidden sm:inline">New Podcast</span>
+                <span className="sm:hidden">New</span>
               </Button>
             </Link>
           </div>
           
           {/* Search and Filters */}
-          <div className="flex flex-col lg:flex-row gap-4">
+          <div className="flex flex-col lg:flex-row gap-3 sm:gap-4">
             {/* Search Bar */}
             <div className="flex-1 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-muted" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 sm:w-5 sm:h-5 text-muted" />
               <Input
                 type="text"
                 placeholder="Search podcasts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 h-11"
+                className="pl-9 sm:pl-10 h-10 sm:h-11 text-sm sm:text-base"
               />
             </div>
 
@@ -152,7 +158,7 @@ export default function PodcastsPage() {
               <Select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="min-w-[140px]"
+                className="min-w-[120px] sm:min-w-[140px] text-sm"
               >
                 <option value="all">All Status</option>
                 <option value="active">Active</option>
@@ -163,7 +169,7 @@ export default function PodcastsPage() {
               <Select
                 value={cadenceFilter}
                 onChange={(e) => setCadenceFilter(e.target.value)}
-                className="min-w-[140px]"
+                className="min-w-[120px] sm:min-w-[140px] text-sm"
               >
                 <option value="all">All Cadence</option>
                 <option value="daily">Daily</option>
@@ -174,7 +180,7 @@ export default function PodcastsPage() {
               <Select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value as SortOption)}
-                className="min-w-[140px]"
+                className="min-w-[120px] sm:min-w-[140px] text-sm"
               >
                 <option value="lastRun">Last Run</option>
                 <option value="nextRun">Next Run</option>
@@ -186,21 +192,21 @@ export default function PodcastsPage() {
               <div className="flex gap-1 border border-border rounded-lg p-1">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-2 rounded transition-colors ${
+                  className={`p-1.5 sm:p-2 rounded transition-colors ${
                     viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'hover:bg-border'
                   }`}
                   title="Grid view"
                 >
-                  <Grid className="w-4 h-4" />
+                  <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-2 rounded transition-colors ${
+                  className={`p-1.5 sm:p-2 rounded transition-colors ${
                     viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'hover:bg-border'
                   }`}
                   title="List view"
                 >
-                  <List className="w-4 h-4" />
+                  <List className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
               </div>
             </div>
@@ -252,13 +258,13 @@ export default function PodcastsPage() {
             </Link>
           </Card>
         ) : viewMode === 'grid' ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
             {filteredPodcasts.map((podcast) => (
               <PodcastCard key={podcast.id} podcast={podcast} onUpdate={fetchPodcasts} />
             ))}
           </div>
         ) : (
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {filteredPodcasts.map((podcast) => (
               <PodcastListItem key={podcast.id} podcast={podcast} onUpdate={fetchPodcasts} />
             ))}
@@ -270,31 +276,42 @@ export default function PodcastsPage() {
   );
 }
 
-function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
+function PodcastCard({ podcast, onUpdate }: { 
+  podcast: Podcast; 
+  onUpdate: () => void;
+}) {
   const [showMenu, setShowMenu] = useState(false);
+  const toast = useToastContext();
+  const { confirm } = useConfirmDialog();
 
   const handleRunNow = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     
-    if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.post(`/podcasts/${podcast.id}/runs`);
+    confirm(
+      'Start Pipeline Run',
+      `Start a new pipeline run for "${podcast.title}"?`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post(`/podcasts/${podcast.id}/runs`);
 
-        if (response.ok) {
-          const data = await response.json();
-          alert(`✅ Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress view...`);
-          window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
-        } else {
-          const error = await response.text();
-          alert(`❌ Failed to start pipeline:\n\n${error}`);
+          if (response.ok) {
+            const data = await response.json();
+            toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting...`);
+            setTimeout(() => {
+              window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+            }, 1000);
+          } else {
+            const error = await response.text();
+            toast.error('Failed to Start Pipeline', error);
+          }
+        } catch (error) {
+          console.error('Error starting pipeline:', error);
+          toast.error('Error Starting Pipeline', error instanceof Error ? error.message : 'Network error');
         }
-      } catch (error) {
-        console.error('Error starting pipeline:', error);
-        alert(`❌ Error starting pipeline:\n\n${error instanceof Error ? error.message : 'Network error'}`);
       }
-    }
+    );
   };
 
   const handlePauseResume = async (e: React.MouseEvent) => {
@@ -303,24 +320,28 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     setShowMenu(false);
     
     const action = podcast.status === 'active' ? 'pause' : 'resume';
-    if (confirm(`${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.patch(`/podcasts/${podcast.id}`, {
-          status: action === 'pause' ? 'paused' : 'active'
-        });
+    confirm(
+      `${action === 'pause' ? 'Pause' : 'Resume'} Podcast`,
+      `${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.patch(`/podcasts/${podcast.id}`, {
+            status: action === 'pause' ? 'paused' : 'active'
+          });
 
-        if (response.ok) {
-          alert(`✅ Podcast ${action}d successfully!`);
-          onUpdate();
-        } else {
-          alert(`❌ Failed to ${action} podcast`);
+          if (response.ok) {
+            toast.success('Success', `Podcast ${action}d successfully!`);
+            onUpdate();
+          } else {
+            toast.error('Failed', `Failed to ${action} podcast`);
+          }
+        } catch (error) {
+          console.error(`Error ${action}ing podcast:`, error);
+          toast.error('Error', `Error ${action}ing podcast`);
         }
-      } catch (error) {
-        console.error(`Error ${action}ing podcast:`, error);
-        alert(`❌ Error ${action}ing podcast`);
       }
-    }
+    );
   };
 
   const handleClone = async (e: React.MouseEvent) => {
@@ -328,23 +349,29 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     e.stopPropagation();
     setShowMenu(false);
     
-    if (confirm(`Clone "${podcast.title}"?`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.post(`/podcasts/${podcast.id}/clone`);
+    confirm(
+      'Clone Podcast',
+      `Clone "${podcast.title}"?`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post(`/podcasts/${podcast.id}/clone`);
 
-        if (response.ok) {
-          const data = await response.json();
-          alert(`✅ Podcast cloned successfully!\n\nRedirecting to edit...`);
-          window.location.href = `/podcasts/${data.id}/edit`;
-        } else {
-          alert(`❌ Failed to clone podcast`);
+          if (response.ok) {
+            const data = await response.json();
+            toast.success('Podcast Cloned', 'Redirecting to edit...');
+            setTimeout(() => {
+              window.location.href = `/podcasts/${data.id}/edit`;
+            }, 1000);
+          } else {
+            toast.error('Failed to Clone', 'Please try again');
+          }
+        } catch (error) {
+          console.error('Error cloning podcast:', error);
+          toast.error('Error Cloning', 'Please try again');
         }
-      } catch (error) {
-        console.error('Error cloning podcast:', error);
-        alert(`❌ Error cloning podcast`);
       }
-    }
+    );
   };
 
   const handleArchive = async (e: React.MouseEvent) => {
@@ -352,24 +379,29 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
     e.stopPropagation();
     setShowMenu(false);
     
-    if (confirm(`Archive "${podcast.title}"? It will be hidden but can be restored later.`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.patch(`/podcasts/${podcast.id}`, {
-          status: 'archived'
-        });
+    confirm(
+      'Archive Podcast',
+      `Archive "${podcast.title}"? It will be hidden but can be restored later.`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.patch(`/podcasts/${podcast.id}`, {
+            status: 'archived'
+          });
 
-        if (response.ok) {
-          alert(`✅ Podcast archived successfully!`);
-          onUpdate();
-        } else {
-          alert(`❌ Failed to archive podcast`);
+          if (response.ok) {
+            toast.success('Podcast Archived', 'The podcast has been archived');
+            onUpdate();
+          } else {
+            toast.error('Failed to Archive', 'Please try again');
+          }
+        } catch (error) {
+          console.error('Error archiving podcast:', error);
+          toast.error('Error Archiving', 'Please try again');
         }
-      } catch (error) {
-        console.error('Error archiving podcast:', error);
-        alert(`❌ Error archiving podcast`);
-      }
-    }
+      },
+      { variant: 'default' }
+    );
   };
 
   const getCadenceColor = (cadence: string) => {
@@ -422,14 +454,15 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
       </Link>
 
       {/* Actions */}
-      <div className="px-4 pb-4 flex gap-2 border-t border-border pt-4">
+      <div className="px-3 sm:px-4 pb-3 sm:pb-4 flex gap-2 border-t border-border pt-3 sm:pt-4">
         <Button
           size="sm"
-          className="flex-1 gap-2"
+          className="flex-1 gap-1 sm:gap-2 text-xs sm:text-sm"
           onClick={handleRunNow}
         >
-          <Play className="w-4 h-4" />
-          Run Now
+          <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+          <span className="hidden sm:inline">Run Now</span>
+          <span className="sm:hidden">Run</span>
         </Button>
         
         <div className="relative">
@@ -441,7 +474,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
               setShowMenu(!showMenu);
             }}
           >
-            <MoreVertical className="w-4 h-4" />
+            <MoreVertical className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </Button>
           
           {showMenu && (
@@ -450,7 +483,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
                 className="fixed inset-0 z-10" 
                 onClick={() => setShowMenu(false)}
               />
-              <div className="absolute right-0 top-full mt-2 w-56 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
+              <div className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
                 <Link 
                   href={`/podcasts/${podcast.id}/edit`}
                   className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2 block"
@@ -482,7 +515,7 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
                     e.stopPropagation();
                     setShowMenu(false);
                     navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
-                    alert('RSS URL copied to clipboard!');
+                    toast.success('RSS URL Copied', 'The RSS URL has been copied to your clipboard');
                   }}
                   className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
                 >
@@ -518,48 +551,63 @@ function PodcastCard({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => 
   );
 }
 
-function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: () => void }) {
+function PodcastListItem({ podcast, onUpdate }: { 
+  podcast: Podcast; 
+  onUpdate: () => void;
+}) {
   const [showMenu, setShowMenu] = useState(false);
+  const toast = useToastContext();
+  const { confirm } = useConfirmDialog();
 
   const handleRunNow = async () => {
-    if (confirm(`Start a new pipeline run for "${podcast.title}"?`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.post(`/podcasts/${podcast.id}/runs`);
+    confirm(
+      'Start Pipeline Run',
+      `Start a new pipeline run for "${podcast.title}"?`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post(`/podcasts/${podcast.id}/runs`);
 
-        if (response.ok) {
-          const data = await response.json();
-          alert(`✅ Pipeline started successfully!\n\nRun ID: ${data.runId}\n\nRedirecting to progress view...`);
-          window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
-        } else {
-          alert(`❌ Failed to start pipeline`);
+          if (response.ok) {
+            const data = await response.json();
+            toast.success('Pipeline Started', `Run ID: ${data.runId}. Redirecting...`);
+            setTimeout(() => {
+              window.location.href = `/podcasts/${podcast.id}/runs/${data.runId}`;
+            }, 1000);
+          } else {
+            toast.error('Failed to Start Pipeline', 'Please try again');
+          }
+        } catch (error) {
+          console.error('Error starting pipeline:', error);
+          toast.error('Error Starting Pipeline', 'Please try again');
         }
-      } catch (error) {
-        console.error('Error starting pipeline:', error);
-        alert(`❌ Error starting pipeline`);
       }
-    }
+    );
   };
 
   const handlePauseResume = async () => {
     const action = podcast.status === 'active' ? 'pause' : 'resume';
-    if (confirm(`${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`)) {
-      try {
-        const { api } = await import('@/lib/api');
-        const response = await api.patch(`/podcasts/${podcast.id}`, {
-          status: action === 'pause' ? 'paused' : 'active'
-        });
+    confirm(
+      `${action === 'pause' ? 'Pause' : 'Resume'} Podcast`,
+      `${action === 'pause' ? 'Pause' : 'Resume'} "${podcast.title}"?`,
+      async () => {
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.patch(`/podcasts/${podcast.id}`, {
+            status: action === 'pause' ? 'paused' : 'active'
+          });
 
-        if (response.ok) {
-          alert(`✅ Podcast ${action}d successfully!`);
-          onUpdate();
-        } else {
-          alert(`❌ Failed to ${action} podcast`);
+          if (response.ok) {
+            toast.success('Success', `Podcast ${action}d successfully!`);
+            onUpdate();
+          } else {
+            toast.error('Failed', `Failed to ${action} podcast`);
+          }
+        } catch (error) {
+          toast.error('Error', `Error ${action}ing podcast`);
         }
-      } catch (error) {
-        alert(`❌ Error ${action}ing podcast`);
       }
-    }
+    );
   };
 
   const getCadenceColor = (cadence: string) => {
@@ -575,16 +623,16 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
   return (
     <Card className="hover:border-primary transition-all">
       <Link href={`/podcasts/${podcast.id}`} className="block">
-        <div className="p-4 flex items-center gap-4">
+        <div className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
           {/* Cover Art */}
-          <div className="w-20 h-20 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-            <div className="text-3xl">🎙️</div>
+          <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
+            <div className="text-2xl sm:text-3xl">🎙️</div>
           </div>
 
           {/* Info */}
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg mb-1 truncate">{podcast.title}</h3>
-            <p className="text-sm text-muted truncate mb-2">{podcast.subtitle}</p>
+            <h3 className="font-semibold text-base sm:text-lg mb-1 truncate">{podcast.title}</h3>
+            <p className="text-xs sm:text-sm text-muted truncate mb-2">{podcast.subtitle}</p>
             <div className="flex gap-2 flex-wrap">
               <Badge variant={getCadenceColor(podcast.cadence)}>
                 {podcast.cadence || 'Not Set'}
@@ -608,17 +656,17 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
           </div>
 
           {/* Actions */}
-          <div className="flex gap-2 items-center flex-shrink-0">
+          <div className="flex gap-1.5 sm:gap-2 items-center flex-shrink-0">
             <Button
               size="sm"
-              className="gap-2"
+              className="gap-1 sm:gap-2 text-xs sm:text-sm"
               onClick={(e) => {
                 e.preventDefault();
                 handleRunNow();
               }}
             >
-              <Play className="w-4 h-4" />
-              Run
+              <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+              <span className="hidden sm:inline">Run</span>
             </Button>
 
             {podcast.status === 'active' ? (
@@ -678,7 +726,7 @@ function PodcastListItem({ podcast, onUpdate }: { podcast: Podcast; onUpdate: ()
                       onClick={() => {
                         setShowMenu(false);
                         navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
-                        alert('RSS URL copied to clipboard!');
+                        toast.success('RSS URL Copied', 'The RSS URL has been copied to your clipboard');
                       }}
                       className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
                     >

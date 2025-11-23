@@ -103,6 +103,32 @@ export async function POST(
 
     logger.info(`Resuming pipeline from stage: ${fromStage}`, { runId, podcastId });
 
+    // Fetch the podcast to get title, subtitle, and description
+    let podcastTitle: string | undefined;
+    let podcastSubtitle: string | undefined;
+    let podcastDescription: string | undefined;
+    try {
+      const { DynamoDBClient } = await import('@aws-sdk/client-dynamodb');
+      const { DynamoDBDocumentClient, GetCommand } = await import('@aws-sdk/lib-dynamodb');
+      
+      const client = new DynamoDBClient({ region: process.env.AWS_REGION || 'us-east-1' });
+      const docClient = DynamoDBDocumentClient.from(client);
+      
+      const response = await docClient.send(
+        new GetCommand({
+          TableName: process.env.PODCASTS_TABLE || 'podcasts',
+          Key: { id: podcastId },
+        })
+      );
+      
+      podcastTitle = response.Item?.title;
+      podcastSubtitle = response.Item?.subtitle;
+      podcastDescription = response.Item?.description;
+    } catch (error: any) {
+      console.warn(`⚠️ Could not fetch podcast metadata from DynamoDB (local dev mode):`, error.message);
+      // Will use undefined, which will fallback to default in script stage
+    }
+
     // Find the run
     let run = runsStore[podcastId]?.find(r => r.id === runId);
     if (!run) {
@@ -289,7 +315,10 @@ export async function POST(
           summarizeOutput.summaries || [],
           (contrastOutput?.contrasts || []),
           scriptInputToSave.targetDurationMinutes,
-          emitter
+          emitter,
+          podcastTitle, // Pass podcast title to script stage
+          podcastSubtitle, // Pass podcast subtitle
+          podcastDescription // Pass podcast description
         );
         break;
       }

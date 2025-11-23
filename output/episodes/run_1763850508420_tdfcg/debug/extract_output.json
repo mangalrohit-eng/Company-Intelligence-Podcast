@@ -1,0 +1,148 @@
+{
+  "units": [
+    {
+      "id": "6e8d7eee-a26f-4016-a51c-7a2671796f3e",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Exxon lifts force majeure on its Rovuma liquefied natural gas project in Mozambique",
+      "context": "Exxon lifted force majeure due to improved security conditions in Mozambique.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+      "publisher": "POLITICO Pro",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT"
+    },
+    {
+      "id": "fd4e6bb6-0782-4759-8424-e5d8051de1ca",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "We have lifted force majeure for the Rovuma LNG project",
+      "context": "Exxon spokesman confirming the lifting of force majeure",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+      "publisher": "POLITICO Pro",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT"
+    },
+    {
+      "id": "e3d94a43-7eaf-47e1-aca7-cdba05b9a274",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "TotalEnergies ended its own suspension last month for a $20 billion LNG plant nearby",
+      "context": "TotalEnergies resumed operations on its LNG plant in Mozambique.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+      "publisher": "POLITICO Pro",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT"
+    },
+    {
+      "id": "8f2db0f6-3f7a-4798-a696-d4fc31d512ca",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Exxon and TotalEnergies projects expected to be online by the early 2030s",
+      "context": "Both projects are anticipated to be operational in the early 2030s.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+      "publisher": "POLITICO Pro",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT"
+    },
+    {
+      "id": "d58bb31d-0bd9-4582-94aa-55bd1341972e",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Any attempt to build another pipeline to move the dirtiest...",
+      "context": "Liz McDowell, Stand.earth Senior Campaigns Director",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+      "publisher": "Stand.earth",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT"
+    },
+    {
+      "id": "17e7ec65-ceeb-4008-89a1-d3e565b75dbd",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Danielle Smith doesn’t seem to understand that ‘no’ means ‘no’....",
+      "context": "Kiki Wood, Senior Campaigner with Stand.earth",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+      "publisher": "Stand.earth",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT"
+    },
+    {
+      "id": "6d72e602-42f8-4225-be64-7d30b06a670f",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "People living in B.C., including Coastal First Nations, have been...",
+      "context": "Kiki Wood, Senior Campaigner with Stand.earth",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+      "publisher": "Stand.earth",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT"
+    },
+    {
+      "id": "6354ff3c-db12-4073-a647-2e0b3c7a98f4",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Setting the tanker ban adrift means losing billions of dollars...",
+      "context": "Anna Barford, Oceans Campaigner with Stand.earth",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+      "publisher": "Stand.earth",
+      "authority": 0.3,
+      "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT"
+    },
+    {
+      "id": "c65776d7-840b-48e3-baf0-637742496b6d",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Exxon Mobil Corp will acquire a 40% stake in the Bahia natural gas liquids (NGL) pipeline, operated by Enterprise Products Partners",
+      "context": "The companies announced the acquisition",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+      "publisher": "Latest news from Azerbaijan",
+      "authority": 0.3,
+      "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT"
+    },
+    {
+      "id": "88c0ac6f-c80a-4923-9445-9a21bf9f15ce",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "550-mile pipeline",
+      "context": "Length of the Bahia NGL pipeline",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+      "publisher": "Latest news from Azerbaijan",
+      "authority": 0.3,
+      "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT"
+    },
+    {
+      "id": "8acf76b4-6424-4d68-b9c5-a105f4fdeecd",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "600,000 barrels per day (bpd)",
+      "context": "Initial transport capacity of the pipeline",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+      "publisher": "Latest news from Azerbaijan",
+      "authority": 0.3,
+      "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT"
+    },
+    {
+      "id": "1eda8b81-5176-4be6-b848-8aec66d637f2",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "The transaction is expected to close by early 2026",
+      "context": "As reported in the article",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+      "publisher": "Latest news from Azerbaijan",
+      "authority": 0.3,
+      "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 12,
+    "byType": {
+      "claim": 5,
+      "quote": 5,
+      "stat": 2
+    },
+    "byTopic": {
+      "company-news": 12
+    },
+    "dedupeRemoved": 0
+  }
+}

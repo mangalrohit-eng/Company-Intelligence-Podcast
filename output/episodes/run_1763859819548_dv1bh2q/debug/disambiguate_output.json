@@ -1,0 +1,1208 @@
+{
+  "items": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPY2cwc1ZJWE9ta091ZHk0YVJXbUhWLTRHOF9CdGZINmNLZF9NV05FMGNXSXZ1NVZTZE5xTERHNVNDUXUxUFhHc29VVDBkcGZsYk9GRkd1MS1iNjlVUzdvblBKV0NLMGtHN3dQQkJMV0dzVEVkdDNmcEtJb2FGLUM3bDdGLXRISjFVU1pzMWFET3J0MUNGMzB4M3dLRWp1SzJuWVA0UkRRS1pvM1l6SHpIeA?oc=5",
+      "title": "Verizon cutting more than 13,000 jobs as it restructures - Reuters",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 22:33:43 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7403607266918788,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFA3WUpkVmJ5ZkhRSEFyT1NuZmp6NmswRmZGQkJ5cmRkWkZ5WVNOeE51VUVtcWVWTklLSWhMNlhyX3VpamJXRVRRUUVwZFpHNC1XLUpQb1dxaHd3WjN2WWlZVDdOdkUtU0FFRTN0ZUotUEItYnRFU3ZOc2NudzE?oc=5",
+      "title": "Jim Cramer Says “I Want You to Scale Out of Verizon” - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 07:29:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9006332984096479,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPMF8xWG5PLW9GNHBkZWszYVJCZHNHYVZIQlZFeS1QLU1DUTg5dkJIM21iakd3VnA2Y25NdkRGU25jOGR5WktXNEp6V2ZZT3BxYUxfaEVPdEhvTC1pdExTT0hKSUdKVjllb0drbjVxUEs3VDd6NEhmbFJLSGpsTzlhbDNLSdIBiAFBVV95cUxOUkJHTktFOHphZVFqWXJMa2RSVFBjaXplbERHRWFPWkY2cmVHSUhkZVVKeHJrNWo0NnRURU5vdkJPbzZidWxnakVvQXhIaTk4ZThaNFduT3NMVGhPRjVEM1ZBdXdtdjVDN1REaWRnS1kzMm9tWjZvZFpnTmQ5Vmpwc3ZLd1l2UHR1?oc=5",
+      "title": "Verizon CEO Dan Schulman says the company is cutting 13,000 jobs - CBS News",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 14:17:09 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7047724371220159,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQVB6ZVBHSms5VkxLOHVNVGhnUmdONFZaWi1hVmo3Y1NXcDVrUG16TXVlWmIyay1zd1hIazIwSWNDQnNjTGRGblhKNS1rbEtBOGhZLUlJVEs4U0kxTkh0NmpDZWpnQkJSUE5qbDFaLThFRUtTZXAtRFJNWWE5YUVSOFRCUW04T1JxY1czSGFzRjlfRm5mNi0yQ2ZWTHRrMjh1?oc=5",
+      "title": "Verizon to Cut 13,000 Jobs, Set Up $20 Million “Reskilling” Fund for Laid Off Staff In “Age of AI” - The Hollywood Reporter",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 15:09:16 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7084257601258171,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNVVFPT3RtZU1IazV5cmMwU0ZsaVVITllaZkt5MzhJX1hORDFjdU91OUR0S3pOdHdqdU8wREZ6RElwX25WbmI1eFVUOE1scEFvb1ZhVUExcmJpZVAyR1R0OFk5VXZzN0VOR0ZjZEpieExTSFRNRDBwb0JYalpYZTFiXzNNTGh1OWRRS052bklnUXhOcHZaaXkzZ9IBngFBVV95cUxQejBBcXh2M3ZsWkp3dUVHUzRDdW14bzB0TEN2bFFCQ1FfX1doa0pPUGp2aF9JZ0dNR3dTMS1qc05RZUpHbDBjS3pXQ2VtekJlS2ZkOV94WW83Y0NtMUFLTUdSSzRNbHRZblRSZHVTaTl5Tk5fdHROMElvSFYzelhtWFFTMUdDY2l2WUhDaHRieVBURUtEZzFOYXRsS3NwUQ?oc=5",
+      "title": "Verizon cutting more than 13,000 jobs as it restructures - CNBC",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 12:52:20 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6988671122827038,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUERyXzJRcVVYVklqbEtYWktpUlgzSFJJQy1BM0JIZC1YbV95Y1pxR3ZfMlQtT0xtTmFiSHF0WjU0OE1XNVhwbW84VXJFOTFRaktaaG4xclJnclBxbnRLR3ZtcUZZYWN1YjVOdnNWN0dzWDFJX2c5ci02c0hVUFRuQTFaVV83WHF5VXM3SXBGVlNYZ3BmZ3dCLVBNSV9KaThhVk1OZUhwcmRXY0lt?oc=5",
+      "title": "T-Mobile wants to sway more AT&amp;T and Verizon customers with new switching app - Fierce Network",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 17:45:24 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8299718876435559,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipANBVV95cUxQbnpocHpHbjlzYldzOGhkVHQ4TmRETVF2ZFZsaEZNbVlsWGNqb0FlaVNLdzdqb0xBOXBsMmc4ZVdDNHlKdXJqeUI3ZHk5TUJreElVUkliU1gxeld6V2Y2RTg5Ny15MXhPTkJxS2Z5eWNNbnFlcFJqaDN2dUhZdTZSNDhWN0hodEpSQU9nWURWdWJFWS16RW9NLXFtenVLVGUtSVhoMHpPYmpqUGJhOU10eGZkcUZLTmFQZHdKZGJKT0RTb0htRFRmaUxUWjUxQWplS09RQWdHcWxnalI3RXlzM05SNVBPbXlpLU94ZWdWb19Mc05KRVhfTG0yVlNGNWtLMXEwSUktQ0MyMUE2OXhWY2N1SVhOTGJXd3ZBc01uMkowcnBrQVVwVGEyTXhWeTdnZ0Q0RlZ2RGhDRlE4T0k3TEZReFZVelAxM2VSeTB4UzkwMXp6enVnX2tFeTgzeU9YOUdhQl9xNTNZbG5fby1FUUpsd2RzZE80dC1LeTlRTFlvajVhQ3YwbnhpR2dWXzZmVWpmSWRsZzFFUDlyZmFoVGlhOEM?oc=5",
+      "title": "Verizon Begins Laying Off More Than 13,000 Employees - The Wall Street Journal",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 12:45:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6983588621160208,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQRDlRamtTUlNSdTFuTm1CQXU3ZW0wOERTOTJOT256V2VBZDZoTU9NWkpUY0w2VzRIOGM2djRDQXAzTXZpVzREOGlrd2xyWjh2U25uS1ZZNkYxcXlWaVZERTFiNWdBSVcweWk1Q2QxelVaM01NTnpOMXBMUlJmSm1vVVpEeklGRnRf?oc=5",
+      "title": "Verizon Promo Codes And Deals: The 7 Best Early Black Friday Offers - Forbes",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 17:37:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8292805297661717,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitANBVV95cUxNVEhSS2N0T3N1UVowS3ZucFFEN1JnRk1acjhfdGJfdU0xbkI3WlUxV0diekJNZW1nNXNoLTZERlZmZTlQelFBek13RkY5SHFFMTBpY2pieDNTaEQ4Zk92Nm1WZTVpM1Q0MlozSFc3U3hDUGIzOW44b2lUS1pKUk1OS1RlelY1SkdVeE5PSkpvQS1zaG5xcXF6N2JlTWFxR0E2Wm5tQ2VvVE1ySzZka1YwdXVpcC03elM5djN6TmtxMHQwb0NiTmNsWWJvRFNrOHozTVc3VldJU2lfSGp5X241V2dOM1gyQWhkZUVsUnhpZzBHakdlOEl2cDZTLWhHYUlQdXB4MlBNXzBGWWxUOEFMZUhvLW8zTXdHQndrZmNNSDk5bnk0YmtKMHJBLU5DWlNmejF6amZhcHMwcGxzMmVnN1pjOFJEWkFhNVRqZ19FZVM4bWJOODBiNE5iVlZyU0loYWNMd3IzSmZXNTZKVWVQUWRtRkhGaHg0cVQ2clplZkY3cXpFM2htRndPNWd3Y1pReVBQWmRsLTk1N2trWi1keGlVcDAtbzQ4cWdEYndHNFlDenp4?oc=5",
+      "title": "Why Verizon’s new CEO is cutting 13,000 jobs at the wireless company - MarketWatch",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 13:07:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6998847202505982,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOWDBYcVd1YjU1aFh2SEk3OERqbm9xSVkzUkJmMVdhc3ludWlIVkZjcHBTY0ItRWxVcmdHTUhPclF2QXFVWVdISnJpekJHZVNleGRZS1ZZTGs0dXFhTXJOaldWUXNHTjl0UkxvRWo3bWNyMWNNcDlxbGVtUm01SjQ5Tk9HYmU3NmJFYzgzcjdjRXp2Q08wQ2FKbVd1VFBEa0pxX1J2SDJVTQ?oc=5",
+      "title": "Verizon Prepared Largest Workforce Reductions as Competition Intensified - Broadband Breakfast",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 19 Nov 2025 20:28:44 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6338936808728723,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPa291eC1HWnZTS0dfc21iRU56WjVYNnNZWmlhZVlxcEw5dzg0bG5Ic0JsVTZmclVvYjV3eHpFREVIbk53cXB6WlZxZkphMEs2UF8yd0VmQk8zcEg1THd3dEpkVWctVHZFZ2NTUW1VdFZUdjVvbVZzckw5dVg5cXhZSms3VGE1NG53dFByeC0xRnQ2eDdjSW5HdExxMXF3OVlBWnhYek9R?oc=5",
+      "title": "Verizon to Lay Off up to 13,000 Workers Under New CEO. See the Memo. - Business Insider",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 13:50:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7028767156321533,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihgNBVV95cUxNbmJGMmRzeHJucWVQVktXTUhPZU90V3BHWEpNWlFWZXFwcGIyZ3JlZ3VBenJqWFdER2NJLW56RWxIOFFEeUcwUE50clROdHpqTVUxandoMll5Y3AwTDg0X1pEeXg3LWNrYmY1bmlieTdfRTJqSjgxNzVtQlVrNjhJTWxZYm1hbi1UTFZ3UG5LSUFYRGxFWV8zWVNIQWN2NGlEcXFyRk02NXZWaGF1bHY2X2VqM0Y4QlNRYm15U0RYaTNVemtlMjhpUUR3TnEtbUFOZ013V3ozYU9XZ1g1UEg3R2VkMHZUVERGTmRIZzVzTTc4VnBRLWR4SVlEal9SLWtXMUdvY2FWMWstU1BwQlZXMDg3LTFkUDJscjFDbzVpWmY4SU0xMW1PallfdFZjUzRRb1Y2X1dLelRRbmI2MjJHY1RYUG10VU5ycXdXNklfZFhDWkNVVC1sMjlKbEZCZVJrLWIyWGJTN0dNNzliRklESmNGdUdXMEhsS283eXJyVEJ6d1dlM1E?oc=5",
+      "title": "Why Verizon Is Firing 13,000 Employees, in the Company’s Own Words - Barron's",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 16:28:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7139808281596263,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNdENEQ1YtWkZTdW93M2t4cWZrQ295bVo0N0wxOTBiSjhTZTB6MU1RVHVJbWxKWjYtU3V6SlFqYkJ2SDU5alcxdEV3RzRvRjRKcmtxUk9fd0VnN3ZtaWttUHJENE9aeUZfLXJmN20zZXduNDBQYjVsa1FCUXBtUjlGMmhmX2FackRiSlVxSXVBWWhGc1pkdDZZenJlcFdIZ2xhY21TWTJIQnlMOGVqal9mSURaM3pFaE0?oc=5",
+      "title": "New Verizon CEO announces historic layoffs affecting 20% of management staff - Washington Times",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 19:45:10 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7280839051244276,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQODlENThLOWdKMjgwRlpKcEZIcjlaTXk3SGhpOUJSTm1Gc0FsUGlfQmJkVHpiWkFiX1JpbnpmWWVkUjBJdUUwUEdETzNYcFJSVzZqNDRIVDZuZHYzOE40N3ROUXZYV29TdndWYzBsd1FxTDNnM3cxakZzeEJIbVVXUmxMUVJSaXQtODBn?oc=5",
+      "title": "AT&amp;T vs. Verizon: Which Major Phone Carrier Is Best? - CNET",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 12:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.524020450998845,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNVWl0bUFwaTZlcGltS3NXUGZ3SEpVcVFmdzBNZk15RVNueHpxLWQxb0VyRjdUUUZ4S2lMQ0RNMVhOVXFVbGdpTHkzUlFZNTJuTWtqWmdGSENreVhOM0MzYmhwV3hhUHJhOUhLNUstODNKX01kVUc3UEwybU4xcWdTVi1ISDc4N0FUU2Ftc1lCOW1ZS3FOVlpKTUtNQURjTTFBb1F5cW9GZFFucTI5UjQwdw?oc=5",
+      "title": "Verizon Cuts Nonunion Workforce 20% in Cost-Slashing Campaign - Bloomberg.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 22:00:03 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7378920773565129,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPMXhHSW9rTzhpTi1tbW1zeVhvNlpMN3ZLaXFXWHJ6d0dwdTUxdm53dU1pcjF4TlBwYnJSbk1JQ01Rc3Q0dnkxMzZWWmY2eXU2QUZHRUJuQWhhcHEtTUY1MXo1UDN2bk45OWFDSmhFaU5hTlJoQmdEOE1ERTZVRlFrZjdVYUtKTGFMQm9lZlhGQVJXbjR2Tk5XMWM3TUd3cHhmU0NVQVBjU2hDMnFzR3RqUTl6WDloaWw3a3BLY9IBxAFBVV95cUxNRjFScnpGX0Fhek1SUG9tWi0zWFVpUEJfbzRFdk1GTmhXY2hiMm00WkdSUWIxVUVoaWxFbzBLbkM1YmRyUzJaRXhpYVF3bVRSeUVkbnppbnhWN3hBSy1COUluUnppaW5OcDJkU1d1aVMyd3gzcVhYZHJfQUVfbE5jeE9jeEZLcWc0T21MMU81ZER6Z1BwR01CM19oNHU4VjlBNHFGME9CMkJManM0Vkw0UHlkRGtwWktncldZSXlnYWNFa3Zh?oc=5",
+      "title": "Verizon cutting more than 13,000 jobs as it works to ‘reorient' entire company - NBC Los Angeles",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 14:54:39 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7073992356821595,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxQX2xyeDJtd09hRkRtYzhETnVYR0JZWDdOdDdhcHlxR1hzdkVHVGJ5bFRoQTZlaTM2b3pHa1phdjhJSTFvZHNuTzdaYXI4UmVGWE9Lb04xQmFDdWZCN2tLRUVaeHQwRWF6U0JCd29JcE9mZzl6U3EtRE9qT1ZUOFJMQzVDRzFnLU1aLUNkRzF3UlJ4VEZ5MjlfbTRub21WLW1lSEQ5czNNTQ?oc=5",
+      "title": "Verizon Confirms Its Largest-Ever Layoff: Over 13,000 Employees Reportedly Affected In Restructuring Drive - Stocktwits",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 14:26:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7054089714688176,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNQTBQVU53cEZnSW53OVNTRmFNaVNvMU9MYnJuUzBHTC0zOVJjQlBwYi1fVVgxbEg5dWo5MllJOWtsTWpVYTBQUTM4V3Y1eEFyREQ2b3ppbERpUnE2alJpdERKaDVTR2s2d2xaVnlOXzR3Y1d2UE5lbFduUVBHaWwwRzgtRUZ5dk5qT2FVQTJ3QVU2WXY4TlNsVE1xT0Q0TVZrRFd3MFFUU1NjS3NJWE9sUzBYSXVVU014c1BNN1VB?oc=5",
+      "title": "Verizon's Best Streaming Perks: Free Disney Plus, Netflix Discount and More - CNET",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 11:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.797254196285303,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQYm5zUWpCSUxDbjV0a3o5Q2Rmclp5emRiWnkyNVlvQm1qV29XS1B2WVlpbjh4Q2lzVzZ0b0FkRTJmaTJsRVByazZMLTVrY2RrMTFyVWozMm9IVHZxb0ZQVGVmLUt4R2dfZXY4SDRHOTdsNDE3Q1VEaTZiYmJZUEI3QkxmYw?oc=5",
+      "title": "How to get free phones for Black Friday - Deals from Verizon, T-Mobile, AT&amp;T, and Mint - Business Insider",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 19 Nov 2025 19:16:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6293362124019561,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPd1FvcExMYnpFNmU0UG9VdVg1SzdCdVlUNUJzTnJRcnBwN1h2S0lhb01VeUVCaHRuOWFaTENiYk1qT2NlMHExSm9qUHBlaWNYOE5iclY1b0V3YVlMR1lXdHktbVlLRUoxRmloUmVUOE9TdVd4eDNLZUtFM19ORFVNbERWUVNud3NmT2FhYmhsTnZicmJKUjBVVXpKVzFoMHh3aXpnUHg2X3dPMWYxbHNNbm1nelRlR3NNM1VQbEFJd2FzS1g0MlhrZ0dueGw5NTREOWNjYXAxRGl3UQ?oc=5",
+      "title": "Seriously, Verizon is giving away free Samsung 4K TVs for Black Friday - how to qualify - ZDNET",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 10:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9169514441155233,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQaUFPRUR6b19fYkU4VGVXWHliVy04anVkemFNTDYxbjVnTGVNekdyd3lkeThnakZXclRNUElreF9GMHR3WnR4REM0ZjdRcjlGY1RQRlRZQXVDOE91SUNyTW1zOGMtdHZCUDBIbDlpaS12LWQ1WWhFZ0cya2xXRE9zaUdn?oc=5",
+      "title": "Verizon customers apparently starting to pay the price of downsizing already - PhoneArena",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 17:00:58 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8263213594292506,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOTlp4QVAyM29GdWlORV9qVGpvOTJaOXVQLWh4djlpdHFKaFpWR1RDanJlell2cDZjQnY2ek4tdnBtbWt2clJyRS1LX0o4am43am5pVnEwZ3RFdFJaZU0xakpkakk3amdORVlQLWZzMDFoQUZnWEJ4OWE1WVNqTXRQMnR1Z0RKdlFiUGt1OXZ3SFl1TWo5eWZuMkJjN05yaWw1TlVkREN3?oc=5",
+      "title": "Verizon to slash over 13,000 jobs under new CEO's cost-cutting plan (VZ:NYSE) - Seeking Alpha",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 15:24:26 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7094924749579196,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOOG1BZEVMWWRYUWdLX1hnZU4wX3dhU01KOXF5NjdZZlJJdXpTVnpVN25mSGpmSHhHdDkwQ0NNb0xsTjF6amwyMEhBRmpwcEZSWVJhNEdId0xHa0N0OU1ISHRyM2w2MEZUWElrTGlsVzVyTDhBZzFEMnBGYnZ2RE1VUXloeHk0UkVsdldVWmpkejkyLTBa?oc=5",
+      "title": "Verizon cuts 13,000 jobs; names transformation chief - Mobile World Live",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 17:21:35 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7177863144598492,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNRGFfVVNTOEVlWEN4dy1rYkkyRjR2WHFxczluUDlVLXd4U1dKWVRONEJPX1NGYUktZHNjMHNUcjBzNU1xTWRlV2FtWGg0SXY5RzJMb0JzejhmZzhTRFk1b3BTb1FyYjAwLXN4TTBYSk9WUU8tV3pBaVFUeG9ZQ3Jyb21OSDVndw?oc=5",
+      "title": "Verizon to lay off over 13,000 workers - Anadolu Ajansı",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 05:18:25 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7706900871550286,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxOcjhnTVY0VzVCZG40dzIyM1Fkb3Jodld4cjh3U2FHbE8yc1JjRDNrNk9jVF85Qmt0WV9xcmVuUnhHMmRXd1M3OVZWYXlxVklWQVNGUDRSbkR5ODVSd1lXOG5YM08wZGsxMUdrNktBWWZKcnJ6cE5iMWxsWmxYNmhOTllWVXJiVk1zSk1J?oc=5",
+      "title": "Verizon (VZ): Exploring Valuation as Shares Continue Their Recent Climb - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 23:08:19 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8569908172835113,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxQaHJib1QyNlJTZU5Yd2lxRjBueVNFWDlZdkNvTkNSaU1zcUV4cHJvYU9XcGZxVEZfWUxPaHBzYm1HQ0FlYXVUSFFxTjJUZ0VYSm9PdFQ5bUpqUEJBR0tLWWFaUWM4NzVzV0FNT2xaMVc3aThlam5vam9yRFE3dTdSa1Z5NnltbFNfRGVERmowTElwcVBraHlDYWgzLVUwYXdOWDdaMUMzUUZCRWw4cjR1VGRTWDRpMXdabE1VSnh6a21tMHM0dHdoQUpvZkZHbnRNbzZIYmpYcW5zbElPaW9QcFAtSEpRcHdF?oc=5",
+      "title": "Verizon's Black Friday iPhone 17 deal gets you a free phone, iPad, and Apple Watch - but read the fine print carefully - TechRadar",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 19 Nov 2025 16:59:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6208939763564821,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxPc2czeTFXSHdmUkU4NDVDTktpMnJ6eUdURjlGVk5DYUo0M2lPS0ZjdGVWcHpERkxjYnhveEtQOFNmcDB4aVF6LUdkdC1zUGxmWjNZMlZEU195cW13WDF1OE1vZGhSSDFxMzZ0OWpGdVNUdk4xbTYtUDhEZ3lCc0ZaWTJESm9Id1pQ?oc=5",
+      "title": "Jim Cramer Says \"I Want You to Scale Out of Verizon\" - Finviz",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 07:44:45 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9020416259853582,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxNeUZlUUhFbGVJSUlhM3RlMEtUOU1maW9PLWdHVnpmemQwcE9vVTI0cEtUc1ZMQ1VhRjNHRjQtTkw1dlhkMzVzRElBODE4Nm9KekVMZEFoLTNTaWtST0ZyQW1IMjM0aVF3WHZkME9EZGw5TVNFeE5kc2FUVTl3R0hMeTZLcGNFNDM1aXJ6RnAxanRCajZSNkNEOG9wdlBZaUY1b3NOallkV2I3S0pjMDRxUjdodUNUTUY4VEtGaml1ZGpuSUFJRF9sR05URWpRZw?oc=5",
+      "title": "Rhumbline Advisers Trims Stock Holdings in Verizon Communications Inc. $VZ - MarketBeat",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 13:03:13 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9309956295305489,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQS3ZYbmhySlVVNGdSNWd5eGF6VHVQdU5BajBOWGVsQlFsaElrWGU2WjFGX2JpbjdJQ3R2TVlTNURfeDNzOEFZc0Y3Q20wWUhRTjI3MzJ3Q0dJamFJa0RCak9sakZyRjBMVjlIRXppa1lUOEhVVWJOM2JBWW9XUXNvV3Itb3l6Rk8tXzhtaVAzZjdIN05hMUhrd0FZTzBlQnPSAaQBQVVfeXFMT1hvZ0xVVzRNM3FoSTFMTEZRQ2t0bzdVOWpjamUxdUk5UkZ1OFFZVDI3ODZtbGdxQTVYV3VKZl9DSl90b0RzWDBCa0R5dUhEMEprSTVVc3hWOEw3Rk9CUmZqMG5DZjJNSVJBY3BITmRLUDhZbFliX3hQV3piNnVFV0JHemcxbl93NElhS09FWDltTC1xWWlUMGprN0gxcC1RR2Y5QjE?oc=5",
+      "title": "What’s up with… Verizon, 5G in Germany, FCC - telecomtv.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 15:11:15 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8173759593719017,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNSjROM2ZfYVZjRW1pQWpCY3U3YWc4UVFJRzcyUjMzMms3UTFpSkJFWExJMWtjakpaTk5UVUVOZ0JKUzVpOGUzckg1WkxWcFdJbzRtR09kVkg4QnlHbU9LNDA3Ny1VajI5bURIRUtVQzVrY2xJUU5hYlVpZW9qVmM3LVNCMElBdXNrRGV5ajQxd2FZOUZVVFJuNG84QXRUVl9VVWVZbXhtSVdGekJGbUpVVGhYWWRndkY4T0s4ak5Lbnp3QQ?oc=5",
+      "title": "Tableaux LLC Buys Shares of 11,775 Verizon Communications Inc. $VZ - MarketBeat",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 14:21:27 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9382494260307733,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMijAJBVV95cUxORHJOWkFOYTdKZTF4SlVUOE1WVGdxTlFORUdPU3BoZzlSbmF1WndVR29DQ1FtWU81SnhBZEtSWWdLTTAzWlNwRGNRbWIxYmVidThWVTV0WnhpWC1tZnIzY2M0Uk1uUExGUGVlQ2NGektRWE42akhlU0ZwallDb29ZV0JRWU5DbkhCUXNSOUlTR1M1V2NSUlJCS25GeERzUXhTRHFmV2RTZ1NhUWRGUFRidENQa3JtVVRLeG84dGtrYlJHY2dEYXJoTkdScXdqQlBaN0RpUEFCdDVVWDg1eThiOUpxS3NDRElmMVE1YzJEb1dfNFM4eVdlaFVvczgtSWVTUTkzcUZsR1dlZ3hN?oc=5",
+      "title": "Leaders Converge at the Viceroy for Regional Recovery: Community Collective, LAEDC &amp; Verizon Unite Business, Government, and Civic Powerhouses - Santa Monica Daily Press",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 20:02:58 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.841376553832254,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQOWlPaFlkUzFoWTRyUWtBdDJQNkF4S2JTb3h6YWxjcFRuZWlqekR1RW5OaTdKb3NBYzFMY1Yyd3MwUmFNUVhpWEFyMHYxRG93Qm10b3lDWHdsVDB0cWZ3VUx3U3EtdUNUX01LRFBHaW5Pb2Q0Yy11UzdFcVFXTmMzWnQ0aHJac3Q5MEZUc0x3SDRIOGZYdFdIUS1EV3M1X0NmeVA3Z1ZDRWxnNGs?oc=5",
+      "title": "Verizon Reports 3Q 2025 Earnings; Reiterates Full-Year Financial Guidance | News Release - Verizon",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 29 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.02912653904360103,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxQQmdFV2p2ODB3WmVrWVBRUklHODlHdUtxMVRKQnJkVVVIUElaNHhjaS1LUkdBRHlOWDVxN3JPd1Fjd2daYzFnYWZlSmR3TWsya3AyTllrOEtGT2NkTy1ZdUI0dWdoR241U2g4MHl0eWl3UWlaSnFGTm9FX3VZNzJnemZYMVhOaG9CemNNWU5aWXlfcXowek5qN1RVWjRqOVJxUlJXTWVDVk5GSVh4Wi1FS1hGVGwyQWRNSi1oR0s3Wnhid19MMy11WnJwazF3dUp1ckE4WTVOdw?oc=5",
+      "title": "Franklin Resources Inc. Purchases 512,099 Shares of Verizon Communications Inc. $VZ - MarketBeat",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 12:26:44 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9276320932356484,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPM3RiNjlSRUFhVW83aTAwQ1pBbkZrZkl0TlR3andQTFNGYXRFWlcwTkVEc0JkRzVYUF9QZFM1a1V6Qjl4MXl1UDJLOFd3aXhzR1RWY0pLM2VROHhHVnV2TkkzUVJuRElKdGxkSE1hbjlHOGtrc3FFLW9PaVFJLUVXaElhRHowRWFkbUI3T3BaNEY5T1VPTG1LNmloU1VyQlVIc19rdTUtQjlkdlBCT1ZLRA?oc=5",
+      "title": "BCE Follows Verizon With More Layoffs in Telecom, Media Units - Bloomberg.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 19:37:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7274942552092165,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQVklBaW1PWDdmZGpEczRSY3NSSDlQbDlZc0hDV0NBM01laFczUkFWa3RCSTNlXzVFd3E3VmZILUpzT0M5RW1yMExROFJTTm5YbC1vSF9sa01IYV8xOUZfWlIwRjRDZ0JCTFFIb0hzV3RhU1dPazR6bzFid1NweUFReXlBbHc3QmI5OE92LXNhOFRmbUxGNXdrR1ZxZlJfYWtVbF9jOXhDOWVOUGllOXUxUW9YMlJneDBIQURwRE5YNG1JZC1VSEJpWC1FajNmNUtQT0p30gHbAUFVX3lxTE9KdWk5Mk9XUVJjZ0F5ZmdJX2t4N09EUVk1Unh1QWFFT1BlamlIRDVieDkwaFlITmc0SF9RQm51V0dwOWY1U2d0LTZwQVRYLXV4V05wY2l6cnlWT1FWUkkyNm44UHZwbUtUZVE5aG00b2g5WHAtY092OGRxNF9oTWlIcTY2QVhFMHg3UzlUU3JmcGpEVTM5aXJzVGg4ZGg0enRhUkpvbVZVQ0xkZFB6YWhJcTBfTVdEbnBJWTJlR1oySkJVNmt3TWduRDdCY0R0b2dWdmw2eDhRX0Zodw?oc=5",
+      "title": "Save big this holiday season through Verizon's home internet plan - NBC10 Philadelphia",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 17:05:32 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8266957973270151,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNcWMxZU44bTFuTDY1YWs0WFZUdGNPeHZEYUdwd1FTa190RDFMdmFhNUJQeGVBWHhzQ3BoOVItM28tUDl1UFZ3WTJBejVxSnA3djRhZGRBTWtaU1ZKdnd2cDd1Vm5MeTZwYmVKM1ZxVDFxZzY0WFNacFVCUjRoRUlHWUV3TnhjT0o3?oc=5",
+      "title": "Is Verizon Stock a Bargain After 5G Investment News and Recent Price Climb? - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 16:13:25 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7129486095734765,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQcF9SUWRDLUc5T08yd3FodFZyQzZuYVV1V09PaW9kQkFlbW5kNlhuRFU2Um1EdVZCM1RoTUhoZkxJUDkzaVdtQjVqQkZVVjdUT0ZqYkctQ2Rjak94YVRLQ1d3ajRBWHZ0bXJzYnlnRE5pUTM1bXFNQjRsQzRhZGd1UGpfblJBb1hHdkthZmtDWEJ2VzRHc0t4TEM1aTA5cGIyc09QTHNWMHR0eGM0SllFQmk5T0puN0tzQUk5Z0lDTkNQdw?oc=5",
+      "title": "Verizon Cost-Cutting to Eliminate 13,000 Jobs, See 179 Stores Converted - Retail TouchPoints",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 15:47:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8202800310832888,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPSzNIeUhOd1c5QVNsd25pY2xfWU01ZXFRRHhRaEtDSVBCVlQwS1NsX2VNb050NE9SUG45T0h0TmFlX2RJOXE2aE9Na2VISUF6YThuRlpoLUR0UmZRYTlnbkx4Szl5QVBjd3Q0bGc1UFlBR1ZzTk1PcWZrZFhlRmh4T0JmUGRaQjhJRHVMWndDaGJUMGdrbW80VExB0gGiAUFVX3lxTE96SWtnZFdfQkxrVURwMG9XTDBGdzdnQTEtUEhpWEswTzAtdXdEektGOFRrMlpWLXBOMC0ySVdpSzJYRlF2d05KZVJ4ckt6RlNYZlNiM0t1WHJqclJDV0p4Z0FBRFhXbVFJRzdqZDA3RTVNR3JiRU5pWU1HODV6a3d0SjlrMFhBWW1YZ3U1SkZvWVZ0dU15VHZ6Vmx2Tms4TjBodw?oc=5",
+      "title": "Jim Cramer Says “I Want You to Scale Out of Verizon” - Insider Monkey",
+      "publisher": "news.google.com",
+      "publishedDate": "Sat, 22 Nov 2025 07:34:59 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9011680428232531,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE93dFBzdnBhSWl5U1NkYWc5TEktcDJsOEZVUzRTN0tIdGVrbS1sU1RucGg3M29MWng4dmVpQTRpb2RucE91eGpKTkwxcWtpNFNwamxFYXRJNDU3RlVvanROZ1FKeGhwcVZYS1lCSEZUeGxwOU04cFE?oc=5",
+      "title": "Verizon Drops 6.2% in Six Months: Should You Buy the Dip? - Yahoo Finance",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 19 Nov 2025 15:15:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6144680245456692,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOUVFscHplbTJLOVI4dVh6b0UwQWYtVkstemJrVTA5YUs1V191LUFlakRPbDRwTnRnQV9CalpmVkZxeXVFX0txZVRSdDFfUUs2WFFIMG90LTlYaFY5aUNaYll1a01NUUQ5V2ZjVFZ2ZDBuelpWUENpOWRPZlBhVE1XRDljUFFtWTNSZTJ4S2NXSjE3VVZnSDhweTBzeC1nTlFEZklQYnJn?oc=5",
+      "title": "Verizon will cut about 15,000 jobs after new CEO says ‘cost reductions will be a way of life for us here’ - Fortune",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 14 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.2881025265033004,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOVTBSdUNEWUhYZkd5VUExN21xajVYTk03QmROOGRhMGQtVVN3ZTVGdW8yNzFGZkdRVi1sMXFyOGkxUHV5eHdBNTJmUHh1aW95UElrN0ZCeWItdGZtVmlIYXFyemVtZ0NxQUlUZWgyV0xxd3lhQ2lNemU1VWlMQVBxWXFNREVwS1g1YWRkTEVKaWM3bW4yV1hla3k4Xy1zSnlacWdxUQ?oc=5",
+      "title": "Verizon to lay off 13,000 nationwide. How many in Arizona? - azcentral.com and The Arizona Republic",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 23:43:16 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7454867092652624,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimAJBVV95cUxQdFVQQ3d3MTVpdHlhME5uMXhjelpXMDFYTUd0YjNTYzJhNjFuZDJETVF2Uk1XT01qeXZBTXMxOVE3VW9SRkMzV05oMXc2NHktWWhXeVVFUUJmcnZiaWtMMGNGcGROV05aQ3ZNQzkybGJsek1wb21UQnlyMlAyOTlnV1hWaWRZa1lUUmdLaGEwZTFONjJTOWtaOXU0Zlp3c1NiaXdRT0hycGtWSnJJS1F4RURPbnAxbThTenJFZGtKVnB5MlF4aXZCNy1GelFDU2hEZkVEX05ITE1DUnJhZWRfVlJVSnVrRlBydnRnNDhJTEZhTHN1S2plcXBEc0Y4VElkUHNRSHQzOHg2TFRsREJ2UmM1Wi1qUldW?oc=5",
+      "title": "Verizon is cutting more than 13,000 jobs as it works to 'reorient' entire company - The Frederick News-Post",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 03:19:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.761613662482843,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOOFp1dmMzTnFCN3MwZXNIVC1STmRMLTB4V3lta1RrNlFQa0piTjFWejFNcFJNUVAtSHhmbU5YMUs4aUNsYWhqUHNKTEtHaGk2Slc4bnZvXzdwVS02eDVNRm8wa21LWGJiRnhvaU95TUxKZ29ubjZxaUFqbGE2SGtKWjRtRQ?oc=5",
+      "title": "Verizon Begins Laying Off Thousands of Workers - Gizmodo",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 21:40:44 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7364793676390439,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxNczJ6Y0tFSzJHTm9oYy15REhZSGlkZTBOdUFPeDRMMXlyaV96RDA3MmUzeFBsZDR0czNsSXdNbTI3cEpRWWdoRmZ2eGdENGxuWnlTa2dyZDkwaXBOZ1NjU21iamh1dTNXczBlWEljZG5zTmN3cGxPdW5yMy1UZkR4R2JrSU1OUTVuNm5ueFJtZzFSTldEdERFMGppUU43YWc5Ul9jVzhsa0Q4akZfa2Q0NHMwMU9rcW9UQzVRZVhB?oc=5",
+      "title": "Verizon vs T-Mobile: which carrier has the best Black Friday iPhone deal right now? - TechRadar",
+      "publisher": "news.google.com",
+      "publishedDate": "Tue, 18 Nov 2025 13:25:23 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5269075303927588,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNek9DZkVPcGlrbGlhcklwVDBzN0Vrb2tuVUQ5dExXOW8talNxbkJ6UXZDTWdYbHhhVUxGUTBQWUpBVC14NW1PaGhtQ1RqOWVxN1pKOUJXRU9zVDlBU0diMEJlVU8zMC00SUJROWNzWVdEbHFHVFFJdHFPWFlEdXI0YjN3YVVxRUhDMGZkMVdn?oc=5",
+      "title": "Verizon to cut about 15,000 jobs as new CEO restructures, source says - Reuters",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 14 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.2881025245978604,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPbW8wVXVyTy1UVzlUV1lkam40Zk93ekFnUTBuWnVFUmhoQzJ2aXpqM2JYYVctajdYNDFrbXdRYlAta29xa0hrZjdmWW0yME5TWVd4S0I3T0pHbGJEOU9OcmowYzJQbVBpcVNpZFlldEZUQ1pfRS1WRmJyQ045eWw4ZVE3cGRpQ0dfd3RnNWRfVTVLNXdtMUdHVC1wUWRWTnpVdzZMT2NFTm9TWTF3?oc=5",
+      "title": "Verizon lays off 13K employees - news8000.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 04:19:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7661605949895397,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOSU42MjdrbG1yUHVMZGZ0WWs5Uld2VnJYaDk4SzZwV0d1aEpDVkhRMGdIUVBJeWZCYnJyVWZXQnAyTWlnSUxacXllbmVVMWdwLWtUWUpEdEt0d2NzaTd6TW1HdzRzek9STjhjVjZ5OVBMcWVvQTlJTElMUTdkcEtiRC1iSzBDMHV3VVVUWTFXVXBTRFFGQVFN?oc=5",
+      "title": "Get Affordable Internet Access With Verizon's New $25 Plan - CNET",
+      "publisher": "news.google.com",
+      "publishedDate": "Wed, 12 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.21650250531295614,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxOUTllRFpuX3VaWnM3eUhXYUVKd1Nib1FTSmZUbFVpX0V3YnpIcGJVaF9MZi1kRUtwWHZDUjQ3YVFqQUtWYmlwcDFYYkNoSnNQN3I3aXNaaV8yQnU1dWVaWU5mdDYxNE1iRkJTX3NRRXhTNXRXb1VBdDlhSWl3dEFvUnc5dG9vRENSUlRKaXlrWm9fUE1jRDBLOHM2ZG0?oc=5",
+      "title": "Watch Verizon Begins Layoffs Aimed at 20% Cut in Non-Union Staff - Bloomberg.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 17:40:53 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7191619508491205,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBFMFBuQ2dqclduUElwVm4yR2VWR0g0SE9yLTc1R3lEM1YxeDNmSHFOaklpdXUwTlpxZGNTYzF0OTFCTXV2emVxU0xYTFlCdmdielREVkUyOXJtU0R4LUpnZEp3NXFMUXdfWVQ1VGcwbnN3UTVZN0EtcDVSbw?oc=5",
+      "title": "Verizon is laying off over 13,000 workers - TechRadar",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 13:04:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8071222430160758,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE1sdUJXVS1ZM2ZlckU0QV9NRGtaZW1EcjlkN1U5N3BCcEdVMlcxc21hOXJidk9CdHRfSExLZVlic2FnQ1JKeTZTNzFXR2ZpMmw3Ml9HQkNXV05WSzExNXRub2VqZDBxd1I0Wng5Q2ladG1ONU42V1hpRWhJdDhsclU?oc=5",
+      "title": "Verizon cuts more than 13,000 jobs after two consecutive quarters of declining customer numbers - El Mundo America",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 11:03:46 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7975521492471155,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1wXzNkX0J0RFk3TDQ4dzBIUnFQYmlnU3Roa1JrRG1jYlpxWG1pVmZZa1FLLXM5RG9RamZqdk9FTm93NWZhUWtmeEhTS0d5WWZmUDJPQ1FUaDNCUzJBbDFSSHRjMDA?oc=5",
+      "title": "Verizon Asks SCOTUS To Review Privacy Fine 11/17/2025 - MediaPost",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 21:13:41 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8473000051196145,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPSnBQMk4zTGU5aE1ON1M5VzdNUGRIMXB4UGsxcHBnM1VzSmdzVVpPcnVkRWJSWmtEWHlBZGlkWGlFUWZ4WkpNMXl1UDBKMkNnRWtvMjlsQXpwU0N1SGxJbWdaZU1GYzZvQURteW1BZlVPaFdCelRlSEhTU2l0ME9OU2NCbC1oNnN2R01kLWpnRHRiaWIxV3d3MU1IcE5OVEdxcG1YWk1iSkZGQ3hldnc?oc=5",
+      "title": "Verizon job cuts affect employees in Rapid City - Rapid City Journal",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 23:49:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7459108476274854,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxPUjRzLVdHQWtnVVltVWV6d1FvNlYzUjNRMWFKM2JXQVpfZTVIN3FHaHpIamo1QnFJVHRQS2RKdjloaHRXZlVLSHZRZHFMRmlOb3RJZEJaZXp3RUF2NG5DdUpkTjR5dzk4czNtbFBNR3N5bl9GYjR0c29GRERUcEp1RDN6TFRlOGZIbFJ5MnNHMWZvVXk0elc1N2FmYWltWWpRR3FzNTk4cVFOV2NreUFGSHdEWQ?oc=5",
+      "title": "Verizon set to cut 13,000 jobs nationwide - cbs19.tv",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 00:29:39 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7489249842452437,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNOGpybVlpMEdDdEM1QVFXVEtFWUptNW5xNnp0LS1hQ29LcFFUakZtTExBNW9hRzVOOWJ1SmtzejkwLVhlZHFaT3VZSU0wOE5YaFA5TkMwTlM4VWhKOTc2Y3VCSm40dFNYR0J2NVAzeDlNME03b2tfZjdadnJLQUlESlVydDhvczlLZ0ZpaHRROXhtZUs5VUprUTRxMGsyRWtBZjktMG9UNDlweHY3MmY1TndTMWJvUnc1?oc=5",
+      "title": "From Harlem To Hollywood Verizon Cuts 13,000 Jobs In Telecom’s largest Layoff Ever - Harlem World Magazine",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 23:53:24 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7462365147053631,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "title": "Verizon to slash over 13K employees as part of customer-focused mission - Lightwave Online",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8441327673947007,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQNHZweUd2eTRsR1ZLQmtqUVY4TVBIVExvZFZhcGt6WFB3Zkg0cl9wdTZGbzduMnVlNGVsckVfektCOXI4UU9VTFh6MGt1c3JDcnNJWTlCckhJbV9pdUp0QnZ3VGhSZFgzb3JGNHYwcGdjbi1SM21ZOFVUNTNGd0xlOWxyREhyM3h1LU03MTlzNWJGQVZMTm9QT3JPZVk2MzTSAaQBQVVfeXFMTzV0NFhkVl9kQ0V5RC0tUmdESG5XSW1BQ0x4alR0Mk1lZW9LeUU1QUNuaXF6S0dWOVRfS0dMNzc0ZXhRaTBSTVg3NVVmTDc4OXlBOE9fUHZuWEt2R2RLTll2NlZXc3RGTk9KQlpYUzJwa2x5VGNjQWxYbTc2ZHNYNW14QTgzX3REcm56RnZWSHdRZDFyWUZNT2JWd0dZeTVmZVlIS20?oc=5",
+      "title": "Ticker: Verizon slashes 13,000 jobs; Mortgage rates nudge up - Boston Herald",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 20:53:32 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7330388316397316,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFB1NTNsNGN6bDN0cE53TUNzaTNuamV6ZV94YWs0cUVEX2lCbVZrT3Bka1lBQkdLbzRMRGpabUR5TXh1RDctci1hUEtMbkN2VW9NSlowYTFhcEZENXV4cG9vTzBYNFRSQk1lZnZnaU9qY3RmZVF5aWllSncwbw?oc=5",
+      "title": "Verizon makes a tough decision that might just save it - PhoneArena",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 00:29:26 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.748908885255382,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPQzJ4NDBOZTdKSHRzRWNRRmZuWlY2bUxOcDRvZ2c0NDhjRlJIbEtkYm9udkZjLWN2MDZPT3FLM0MtbWlVdkw3RFc1YldwcUVfR0ZnTGx2Q3J5Ukg3YWFFQ3BmcnlQRVZzUXh0S1czSUNGR1RCMHRKSFU1Z1F3WFNuSUdpSGlWZkNpLVZGNzE4aFIyX09pRnhZ?oc=5",
+      "title": "Verizon Cuts 13,000 Jobs in Largest Layoff Under New CEO Schulman - WebProNews",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 19:30:14 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7270060416693207,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1BZFZwUUsxN3hsWTlmZFBnaU4zS2w2N3pFNXE1Z0NXblNfX0MxNkpGVmJjeU5LWlhCLTRfRGNNSnNLakxpTF8tVVJDTVNhRG95NUhXTUpDSlRDLTJJaGIyMXlHcXJWeko4Sk9yUmlIWXJ6RzNudVJ0WXd3?oc=5",
+      "title": "Verizon laying off more than 13,000 employees as it begins restructuring - AOL.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 21:19:11 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7349065289701971,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNUmxUbjN4anVPUXliTTZIV2lyTWt0Zk5IdEQ4WG81cTlJcERrdTVSZDRPNDkwMzhrQW10X1pyTXBGTjAtcnMza2xOZGl1S3BzdDl1MmF5MGhUdmliUk1FLXo1OUNkSGtWQ3d1OVc2MzY1NnJERGZPTy1VNnR6a0VJSWdLbGRSWFVUMjFFczUyZzdCWVBFSXlTWVpGR1I3aGM4ekhCeGRR?oc=5",
+      "title": "Verizon to lay off 13,000 employees under new CEO - The Business Journals",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 18:10:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7212422927663795,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOdmVUbXoxeGtYVG01TUxZWG9DX2ZILUNHQ2NmYkFhTDJod0ZGQUpEdGJMOWd2YmxEY1poVk5SWU1EU3pMQ1RxM2FfU3dzR09aQ0RTZEU1V3N5U2xqM3VXV3dMMnZlZEp2S2xkc3B5Z2Y1c3FTZU9UTnRDaUEwNEJ1VW1BUHRMRGtvZWMtR0pfVQ?oc=5",
+      "title": "‘Hearing the bombs drop’: Verizon confirms more than 13,000 job cuts - San Francisco Chronicle",
+      "publisher": "news.google.com",
+      "publishedDate": "Fri, 21 Nov 2025 19:13:19 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8372424466599508,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOR1pmNHFsMUFtaE1QRHk0Q1JUSS15YkN4bEZXaTJvellPQ25uVTJqUkRuWVhqOGtzMWdUamFpaU5WckxzbFRpZVZsTFdBUWt3ajhPaks5bzZucDlYS3ZoZks0ZFlkOGpjV2ZLTmVpMk13RGt3bVJZS3ZtZUpjQThYQVRDZTFLRGR3V3oxZV9mdGljeExPM3NyMzNHUkc0R1U?oc=5",
+      "title": "Verizon Leads the Future of Wireless with Development of New Industry 6G Forum - Verizon",
+      "publisher": "news.google.com",
+      "publishedDate": "Mon, 22 Sep 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.00014747972788528097,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE1adDBPRTVRZGt2SHB5WFRqb1lWN0FJdTZoMFE1NkdfMEkwR1ZKdS1VZEgyVVBxcVlsdTEySGE2UUx3S1NfQ2NXOTFLNFB5V3J2eTBUUTRGOWIyZHhQUDR5UzFiUzBza3JOdjg1TGU4amJPbDBYUU1TXw?oc=5",
+      "title": "AT&amp;T Bets on Fiber Growth While Verizon Cuts 15% of Workforce - AOL.com",
+      "publisher": "news.google.com",
+      "publishedDate": "Thu, 20 Nov 2025 20:26:56 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Verizon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7311069725032413,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "blocked": false
+    }
+  ],
+  "stats": {
+    "totalInput": 91,
+    "passedConfidenceThreshold": 63,
+    "blockedByPolicy": 0,
+    "blockedByRobots": 0,
+    "finalCount": 63
+  }
+}

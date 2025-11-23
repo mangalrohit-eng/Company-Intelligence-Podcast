@@ -1,0 +1,93 @@
+{
+  "units": [
+    {
+      "id": "0f84262a-0b5a-4f58-abb0-d4b22168c3e6",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon begins laying off more than 13,000 employees",
+      "context": "According to The Wall Street Journal",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMipANBVV95cUxNUm9pTjVKeTkydHA4S0ROQ0F5ZTFuWHRSVkJPdkxJNkx1eFhZbFdCUE5aWDhSN2dpbXQ2N2RraVA4VjNaZkcxY0VnNENWVVdTbjF0SnpWUXhlbFdOdkhvYzdPSDFOYmxLeXdhQ0J2NFBLUDR5eDNIUDZuOW16TjVScWlSa1N4WFZfOVBNX3pUS1pFZGVPREQ2M0xseGMxcmdrb3dicWZmZkRMdWZocjhOX0hiUVZRSU1uVEtuS3VyZThhbkhaQkFnaUdMTS1XS1ZxbEVSejNGTUxXS3c5YXhLMEdPZjhtTXRhdzBzYUdIeEFXTEJhNC1qUGxQQW9sOXRRNTBub0xpZ2VvUEU2ZW5YSHZtM01BQTBGdUVQbTR2RUwxRGpBVTBSYnAzb2M1cWFZOU52TDdzdUhQdThTZ1lkdXd0eExjNkE3OTVpdkpQMlhLSzRiaDRFUHpZd3lPT2syMXVENzZFZUNOaEhpVkRnaW92Qmw3MXljYllkWDl0RS1KUzZKSkdmQ1JqNDNYRmc5LXZfZnJFOG83WGxROG5FaG5TSlI?oc=5",
+      "publisher": "The Wall Street Journal",
+      "authority": 0.9,
+      "publishedDate": "Thu, 20 Nov 2025 12:45:00 GMT"
+    },
+    {
+      "id": "156445c0-d0d9-43d0-aa2a-6c293a48fd60",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon plans to lay off over 13,000 employees",
+      "context": "representing about 13% of its workforce",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    },
+    {
+      "id": "e7dd4744-72e7-4f02-9ce6-050066feda29",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon is expanding its broadband footprint through acquisitions and infrastructure investments",
+      "context": "aiming to reach up to 650,000 passings annually in 2025 and over 1 million after the Frontier deal",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    },
+    {
+      "id": "1ff0901e-fbfb-4369-9878-53d9cf901e44",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Dan Schulman, who recently became Verizon’s new CEO, says that...",
+      "context": "",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    },
+    {
+      "id": "39c72196-46f9-4780-bd23-bca84e0db333",
+      "type": "stat",
+      "topicId": "company-news",
+      "span": "Verizon had nearly 100,000 U.S. employees as of the end of 2024",
+      "context": "after cutting almost 20,000 over three years from its workforce",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    },
+    {
+      "id": "480ee120-78f0-48ac-887f-46fd5d4862ee",
+      "type": "claim",
+      "topicId": "company-news",
+      "span": "Verizon will offer a $20 million 'reskilling and career transition fund' for workers who were laid off",
+      "context": "",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    },
+    {
+      "id": "ee9256db-d7c8-4156-a28f-b70234c7eaf1",
+      "type": "quote",
+      "topicId": "company-news",
+      "span": "Alfonso Villanueva, EVP and Chief Transformation Officer for Verizon.",
+      "context": "",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxPNWp3UnpLSy1oa3plTlZTakVwT0xvTjNOcGExM1hwczJidHBjZEtYcXo2WlBmS29HNWJ6RmZ3S0JMN1dUZ2EtRWpNazlrdGpPeXN6Vmt4SVc4b3JhY0Z6c0dxTkZWNW1SYVVaRW1ROGRBVmwyYm55MjN0NFY5UXNlTm96YzdMaTJ0YndoT19RTFNCZEFRV29ma0xaT3pkZl91NUJkUDk2OGNNMHQxcHFJTHJVeXd3QUJDQ2lycWFkWUMzZDg?oc=5",
+      "publisher": "Lightwave Online",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 20:35:56 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 7,
+    "byType": {
+      "claim": 3,
+      "stat": 2,
+      "quote": 2
+    },
+    "byTopic": {
+      "company-news": 7
+    },
+    "dedupeRemoved": 0
+  }
+}

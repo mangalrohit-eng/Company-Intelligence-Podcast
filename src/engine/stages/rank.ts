@@ -184,7 +184,7 @@ export class RankStage {
     }
     
     // Default authority for unknown sources
-    return 0.5;
+    return 0.3;
   }
 
   /**

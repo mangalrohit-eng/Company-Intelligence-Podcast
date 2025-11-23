@@ -1,0 +1,21 @@
+{
+  "itemCount": 12,
+  "articleLimit": 12,
+  "topicTargets": {
+    "company-news": {
+      "targetUnits": 3
+    },
+    "competitor-analysis": {
+      "targetUnits": 3
+    },
+    "industry-trends": {
+      "targetUnits": 3
+    }
+  },
+  "sampleUrls": [
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxObVlpSDlzTEpydzdWcFBoa1lkZC03MExKTW1JODFIQTBaZG9RaWhTeEY1OTh2c2wxY2t2Ykt6bVEyYmRxd2wxNkQtYjNrRVVCZHZBYURnN0pSMjBXVTR2OVJ2LUkycUxxT19tSGxLT0VNcWVrR3M1QjZMdDFndl9CUTV0OHFQalFkbDlPNncyQ2tsMGtlbEhtV0NvbW4xRDE1Mk9yUGZvLVhoX01G?oc=5",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPaGpiODB1ZjV1dVJBSllGVS13clg5YnZqcE56M0lOLTlQdXM0Z1c0R1kwOUJSdWRZWUl4SmJlWjVWckVWV192QVRpTmkzZFpPbm1SZXdLcS0zekNGMjFwRzM3b1FucjVXYVVBZUJXanljdC01ODhpMzNfVXVLOFFHRGdOMEQ5WW15a3JPVmFVNUsxczBvdF94TWVGclI3d09FaVZTTl9mMWdiZG9TaGh30gG0AUFVX3lxTE53SHRfLTVGN1VsRVM3OTVwbE5YZjl5MUVFcjhYcEgwNFV4UkpEekRGUEZNTVZzN20xWU1lcnUwMWVIQUdKbFdQTXY2dkpWQTVEWEV3c2wwZl9IN3RBXzNub2o5bUJqSERuVm1Ub1hVNGk3MW5oM1V5b25TWm0xUWJibmtyZW9PVk91Ylh1MzZiWHlUMTg1LVFMTTM1dFI0MVhCdVh2TXJ2YzJ4YTI4SnNfTE4yYQ?oc=5",
+    "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQc05xbGlra1k3UGVoNDRlODNJX2xVaWE4QW9FSFZSOVFOTG4zdHJjUlRWUVRFcldaR2NZeS1vZVhxRjQ4R1REVEs2S3BJT1doaEI3RWpjNm50RUZQNUxhZ0JxNnkySUpHQUNzN1JlN2N6U1J1MHdRMGVkLVZFT1U4Z3dpWkJQWlhzT0ZJdWtXU0hDcDFvaEpPcEtremZoRjBfVnFwdFNGVi1vTGFtUVhEc3ZiUm8yYmNRMjlQUVNqM2RYcXgyUEx6c3FLLWpiZWNaZzVjczJGZm0?oc=5"
+  ],
+  "totalRankedItems": 78
+}

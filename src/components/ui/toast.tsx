@@ -61,7 +61,7 @@ export function Toast({ id, type, title, message, duration = 5000, onClose }: To
 
   return (
     <div
-      className={`${getStyles()} border rounded-lg p-4 shadow-lg backdrop-blur-sm min-w-[300px] max-w-md animate-in slide-in-from-right duration-300`}
+      className={`${getStyles()} border rounded-lg p-3 sm:p-4 shadow-lg backdrop-blur-sm w-[calc(100vw-2rem)] sm:min-w-[300px] sm:max-w-md animate-in slide-in-from-right duration-300`}
     >
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 mt-0.5">{getIcon()}</div>
@@ -85,7 +85,7 @@ export function ToastContainer({ toasts, onClose }: {
   onClose: (id: string) => void;
 }) {
   return (
-    <div className="fixed top-4 right-4 z-50 flex flex-col gap-2 pointer-events-none">
+    <div className="fixed top-4 right-2 sm:right-4 z-50 flex flex-col gap-2 pointer-events-none max-w-[calc(100vw-1rem)]">
       {toasts.map((toast) => (
         <div key={toast.id} className="pointer-events-auto">
           <Toast {...toast} onClose={onClose} />

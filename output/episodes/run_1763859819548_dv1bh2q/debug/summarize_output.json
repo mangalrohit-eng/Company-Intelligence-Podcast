@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a bold reflection of its evolving corporate landscape, Verizon announced a significant figure in its 2024 annual report, revealing that the company employed 99,600 workers by the year's end. This number isn't just a testament to the telecommunications giant's size but also a crucial piece of the puzzle as the company navigates through transformative times. Echoing this sentiment, CEO Dan Schulman remarked, \"Verizon is at a critical juncture,\" a statement that underscores the company's current phase of reevaluation and strategic redirection. As Verizon stands on this pivotal threshold, it's clear that every employee plays a part in steering the company towards its redefined trajectory, making each of the 99,600 workers integral to its journey ahead.",
+      "onAirStat": {
+        "span": "Verizon employed 99,600 workers at the end of 2024.",
+        "evidenceId": "0dc20561-a371-4fa9-9f22-1a236c9cec6c"
+      },
+      "onAirQuote": {
+        "span": "Verizon is at a critical juncture",
+        "evidenceId": "3ece1c0e-9a19-4497-bc05-c4e46c37bb93"
+      }
+    }
+  ]
+}

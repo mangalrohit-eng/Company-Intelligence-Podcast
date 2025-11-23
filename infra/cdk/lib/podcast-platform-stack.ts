@@ -488,7 +488,10 @@ export class PodcastPlatformStack extends cdk.Stack {
         EVENTS_TABLE: eventsTable.tableName,
         EPISODES_TABLE: episodesTable.tableName,
         MEDIA_BUCKET: mediaBucket.bucketName,
+        S3_BUCKET_NAME: mediaBucket.bucketName,  // For serve-file API compatibility
+        S3_BUCKET_MEDIA: mediaBucket.bucketName,  // Alternative name for compatibility
         RSS_BUCKET: rssBucket.bucketName,
+        CLOUDFRONT_DOMAIN: 'dhycfwg0k4xij.cloudfront.net',  // TODO: Make this dynamic from CloudFront distribution
         USER_POOL_ID: userPool.userPoolId,
         USER_POOL_CLIENT_ID: userPoolClient.userPoolClientId,
         NODE_ENV: 'production',

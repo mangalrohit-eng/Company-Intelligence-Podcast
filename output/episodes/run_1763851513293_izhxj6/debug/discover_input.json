@@ -1,0 +1,20 @@
+{
+  "topicIds": [
+    "earnings",
+    "product-launches",
+    "m-and-a",
+    "leadership",
+    "technology",
+    "strategy"
+  ],
+  "companyName": "Verizon",
+  "sources": {
+    "rssFeeds": [
+      "https://news.google.com/rss/search?q=Verizon"
+    ],
+    "newsApis": [],
+    "irUrls": [],
+    "regulatorUrls": [],
+    "tradePublications": []
+  }
+}

@@ -437,9 +437,25 @@ export class PipelineOrchestrator {
         const stage = new ScrapeStage(httpGateway);
         const stageStart = Date.now();
         // Get top-ranked items from all topic queues
-        const allRankedItems = Array.from(rankOutput.topicQueues.values()).flat();
+        // Deduplicate by URL since items can appear in multiple topic queues
+        const allRankedItemsArray = Array.from(rankOutput.topicQueues.values()).flat();
+        const seenUrls = new Set<string>();
+        const allRankedItems: typeof allRankedItemsArray = [];
+        for (const item of allRankedItemsArray) {
+          if (!seenUrls.has(item.url)) {
+            seenUrls.add(item.url);
+            allRankedItems.push(item);
+          }
+        }
         
-        // Apply article limit based on admin settings
+        // Sort by rankScore (descending) to get top-ranked items first
+        allRankedItems.sort((a, b) => {
+          const scoreA = (a as any).rankScore || 0;
+          const scoreB = (b as any).rankScore || 0;
+          return scoreB - scoreA; // Descending order (highest rank first)
+        });
+        
+        // Apply article limit based on admin settings - take top N by rank
         const limitedRankedItems = allRankedItems.slice(0, articleLimit);
         logger.info('Applied article limit', {
           totalRanked: allRankedItems.length,
@@ -851,7 +867,10 @@ export class PipelineOrchestrator {
               summarizeOutput.summaries,
               contrastOutput.contrasts,
               input.config.durationMinutes,
-              emitter
+              emitter,
+              input.config.title, // Pass podcast title to script stage
+              input.config.subtitle, // Pass podcast subtitle
+              input.config.description // Pass podcast description
             );
           },
           (error) => {

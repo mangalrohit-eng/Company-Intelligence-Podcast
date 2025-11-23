@@ -1,0 +1,55 @@
+{
+  "outline": {
+    "theme": "Environmental and Economic Impact of Energy Projects",
+    "subThemes": [
+      "Environmental Stewardship",
+      "Economic Viability"
+    ],
+    "sections": [
+      {
+        "section": "cold_open",
+        "title": "A Costly Crossroads: Environmental and Economic Implications of Energy Projects",
+        "bulletPoints": [
+          "Discover the staggering $35 billion cost of the Trans Mountain tar sands oil pipeline to taxpayers.",
+          "Hear Liz McDowell's poignant warning on the future of energy infrastructure."
+        ]
+      },
+      {
+        "section": "company_deep_dive",
+        "title": "Trans Mountain Pipeline: An Examination",
+        "bulletPoints": [
+          "Explore the environmental and economic controversies surrounding the Trans Mountain tar sands oil pipeline.",
+          "Understand the implications of its $35 billion price tag on taxpayers and its failure to reach full operational capacity."
+        ]
+      },
+      {
+        "section": "competitor_moves",
+        "title": "The Energy Landscape: Competitors and Alternatives",
+        "bulletPoints": [
+          "Analyze how competitors and alternative energy projects are responding to the environmental and economic challenges highlighted by the Trans Mountain pipeline.",
+          "Discuss the shift towards sustainable and economically viable energy solutions in the wake of this controversy."
+        ]
+      },
+      {
+        "section": "industry_special_topics",
+        "title": "Navigating the Future: Environmental Stewardship and Economic Viability",
+        "bulletPoints": [
+          "Delve into the broader implications of the Trans Mountain project on policy, environmental stewardship, and the economic viability of future energy infrastructure.",
+          "Examine the role of public opinion, policy changes, and technological advancements in shaping the future of energy projects."
+        ]
+      },
+      {
+        "section": "takeaways",
+        "title": "Reflecting on the Crossroads",
+        "bulletPoints": [
+          "Summarize key insights on the environmental and economic impact of the Trans Mountain pipeline and similar projects.",
+          "Reflect on the critical stance of environmental campaigners like Liz McDowell and the pivotal moment for sustainable energy decisions."
+        ]
+      }
+    ]
+  },
+  "knowledgeGraph": {
+    "entities": 2,
+    "relationships": 1
+  }
+}

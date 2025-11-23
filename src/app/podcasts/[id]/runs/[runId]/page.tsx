@@ -6,6 +6,8 @@ import { ArrowLeft, CheckCircle2, Circle, Loader2, XCircle, Download, Play, Rota
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
+import { useConfirmDialog } from '@/components/ui/dialog';
 
 interface RunData {
   id: string;
@@ -92,8 +94,20 @@ export default function RunProgressPage() {
             return `${outputData.rankedItems.length} articles ranked`;
           }
           if (outputData.topicQueues) {
-            const total = Object.values(outputData.topicQueues).reduce((sum: number, items: any) => sum + (Array.isArray(items) ? items.length : 0), 0);
-            return `${total} articles ranked`;
+            // Deduplicate by URL since items can appear in multiple topic queues
+            const seenUrls = new Set<string>();
+            const allItems: any[] = [];
+            Object.values(outputData.topicQueues).forEach((items: any) => {
+              if (Array.isArray(items)) {
+                items.forEach((item: any) => {
+                  if (item.url && !seenUrls.has(item.url)) {
+                    seenUrls.add(item.url);
+                    allItems.push(item);
+                  }
+                });
+              }
+            });
+            return `${allItems.length} articles ranked`;
           }
           return null;
         
@@ -213,64 +227,72 @@ export default function RunProgressPage() {
     fetchSummaries();
   }, [run, runId]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const toast = useToastContext();
+  const { confirm, ConfirmDialog } = useConfirmDialog();
+
   const handleResume = async (stageId: string) => {
-    if (!confirm(`Resume pipeline from ${stageId} stage? This will re-execute the stage using saved inputs.`)) {
-      return;
-    }
+    confirm(
+      'Resume Pipeline',
+      `Resume pipeline from ${stageId} stage? This will re-execute the stage using saved inputs.`,
+      async () => {
+        setResumingStage(stageId);
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/resume`, {
+            fromStage: stageId,
+          });
 
-    setResumingStage(stageId);
-    try {
-      const { api } = await import('@/lib/api');
-      const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/resume`, {
-        fromStage: stageId,
-      });
-
-      if (response.ok) {
-        // Refresh run data
-        await fetchRun();
-        // Start polling again
-        const interval = setInterval(() => {
-          fetchRun();
-        }, 3000);
-        setTimeout(() => clearInterval(interval), 60000); // Poll for 1 minute
-      } else {
-        const error = await response.json();
-        alert(`Failed to resume: ${error.error || error.details || 'Unknown error'}`);
+          if (response.ok) {
+            toast.success('Pipeline Resumed', 'The pipeline has been resumed from the selected stage');
+            // Refresh run data
+            await fetchRun();
+            // Start polling again
+            const interval = setInterval(() => {
+              fetchRun();
+            }, 3000);
+            setTimeout(() => clearInterval(interval), 60000); // Poll for 1 minute
+          } else {
+            const error = await response.json();
+            toast.error('Failed to Resume', error.error || error.details || 'Unknown error');
+          }
+        } catch (error: any) {
+          console.error('Error resuming pipeline:', error);
+          toast.error('Error Resuming Pipeline', error.message || 'Please try again');
+        } finally {
+          setResumingStage(null);
+        }
       }
-    } catch (error: any) {
-      console.error('Error resuming pipeline:', error);
-      alert(`Failed to resume pipeline: ${error.message}`);
-    } finally {
-      setResumingStage(null);
-    }
+    );
   };
 
   const handleStop = async () => {
-    if (!confirm('Are you sure you want to stop this pipeline execution? This action cannot be undone.')) {
-      return;
-    }
+    confirm(
+      'Stop Pipeline',
+      'Are you sure you want to stop this pipeline execution? This action cannot be undone.',
+      async () => {
+        setStopping(true);
+        try {
+          const { api } = await import('@/lib/api');
+          const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/stop`);
 
-    setStopping(true);
-    try {
-      const { api } = await import('@/lib/api');
-      const response = await api.post(`/podcasts/${podcastId}/runs/${runId}/stop`);
-
-      if (response.ok) {
-        const data = await response.json();
-        alert('Pipeline execution stopped successfully.');
-        // Refresh run data
-        await fetchRun();
-        // Continue polling to see the updated status
-      } else {
-        const error = await response.json();
-        alert(`Failed to stop pipeline: ${error.error || error.details || 'Unknown error'}`);
-      }
-    } catch (error: any) {
-      console.error('Error stopping pipeline:', error);
-      alert(`Failed to stop pipeline: ${error.message}`);
-    } finally {
-      setStopping(false);
-    }
+          if (response.ok) {
+            toast.success('Pipeline Stopped', 'The pipeline execution has been stopped');
+            // Refresh run data
+            await fetchRun();
+            // Continue polling to see the updated status
+          } else {
+            const error = await response.json();
+            toast.error('Failed to Stop Pipeline', error.error || error.details || 'Unknown error');
+          }
+        } catch (error: any) {
+          console.error('Error stopping pipeline:', error);
+          toast.error('Error Stopping Pipeline', error.message || 'Please try again');
+        } finally {
+          setStopping(false);
+        }
+      },
+      { variant: 'danger' }
+    );
   };
 
   if (loading) {
@@ -297,6 +319,7 @@ export default function RunProgressPage() {
 
   return (
     <ProtectedRoute>
+      {ConfirmDialog}
       <div className="min-h-screen p-8">
         <div className="max-w-4xl mx-auto">
           <Button

@@ -176,23 +176,23 @@ export function Navigation() {
       </nav>
 
       {/* Mobile Header */}
-      <header className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-secondary border-b border-border px-4 flex items-center justify-between z-50">
-        <Link href="/" className="flex items-center gap-2">
-          <Radio className="w-6 h-6 text-primary" />
-          <h1 className="text-xl font-bold text-primary">Podcast AI</h1>
+      <header className="lg:hidden fixed top-0 left-0 right-0 h-14 sm:h-16 bg-secondary border-b border-border px-3 sm:px-4 flex items-center justify-between z-50">
+        <Link href="/" className="flex items-center gap-1.5 sm:gap-2">
+          <Radio className="w-5 h-5 sm:w-6 sm:h-6 text-primary" />
+          <h1 className="text-lg sm:text-xl font-bold text-primary">Podcast AI</h1>
         </Link>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           {isAuthenticated && <NotificationCenter />}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="p-2 hover:bg-border rounded-lg transition-colors"
+            className="p-1.5 sm:p-2 hover:bg-border rounded-lg transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? (
-              <X className="w-6 h-6" />
+              <X className="w-5 h-5 sm:w-6 sm:h-6" />
             ) : (
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 sm:w-6 sm:h-6" />
             )}
           </button>
         </div>
@@ -205,7 +205,7 @@ export function Navigation() {
             className="lg:hidden fixed inset-0 bg-black/50 z-40 mt-16"
             onClick={() => setIsMobileMenuOpen(false)}
           />
-          <nav className="lg:hidden fixed top-16 right-0 w-64 h-[calc(100vh-4rem)] bg-secondary border-l border-border p-6 z-40 shadow-xl animate-in slide-in-from-right duration-200 flex flex-col">
+          <nav className="lg:hidden fixed top-16 right-0 w-72 sm:w-80 h-[calc(100vh-4rem)] bg-secondary border-l border-border p-4 sm:p-6 z-40 shadow-xl animate-in slide-in-from-right duration-200 flex flex-col overflow-y-auto">
             <ul className="space-y-2 flex-1">
               {links.map((link) => {
                 const Icon = link.icon;

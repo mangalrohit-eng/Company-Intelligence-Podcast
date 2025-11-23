@@ -1,0 +1,4376 @@
+{
+  "topicQueues": {
+    "company-news": [
+      {
+        "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxObVlpSDlzTEpydzdWcFBoa1lkZC03MExKTW1JODFIQTBaZG9RaWhTeEY1OTh2c2wxY2t2Ykt6bVEyYmRxd2wxNkQtYjNrRVVCZHZBYURnN0pSMjBXVTR2OVJ2LUkycUxxT19tSGxLT0VNcWVrR3M1QjZMdDFndl9CUTV0OHFQalFkbDlPNncyQ2tsMGtlbEhtV0NvbW4xRDE1Mk9yUGZvLVhoX01G?oc=5",
+        "title": "Exxon to acquire 40% stake in Enterprise Bahia NGL pipeline - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Thu, 20 Nov 2025 14:19:31 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7158654285034112,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3820005560786442,
+        "expectedInfoGain": 0.8008300509208108,
+        "rankingFactors": {
+          "R": 0.6657366203703703,
+          "F": 0.7158654285034112,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 2.0964106941141214
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPaGpiODB1ZjV1dVJBSllGVS13clg5YnZqcE56M0lOLTlQdXM0Z1c0R1kwOUJSdWRZWUl4SmJlWjVWckVWV192QVRpTmkzZFpPbm1SZXdLcS0zekNGMjFwRzM3b1FucjVXYVVBZUJXanljdC01ODhpMzNfVXVLOFFHRGdOMEQ5WW15a3JPVmFVNUsxczBvdF94TWVGclI3d09FaVZTTl9mMWdiZG9TaGh30gG0AUFVX3lxTE53SHRfLTVGN1VsRVM3OTVwbE5YZjl5MUVFcjhYcEgwNFV4UkpEekRGUEZNTVZzN20xWU1lcnUwMWVIQUdKbFdQTXY2dkpWQTVEWEV3c2wwZl9IN3RBXzNub2o5bUJqSERuVm1Ub1hVNGk3MW5oM1V5b25TWm0xUWJibmtyZW9PVk91Ylh1MzZiWHlUMTg1LVFMTTM1dFI0MVhCdVh2TXJ2YzJ4YTI4SnNfTE4yYQ?oc=5",
+        "title": "Exxon Joins Chevron in Eyeing Lukoil's Global Fire Sale - Crude Oil Prices Today | OilPrice.com",
+        "publisher": "Crude Oil Prices Today | OilPrice.com",
+        "publishedDate": "Tue, 18 Nov 2025 19:30:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5547845457690775,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.36298083956218624,
+        "expectedInfoGain": 0.7294567031374922,
+        "rankingFactors": {
+          "R": 0.4108242443783069,
+          "F": 0.5547845457690775,
+          "A": 0.7,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 2.009628673561214
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQc05xbGlra1k3UGVoNDRlODNJX2xVaWE4QW9FSFZSOVFOTG4zdHJjUlRWUVRFcldaR2NZeS1vZVhxRjQ4R1REVEs2S3BJT1doaEI3RWpjNm50RUZQNUxhZ0JxNnkySUpHQUNzN1JlN2N6U1J1MHdRMGVkLVZFT1U4Z3dpWkJQWlhzT0ZJdWtXU0hDcDFvaEpPcEtremZoRjBfVnFwdFNGVi1vTGFtUVhEc3ZiUm8yYmNRMjlQUVNqM2RYcXgyUEx6c3FLLWpiZWNaZzVjczJGZm0?oc=5",
+        "title": "Exxon to close Scottish chemicals plant in 2026 amid market uncertainty - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Tue, 18 Nov 2025 16:46:52 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.545878251601756,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.32871728003011885,
+        "expectedInfoGain": 0.7346674937308006,
+        "rankingFactors": {
+          "R": 0.3946400826719577,
+          "F": 0.545878251601756,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 2.2349524602524284
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+        "title": "E&amp;E News: Exxon lifts force majeure on its giant Mozambique LNG project - POLITICO Pro",
+        "publisher": "POLITICO Pro",
+        "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.813244565446289,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.32454173434803446,
+        "expectedInfoGain": 0.7358499209089763,
+        "rankingFactors": {
+          "R": 0.7932762748015874,
+          "F": 0.813244565446289,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.267350676446007
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+        "title": "Carney’s deal with the devil: a deadly tar sands pipeline through B.C., violating Indigenous rights and risking another Exxon Valdez oil spill - Stand.earth",
+        "publisher": "Stand.earth",
+        "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.650290452646693,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3203937783708542,
+        "expectedInfoGain": 0.6778647221437988,
+        "rankingFactors": {
+          "R": 0.5696623958333333,
+          "F": 0.650290452646693,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.1157237371793585
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQdG1TNExRQWJGbENEekllWnNmTjZyckFDRmpDZkM2V2hXNkZpbTNMU2g2cnRpamVKSldhWDZzMUk1SHh1b05YNXBFSlRQVlJSV1hlSEhBakcxVXJkZkRmeW1WX2t5ckt6N28wOVZxVk1KVks0Y0VRdlVndXZhN1luQjVXcWZxVzBzU2N3OC1zN1dueWU0MXVodFBJRURkRXdPYy1aeUQtQlpOV21PQ0FzcGtjeDdZM0JmNVZUWHUzMHctTjg5Mkh3bXhuY3hXRDRBbnRjQzRB?oc=5",
+        "title": "Willis Investment Counsel Acquires 17,246 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 13:34:14 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.822095808811109,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3170964051424594,
+        "expectedInfoGain": 0.6516217256409582,
+        "rankingFactors": {
+          "R": 0.8041003108465609,
+          "F": 0.822095808811109,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.054964090016124
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNclJzNGFFSk5HUHpLNGlSM0NOalFLSnlwMHBVM1FmWDhTako2dXdOM0hRc0FHLW1yZG8yazVpTFM4dWcxX21Zd1ZTcWJWYXpLRXBEWE5BYjdyZ2xaMl84MVpPQWJMcnYtRzdpUURmNXpha3dic2g1MkY1YngtTjZuTUxtckVGazNlTFBTZTR1UDhma1hmcWY0c0ZucTFNQkpJQ1BkVjhaVTlVMkNlNE1WU2tpOFdNVk1Zc3Z6b2VOZ3A5NnhnUGJzVmNKcDJPczZ1S3RaMUlxMVVCSEpoU2c?oc=5",
+        "title": "Mediolanum International Funds Ltd Sells 23,688 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 13:03:55 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8196269845152655,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.31636839513422027,
+        "expectedInfoGain": 0.6508002690600737,
+        "rankingFactors": {
+          "R": 0.8010927579365079,
+          "F": 0.8196269845152655,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.0570963442286
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQcHc4TnpBQ0lyRHBqbGt6Q0U3WVNlME9yQ09Zb1hhb3c3X3FvY2otcXQzbkI0RXdXUEFidk1OT1J5S1JvWE9KSzZrYk9maHB2elNXdVRMY2docmpOUXRoSmhEZ2ZXNTRYdDJ1anBfaDhsQWl0MHk4QnppY2gxN3BTYTlKQk1IVEx0c3NPTmxTWHFUQzZuUlFWMEtFeXlfdGoxMHpV?oc=5",
+        "title": "Chevron &amp; Exxon Eye Lukoil's Global Assets in High-Stakes Pivot - Zacks Investment Research",
+        "publisher": "Zacks Investment Research",
+        "publishedDate": "Wed, 19 Nov 2025 14:31:37 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.621313291126412,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.31326063738263576,
+        "expectedInfoGain": 0.666680606001074,
+        "rankingFactors": {
+          "R": 0.524078783068783,
+          "F": 0.621313291126412,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.1281978213775687
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+        "title": "Exxon to acquire 40% stake in enterprise Bahia NGL pipeline - Latest news from Azerbaijan",
+        "publisher": "Latest news from Azerbaijan",
+        "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.709515123238912,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3098868026020272,
+        "expectedInfoGain": 0.6998228453516793,
+        "rankingFactors": {
+          "R": 0.6568252132936507,
+          "F": 0.709515123238912,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.258317680764315
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNUG5EWlBWWTJiYzhRY0x0YjhQeExCa1pVbVVVT3dfaW9Pd2QyOEFkQU9WeTNqUTctM3NJbXcyTVNDX1ZxaEp6UFlFb0p2UHZVNzljTE91MEE4YXBHTEszNzR5bEczVmRnZG9qM3BJYTh5X3VMWXUyM1d2MUQwaWl3ZnN2T21WckdKektacmlSbGlEZ1NjS3ZYM2k3cl94TmFHbW9jX2lBWmRURFZHUkE0QzYxUTZLczhNeXZKUVc0WHg2aTdWZU9mUktoRjFtZUVWLURUdG5ZZmpiaFlETndHX0dfMDBabEs1Znlj?oc=5",
+        "title": "Evelyn Partners Investment Management LLP Raises Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Sat, 22 Nov 2025 12:59:05 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9450397470548972,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3034310428648708,
+        "expectedInfoGain": 0.6909689493140343,
+        "rankingFactors": {
+          "R": 0.9434711970899471,
+          "F": 0.9450397470548972,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.277186087455622
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcnJtMDhjckpwem12YWFsMEhoNEpLVjRWZHY2dTdISkRjazRmRzhfM0V2cEUxd0ZPUzh3a01WTDR2OGVISk1sVkFsOGZJcUpjdmVOX0tta0pjT1lGUmZiS2h5S0w1a0xmTXFfQkN4emFxSzc0aXptVVF4NnhhTlg4S0hoMXBxbHlsdEprVWNaUndLdTBqMk9lVnpla004QlNGSGdSRkhJaEFENlJSQmRwT2VSVjJkN1pHY19YeDJXMmk3cUYxQXk5Ug?oc=5",
+        "title": "Exxon Mobil Corporation $XOM Position Decreased by Rhumbline Advisers - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Sat, 22 Nov 2025 13:03:13 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9454273428152464,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3032083999654314,
+        "expectedInfoGain": 0.6910886105034836,
+        "rankingFactors": {
+          "R": 0.9438813425925926,
+          "F": 0.9454273428152464,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.2792528524350715
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQSktYWFNBV1Z1QjRQalVFNENhMjhZMnQ5emFKZjhHR3lQcHkyTnBiZmZtb3AyekxGcXUyV3hIWTNldFZEQ1J5dmpUeklsVHdQenZpS2NHU0JxUEwzZXpzUnQxN1p3Z1VwY0Fzc1FqbTNFRnZ4dXBhZTJLQkw3UXZGS0JTdDl0b0tJbjBV?oc=5",
+        "title": "How a Texas shrimper stalled Exxon’s $10bn plastics plant | Shilpi Chhotray - The Guardian",
+        "publisher": "The Guardian",
+        "publishedDate": "Fri, 14 Nov 2025 13:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.30140678069880195,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.3006606114582805,
+        "expectedInfoGain": 0.68495460684841,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.30140678069880195,
+          "A": 0.9,
+          "D": 0.9487179487179487,
+          "S": 0.9,
+          "C": 2.278165415570087
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPQkJZRlQzVDkydl8zdmVoVXlucEp2bWxaTWxfLXo2bDF5MDNnLUIxYlV1OEN3VUNlVjFJS083MmkwYjFnei16RmcyaG53VUxtc2hqVDh0VlhHNmk3R0RCZTREVTJ1SUE3LU5XUjloME9rMHJWdndBRFZqOW11Smg1dDdQeUkySXFkSFZKUFpObHd5MHFSNUV1WDRrR2dXQS12Qmc0NE9VZG1XMUtKVlJFaGNsWXNCeVlCcHh0Sy16OFRLLUZpeTFCUDRtLWl4Zw?oc=5",
+        "title": "Kingdom Financial Group LLC. Cuts Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Wed, 19 Nov 2025 13:15:21 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.6166300874934985,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2837280716651511,
+        "expectedInfoGain": 0.577663700528634,
+        "rankingFactors": {
+          "R": 0.5165125314153439,
+          "F": 0.6166300874934985,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.035976550146855
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOFpNMjk2UlduWW1oS0pSVlE0cXp6aUtRQXB1Y1RfVnl6NjQ4dGNoT09TVXZhUVVWU1o2VE11UlMwRXQySW5WZ0M2NHkzSmtsNEQ5ZWphaW1oZUZWb2g5ZkZmNXQyNzgwTFBrUHZtWFVXWHBsaGM3Y2xDcER0NC13QW54SExBTU5YZ3gzdHBxRFdzQ1N5cGVMU05qMVZvb1RZbUoxOXdlNENTdw?oc=5",
+        "title": "Exxon Mobil's Options Frenzy: What You Need to Know - Benzinga",
+        "publisher": "Benzinga",
+        "publishedDate": "Fri, 21 Nov 2025 17:01:34 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8391804258399285,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.28218571409723053,
+        "expectedInfoGain": 0.7444493872696095,
+        "rankingFactors": {
+          "R": 0.8246701901455027,
+          "F": 0.8391804258399285,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.638154059822817
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTVBCaDUzWVh1WTZuX3YwbTJSUXlPYi1QOURnTFVib3ktY0N0d3FERFJ1cGFhMjhldHh5aVMzN3dXckNUeVhBZGw4MVlUdUdreV9rUXZlUFRLdVZVUDNxU0QzLXJ6SXV0RUk4RUV2eVpxd0FRc0J5aFg4QTdhSFZwTkw5MDRWdUNtOXc?oc=5",
+        "title": "Investors Heavily Search Exxon Mobil Corporation (XOM): Here is What You Need to Know - Yahoo Finance",
+        "publisher": "Yahoo Finance",
+        "publishedDate": "Mon, 17 Nov 2025 14:00:04 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.4654437282643476,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.28098142807254156,
+        "expectedInfoGain": 0.5897171457399574,
+        "rankingFactors": {
+          "R": 0.23523467923280417,
+          "F": 0.4654437282643476,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 2.098776242206687
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPRXFvVlVjMDctT0tEd2VuN1o1V0FBWUxEWUw2UjBYc0lQOUZ5ajVMWDFUYXYwdlJuNDhzb2FCeU5fcVFtckRLZkI0VzZiODliVnBPLUJHX2hUYzZVLUg4dkVwVV94Wng4dk5xeE5ITVk0TW5kNzFZeXI2WG0xV25fLTZzVnM5YWV1QVMzTjdob0hZQ0kwV2VOVmwxbjFMZ19kQVRmQVBUYjliVlBldF9KNHNMRkrSAboBQVVfeXFMTVJLY1I1blNqcmhlSFRRWW1HaVRiMEZaeThqWFJJZWJQcmlWQnZxVDVvNm14bjRhd1Y1SmZQSVRvazBpMDVyVk1OMEhGMzNrQmRUaEZDMVYxbVRLb3QzdVhyMnVaTlUzenYzajFiY2xDVWxmb3JpSFZ5WnRVd1BmZ3FfaVRYTkhvbWdyb0JGeU5hZ3BiNGl1Z3FRcFBkY2ZPcU9tMlBnc0xwNGtFUWQ0VDk3WU5xbkIzVGxB?oc=5",
+        "title": "Exxon to Buy Stake in Enterprise's New Permian NGL Pipeline - Crude Oil Prices Today | OilPrice.com",
+        "publisher": "Crude Oil Prices Today | OilPrice.com",
+        "publishedDate": "Thu, 20 Nov 2025 16:30:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.725192380525445,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2783209338418882,
+        "expectedInfoGain": 0.7951963480930109,
+        "rankingFactors": {
+          "R": 0.6786807093253968,
+          "F": 0.725192380525445,
+          "A": 0.7,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 2.8571201494486047
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNRUdmYW9sbDh6Z19oVGhuN1kwQjh4MWoya2ZGZVc3UmJMSDNjWEVlVFZXZjZjOC1ZaENncFM2eHc1UW5lMDBpUHBGRHBwUmtCSldkZWx2UndNdmJ1eDNLWXJjMmtnems0MHJESDNUTnJJSEJWVWNjcUU3RkZOTGphcjM5TWNoNUhjSTRRZg?oc=5",
+        "title": "Exxon Sues California Over New Climate Disclosure Laws - The New York Times",
+        "publisher": "The New York Times",
+        "publishedDate": "Sat, 25 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.01670325547037482,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.27075709734296105,
+        "expectedInfoGain": 0.6473772831923511,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.01670325547037482,
+          "A": 0.9,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.3909891542836825
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZU2xXSUppekpUQl9Ta01BeDhmQ3JwVGZ2Q3R0YjZrSkl2Z1JpTEFZUHJPZ3NlQlpFYXFlbk5RMVJfNWQ2allSbmR0MXlMY2VwN09hUC05eDZaM3ZvaFFWdHB0N0QzWGhDMG9VWHVUcEk2QQ?oc=5",
+        "title": "Exxon Gives Up on Scottish Chemicals Plant - Energy Intelligence",
+        "publisher": "Energy Intelligence",
+        "publishedDate": "Tue, 18 Nov 2025 22:42:22 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.565473719985565,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2632924470996977,
+        "expectedInfoGain": 0.6339225222263146,
+        "rankingFactors": {
+          "R": 0.4299071974206349,
+          "F": 0.565473719985565,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 2.4076745429247923
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQ1VqVE5PYzBxajJ0N0Yyd3AwcVhsaTFyaDU5SUNGem9UeldrTjJNMnQyQmpyaTZHR1RUWnV5akJYU0l3WldtTFZuRm56OGJHNFpFYlFCRzUtRnAyb0JBYzJhbi1ZcWlfakliWTZlcThfR3M2V1pfN3I0eWlUVVRSQ2QyNlZPTnNWUFBYU2diVU5FaXhWM0JsemNjNXVKRzA5bGc?oc=5",
+        "title": "How Exxon exported climate denial to the global south - KALW",
+        "publisher": "KALW",
+        "publishedDate": "Thu, 20 Nov 2025 16:09:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7236831369384444,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.25095984755006856,
+        "expectedInfoGain": 0.7049139062855774,
+        "rankingFactors": {
+          "R": 0.6765976058201058,
+          "F": 0.7236831369384444,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.8088712723055878
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNYmxXZ2gwSFk1UkpIaHlLSG44clE0X0tfSlZFSkJGcExWYTAzbDRfbHNvcHdCb3M3TDZmZHF1V1l0cFFYT3J3VXNOaGdrblVtMjd2N3J2OW8xa1RDUFZtSG56UFFyb3NhWGdsUDMwTFp3N01YbTlibHppSDV6UEhhQlZ6ekxweG5DVFdOTEs4c21qcjdERUJ1a21mdFRqQ3Bf?oc=5",
+        "title": "Exxon lifts force majeure on Rovuma LNG project in Mozambique (XOM:NYSE) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Thu, 20 Nov 2025 17:32:34 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7297076571965303,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.24207718006853515,
+        "expectedInfoGain": 0.6762918736443452,
+        "rankingFactors": {
+          "R": 0.6848877397486772,
+          "F": 0.7297076571965303,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 2.793703534768863
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOW56REs2N3hnWURSTVRjMGVJbDBnbm1HdzRJQkZ2QkpjYnctdmhRTE91TGNTdnJWN2wtSGxRQmQ4WFp2SHZzdXoxX3FoV0lQeC0xU2RJcnd3bmxMUkdGUU9tbEJMMlVEYXFHenAzbDlzT1lySVhMbkJfdTdaN1NnT0hJN0hhcVh0UFBoUm5Wemt6WWI0Mzg5dFg1Wk5YWm11bkJjNnNzcHlxRDh1ellRU2UxMWtiZw?oc=5",
+        "title": "Exxon Meets Iraq Oil Minister to Discuss Lukoil West Qurna Stake - Bloomberg.com",
+        "publisher": "Bloomberg.com",
+        "publishedDate": "Wed, 19 Nov 2025 13:45:59 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.6185068918015318,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.238284793242248,
+        "expectedInfoGain": 0.8053241882268842,
+        "rankingFactors": {
+          "R": 0.5195517989417989,
+          "F": 0.6185068918015318,
+          "A": 0.9,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 3.3796709276708468
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRlRpcXhCNkpWSTh3QnFZdnItOXNnRWtURTRob05SXzE4SVk2RmYybkt0X3FLOHhhbHplNVdybUdmc2xDX3J5U3p6Mkh4dl9Zb2g2b1BnYXBoRVIteWY4X2VuTGxKeldEZW1pVlJZb29KaDk4aVhRa2lQZGVUQV93MzF5TVdrWVJDSjJ6aTNIbmo1UzNqQ3k5OWlMdU1aelJOR3JZbC1CbXpGWE1paXMxYWdHM3pLUmFyVGfSAb8BQVVfeXFMTWd4SE0zZmYxLXNIcGJvWTlSZWZQNTl5dzZ4X3RCaGVtN3E4bnpNMzBySnBVRTBaMldZbDJFUmJnRWt6S1lEeEFXWlFXSkpPeWlGNlhhSjVONzlkbG1jbWltUUhmdnBIYzJEV3ExSWUzQ05Oam4xNW52UHR2T1pRd29EME9BTHBKZG5QSUZ0U1BINDdLUjU3Wm5lcjdtbk5sbGljbHFUbl9aNkFKTGtGZzNiUGhPUEVHV3FYajJtYjA?oc=5",
+        "title": "Raleigh Police Department investigates a double stabbing near a Raleigh Exxon gas station Friday night - ABC11",
+        "publisher": "ABC11",
+        "publishedDate": "Sun, 16 Nov 2025 05:58:55 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.38467580917756333,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.23158645592208466,
+        "expectedInfoGain": 0.5592698086095405,
+        "rankingFactors": {
+          "R": 0.044644282407407365,
+          "F": 0.38467580917756333,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.414950418334059
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNd3d5NWNUZkYzVXlJNkRjNWRjTnlTS184MjgyV19NRUItbnNpYlNEczlPRjBsVy1uYzdFTmdGYTJsNGJzVEtNb19BdEZDMEFUTi1BVXEzaTh1THc0clhqYlNvN0pXaWp2R3BmMWxYSmQ5ZFA1VkNHMVhHZVJ6MVBPb2t2WnR2c0w4TTlDdFBLVi0yMThISV9aZm50M0VsSGxJMGFHTS1tdmhvQ1l2eWFWMTdZcGNDQ1MwV1BBU1hJRXJuTFdSTy1BNjFqdzlZSWhxY1RsZ3lBeTZsUQ?oc=5",
+        "title": "Northstar Financial Companies Inc. Reduces Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 12:03:38 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8147398423249719,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.22989445638563294,
+        "expectedInfoGain": 0.6491701379597042,
+        "rankingFactors": {
+          "R": 0.7951123594576719,
+          "F": 0.8147398423249719,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 2.8237746493145695
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE4wYVVYdDljZ2g0TkpLNWpCcUJpZHpTLWt1dnY2c3BSblBseW5iQl9fekhnY2cxaUVpdXFlcHRJS1FFLVFmWVh4M1F2aFkxVUNHTnRCV3lnZnBrVjJQTFdmOE1LRC1KZnZCd2xYc3hrd3VNRVJ3ZnhpbHdNSlhuZw?oc=5",
+        "title": "Exxon Mobil - Better Returns Are Ahead (NYSE:XOM) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Wed, 19 Nov 2025 02:52:51 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5797015271059944,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2244031652535752,
+        "expectedInfoGain": 0.6192714003113203,
+        "rankingFactors": {
+          "R": 0.45475738095238094,
+          "F": 0.5797015271059944,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 2.759637546161814
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQQUJSYVVXRHNuWVVxbjZLV0hfWTdZUUsyU3NYLTNJYk9UUjZyZTFrQTllOS1PLTduZlA0cHNIOVBrbHpSTjlYMDJ3djEyZzdyZjNXSmJ6YzQ4Yk9TbFZHa3U2eDU0dTI2cE9EUkZCOWhtdnUxMzJjazVFRXRROXIyRjRZbGFxVGtkakF0bEhmMWQtT0dDQXdlRFJVLXRXd0RvM3VnbjBXUmpJMC1HSHhzcEU4dTBfT3FjVWRWcEtEM1hEaUlLODZRbFNTYnlPNlJjRUp4Y3dmcDVUdHJHRjFIV0ZFTkJuYWF6ZlI1eQ?oc=5",
+        "title": "Exxon Mobil Corporation $XOM Shares Bought by Evelyn Partners Investment Management Services Ltd - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Sat, 22 Nov 2025 12:57:03 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9448491332630512,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21889556776169067,
+        "expectedInfoGain": 0.690910078723432,
+        "rankingFactors": {
+          "R": 0.9432693402777778,
+          "F": 0.9448491332630512,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.1563456756493977
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOVjhIank4TGhrV192cmhaMWc1ZVBXdmFHNFRGLUxoa2Q2cDY3RUtnYXdqMUd4SjdFRktPOGlMZU10S0dpNTYwSlp3VmY4Tk9BbjdiakdRanYxV3FQejdZa09YN1NVQ0h4RzdCM2hVZ2MxSXZNaVJoMXYyRUZsSk5KZnhBbV9Xc0FpM3hIS0MxamptMUJ2VHJFY2tVZUYxRzVXVFo1LQ?oc=5",
+        "title": "Exxon sues California over new laws requiring corporate climate disclosures - Los Angeles Times",
+        "publisher": "Los Angeles Times",
+        "publishedDate": "Sun, 26 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.01926829077955567,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21859349374967893,
+        "expectedInfoGain": 0.5977620384887282,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.01926829077955567,
+          "A": 0.7,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.7345829385629012
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi0ANBVV95cUxPWG1BZkhqbk8wZWprbFRMZXEyY1RPUlhJdTJ3S0I3WlJYY3lQRzFqaUZfNklxYTBGU2kxU21lZGtYeXFEYTFJNFRwZy1vRVpfVXA2TE5WUWZrT0R2SmRUaW16LVdTVDJxdnptRDI2SGVrSURVaVAyRmhYbUl2ejVYWGJLY1VmVklUVGVsaG80emlJWmUzTG1LRUdULUhrajhpYVZVazI1d3k2V3FUVUFfSmhOYXpXQ0ZSeGszNEx3NUxFMUVnUTUxbjg2QTdRaEZzVDktdTJnOFpWWm1sRHVVbnpuS1lSM080U2RTVTFBVl90SGhFeXBoaW5EWUdWRkNheVhnTUR4eElrQ05oRUtwak5adFZxdDFUWEc4ZHNUWHVXZWlULWppVUpyT3RSOHZvTWRvVTduLVEtUy1GRXpxUWxLMVFnb3d1T3JaWUJ0UXR2RUV6cG5XNVYzZVhCWDlFbXlpaFBrUHhCRldwQlZQTV9OeDFRU0tTSzBQdXV6aEUtSEZhQk96UTZWbXhaSUtVYnFKLWhKRVJjWXF3d3FxUElXQWlSa0R6UEp3SGhCZ21GZTd5bWtNQkxHbHpaUWJkRThqMUNpV3JXTkc4bGNUeg?oc=5",
+        "title": "Chevron, Exxon plan to keep boosting oil production, even as crude gets cheaper. What gives? - MarketWatch",
+        "publisher": "MarketWatch",
+        "publishedDate": "Sun, 16 Nov 2025 20:10:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.41856567097051756,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21855965934175003,
+        "expectedInfoGain": 0.5770182593566582,
+        "rankingFactors": {
+          "R": 0.12907742559523816,
+          "F": 0.41856567097051756,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.6400949795332798
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQV1BVbnlPN3gyb1VKZ2o4dDJUaWJYa0xacEtmem1LYmJYOC1KVjhpWWJneEVacUhBbG0xLUhPWnhPS21lZ2M3ZzZnOFl0VDdBNWtadUViZ3UxYkxGS0U0ekFFS095V0NIOGlxVkhHcENwU3ppUExiVlhUR3g0R3dNRG5kYTFTOTFTOFhSV2hrbklHd1B5MWlYaDR3?oc=5",
+        "title": "Exxon Mobil (NYSE:XOM) S&amp;P 500 Today Captures Oil Cycles - Kalkine Media",
+        "publisher": "Kalkine Media",
+        "publishedDate": "Thu, 20 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.6894138432398503,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21721600559705317,
+        "expectedInfoGain": 0.692496663272455,
+        "rankingFactors": {
+          "R": 0.628085279431217,
+          "F": 0.6894138432398503,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 3.1880554168603568
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOM2VxbTdPUkI0NGtQc2dZQjlSazJOclo5U29wTFJHY0JFOUR2dFI5ZnB3RTJRR2lONm1MTjAwM1NLaVRRR2stLVlManpjd3FIYnRqcVAtZFpJSVNDb3pQWTVjeFc0Q1h2a09jRTR4dFZ4dEdSV2hFcmRkd1c0cWZWUm03aDk5VFhhRVcwM3p5a19tOUd1cDlmMUNTcExsZVBTQS1uNjFJNDFwaEd0aERpQ2M4TXFLS2l2X2FuYXp5elhzRWtabHNJQnVfbw?oc=5",
+        "title": "Exxon Acquires 40% Stake in Enterprise’s Bahia NGL Pipeline, Plans 92-Mile Permian Extension - Pipeline and Gas Journal",
+        "publisher": "Pipeline and Gas Journal",
+        "publishedDate": "Thu, 20 Nov 2025 16:03:35 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7232943574457538,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2119013015203751,
+        "expectedInfoGain": 0.7047749564251659,
+        "rankingFactors": {
+          "R": 0.6760600529100529,
+          "F": 0.7232943574457538,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 3.3259586013321356
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNOW5JUGpkT05KQ0VCQWE2dVFUOWRXMWJhNTR3RnR5SkZBZ2NtYlFrakF2ZUhNV1NIZ3N3eUk4MFQ3aWdDTno1eFlhekRJYnd5ZDY5eE1hWEF2WlFsRVpNQlNXa2ltWEZQUmFTcWdtSkFKeUg2VU9XbU9oa3VhVGN0SVplUi16MWVnWFNYaHBiZ3pucFl3WVN5NExsM3J3RXZIZUo5Wl9iVWxWTGJkbldWMElrZWRQLVZ1amM2TkpKODZWZTg5YVE?oc=5",
+        "title": "Exxon Mobil Corporation $XOM Shares Sold by Riverstone Advisors LLC - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Sat, 22 Nov 2025 13:21:07 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9471077182463346,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21113521464248916,
+        "expectedInfoGain": 0.6916070110641785,
+        "rankingFactors": {
+          "R": 0.9456569708994709,
+          "F": 0.9471077182463346,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.2756592131505027
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTjZBcWFJQkdWcUZ2UVdBTVJBLTZ1MFFUaU52bkNpMHlvQWsxQUpULWdNUE1PRjROeGZMdG16eWVkNmtrSWFLMi1BWnowMmduWHQtcTFLYVIwZ1ZMS215WkZJMDNaZUVOWENFRkVVZ2lsZmphdlNSdFBHbkRFNE1wemxFNGNjZzg?oc=5",
+        "title": "Exxon to Buy Stake in Enterprise’s New Permian NGL Pipeline - Yahoo Finance",
+        "publisher": "Yahoo Finance",
+        "publishedDate": "Thu, 20 Nov 2025 16:30:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.725192382923568,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21073040299346305,
+        "expectedInfoGain": 0.6951964541074913,
+        "rankingFactors": {
+          "R": 0.6786814136904762,
+          "F": 0.725192382923568,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 3.2989850739717737
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQSl85VlJTaTRfQ1VzYnpyYTFXSUs5NmxQRGNfbEpSS3gySmZHWWt5QUxoX0xDdW1zSGNXdnNIUE5nMk5WcEVUMzJQQkxITmpKQ3R4Ymt6SXNQMW04aE45SlIybnFfT29oejBTNTdUVkhyZTc3OGFRRFZBTFFWZTBlbGR4WjN6MUFoN01LRFhDeVQ2OXFSWVZkV2pmaEVTb1FSd0dySQ?oc=5",
+        "title": "Exxon, BASF teaming up to build hydrogen pyrolysis plant in Texas (XOM:NYSE) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Mon, 17 Nov 2025 17:46:52 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.47603491541553516,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.21006738104680245,
+        "expectedInfoGain": 0.5741679834585451,
+        "rankingFactors": {
+          "R": 0.25773454695767195,
+          "F": 0.47603491541553516,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 2.7332562561467935
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPcjBnd0tndnlGczdaMzZUWEpTdEIyT3czeFhpaWliMTI1RWpKTGgzMkFsTE9ZNGNmaHh4V3lydHhnQmtQREdoQkNJbVotRWlTX29ZczRQMlV3RmtjSFJfcF9PUUk3VlphRjQ3OTlidVZ0ZEZsTlFVeER3QlZTQ3pyaGowbnh3T09mcmdqSktLWlp3cUJ5WEhN0gGcAUFVX3lxTE1oeDM0cFl5a3ItM1FnbUdwYW5QV015S3N1NlVud2pXWnpmcVVkMWcyYncwVlIyU18wVU41aGNJSDBIY1FPd1cwb2ZyZm11WG9VaWROUXFCMUJESEthemlxazJZRGQ1Nk1VSHhZcl9BTlRsNWdvU1JheEowWXdlNUlKdTItYi1HSnBrX3R0Zl9XbFEwYTFrcnQxNjBmdg?oc=5",
+        "title": "Exxon Mobil sues California over climate disclosure laws - CNBC",
+        "publisher": "CNBC",
+        "publishedDate": "Sat, 25 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.01670325544275702,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.20600390883393005,
+        "expectedInfoGain": 0.5922490780600033,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.01670325544275702,
+          "A": 0.7,
+          "D": 0.9487179487179487,
+          "S": 0.9,
+          "C": 2.874940972782437
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNZGtFemx6UmV4dU1OMnVHNEVDTlBWdmVmV2JZNHljVEczY2dGWFRjNENPeFZkN1F5NUM1ZG9yZGtENzYxQkRJTnc1dzJyMUg3TV9qM2JVZXZQc3ItOFBQOWdjb2RSNHV2eVlrekpKNVJFWVY1N3ZDWTBTWUhWUXFCcU5OTzRqazliMEYtN2xfV1FJVlBOcFdfYVZXaGhkcXhfTFl4eUJISmFLdw?oc=5",
+        "title": "Exxon buys stake in Enterprise Bahia NGLs pipe, up for expansion - Quantum Commodity Intelligence",
+        "publisher": "Quantum Commodity Intelligence",
+        "publishedDate": "Thu, 20 Nov 2025 15:39:52 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7215945579888792,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.203261174738558,
+        "expectedInfoGain": 0.7041670204848093,
+        "rankingFactors": {
+          "R": 0.6737069460978836,
+          "F": 0.7215945579888792,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 3.4643459154978062
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQOUJyaWdHQzFMRkUyOVZDaElyemdHcnpJdllQT0piVk5EclhXVUx5TU80dWUySFFTQ0tCcnV5TFlMWXpWcDdIX05Ba0kxcFZza19iUzBZYnRHVEtuVEhOcE9HODYteFhqNTZXVDRtdEFnTGlVWVhuYXlGNWkyWDVJemg1dTl0enZDRXV3NGxzLXhPdU9wcXEyRTVsTGpjV2FFNnRMR2kwMm5nT2hXcW9BeEFrcElTNVhBUTdVQm1KRjRZaUtkMmNfYWlBWQ?oc=5",
+        "title": "GDS Wealth Management Sells 2,390 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Thu, 20 Nov 2025 13:16:08 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7113781651237732,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.2020456881782658,
+        "expectedInfoGain": 0.6133161443160324,
+        "rankingFactors": {
+          "R": 0.6594474123677249,
+          "F": 0.7113781651237732,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.0355319623297325
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZlVITENId3Vpekt2ZS1TR3B0STBpTXVkamZfT2o5TzNENzFLMlk4TkdnSVc5YUdRNkNfVHNYOF9OMnRTTDVNTGZGcGMxRFV5ZVRIc2xxUm9DcGFUUG1rYjRVU2FQYXVYSzFZeG1MZ01GZHhFd0FmVG1xVDlfUlJ4QkdEdnQ?oc=5",
+        "title": "Chevron &amp; Exxon Eye Lukoil's Global Assets in High-Stakes Pivot - Yahoo Finance",
+        "publisher": "Yahoo Finance",
+        "publishedDate": "Wed, 19 Nov 2025 15:20:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.624302724693364,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.20070138759450096,
+        "expectedInfoGain": 0.6575927087459765,
+        "rankingFactors": {
+          "R": 0.5288794361772486,
+          "F": 0.624302724693364,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 3.2764731556046005
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNSlF6MXB4RG41V0pscVdYWHZFVk55Vi1jN2pFY2M4bGdITzJhakhtTmN4ZEVTSjJ0eThPYTVpMXFRc0JBcVNiR005NG5kSzNGUEJrNk1WNXlwVk53REV5ZU5yaWlad0VhdWdqMVIweWNrbV9rOVg2a19IcUVuVl96aEI5U3NQM3ExRFotNDdCMU1UNEpRMW1IYkt1QVNRQ0dza1E?oc=5",
+        "title": "Exxon lifts force majeure on LNG project in Mozambique - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Thu, 20 Nov 2025 16:24:53 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7248243644613583,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.19683051922756206,
+        "expectedInfoGain": 0.8040394684474395,
+        "rankingFactors": {
+          "R": 0.6781738012566138,
+          "F": 0.7248243644613583,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.084932924034325
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxORHcwU3ZBUm1ZaV9Sc0p6OVljN1M5NDlRZTJpRzJJNkl5cXBId2hSdjJrOGR4czVVeElralluR01HNXdMLVNYVjg1R0lHMkFnS05QSjRLaGR4MjRRbW1SMFdmdmZvdi1GcGVlRmdJaHF6SU83R3E1Mk5tQnhJYjdsOGNIUURqR2pwSlBEUTBlSENBSmdTRHVFLTBHX0J3V0NMR0E1TS1sTFdfYWt2YWJMb0lybkduOWRPalg3UUN0cU43V3Q1dFIwQzc3UUJxdEU?oc=5",
+        "title": "Franklin Resources Inc. Sells 236,991 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 13:03:49 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8196188533355143,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.19677498505850283,
+        "expectedInfoGain": 0.6507975627759682,
+        "rankingFactors": {
+          "R": 0.8010828472222222,
+          "F": 0.8196188533355143,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.307318572950117
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQy1PSWFfLU5LUk9FRmZaQWttejZkbG1zTWZDamNOR1FUUHNKNkpFVWF4UHlobVNrSTQtWE12Y2VkUnltV1dETk5PSFJIaUVGLXNLN1RLWi1faDNQNXBBMkpOWDlXb0JuNWZxLVNQczFkNS1WQVB6ZXlKeV92ZTc5Y1duNHRZelhQVk5ETzFUNVJpWWEzeFZVWGo1U2ZQY1lyZnNkUmRELVZhbE5Ib0pWNWc2bExqQks1OW5WX3NrUFlUTUXSAcgBQVVfeXFMT081enN0RlI0ZGFoWWVLa2c0UThTc1dIWWl2VGNodk9BQ24xZGpTWGtDZzBWMDZjekFsZ1hlRlFqZGlqT2pFeFRIVmFTcmlxWEY0N0dZZW1yb1dXQ1g0M2xuUUl2ZTJDbEkxekR1cHVBYkRSNmUwSkZ3U3lkZ09MRjVSSElpUHo5bEhKN0gyeFdzVkJzZ0NkcFRxbVZPMDd1UFRUUUhSV1hhcjJoc0hxY1pJWjRRckJyTjVvaU1MQkZnMnBzMzdpdzQ?oc=5",
+        "title": "Is Exxon Mobil at an Attractive Price After Low-Carbon Investments and 11% Year-to-Date Rise? - simplywall.st",
+        "publisher": "simplywall.st",
+        "publishedDate": "Mon, 17 Nov 2025 07:24:13 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.4475196160821904,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1936759448299536,
+        "expectedInfoGain": 0.5913943097047584,
+        "rankingFactors": {
+          "R": 0.1959638161375662,
+          "F": 0.4475196160821904,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 3.053524846485191
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQT0JKbjhmY3ViN1JjOUZJbXBWbVk1a0xnTkdIbS0zbG9sN1VTVzRRZS1qc0swaEpubGYyRWFKTDc1NXVSZU5JVllwdlNSd01aMEl6SHFDWEVLbWo3SnY0M1hnTmt1RlU4VmJ4S1V2Qm1mVlpnLXR3b0NQNHF2MkJFb2xhS1lQMFlGeDFJVlVsMkQtaDAwaER5TGZZcmFVZnI5TWVJS1B1RkJmLVhFbVBOUExMRnF4aFI2X2lLcmpZeWxWT0k1c2ZOcFk5Yw?oc=5",
+        "title": "SEC Confirms No Enforcement Recommendation for the Exxon Mobil Retail Voting Program - Arnold &amp; Porter",
+        "publisher": "Arnold &amp; Porter",
+        "publishedDate": "Fri, 26 Sep 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.0002652046450002057,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.19277239047623734,
+        "expectedInfoGain": 0.4949115755685449,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.0002652046450002057,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.5673364030288957
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9JTlRubjJHV1RfSmVUa0RYajZzbVd0Z3RNTVNjemhSa3FWVWt5VXh3WXNaaDh6d0hIR29DT0IzN3VPUWFhbFlvZXdFb0FiRk1NdURKUDhMX1dxdm5JaHdtdTlJSjcxektjWE56UTA4aC0?oc=5",
+        "title": "5 Things to Know About the Exxon Mobil Credit Card - NerdWallet",
+        "publisher": "NerdWallet",
+        "publishedDate": "Mon, 10 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.16521874206973808,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.18926293101671487,
+        "expectedInfoGain": 0.5196546061822556,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.16521874206973808,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 2.745675570967259
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOTGJvMkFLeEMxN2lPTE8zRE55RWU3R1I1eEVlWXUzZnQtZkdzWjJ2bGxsWFYtRzUwTVZtNHNyLUF3emZ5dXpHc1R0UUwwZ2RzOHd5MFEzcHZ0enl4cXFHS2F1ZHkydkxodG45QzJ6Q1hfSXQ5bzEyVHpzQXNVVjhwSjhKZ2Q1OG14RzlJVzBRYUFBQ1pNdC1GcEI5REQzWWhqdXZsbzFSU09hclg3U08tc1VNVXE5czFxaFlOVzdCRHVCR0pZenJ5bFBpNm8?oc=5",
+        "title": "Exxon freezes plans for major hydrogen plant amid weak customer demand - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Fri, 21 Nov 2025 21:41:17 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8627935190806332,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1885897758730414,
+        "expectedInfoGain": 0.8508717553308068,
+        "rankingFactors": {
+          "R": 0.852419892526455,
+          "F": 0.8627935190806332,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.511759725000222
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQVEhfSmg3MXBiajRTSXB0cVVLN28wVEgzZ2x3SGxoRDdNTUNVSGladWdFLVBBQWR0SnVoQzNhNmI1cl8yaGFHcFI0NmRmVHdkd1lYdkZxVzFQcmtRWHVYX3hQVDNLTHhCQk0zUXMzU1RIMjg5a2RQOEgzQjlYLWtqdl94cjFDZlFtTG9JT3NNMWZSeFFrTzBFeG5uMGJUN2ZDcjBGT2hTcFlmbkxOSGxGYzJQSVg0aFlIb19IMGxRWnJ1ZmtSQ3JPdHhRSU5aR1p4Sk00OFpR?oc=5",
+        "title": "ARS Investment Partners LLC Cuts Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Wed, 19 Nov 2025 08:32:49 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5995864761521444,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.18620833314269455,
+        "expectedInfoGain": 0.5709027989563992,
+        "rankingFactors": {
+          "R": 0.48848346560846556,
+          "F": 0.5995864761521444,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.0659358221036586
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOb1Iza3c2Y0tLc3gyMDk0YzJLUVR1REltcTFjOTVOeHg5MzdfRm1PMlZXU0ZDOF9EM0NGWDMxbTVmYUZDb2ZsUC1qQTFHVEpvVkRVem1rd2hUcTJrUTAtQTVYdEdUUnJzYjlFbkF5aUlTSUlHbXVncmVzRWFPR1NkV2ppQU1HR1J2TUVDck5SYkZaRk5KWHMwODRaM1lNcTFOZ3g3VkFoWGlqWXROSHZRS3pfY0NRbUYzd011MC02LWpONFd3Wk02SWlpN2dJXzR0TXFyT2lGWUlPakJVNTg4?oc=5",
+        "title": "Exxon Halts Hydrogen Plant Plans, Signaling Challenges in Meeting Demand and Innovation in Energy Sector - Energy Reporters",
+        "publisher": "Energy Reporters",
+        "publishedDate": "Sat, 22 Nov 2025 11:45:28 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9381630375274588,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1853319771320092,
+        "expectedInfoGain": 0.7760214729711518,
+        "rankingFactors": {
+          "R": 0.9361681498015872,
+          "F": 0.9381630375274588,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.187196861437481
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPZnNsZmRDcUtzLVRLbHp4WDNqeU5wazFqQVJQand6Wm9ycUp0NEdZZzI1eGh2OS1YLWxGRFVxZTRRLWxiQ3otNGh3a2RYYWF2a0tKRVBRTjhmQng4N2dBekdXZWlTN0MyQzhBb0VmTU8wSktFYkdmXy1sdS10SEFBSFBwTGN5NGNKWVhja0lyRjBFY1lUUUZIaWg4d3ByZ0liOUxxaXVsemhPVFlZcHVlYmlDNjgzMjBBTmtZWDl3UDhhWmJmWUFxYnRreWxTTy1XZ3JPS1J3TnRPUQ?oc=5",
+        "title": "Swiss National Bank Has $1.41 Billion Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 12:03:39 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8147411881017158,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1826157695850337,
+        "expectedInfoGain": 0.6491705727131206,
+        "rankingFactors": {
+          "R": 0.7951139120370371,
+          "F": 0.8147411881017158,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.554843999443537
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5XNG1COTZYUTN3TUs1VENaRHJpRlRMQzVKV0xvSjN3UmU5dzJzaDNvaFZPcURuUWF2YXRZSnZ1SjZFUnpiZDFkc25ROEJ6NHFFZUFhekFiemlkMVZxcnM4MXRBYzJxcjVsdWg5b1VWNmfSAXZBVV95cUxNS0Rvdjc1QWNBeFBYZDNSTDRDUGpMby01RG9fclVOLWF5SW5FYndRcTdzblphS05NM2RURHRkSHF5Znl2Q2p1OVNMMFhJamw5UkNWZW5KUHBnWTMxNTl1QzFZRDZzbUJuT3M1UThtU1VnbHQtTkh3?oc=5",
+        "title": "Exxon earnings beat as production in Guyana, Permian soar to records despite low oil prices - CNBC",
+        "publisher": "CNBC",
+        "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.03935985923823701,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1814873781598227,
+        "expectedInfoGain": 0.5956475686293252,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.03935985923823701,
+          "A": 0.7,
+          "D": 0.9487179487179487,
+          "S": 0.9,
+          "C": 3.282033024383557
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPbXFwVnFCS2otbkpoTGI2ZXlkUEVPTVdfLWFaaHZYQ0JFU0VHVlBuUXhvbU14NlNieDhUOWFnaEM0MGJoeXE3V2ctNnJaUTJWYmh4MUNwWkJiUmQzUDMzUlpibi04T3JXYzlkbUNrMEVOLVVqaU5sajZaWkN2Sm1PSy1tb243OWdUMlh0Yk9BQVRYbFVCcDZ1ag?oc=5",
+        "title": "3Q 2025 Earnings Call - Exxon Mobil Corporation",
+        "publisher": "Exxon Mobil Corporation",
+        "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.039359859303316126,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17960943249069072,
+        "expectedInfoGain": 0.490519363510882,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.039359859303316126,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 2.731033424629889
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPaG9JVTZ3SWo1dDA4c3RzRnk2aVJXbXRDSmhXVFJ1cTZMRGlOVkRmM0VKT2xldjV3eVJMLU9rRDhpbWt0VDhxRWtNRl9wODd6bEY0ZDB6QW1uLURVeEQtOWU4d3F0bnE1M2J6MGs5MkM4eHVNRTk4X081LUNWSklNNGNydkY3V2I1SU1WU3R1QWlBX2VZWTNjVQ?oc=5",
+        "title": "Exxon Mobil, Chevron Weigh Bids for Lukoil International Assets - Egypt Oil &amp; Gas",
+        "publisher": "Egypt Oil &amp; Gas",
+        "publishedDate": "Wed, 19 Nov 2025 10:02:16 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.6049308904114135,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17439223408186344,
+        "expectedInfoGain": 0.6602150769950148,
+        "rankingFactors": {
+          "R": 0.49735765707671953,
+          "F": 0.6049308904114135,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 3.7858054888218002
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxONjNuMGc5VDA4cGFPOFVlSzEyM3Z0RDlfTy13RzVQZ0paYXJXdDMwOWwtVGFGcnFPZVlTYkotOFgybEZBc19fYXIxczFCTlVjUTBSMXp6Wkp1RG9oNXdwaHE3Vm1VUGpfS3MwOTBfREk5Um1OOXNaYzdRR0hpRWQxQzROM3NqRGlDVXJWTHpZbUExdTJwQktOMzhmckQwOVVtZmp1eHVheVpWU0k0OXFiYk1na2hXNTBvN2E0ckhDanNtTTI5X2Zxc1Uwdm93Y1dQQ1E?oc=5",
+        "title": "New World Advisors LLC Purchases 3,620 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Sat, 22 Nov 2025 13:03:14 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.9454289060231241,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17310736589121828,
+        "expectedInfoGain": 0.6910890615025224,
+        "rankingFactors": {
+          "R": 0.9438827860449736,
+          "F": 0.9454289060231241,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.9922568167134314
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBneEhtSTRoTGVBSjUwYkpSVG1XTWtEeFk4SkhXRHNUNlFFNkxXd1JWX1hEV1hyM2IzLXM4XzZ2WXJVQ2t2cGxIbE5BMVFKOU5PbVJjNUExVHBMQWVXOExVY0RVYlZDZVltVXhVTGZBdG14UQ?oc=5",
+        "title": "Exxon, Enterprise to Expand Permian NGL Pipeline - Energy Intelligence",
+        "publisher": "Energy Intelligence",
+        "publishedDate": "Thu, 20 Nov 2025 23:01:56 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7539448702002634,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17222601640997762,
+        "expectedInfoGain": 0.7053415910878844,
+        "rankingFactors": {
+          "R": 0.7175631729497355,
+          "F": 0.7539448702002634,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.095441593497959
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPb0liVjcwSHVrVkVHVlhuUU11aUpNMXFHT0NpMGRZZl9kU0xfbHltamtqX3ZrMGpuZHJzSzlUd0VMaDNxOHBJRHdRYWhmSlFFOWFfdTRydDhlYi0wZmNmd2lqdm90N245WWlGUjB4X3M1YWo4NXpGcXJYZWFVc25MNmlkVTJSb2FULUE1QTZQMDJBRndJbUhJQ3lvcEpSdDNrRHoxNmJqN1M1Skl5RUVqOXZtT0ZESjdqeXZoSlpMSG45Tk83VmNYQQ?oc=5",
+        "title": "Prudential PLC Purchases 56,867 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 11:37:35 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8126370078332936,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1720192498923744,
+        "expectedInfoGain": 0.6484670612482542,
+        "rankingFactors": {
+          "R": 0.7925280158730159,
+          "F": 0.8126370078332936,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.7697354316681078
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNLTVzSFJsU3pwekVxRi0tWG12Nk4tWlh5OGNCeHI1NHJvMHhBc1J1cld1djU4aWtKbFkwZm9saVpHbDV4aEFIVE9GVzRNbmkwUW1zTzU0anp4TTI0NUJCTDFvaE50U3hqRHcxWERkSFB1Zjc2OThSZjk4eVVTN190V1YtN0gwR2dvanRldklpdHY0SXNqRWNqbFplWktERFJXYmQyeUV5LUREdFprLThBdERzdzNiNms?oc=5",
+        "title": "Methane pyrolysis technology - Exxon Mobil Corporation",
+        "publisher": "Exxon Mobil Corporation",
+        "publishedDate": "Mon, 17 Nov 2025 14:31:27 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.46689511182095805,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17191085529410682,
+        "expectedInfoGain": 0.590402001586941,
+        "rankingFactors": {
+          "R": 0.23834900132275139,
+          "F": 0.46689511182095805,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 3.434349742352659
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdUJ2SkRGUUp2VzFKLWtPaVlEUzRFUkV0TU55Y3ZHMHY1R0RRSnlmT1ZpSlZNUWZZMVNJRjZ3NUp5SE0wbjNMY19oVzRvc1dScjNRTGZMcDRKMXdVX0lUd0t2UWdTbnpqdjVmM1NRYWJIdkhnVHZWS0t3ZE9zdENQNEpXN3MtU3c1cGpZSlZXdmVEUmN6aXdsXzVpUEJ4TWxEbUEw?oc=5",
+        "title": "Exxon Mobil: Why Stability Trumps Higher Dividend Yield (NYSE:XOM) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Thu, 20 Nov 2025 13:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7102404966981446,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.17041295871525017,
+        "expectedInfoGain": 0.6693157896489524,
+        "rankingFactors": {
+          "R": 0.6578476736111111,
+          "F": 0.7102404966981446,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 3.927610873579978
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQV1pPWV9FeVd4LW5kZFpBenhubkdoMWVGQ2xJN1d6aU9wVTBNRTI3eEtyRzJUUGFWbkFiUkFOVzRna3BaWHJJTEZkdGNRUWZQcEdJNGc1QXZybVhnTG5PYlJ0djRGblZaLWNzclNUVC1GeFllYmkyUjhSbUJxcGw0Vmo0aXNrWFpheE93NEwzcTJmLVlOOEJVTDNhOFhfa3ZrcnFJWkdfU1Itb0ZSOVc3RHBCZnk1T21MOUpZUw?oc=5",
+        "title": "Exxon explores more refinery upgrades as it hones in on higher-value products - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.06078057850366389,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.16987212011202238,
+        "expectedInfoGain": 0.6027068303652932,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.06078057850366389,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 3.548003227179583
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOOXZrRnFFRmhQcEhNODVXNGY5WVdTODU2Tk9JdWg4OHZBZkQ5VEdTQ2NwZzhJcUtUMC1QRWRVc0RCY0lIX1RWMmRXUExsYTRWRjQxQTRERlQ0VFNtTGtESk9BNVkxTUM2bWNhVTJuVEREQ1FoT2NfX28wd1RhMjVFWlhxUlhuTEJyYW1MYkpxcm13NGs1ZVVmcEdhVFFRZjdybm5meXk0dG9PZmc2LUJ4TlU1eVZkZmc1dm5V?oc=5",
+        "title": "Exxon joins Chevron in pursuing parts of Lukoil global empire, sources say - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Tue, 18 Nov 2025 20:06:40 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5568062852036081,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1688528512520183,
+        "expectedInfoGain": 0.7392799234734594,
+        "rankingFactors": {
+          "R": 0.4144615806878307,
+          "F": 0.5568062852036081,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.378249570509534
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPclp3c2ZkOFZWclVrWnAwYzN6UzBxN3B0ZXl0WFo4R0o5aGNPajk4bENMN3Zpc3hZYW5veEdJekVzS3pEYi1XU3pEbE9heU1xeEtoaGJ6RnhQZnI4OER6YzIxN2hLYXlDNkFwellrUHJURjM5XzR3aml4TWhxcXRQOGRWRDQwVkVWQWhoM1Y0ZG1SSVdBVnRvcVd2ZEh3eEloa3FR?oc=5",
+        "title": "Exxon to pay $650M for stake in Enterprise's Permian-Mont Belvieu pipeline; expansion planned - The Business Journals",
+        "publisher": "The Business Journals",
+        "publishedDate": "Thu, 20 Nov 2025 21:45:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7482124577757086,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.16836547891267817,
+        "expectedInfoGain": 0.7135932669607702,
+        "rankingFactors": {
+          "R": 0.709930689484127,
+          "F": 0.7482124577757086,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.238358549325135
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNWUxoTFBCVURHdm90SUY2ZDlBZWlCUTd0YjI4N2pTaGdUQ09SNWwzMm53d2hzMHJ3RjRBbnMxdXhSYkp1RUk5ZDdBdHc4V2RWRWVjVWhjUlVNZllLT1d5cnVHZ1VLWTE2S3Vrc0FqT2FOWWRxSS12SENpaWMxcko3LXJDUEIyUzVBTGluenZKbTJRZTU5Wkt2VVQxY3Z4eGg1d21iZWd0RS0wLWZNZXdRV1Azc3llVkFkZlpTYk5icm9pMGVVeUtvWjI2c1o?oc=5",
+        "title": "Ensign Peak Advisors Inc Increases Stake in Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Thu, 20 Nov 2025 12:39:55 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7088268240840494,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1677282535942813,
+        "expectedInfoGain": 0.6123945160767406,
+        "rankingFactors": {
+          "R": 0.6558545651455027,
+          "F": 0.7088268240840494,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 3.6511112645223425
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPa3REOW1zNVM5bVJUajZzOUY0cHhhUDZSdUwxTzdRa1JLNFJSV215a3lXamxXdWxOQ0VJc2U1R3pyTXBfSjR0Y29WZWpzMlZ1QlRMdmZhX2ViZVg5MW1lbXN0WE1pR3VnVUM1UFpmMkJEYlZKWmptZnJzY3FrbXBxb255bVFxbUlDcnFuS1hEM2hNMlUwc3VSSllTcXZHbHpLYW9mV1hEQUNXNEpScmt2YkkyTHk?oc=5",
+        "title": "Qatar-Exxon LNG Plant in Texas Plans First Shipment in February - Bloomberg.com",
+        "publisher": "Bloomberg.com",
+        "publishedDate": "Tue, 18 Nov 2025 14:28:39 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5384442686566531,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.15462945140067882,
+        "expectedInfoGain": 0.7725212813622953,
+        "rankingFactors": {
+          "R": 0.38092837632275134,
+          "F": 0.5384442686566531,
+          "A": 0.9,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.99595176963102
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaHZyTnZJcmVDZUZjSjRUZnBjMlM5b2xrNDZBRUtKLUZ1a0ZYc0RqQU1lRmR3VmdhWmRIaWdxbk9jQjQzRmFRbWUwaUJ3b0NHa096REExOHZuWkRmRXN5SkFpdFlldlZlQmlLVlFKQWR6dkNMTTlzMF9TWlpFYVg1clNZTEpkSUNIWEc1RGRpS2pOTVU2bnZQdlg4Z1NpV0ExRG5EQUc4bEotTE11S05pLWdaNXBPVEk?oc=5",
+        "title": "Exxon sues California over climate disclosure laws - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Mon, 27 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.02222722582825832,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.15000128453839007,
+        "expectedInfoGain": 0.5969238274639823,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.02222722582825832,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 3.9794581046485016
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOc3dYd1VZT1dreFJPdG0xT3V0ZHRwaWhIbmRWQU1KdmR6bV9mOGtZcDl0M3pHRUtZMzRBZ1NPNW1mUVB2WFF3TzctSG90WUpGb3hRa0ZMZnA4ZUlfU29JeURsODlXYlhVVmNqSVc3Q2xNbWlZRTZqdllrQWdLTDF0OG1TZlJldVpZamRHMGotZDE?oc=5",
+        "title": "Connecting U.S. industry growth - Exxon Mobil Corporation",
+        "publisher": "Exxon Mobil Corporation",
+        "publishedDate": "Thu, 20 Nov 2025 12:16:45 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7071996153899269,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14902960101880852,
+        "expectedInfoGain": 0.6887289392750642,
+        "rankingFactors": {
+          "R": 0.6535574156746031,
+          "F": 0.7071996153899269,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.621423761230777
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOeGNVYmZhdFNkMGtBUWdtSEQ1MHJ3Ukx4aFRhUVo0dW1HMWhoZ200aDRuSmZCN1JucHRNNVk5bkJxRjJyMS1mWEh0Q2RqVWJCU2lrRXlWRFRMRFFJeEh6S3RNVWJlZUlVMHZZT2hjVFh0UW03NHJhdk1ibkwwam1OQk96VUg0U09YNTFYQ0hvdkpGWjBiMUoxdHB4OUd3d21od0JKT2tudHE5Wk1hWFJ6T0FUVW9sWmhXdUExVjNn?oc=5",
+        "title": "Exclusive: QatarEnergy, Exxon executives warn of Europe exit over climate law - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.060780578604160904,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14863392529779532,
+        "expectedInfoGain": 0.6027068303803678,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.060780578604160904,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.054974859695156
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQYy05RUlNbGNkbTE2aURKZFhpOXNtdHdUYWxYY0lpVG1CcEdRNlVDY3hTRzM0U0hCTnZZai1VYVAycU1KYkJyTk5qVFppNWhNTDZxcWFobjQ5dWdDT2NjRlZoaGdIblZhNXdNaE9SNUJ3NHlQb3pzQ0pESHFyYlN4NXBITlhVQWpjQm1WanJUOTlHWDRTZ1JjeDFzS0E1U0k1RkJxa21kNTdKbGF4MzJacEM0NTJqczc5a2lSdVR0aW1Sa0x5c3BEeF9CY0hBRHpfWGZhTnZ5aVU?oc=5",
+        "title": "FUKOKU MUTUAL LIFE INSURANCE Co Sells 2,383 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Thu, 20 Nov 2025 13:48:18 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7136518966757966,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14849278373334046,
+        "expectedInfoGain": 0.6141358967571693,
+        "rankingFactors": {
+          "R": 0.6626386970899472,
+          "F": 0.7136518966757966,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 4.135796240846416
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNZjcwRXIxeXlnczExRFdtRlFjWHpvVmtwdHN2eVh1UFRkc2k1c2NKM2V5ckdSNDZ0aVQyMDN0TENiUzJteUN2blFPY2ZZeEdZeDU2QlRZNndBYzM5aUNEbDhfTkNfMUExZld4bFVUVUpZRXc4VTN2TjgyckVfWFFsNVRwRVdqc2FFQ3FtVDA1RDRnTDFkQWdCMTd3dVN5a2JrcE5GeVJsMXNIbzA?oc=5",
+        "title": "Exxon CEO expects long-term role for oil and gas, maybe not as fuel - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Fri, 07 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.10762994179833628,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14779759455715355,
+        "expectedInfoGain": 0.6097342348594941,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.10762994179833628,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.125467919058107
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQWDNwMVNmTlg4ekNhSkVONXNxbFI3T28wN2F6MmZEUXZRUDZiaHJVMFNBVFdYUUNBcXA2bkdkX3E5bllYbjNlQmlPcGVlTWpGMkwxekYzc05ENTlobmpOeW95LWJTaE93aDNmX2ZYRktEc182UHFVNW5zbWFpdlRhb285MzBaS1I3bU53emVJNEo5YjRfdUlfVWduVG5rVEtiMW9ncnVtb1d0cUR2a2pLcjFQOXhZOTl0T09pRnpUdDBMVzkwc0VCb0ZRSmo3Zw?oc=5",
+        "title": "Exxon Joins Chevron in Pursuing Parts of Lukoil Global Empire, Sources Say - US News Money",
+        "publisher": "US News Money",
+        "publishedDate": "Tue, 18 Nov 2025 18:39:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5519846872687526,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14270728874977456,
+        "expectedInfoGain": 0.638534102872822,
+        "rankingFactors": {
+          "R": 0.40576403273809525,
+          "F": 0.5519846872687526,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.474432304522573
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBSNGUtZTR1blJpY0N0WllTNkU0SkppRElBeGlKcTBiaEtKamFDV3RaQmNBemVjWmF1YnBtLUpwVDFKeDE0SFl2eTVfc1RSazFsX1UyN2h5eUxNN1NsbXVJeFl0aWlPTmFGbjU1Qy1TdW03UQ?oc=5",
+        "title": "Exxon Lifts Force Majeure on Mozambique's Rovuma LNG - Energy Intelligence",
+        "publisher": "Energy Intelligence",
+        "publishedDate": "Thu, 20 Nov 2025 22:31:56 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7517043212173692,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14167070973220394,
+        "expectedInfoGain": 0.7045590303178313,
+        "rankingFactors": {
+          "R": 0.7145866501322751,
+          "F": 0.7517043212173692,
+          "A": 0.3,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.973215929034582
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQczV5enZ2SzItb2haeDk0aEFYU1ZEeUpTZk9LRHBYRWJib1ZmS21xU0s3c0d1WktwNjdFX1VrWWR1eElDUUQ1NWJVMEo3ajFwSkY0bllkcHhybTJPZjkzbi1YZ3AxaUZEUUNwU3VaM1VoWlMweHBrUkFBRXpRWWpzSHRTencxTVpEODNZNEQ5RWNPcExHSGVyYUd2cGZ3X0RuVHp4VXR4VkU?oc=5",
+        "title": "Exxon looks to lift force majeure at LNG project in Mozambique - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.039359859303316126,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.14014133982179636,
+        "expectedInfoGain": 0.599493722485241,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.039359859303316126,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.277779299438388
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNcXo3cWVIVUt3Rm1BZFozalBlcEZBWkhWRC12Q21CbDdFeW5xM3hTLTVRTlg2Z1l1Unh3OFVSeGtZVHhrV2ZzSHIxeWNWSlVkaW1pSjgyZmJoRUVLMjVWYXhPbHlPQ1hrZGp0ZFUwVkJUUUhkY09LT1kwLUZqXzdCMWJrSFBxV19KZ1Y5Q1hLNWFwam5qVUhHUHlDMVU3dVI1QUdZSjZQSFVBMEtXcDZj?oc=5",
+        "title": "Exxon Thinks It Can Count Carbon Better - Bloomberg.com",
+        "publisher": "Bloomberg.com",
+        "publishedDate": "Wed, 12 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.2198585956826309,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13876898376930052,
+        "expectedInfoGain": 0.6675941739677793,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.2198585956826309,
+          "A": 0.9,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.810831324365937
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdGsyTzNFVzdYd2wwMGtEN2ZIX1FMdFBsVWlyOEl2Y1RnLXFvaC1jdmh5MkQtbF81eWVvb0MxN011d052Q1FsQURfZHhPbXRNVk5JTmVCcjlYTW1RblpnMUNOMzduRlA4RUVUT0Z1ZmtjeDFsS0JRenFlczRCaU9LRHRvZmFpNW9seHdEMTlhbjBfRzcwM2V2ZEpWUlRJNDVkMjU2cmY3NzNEZw?oc=5",
+        "title": "Exxon to acquire 40% stake in Enterprise Products' Bahia NGL pipeline (EPD:NYSE) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Thu, 20 Nov 2025 12:48:06 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.7094025142473778,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.1372301874106353,
+        "expectedInfoGain": 0.6690130744241946,
+        "rankingFactors": {
+          "R": 0.6566675545634921,
+          "F": 0.7094025142473778,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 4.875115942400486
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSGFQdnVYVHV4M3VsU01zejROWTlsVWx5TWxDRUQ4Y19XMTJNU2R1d2xaV2hOQldwVDdDNEhKd3VYTWVnWGEzMUg1bFBuWWhNcVhTbjRPSWlteW5HNDZPYlE3d2M3TUd1YllESlFnY2oyMEJLNlhmYmFHdFp4SlNSeHFXMkFHbnJlZXVJb2RSdFJtZTY2aG9HNDd1RFhvZU9FNVFMSGZ6NzRORVMxTDlvcDMwZHBSdHFuZS1kWGNB?oc=5",
+        "title": "Exxon to close Scottish chemicals plant, citing U.K. policy and market conditions - FT (XOM:NYSE) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Tue, 18 Nov 2025 12:51:19 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5332700259962977,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13500699614166878,
+        "expectedInfoGain": 0.5997837731111357,
+        "rankingFactors": {
+          "R": 0.3712713673941799,
+          "F": 0.5332700259962977,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 4.442612533070184
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQUS1HZEVXdjZIS1h1YkJ2ZDZDZVNLZlZiNmJybUxhVmtYb01BdVk5NF9IQ3Q5ZDFOYmNLTGlEZXNjblVYaG9TRThkTDVPNlJCZ1RjMnVBdDRydTNxWjBRdmcxYXltMUVMUTVnd3BVS21FUFozLW5pdy05TDgxc1liY1dsSGE3UTRLS0lnVmZOenJ2VklrTVHSAZsBQVVfeXFMUHFkY080dEM2ejE4cUtsNmVNV1htLWNXVUNRdUFxSVU0ZDV5RnA0cG1mUEIteVZvNld6TGJ0b01GU3FpMHprVG9QeWF3T0d4Y3hxODJXcmpfNGZ3RV9nN2VPd2ZmazQydGFjcFFsd2hXMVFwTjU2bGp5cG9ZQlFFODN1c0M2czBtOVVVUWtraFFBVTJ6b3M1VndYTlE?oc=5",
+        "title": "Exxon Cancels Mozambique LNG Update - Crude Oil Prices Today | OilPrice.com",
+        "publisher": "Crude Oil Prices Today | OilPrice.com",
+        "publishedDate": "Thu, 30 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.034120192054490024,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13353319678426348,
+        "expectedInfoGain": 0.5897334134235581,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.034120192054490024,
+          "A": 0.7,
+          "D": 0.9230769230769231,
+          "S": 0.9,
+          "C": 4.416380552742496
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZ0oySW04dEVKZ2MzMFUwTEE0ekg1TWw5eHpjTE93UDdtQVZMSHVmcFItdjVQS05Vb25uTGREM2ZJSTFGMk9JQzhRSmhVdC1QeEJsQnYyekE4UEtzd3lPTC02UDNuOVBCTXI1bXVjM2thQ0NSeTV5VHdfekxIVGV2dWxhVGhuWDBnT3J4OHVpenEwZmc?oc=5",
+        "title": "Exxon Mobil And Chevron Eye Russian Oil Giant’s Global Assets - Finimize",
+        "publisher": "Finimize",
+        "publishedDate": "Tue, 18 Nov 2025 19:44:46 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5555978686130386,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13297903623560114,
+        "expectedInfoGain": 0.640054675560576,
+        "rankingFactors": {
+          "R": 0.4122880026455027,
+          "F": 0.5555978686130386,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.813199837202765
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQU0hKQUVIdGU5ZWlkWXFuSDJrWjhHVVd5blkwTVRFQWpKeUp0OGN3dnFKZjhBY2lMNFdZTzdEaWVuT1BjZ3AzVWZMdlY4aWY3ZERfc29mdW8zbzFZWjNORUwxbFRrelNqc1dqVWJUNTkzNS0xMmNFM1lNZkNxS2k4MV8yWmFOWGNvTHphMW1DWUgzWERQVTllbU53U194MkVKZEtJWlg2S0FBUHp0MnZkQmRMdWlNYkt4U2dOdW11d3ZHUFFOLV8zcjZnemtWcTRROFRsN0Nhb3dhZw?oc=5",
+        "title": "Raiffeisen Bank International AG Sells 2,564 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Wed, 19 Nov 2025 11:34:43 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.6105046108559068,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13231278949551664,
+        "expectedInfoGain": 0.5752473706004556,
+        "rankingFactors": {
+          "R": 0.5065291418650794,
+          "F": 0.6105046108559068,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 4.347632400418462
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPMUVTbG1td09nS1NqMjFSbXlQMnNrWDFmc1dWLXhiZS0xRkd3RGhveU9kUmdaMmpSS0l4ZFJHZTN5bHAwdkpwVVp5VU9TUkdtS3Vqcl9MYlFHRTktUWYweE1scjRhbkgwRS03MmdMb0lBZmI1R0h5aWVtendrU0tZZFJWcVBjSjYyQmVxUndwamxQcXg0Yy0yYWZFM3RjNFhYWFFCdG51MUNYWlZDUk9RMVBQN3NoektiYUc1d202OFg2ZC1sVWlza0RMckQtVkVkV1Fr?oc=5",
+        "title": "Legal &amp; General Group Plc Acquires 58,557 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+        "publisher": "MarketBeat",
+        "publishedDate": "Fri, 21 Nov 2025 13:03:50 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.8196202085265376,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13163407865660445,
+        "expectedInfoGain": 0.6507980222550185,
+        "rankingFactors": {
+          "R": 0.8010845552248678,
+          "F": 0.8196202085265376,
+          "A": 0.3,
+          "D": 0.5384615384615384,
+          "S": 0.9,
+          "C": 4.943993446809195
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPTDJpZmQ1RnBfSHVRWlROLTAxSGFMTC1CZWdFZ1huWXphY2NSRy1xU0RZNDlIRTEtcGloaTZDZWtTWXU4OXYwUzlGb2lCeVY5T0g3YkVKM2tHTUlDclZ1c0Zkei1tR2lHMklqc1o1M1M2MlByazNWNERTWTVpQkxHckdBazJoRUcxbVhZNEY3d0ExWWlBcU8ybnFqMlNBQzQwamx3amNSSXdadnV1OVVTQ1lMOWhSeFI5YTByZEUtcHQ3eWlDVzZaUUtiNGozLTg?oc=5",
+        "title": "Exxon funded thinktanks to spread climate denial in Latin America, documents reveal - The Guardian",
+        "publisher": "The Guardian",
+        "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.06078057850366389,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.13119406525231805,
+        "expectedInfoGain": 0.6488606765191394,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.06078057850366389,
+          "A": 0.9,
+          "D": 0.9487179487179487,
+          "S": 0.9,
+          "C": 4.945808145141495
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQzdMc1p3amI3RGstNUxtQXR2QUNzMWhldnA3RG1xWm9pN0dKQ2JZMTcwazFYTGh6dlVwb3ZMbVRpT1lhYzlYVTdkUEFpbHBPU25KWHZjcGItWmNrZUd1VUltNXB4YTBjQWt1TS1QUFYxeWxRN3ZKVVlqQTItSU5sVXRXX3lQNFhPLU9UWkprclhZdG5KQ0E?oc=5",
+        "title": "Lukoil’s suitor list grows to include Exxon - Bloomberg (XOM:NYSE) - Seeking Alpha",
+        "publisher": "Seeking Alpha",
+        "publishedDate": "Tue, 18 Nov 2025 17:52:24 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.5494387428030698,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.12929542940516545,
+        "expectedInfoGain": 0.6066894980428658,
+        "rankingFactors": {
+          "R": 0.40114081679894176,
+          "F": 0.5494387428030698,
+          "A": 0.3,
+          "D": 0.8205128205128205,
+          "S": 0.9,
+          "C": 4.692273352847754
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOXzVSMHB3bFZTb254aHRzTkVlcWp0ODNzM01ZR1NqakVwaV84T0l4N2tWZGpJYlZXc0hrQW85WG1Vd3h0YktvSjBCSzJYTVhhSjJmdER5YkJJcy1nblpqOThvMWdTREExYTQ5S29iQmY0di1NTWowQ0JycmRXZW9IT1g4aUctU2piQnNmY2xuQllOUWpZNzAyNHZHUmh4ZHdCYndlSTBUMF84QjRUbHpjdlZ2aUs4NW8?oc=5",
+        "title": "Exxon beats Q3 profit estimates on higher Guyana, Permian production - Reuters",
+        "publisher": "Reuters",
+        "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.039359859173157874,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.12373831711545963,
+        "expectedInfoGain": 0.5994937224657173,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.039359859173157874,
+          "A": 0.9,
+          "D": 0.717948717948718,
+          "S": 0.9,
+          "C": 4.844851105469073
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPb3hXZFJPMTMzZEtLbUlmSUdiQ3B6YW0xeDJhNldUd2lfRURvVXROUlNuX0RPZEZISjQwVnpKTFlhaDJnS0t0T2UzQWtaR0lrRW40eEZNQmZaUjkwTC14N1JydHJiRE9ybEZNanJGcEtfSk5YY1A1RUNxa2tSeGFTX1Nuc3FNb1BpbG1uU3FNQW0yNlJrRThtNkx2VWZkQWpSRnBsMHJXRjJybUczWGtMcG5ncnh1VDF5ZU5Tdmk5YlpuQWh1SjIzbEx6OExHX3QtVGdySmFaQ1YyLWx6?oc=5",
+        "title": "Exxon, BASF teaming up to build hydrogen pyrolysis plant in Texas - MSN",
+        "publisher": "MSN",
+        "publishedDate": "Mon, 17 Nov 2025 19:04:17 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.47970504628553673,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.12244127756167118,
+        "expectedInfoGain": 0.6066397628761333,
+        "rankingFactors": {
+          "R": 0.26541474041005286,
+          "F": 0.47970504628553673,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.954536370061813
+        }
+      },
+      {
+        "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOOTdoQlIteW4yeUQxb0FpdHBQRzRsODE4WGRSRWp5NEVXTVIxTDlHSm5nZG45U3FBaUdUU2MyYXRFOGExalVYWjdRemVIaXZtSFVnREJRdWFMazdOdFZqTWF2MWJweEh6NGZ3MHZDdlJieWhDX2JMaXlhb3NwSTJoSG40Umo1Y19aRlh4N0F5RUYzbUJjOXNKN1dIeUlTSUdrSDBueE9lMGEzSDBTOEtB?oc=5",
+        "title": "‘A Pretty Ugly History’: How Exxon Exported Climate Denial to the Global South - DeSmog",
+        "publisher": "DeSmog",
+        "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "Exxon"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 0.060780578403166925,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.11714386970334517,
+        "expectedInfoGain": 0.50398888163227,
+        "rankingFactors": {
+          "R": 0,
+          "F": 0.060780578403166925,
+          "A": 0.3,
+          "D": 0.9743589743589743,
+          "S": 0.9,
+          "C": 4.302306923175494
+        }
+      }
+    ]
+  },
+  "rankedItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxObVlpSDlzTEpydzdWcFBoa1lkZC03MExKTW1JODFIQTBaZG9RaWhTeEY1OTh2c2wxY2t2Ykt6bVEyYmRxd2wxNkQtYjNrRVVCZHZBYURnN0pSMjBXVTR2OVJ2LUkycUxxT19tSGxLT0VNcWVrR3M1QjZMdDFndl9CUTV0OHFQalFkbDlPNncyQ2tsMGtlbEhtV0NvbW4xRDE1Mk9yUGZvLVhoX01G?oc=5",
+      "title": "Exxon to acquire 40% stake in Enterprise Bahia NGL pipeline - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Thu, 20 Nov 2025 14:19:31 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7158654285034112,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3820005560786442,
+      "expectedInfoGain": 0.8008300509208108,
+      "rankingFactors": {
+        "R": 0.6657366203703703,
+        "F": 0.7158654285034112,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 2.0964106941141214
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPaGpiODB1ZjV1dVJBSllGVS13clg5YnZqcE56M0lOLTlQdXM0Z1c0R1kwOUJSdWRZWUl4SmJlWjVWckVWV192QVRpTmkzZFpPbm1SZXdLcS0zekNGMjFwRzM3b1FucjVXYVVBZUJXanljdC01ODhpMzNfVXVLOFFHRGdOMEQ5WW15a3JPVmFVNUsxczBvdF94TWVGclI3d09FaVZTTl9mMWdiZG9TaGh30gG0AUFVX3lxTE53SHRfLTVGN1VsRVM3OTVwbE5YZjl5MUVFcjhYcEgwNFV4UkpEekRGUEZNTVZzN20xWU1lcnUwMWVIQUdKbFdQTXY2dkpWQTVEWEV3c2wwZl9IN3RBXzNub2o5bUJqSERuVm1Ub1hVNGk3MW5oM1V5b25TWm0xUWJibmtyZW9PVk91Ylh1MzZiWHlUMTg1LVFMTTM1dFI0MVhCdVh2TXJ2YzJ4YTI4SnNfTE4yYQ?oc=5",
+      "title": "Exxon Joins Chevron in Eyeing Lukoil's Global Fire Sale - Crude Oil Prices Today | OilPrice.com",
+      "publisher": "Crude Oil Prices Today | OilPrice.com",
+      "publishedDate": "Tue, 18 Nov 2025 19:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5547845457690775,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.36298083956218624,
+      "expectedInfoGain": 0.7294567031374922,
+      "rankingFactors": {
+        "R": 0.4108242443783069,
+        "F": 0.5547845457690775,
+        "A": 0.7,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 2.009628673561214
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQc05xbGlra1k3UGVoNDRlODNJX2xVaWE4QW9FSFZSOVFOTG4zdHJjUlRWUVRFcldaR2NZeS1vZVhxRjQ4R1REVEs2S3BJT1doaEI3RWpjNm50RUZQNUxhZ0JxNnkySUpHQUNzN1JlN2N6U1J1MHdRMGVkLVZFT1U4Z3dpWkJQWlhzT0ZJdWtXU0hDcDFvaEpPcEtremZoRjBfVnFwdFNGVi1vTGFtUVhEc3ZiUm8yYmNRMjlQUVNqM2RYcXgyUEx6c3FLLWpiZWNaZzVjczJGZm0?oc=5",
+      "title": "Exxon to close Scottish chemicals plant in 2026 amid market uncertainty - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Tue, 18 Nov 2025 16:46:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.545878251601756,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.32871728003011885,
+      "expectedInfoGain": 0.7346674937308006,
+      "rankingFactors": {
+        "R": 0.3946400826719577,
+        "F": 0.545878251601756,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 2.2349524602524284
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxObnVoRGlqbGlLU0dWMzg0a2NRUjA5SlhiSHZaaVd2TFVUUlk0MW5wb0FmSGg5TlQzZHlkczBlWjIzZDBlT1NIQ2lPb1pwdG92X2R4OFowZTNxV1lUTW84WnZXM0F0dmxhZUR5UHdhMUczQVl0VXoyeWtuR3piN3FPQmVIcG92ZGZ2Y3h0SG1WYTFudFVMWTFuTjU3aWVORVNvZy01bkJSV0tNeU00a3AzNkVNRG9RTVoxTlRPZlloUDBRWEtyRkRBbFM0NA?oc=5",
+      "title": "E&amp;E News: Exxon lifts force majeure on its giant Mozambique LNG project - POLITICO Pro",
+      "publisher": "POLITICO Pro",
+      "publishedDate": "Fri, 21 Nov 2025 11:45:07 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.813244565446289,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.32454173434803446,
+      "expectedInfoGain": 0.7358499209089763,
+      "rankingFactors": {
+        "R": 0.7932762748015874,
+        "F": 0.813244565446289,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.267350676446007
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi9wFBVV95cUxNVV93M1ZIVTV1V2ZFV19acGs0Z0JMWlU0eldvbEJ4RFlBMlBRaFV0X3lZU1R5UGJvUEdETWMwU1NzVWFieGswUTdUMUtSYjRlNm1IVUJRVGt6bHRpc205bldUeFF4RmJYU0ZCQXZUakluQUdwZHd5TkgzbklLb3l6NjVLV3dXbTJIZEN3dk5iMjFldDBLQTE2LVF1cXRWZkRpTEY3NkwxYk1BaFZkd0xqOUFzUlhsVVlLdXBxN3hwTGNhTEFMT2tkNVZUbE05UEN1SkFwRUtCNWI1NzNSdTQ4dDR0STFaTkQ5QmVtMlZ0aUdfdWJtU3Jr?oc=5",
+      "title": "Carney’s deal with the devil: a deadly tar sands pipeline through B.C., violating Indigenous rights and risking another Exxon Valdez oil spill - Stand.earth",
+      "publisher": "Stand.earth",
+      "publishedDate": "Wed, 19 Nov 2025 22:11:06 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.650290452646693,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3203937783708542,
+      "expectedInfoGain": 0.6778647221437988,
+      "rankingFactors": {
+        "R": 0.5696623958333333,
+        "F": 0.650290452646693,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.1157237371793585
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQdG1TNExRQWJGbENEekllWnNmTjZyckFDRmpDZkM2V2hXNkZpbTNMU2g2cnRpamVKSldhWDZzMUk1SHh1b05YNXBFSlRQVlJSV1hlSEhBakcxVXJkZkRmeW1WX2t5ckt6N28wOVZxVk1KVks0Y0VRdlVndXZhN1luQjVXcWZxVzBzU2N3OC1zN1dueWU0MXVodFBJRURkRXdPYy1aeUQtQlpOV21PQ0FzcGtjeDdZM0JmNVZUWHUzMHctTjg5Mkh3bXhuY3hXRDRBbnRjQzRB?oc=5",
+      "title": "Willis Investment Counsel Acquires 17,246 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 13:34:14 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.822095808811109,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3170964051424594,
+      "expectedInfoGain": 0.6516217256409582,
+      "rankingFactors": {
+        "R": 0.8041003108465609,
+        "F": 0.822095808811109,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.054964090016124
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi3gFBVV95cUxNclJzNGFFSk5HUHpLNGlSM0NOalFLSnlwMHBVM1FmWDhTako2dXdOM0hRc0FHLW1yZG8yazVpTFM4dWcxX21Zd1ZTcWJWYXpLRXBEWE5BYjdyZ2xaMl84MVpPQWJMcnYtRzdpUURmNXpha3dic2g1MkY1YngtTjZuTUxtckVGazNlTFBTZTR1UDhma1hmcWY0c0ZucTFNQkpJQ1BkVjhaVTlVMkNlNE1WU2tpOFdNVk1Zc3Z6b2VOZ3A5NnhnUGJzVmNKcDJPczZ1S3RaMUlxMVVCSEpoU2c?oc=5",
+      "title": "Mediolanum International Funds Ltd Sells 23,688 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 13:03:55 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8196269845152655,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.31636839513422027,
+      "expectedInfoGain": 0.6508002690600737,
+      "rankingFactors": {
+        "R": 0.8010927579365079,
+        "F": 0.8196269845152655,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.0570963442286
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQcHc4TnpBQ0lyRHBqbGt6Q0U3WVNlME9yQ09Zb1hhb3c3X3FvY2otcXQzbkI0RXdXUEFidk1OT1J5S1JvWE9KSzZrYk9maHB2elNXdVRMY2docmpOUXRoSmhEZ2ZXNTRYdDJ1anBfaDhsQWl0MHk4QnppY2gxN3BTYTlKQk1IVEx0c3NPTmxTWHFUQzZuUlFWMEtFeXlfdGoxMHpV?oc=5",
+      "title": "Chevron &amp; Exxon Eye Lukoil's Global Assets in High-Stakes Pivot - Zacks Investment Research",
+      "publisher": "Zacks Investment Research",
+      "publishedDate": "Wed, 19 Nov 2025 14:31:37 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.621313291126412,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.31326063738263576,
+      "expectedInfoGain": 0.666680606001074,
+      "rankingFactors": {
+        "R": 0.524078783068783,
+        "F": 0.621313291126412,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.1281978213775687
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPaW8xRkFvUVRtdFR0enVPMUs2eWtOcnJ6NlZsZU1SOUNJVXdVYVFtYVk1a0dGQ1VJRVJkT3lOQkZUbmE5UF9IcGxoTkxpbFBTOVdDaE4yQVIwb3Fld3RNS2NQS00zdVJzM3V0Rm00ak81eERyNTB4NGhxbktWby1Pc0FmVlVIZw?oc=5",
+      "title": "Exxon to acquire 40% stake in enterprise Bahia NGL pipeline - Latest news from Azerbaijan",
+      "publisher": "Latest news from Azerbaijan",
+      "publishedDate": "Thu, 20 Nov 2025 12:49:42 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.709515123238912,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3098868026020272,
+      "expectedInfoGain": 0.6998228453516793,
+      "rankingFactors": {
+        "R": 0.6568252132936507,
+        "F": 0.709515123238912,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.258317680764315
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxNUG5EWlBWWTJiYzhRY0x0YjhQeExCa1pVbVVVT3dfaW9Pd2QyOEFkQU9WeTNqUTctM3NJbXcyTVNDX1ZxaEp6UFlFb0p2UHZVNzljTE91MEE4YXBHTEszNzR5bEczVmRnZG9qM3BJYTh5X3VMWXUyM1d2MUQwaWl3ZnN2T21WckdKektacmlSbGlEZ1NjS3ZYM2k3cl94TmFHbW9jX2lBWmRURFZHUkE0QzYxUTZLczhNeXZKUVc0WHg2aTdWZU9mUktoRjFtZUVWLURUdG5ZZmpiaFlETndHX0dfMDBabEs1Znlj?oc=5",
+      "title": "Evelyn Partners Investment Management LLP Raises Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Sat, 22 Nov 2025 12:59:05 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9450397470548972,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3034310428648708,
+      "expectedInfoGain": 0.6909689493140343,
+      "rankingFactors": {
+        "R": 0.9434711970899471,
+        "F": 0.9450397470548972,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.277186087455622
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxQcnJtMDhjckpwem12YWFsMEhoNEpLVjRWZHY2dTdISkRjazRmRzhfM0V2cEUxd0ZPUzh3a01WTDR2OGVISk1sVkFsOGZJcUpjdmVOX0tta0pjT1lGUmZiS2h5S0w1a0xmTXFfQkN4emFxSzc0aXptVVF4NnhhTlg4S0hoMXBxbHlsdEprVWNaUndLdTBqMk9lVnpla004QlNGSGdSRkhJaEFENlJSQmRwT2VSVjJkN1pHY19YeDJXMmk3cUYxQXk5Ug?oc=5",
+      "title": "Exxon Mobil Corporation $XOM Position Decreased by Rhumbline Advisers - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Sat, 22 Nov 2025 13:03:13 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9454273428152464,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3032083999654314,
+      "expectedInfoGain": 0.6910886105034836,
+      "rankingFactors": {
+        "R": 0.9438813425925926,
+        "F": 0.9454273428152464,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.2792528524350715
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxQSktYWFNBV1Z1QjRQalVFNENhMjhZMnQ5emFKZjhHR3lQcHkyTnBiZmZtb3AyekxGcXUyV3hIWTNldFZEQ1J5dmpUeklsVHdQenZpS2NHU0JxUEwzZXpzUnQxN1p3Z1VwY0Fzc1FqbTNFRnZ4dXBhZTJLQkw3UXZGS0JTdDl0b0tJbjBV?oc=5",
+      "title": "How a Texas shrimper stalled Exxon’s $10bn plastics plant | Shilpi Chhotray - The Guardian",
+      "publisher": "The Guardian",
+      "publishedDate": "Fri, 14 Nov 2025 13:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.30140678069880195,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.3006606114582805,
+      "expectedInfoGain": 0.68495460684841,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.30140678069880195,
+        "A": 0.9,
+        "D": 0.9487179487179487,
+        "S": 0.9,
+        "C": 2.278165415570087
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPQkJZRlQzVDkydl8zdmVoVXlucEp2bWxaTWxfLXo2bDF5MDNnLUIxYlV1OEN3VUNlVjFJS083MmkwYjFnei16RmcyaG53VUxtc2hqVDh0VlhHNmk3R0RCZTREVTJ1SUE3LU5XUjloME9rMHJWdndBRFZqOW11Smg1dDdQeUkySXFkSFZKUFpObHd5MHFSNUV1WDRrR2dXQS12Qmc0NE9VZG1XMUtKVlJFaGNsWXNCeVlCcHh0Sy16OFRLLUZpeTFCUDRtLWl4Zw?oc=5",
+      "title": "Kingdom Financial Group LLC. Cuts Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Wed, 19 Nov 2025 13:15:21 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6166300874934985,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2837280716651511,
+      "expectedInfoGain": 0.577663700528634,
+      "rankingFactors": {
+        "R": 0.5165125314153439,
+        "F": 0.6166300874934985,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.035976550146855
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPOFpNMjk2UlduWW1oS0pSVlE0cXp6aUtRQXB1Y1RfVnl6NjQ4dGNoT09TVXZhUVVWU1o2VE11UlMwRXQySW5WZ0M2NHkzSmtsNEQ5ZWphaW1oZUZWb2g5ZkZmNXQyNzgwTFBrUHZtWFVXWHBsaGM3Y2xDcER0NC13QW54SExBTU5YZ3gzdHBxRFdzQ1N5cGVMU05qMVZvb1RZbUoxOXdlNENTdw?oc=5",
+      "title": "Exxon Mobil's Options Frenzy: What You Need to Know - Benzinga",
+      "publisher": "Benzinga",
+      "publishedDate": "Fri, 21 Nov 2025 17:01:34 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8391804258399285,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.28218571409723053,
+      "expectedInfoGain": 0.7444493872696095,
+      "rankingFactors": {
+        "R": 0.8246701901455027,
+        "F": 0.8391804258399285,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.638154059822817
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQTVBCaDUzWVh1WTZuX3YwbTJSUXlPYi1QOURnTFVib3ktY0N0d3FERFJ1cGFhMjhldHh5aVMzN3dXckNUeVhBZGw4MVlUdUdreV9rUXZlUFRLdVZVUDNxU0QzLXJ6SXV0RUk4RUV2eVpxd0FRc0J5aFg4QTdhSFZwTkw5MDRWdUNtOXc?oc=5",
+      "title": "Investors Heavily Search Exxon Mobil Corporation (XOM): Here is What You Need to Know - Yahoo Finance",
+      "publisher": "Yahoo Finance",
+      "publishedDate": "Mon, 17 Nov 2025 14:00:04 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.4654437282643476,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.28098142807254156,
+      "expectedInfoGain": 0.5897171457399574,
+      "rankingFactors": {
+        "R": 0.23523467923280417,
+        "F": 0.4654437282643476,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 2.098776242206687
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPRXFvVlVjMDctT0tEd2VuN1o1V0FBWUxEWUw2UjBYc0lQOUZ5ajVMWDFUYXYwdlJuNDhzb2FCeU5fcVFtckRLZkI0VzZiODliVnBPLUJHX2hUYzZVLUg4dkVwVV94Wng4dk5xeE5ITVk0TW5kNzFZeXI2WG0xV25fLTZzVnM5YWV1QVMzTjdob0hZQ0kwV2VOVmwxbjFMZ19kQVRmQVBUYjliVlBldF9KNHNMRkrSAboBQVVfeXFMTVJLY1I1blNqcmhlSFRRWW1HaVRiMEZaeThqWFJJZWJQcmlWQnZxVDVvNm14bjRhd1Y1SmZQSVRvazBpMDVyVk1OMEhGMzNrQmRUaEZDMVYxbVRLb3QzdVhyMnVaTlUzenYzajFiY2xDVWxmb3JpSFZ5WnRVd1BmZ3FfaVRYTkhvbWdyb0JGeU5hZ3BiNGl1Z3FRcFBkY2ZPcU9tMlBnc0xwNGtFUWQ0VDk3WU5xbkIzVGxB?oc=5",
+      "title": "Exxon to Buy Stake in Enterprise's New Permian NGL Pipeline - Crude Oil Prices Today | OilPrice.com",
+      "publisher": "Crude Oil Prices Today | OilPrice.com",
+      "publishedDate": "Thu, 20 Nov 2025 16:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.725192380525445,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2783209338418882,
+      "expectedInfoGain": 0.7951963480930109,
+      "rankingFactors": {
+        "R": 0.6786807093253968,
+        "F": 0.725192380525445,
+        "A": 0.7,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 2.8571201494486047
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxNRUdmYW9sbDh6Z19oVGhuN1kwQjh4MWoya2ZGZVc3UmJMSDNjWEVlVFZXZjZjOC1ZaENncFM2eHc1UW5lMDBpUHBGRHBwUmtCSldkZWx2UndNdmJ1eDNLWXJjMmtnems0MHJESDNUTnJJSEJWVWNjcUU3RkZOTGphcjM5TWNoNUhjSTRRZg?oc=5",
+      "title": "Exxon Sues California Over New Climate Disclosure Laws - The New York Times",
+      "publisher": "The New York Times",
+      "publishedDate": "Sat, 25 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.01670325547037482,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.27075709734296105,
+      "expectedInfoGain": 0.6473772831923511,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.01670325547037482,
+        "A": 0.9,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.3909891542836825
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTE9ZU2xXSUppekpUQl9Ta01BeDhmQ3JwVGZ2Q3R0YjZrSkl2Z1JpTEFZUHJPZ3NlQlpFYXFlbk5RMVJfNWQ2allSbmR0MXlMY2VwN09hUC05eDZaM3ZvaFFWdHB0N0QzWGhDMG9VWHVUcEk2QQ?oc=5",
+      "title": "Exxon Gives Up on Scottish Chemicals Plant - Energy Intelligence",
+      "publisher": "Energy Intelligence",
+      "publishedDate": "Tue, 18 Nov 2025 22:42:22 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.565473719985565,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2632924470996977,
+      "expectedInfoGain": 0.6339225222263146,
+      "rankingFactors": {
+        "R": 0.4299071974206349,
+        "F": 0.565473719985565,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 2.4076745429247923
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxPQ1VqVE5PYzBxajJ0N0Yyd3AwcVhsaTFyaDU5SUNGem9UeldrTjJNMnQyQmpyaTZHR1RUWnV5akJYU0l3WldtTFZuRm56OGJHNFpFYlFCRzUtRnAyb0JBYzJhbi1ZcWlfakliWTZlcThfR3M2V1pfN3I0eWlUVVRSQ2QyNlZPTnNWUFBYU2diVU5FaXhWM0JsemNjNXVKRzA5bGc?oc=5",
+      "title": "How Exxon exported climate denial to the global south - KALW",
+      "publisher": "KALW",
+      "publishedDate": "Thu, 20 Nov 2025 16:09:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7236831369384444,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.25095984755006856,
+      "expectedInfoGain": 0.7049139062855774,
+      "rankingFactors": {
+        "R": 0.6765976058201058,
+        "F": 0.7236831369384444,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.8088712723055878
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNYmxXZ2gwSFk1UkpIaHlLSG44clE0X0tfSlZFSkJGcExWYTAzbDRfbHNvcHdCb3M3TDZmZHF1V1l0cFFYT3J3VXNOaGdrblVtMjd2N3J2OW8xa1RDUFZtSG56UFFyb3NhWGdsUDMwTFp3N01YbTlibHppSDV6UEhhQlZ6ekxweG5DVFdOTEs4c21qcjdERUJ1a21mdFRqQ3Bf?oc=5",
+      "title": "Exxon lifts force majeure on Rovuma LNG project in Mozambique (XOM:NYSE) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Thu, 20 Nov 2025 17:32:34 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7297076571965303,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.24207718006853515,
+      "expectedInfoGain": 0.6762918736443452,
+      "rankingFactors": {
+        "R": 0.6848877397486772,
+        "F": 0.7297076571965303,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 2.793703534768863
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOOW56REs2N3hnWURSTVRjMGVJbDBnbm1HdzRJQkZ2QkpjYnctdmhRTE91TGNTdnJWN2wtSGxRQmQ4WFp2SHZzdXoxX3FoV0lQeC0xU2RJcnd3bmxMUkdGUU9tbEJMMlVEYXFHenAzbDlzT1lySVhMbkJfdTdaN1NnT0hJN0hhcVh0UFBoUm5Wemt6WWI0Mzg5dFg1Wk5YWm11bkJjNnNzcHlxRDh1ellRU2UxMWtiZw?oc=5",
+      "title": "Exxon Meets Iraq Oil Minister to Discuss Lukoil West Qurna Stake - Bloomberg.com",
+      "publisher": "Bloomberg.com",
+      "publishedDate": "Wed, 19 Nov 2025 13:45:59 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6185068918015318,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.238284793242248,
+      "expectedInfoGain": 0.8053241882268842,
+      "rankingFactors": {
+        "R": 0.5195517989417989,
+        "F": 0.6185068918015318,
+        "A": 0.9,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 3.3796709276708468
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxNRlRpcXhCNkpWSTh3QnFZdnItOXNnRWtURTRob05SXzE4SVk2RmYybkt0X3FLOHhhbHplNVdybUdmc2xDX3J5U3p6Mkh4dl9Zb2g2b1BnYXBoRVIteWY4X2VuTGxKeldEZW1pVlJZb29KaDk4aVhRa2lQZGVUQV93MzF5TVdrWVJDSjJ6aTNIbmo1UzNqQ3k5OWlMdU1aelJOR3JZbC1CbXpGWE1paXMxYWdHM3pLUmFyVGfSAb8BQVVfeXFMTWd4SE0zZmYxLXNIcGJvWTlSZWZQNTl5dzZ4X3RCaGVtN3E4bnpNMzBySnBVRTBaMldZbDJFUmJnRWt6S1lEeEFXWlFXSkpPeWlGNlhhSjVONzlkbG1jbWltUUhmdnBIYzJEV3ExSWUzQ05Oam4xNW52UHR2T1pRd29EME9BTHBKZG5QSUZ0U1BINDdLUjU3Wm5lcjdtbk5sbGljbHFUbl9aNkFKTGtGZzNiUGhPUEVHV3FYajJtYjA?oc=5",
+      "title": "Raleigh Police Department investigates a double stabbing near a Raleigh Exxon gas station Friday night - ABC11",
+      "publisher": "ABC11",
+      "publishedDate": "Sun, 16 Nov 2025 05:58:55 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.38467580917756333,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.23158645592208466,
+      "expectedInfoGain": 0.5592698086095405,
+      "rankingFactors": {
+        "R": 0.044644282407407365,
+        "F": 0.38467580917756333,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.414950418334059
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxNd3d5NWNUZkYzVXlJNkRjNWRjTnlTS184MjgyV19NRUItbnNpYlNEczlPRjBsVy1uYzdFTmdGYTJsNGJzVEtNb19BdEZDMEFUTi1BVXEzaTh1THc0clhqYlNvN0pXaWp2R3BmMWxYSmQ5ZFA1VkNHMVhHZVJ6MVBPb2t2WnR2c0w4TTlDdFBLVi0yMThISV9aZm50M0VsSGxJMGFHTS1tdmhvQ1l2eWFWMTdZcGNDQ1MwV1BBU1hJRXJuTFdSTy1BNjFqdzlZSWhxY1RsZ3lBeTZsUQ?oc=5",
+      "title": "Northstar Financial Companies Inc. Reduces Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 12:03:38 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8147398423249719,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.22989445638563294,
+      "expectedInfoGain": 0.6491701379597042,
+      "rankingFactors": {
+        "R": 0.7951123594576719,
+        "F": 0.8147398423249719,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 2.8237746493145695
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE4wYVVYdDljZ2g0TkpLNWpCcUJpZHpTLWt1dnY2c3BSblBseW5iQl9fekhnY2cxaUVpdXFlcHRJS1FFLVFmWVh4M1F2aFkxVUNHTnRCV3lnZnBrVjJQTFdmOE1LRC1KZnZCd2xYc3hrd3VNRVJ3ZnhpbHdNSlhuZw?oc=5",
+      "title": "Exxon Mobil - Better Returns Are Ahead (NYSE:XOM) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Wed, 19 Nov 2025 02:52:51 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5797015271059944,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2244031652535752,
+      "expectedInfoGain": 0.6192714003113203,
+      "rankingFactors": {
+        "R": 0.45475738095238094,
+        "F": 0.5797015271059944,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 2.759637546161814
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi7AFBVV95cUxQQUJSYVVXRHNuWVVxbjZLV0hfWTdZUUsyU3NYLTNJYk9UUjZyZTFrQTllOS1PLTduZlA0cHNIOVBrbHpSTjlYMDJ3djEyZzdyZjNXSmJ6YzQ4Yk9TbFZHa3U2eDU0dTI2cE9EUkZCOWhtdnUxMzJjazVFRXRROXIyRjRZbGFxVGtkakF0bEhmMWQtT0dDQXdlRFJVLXRXd0RvM3VnbjBXUmpJMC1HSHhzcEU4dTBfT3FjVWRWcEtEM1hEaUlLODZRbFNTYnlPNlJjRUp4Y3dmcDVUdHJHRjFIV0ZFTkJuYWF6ZlI1eQ?oc=5",
+      "title": "Exxon Mobil Corporation $XOM Shares Bought by Evelyn Partners Investment Management Services Ltd - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Sat, 22 Nov 2025 12:57:03 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9448491332630512,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21889556776169067,
+      "expectedInfoGain": 0.690910078723432,
+      "rankingFactors": {
+        "R": 0.9432693402777778,
+        "F": 0.9448491332630512,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.1563456756493977
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOVjhIank4TGhrV192cmhaMWc1ZVBXdmFHNFRGLUxoa2Q2cDY3RUtnYXdqMUd4SjdFRktPOGlMZU10S0dpNTYwSlp3VmY4Tk9BbjdiakdRanYxV3FQejdZa09YN1NVQ0h4RzdCM2hVZ2MxSXZNaVJoMXYyRUZsSk5KZnhBbV9Xc0FpM3hIS0MxamptMUJ2VHJFY2tVZUYxRzVXVFo1LQ?oc=5",
+      "title": "Exxon sues California over new laws requiring corporate climate disclosures - Los Angeles Times",
+      "publisher": "Los Angeles Times",
+      "publishedDate": "Sun, 26 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.01926829077955567,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21859349374967893,
+      "expectedInfoGain": 0.5977620384887282,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.01926829077955567,
+        "A": 0.7,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.7345829385629012
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi0ANBVV95cUxPWG1BZkhqbk8wZWprbFRMZXEyY1RPUlhJdTJ3S0I3WlJYY3lQRzFqaUZfNklxYTBGU2kxU21lZGtYeXFEYTFJNFRwZy1vRVpfVXA2TE5WUWZrT0R2SmRUaW16LVdTVDJxdnptRDI2SGVrSURVaVAyRmhYbUl2ejVYWGJLY1VmVklUVGVsaG80emlJWmUzTG1LRUdULUhrajhpYVZVazI1d3k2V3FUVUFfSmhOYXpXQ0ZSeGszNEx3NUxFMUVnUTUxbjg2QTdRaEZzVDktdTJnOFpWWm1sRHVVbnpuS1lSM080U2RTVTFBVl90SGhFeXBoaW5EWUdWRkNheVhnTUR4eElrQ05oRUtwak5adFZxdDFUWEc4ZHNUWHVXZWlULWppVUpyT3RSOHZvTWRvVTduLVEtUy1GRXpxUWxLMVFnb3d1T3JaWUJ0UXR2RUV6cG5XNVYzZVhCWDlFbXlpaFBrUHhCRldwQlZQTV9OeDFRU0tTSzBQdXV6aEUtSEZhQk96UTZWbXhaSUtVYnFKLWhKRVJjWXF3d3FxUElXQWlSa0R6UEp3SGhCZ21GZTd5bWtNQkxHbHpaUWJkRThqMUNpV3JXTkc4bGNUeg?oc=5",
+      "title": "Chevron, Exxon plan to keep boosting oil production, even as crude gets cheaper. What gives? - MarketWatch",
+      "publisher": "MarketWatch",
+      "publishedDate": "Sun, 16 Nov 2025 20:10:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.41856567097051756,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21855965934175003,
+      "expectedInfoGain": 0.5770182593566582,
+      "rankingFactors": {
+        "R": 0.12907742559523816,
+        "F": 0.41856567097051756,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.6400949795332798
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxQV1BVbnlPN3gyb1VKZ2o4dDJUaWJYa0xacEtmem1LYmJYOC1KVjhpWWJneEVacUhBbG0xLUhPWnhPS21lZ2M3ZzZnOFl0VDdBNWtadUViZ3UxYkxGS0U0ekFFS095V0NIOGlxVkhHcENwU3ppUExiVlhUR3g0R3dNRG5kYTFTOTFTOFhSV2hrbklHd1B5MWlYaDR3?oc=5",
+      "title": "Exxon Mobil (NYSE:XOM) S&amp;P 500 Today Captures Oil Cycles - Kalkine Media",
+      "publisher": "Kalkine Media",
+      "publishedDate": "Thu, 20 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6894138432398503,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21721600559705317,
+      "expectedInfoGain": 0.692496663272455,
+      "rankingFactors": {
+        "R": 0.628085279431217,
+        "F": 0.6894138432398503,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 3.1880554168603568
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOM2VxbTdPUkI0NGtQc2dZQjlSazJOclo5U29wTFJHY0JFOUR2dFI5ZnB3RTJRR2lONm1MTjAwM1NLaVRRR2stLVlManpjd3FIYnRqcVAtZFpJSVNDb3pQWTVjeFc0Q1h2a09jRTR4dFZ4dEdSV2hFcmRkd1c0cWZWUm03aDk5VFhhRVcwM3p5a19tOUd1cDlmMUNTcExsZVBTQS1uNjFJNDFwaEd0aERpQ2M4TXFLS2l2X2FuYXp5elhzRWtabHNJQnVfbw?oc=5",
+      "title": "Exxon Acquires 40% Stake in Enterprise’s Bahia NGL Pipeline, Plans 92-Mile Permian Extension - Pipeline and Gas Journal",
+      "publisher": "Pipeline and Gas Journal",
+      "publishedDate": "Thu, 20 Nov 2025 16:03:35 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7232943574457538,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2119013015203751,
+      "expectedInfoGain": 0.7047749564251659,
+      "rankingFactors": {
+        "R": 0.6760600529100529,
+        "F": 0.7232943574457538,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 3.3259586013321356
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNOW5JUGpkT05KQ0VCQWE2dVFUOWRXMWJhNTR3RnR5SkZBZ2NtYlFrakF2ZUhNV1NIZ3N3eUk4MFQ3aWdDTno1eFlhekRJYnd5ZDY5eE1hWEF2WlFsRVpNQlNXa2ltWEZQUmFTcWdtSkFKeUg2VU9XbU9oa3VhVGN0SVplUi16MWVnWFNYaHBiZ3pucFl3WVN5NExsM3J3RXZIZUo5Wl9iVWxWTGJkbldWMElrZWRQLVZ1amM2TkpKODZWZTg5YVE?oc=5",
+      "title": "Exxon Mobil Corporation $XOM Shares Sold by Riverstone Advisors LLC - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Sat, 22 Nov 2025 13:21:07 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9471077182463346,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21113521464248916,
+      "expectedInfoGain": 0.6916070110641785,
+      "rankingFactors": {
+        "R": 0.9456569708994709,
+        "F": 0.9471077182463346,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.2756592131505027
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTjZBcWFJQkdWcUZ2UVdBTVJBLTZ1MFFUaU52bkNpMHlvQWsxQUpULWdNUE1PRjROeGZMdG16eWVkNmtrSWFLMi1BWnowMmduWHQtcTFLYVIwZ1ZMS215WkZJMDNaZUVOWENFRkVVZ2lsZmphdlNSdFBHbkRFNE1wemxFNGNjZzg?oc=5",
+      "title": "Exxon to Buy Stake in Enterprise’s New Permian NGL Pipeline - Yahoo Finance",
+      "publisher": "Yahoo Finance",
+      "publishedDate": "Thu, 20 Nov 2025 16:30:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.725192382923568,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21073040299346305,
+      "expectedInfoGain": 0.6951964541074913,
+      "rankingFactors": {
+        "R": 0.6786814136904762,
+        "F": 0.725192382923568,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 3.2989850739717737
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQSl85VlJTaTRfQ1VzYnpyYTFXSUs5NmxQRGNfbEpSS3gySmZHWWt5QUxoX0xDdW1zSGNXdnNIUE5nMk5WcEVUMzJQQkxITmpKQ3R4Ymt6SXNQMW04aE45SlIybnFfT29oejBTNTdUVkhyZTc3OGFRRFZBTFFWZTBlbGR4WjN6MUFoN01LRFhDeVQ2OXFSWVZkV2pmaEVTb1FSd0dySQ?oc=5",
+      "title": "Exxon, BASF teaming up to build hydrogen pyrolysis plant in Texas (XOM:NYSE) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Mon, 17 Nov 2025 17:46:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.47603491541553516,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.21006738104680245,
+      "expectedInfoGain": 0.5741679834585451,
+      "rankingFactors": {
+        "R": 0.25773454695767195,
+        "F": 0.47603491541553516,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 2.7332562561467935
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilwFBVV95cUxPcjBnd0tndnlGczdaMzZUWEpTdEIyT3czeFhpaWliMTI1RWpKTGgzMkFsTE9ZNGNmaHh4V3lydHhnQmtQREdoQkNJbVotRWlTX29ZczRQMlV3RmtjSFJfcF9PUUk3VlphRjQ3OTlidVZ0ZEZsTlFVeER3QlZTQ3pyaGowbnh3T09mcmdqSktLWlp3cUJ5WEhN0gGcAUFVX3lxTE1oeDM0cFl5a3ItM1FnbUdwYW5QV015S3N1NlVud2pXWnpmcVVkMWcyYncwVlIyU18wVU41aGNJSDBIY1FPd1cwb2ZyZm11WG9VaWROUXFCMUJESEthemlxazJZRGQ1Nk1VSHhZcl9BTlRsNWdvU1JheEowWXdlNUlKdTItYi1HSnBrX3R0Zl9XbFEwYTFrcnQxNjBmdg?oc=5",
+      "title": "Exxon Mobil sues California over climate disclosure laws - CNBC",
+      "publisher": "CNBC",
+      "publishedDate": "Sat, 25 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.01670325544275702,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.20600390883393005,
+      "expectedInfoGain": 0.5922490780600033,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.01670325544275702,
+        "A": 0.7,
+        "D": 0.9487179487179487,
+        "S": 0.9,
+        "C": 2.874940972782437
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNZGtFemx6UmV4dU1OMnVHNEVDTlBWdmVmV2JZNHljVEczY2dGWFRjNENPeFZkN1F5NUM1ZG9yZGtENzYxQkRJTnc1dzJyMUg3TV9qM2JVZXZQc3ItOFBQOWdjb2RSNHV2eVlrekpKNVJFWVY1N3ZDWTBTWUhWUXFCcU5OTzRqazliMEYtN2xfV1FJVlBOcFdfYVZXaGhkcXhfTFl4eUJISmFLdw?oc=5",
+      "title": "Exxon buys stake in Enterprise Bahia NGLs pipe, up for expansion - Quantum Commodity Intelligence",
+      "publisher": "Quantum Commodity Intelligence",
+      "publishedDate": "Thu, 20 Nov 2025 15:39:52 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7215945579888792,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.203261174738558,
+      "expectedInfoGain": 0.7041670204848093,
+      "rankingFactors": {
+        "R": 0.6737069460978836,
+        "F": 0.7215945579888792,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 3.4643459154978062
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQOUJyaWdHQzFMRkUyOVZDaElyemdHcnpJdllQT0piVk5EclhXVUx5TU80dWUySFFTQ0tCcnV5TFlMWXpWcDdIX05Ba0kxcFZza19iUzBZYnRHVEtuVEhOcE9HODYteFhqNTZXVDRtdEFnTGlVWVhuYXlGNWkyWDVJemg1dTl0enZDRXV3NGxzLXhPdU9wcXEyRTVsTGpjV2FFNnRMR2kwMm5nT2hXcW9BeEFrcElTNVhBUTdVQm1KRjRZaUtkMmNfYWlBWQ?oc=5",
+      "title": "GDS Wealth Management Sells 2,390 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Thu, 20 Nov 2025 13:16:08 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7113781651237732,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.2020456881782658,
+      "expectedInfoGain": 0.6133161443160324,
+      "rankingFactors": {
+        "R": 0.6594474123677249,
+        "F": 0.7113781651237732,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.0355319623297325
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNZlVITENId3Vpekt2ZS1TR3B0STBpTXVkamZfT2o5TzNENzFLMlk4TkdnSVc5YUdRNkNfVHNYOF9OMnRTTDVNTGZGcGMxRFV5ZVRIc2xxUm9DcGFUUG1rYjRVU2FQYXVYSzFZeG1MZ01GZHhFd0FmVG1xVDlfUlJ4QkdEdnQ?oc=5",
+      "title": "Chevron &amp; Exxon Eye Lukoil's Global Assets in High-Stakes Pivot - Yahoo Finance",
+      "publisher": "Yahoo Finance",
+      "publishedDate": "Wed, 19 Nov 2025 15:20:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.624302724693364,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.20070138759450096,
+      "expectedInfoGain": 0.6575927087459765,
+      "rankingFactors": {
+        "R": 0.5288794361772486,
+        "F": 0.624302724693364,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 3.2764731556046005
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNSlF6MXB4RG41V0pscVdYWHZFVk55Vi1jN2pFY2M4bGdITzJhakhtTmN4ZEVTSjJ0eThPYTVpMXFRc0JBcVNiR005NG5kSzNGUEJrNk1WNXlwVk53REV5ZU5yaWlad0VhdWdqMVIweWNrbV9rOVg2a19IcUVuVl96aEI5U3NQM3ExRFotNDdCMU1UNEpRMW1IYkt1QVNRQ0dza1E?oc=5",
+      "title": "Exxon lifts force majeure on LNG project in Mozambique - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Thu, 20 Nov 2025 16:24:53 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7248243644613583,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.19683051922756206,
+      "expectedInfoGain": 0.8040394684474395,
+      "rankingFactors": {
+        "R": 0.6781738012566138,
+        "F": 0.7248243644613583,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.084932924034325
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxORHcwU3ZBUm1ZaV9Sc0p6OVljN1M5NDlRZTJpRzJJNkl5cXBId2hSdjJrOGR4czVVeElralluR01HNXdMLVNYVjg1R0lHMkFnS05QSjRLaGR4MjRRbW1SMFdmdmZvdi1GcGVlRmdJaHF6SU83R3E1Mk5tQnhJYjdsOGNIUURqR2pwSlBEUTBlSENBSmdTRHVFLTBHX0J3V0NMR0E1TS1sTFdfYWt2YWJMb0lybkduOWRPalg3UUN0cU43V3Q1dFIwQzc3UUJxdEU?oc=5",
+      "title": "Franklin Resources Inc. Sells 236,991 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 13:03:49 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8196188533355143,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.19677498505850283,
+      "expectedInfoGain": 0.6507975627759682,
+      "rankingFactors": {
+        "R": 0.8010828472222222,
+        "F": 0.8196188533355143,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.307318572950117
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiwwFBVV95cUxQQy1PSWFfLU5LUk9FRmZaQWttejZkbG1zTWZDamNOR1FUUHNKNkpFVWF4UHlobVNrSTQtWE12Y2VkUnltV1dETk5PSFJIaUVGLXNLN1RLWi1faDNQNXBBMkpOWDlXb0JuNWZxLVNQczFkNS1WQVB6ZXlKeV92ZTc5Y1duNHRZelhQVk5ETzFUNVJpWWEzeFZVWGo1U2ZQY1lyZnNkUmRELVZhbE5Ib0pWNWc2bExqQks1OW5WX3NrUFlUTUXSAcgBQVVfeXFMT081enN0RlI0ZGFoWWVLa2c0UThTc1dIWWl2VGNodk9BQ24xZGpTWGtDZzBWMDZjekFsZ1hlRlFqZGlqT2pFeFRIVmFTcmlxWEY0N0dZZW1yb1dXQ1g0M2xuUUl2ZTJDbEkxekR1cHVBYkRSNmUwSkZ3U3lkZ09MRjVSSElpUHo5bEhKN0gyeFdzVkJzZ0NkcFRxbVZPMDd1UFRUUUhSV1hhcjJoc0hxY1pJWjRRckJyTjVvaU1MQkZnMnBzMzdpdzQ?oc=5",
+      "title": "Is Exxon Mobil at an Attractive Price After Low-Carbon Investments and 11% Year-to-Date Rise? - simplywall.st",
+      "publisher": "simplywall.st",
+      "publishedDate": "Mon, 17 Nov 2025 07:24:13 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.4475196160821904,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1936759448299536,
+      "expectedInfoGain": 0.5913943097047584,
+      "rankingFactors": {
+        "R": 0.1959638161375662,
+        "F": 0.4475196160821904,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 3.053524846485191
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQT0JKbjhmY3ViN1JjOUZJbXBWbVk1a0xnTkdIbS0zbG9sN1VTVzRRZS1qc0swaEpubGYyRWFKTDc1NXVSZU5JVllwdlNSd01aMEl6SHFDWEVLbWo3SnY0M1hnTmt1RlU4VmJ4S1V2Qm1mVlpnLXR3b0NQNHF2MkJFb2xhS1lQMFlGeDFJVlVsMkQtaDAwaER5TGZZcmFVZnI5TWVJS1B1RkJmLVhFbVBOUExMRnF4aFI2X2lLcmpZeWxWT0k1c2ZOcFk5Yw?oc=5",
+      "title": "SEC Confirms No Enforcement Recommendation for the Exxon Mobil Retail Voting Program - Arnold &amp; Porter",
+      "publisher": "Arnold &amp; Porter",
+      "publishedDate": "Fri, 26 Sep 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.0002652046450002057,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.19277239047623734,
+      "expectedInfoGain": 0.4949115755685449,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.0002652046450002057,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.5673364030288957
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE9JTlRubjJHV1RfSmVUa0RYajZzbVd0Z3RNTVNjemhSa3FWVWt5VXh3WXNaaDh6d0hIR29DT0IzN3VPUWFhbFlvZXdFb0FiRk1NdURKUDhMX1dxdm5JaHdtdTlJSjcxektjWE56UTA4aC0?oc=5",
+      "title": "5 Things to Know About the Exxon Mobil Credit Card - NerdWallet",
+      "publisher": "NerdWallet",
+      "publishedDate": "Mon, 10 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.16521874206973808,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.18926293101671487,
+      "expectedInfoGain": 0.5196546061822556,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.16521874206973808,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 2.745675570967259
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxOTGJvMkFLeEMxN2lPTE8zRE55RWU3R1I1eEVlWXUzZnQtZkdzWjJ2bGxsWFYtRzUwTVZtNHNyLUF3emZ5dXpHc1R0UUwwZ2RzOHd5MFEzcHZ0enl4cXFHS2F1ZHkydkxodG45QzJ6Q1hfSXQ5bzEyVHpzQXNVVjhwSjhKZ2Q1OG14RzlJVzBRYUFBQ1pNdC1GcEI5REQzWWhqdXZsbzFSU09hclg3U08tc1VNVXE5czFxaFlOVzdCRHVCR0pZenJ5bFBpNm8?oc=5",
+      "title": "Exxon freezes plans for major hydrogen plant amid weak customer demand - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Fri, 21 Nov 2025 21:41:17 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8627935190806332,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1885897758730414,
+      "expectedInfoGain": 0.8508717553308068,
+      "rankingFactors": {
+        "R": 0.852419892526455,
+        "F": 0.8627935190806332,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.511759725000222
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxQVEhfSmg3MXBiajRTSXB0cVVLN28wVEgzZ2x3SGxoRDdNTUNVSGladWdFLVBBQWR0SnVoQzNhNmI1cl8yaGFHcFI0NmRmVHdkd1lYdkZxVzFQcmtRWHVYX3hQVDNLTHhCQk0zUXMzU1RIMjg5a2RQOEgzQjlYLWtqdl94cjFDZlFtTG9JT3NNMWZSeFFrTzBFeG5uMGJUN2ZDcjBGT2hTcFlmbkxOSGxGYzJQSVg0aFlIb19IMGxRWnJ1ZmtSQ3JPdHhRSU5aR1p4Sk00OFpR?oc=5",
+      "title": "ARS Investment Partners LLC Cuts Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Wed, 19 Nov 2025 08:32:49 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5995864761521444,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.18620833314269455,
+      "expectedInfoGain": 0.5709027989563992,
+      "rankingFactors": {
+        "R": 0.48848346560846556,
+        "F": 0.5995864761521444,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.0659358221036586
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxOb1Iza3c2Y0tLc3gyMDk0YzJLUVR1REltcTFjOTVOeHg5MzdfRm1PMlZXU0ZDOF9EM0NGWDMxbTVmYUZDb2ZsUC1qQTFHVEpvVkRVem1rd2hUcTJrUTAtQTVYdEdUUnJzYjlFbkF5aUlTSUlHbXVncmVzRWFPR1NkV2ppQU1HR1J2TUVDck5SYkZaRk5KWHMwODRaM1lNcTFOZ3g3VkFoWGlqWXROSHZRS3pfY0NRbUYzd011MC02LWpONFd3Wk02SWlpN2dJXzR0TXFyT2lGWUlPakJVNTg4?oc=5",
+      "title": "Exxon Halts Hydrogen Plant Plans, Signaling Challenges in Meeting Demand and Innovation in Energy Sector - Energy Reporters",
+      "publisher": "Energy Reporters",
+      "publishedDate": "Sat, 22 Nov 2025 11:45:28 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9381630375274588,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1853319771320092,
+      "expectedInfoGain": 0.7760214729711518,
+      "rankingFactors": {
+        "R": 0.9361681498015872,
+        "F": 0.9381630375274588,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.187196861437481
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxPZnNsZmRDcUtzLVRLbHp4WDNqeU5wazFqQVJQand6Wm9ycUp0NEdZZzI1eGh2OS1YLWxGRFVxZTRRLWxiQ3otNGh3a2RYYWF2a0tKRVBRTjhmQng4N2dBekdXZWlTN0MyQzhBb0VmTU8wSktFYkdmXy1sdS10SEFBSFBwTGN5NGNKWVhja0lyRjBFY1lUUUZIaWg4d3ByZ0liOUxxaXVsemhPVFlZcHVlYmlDNjgzMjBBTmtZWDl3UDhhWmJmWUFxYnRreWxTTy1XZ3JPS1J3TnRPUQ?oc=5",
+      "title": "Swiss National Bank Has $1.41 Billion Stock Holdings in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 12:03:39 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8147411881017158,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1826157695850337,
+      "expectedInfoGain": 0.6491705727131206,
+      "rankingFactors": {
+        "R": 0.7951139120370371,
+        "F": 0.8147411881017158,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.554843999443537
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5XNG1COTZYUTN3TUs1VENaRHJpRlRMQzVKV0xvSjN3UmU5dzJzaDNvaFZPcURuUWF2YXRZSnZ1SjZFUnpiZDFkc25ROEJ6NHFFZUFhekFiemlkMVZxcnM4MXRBYzJxcjVsdWg5b1VWNmfSAXZBVV95cUxNS0Rvdjc1QWNBeFBYZDNSTDRDUGpMby01RG9fclVOLWF5SW5FYndRcTdzblphS05NM2RURHRkSHF5Znl2Q2p1OVNMMFhJamw5UkNWZW5KUHBnWTMxNTl1QzFZRDZzbUJuT3M1UThtU1VnbHQtTkh3?oc=5",
+      "title": "Exxon earnings beat as production in Guyana, Permian soar to records despite low oil prices - CNBC",
+      "publisher": "CNBC",
+      "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.03935985923823701,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1814873781598227,
+      "expectedInfoGain": 0.5956475686293252,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.03935985923823701,
+        "A": 0.7,
+        "D": 0.9487179487179487,
+        "S": 0.9,
+        "C": 3.282033024383557
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPbXFwVnFCS2otbkpoTGI2ZXlkUEVPTVdfLWFaaHZYQ0JFU0VHVlBuUXhvbU14NlNieDhUOWFnaEM0MGJoeXE3V2ctNnJaUTJWYmh4MUNwWkJiUmQzUDMzUlpibi04T3JXYzlkbUNrMEVOLVVqaU5sajZaWkN2Sm1PSy1tb243OWdUMlh0Yk9BQVRYbFVCcDZ1ag?oc=5",
+      "title": "3Q 2025 Earnings Call - Exxon Mobil Corporation",
+      "publisher": "Exxon Mobil Corporation",
+      "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.039359859303316126,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17960943249069072,
+      "expectedInfoGain": 0.490519363510882,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.039359859303316126,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 2.731033424629889
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPaG9JVTZ3SWo1dDA4c3RzRnk2aVJXbXRDSmhXVFJ1cTZMRGlOVkRmM0VKT2xldjV3eVJMLU9rRDhpbWt0VDhxRWtNRl9wODd6bEY0ZDB6QW1uLURVeEQtOWU4d3F0bnE1M2J6MGs5MkM4eHVNRTk4X081LUNWSklNNGNydkY3V2I1SU1WU3R1QWlBX2VZWTNjVQ?oc=5",
+      "title": "Exxon Mobil, Chevron Weigh Bids for Lukoil International Assets - Egypt Oil &amp; Gas",
+      "publisher": "Egypt Oil &amp; Gas",
+      "publishedDate": "Wed, 19 Nov 2025 10:02:16 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6049308904114135,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17439223408186344,
+      "expectedInfoGain": 0.6602150769950148,
+      "rankingFactors": {
+        "R": 0.49735765707671953,
+        "F": 0.6049308904114135,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 3.7858054888218002
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxONjNuMGc5VDA4cGFPOFVlSzEyM3Z0RDlfTy13RzVQZ0paYXJXdDMwOWwtVGFGcnFPZVlTYkotOFgybEZBc19fYXIxczFCTlVjUTBSMXp6Wkp1RG9oNXdwaHE3Vm1VUGpfS3MwOTBfREk5Um1OOXNaYzdRR0hpRWQxQzROM3NqRGlDVXJWTHpZbUExdTJwQktOMzhmckQwOVVtZmp1eHVheVpWU0k0OXFiYk1na2hXNTBvN2E0ckhDanNtTTI5X2Zxc1Uwdm93Y1dQQ1E?oc=5",
+      "title": "New World Advisors LLC Purchases 3,620 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Sat, 22 Nov 2025 13:03:14 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9454289060231241,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17310736589121828,
+      "expectedInfoGain": 0.6910890615025224,
+      "rankingFactors": {
+        "R": 0.9438827860449736,
+        "F": 0.9454289060231241,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.9922568167134314
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBneEhtSTRoTGVBSjUwYkpSVG1XTWtEeFk4SkhXRHNUNlFFNkxXd1JWX1hEV1hyM2IzLXM4XzZ2WXJVQ2t2cGxIbE5BMVFKOU5PbVJjNUExVHBMQWVXOExVY0RVYlZDZVltVXhVTGZBdG14UQ?oc=5",
+      "title": "Exxon, Enterprise to Expand Permian NGL Pipeline - Energy Intelligence",
+      "publisher": "Energy Intelligence",
+      "publishedDate": "Thu, 20 Nov 2025 23:01:56 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7539448702002634,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17222601640997762,
+      "expectedInfoGain": 0.7053415910878844,
+      "rankingFactors": {
+        "R": 0.7175631729497355,
+        "F": 0.7539448702002634,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.095441593497959
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxPb0liVjcwSHVrVkVHVlhuUU11aUpNMXFHT0NpMGRZZl9kU0xfbHltamtqX3ZrMGpuZHJzSzlUd0VMaDNxOHBJRHdRYWhmSlFFOWFfdTRydDhlYi0wZmNmd2lqdm90N245WWlGUjB4X3M1YWo4NXpGcXJYZWFVc25MNmlkVTJSb2FULUE1QTZQMDJBRndJbUhJQ3lvcEpSdDNrRHoxNmJqN1M1Skl5RUVqOXZtT0ZESjdqeXZoSlpMSG45Tk83VmNYQQ?oc=5",
+      "title": "Prudential PLC Purchases 56,867 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 11:37:35 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8126370078332936,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1720192498923744,
+      "expectedInfoGain": 0.6484670612482542,
+      "rankingFactors": {
+        "R": 0.7925280158730159,
+        "F": 0.8126370078332936,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.7697354316681078
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxNLTVzSFJsU3pwekVxRi0tWG12Nk4tWlh5OGNCeHI1NHJvMHhBc1J1cld1djU4aWtKbFkwZm9saVpHbDV4aEFIVE9GVzRNbmkwUW1zTzU0anp4TTI0NUJCTDFvaE50U3hqRHcxWERkSFB1Zjc2OThSZjk4eVVTN190V1YtN0gwR2dvanRldklpdHY0SXNqRWNqbFplWktERFJXYmQyeUV5LUREdFprLThBdERzdzNiNms?oc=5",
+      "title": "Methane pyrolysis technology - Exxon Mobil Corporation",
+      "publisher": "Exxon Mobil Corporation",
+      "publishedDate": "Mon, 17 Nov 2025 14:31:27 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.46689511182095805,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17191085529410682,
+      "expectedInfoGain": 0.590402001586941,
+      "rankingFactors": {
+        "R": 0.23834900132275139,
+        "F": 0.46689511182095805,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 3.434349742352659
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQdUJ2SkRGUUp2VzFKLWtPaVlEUzRFUkV0TU55Y3ZHMHY1R0RRSnlmT1ZpSlZNUWZZMVNJRjZ3NUp5SE0wbjNMY19oVzRvc1dScjNRTGZMcDRKMXdVX0lUd0t2UWdTbnpqdjVmM1NRYWJIdkhnVHZWS0t3ZE9zdENQNEpXN3MtU3c1cGpZSlZXdmVEUmN6aXdsXzVpUEJ4TWxEbUEw?oc=5",
+      "title": "Exxon Mobil: Why Stability Trumps Higher Dividend Yield (NYSE:XOM) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Thu, 20 Nov 2025 13:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7102404966981446,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.17041295871525017,
+      "expectedInfoGain": 0.6693157896489524,
+      "rankingFactors": {
+        "R": 0.6578476736111111,
+        "F": 0.7102404966981446,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 3.927610873579978
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQV1pPWV9FeVd4LW5kZFpBenhubkdoMWVGQ2xJN1d6aU9wVTBNRTI3eEtyRzJUUGFWbkFiUkFOVzRna3BaWHJJTEZkdGNRUWZQcEdJNGc1QXZybVhnTG5PYlJ0djRGblZaLWNzclNUVC1GeFllYmkyUjhSbUJxcGw0Vmo0aXNrWFpheE93NEwzcTJmLVlOOEJVTDNhOFhfa3ZrcnFJWkdfU1Itb0ZSOVc3RHBCZnk1T21MOUpZUw?oc=5",
+      "title": "Exxon explores more refinery upgrades as it hones in on higher-value products - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.06078057850366389,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.16987212011202238,
+      "expectedInfoGain": 0.6027068303652932,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.06078057850366389,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 3.548003227179583
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOOXZrRnFFRmhQcEhNODVXNGY5WVdTODU2Tk9JdWg4OHZBZkQ5VEdTQ2NwZzhJcUtUMC1QRWRVc0RCY0lIX1RWMmRXUExsYTRWRjQxQTRERlQ0VFNtTGtESk9BNVkxTUM2bWNhVTJuVEREQ1FoT2NfX28wd1RhMjVFWlhxUlhuTEJyYW1MYkpxcm13NGs1ZVVmcEdhVFFRZjdybm5meXk0dG9PZmc2LUJ4TlU1eVZkZmc1dm5V?oc=5",
+      "title": "Exxon joins Chevron in pursuing parts of Lukoil global empire, sources say - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Tue, 18 Nov 2025 20:06:40 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5568062852036081,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1688528512520183,
+      "expectedInfoGain": 0.7392799234734594,
+      "rankingFactors": {
+        "R": 0.4144615806878307,
+        "F": 0.5568062852036081,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.378249570509534
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPclp3c2ZkOFZWclVrWnAwYzN6UzBxN3B0ZXl0WFo4R0o5aGNPajk4bENMN3Zpc3hZYW5veEdJekVzS3pEYi1XU3pEbE9heU1xeEtoaGJ6RnhQZnI4OER6YzIxN2hLYXlDNkFwellrUHJURjM5XzR3aml4TWhxcXRQOGRWRDQwVkVWQWhoM1Y0ZG1SSVdBVnRvcVd2ZEh3eEloa3FR?oc=5",
+      "title": "Exxon to pay $650M for stake in Enterprise's Permian-Mont Belvieu pipeline; expansion planned - The Business Journals",
+      "publisher": "The Business Journals",
+      "publishedDate": "Thu, 20 Nov 2025 21:45:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7482124577757086,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.16836547891267817,
+      "expectedInfoGain": 0.7135932669607702,
+      "rankingFactors": {
+        "R": 0.709930689484127,
+        "F": 0.7482124577757086,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.238358549325135
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizAFBVV95cUxNWUxoTFBCVURHdm90SUY2ZDlBZWlCUTd0YjI4N2pTaGdUQ09SNWwzMm53d2hzMHJ3RjRBbnMxdXhSYkp1RUk5ZDdBdHc4V2RWRWVjVWhjUlVNZllLT1d5cnVHZ1VLWTE2S3Vrc0FqT2FOWWRxSS12SENpaWMxcko3LXJDUEIyUzVBTGluenZKbTJRZTU5Wkt2VVQxY3Z4eGg1d21iZWd0RS0wLWZNZXdRV1Azc3llVkFkZlpTYk5icm9pMGVVeUtvWjI2c1o?oc=5",
+      "title": "Ensign Peak Advisors Inc Increases Stake in Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Thu, 20 Nov 2025 12:39:55 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7088268240840494,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1677282535942813,
+      "expectedInfoGain": 0.6123945160767406,
+      "rankingFactors": {
+        "R": 0.6558545651455027,
+        "F": 0.7088268240840494,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 3.6511112645223425
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPa3REOW1zNVM5bVJUajZzOUY0cHhhUDZSdUwxTzdRa1JLNFJSV215a3lXamxXdWxOQ0VJc2U1R3pyTXBfSjR0Y29WZWpzMlZ1QlRMdmZhX2ViZVg5MW1lbXN0WE1pR3VnVUM1UFpmMkJEYlZKWmptZnJzY3FrbXBxb255bVFxbUlDcnFuS1hEM2hNMlUwc3VSSllTcXZHbHpLYW9mV1hEQUNXNEpScmt2YkkyTHk?oc=5",
+      "title": "Qatar-Exxon LNG Plant in Texas Plans First Shipment in February - Bloomberg.com",
+      "publisher": "Bloomberg.com",
+      "publishedDate": "Tue, 18 Nov 2025 14:28:39 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5384442686566531,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.15462945140067882,
+      "expectedInfoGain": 0.7725212813622953,
+      "rankingFactors": {
+        "R": 0.38092837632275134,
+        "F": 0.5384442686566531,
+        "A": 0.9,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.99595176963102
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQaHZyTnZJcmVDZUZjSjRUZnBjMlM5b2xrNDZBRUtKLUZ1a0ZYc0RqQU1lRmR3VmdhWmRIaWdxbk9jQjQzRmFRbWUwaUJ3b0NHa096REExOHZuWkRmRXN5SkFpdFlldlZlQmlLVlFKQWR6dkNMTTlzMF9TWlpFYVg1clNZTEpkSUNIWEc1RGRpS2pOTVU2bnZQdlg4Z1NpV0ExRG5EQUc4bEotTE11S05pLWdaNXBPVEk?oc=5",
+      "title": "Exxon sues California over climate disclosure laws - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Mon, 27 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.02222722582825832,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.15000128453839007,
+      "expectedInfoGain": 0.5969238274639823,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.02222722582825832,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 3.9794581046485016
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxOc3dYd1VZT1dreFJPdG0xT3V0ZHRwaWhIbmRWQU1KdmR6bV9mOGtZcDl0M3pHRUtZMzRBZ1NPNW1mUVB2WFF3TzctSG90WUpGb3hRa0ZMZnA4ZUlfU29JeURsODlXYlhVVmNqSVc3Q2xNbWlZRTZqdllrQWdLTDF0OG1TZlJldVpZamRHMGotZDE?oc=5",
+      "title": "Connecting U.S. industry growth - Exxon Mobil Corporation",
+      "publisher": "Exxon Mobil Corporation",
+      "publishedDate": "Thu, 20 Nov 2025 12:16:45 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7071996153899269,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14902960101880852,
+      "expectedInfoGain": 0.6887289392750642,
+      "rankingFactors": {
+        "R": 0.6535574156746031,
+        "F": 0.7071996153899269,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.621423761230777
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxOeGNVYmZhdFNkMGtBUWdtSEQ1MHJ3Ukx4aFRhUVo0dW1HMWhoZ200aDRuSmZCN1JucHRNNVk5bkJxRjJyMS1mWEh0Q2RqVWJCU2lrRXlWRFRMRFFJeEh6S3RNVWJlZUlVMHZZT2hjVFh0UW03NHJhdk1ibkwwam1OQk96VUg0U09YNTFYQ0hvdkpGWjBiMUoxdHB4OUd3d21od0JKT2tudHE5Wk1hWFJ6T0FUVW9sWmhXdUExVjNn?oc=5",
+      "title": "Exclusive: QatarEnergy, Exxon executives warn of Europe exit over climate law - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.060780578604160904,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14863392529779532,
+      "expectedInfoGain": 0.6027068303803678,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.060780578604160904,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.054974859695156
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQYy05RUlNbGNkbTE2aURKZFhpOXNtdHdUYWxYY0lpVG1CcEdRNlVDY3hTRzM0U0hCTnZZai1VYVAycU1KYkJyTk5qVFppNWhNTDZxcWFobjQ5dWdDT2NjRlZoaGdIblZhNXdNaE9SNUJ3NHlQb3pzQ0pESHFyYlN4NXBITlhVQWpjQm1WanJUOTlHWDRTZ1JjeDFzS0E1U0k1RkJxa21kNTdKbGF4MzJacEM0NTJqczc5a2lSdVR0aW1Sa0x5c3BEeF9CY0hBRHpfWGZhTnZ5aVU?oc=5",
+      "title": "FUKOKU MUTUAL LIFE INSURANCE Co Sells 2,383 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Thu, 20 Nov 2025 13:48:18 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7136518966757966,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14849278373334046,
+      "expectedInfoGain": 0.6141358967571693,
+      "rankingFactors": {
+        "R": 0.6626386970899472,
+        "F": 0.7136518966757966,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 4.135796240846416
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxNZjcwRXIxeXlnczExRFdtRlFjWHpvVmtwdHN2eVh1UFRkc2k1c2NKM2V5ckdSNDZ0aVQyMDN0TENiUzJteUN2blFPY2ZZeEdZeDU2QlRZNndBYzM5aUNEbDhfTkNfMUExZld4bFVUVUpZRXc4VTN2TjgyckVfWFFsNVRwRVdqc2FFQ3FtVDA1RDRnTDFkQWdCMTd3dVN5a2JrcE5GeVJsMXNIbzA?oc=5",
+      "title": "Exxon CEO expects long-term role for oil and gas, maybe not as fuel - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Fri, 07 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.10762994179833628,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14779759455715355,
+      "expectedInfoGain": 0.6097342348594941,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.10762994179833628,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.125467919058107
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxQWDNwMVNmTlg4ekNhSkVONXNxbFI3T28wN2F6MmZEUXZRUDZiaHJVMFNBVFdYUUNBcXA2bkdkX3E5bllYbjNlQmlPcGVlTWpGMkwxekYzc05ENTlobmpOeW95LWJTaE93aDNmX2ZYRktEc182UHFVNW5zbWFpdlRhb285MzBaS1I3bU53emVJNEo5YjRfdUlfVWduVG5rVEtiMW9ncnVtb1d0cUR2a2pLcjFQOXhZOTl0T09pRnpUdDBMVzkwc0VCb0ZRSmo3Zw?oc=5",
+      "title": "Exxon Joins Chevron in Pursuing Parts of Lukoil Global Empire, Sources Say - US News Money",
+      "publisher": "US News Money",
+      "publishedDate": "Tue, 18 Nov 2025 18:39:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5519846872687526,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14270728874977456,
+      "expectedInfoGain": 0.638534102872822,
+      "rankingFactors": {
+        "R": 0.40576403273809525,
+        "F": 0.5519846872687526,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.474432304522573
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMickFVX3lxTFBSNGUtZTR1blJpY0N0WllTNkU0SkppRElBeGlKcTBiaEtKamFDV3RaQmNBemVjWmF1YnBtLUpwVDFKeDE0SFl2eTVfc1RSazFsX1UyN2h5eUxNN1NsbXVJeFl0aWlPTmFGbjU1Qy1TdW03UQ?oc=5",
+      "title": "Exxon Lifts Force Majeure on Mozambique's Rovuma LNG - Energy Intelligence",
+      "publisher": "Energy Intelligence",
+      "publishedDate": "Thu, 20 Nov 2025 22:31:56 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7517043212173692,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14167070973220394,
+      "expectedInfoGain": 0.7045590303178313,
+      "rankingFactors": {
+        "R": 0.7145866501322751,
+        "F": 0.7517043212173692,
+        "A": 0.3,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.973215929034582
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQczV5enZ2SzItb2haeDk0aEFYU1ZEeUpTZk9LRHBYRWJib1ZmS21xU0s3c0d1WktwNjdFX1VrWWR1eElDUUQ1NWJVMEo3ajFwSkY0bllkcHhybTJPZjkzbi1YZ3AxaUZEUUNwU3VaM1VoWlMweHBrUkFBRXpRWWpzSHRTencxTVpEODNZNEQ5RWNPcExHSGVyYUd2cGZ3X0RuVHp4VXR4VkU?oc=5",
+      "title": "Exxon looks to lift force majeure at LNG project in Mozambique - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.039359859303316126,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.14014133982179636,
+      "expectedInfoGain": 0.599493722485241,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.039359859303316126,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.277779299438388
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxNcXo3cWVIVUt3Rm1BZFozalBlcEZBWkhWRC12Q21CbDdFeW5xM3hTLTVRTlg2Z1l1Unh3OFVSeGtZVHhrV2ZzSHIxeWNWSlVkaW1pSjgyZmJoRUVLMjVWYXhPbHlPQ1hrZGp0ZFUwVkJUUUhkY09LT1kwLUZqXzdCMWJrSFBxV19KZ1Y5Q1hLNWFwam5qVUhHUHlDMVU3dVI1QUdZSjZQSFVBMEtXcDZj?oc=5",
+      "title": "Exxon Thinks It Can Count Carbon Better - Bloomberg.com",
+      "publisher": "Bloomberg.com",
+      "publishedDate": "Wed, 12 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.2198585956826309,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13876898376930052,
+      "expectedInfoGain": 0.6675941739677793,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.2198585956826309,
+        "A": 0.9,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.810831324365937
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxPdGsyTzNFVzdYd2wwMGtEN2ZIX1FMdFBsVWlyOEl2Y1RnLXFvaC1jdmh5MkQtbF81eWVvb0MxN011d052Q1FsQURfZHhPbXRNVk5JTmVCcjlYTW1RblpnMUNOMzduRlA4RUVUT0Z1ZmtjeDFsS0JRenFlczRCaU9LRHRvZmFpNW9seHdEMTlhbjBfRzcwM2V2ZEpWUlRJNDVkMjU2cmY3NzNEZw?oc=5",
+      "title": "Exxon to acquire 40% stake in Enterprise Products' Bahia NGL pipeline (EPD:NYSE) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Thu, 20 Nov 2025 12:48:06 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7094025142473778,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.1372301874106353,
+      "expectedInfoGain": 0.6690130744241946,
+      "rankingFactors": {
+        "R": 0.6566675545634921,
+        "F": 0.7094025142473778,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 4.875115942400486
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMivgFBVV95cUxPSGFQdnVYVHV4M3VsU01zejROWTlsVWx5TWxDRUQ4Y19XMTJNU2R1d2xaV2hOQldwVDdDNEhKd3VYTWVnWGEzMUg1bFBuWWhNcVhTbjRPSWlteW5HNDZPYlE3d2M3TUd1YllESlFnY2oyMEJLNlhmYmFHdFp4SlNSeHFXMkFHbnJlZXVJb2RSdFJtZTY2aG9HNDd1RFhvZU9FNVFMSGZ6NzRORVMxTDlvcDMwZHBSdHFuZS1kWGNB?oc=5",
+      "title": "Exxon to close Scottish chemicals plant, citing U.K. policy and market conditions - FT (XOM:NYSE) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Tue, 18 Nov 2025 12:51:19 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5332700259962977,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13500699614166878,
+      "expectedInfoGain": 0.5997837731111357,
+      "rankingFactors": {
+        "R": 0.3712713673941799,
+        "F": 0.5332700259962977,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 4.442612533070184
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQUS1HZEVXdjZIS1h1YkJ2ZDZDZVNLZlZiNmJybUxhVmtYb01BdVk5NF9IQ3Q5ZDFOYmNLTGlEZXNjblVYaG9TRThkTDVPNlJCZ1RjMnVBdDRydTNxWjBRdmcxYXltMUVMUTVnd3BVS21FUFozLW5pdy05TDgxc1liY1dsSGE3UTRLS0lnVmZOenJ2VklrTVHSAZsBQVVfeXFMUHFkY080dEM2ejE4cUtsNmVNV1htLWNXVUNRdUFxSVU0ZDV5RnA0cG1mUEIteVZvNld6TGJ0b01GU3FpMHprVG9QeWF3T0d4Y3hxODJXcmpfNGZ3RV9nN2VPd2ZmazQydGFjcFFsd2hXMVFwTjU2bGp5cG9ZQlFFODN1c0M2czBtOVVVUWtraFFBVTJ6b3M1VndYTlE?oc=5",
+      "title": "Exxon Cancels Mozambique LNG Update - Crude Oil Prices Today | OilPrice.com",
+      "publisher": "Crude Oil Prices Today | OilPrice.com",
+      "publishedDate": "Thu, 30 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.034120192054490024,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13353319678426348,
+      "expectedInfoGain": 0.5897334134235581,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.034120192054490024,
+        "A": 0.7,
+        "D": 0.9230769230769231,
+        "S": 0.9,
+        "C": 4.416380552742496
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNZ0oySW04dEVKZ2MzMFUwTEE0ekg1TWw5eHpjTE93UDdtQVZMSHVmcFItdjVQS05Vb25uTGREM2ZJSTFGMk9JQzhRSmhVdC1QeEJsQnYyekE4UEtzd3lPTC02UDNuOVBCTXI1bXVjM2thQ0NSeTV5VHdfekxIVGV2dWxhVGhuWDBnT3J4OHVpenEwZmc?oc=5",
+      "title": "Exxon Mobil And Chevron Eye Russian Oil Giant’s Global Assets - Finimize",
+      "publisher": "Finimize",
+      "publishedDate": "Tue, 18 Nov 2025 19:44:46 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5555978686130386,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13297903623560114,
+      "expectedInfoGain": 0.640054675560576,
+      "rankingFactors": {
+        "R": 0.4122880026455027,
+        "F": 0.5555978686130386,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.813199837202765
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi2gFBVV95cUxQU0hKQUVIdGU5ZWlkWXFuSDJrWjhHVVd5blkwTVRFQWpKeUp0OGN3dnFKZjhBY2lMNFdZTzdEaWVuT1BjZ3AzVWZMdlY4aWY3ZERfc29mdW8zbzFZWjNORUwxbFRrelNqc1dqVWJUNTkzNS0xMmNFM1lNZkNxS2k4MV8yWmFOWGNvTHphMW1DWUgzWERQVTllbU53U194MkVKZEtJWlg2S0FBUHp0MnZkQmRMdWlNYkt4U2dOdW11d3ZHUFFOLV8zcjZnemtWcTRROFRsN0Nhb3dhZw?oc=5",
+      "title": "Raiffeisen Bank International AG Sells 2,564 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Wed, 19 Nov 2025 11:34:43 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6105046108559068,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13231278949551664,
+      "expectedInfoGain": 0.5752473706004556,
+      "rankingFactors": {
+        "R": 0.5065291418650794,
+        "F": 0.6105046108559068,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 4.347632400418462
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxPMUVTbG1td09nS1NqMjFSbXlQMnNrWDFmc1dWLXhiZS0xRkd3RGhveU9kUmdaMmpSS0l4ZFJHZTN5bHAwdkpwVVp5VU9TUkdtS3Vqcl9MYlFHRTktUWYweE1scjRhbkgwRS03MmdMb0lBZmI1R0h5aWVtendrU0tZZFJWcVBjSjYyQmVxUndwamxQcXg0Yy0yYWZFM3RjNFhYWFFCdG51MUNYWlZDUk9RMVBQN3NoektiYUc1d202OFg2ZC1sVWlza0RMckQtVkVkV1Fr?oc=5",
+      "title": "Legal &amp; General Group Plc Acquires 58,557 Shares of Exxon Mobil Corporation $XOM - MarketBeat",
+      "publisher": "MarketBeat",
+      "publishedDate": "Fri, 21 Nov 2025 13:03:50 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8196202085265376,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13163407865660445,
+      "expectedInfoGain": 0.6507980222550185,
+      "rankingFactors": {
+        "R": 0.8010845552248678,
+        "F": 0.8196202085265376,
+        "A": 0.3,
+        "D": 0.5384615384615384,
+        "S": 0.9,
+        "C": 4.943993446809195
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMizwFBVV95cUxPTDJpZmQ1RnBfSHVRWlROLTAxSGFMTC1CZWdFZ1huWXphY2NSRy1xU0RZNDlIRTEtcGloaTZDZWtTWXU4OXYwUzlGb2lCeVY5T0g3YkVKM2tHTUlDclZ1c0Zkei1tR2lHMklqc1o1M1M2MlByazNWNERTWTVpQkxHckdBazJoRUcxbVhZNEY3d0ExWWlBcU8ybnFqMlNBQzQwamx3amNSSXdadnV1OVVTQ1lMOWhSeFI5YTByZEUtcHQ3eWlDVzZaUUtiNGozLTg?oc=5",
+      "title": "Exxon funded thinktanks to spread climate denial in Latin America, documents reveal - The Guardian",
+      "publisher": "The Guardian",
+      "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.06078057850366389,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.13119406525231805,
+      "expectedInfoGain": 0.6488606765191394,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.06078057850366389,
+        "A": 0.9,
+        "D": 0.9487179487179487,
+        "S": 0.9,
+        "C": 4.945808145141495
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQQzdMc1p3amI3RGstNUxtQXR2QUNzMWhldnA3RG1xWm9pN0dKQ2JZMTcwazFYTGh6dlVwb3ZMbVRpT1lhYzlYVTdkUEFpbHBPU25KWHZjcGItWmNrZUd1VUltNXB4YTBjQWt1TS1QUFYxeWxRN3ZKVVlqQTItSU5sVXRXX3lQNFhPLU9UWkprclhZdG5KQ0E?oc=5",
+      "title": "Lukoil’s suitor list grows to include Exxon - Bloomberg (XOM:NYSE) - Seeking Alpha",
+      "publisher": "Seeking Alpha",
+      "publishedDate": "Tue, 18 Nov 2025 17:52:24 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.5494387428030698,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.12929542940516545,
+      "expectedInfoGain": 0.6066894980428658,
+      "rankingFactors": {
+        "R": 0.40114081679894176,
+        "F": 0.5494387428030698,
+        "A": 0.3,
+        "D": 0.8205128205128205,
+        "S": 0.9,
+        "C": 4.692273352847754
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxOXzVSMHB3bFZTb254aHRzTkVlcWp0ODNzM01ZR1NqakVwaV84T0l4N2tWZGpJYlZXc0hrQW85WG1Vd3h0YktvSjBCSzJYTVhhSjJmdER5YkJJcy1nblpqOThvMWdTREExYTQ5S29iQmY0di1NTWowQ0JycmRXZW9IT1g4aUctU2piQnNmY2xuQllOUWpZNzAyNHZHUmh4ZHdCYndlSTBUMF84QjRUbHpjdlZ2aUs4NW8?oc=5",
+      "title": "Exxon beats Q3 profit estimates on higher Guyana, Permian production - Reuters",
+      "publisher": "Reuters",
+      "publishedDate": "Fri, 31 Oct 2025 07:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.039359859173157874,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.12373831711545963,
+      "expectedInfoGain": 0.5994937224657173,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.039359859173157874,
+        "A": 0.9,
+        "D": 0.717948717948718,
+        "S": 0.9,
+        "C": 4.844851105469073
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPb3hXZFJPMTMzZEtLbUlmSUdiQ3B6YW0xeDJhNldUd2lfRURvVXROUlNuX0RPZEZISjQwVnpKTFlhaDJnS0t0T2UzQWtaR0lrRW40eEZNQmZaUjkwTC14N1JydHJiRE9ybEZNanJGcEtfSk5YY1A1RUNxa2tSeGFTX1Nuc3FNb1BpbG1uU3FNQW0yNlJrRThtNkx2VWZkQWpSRnBsMHJXRjJybUczWGtMcG5ncnh1VDF5ZU5Tdmk5YlpuQWh1SjIzbEx6OExHX3QtVGdySmFaQ1YyLWx6?oc=5",
+      "title": "Exxon, BASF teaming up to build hydrogen pyrolysis plant in Texas - MSN",
+      "publisher": "MSN",
+      "publishedDate": "Mon, 17 Nov 2025 19:04:17 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.47970504628553673,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.12244127756167118,
+      "expectedInfoGain": 0.6066397628761333,
+      "rankingFactors": {
+        "R": 0.26541474041005286,
+        "F": 0.47970504628553673,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.954536370061813
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOOTdoQlIteW4yeUQxb0FpdHBQRzRsODE4WGRSRWp5NEVXTVIxTDlHSm5nZG45U3FBaUdUU2MyYXRFOGExalVYWjdRemVIaXZtSFVnREJRdWFMazdOdFZqTWF2MWJweEh6NGZ3MHZDdlJieWhDX2JMaXlhb3NwSTJoSG40Umo1Y19aRlh4N0F5RUYzbUJjOXNKN1dIeUlTSUdrSDBueE9lMGEzSDBTOEtB?oc=5",
+      "title": "‘A Pretty Ugly History’: How Exxon Exported Climate Denial to the Global South - DeSmog",
+      "publisher": "DeSmog",
+      "publishedDate": "Mon, 03 Nov 2025 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "Exxon"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.060780578403166925,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.11714386970334517,
+      "expectedInfoGain": 0.50398888163227,
+      "rankingFactors": {
+        "R": 0,
+        "F": 0.060780578403166925,
+        "A": 0.3,
+        "D": 0.9743589743589743,
+        "S": 0.9,
+        "C": 4.302306923175494
+      }
+    }
+  ]
+}

@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Bell, Lock, User, Palette, Trash2, AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -14,12 +14,29 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useAuth } from '@/contexts/AuthContext';
 
 export default function SettingsPage() {
   const router = useRouter();
+  const { user } = useAuth();
   const [notifications, setNotifications] = useState(true);
   const [emailUpdates, setEmailUpdates] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [profileData, setProfileData] = useState({
+    name: '',
+    email: '',
+    company: '',
+  });
+
+  useEffect(() => {
+    if (user) {
+      setProfileData({
+        name: user.name || user.email?.split('@')[0] || '',
+        email: user.email || '',
+        company: '', // TODO: Fetch from user profile API
+      });
+    }
+  }, [user]);
 
   const handleDeleteAccount = () => {
     // TODO: Call API to delete account
@@ -59,7 +76,8 @@ export default function SettingsPage() {
                   <label className="block text-sm font-medium mb-2">Full Name</label>
                   <Input
                     type="text"
-                    defaultValue="John Doe"
+                    value={profileData.name}
+                    onChange={(e) => setProfileData({ ...profileData, name: e.target.value })}
                     placeholder="Enter your full name"
                   />
                 </div>
@@ -67,15 +85,18 @@ export default function SettingsPage() {
                   <label className="block text-sm font-medium mb-2">Email Address</label>
                   <Input
                     type="email"
-                    defaultValue="john@example.com"
+                    value={profileData.email}
+                    onChange={(e) => setProfileData({ ...profileData, email: e.target.value })}
                     placeholder="your.email@company.com"
+                    disabled={!!user?.email} // Email from auth cannot be changed here
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-medium mb-2">Company</label>
                   <Input
                     type="text"
-                    defaultValue="Acme Corp"
+                    value={profileData.company}
+                    onChange={(e) => setProfileData({ ...profileData, company: e.target.value })}
                     placeholder="Your company name"
                   />
                 </div>

@@ -1,0 +1,62 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 12,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 12,
+      "sampleUnits": [
+        {
+          "id": "6e8d7eee-a26f-4016-a51c-7a2671796f3e",
+          "type": "claim",
+          "span": "Exxon lifts force majeure on its Rovuma liquefied natural gas project in Mozambique",
+          "authority": 0.3,
+          "publisher": "POLITICO Pro",
+          "context": "Exxon lifted force majeure due to improved security conditions in Mozambique.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "fd4e6bb6-0782-4759-8424-e5d8051de1ca",
+          "type": "quote",
+          "span": "We have lifted force majeure for the Rovuma LNG project",
+          "authority": 0.3,
+          "publisher": "POLITICO Pro",
+          "context": "Exxon spokesman confirming the lifting of force majeure",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "e3d94a43-7eaf-47e1-aca7-cdba05b9a274",
+          "type": "claim",
+          "span": "TotalEnergies ended its own suspension last month for a $20 billion LNG plant nearby",
+          "authority": 0.3,
+          "publisher": "POLITICO Pro",
+          "context": "TotalEnergies resumed operations on its LNG plant in Mozambique.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 2,
+      "validQuotes": 5,
+      "validClaims": 5
+    }
+  ]
+}

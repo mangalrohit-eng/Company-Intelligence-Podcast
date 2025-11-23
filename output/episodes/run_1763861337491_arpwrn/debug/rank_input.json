@@ -1,0 +1,67 @@
+{
+  "itemCount": 66,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMipANBVV95cUxNUm9pTjVKeTkydHA4S0ROQ0F5ZTFuWHRSVkJPdkxJNkx1eFhZbFdCUE5aWDhSN2dpbXQ2N2RraVA4VjNaZkcxY0VnNENWVVdTbjF0SnpWUXhlbFdOdkhvYzdPSDFOYmxLeXdhQ0J2NFBLUDR5eDNIUDZuOW16TjVScWlSa1N4WFZfOVBNX3pUS1pFZGVPREQ2M0xseGMxcmdrb3dicWZmZkRMdWZocjhOX0hiUVZRSU1uVEtuS3VyZThhbkhaQkFnaUdMTS1XS1ZxbEVSejNGTUxXS3c5YXhLMEdPZjhtTXRhdzBzYUdIeEFXTEJhNC1qUGxQQW9sOXRRNTBub0xpZ2VvUEU2ZW5YSHZtM01BQTBGdUVQbTR2RUwxRGpBVTBSYnAzb2M1cWFZOU52TDdzdUhQdThTZ1lkdXd0eExjNkE3OTVpdkpQMlhLSzRiaDRFUHpZd3lPT2syMXVENzZFZUNOaEhpVkRnaW92Qmw3MXljYllkWDl0RS1KUzZKSkdmQ1JqNDNYRmc5LXZfZnJFOG83WGxROG5FaG5TSlI?oc=5",
+      "title": "Verizon Begins Laying Off More Than 13,000 Employees - The Wall Street Journal",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6966084777141102,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQZ3NxLTNldHpKOGJqb1hPTkVZdUR3Y3prMzNxMURObTlFTFBIWVNvZzYxdUZCNXJBemE5aG13bXVjaWdPSVBIXy1OVDUtWml5aDlYZlNhejZUWk5aVXhzNXI5Q1JZX1RvU01iX1ZLVTV0OHhkT1FEblFmcmNrUE1fbjhFRXlGa3hFdm0yQlN3YTF2WFMwZExNcndKaFhfVV9FSzZ0NUdNaF9KN3puMnUwWE84MHFhcVdZSG5B?oc=5",
+      "title": "Why Verizon Is Firing 13,000 Employees, in the Company’s Own Words - MSN",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9417312049278475,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQeGhvblBqMWZZanFyTS1VcTNSSml3aGJqZVJ6cFpjS2hWUHZ4VnNuUnhjRHA2V3BZT24yMGZsNmlHR194VW1DY3RtSngwaVpnTFVMNnVFdjRzZVRCUTFFc1k0QkN0cHpDMl9uNC1ZaUY1UWZkVWdqczFVZGNNTHNOMHpOY2VlSGpBZWFQR0NVLWdCN1I0?oc=5",
+      "title": "Is Verizon’s 5G Home Internet Right for You? - Kiplinger",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9323515717681754,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQVB6ZVBHSms5VkxLOHVNVGhnUmdONFZaWi1hVmo3Y1NXcDVrUG16TXVlWmIyay1zd1hIazIwSWNDQnNjTGRGblhKNS1rbEtBOGhZLUlJVEs4U0kxTkh0NmpDZWpnQkJSUE5qbDFaLThFRUtTZXAtRFJNWWE5YUVSOFRCUW04T1JxY1czSGFzRjlfRm5mNi0yQ2ZWTHRrMjh1?oc=5",
+      "title": "Verizon to Cut 13,000 Jobs, Set Up $20 Million “Reskilling” Fund for Laid Off Staff In “Age of AI” - The Hollywood Reporter",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7066501414580625,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE55d3hkbXdzQTVWS2tPaHJ6Y3hraTIyeUNBeE9XdnhBSU1abXR6WU03VkFfZjdNS0dlUC1raHF0RHduMXZjeWRDQ3NVUHZBeVcwTTAwd3R0TFZraWJvWjVpM3VYYTN6QTRJRXFOTWFwUjJybEIwMDVOU21YdDBnaUHSAYQBQVVfeXFMTTVzSUZQNzdiVjdNa1lBZ2xsWUZ3NXc2d0otT0pSRW5MVWoyaEZ5RnUxaVNEQ2hwMmN4OHF6VjczenZucTgyamYxN2c5T0xzTFY2VWh2SlgxQlRMa2VINEhKSEg4V1dueU05WTREN0p1ZkpneFNWalNhMkx0Z3RpQzRLUkFx?oc=5",
+      "title": "Verizon layoffs: Company to cut thousands of jobs - LiveNOW from FOX",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7338892374935907,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

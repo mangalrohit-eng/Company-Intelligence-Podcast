@@ -4,7 +4,7 @@
 
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowLeft, ArrowRight, Check, Zap, Sparkles, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -12,6 +12,8 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select } from '@/components/ui/select';
 import { Card } from '@/components/ui/card';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
+import { useToastContext } from '@/contexts/ToastContext';
+import { useAuth } from '@/contexts/AuthContext';
 
 type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -19,6 +21,8 @@ export default function NewPodcastPage() {
   const [setupMode, setSetupMode] = useState<'choice' | 'easy' | 'advanced'>('choice');
   const [easyModeCompany, setEasyModeCompany] = useState('');
   const [currentStep, setCurrentStep] = useState<Step>(1);
+  const toast = useToastContext();
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     // Step 1: Branding
     title: '',
@@ -42,9 +46,13 @@ export default function NewPodcastPage() {
     timezone: 'America/New_York',
     timeWindowHours: 168,
 
-    // Step 4: Topics & Regions
-    topicIds: [] as string[],
-    topicPriorities: {} as Record<string, number>,
+    // Step 4: Topics & Regions (defaults match "I'm Feeling Lucky")
+    topicIds: ['company-news', 'competitor-analysis', 'industry-trends'] as string[],
+    topicPriorities: {
+      'company-news': 75,  // Priority 3 → 75
+      'competitor-analysis': 50,  // Priority 2 → 50
+      'industry-trends': 50,  // Priority 2 → 50
+    } as Record<string, number>,
     regions: ['US'],
     sourceLanguages: ['en'],
     robotsMode: 'strict' as const,
@@ -65,6 +73,20 @@ export default function NewPodcastPage() {
     { num: 5, title: 'Voice', desc: 'Audio settings' },
   ];
 
+  // Populate author and email from user profile when user is loaded
+  useEffect(() => {
+    if (user) {
+      const userName = user.name || user.email?.split('@')[0] || '';
+      const userEmail = user.email || '';
+      
+      setFormData(prev => ({
+        ...prev,
+        author: userName,
+        email: userEmail,
+      }));
+    }
+  }, [user]);
+
   const handleNext = () => {
     if (currentStep < 5) {
       setCurrentStep((currentStep + 1) as Step);
@@ -79,7 +101,7 @@ export default function NewPodcastPage() {
 
   const handleEasyModeSubmit = async () => {
     if (!easyModeCompany.trim()) {
-      alert('Please enter your company name');
+      toast.warning('Company Name Required', 'Please enter your company name');
       return;
     }
 
@@ -92,8 +114,8 @@ export default function NewPodcastPage() {
         title: `${companyName} Intelligence Briefing`,
         subtitle: `Daily insights for ${companyName}`,
         description: `Stay ahead of the curve with AI-powered intelligence briefings tailored for ${companyName}. Get daily updates on industry trends, competitor moves, and market insights.`,
-        author: companyName,
-        email: '', // Will use user's email from auth
+        author: user?.name || user?.email?.split('@')[0] || companyName,
+        email: user?.email || '',
         category: 'Business',
         explicit: false,
         language: 'en',
@@ -131,14 +153,17 @@ export default function NewPodcastPage() {
 
       if (response.ok) {
         const data = await response.json();
-        window.location.href = `/podcasts/${data.id}`;
+        toast.success('Podcast Created', 'Redirecting to your new podcast...');
+        setTimeout(() => {
+          window.location.href = `/podcasts/${data.id}`;
+        }, 1000);
       } else {
         const error = await response.text();
-        alert(`Failed to create podcast: ${error}`);
+        toast.error('Failed to Create Podcast', error);
       }
     } catch (error) {
       console.error('Error creating podcast:', error);
-      alert('Failed to create podcast. Please try again.');
+      toast.error('Failed to Create Podcast', 'Please try again');
     }
   };
 
@@ -147,27 +172,56 @@ export default function NewPodcastPage() {
       // Create podcast via AWS Lambda API Gateway with auth token
       const { api } = await import('@/lib/api');
       const response = await api.post('/podcasts', {
-          title: formData.title,
-          description: formData.description,
-          companyId: formData.companyId,
-          competitors: formData.competitorIds || [],
-          topics: formData.topicIds || [],
-          duration: formData.durationMinutes || 5,
-          voice: formData.voiceId || 'alloy',
-          schedule: formData.cadence || 'weekly',
-        });
+        // Branding
+        title: formData.title,
+        subtitle: formData.subtitle,
+        description: formData.description,
+        author: formData.author, // From user profile (non-editable)
+        email: formData.email, // From user profile (non-editable)
+        category: formData.category,
+        explicit: formData.explicit,
+        language: formData.language,
+        
+        // Company settings
+        companyId: formData.companyId,
+        industryId: formData.industryId,
+        competitorIds: formData.competitorIds || [],
+        
+        // Cadence
+        cadence: formData.cadence,
+        durationMinutes: formData.durationMinutes,
+        publishTime: formData.publishTime,
+        timezone: formData.timezone,
+        timeWindowHours: formData.timeWindowHours,
+        
+        // Topics & regions
+        topics: formData.topicIds || [],
+        topicPriorities: formData.topicPriorities || {},
+        regions: formData.regions,
+        sourceLanguages: formData.sourceLanguages,
+        robotsMode: formData.robotsMode,
+        allowDomains: formData.allowDomains || [],
+        blockDomains: formData.blockDomains || [],
+        
+        // Voice
+        voiceId: formData.voiceId,
+        voiceSpeed: formData.voiceSpeed,
+        voiceTone: formData.voiceTone,
+      });
 
       if (response.ok) {
         const data = await response.json();
-        // Redirect to the new podcast's page
-        window.location.href = `/podcasts/${data.id}`;
+        toast.success('Podcast Created', 'Redirecting to your new podcast...');
+        setTimeout(() => {
+          window.location.href = `/podcasts/${data.id}`;
+        }, 1000);
       } else {
         const error = await response.text();
-        alert(`Failed to create podcast: ${error}`);
+        toast.error('Failed to Create Podcast', error);
       }
     } catch (error) {
       console.error('Error creating podcast:', error);
-      alert('Failed to create podcast. Please try again.');
+      toast.error('Failed to Create Podcast', 'Please try again');
     }
   };
 
@@ -573,9 +627,11 @@ function Step1({ formData, setFormData }: any) {
           <Input
             type="text"
             value={formData.author}
-            onChange={(e) => setFormData({ ...formData, author: e.target.value })}
+            disabled
             placeholder="John Doe"
+            className="bg-muted cursor-not-allowed"
           />
+          <p className="text-xs text-muted mt-1">Author is set from your profile</p>
         </div>
 
         <div>
@@ -583,9 +639,11 @@ function Step1({ formData, setFormData }: any) {
           <Input
             type="email"
             value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            disabled
             placeholder="john@company.com"
+            className="bg-muted cursor-not-allowed"
           />
+          <p className="text-xs text-muted mt-1">Email is set from your profile</p>
         </div>
       </div>
 
@@ -945,17 +1003,102 @@ function Step3({ formData, setFormData }: any) {
 }
 
 function Step4({ formData, setFormData }: any) {
-  const [topicPriorities, setTopicPriorities] = useState<Record<string, number>>({
-    'Earnings': 80,
-    'Product Launches': 70,
-    'M&A': 60,
-    'Leadership': 50,
-    'Technology': 85,
-    'Strategy': 75,
+  // All available topics matching the topicMap from runs route
+  const allTopics = [
+    { id: 'company-news', name: 'Company News & Announcements', defaultPriority: 3 },
+    { id: 'competitor-analysis', name: 'Competitive Intelligence', defaultPriority: 2 },
+    { id: 'industry-trends', name: 'Industry Trends & Market Analysis', defaultPriority: 2 },
+    { id: 'earnings', name: 'Earnings & Financial Results', defaultPriority: 3 },
+    { id: 'product-launches', name: 'Product Launches', defaultPriority: 3 },
+    { id: 'technology', name: 'Technology & Innovation', defaultPriority: 2 },
+    { id: 'partnerships', name: 'Strategic Partnerships', defaultPriority: 2 },
+    { id: 'leadership', name: 'Leadership & Executive Changes', defaultPriority: 1 },
+    { id: 'mergers-acquisitions', name: 'Mergers & Acquisitions', defaultPriority: 3 },
+    { id: 'regulatory', name: 'Regulatory & Legal Developments', defaultPriority: 2 },
+  ];
+
+  // Default topics (same as "I'm Feeling Lucky")
+  const defaultTopicIds = ['company-news', 'competitor-analysis', 'industry-trends'];
+
+  // Initialize selected topics with defaults if not already set
+  const [selectedTopicIds, setSelectedTopicIds] = useState<string[]>(() => {
+    return formData.topicIds && formData.topicIds.length > 0 
+      ? formData.topicIds 
+      : defaultTopicIds;
   });
 
-  const [selectedRegions, setSelectedRegions] = useState<string[]>(['US', 'UK']);
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(['en']);
+  // Initialize topic priorities (convert priority 1-3 to priorityWeight 0-100)
+  // Priority 3 → 75, Priority 2 → 50, Priority 1 → 25
+  const getPriorityWeight = (priority: number): number => {
+    if (priority === 3) return 75;
+    if (priority === 2) return 50;
+    if (priority === 1) return 25;
+    return 50; // default
+  };
+
+  const [topicPriorities, setTopicPriorities] = useState<Record<string, number>>(() => {
+    const initial: Record<string, number> = {};
+    // Initialize with defaults from formData or use topic defaults
+    allTopics.forEach(topic => {
+      if (selectedTopicIds.includes(topic.id)) {
+        initial[topic.id] = formData.topicPriorities?.[topic.id] 
+          || getPriorityWeight(topic.defaultPriority);
+      }
+    });
+    return initial;
+  });
+
+  // Sync selected topics and priorities with formData
+  useEffect(() => {
+    setFormData((prev: any) => ({
+      ...prev,
+      topicIds: selectedTopicIds,
+      topicPriorities: topicPriorities,
+    }));
+  }, [selectedTopicIds, topicPriorities, setFormData]);
+
+  const toggleTopic = (topicId: string) => {
+    setSelectedTopicIds(prev => {
+      const isSelected = prev.includes(topicId);
+      const newSelected = isSelected 
+        ? prev.filter(id => id !== topicId)
+        : [...prev, topicId];
+      
+      // Update priorities when topic is added
+      if (!isSelected) {
+        const topic = allTopics.find(t => t.id === topicId);
+        if (topic) {
+          setTopicPriorities(prevPriorities => ({
+            ...prevPriorities,
+            [topicId]: getPriorityWeight(topic.defaultPriority),
+          }));
+        }
+      } else {
+        // Remove priority when topic is removed
+        setTopicPriorities(prevPriorities => {
+          const newPriorities = { ...prevPriorities };
+          delete newPriorities[topicId];
+          return newPriorities;
+        });
+      }
+      
+      return newSelected;
+    });
+  };
+
+  const updateTopicPriority = (topicId: string, priority: number) => {
+    setTopicPriorities(prev => ({
+      ...prev,
+      [topicId]: priority,
+    }));
+  };
+
+  const [selectedRegions, setSelectedRegions] = useState<string[]>(() => 
+    formData.regions && formData.regions.length > 0 ? formData.regions : ['US']
+  );
+  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(() => 
+    formData.sourceLanguages && formData.sourceLanguages.length > 0 ? formData.sourceLanguages : ['en']
+  );
 
   const regions = ['US', 'UK', 'EU', 'APAC', 'LATAM', 'MEA', 'Global'];
   const languages = [
@@ -967,16 +1110,24 @@ function Step4({ formData, setFormData }: any) {
   ];
 
   const toggleRegion = (region: string) => {
-    setSelectedRegions(prev =>
-      prev.includes(region) ? prev.filter(r => r !== region) : [...prev, region]
-    );
+    const newRegions = selectedRegions.includes(region)
+      ? selectedRegions.filter(r => r !== region)
+      : [...selectedRegions, region];
+    setSelectedRegions(newRegions);
+    setFormData((prev: any) => ({ ...prev, regions: newRegions }));
   };
 
   const toggleLanguage = (lang: string) => {
-    setSelectedLanguages(prev =>
-      prev.includes(lang) ? prev.filter(l => l !== lang) : [...prev, lang]
-    );
+    const newLanguages = selectedLanguages.includes(lang)
+      ? selectedLanguages.filter(l => l !== lang)
+      : [...selectedLanguages, lang];
+    setSelectedLanguages(newLanguages);
+    setFormData((prev: any) => ({ ...prev, sourceLanguages: newLanguages }));
   };
+
+  // Get selected topics for display
+  const selectedTopics = allTopics.filter(t => selectedTopicIds.includes(t.id));
+  const availableTopics = allTopics.filter(t => !selectedTopicIds.includes(t.id));
 
   return (
     <div className="space-y-6">
@@ -986,52 +1137,71 @@ function Step4({ formData, setFormData }: any) {
       </div>
 
       <div>
-        <label className="block text-sm font-medium mb-4">Standard Topics with Priority</label>
+        <label className="block text-sm font-medium mb-4">Selected Topics</label>
+        <p className="text-xs text-muted mb-4">
+          Default topics match "I'm Feeling Lucky" option. Add more topics below.
+        </p>
         <div className="space-y-4">
-          {Object.entries(topicPriorities).map(([topic, priority]) => (
-            <div key={topic} className="space-y-2">
+          {selectedTopics.map((topic) => (
+            <div key={topic.id} className="space-y-2 p-4 border rounded-lg">
               <div className="flex items-center justify-between">
-                <label className="flex items-center gap-2">
-                  <input type="checkbox" className="w-4 h-4" defaultChecked />
-                  <span className="font-medium">{topic}</span>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input 
+                    type="checkbox" 
+                    className="w-4 h-4" 
+                    checked={true}
+                    onChange={() => toggleTopic(topic.id)}
+                  />
+                  <span className="font-medium">{topic.name}</span>
                 </label>
-                <span className="text-sm text-muted">Priority: {priority}</span>
+                <span className="text-sm text-muted">
+                  Priority: {topicPriorities[topic.id] || getPriorityWeight(topic.defaultPriority)}
+                </span>
               </div>
-              <input
-                type="range"
-                min="0"
-                max="100"
-                value={priority}
-                onChange={(e) => setTopicPriorities({ ...topicPriorities, [topic]: parseInt(e.target.value) })}
-                className="w-full h-2 bg-border rounded-lg appearance-none cursor-pointer"
-              />
+              <div className="flex items-center gap-3">
+                <input
+                  type="range"
+                  min="0"
+                  max="100"
+                  value={topicPriorities[topic.id] || getPriorityWeight(topic.defaultPriority)}
+                  onChange={(e) => updateTopicPriority(topic.id, parseInt(e.target.value))}
+                  className="flex-1 h-2 bg-border rounded-lg appearance-none cursor-pointer"
+                />
+                <span className="text-xs text-muted w-12 text-right">
+                  {topicPriorities[topic.id] || getPriorityWeight(topic.defaultPriority)}
+                </span>
+              </div>
             </div>
           ))}
         </div>
       </div>
 
-      <Card className="p-4 bg-primary/10 border-primary/30">
-        <h3 className="font-semibold mb-2 flex items-center gap-2">
-          <span className="text-primary">✨</span>
-          AI-Suggested Special Topics
-        </h3>
-        <p className="text-sm text-muted mb-4">Based on your industry and competitors</p>
-        <div className="space-y-2">
-          {[
-            { name: 'AI & Machine Learning', desc: 'Latest AI developments and applications' },
-            { name: 'Sustainability', desc: 'ESG and environmental initiatives' },
-            { name: 'Digital Transformation', desc: 'Technology adoption and modernization' },
-          ].map((topic) => (
-            <label key={topic.name} className="flex items-start gap-2 p-2 hover:bg-primary/5 rounded cursor-pointer">
-              <input type="checkbox" className="w-4 h-4 mt-0.5" />
-              <div>
-                <div className="font-medium">{topic.name}</div>
-                <div className="text-xs text-muted">{topic.desc}</div>
-              </div>
-            </label>
-          ))}
+      {availableTopics.length > 0 && (
+        <div>
+          <label className="block text-sm font-medium mb-4">Add Additional Topics</label>
+          <div className="space-y-2">
+            {availableTopics.map((topic) => (
+              <label 
+                key={topic.id} 
+                className="flex items-center gap-2 p-3 border rounded-lg hover:bg-primary/5 cursor-pointer"
+              >
+                <input 
+                  type="checkbox" 
+                  className="w-4 h-4" 
+                  checked={false}
+                  onChange={() => toggleTopic(topic.id)}
+                />
+                <div className="flex-1">
+                  <div className="font-medium">{topic.name}</div>
+                  <div className="text-xs text-muted">
+                    Default priority: {topic.defaultPriority === 3 ? 'High' : topic.defaultPriority === 2 ? 'Medium' : 'Low'}
+                  </div>
+                </div>
+              </label>
+            ))}
+          </div>
         </div>
-      </Card>
+      )}
 
       <div>
         <label className="block text-sm font-medium mb-3">Geographic Regions</label>
@@ -1075,7 +1245,15 @@ function Step4({ formData, setFormData }: any) {
         <h3 className="font-semibold mb-3">Compliance & Filtering</h3>
         <div className="space-y-4">
           <label className="flex items-center gap-2">
-            <input type="checkbox" className="w-4 h-4" defaultChecked />
+            <input 
+              type="checkbox" 
+              className="w-4 h-4" 
+              checked={formData.robotsMode === 'strict'}
+              onChange={(e) => setFormData({ 
+                ...formData, 
+                robotsMode: e.target.checked ? 'strict' : 'permissive' 
+              })}
+            />
             <span className="text-sm">Respect robots.txt (recommended)</span>
           </label>
           
@@ -1084,6 +1262,11 @@ function Step4({ formData, setFormData }: any) {
             <Input
               type="text"
               placeholder="example.com, news.com (comma separated)"
+              value={formData.allowDomains?.join(', ') || ''}
+              onChange={(e) => {
+                const domains = e.target.value.split(',').map(d => d.trim()).filter(d => d.length > 0);
+                setFormData({ ...formData, allowDomains: domains });
+              }}
             />
           </div>
           
@@ -1092,6 +1275,11 @@ function Step4({ formData, setFormData }: any) {
             <Input
               type="text"
               placeholder="spam.com, unwanted.com (comma separated)"
+              value={formData.blockDomains?.join(', ') || ''}
+              onChange={(e) => {
+                const domains = e.target.value.split(',').map(d => d.trim()).filter(d => d.length > 0);
+                setFormData({ ...formData, blockDomains: domains });
+              }}
             />
           </div>
         </div>

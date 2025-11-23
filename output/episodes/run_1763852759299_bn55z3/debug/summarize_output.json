@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a striking revelation by Stand.earth, it's been spotlighted that the Trans Mountain tar sands oil pipeline, a project embroiled in environmental and economic controversy, has cost taxpayers a staggering $35 billion, yet it still hasn’t reached its full operational capacity. This figure not only raises eyebrows but also sparks a broader conversation about the future of energy infrastructure and environmental stewardship. Liz McDowell, Senior Campaigns Director at Stand.earth, poignantly adds to this discourse, stating, \"Any attempt to build another pipeline to move the dirtiest...\" This quote underscores a critical stance on the environmental implications of pursuing further projects of this nature, suggesting a pivotal moment for reflection on the part of policymakers and the public alike. The marriage of this hefty financial toll with McDowell's cautionary words paints a vivid picture of the crossroads at which we find ourselves in the conversation about sustainable energy and economic viability.",
+      "onAirStat": {
+        "span": "The Trans Mountain tar sands oil pipeline cost taxpayers $35 billion and it still isn’t operating at full capacity.",
+        "evidenceId": "12713703-42f2-4999-a163-6f495346de88"
+      },
+      "onAirQuote": {
+        "span": "Any attempt to build another pipeline to move the dirtiest...",
+        "evidenceId": "ebc3c00c-47db-4a2a-8316-379e776d1374"
+      }
+    }
+  ]
+}

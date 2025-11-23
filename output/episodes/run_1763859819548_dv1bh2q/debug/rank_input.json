@@ -1,0 +1,67 @@
+{
+  "itemCount": 63,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMisAFBVV95cUxPY2cwc1ZJWE9ta091ZHk0YVJXbUhWLTRHOF9CdGZINmNLZF9NV05FMGNXSXZ1NVZTZE5xTERHNVNDUXUxUFhHc29VVDBkcGZsYk9GRkd1MS1iNjlVUzdvblBKV0NLMGtHN3dQQkJMV0dzVEVkdDNmcEtJb2FGLUM3bDdGLXRISjFVU1pzMWFET3J0MUNGMzB4M3dLRWp1SzJuWVA0UkRRS1pvM1l6SHpIeA?oc=5",
+      "title": "Verizon cutting more than 13,000 jobs as it restructures - Reuters",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7403607266918788,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFA3WUpkVmJ5ZkhRSEFyT1NuZmp6NmswRmZGQkJ5cmRkWkZ5WVNOeE51VUVtcWVWTklLSWhMNlhyX3VpamJXRVRRUUVwZFpHNC1XLUpQb1dxaHd3WjN2WWlZVDdOdkUtU0FFRTN0ZUotUEItYnRFU3ZOc2NudzE?oc=5",
+      "title": "Jim Cramer Says “I Want You to Scale Out of Verizon” - Yahoo Finance",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9006332984096479,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxPMF8xWG5PLW9GNHBkZWszYVJCZHNHYVZIQlZFeS1QLU1DUTg5dkJIM21iakd3VnA2Y25NdkRGU25jOGR5WktXNEp6V2ZZT3BxYUxfaEVPdEhvTC1pdExTT0hKSUdKVjllb0drbjVxUEs3VDd6NEhmbFJLSGpsTzlhbDNLSdIBiAFBVV95cUxOUkJHTktFOHphZVFqWXJMa2RSVFBjaXplbERHRWFPWkY2cmVHSUhkZVVKeHJrNWo0NnRURU5vdkJPbzZidWxnakVvQXhIaTk4ZThaNFduT3NMVGhPRjVEM1ZBdXdtdjVDN1REaWRnS1kzMm9tWjZvZFpnTmQ5Vmpwc3ZLd1l2UHR1?oc=5",
+      "title": "Verizon CEO Dan Schulman says the company is cutting 13,000 jobs - CBS News",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7047724371220159,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQVB6ZVBHSms5VkxLOHVNVGhnUmdONFZaWi1hVmo3Y1NXcDVrUG16TXVlWmIyay1zd1hIazIwSWNDQnNjTGRGblhKNS1rbEtBOGhZLUlJVEs4U0kxTkh0NmpDZWpnQkJSUE5qbDFaLThFRUtTZXAtRFJNWWE5YUVSOFRCUW04T1JxY1czSGFzRjlfRm5mNi0yQ2ZWTHRrMjh1?oc=5",
+      "title": "Verizon to Cut 13,000 Jobs, Set Up $20 Million “Reskilling” Fund for Laid Off Staff In “Age of AI” - The Hollywood Reporter",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7084257601258171,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMimAFBVV95cUxNVVFPT3RtZU1IazV5cmMwU0ZsaVVITllaZkt5MzhJX1hORDFjdU91OUR0S3pOdHdqdU8wREZ6RElwX25WbmI1eFVUOE1scEFvb1ZhVUExcmJpZVAyR1R0OFk5VXZzN0VOR0ZjZEpieExTSFRNRDBwb0JYalpYZTFiXzNNTGh1OWRRS052bklnUXhOcHZaaXkzZ9IBngFBVV95cUxQejBBcXh2M3ZsWkp3dUVHUzRDdW14bzB0TEN2bFFCQ1FfX1doa0pPUGp2aF9JZ0dNR3dTMS1qc05RZUpHbDBjS3pXQ2VtekJlS2ZkOV94WW83Y0NtMUFLTUdSSzRNbHRZblRSZHVTaTl5Tk5fdHROMElvSFYzelhtWFFTMUdDY2l2WUhDaHRieVBURUtEZzFOYXRsS3NwUQ?oc=5",
+      "title": "Verizon cutting more than 13,000 jobs as it restructures - CNBC",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.6988671122827038,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

@@ -5,7 +5,7 @@
 'use client';
 
 import { useParams } from 'next/navigation';
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { Play, Pause, Download, Share2, ExternalLink } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Card } from '@/components/ui/card';
@@ -13,43 +13,103 @@ import { Card } from '@/components/ui/card';
 export default function EpisodeDetailPage() {
   const params = useParams();
   const episodeId = params.episodeId as string;
+  const podcastId = params.id as string;
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [episode, setEpisode] = useState<any>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // TODO: Fetch episode data
-  const episode = {
-    id: episodeId,
-    title: 'Episode 42: AI Chip Breakthrough',
-    description:
-      'In this episode, we dive into the latest breakthrough in AI chip technology...',
-    pubDate: '2025-01-15T10:00:00Z',
-    duration: 272,
-    audioUrl: 'https://example.com/audio.mp3',
-    transcript: `Welcome to Tech Industry Insights.
+  useEffect(() => {
+    const fetchEpisode = async () => {
+      try {
+        setLoading(true);
+        const { api } = await import('@/lib/api');
+        
+        // Fetch run data (episode is a completed run)
+        const response = await api.get(`/podcasts/${podcastId}/runs/${episodeId}`);
+        
+        if (response.ok) {
+          const runData = await response.json();
+          const run = runData.run || runData;
+          
+          // Construct audio URL
+          let audioUrl = null;
+          if (run.output?.audioPath) {
+            const path = run.output.audioPath.replace(/^\/output\//, '');
+            audioUrl = `/api/serve-file/${path}`;
+          } else if (run.output?.audioS3Key) {
+            const path = run.output.audioS3Key.replace(/^\/output\//, '');
+            audioUrl = `/api/serve-file/${path}`;
+          }
+          
+          // Load transcript and show notes from files if available
+          let transcript = run.output?.transcript || run.output?.script || '';
+          let showNotes = run.output?.showNotes || '';
+          let sources: any[] = [];
+          
+          // Try to load sources from JSON file
+          if (run.output?.sourcesJsonPath) {
+            try {
+              const sourcesResponse = await fetch(`/api/serve-file/${run.output.sourcesJsonPath.replace(/^\/output\//, '')}`);
+              if (sourcesResponse.ok) {
+                sources = await sourcesResponse.json();
+              }
+            } catch (e) {
+              console.error('Error loading sources:', e);
+            }
+          }
+          
+          setEpisode({
+            id: episodeId,
+            title: run.output?.episodeTitle || `Episode ${episodeId.substring(0, 8)}`,
+            description: run.output?.description || run.output?.script?.substring(0, 200) || '',
+            pubDate: run.completedAt || run.startedAt || run.createdAt,
+            duration: run.duration || 0,
+            audioUrl,
+            transcript: transcript || 'Transcript not available',
+            showNotes: showNotes || 'Show notes not available',
+            sources: sources.length > 0 ? sources.map((s: any) => ({
+              title: s.title || s.url,
+              url: s.url,
+              publisher: s.publisher || s.domain || 'Unknown',
+              date: s.publishedAt || s.date || '',
+            })) : [],
+          });
+        }
+      } catch (error) {
+        console.error('Error fetching episode:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-Today, we're discussing a major breakthrough in AI chip technology. The company unveiled their latest AI chip which delivers a remarkable 30% improvement in processing speed over the previous generation.
+    if (episodeId && podcastId) {
+      fetchEpisode();
+    }
+  }, [episodeId, podcastId]);
 
-Industry analysts are calling it "transformative for the industry," with potential to redefine competitive benchmarks in the semiconductor space.`,
-    showNotes: `## Key Takeaways
+  if (loading) {
+    return (
+      <div className="min-h-screen p-8 flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
+          <p className="text-muted">Loading episode...</p>
+        </div>
+      </div>
+    );
+  }
 
-- 30% performance improvement in new AI chip
-- Transformative impact on the industry
-- Sets new competitive benchmarks
-
-## Sources
-
-1. [Tech News - AI Chip Announcement](https://example.com/news/1)
-2. [Industry Analysis Report](https://example.com/report)`,
-    sources: [
-      {
-        title: 'AI Chip Announcement',
-        url: 'https://example.com/news/1',
-        publisher: 'Tech News',
-        date: '2025-01-15',
-      },
-    ],
-  };
+  if (!episode) {
+    return (
+      <div className="min-h-screen p-8 flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-2">Episode Not Found</h1>
+          <p className="text-muted">The episode you're looking for doesn't exist.</p>
+        </div>
+      </div>
+    );
+  }
 
   const togglePlay = () => {
     if (audioRef.current) {

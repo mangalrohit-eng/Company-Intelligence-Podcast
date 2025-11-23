@@ -1,0 +1,49 @@
+{
+  "units": [
+    {
+      "id": "1327cfb6-bec1-4f6a-9b1b-964d9f90f112",
+      "type": "quote",
+      "topicId": "earnings",
+      "span": "Our current cost structure limits our ability to invest significantly...",
+      "context": "CEO Dan Schulman emphasizes the need for restructuring.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNRGFfVVNTOEVlWEN4dy1rYkkyRjR2WHFxczluUDlVLXd4U1dKWVRONEJPX1NGYUktZHNjMHNUcjBzNU1xTWRlV2FtWGg0SXY5RzJMb0JzejhmZzhTRFk1b3BTb1FyYjAwLXN4TTBYSk9WUU8tV3pBaVFUeG9ZQ3Jyb21OSDVndw?oc=5",
+      "publisher": "Anadolu Ajansı",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 05:18:25 GMT"
+    },
+    {
+      "id": "451e66b8-e328-43de-96f5-6669eeeb72f9",
+      "type": "claim",
+      "topicId": "earnings",
+      "span": "Verizon will cut more than 13,000 employees to restructure and reduce costs.",
+      "context": "Announcement of layoffs by Verizon.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNRGFfVVNTOEVlWEN4dy1rYkkyRjR2WHFxczluUDlVLXd4U1dKWVRONEJPX1NGYUktZHNjMHNUcjBzNU1xTWRlV2FtWGg0SXY5RzJMb0JzejhmZzhTRFk1b3BTb1FyYjAwLXN4TTBYSk9WUU8tV3pBaVFUeG9ZQ3Jyb21OSDVndw?oc=5",
+      "publisher": "Anadolu Ajansı",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 05:18:25 GMT"
+    },
+    {
+      "id": "5c3e98e5-dfa3-4566-b0fe-b81712488785",
+      "type": "stat",
+      "topicId": "earnings",
+      "span": "Verizon employed 99,600 workers at the end of 2024.",
+      "context": "Number of workers employed by Verizon in 2024.",
+      "sourceUrl": "https://news.google.com/rss/articles/CBMihgFBVV95cUxNRGFfVVNTOEVlWEN4dy1rYkkyRjR2WHFxczluUDlVLXd4U1dKWVRONEJPX1NGYUktZHNjMHNUcjBzNU1xTWRlV2FtWGg0SXY5RzJMb0JzejhmZzhTRFk1b3BTb1FyYjAwLXN4TTBYSk9WUU8tV3pBaVFUeG9ZQ3Jyb21OSDVndw?oc=5",
+      "publisher": "Anadolu Ajansı",
+      "authority": 0.3,
+      "publishedDate": "Fri, 21 Nov 2025 05:18:25 GMT"
+    }
+  ],
+  "stats": {
+    "totalUnits": 3,
+    "byType": {
+      "quote": 1,
+      "claim": 1,
+      "stat": 1
+    },
+    "byTopic": {
+      "earnings": 3
+    },
+    "dedupeRemoved": 0
+  }
+}

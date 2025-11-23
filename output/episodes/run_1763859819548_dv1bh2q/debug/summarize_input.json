@@ -1,0 +1,58 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 8,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 8,
+      "sampleUnits": [
+        {
+          "id": "4730ed2d-55d1-4fdc-896f-ab9383784a98",
+          "type": "quote",
+          "span": "Our current cost structure limits our ability to invest significantly...",
+          "authority": 0.3,
+          "publisher": "Anadolu Ajansı",
+          "context": "CEO Dan Schulman emphasizing the need for restructuring",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "ca8e3e18-adbf-4b21-860b-9edcb3d7c149",
+          "type": "claim",
+          "span": "Verizon will cut more than 13,000 employees to restructure and reduce costs.",
+          "authority": 0.3,
+          "publisher": "Anadolu Ajansı",
+          "context": "Announcement of layoffs in internal memo",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "0dc20561-a371-4fa9-9f22-1a236c9cec6c",
+          "type": "stat",
+          "span": "Verizon employed 99,600 workers at the end of 2024.",
+          "authority": 0.3,
+          "publisher": "Anadolu Ajansı",
+          "context": "Number of employees according to 2024 annual report",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 2,
+      "validQuotes": 2,
+      "validClaims": 4
+    }
+  ]
+}

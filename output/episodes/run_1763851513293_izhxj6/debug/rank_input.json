@@ -1,0 +1,67 @@
+{
+  "itemCount": 67,
+  "rankingWeights": {
+    "recency": 0.15,
+    "freshness": 0.15,
+    "authority": 0.25,
+    "diversity": 0.2,
+    "specificity": 0.25
+  },
+  "sampleItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMipANBVV95cUxPODZXcmFHVkExdTRWNC1POW5EcFg3QmV5VTJxbUVtMzQ0dWdXTjlsMl9ScFM0dXVVRHM4SXR5SDJXamNDLThrY0YtbDhtMW1tQjBqZC1EOVNIdGZybG9pNlFvSERZcTlNMFAtT3dyTEh1MzZzNWN4eU11alRnaTRCOXZjZzdlSXR6b3hPeHR2Y2U5a3cxUi1FcVFfUXRwaGNSNGZKS2k0WVJ0VmlTREJWUC1uNkhpZk9VNTJEQXktSEEwZkRzdlR5aWxkMGhyOTdlcDdad295UjZMVWkxSm9CbVR1RjFwMV9BNW52dDJEZjFMRlZQTTFtQjhBdXZ6WUZrRnNfU0dmTU9FN1lhdzdRRGJzaEZvaXhDOVNrRTFGMEQzVV84MU5ISEZiS3ZPeXdKRnhEWXlfUTYwUjNtUUdYaUxIenZ1ZUV1dTZEMUh0Wkh1ZF9wcnEyMWpHSklmc0dGUmVVbXV1WjljbjJSR0U1clN2a0U3QVFiSkhTQ045c3FQa2VhQzBxLVVYV2ZCMmNWam9Fc0hHZVpZMWZUanNJNGRzTGQ?oc=5",
+      "title": "Verizon Begins Laying Off More Than 13,000 Employees - The Wall Street Journal",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.708001815496051,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUERyXzJRcVVYVklqbEtYWktpUlgzSFJJQy1BM0JIZC1YbV95Y1pxR3ZfMlQtT0xtTmFiSHF0WjU0OE1XNVhwbW84VXJFOTFRaktaaG4xclJnclBxbnRLR3ZtcUZZYWN1YjVOdnNWN0dzWDFJX2c5ci02c0hVUFRuQTFaVV83WHF5VXM3SXBGVlNYZ3BmZ3dCLVBNSV9KaThhVk1OZUhwcmRXY0lt?oc=5",
+      "title": "T-Mobile wants to sway more AT&amp;T and Verizon customers with new switching app - Fierce Network",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8414321521846868,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQeGhvblBqMWZZanFyTS1VcTNSSml3aGJqZVJ6cFpjS2hWUHZ4VnNuUnhjRHA2V3BZT24yMGZsNmlHR194VW1DY3RtSngwaVpnTFVMNnVFdjRzZVRCUTFFc1k0QkN0cHpDMl9uNC1ZaUY1UWZkVWdqczFVZGNNTHNOMHpOY2VlSGpBZWFQR0NVLWdCN1I0?oc=5",
+      "title": "Is Verizon’s 5G Home Internet Right for You? - Kiplinger",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.9476005836181391,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNQVB6ZVBHSms5VkxLOHVNVGhnUmdONFZaWi1hVmo3Y1NXcDVrUG16TXVlWmIyay1zd1hIazIwSWNDQnNjTGRGblhKNS1rbEtBOGhZLUlJVEs4U0kxTkh0NmpDZWpnQkJSUE5qbDFaLThFRUtTZXAtRFJNWWE5YUVSOFRCUW04T1JxY1czSGFzRjlfRm5mNi0yQ2ZWTHRrMjh1?oc=5",
+      "title": "Verizon to Cut 13,000 Jobs, Set Up $20 Million “Reskilling” Fund for Laid Off Staff In “Age of AI” - The Hollywood Reporter",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.7182077079383307,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    },
+    {
+      "url": "https://news.google.com/rss/articles/CBMifkFVX3lxTE5CQ0dYeEJLWWFDbEwzVUJHZVBTRHdpUjJrN3RzWEhGUTE2bmpESHQ2TklEREw1YUZ3bUl2UHpEanAteXJycHRGTjRweFpZTlJ0YWowbFNrZG42eXVDdm4tMzlKRG9Fa2ZUWVBMSmNVdGY1bXl4SHhjQzQ3WnAwQQ?oc=5",
+      "title": "Best early Black Friday Verizon deals 2025: How to qualify for a free iPhone, Samsung, or Pixel - ZDNET",
+      "publisher": "news.google.com",
+      "scores": {
+        "relevance": 0.9,
+        "recency": 0.8887603237678551,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      }
+    }
+  ]
+}

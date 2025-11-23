@@ -1,0 +1,17 @@
+{
+  "topicIds": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "companyName": "Exxon",
+  "sources": {
+    "rssFeeds": [
+      "https://news.google.com/rss/search?q=Exxon"
+    ],
+    "newsApis": [],
+    "irUrls": [],
+    "regulatorUrls": [],
+    "tradePublications": []
+  }
+}
