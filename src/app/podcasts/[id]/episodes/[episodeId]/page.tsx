@@ -208,7 +208,7 @@ export default function EpisodeDetailPage() {
             <Card className="p-6">
               <h2 className="text-2xl font-semibold mb-4">Sources</h2>
               <div className="space-y-3">
-                {episode.sources.map((source, idx) => (
+                {episode.sources.map((source: any, idx: number) => (
                   <a
                     key={idx}
                     href={source.url}
