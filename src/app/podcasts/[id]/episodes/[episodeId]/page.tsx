@@ -186,7 +186,7 @@ export default function EpisodeDetailPage() {
             <Card className="p-8">
               <h2 className="text-2xl font-semibold mb-6">Transcript</h2>
               <div className="prose prose-invert max-w-none">
-                {episode.transcript.split('\n\n').map((paragraph, idx) => (
+                {episode.transcript.split('\n\n').map((paragraph: string, idx: number) => (
                   <p key={idx} className="mb-4 text-muted leading-relaxed">
                     {paragraph}
                   </p>
