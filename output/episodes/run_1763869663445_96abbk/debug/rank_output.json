@@ -1,0 +1,64 @@
+{
+  "topicQueues": {
+    "company-news": [
+      {
+        "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5",
+        "title": "JCFamilies exec. dir. to challenge Aponte-Lipski for Jersey City county commissioner seat - Hudson County View",
+        "publisher": "Hudson County View",
+        "publishedDate": "Tue, 10 Jan 2023 08:00:00 GMT",
+        "topicIds": [
+          "company-news"
+        ],
+        "entityIds": [
+          "JCFamilies"
+        ],
+        "scores": {
+          "relevance": 0.9,
+          "recency": 9.789665046381687e-66,
+          "authority": 0.7,
+          "expectedInfoGain": 0.5
+        },
+        "rankScore": 0.11238706533199382,
+        "expectedInfoGain": 0.36,
+        "rankingFactors": {
+          "R": 0,
+          "F": 9.789665046381687e-66,
+          "A": 0.3,
+          "D": 0.3,
+          "S": 0.9,
+          "C": 3.2032155919059924
+        }
+      }
+    ]
+  },
+  "rankedItems": [
+    {
+      "url": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5",
+      "title": "JCFamilies exec. dir. to challenge Aponte-Lipski for Jersey City county commissioner seat - Hudson County View",
+      "publisher": "Hudson County View",
+      "publishedDate": "Tue, 10 Jan 2023 08:00:00 GMT",
+      "topicIds": [
+        "company-news"
+      ],
+      "entityIds": [
+        "JCFamilies"
+      ],
+      "scores": {
+        "relevance": 0.9,
+        "recency": 9.789665046381687e-66,
+        "authority": 0.7,
+        "expectedInfoGain": 0.5
+      },
+      "rankScore": 0.11238706533199382,
+      "expectedInfoGain": 0.36,
+      "rankingFactors": {
+        "R": 0,
+        "F": 9.789665046381687e-66,
+        "A": 0.3,
+        "D": 0.3,
+        "S": 0.9,
+        "C": 3.2032155919059924
+      }
+    }
+  ]
+}

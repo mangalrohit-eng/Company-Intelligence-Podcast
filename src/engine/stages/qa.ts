@@ -102,15 +102,65 @@ export class QAStage {
 
     await emitter.emit('qa', 50, `Resolved ${resolved}/${totalChecks} checks`);
 
-    // Step 3: Bind every stat/quote to evidence
-    const evidenceBindings = await this.bindEvidence(updatedScript, evidenceUnits);
-
-    await emitter.emit('qa', 70, `Bound ${evidenceBindings.length} evidence items`);
-
-    // Step 4: Date sanity check
+    // Step 3: Date sanity check (before binding)
     const dateChecks = this.checkDateSanity(evidenceUnits, timeWindowStart, timeWindowEnd);
 
-    await emitter.emit('qa', 90, `Date check: ${dateChecks.outsideWindow} violations`);
+    await emitter.emit('qa', 60, `Date check: ${dateChecks.outsideWindow} violations`);
+
+    // ✅ FAIL if too many date violations (more than 20% of evidence outside window)
+    const violationRatio = evidenceUnits.length > 0 
+      ? dateChecks.outsideWindow / evidenceUnits.length 
+      : 0;
+    
+    if (violationRatio > 0.2) {
+      const errorMessage = `QA failed: ${dateChecks.outsideWindow} out of ${evidenceUnits.length} evidence items (${Math.round(violationRatio * 100)}%) are outside the time window (${timeWindowStart.toISOString()} to ${timeWindowEnd.toISOString()})`;
+      logger.error('QA date sanity check failed', {
+        outsideWindow: dateChecks.outsideWindow,
+        total: evidenceUnits.length,
+        violationRatio,
+        timeWindowStart: timeWindowStart.toISOString(),
+        timeWindowEnd: timeWindowEnd.toISOString(),
+      });
+      throw new Error(errorMessage);
+    }
+    
+    // Filter out evidence outside time window before binding
+    const filteredEvidenceUnits = evidenceUnits.filter(evidence => {
+      try {
+        const publishDate = new Date(evidence.publishedDate);
+        if (isNaN(publishDate.getTime())) {
+          logger.warn('Evidence with invalid date filtered out', { evidenceId: evidence.id });
+          return false;
+        }
+        const inWindow = publishDate >= timeWindowStart && publishDate <= timeWindowEnd;
+        if (!inWindow) {
+          logger.warn('Evidence outside time window filtered out', {
+            evidenceId: evidence.id,
+            publishDate: publishDate.toISOString(),
+            windowStart: timeWindowStart.toISOString(),
+            windowEnd: timeWindowEnd.toISOString(),
+          });
+        }
+        return inWindow;
+      } catch (error) {
+        logger.warn('Error parsing evidence date, filtering out', { evidenceId: evidence.id, error });
+        return false;
+      }
+    });
+    
+    if (filteredEvidenceUnits.length !== evidenceUnits.length) {
+      logger.warn('Filtered evidence outside time window', {
+        original: evidenceUnits.length,
+        filtered: filteredEvidenceUnits.length,
+        removed: evidenceUnits.length - filteredEvidenceUnits.length,
+      });
+      await emitter.emit('qa', 70, `Filtered ${evidenceUnits.length - filteredEvidenceUnits.length} evidence items outside time window`);
+    }
+
+    // Step 4: Bind every stat/quote to evidence (using filtered units)
+    const evidenceBindings = await this.bindEvidence(updatedScript, filteredEvidenceUnits);
+
+    await emitter.emit('qa', 80, `Bound ${evidenceBindings.length} evidence items`);
 
     // Calculate final statistics
     const statsBound = evidenceBindings.filter(b => b.span.match(/\d+%|\d+|\$\d+/)).length;
@@ -139,7 +189,7 @@ export class QAStage {
       script: updatedScript,
       finalScript,
       checkMarkers,
-      evidenceBindings,
+      evidenceBindings, // Already filtered before binding
       dateChecks,
       stats,
     };

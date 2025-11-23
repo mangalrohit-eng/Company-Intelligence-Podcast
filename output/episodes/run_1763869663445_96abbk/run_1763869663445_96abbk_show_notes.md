@@ -1,0 +1,20 @@
+# Show Notes
+
+## Thesis
+Leadership and Management
+
+## Key Points
+- **A Pledge That's Shaking Hudson County**: Mamta Singh's groundbreaking $600 million budget promise is stirring excitement and hope across Hudson County.
+- **Mamta Singh's Vision for Hudson County**: Understanding the significance of Singh's $600 million pledge and its potential impact on community development and transparency.
+- **Comparative Leadership in the Region**: An overview of how other local leaders are managing their budgets and the level of transparency and community involvement in their processes.
+- **The Role of Transparency in Community Development**: The impact of transparency on public trust and community development: A look at successful case studies.
+- **Navigating the Future with Mamta Singh**: Summarizing the potential changes and benefits that Singh's leadership might bring to Hudson County, emphasizing transparency and fairness.
+
+## Sources (Top 10)
+1. [Hudson County View](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5) - Tue, 10 Jan 2023 08:00:00 GMT
+2. [Hudson County View](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5) - Tue, 10 Jan 2023 08:00:00 GMT
+3. [Hudson County View](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5) - Tue, 10 Jan 2023 08:00:00 GMT
+4. [Hudson County View](https://news.google.com/rss/articles/CBMiuAFBVV95cUxNY3lWdjNIbG1jbVkxM2ZZLTZqMGhFSkhxb09raUVVMGo5eXBDRGtMLWpkcS1oTGd4TEZRTDVDMnYwOFJVYkZ1bzZQZzRqRFVYdFZlU0ktRVgtdVMyc2pqRUhVNUV1bVlBcFBsaTRXQWRCNU1QZm8zd1hUY0t6aC1qWWlUYWkzTFQ1QS1WY3ZOeWpRZUtZUFdId0NVM2pSZlVyUjlOb0o2U0k4ekk2V0ZMUkhmR3FENThy0gG-AUFVX3lxTE5qbXNOTWxrS1ozRUZGdGZVSkNFeEEwTXlWbXZMYm9RYm9jaDdUdER1Vl9GTmFqZGJoMXZWaW1jN1AyeDBtc0F5R1NvWWFTUzhjblhiUlktbHc3dnJHUXpBZzByRmlCSUJiTDdPLWJESThMcTB0eDZHYjFzNGJWTzhReHpWem5JSTF6MUZDendpeDl4d3Ntc3R2NE1tY1dGUTJTQ0tCaXR4SUlFRlJ6Z1ZOT3VYNDZEejZXTjBKZWc?oc=5) - Tue, 10 Jan 2023 08:00:00 GMT
+
+---
+*Episode ID: run_1763869663445_96abbk*

@@ -34,7 +34,9 @@ export class DiscoverStage {
     topicIds: string[],
     companyName: string,
     sources: DiscoveryConfig,
-    emitter: any
+    emitter: any,
+    timeWindowStart?: Date,
+    timeWindowEnd?: Date
   ): Promise<DiscoverOutput> {
     emitter.emit('discover', 0, 'Starting discovery');
 
@@ -69,8 +71,41 @@ export class DiscoverStage {
             const itemXml = match[0];
             const title = itemXml.match(/<title>(.*?)<\/title>/)?.[1] || '';
             const link = itemXml.match(/<link>(.*?)<\/link>/)?.[1] || '';
-            const pubDate = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1] || new Date().toISOString();
+            const pubDateRaw = itemXml.match(/<pubDate>(.*?)<\/pubDate>/)?.[1];
             const description = itemXml.match(/<description>(.*?)<\/description>/)?.[1] || itemXml.match(/<content:encoded>(.*?)<\/content:encoded>/)?.[1] || '';
+            
+            // Skip articles without publication date
+            if (!pubDateRaw) {
+              logger.debug('Skipping article without publication date', { title: title.substring(0, 100) });
+              continue;
+            }
+            
+            // Parse publication date
+            let pubDate: Date;
+            try {
+              pubDate = new Date(pubDateRaw);
+              // Validate date is valid
+              if (isNaN(pubDate.getTime())) {
+                logger.debug('Skipping article with invalid date', { title: title.substring(0, 100), pubDateRaw });
+                continue;
+              }
+            } catch (error) {
+              logger.debug('Skipping article with unparseable date', { title: title.substring(0, 100), pubDateRaw });
+              continue;
+            }
+            
+            // ✅ Filter by time window if provided
+            if (timeWindowStart && timeWindowEnd) {
+              if (pubDate < timeWindowStart || pubDate > timeWindowEnd) {
+                logger.debug('Skipping article outside time window', {
+                  title: title.substring(0, 100),
+                  pubDate: pubDate.toISOString(),
+                  windowStart: timeWindowStart.toISOString(),
+                  windowEnd: timeWindowEnd.toISOString(),
+                });
+                continue;
+              }
+            }
             
             if (title && link) {
               // Simple keyword matching instead of LLM classification (faster)
@@ -87,12 +122,12 @@ export class DiscoverStage {
                   title,
                   snippet: description || title, // Use description as snippet, fallback to title
                   publisher: new URL(feedUrl).hostname,
-                  publishedDate: pubDate,
+                  publishedDate: pubDate.toISOString(),
                   topicIds: [topicIds[0] || 'company-news'],
                   entityIds: [companyName],
                   scores: {
                     relevance,
-                    recency: this.calculateRecency(pubDate),
+                    recency: this.calculateRecency(pubDate.toISOString()),
                     authority: 0.7,
                     expectedInfoGain: 0.5,
                   },
@@ -129,18 +164,50 @@ export class DiscoverStage {
           const data = JSON.parse(response.body);
           if (data.articles) {
             for (const article of data.articles) {
+              // Skip articles without publication date
+              if (!article.publishedAt) {
+                logger.debug('Skipping article without publication date', { title: article.title?.substring(0, 100) });
+                continue;
+              }
+              
+              // Parse and validate publication date
+              let pubDate: Date;
+              try {
+                pubDate = new Date(article.publishedAt);
+                if (isNaN(pubDate.getTime())) {
+                  logger.debug('Skipping article with invalid date', { title: article.title?.substring(0, 100) });
+                  continue;
+                }
+              } catch (error) {
+                logger.debug('Skipping article with unparseable date', { title: article.title?.substring(0, 100) });
+                continue;
+              }
+              
+              // ✅ Filter by time window if provided
+              if (timeWindowStart && timeWindowEnd) {
+                if (pubDate < timeWindowStart || pubDate > timeWindowEnd) {
+                  logger.debug('Skipping article outside time window', {
+                    title: article.title?.substring(0, 100),
+                    pubDate: pubDate.toISOString(),
+                    windowStart: timeWindowStart.toISOString(),
+                    windowEnd: timeWindowEnd.toISOString(),
+                  });
+                  continue;
+                }
+              }
+              
               const publisher = article.source?.name || 'Unknown';
               items.push({
                 url: article.url,
                 title: article.title,
                 snippet: article.description || article.title, // Use description as snippet, fallback to title
                 publisher,
-                publishedDate: article.publishedAt,
+                publishedDate: pubDate.toISOString(),
                 topicIds: [topicIds[0]],
                 entityIds: [companyName],
                 scores: {
                   relevance: 0.8,
-                  recency: this.calculateRecency(article.publishedAt),
+                  recency: this.calculateRecency(pubDate.toISOString()),
                   authority: publisher === 'Unknown' ? 0.3 : 0.7,
                   expectedInfoGain: 0.5,
                 },

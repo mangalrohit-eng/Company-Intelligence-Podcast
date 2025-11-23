@@ -1,0 +1,17 @@
+{
+  "PodcastPlatformStack": {
+    "DistributionDomain": "https://dhycfwg0k4xij.cloudfront.net",
+    "ScraperRepoUri": "098478926952.dkr.ecr.us-east-1.amazonaws.com/podcast-scraper",
+    "AppRepoUri": "098478926952.dkr.ecr.us-east-1.amazonaws.com/podcast-platform-app",
+    "StateMachineArn": "arn:aws:states:us-east-1:098478926952:stateMachine:podcast-pipeline",
+    "ScraperTaskDefinitionArn": "arn:aws:ecs:us-east-1:098478926952:task-definition/PodcastPlatformStackScraperTaskDef90ABB2FD:1",
+    "ScraperSecurityGroupId": "sg-0ebcb2efeff692bdc",
+    "UserPoolClientId": "3lm7s5lml6i0va070cm1c3uafn",
+    "ApiUrl": "https://54xpwhf7jd.execute-api.us-east-1.amazonaws.com",
+    "UserPoolId": "us-east-1_lvLcARe2P",
+    "AppLoadBalancerUrl": "http://Podcas-AppLo-MRA3g489YMoz-516366327.us-east-1.elb.amazonaws.com",
+    "FrontendBucketName": "podcast-platform-frontend-098478926952",
+    "ScraperSubnetIds": "subnet-010a74433d6b0133d,subnet-0241e4d0aad898212",
+    "EcsClusterArn": "arn:aws:ecs:us-east-1:098478926952:cluster/podcast-platform-cluster"
+  }
+}

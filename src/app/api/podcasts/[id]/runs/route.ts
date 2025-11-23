@@ -6,7 +6,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { runsStore } from '@/lib/runs-store';
-import { saveRun, getRunsForPodcast, PersistedRun } from '@/lib/runs-persistence';
+import { saveRun, getRunsForPodcast, PersistedRun, loadRuns } from '@/lib/runs-persistence';
+import { logger } from '@/utils/logger';
 
 // Helper to map topic IDs to full topic objects
 function mapTopicsToStandard(topicIds: string[] = [], topicPriorities: Record<string, number> = {}) {
@@ -331,6 +332,10 @@ export async function GET(
         const path = await import('path');
         const outputDir = path.join(process.cwd(), 'output', 'episodes');
         
+        // Load all runs to check if run exists for another podcast
+        const { loadRuns } = await import('@/lib/runs-persistence');
+        const allRuns = await loadRuns();
+        
         const dirs = await fs.readdir(outputDir);
         
         for (const dir of dirs) {
@@ -338,7 +343,36 @@ export async function GET(
           const stat = await fs.stat(dirPath);
           
           if (stat.isDirectory() && dir.startsWith('run_')) {
-            // Check if this run already exists
+            // Check if this run already exists in database for ANY podcast
+            let existingRunInDb: PersistedRun | null = null;
+            let actualPodcastId: string | null = null;
+            
+            // Search all podcasts to find if this run exists
+            for (const [pid, podcastRuns] of Object.entries(allRuns)) {
+              const found = podcastRuns.find((r: PersistedRun) => r.id === dir);
+              if (found) {
+                existingRunInDb = found;
+                actualPodcastId = pid;
+                break;
+              }
+            }
+            
+            // ✅ CRITICAL: If run exists in DB for a DIFFERENT podcast, skip it
+            // This prevents cross-contamination (e.g., Amazon run showing in JCFamilies)
+            if (existingRunInDb && actualPodcastId !== podcastId) {
+              logger.debug('Skipping run from file system - belongs to different podcast', {
+                runId: dir,
+                actualPodcastId,
+                requestedPodcastId: podcastId,
+              });
+              continue;
+            }
+            
+            // ✅ Only process runs that:
+            // 1. Already exist in DB for THIS podcast, OR
+            // 2. Don't exist in DB at all (orphaned file system runs - we'll skip these for safety)
+            
+            // Check if this run already exists in current podcast's runs
             const existingRun = runs.find(r => r.id === dir);
             
             // Check if audio file exists
@@ -356,39 +390,20 @@ export async function GET(
                 existingRun.output.audioPath = `/output/episodes/${dir}/audio.mp3`;
                 existingRun.output.audioSize = audioStats.size;
                 existingRun.status = 'completed';
+              } else if (existingRunInDb && actualPodcastId === podcastId) {
+                // Run exists in DB for this podcast, add it to results
+                runs.push(existingRunInDb);
               } else {
-                // Add completed run from file system (not in DB yet)
-                runs.push({
-                  id: dir,
-                  podcastId,
-                  status: 'completed',
-                  createdAt: stat.birthtime.toISOString(),
-                  startedAt: stat.birthtime.toISOString(),
-                  completedAt: stat.mtime.toISOString(),
-                  duration: Math.floor((stat.mtime.getTime() - stat.birthtime.getTime()) / 1000),
-                  progress: {
-                    currentStage: 'completed',
-                    stages: {
-                      prepare: { status: 'completed' },
-                      discover: { status: 'completed' },
-                      disambiguate: { status: 'completed' },
-                      rank: { status: 'completed' },
-                      scrape: { status: 'completed' },
-                      extract: { status: 'completed' },
-                      summarize: { status: 'completed' },
-                      contrast: { status: 'completed' },
-                      outline: { status: 'completed' },
-                      script: { status: 'completed' },
-                      qa: { status: 'completed' },
-                      tts: { status: 'completed' },
-                      publish: { status: 'completed' },
-                    },
-                  },
-                  output: {
-                    audioPath: `/output/episodes/${dir}/audio.mp3`,
-                    audioSize: audioStats.size,
-                  },
+                // Run doesn't exist in DB OR exists for different podcast
+                // Skip it to prevent cross-contamination
+                // In production, all runs should come from DynamoDB with proper podcastId
+                logger.debug('Skipping run from file system - not in database for this podcast', {
+                  runId: dir,
+                  requestedPodcastId: podcastId,
+                  existsInDb: !!existingRunInDb,
+                  actualPodcastId: actualPodcastId || 'none',
                 });
+                continue;
               }
             }
           }

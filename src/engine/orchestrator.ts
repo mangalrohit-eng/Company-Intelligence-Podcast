@@ -272,7 +272,16 @@ export class PipelineOrchestrator {
         );
         logger.info('Saved discover input', { topicCount: topicIds.length, feedCount: rssFeeds.length });
         
-        discoverOutput = await stage.execute(topicIds, companyName, sources, emitter);
+        // Pass time window to discover stage for filtering
+        const timeWindowStart = new Date(input.config.timeWindow.startIso);
+        const timeWindowEnd = new Date(input.config.timeWindow.endIso);
+        logger.info('Time window for discovery', {
+          start: timeWindowStart.toISOString(),
+          end: timeWindowEnd.toISOString(),
+          hours: (timeWindowEnd.getTime() - timeWindowStart.getTime()) / (1000 * 60 * 60),
+        });
+        
+        discoverOutput = await stage.execute(topicIds, companyName, sources, emitter, timeWindowStart, timeWindowEnd);
         
         // Save output AFTER execution (exact format next stage expects)
         // Disambiguate stage receives: discoverOutput.items
@@ -382,7 +391,10 @@ export class PipelineOrchestrator {
           JSON.stringify(rankInput, null, 2)
         );
         
-        rankOutput = await stage.execute(validItems, adminSettings.ranking, emitter);
+        // Pass time window to rank stage for additional filtering
+        const timeWindowStart = new Date(input.config.timeWindow.startIso);
+        const timeWindowEnd = new Date(input.config.timeWindow.endIso);
+        rankOutput = await stage.execute(validItems, adminSettings.ranking, emitter, timeWindowStart, timeWindowEnd);
         telemetry.stages.rank = {
           startTime: new Date(stageStart).toISOString(),
           endTime: new Date().toISOString(),

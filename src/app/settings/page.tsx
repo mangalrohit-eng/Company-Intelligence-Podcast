@@ -15,10 +15,12 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Badge } from '@/components/ui/badge';
 import { ProtectedRoute } from '@/components/ProtectedRoute';
 import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function SettingsPage() {
   const router = useRouter();
   const { user } = useAuth();
+  const { theme, setTheme } = useTheme();
   const [notifications, setNotifications] = useState(true);
   const [emailUpdates, setEmailUpdates] = useState(true);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -279,16 +281,29 @@ export default function SettingsPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium mb-2">Theme</label>
-                  <Select defaultValue="dark">
-                    <option value="dark">Dark (Default)</option>
+                  <label htmlFor="theme-select" className="block text-sm font-medium mb-2">Theme</label>
+                  <Select
+                    id="theme-select"
+                    value={theme}
+                    onChange={(e) => setTheme(e.target.value as 'dark' | 'light' | 'system')}
+                    className="w-full"
+                  >
+                    <option value="dark">Dark</option>
                     <option value="light">Light</option>
-                    <option value="auto">Auto (System)</option>
+                    <option value="system">Auto (System)</option>
                   </Select>
-                  <p className="text-sm text-muted mt-2">Choose your preferred color scheme</p>
+                  <p className="text-sm text-muted mt-2">
+                    {theme === 'system' 
+                      ? 'Theme follows your system preference'
+                      : theme === 'dark'
+                      ? 'Dark theme is active'
+                      : 'Light theme is active'}
+                  </p>
                 </div>
                 <div className="pt-4">
-                  <Button>Save Appearance</Button>
+                  <p className="text-xs text-muted">
+                    💡 Tip: You can also toggle theme from the navigation sidebar
+                  </p>
                 </div>
               </CardContent>
             </Card>

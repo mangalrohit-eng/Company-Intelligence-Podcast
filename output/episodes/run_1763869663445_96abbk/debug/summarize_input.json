@@ -1,0 +1,62 @@
+{
+  "topicCount": 1,
+  "topicIds": [
+    "company-news"
+  ],
+  "topicIdsFromConfig": [
+    "company-news",
+    "competitor-analysis",
+    "industry-trends"
+  ],
+  "topicIdsFromEvidence": [
+    "company-news"
+  ],
+  "evidenceCount": 4,
+  "evidenceByTopic": [
+    {
+      "topicId": "company-news",
+      "unitCount": 4,
+      "sampleUnits": [
+        {
+          "id": "11ec3c38-b941-4142-8da6-4ccc4b53d1f0",
+          "type": "claim",
+          "span": "Mamta Singh announced a June 6th primary challenge to Hudson County Commissioner Yraida Aponte-Lipsk",
+          "authority": 0.3,
+          "publisher": "Hudson County View",
+          "context": "According to the article.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "9c5a2d7d-2b24-467d-a853-1fac314f7045",
+          "type": "quote",
+          "span": "Mamta Singh is an extraordinary leader.",
+          "authority": 0.3,
+          "publisher": "Hudson County View",
+          "context": "Jersey City Ward E Councilman James Solomon",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        },
+        {
+          "id": "e01cfe18-a1d7-4a1e-b166-ae85648402a9",
+          "type": "claim",
+          "span": "Singh's platform includes increasing climate resilience, revitalizing public transportation, and ens",
+          "authority": 0.3,
+          "publisher": "Hudson County View",
+          "context": "As stated in the article.",
+          "hasSpan": true,
+          "hasAuthority": true,
+          "hasPublisher": true,
+          "hasContext": true
+        }
+      ],
+      "validStats": 1,
+      "validQuotes": 1,
+      "validClaims": 2
+    }
+  ]
+}

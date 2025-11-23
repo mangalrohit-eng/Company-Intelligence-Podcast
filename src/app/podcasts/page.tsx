@@ -189,24 +189,26 @@ export default function PodcastsPage() {
               </Select>
 
               {/* View Mode Toggle */}
-              <div className="flex gap-1 border border-border rounded-lg p-1">
+              <div className="flex gap-1 border border-border rounded-lg p-1" role="group" aria-label="View mode">
                 <button
                   onClick={() => setViewMode('grid')}
-                  className={`p-1.5 sm:p-2 rounded transition-colors ${
-                    viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'hover:bg-border'
+                  className={`p-2 sm:p-2.5 rounded transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation ${
+                    viewMode === 'grid' ? 'bg-primary text-background' : 'hover:bg-border active:bg-border/60'
                   }`}
-                  title="Grid view"
+                  aria-label="Grid view"
+                  aria-pressed={viewMode === 'grid'}
                 >
-                  <Grid className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <Grid className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </button>
                 <button
                   onClick={() => setViewMode('list')}
-                  className={`p-1.5 sm:p-2 rounded transition-colors ${
-                    viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'hover:bg-border'
+                  className={`p-2 sm:p-2.5 rounded transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation ${
+                    viewMode === 'list' ? 'bg-primary text-background' : 'hover:bg-border active:bg-border/60'
                   }`}
-                  title="List view"
+                  aria-label="List view"
+                  aria-pressed={viewMode === 'list'}
                 >
-                  <List className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  <List className="w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -415,20 +417,25 @@ function PodcastCard({ podcast, onUpdate }: {
   };
 
   return (
-    <Card className="group hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all">
-      <Link href={`/podcasts/${podcast.id}`} className="block p-4">
+    <Card className="group hover:border-primary hover:shadow-lg hover:shadow-primary/5 transition-all touch-manipulation">
+      <Link 
+        href={`/podcasts/${podcast.id}`} 
+        className="block p-3 sm:p-4"
+        aria-label={`View ${podcast.title} podcast`}
+      >
         {/* Cover Art */}
-        <div className="relative aspect-square bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
-          <div className="text-6xl group-hover:scale-110 transition-transform">🎙️</div>
+        <div className="relative aspect-square bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg mb-3 sm:mb-4 flex items-center justify-center overflow-hidden group-hover:scale-105 transition-transform duration-300">
+          <div className="text-4xl sm:text-5xl lg:text-6xl group-hover:scale-110 transition-transform" aria-hidden="true">🎙️</div>
           
-          {/* Hover Overlay */}
-          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors flex items-center justify-center opacity-0 group-hover:opacity-100">
+          {/* Hover Overlay - Only on desktop */}
+          <div className="hidden sm:flex absolute inset-0 bg-black/0 group-hover:bg-black/60 transition-colors items-center justify-center opacity-0 group-hover:opacity-100">
             <Button
               size="icon"
               className="w-12 h-12"
               onClick={handleRunNow}
+              aria-label={`Run ${podcast.title} now`}
             >
-              <Play className="w-6 h-6" />
+              <Play className="w-6 h-6" aria-hidden="true" />
             </Button>
           </div>
         </div>
@@ -457,10 +464,11 @@ function PodcastCard({ podcast, onUpdate }: {
       <div className="px-3 sm:px-4 pb-3 sm:pb-4 flex gap-2 border-t border-border pt-3 sm:pt-4">
         <Button
           size="sm"
-          className="flex-1 gap-1 sm:gap-2 text-xs sm:text-sm"
+          className="flex-1 gap-1 sm:gap-2 text-xs sm:text-sm min-h-[44px]"
           onClick={handleRunNow}
+          aria-label={`Run ${podcast.title} now`}
         >
-          <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+          <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
           <span className="hidden sm:inline">Run Now</span>
           <span className="sm:hidden">Run</span>
         </Button>
@@ -471,10 +479,14 @@ function PodcastCard({ podcast, onUpdate }: {
             variant="outline"
             onClick={(e) => {
               e.preventDefault();
+              e.stopPropagation();
               setShowMenu(!showMenu);
             }}
+            aria-label="More options"
+            aria-expanded={showMenu}
+            aria-haspopup="true"
           >
-            <MoreVertical className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <MoreVertical className="w-4 h-4" aria-hidden="true" />
           </Button>
           
           {showMenu && (
@@ -483,29 +495,36 @@ function PodcastCard({ podcast, onUpdate }: {
                 className="fixed inset-0 z-10" 
                 onClick={() => setShowMenu(false)}
               />
-              <div className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
+              <div 
+                className="absolute right-0 top-full mt-2 w-48 sm:w-56 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden"
+                role="menu"
+                aria-label="Podcast actions"
+              >
                 <Link 
                   href={`/podcasts/${podcast.id}/edit`}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2 block"
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 block min-h-[44px] touch-manipulation"
                   onClick={() => setShowMenu(false)}
+                  role="menuitem"
                 >
-                  <Edit className="w-4 h-4" />
+                  <Edit className="w-4 h-4" aria-hidden="true" />
                   Edit Settings
                 </Link>
                 
                 <button 
                   onClick={handlePauseResume}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
                 >
-                  <Pause className="w-4 h-4" />
+                  <Pause className="w-4 h-4" aria-hidden="true" />
                   {podcast.status === 'active' ? 'Pause' : 'Resume'} Podcast
                 </button>
                 
                 <button 
                   onClick={handleClone}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
                 >
-                  <Copy className="w-4 h-4" />
+                  <Copy className="w-4 h-4" aria-hidden="true" />
                   Clone Podcast
                 </button>
                 
@@ -517,29 +536,37 @@ function PodcastCard({ podcast, onUpdate }: {
                     navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
                     toast.success('RSS URL Copied', 'The RSS URL has been copied to your clipboard');
                   }}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
                 >
-                  <Rss className="w-4 h-4" />
+                  <Rss className="w-4 h-4" aria-hidden="true" />
                   Copy RSS URL
                 </button>
                 
-                <button className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2">
-                  <Share2 className="w-4 h-4" />
+                <button 
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
+                >
+                  <Share2 className="w-4 h-4" aria-hidden="true" />
                   Share
                 </button>
                 
-                <div className="border-t border-border my-1" />
+                <div className="border-t border-border my-1" aria-hidden="true" />
                 
                 <button 
                   onClick={handleArchive}
-                  className="w-full px-4 py-2 text-left text-sm hover:bg-yellow-500/10 text-yellow-500 transition-colors flex items-center gap-2"
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-yellow-500/10 active:bg-yellow-500/20 text-yellow-500 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
                 >
-                  <Archive className="w-4 h-4" />
+                  <Archive className="w-4 h-4" aria-hidden="true" />
                   Archive
                 </button>
                 
-                <button className="w-full px-4 py-2 text-left text-sm hover:bg-red-500/10 text-red-500 transition-colors flex items-center gap-2">
-                  <Trash2 className="w-4 h-4" />
+                <button 
+                  className="w-full px-4 py-3 text-left text-sm hover:bg-red-500/10 active:bg-red-500/20 text-red-500 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                  role="menuitem"
+                >
+                  <Trash2 className="w-4 h-4" aria-hidden="true" />
                   Delete
                 </button>
               </div>
@@ -621,12 +648,16 @@ function PodcastListItem({ podcast, onUpdate }: {
   };
 
   return (
-    <Card className="hover:border-primary transition-all">
-      <Link href={`/podcasts/${podcast.id}`} className="block">
+    <Card className="hover:border-primary transition-all touch-manipulation">
+      <Link 
+        href={`/podcasts/${podcast.id}`} 
+        className="block"
+        aria-label={`View ${podcast.title} podcast`}
+      >
         <div className="p-3 sm:p-4 flex items-center gap-3 sm:gap-4">
           {/* Cover Art */}
           <div className="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/20 rounded-lg flex items-center justify-center flex-shrink-0">
-            <div className="text-2xl sm:text-3xl">🎙️</div>
+            <div className="text-2xl sm:text-3xl" aria-hidden="true">🎙️</div>
           </div>
 
           {/* Info */}
@@ -659,13 +690,15 @@ function PodcastListItem({ podcast, onUpdate }: {
           <div className="flex gap-1.5 sm:gap-2 items-center flex-shrink-0">
             <Button
               size="sm"
-              className="gap-1 sm:gap-2 text-xs sm:text-sm"
+              className="gap-1 sm:gap-2 text-xs sm:text-sm min-h-[44px]"
               onClick={(e) => {
                 e.preventDefault();
+                e.stopPropagation();
                 handleRunNow();
               }}
+              aria-label={`Run ${podcast.title} now`}
             >
-              <Play className="w-3 h-3 sm:w-4 sm:h-4" />
+              <Play className="w-3.5 h-3.5 sm:w-4 sm:h-4" aria-hidden="true" />
               <span className="hidden sm:inline">Run</span>
             </Button>
 
@@ -709,10 +742,14 @@ function PodcastListItem({ podcast, onUpdate }: {
                 variant="outline"
                 onClick={(e) => {
                   e.preventDefault();
+                  e.stopPropagation();
                   setShowMenu(!showMenu);
                 }}
+                aria-label="More options"
+                aria-expanded={showMenu}
+                aria-haspopup="true"
               >
-                <MoreVertical className="w-4 h-4" />
+                <MoreVertical className="w-4 h-4" aria-hidden="true" />
               </Button>
 
               {showMenu && (
@@ -720,26 +757,38 @@ function PodcastListItem({ podcast, onUpdate }: {
                   <div 
                     className="fixed inset-0 z-10" 
                     onClick={() => setShowMenu(false)}
+                    aria-hidden="true"
                   />
-                  <div className="absolute right-0 top-full mt-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden">
+                  <div 
+                    className="absolute right-0 top-full mt-2 w-48 bg-secondary border border-border rounded-lg shadow-lg z-20 overflow-hidden"
+                    role="menu"
+                    aria-label="Podcast actions"
+                  >
                     <button 
                       onClick={() => {
                         setShowMenu(false);
                         navigator.clipboard.writeText(`${window.location.origin}/rss/${podcast.id}.xml`);
                         toast.success('RSS URL Copied', 'The RSS URL has been copied to your clipboard');
                       }}
-                      className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2"
+                      className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                      role="menuitem"
                     >
-                      <Rss className="w-4 h-4" />
+                      <Rss className="w-4 h-4" aria-hidden="true" />
                       Copy RSS
                     </button>
-                    <button className="w-full px-4 py-2 text-left text-sm hover:bg-border transition-colors flex items-center gap-2">
-                      <Share2 className="w-4 h-4" />
+                    <button 
+                      className="w-full px-4 py-3 text-left text-sm hover:bg-border active:bg-border/60 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                      role="menuitem"
+                    >
+                      <Share2 className="w-4 h-4" aria-hidden="true" />
                       Share
                     </button>
-                    <div className="border-t border-border my-1" />
-                    <button className="w-full px-4 py-2 text-left text-sm hover:bg-red-500/10 text-red-500 transition-colors flex items-center gap-2">
-                      <Trash2 className="w-4 h-4" />
+                    <div className="border-t border-border my-1" aria-hidden="true" />
+                    <button 
+                      className="w-full px-4 py-3 text-left text-sm hover:bg-red-500/10 active:bg-red-500/20 text-red-500 transition-colors flex items-center gap-2 min-h-[44px] touch-manipulation"
+                      role="menuitem"
+                    >
+                      <Trash2 className="w-4 h-4" aria-hidden="true" />
                       Delete
                     </button>
                   </div>

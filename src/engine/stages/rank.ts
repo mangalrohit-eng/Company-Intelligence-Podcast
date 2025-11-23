@@ -37,17 +37,55 @@ export class RankStage {
   async execute(
     items: DiscoveryItem[],
     weights: RankingWeights,
-    emitter: IEventEmitter
+    emitter: IEventEmitter,
+    timeWindowStart?: Date,
+    timeWindowEnd?: Date
   ): Promise<RankOutput> {
     await emitter.emit('rank', 0, 'Starting URL ranking');
 
     logger.info('Using ranking weights', weights);
 
+    // Filter items by time window if provided
+    let itemsToRank = items;
+    if (timeWindowStart && timeWindowEnd) {
+      const beforeFilter = items.length;
+      itemsToRank = items.filter(item => {
+        try {
+          const pubDate = new Date(item.publishedDate);
+          if (isNaN(pubDate.getTime())) {
+            logger.warn('Item with invalid date in rank stage', { url: item.url });
+            return false;
+          }
+          const inWindow = pubDate >= timeWindowStart && pubDate <= timeWindowEnd;
+          if (!inWindow) {
+            logger.debug('Filtering item outside time window in rank stage', {
+              url: item.url,
+              pubDate: pubDate.toISOString(),
+              windowStart: timeWindowStart.toISOString(),
+              windowEnd: timeWindowEnd.toISOString(),
+            });
+          }
+          return inWindow;
+        } catch (error) {
+          logger.warn('Error parsing date in rank stage', { url: item.url, error });
+          return false;
+        }
+      });
+      
+      if (beforeFilter !== itemsToRank.length) {
+        logger.info('Filtered items by time window in rank stage', {
+          before: beforeFilter,
+          after: itemsToRank.length,
+          filtered: beforeFilter - itemsToRank.length,
+        });
+      }
+    }
+
     const rankedItems: RankedItem[] = [];
     const topicQueues = new Map<string, RankedItem[]>();
 
-    for (let i = 0; i < items.length; i++) {
-      const item = items[i];
+    for (let i = 0; i < itemsToRank.length; i++) {
+      const item = itemsToRank[i];
       const pct = Math.round(((i + 1) / items.length) * 100);
 
       await emitter.emit('rank', pct, `Ranking ${i + 1}/${items.length}`);
@@ -62,7 +100,7 @@ export class RankStage {
       };
 
       // Compute ranking factors (R, F, A, D, S, C)
-      const factors = this.computeRankingFactors(updatedItem, items);
+      const factors = this.computeRankingFactors(updatedItem, itemsToRank);
 
       // Compute Expected Info Gain from factors using admin-configured weights
       const expectedInfoGain = this.computeExpectedInfoGain(factors, weights);

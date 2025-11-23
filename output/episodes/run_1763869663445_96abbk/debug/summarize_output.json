@@ -1,0 +1,17 @@
+{
+  "summaries": [
+    {
+      "topicId": "company-news",
+      "topicName": "company-news",
+      "paragraph": "In a recent announcement that's causing quite the buzz throughout Hudson County, Mamta Singh has made a bold pledge that's turning heads. With a staggering $600 million budget at her fingertips, Singh promises to manage it with the kind of fairness and transparency that's been long awaited by residents. This commitment is particularly compelling when you consider the high praise she's received from influential figures, such as Jersey City Ward E Councilman James Solomon, who didn't mince words when he described Singh, saying, \"Mamta Singh is an extraordinary leader.\" This endorsement, coupled with Singh's ambitious vision for the budget, paints a promising picture for the future of Hudson County, suggesting [CHECK] that under Singh's leadership, the community might just be on the brink of experiencing some significant positive changes.",
+      "onAirStat": {
+        "span": "$600 million budget of Hudson County",
+        "evidenceId": "1a59e8b1-f479-4c5d-a185-e96d6d034eb9"
+      },
+      "onAirQuote": {
+        "span": "Mamta Singh is an extraordinary leader.",
+        "evidenceId": "9c5a2d7d-2b24-467d-a853-1fac314f7045"
+      }
+    }
+  ]
+}
